@@ -2,11 +2,13 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # qemu-ace-dsp: build the patched QEMU.
 #
-#  1. reset src/qemu-11.1.3 to the clean v11.1.3 baseline and `git am` every
-#     patches/*.patch onto it (none yet -> the pristine tree);
+#  1. on a separate branch `applied`: reset src/qemu-11.1.3 to the clean v11.1.3
+#     baseline and `git am` every patches/*.patch onto it (none yet -> the
+#     pristine tree).  The development branch `master` is left alone; the
+#     script refuses to run on a tree with uncommitted changes;
 #  2. configure out of tree in build/ (the gate-(c) option line of the plan:
 #     x86_64-softmmu only, no system meson needed -- configure makes its own
-#     pyvenv);
+#     pyvenv).  EXTRA_CONFIGURE adds options (e.g. host-specific -O3/-march);
 #  3. ninja. The wall time is appended to build/TIME.txt (the first, cold
 #     build is the measurement the plan asked for; later runs are incremental).
 #
@@ -24,13 +26,24 @@ mkdir -p "$B"
 
 t0=$(date +%s)
 CONFIGURED=no
-echo "== $(date -u +%FT%TZ) reset $SRC to v$VER and apply patches"
-git -C "$SRC" reset -q --hard "v$VER"
-git -C "$SRC" tag -d applied >/dev/null 2>&1 || true
+if ! git -C "$SRC" diff --quiet || ! git -C "$SRC" diff --cached --quiet; then
+    echo "build: $SRC has uncommitted changes; commit them on master first (build.sh resets the applied branch)" >&2
+    exit 1
+fi
+echo "== $(date -u +%FT%TZ) branch applied = v$VER + patches"
+git -C "$SRC" checkout -q -B applied "v$VER"
+# whatever happens below, leave the development branch checked out
+cleanup() {
+    git -C "$SRC" am --abort -q 2>/dev/null || true
+    git -C "$SRC" checkout -q master 2>/dev/null || true
+    git -C "$SRC" branch -q -D applied 2>/dev/null || true
+}
+trap cleanup EXIT
 shopt -s nullglob
 patches=(patches/*.patch)
 if [ ${#patches[@]} -gt 0 ]; then
-    git -C "$SRC" am -q "${patches[@]/#/$PWD/}"
+    git -C "$SRC" -c user.name=qemu-ace-dsp -c user.email=qemu-ace-dsp@localhost \
+        am -q "${patches[@]/#/$PWD/}"
 fi
 git -C "$SRC" log --format='%h %s' "v$VER..HEAD" > "$B/applied-patches.txt"
 echo "applied $(wc -l < "$B/applied-patches.txt") patch(es)"
@@ -38,7 +51,8 @@ echo "applied $(wc -l < "$B/applied-patches.txt") patch(es)"
 cd "$B"
 if [ ! -f config-host.mak ] || [ "${RECONFIGURE:-0}" = 1 ]; then
     CONFIGURED=yes
-    echo "== $(date -u +%FT%TZ) configure"
+    echo "== $(date -u +%FT%TZ) configure (extra: ${EXTRA_CONFIGURE:-none})"
+    # shellcheck disable=SC2086
     "$SRC/configure" \
         --target-list=x86_64-softmmu \
         --prefix="$B/inst" \
@@ -48,6 +62,7 @@ if [ ! -f config-host.mak ] || [ "${RECONFIGURE:-0}" = 1 ]; then
         --disable-spice --disable-vnc --disable-curses --disable-usb-redir \
         --disable-libnfs --disable-vde --disable-xen \
         --disable-vhost-user --disable-vhost-vdpa --enable-modules \
+        ${EXTRA_CONFIGURE:-} \
         > configure.log 2>&1 || { tail -30 configure.log; exit 1; }
 fi
 
@@ -55,6 +70,6 @@ echo "== $(date -u +%FT%TZ) ninja (${JOBS:-$(nproc)} jobs)"
 ninja -j "${JOBS:-$(nproc)}" > ninja.log 2>&1 || { tail -60 ninja.log; exit 1; }
 tail -1 ninja.log
 t1=$(date +%s)
-echo "$VER patches=$(wc -l < applied-patches.txt | tr -d ' ') rc=0 wall=$((t1 - t0))s jobs=${JOBS:-$(nproc)} configure=$CONFIGURED $(date -u +%FT%TZ)" >> TIME.txt
-echo "== build ok in $((t1 - t0)) s: $(cat "$B/applied-patches.txt" | wc -l) patch(es) applied"
+echo "$VER patches=$(wc -l < applied-patches.txt | tr -d ' ') rc=0 wall=$((t1 - t0))s jobs=${JOBS:-$(nproc)} configure=$CONFIGURED extra='${EXTRA_CONFIGURE:-none}' $(date -u +%FT%TZ)" >> TIME.txt
+echo "== build ok in $((t1 - t0)) s: $(wc -l < "$B/applied-patches.txt") patch(es) applied"
 ./qemu-system-x86_64 --version

@@ -1,0 +1,163 @@
+[2J[001;001H[=3h[2J[001;001H[2J[001;001H[8;042;160t[2J[001;001H[2J[001;001H[8;056;240t[2J[001;001HBdsDxe: loading Boot0002 "UEFI QEMU DVD-ROM QM00005 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x2,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU DVD-ROM QM00005 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x2,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007E30A000
+OS loader: selecting the boot entry
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  MININT SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 RDRAMSIZE=64M KDWATCHDOG=0 DEBUGPORT=FILE
+Loading files... 1%Loading files... 2%Loading files... 3%Loading files... 4%Loading files... 5%Loading files... 6%Loading files... 7%Loading files... 8%Loading files... 9%RAM disk: 10% of 753 MB
+Loading files... 10%Loading files... 11%Loading files... 12%Loading files... 13%Loading files... 14%Loading files... 15%Loading files... 17%Loading files... 19%RAM disk: 20% of 753 MB
+Loading files... 20%Loading files... 21%Loading files... 22%Loading files... 23%Loading files... 24%Loading files... 25%Loading files... 26%Loading files... 27%Loading files... 28%Loading files... 29%RAM disk: 30% of 753 MB
+Loading files... 30%Loading files... 32%Loading files... 33%Loading files... 34%Loading files... 35%Loading files... 36%Loading files... 37%Loading files... 38%Loading files... 39%RAM disk: 40% of 753 MB
+Loading files... 40%Loading files... 41%Loading files... 42%Loading files... 43%Loading files... 44%Loading files... 45%Loading files... 46%Loading files... 47%Loading files... 48%Loading files... 49%RAM disk: 50% of 753 MB
+Loading files... 50%Loading files... 51%Loading files... 52%Loading files... 53%Loading files... 54%Loading files... 55%Loading files... 56%Loading files... 57%Loading files... 58%Loading files... 59%RAM disk: 61% of 753 MB
+Loading files... 61%Loading files... 63%Loading files... 64%Loading files... 65%Loading files... 66%Loading files... 67%Loading files... 68%Loading files... 69%RAM disk: 70% of 753 MB
+Loading files... 70%Loading files... 71%Loading files... 72%Loading files... 73%Loading files... 74%Loading files... 75%Loading files... 76%Loading files... 77%Loading files... 78%Loading files... 79%RAM disk: 80% of 753 MB
+Loading files... 80%Loading files... 81%Loading files... 82%Loading files... 83%Loading files... 84%Loading files... 85%                      RAM disk: built, 817 MB
+OS loader: loading the SYSTEM hive
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007E2B2000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007E2B2000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device ramdisk(0), hal device ramdisk(0)
+OS loader: nt path \Windows\, options  MININT SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 RDRAMSIZE=64M KDWATCHDOG=0 DEBUGPORT=FILE
+OS loader: entry FFFFF8007C9D23B0, loader block FFFFF8007E2B4000, arc disks FFFFF8007E2B51B0, registry 2596864 bytes at FFFFF8007D2EC000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:716) Pcr = FFFFF8007C7B1010, Gdt = FFFFF8007E29F000, Idt = FFFFF8007C78BB00, Tss = FFFFF8007E2A1000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1009838000 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007C7B1190
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.000000] (\sdk\include\reactos\drivers\bootvid\framebuf.c:730) 
+[    0.000000] (\ntos\ke\amd64\mproc.c:208) KeStartAllProcessors: started 0 processor(s)
+[    0.000000] (\ntos\ke\cpuctrl.c:831) All 1 processors have efficiency class 0
+[0m[s[999;999H[6n[u[    0.000000] ACPI: RSDP 0x000000000C3C4560 000024 (v02 ROS   )
+[    0.000000] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    0.000000] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: FACS 0x000000007FECA000 000040
+[    0.000000] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.000000] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    0.000000] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    0.000000] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    0.000000] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    0.000000] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    0.000000] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    0.000000] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    0.000000] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    0.000000] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    0.000000] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    0.000000] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    0.000000] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATAPI 'QEMU DVD-ROM' fw '2.5+' 0 sectors of 0 bytes
+[    0.000000] (\drivers\storage\class\ramdisk\ramdisk.c:1790) RamdiskCreateDiskDevice: DiskType=3 ExportAsCd=0
+[    0.000000] (\drivers\storage\class\ramdisk\ramdisk.c:1790) RamdiskCreateDiskDevice: DiskType=3 ExportAsCd=0
+[    0.000000] RamdiskCreateDiskDevice: MBR check - Magic=0xAA55, bytes at 0x1FE: 55 AA
+[    0.000000] RamdiskCreateDiskDevice: MBR magic matched, examining partitions
+[    0.000000]   MBR[0]: type=0x0C start=1 count=1674111
+[    0.000000] (\drivers\storage\class\ramdisk\ramdisk.c:2240) RamdiskCreateDiskDevice: geometry BPS=512 SPT=63 Heads=255 ExportAsCd=0 HiddenSectors=1
+[    0.000000] (\drivers\storage\class\ramdisk\ramdisk.c:2512) RamdiskBuildPartitionInfo: type=0x0C LBA=1 sectors=1674111 effBPS=512 start=512 len=857144832
+[    0.000000] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device ramdisk(0), hal device ramdisk(0), remote boot 0
+[    0.000000] (\ntos\io\iomgr\ioarcname.c:663) I/O: the boot device is a RAM disk, for which no ARC name is built here
+[    0.000000] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks did not answer to the boot device
+[    0.022708] (\ntos\io\iomgr\ioarcname.c:682) I/O: attempt 0, the CD drives did not answer to the boot device
+[    0.022708] (\ntos\io\iomgr\ioarcname.c:702) I/O: no device answered to the ARC boot name ramdisk(0)
+[    0.022708] (\ntos\kd64\kddump.c:1368) KD: Raw crash dump target initialization failed while locating the system disk (0xc0000010)
+[    0.022708] (\drivers\storage\class\ramdisk\ramdisk.c:2512) RamdiskBuildPartitionInfo: type=0x0C LBA=1 sectors=1674111 effBPS=512 start=512 len=857144832
+[    0.085895] (\drivers\storage\class\ramdisk\ramdisk.c:2512) RamdiskBuildPartitionInfo: type=0x0C LBA=1 sectors=1674111 effBPS=512 start=512 len=857144832
+[    0.101773] (\drivers\storage\class\ramdisk\ramdisk.c:2512) RamdiskBuildPartitionInfo: type=0x0C LBA=1 sectors=1674111 effBPS=512 start=512 len=857144832
+[    0.101773] (\ntos\kd64\kdlog.c:373) KD: Boot log has no crash-time storage path of its own (0xc0000010)
+0000 œ  €€è  04      ‰ €€                                                 \ S y s t e m R o o t \ s y s t e m 3 2 \ d r i v e r s \ B a s i c D i s p l a y . s y s   ª[    0.235643] (\drivers\directx\dxgkrnl\adapter.c:13161) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF8180001631A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    0.361681] (\drivers\directx\dxgkrnl\adapter.c:15092) DXGKRNL: DxgkAdapterStart: adapter FFFF8180001631A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    0.361681] (\drivers\directx\dxgkrnl\adapter.c:6424) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    0.459519] (\drivers\directx\dxgkrnl\display.c:6516) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF8180001631A0 desktop ready 1280x800 (scanout)
+[    0.461456] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    0.549171] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    0.550160] hdaudbus.sys: ADSP child not created on PCI 8086:293e (subclass 03): not an ACE-era Intel controller
+[    0.555148] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    0.556149] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+[    0.644937] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    0.661002] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    0.692218] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    0.707665] (\drivers\processor\pnpcpu\pnpcpu.c:1834) PNPCPU: uid=0 apic=0 pxm=?0 active=1 caps=0x00 CPC=0 CST=0 PSS=0 PCT=0 PSD=0 PPC=0 TSS=0 TSD=0
+[    0.707665] (\drivers\processor\pnpcpu\pnpcpu.c:1634) PNPCPU: P0 CPU 0 uid=0 apic=0 idle=fallback/1 perf=none/0 registered SMP
+[    0.723356] (\drivers\directx\dxgkrnl\adapter.c:617) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180001821A0 device UI suppressed
+[    0.723356] (\drivers\directx\dxgkrnl\adapter.c:14485) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180001821A0 stays retired; another adapter owns the desktop
+[    0.817255] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    0.817255] (\drivers\network\nwifi\control.c:816) NWIFI: control device \Device\Nwifi created
+[    0.817255] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    0.863544] (\drivers\storage\ramdrv\ramdrv.c:480) RAMDRV: 256 MB FAT32 drive at R:
+[    0.863544] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    1.573268] (\base\system\smss\pagefile.c:166) SMSS:PFILE: SmpParseCommandLine() failed - Status == c0000001
+[    1.573268] (\base\system\smss\pagefile.c:1117) SMSS:PFILE: No paging file was requested
+[    2.282519] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[    2.282519] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[    2.550781] (\base\system\smss\sminit.c:960) SMSS: Cannot query SystemPartition value (Type 232, Status 0xc0000034)
+[    2.771736] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[    2.771736] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[    4.853650] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    5.799766] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   13.877617] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001A3850
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1188) HDAUDIO: SubdeviceName eLineOutWave
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1864) HDAUDIO: SubdeviceName eLineOutTopo
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1249) HDAUDIO: SubdeviceName eLineInWave
+[   13.877617] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1864) HDAUDIO: SubdeviceName eLineInTopo
+[   22.165025] (\base\services\umpnpmgr\rpcserver.c:6459) PNP_RegisterNotification(000000685CD25610 000000000000000A 'AudioSrv' 000000685CD259DC 32 0x1 000000685CD25A30 2b0 000000685CD25A08)
+[   22.165025] (\base\services\umpnpmgr\rpcserver.c:6479) DBT_DEVTYP_DEVICEINTERFACE
+[   22.165025] (\drivers\wdm\audio\filters\kmixer\kmixer.c:106) KMixer.sys loaded
+[   22.165025] (\drivers\wdm\audio\filters\kmixer\kmixer.c:53) KMix_InstallDevice called
+[   22.165025] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000001 DeviceName {b7eafdc0-a680-11d0-96d8-00aa0051e51d}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   22.165025] (\drivers\wdm\audio\sysaudio\main.c:149) SYSAUDIO: AddDevice PDO FFFF8180001A45F0
+[   22.165025] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {a7c7a5b0-5af3-11d1-9ced-00a024bf0407}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   22.165025] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000003 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   22.165025] (\dll\win32\syssetup\install.c:1277) No firmware system identification seed (error 203)
+[   31.404332] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   31.456912] (\dll\win32\userenv\profile.c:2161) SetNamedSecurityInfoW(R:\ServiceProfiles\NetworkService\AppData\LocalLow) failed (Error 1)
+[   32.826648] (\dll\win32\userenv\profile.c:2161) SetNamedSecurityInfoW(R:\ServiceProfiles\LocalService\AppData\LocalLow) failed (Error 1)
+[   40.115889] (\base\services\umpnpmgr\rpcserver.c:6459) PNP_RegisterNotification(000000685CD22920 000000000003017A 'Program Manager' 000000685CD22B08 32 0x0 000000685CD22B50 174 000000685CD22B34)
+[   40.115889] (\base\services\umpnpmgr\rpcserver.c:6479) DBT_DEVTYP_DEVICEINTERFACE
+[  185.568560] (\base\setup\lib\setuplib.c:1044) SourcePath (1): '\Device\Ramdisk{d9b257fc-684e-4dcb-ab79-03cfa2f6b750}\AMD64'
+[  185.568560] (\base\setup\lib\setuplib.c:1045) SourceRootPath (1): '\Device\Ramdisk{d9b257fc-684e-4dcb-ab79-03cfa2f6b750}'
+[  185.568560] (\base\setup\lib\setuplib.c:1046) SourceRootDir (1): '\AMD64'
+[  185.568560] (\base\setup\lib\setuplib.c:1063) SourcePath (2): '\Device\Ramdisk{d9b257fc-684e-4dcb-ab79-03cfa2f6b750}\AMD64'
+[  185.568560] (\base\setup\lib\setuplib.c:1064) SourceRootPath (2): '\Device\Ramdisk{d9b257fc-684e-4dcb-ab79-03cfa2f6b750}'
+[  185.568560] (\base\setup\lib\setuplib.c:1065) SourceRootDir (2): '\AMD64'
+[  185.568560] (\base\setup\lib\setuplib.c:180) UnattendInf path: '\Device\Ramdisk{d9b257fc-684e-4dcb-ab79-03cfa2f6b750}\AMD64\unattend.inf'
+[  185.568560] (\base\setup\libernt\libernt.c:1106) Firmware language 'en'
+[  185.568560] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409

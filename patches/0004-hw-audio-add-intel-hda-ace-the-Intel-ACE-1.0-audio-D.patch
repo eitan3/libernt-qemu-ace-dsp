@@ -1,0 +1,1870 @@
+From 301bdbc6f6819aa27e6ec9a8b46d869baaa74277 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 10:12:38 +0200
+Subject: [PATCH 4/5] hw/audio: add intel-hda-ace, the Intel ACE 1.0 audio DSP
+ (Arrow Lake-S 8086:7f50)
+
+A variant of intel-hda for the Intel Smart Sound Technology BUS function of
+Arrow Lake-S/HX: BAR0 is the controller as before (plus the capability
+chain of the previous patches), BAR4 is the ACE 1.0 DSP bar with its
+register block and two SRAM windows.  The model runs the boot handshake a
+host driver exercises: the subsystem and core power-up (CPA follows SPA
+after a model delay), the purge request and its DONE reply, the ROM state
+walk to INIT_DONE, the code-loader stream consumed through QEMA DMA up to
+the stream SPIB, the ROM judgement of the streamed .ri container (model
+rules, with the 16 documented halt codes), the walk to FW_ENTERED, the
+firmware register block and the FW_READY notification in window 0, the
+IPC4 FW_CONFIG reply with its TLV list, and the controller-level
+interrupt (INTSTS bit 30, INTx or MSI) gated by the BAR4 enables.  The
+fault injector (property fault, QMP-settable), x-delay-scale, the
+personality table of the six ACE 1.0 controllers and the powered-down read
+value are the test hooks; every value the ABI does not dictate is a named
+model value.
+
+Sources studied (nothing copied; see intel-hda-ace-regs.h for the per-block
+citations): Linux v6.12 sound/soc/sof/intel/mtl.h, hda.h, mtl.c,
+hda-loader.c and include/sound/sof/ipc4/header.h (GPL-2.0-only OR
+BSD-3-Clause; declarations re-derived under LICENSING.md rule 7); SOF
+fcebbbf22d7 src/include/ipc4/{header.h,fw_reg.h,base_fw.h,notification.h,
+error_status.h}, src/include/sof/tlv.h and rimage
+tools/rimage/src/include/rimage/{cavs/cavs_ext_manifest.h,cse.h,
+sof/user/manifest.h} (BSD-3); the .ri field offsets verified byte for
+byte against the pinned sof-arl-s.ri (sof-firmware 2026.09.2, sha256
+f37a055c...dc647c6e); the boot handshake as prose in the P2a/P2b NOTES
+(facts).  The GPL-3 LiberNT driver and fake-DSP sources were not opened.
+---
+ hw/audio/Kconfig              |    5 +
+ hw/audio/intel-hda-ace-regs.h |  336 ++++++++
+ hw/audio/intel-hda-ace.c      | 1428 +++++++++++++++++++++++++++++++++
+ hw/audio/meson.build          |    1 +
+ hw/audio/trace-events         |   11 +
+ 5 files changed, 1781 insertions(+)
+ create mode 100644 hw/audio/intel-hda-ace-regs.h
+ create mode 100644 hw/audio/intel-hda-ace.c
+
+diff --git a/hw/audio/Kconfig b/hw/audio/Kconfig
+index daf060e1b..a9e4da1ab 100644
+--- a/hw/audio/Kconfig
++++ b/hw/audio/Kconfig
+@@ -33,6 +33,11 @@ config HDA
+     default y if PCI_DEVICES
+     depends on PCI
+ 
++config HDA_ACE
++    bool
++    default y if PCI_DEVICES
++    depends on HDA
++
+ config PCSPK
+     bool
+     default y
+diff --git a/hw/audio/intel-hda-ace-regs.h b/hw/audio/intel-hda-ace-regs.h
+new file mode 100644
+index 000000000..253bbd045
+--- /dev/null
++++ b/hw/audio/intel-hda-ace-regs.h
+@@ -0,0 +1,336 @@
++/*
++ * Intel ACE 1.0 audio DSP: the register map of the DSP bar (BAR4) and the
++ * message layouts the host and the firmware exchange through it.
++ *
++ * Copyright (c) 2026 LiberNT Intel SST project contributors
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 or
++ * (at your option) version 3 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_INTEL_HDA_ACE_REGS_H
++#define HW_INTEL_HDA_ACE_REGS_H
++
++/*
++ * Every definition in this file is an own declaration written after studying
++ * the source named in its comment; no text was copied.  The register offsets
++ * and bit positions are dictated by the hardware.  Values the hardware ABI
++ * does not dictate are marked "model value": they are choices of this model,
++ * exposed as properties of intel-hda-ace and to be replaced by measurements
++ * from the real device.
++ */
++
++/* --------------------------------------------------------------------- */
++/* BAR4 register offsets, ACE 1.0 (Arrow Lake-S).  Studied: Linux v6.12   */
++/* sound/soc/sof/intel/mtl.h (GPL-2.0-only OR BSD-3-Clause).              */
++/* --------------------------------------------------------------------- */
++
++#define ACE_HFDSSCS                  0x1000 /* subsystem power/clock status */
++#define ACE_HFDSSCS_SPA              (1u << 16) /* host: power active request */
++#define ACE_HFDSSCS_CPA              (1u << 24) /* device: power active */
++
++#define ACE_DSP2CXCAP_PRIMARY_CORE   0x178D00
++#define ACE_DSP2CXCTL_PRIMARY_CORE   0x178D04 /* primary core power/clock ctl */
++#define ACE_DSP2CXCTL_SPA            (1u << 0)
++#define ACE_DSP2CXCTL_CPA            (1u << 8)
++#define ACE_DSP2CXCTL_OSEL_SHIFT     24 /* owner select, bits 25:24 */
++#define ACE_DSP2CXCTL_OSEL_MASK      0x03000000u
++
++#define ACE_HFINTIPPTR               0x1108 /* interrupt IP pointer */
++#define ACE_HFINTIPPTR_PTR_MASK      0x001fffffu /* bits 20:0: INTEN offset */
++#define ACE_IRQ_INTEN_L_HOST_IPC     (1u << 0) /* in the register named above */
++#define ACE_IRQ_INTEN_L_SOUNDWIRE    (1u << 6)
++#define ACE_IRQSTS_OFFSET            0x20 /* status register at pointer + 0x20 */
++#define ACE_IRQSTS_IPC               (1u << 0)
++#define ACE_IRQSTS_SDW               (1u << 6)
++
++#define ACE_HfHIPCIE                 0x1140 /* host IPC interrupt enable */
++#define ACE_HfHIPCIE_IE              (1u << 0)
++
++#define ACE_HFIPCXTDR                0x73200 /* DSP -> host: primary */
++#define ACE_HFIPCXTDR_BUSY           (1u << 31)
++#define ACE_HFIPCXTDR_MSG_MASK       0x7fffffffu
++#define ACE_HFIPCXTDA                0x73204 /* DSP -> host: host-done ack */
++#define ACE_HFIPCXTDA_BUSY           (1u << 31)
++#define ACE_HFIPCXIDR                0x73210 /* host -> DSP: primary */
++#define ACE_HFIPCXIDR_BUSY           (1u << 31)
++#define ACE_HFIPCXIDR_MSG_MASK       0x7fffffffu
++#define ACE_HFIPCXIDA                0x73214 /* DSP -> host: reply */
++#define ACE_HFIPCXIDA_DONE           (1u << 31)
++#define ACE_HFIPCXIDA_MSG_MASK       0x7fffffffu
++#define ACE_HFIPCXCTL                0x73228 /* interrupt enables */
++#define ACE_HFIPCXCTL_BUSY           (1u << 0)
++#define ACE_HFIPCXCTL_DONE           (1u << 1)
++#define ACE_HFIPCXTDDY               0x73300 /* DSP -> host: extension */
++#define ACE_HFIPCXIDDY               0x73380 /* host -> DSP: extension */
++
++#define ACE_HFFLGPXQWY               0x163200 /* core 0 status (FSR) */
++#define ACE_HFFLGPXQWY_ERROR         0x163204 /* core 0 error (ROM error) */
++
++/* --------------------------------------------------------------------- */
++/* SRAM windows, ACE 1.0.  Studied: Linux v6.12 mtl.h (MTL_SRAM_WINDOW_*, */
++/* MTL_DSP_MBOX_*, MTL_DSP_ROM_STS/ROM_ERROR).                           */
++/* --------------------------------------------------------------------- */
++
++#define ACE_SRAM_WINDOW0         0x180000 /* firmware registers at +0 */
++#define ACE_SRAM_WINDOW_SIZE     0x8000
++#define ACE_SRAM_MBOX_UPLINK     (ACE_SRAM_WINDOW0 + 0x1000)
++#define ACE_SRAM_MBOX_SIZE       0x1000
++#define ACE_SRAM_WINDOW1         0x188000 /* downlink mailbox at +0 */
++
++/* --------------------------------------------------------------------- */
++/* The firmware status register (FSR).  Studied: Linux v6.12              */
++/* sound/soc/sof/intel/hda.h (FSR_*_MASK, FSR_STATE_*, FSR_WAIT_FOR_*,    */
++/* FSR_MOD_*) and mtl.h (FSR_STATE_ROM_* of ACE 1.0).                     */
++/* --------------------------------------------------------------------- */
++
++#define ACE_FSR_STATE_MASK       0x00ffffffu
++#define ACE_FSR_WAIT_SHIFT       24
++#define ACE_FSR_WAIT_MASK        0x0f000000u
++#define ACE_FSR_MODULE_SHIFT     28
++#define ACE_FSR_MODULE_MASK      0x70000000u
++#define ACE_FSR_HALTED           (1u << 31) /* while the ROM runs */
++#define ACE_FSR_RUNNING          (1u << 31) /* once the firmware entered */
++
++#define ACE_FSR_INIT_DONE        0x1 /* module independent */
++#define ACE_FSR_FW_ENTERED       0x5 /* module independent */
++
++#define ACE_ROM_RESET_VECTOR_DONE        0x08
++#define ACE_ROM_PURGE_BOOT               0x09
++#define ACE_ROM_FW_MANIFEST_IN_DMA_BUFF  0x25
++#define ACE_ROM_LOAD_CSE_MAN_TO_IMR      0x26
++#define ACE_ROM_LOAD_FW_MAN_TO_IMR       0x27
++#define ACE_ROM_LOAD_FW_CODE_TO_IMR      0x28
++#define ACE_ROM_FW_LOADING_DONE          0x29
++#define ACE_ROM_FW_CODE_LOADED           0x2A
++
++#define ACE_FSR_WAIT_FOR_DMA_BUFFER_FULL 0x5
++#define ACE_FSR_MOD_ROM                  0
++#define ACE_FSR_MOD_BASE_FW              2
++
++/* --------------------------------------------------------------------- */
++/* ROM error codes.  Studied: Linux v6.12 hda.h (HDA_DSP_ROM_*).          */
++/* --------------------------------------------------------------------- */
++
++#define ACE_ROM_CSE_ERROR                40
++#define ACE_ROM_CSE_WRONG_RESPONSE       41
++#define ACE_ROM_IMR_TO_SMALL             42
++#define ACE_ROM_BASE_FW_NOT_FOUND        43
++#define ACE_ROM_CSE_VALIDATION_FAILED    44
++#define ACE_ROM_IPC_FATAL_ERROR          45
++#define ACE_ROM_L2_CACHE_ERROR           46
++#define ACE_ROM_LOAD_OFFSET_TO_SMALL     47
++#define ACE_ROM_API_PTR_INVALID          50
++#define ACE_ROM_BASEFW_INCOMPAT          51
++#define ACE_ROM_UNHANDLED_INTERRUPT      0xbee00000u
++#define ACE_ROM_MEMORY_HOLE_ECC          0xecc00000u
++#define ACE_ROM_KERNEL_EXCEPTION         0xcafe0000u
++#define ACE_ROM_USER_EXCEPTION           0xbeef0000u
++#define ACE_ROM_UNEXPECTED_RESET         0xdecaf000u
++#define ACE_ROM_NULL_FW_ENTRY            0x4c4c4e55u
++
++/* --------------------------------------------------------------------- */
++/* The ROM control request and the code-loader stream.  Studied: Linux    */
++/* v6.12 hda.h (HDA_DSP_ROM_IPC_CONTROL, HDA_DSP_ROM_IPC_PURGE_FW,        */
++/* HDA_CL_STREAM_FORMAT) and hda-loader.c (the stream tag at bits 15:9).  */
++/* --------------------------------------------------------------------- */
++
++#define ACE_ROM_IPC_CONTROL              0x01000000u
++#define ACE_ROM_IPC_PURGE_FW             0x00004000u
++#define ACE_ROM_IPC_STREAM_TAG_SHIFT     9 /* (tag - 1) at bits 13:9; bit 14 is PURGE_FW */
++#define ACE_ROM_IPC_STREAM_TAG_MASK      0x00001e00u
++#define ACE_CL_STREAM_FORMAT             0x40 /* 48 kHz, 32-bit, 1 ch */
++
++/* --------------------------------------------------------------------- */
++/* IPC4 message header.  Studied: SOF src/include/ipc4/header.h and the   */
++/* Linux include/sound/sof/ipc4/header.h (both dual BSD-3 / GPL-2.0;      */
++/* the message-type, target, direction and module/instance encodings).    */
++/* --------------------------------------------------------------------- */
++
++#define ACE_IPC4_MSG_TARGET_SHIFT        30 /* 0: firmware, 1: module */
++#define ACE_IPC4_MSG_TARGET_MASK         0x40000000u
++#define ACE_IPC4_MSG_DIR_SHIFT           29 /* 0: request, 1: reply */
++#define ACE_IPC4_MSG_DIR_REPLY           0x20000000u
++#define ACE_IPC4_MSG_TYPE_SHIFT          24 /* bits 28:24 */
++#define ACE_IPC4_MSG_TYPE_MASK           0x1f000000u
++#define ACE_IPC4_REPLY_STATUS_MASK       0x00ffffffu
++
++#define ACE_IPC4_GLB_BOOT_CONFIG         0
++#define ACE_IPC4_GLB_ROM_CONTROL         1
++#define ACE_IPC4_GLB_NOTIFICATION        27
++
++/* The module-message extension of the FW_CONFIG GET: the parameter id at
++ * bits 29:20 and module 0 / instance 0 in the low bits (0x00700000), as the
++ * P2a facts table records the request the host sends. */
++
++/* --------------------------------------------------------------------- */
++/* Notifications.  Studied: SOF src/include/ipc4/notification.h (BSD-3).  */
++/* --------------------------------------------------------------------- */
++
++#define ACE_IPC4_NOTIFY_TYPE_SHIFT       16 /* notification type at 23:16 */
++#define ACE_IPC4_NOTIFY_TYPE_MASK        0x00ff0000u
++#define ACE_IPC4_NOTIFY_FW_READY         8
++#define ACE_IPC4_EXCEPTION_CAUGHT        10
++#define ACE_IPC4_WATCHDOG_TIMEOUT        15
++#define ACE_IPC4_FW_READY_LIB_RESTORED   (1u << 15) /* extension flag */
++
++/* --------------------------------------------------------------------- */
++/* Reply status.  Studied: SOF src/include/ipc4/error_status.h (BSD-3).   */
++/* --------------------------------------------------------------------- */
++
++#define ACE_IPC4_SUCCESS                 0
++#define ACE_IPC4_UNKNOWN_MESSAGE_TYPE    2
++
++/* --------------------------------------------------------------------- */
++/* Firmware configuration parameters (TLVs of the FW_CONFIG reply).        */
++/* Studied: SOF src/include/ipc4/base_fw.h (enum ipc4_fw_config_params,   */
++/* IPC4_FW_CONFIG = 7, the four-uint16 version) and src/include/sof/tlv.h  */
++/* (struct sof_tlv: type, length, value; a zero header ends the list).     */
++/* Both BSD-3.                                                             */
++/* --------------------------------------------------------------------- */
++
++#define ACE_IPC4_FW_CONFIG_PARAM         7
++#define ACE_IPC4_FW_CONFIG_PARAM_SHIFT   20 /* parameter id at ext 29:20 */
++
++#define ACE_TLV_FW_VERSION               0
++#define ACE_TLV_DL_MAILBOX_BYTES         6
++#define ACE_TLV_UL_MAILBOX_BYTES         7
++#define ACE_TLV_TRACE_LOG_BYTES          8
++#define ACE_TLV_MAX_PPL_CNT              9
++#define ACE_TLV_MAX_LIBS_COUNT           17
++#define ACE_TLV_FW_CONTEXT_SAVE          29
++
++/* --------------------------------------------------------------------- */
++/* The firmware register block in window 0.  Studied: SOF                  */
++/* src/include/ipc4/fw_reg.h (struct ipc4_fw_registers, BSD-3); the       */
++/* rom_info union: fuses 7:0, load method 8, downlink IPC by DMA 9,        */
++/* implementation revision 19:12, version 27:20, platform 27:16.            */
++/* The host driver reads the first 64 bytes.                                */
++/* --------------------------------------------------------------------- */
++
++#define ACE_FWREG_FSR                    0x00
++#define ACE_FWREG_LEC                    0x04
++#define ACE_FWREG_FPS                    0x08
++#define ACE_FWREG_LNEC                   0x0c
++#define ACE_FWREG_LTR                    0x10
++#define ACE_FWREG_ROM_INFO               0x18
++#define ACE_FWREG_ABI_VER                0x1c
++#define ACE_FWREG_SIZE                   0x40
++
++#define ACE_IPC4_FW_REGS_ABI_VER         1
++
++/* --------------------------------------------------------------------- */
++/* The firmware container (.ri) as the ROM receives it: the bytes are the  */
++/* file from the extended-manifest header on.  Layout studied: SOF rimage  */
++/* tools/rimage/src/include/rimage/cavs/cavs_ext_manifest.h (struct        */
++/* fw_ext_man_cavs_header, EXTENDED_MANIFEST_*; BSD-3), rimage/cse.h        */
++/* (CsePartitionDirHeader_v2_5, CsePartitionDirEntry; BSD-3) and the       */
++/* manifest/firmware descriptor of rimage/sof/user/manifest.h (BSD-3);      */
++/* every field offset below was verified byte for byte against the pinned   */
++/* sof-arl-s.ri (sof-firmware 2026.09.2, sha256 f37a055c...dc647c6e).       */
++/* --------------------------------------------------------------------- */
++
++#define ACE_RI_EXT_MAN_MAGIC             0x31454124u /* "$AE1" */
++#define ACE_RI_EXT_MAN_LEN               4 /* header length = payload offset */
++#define ACE_RI_EXT_MAN_VER_MAJOR         8 /* uint16 */
++#define ACE_RI_EXT_MAN_VER_MINOR         10 /* uint16 */
++#define ACE_RI_EXT_MAN_NUM_MODULES       12
++#define ACE_RI_EXT_MAN_VERSION_MAJOR     1
++#define ACE_RI_EXT_MAN_HDR_SIZE          16
++
++#define ACE_RI_CPD_MAGIC                 0x44504324u /* "$CPD" */
++#define ACE_RI_CPD_NB_ENTRIES            4
++#define ACE_RI_CPD_HEADER_VERSION        8
++#define ACE_RI_CPD_ENTRY_VERSION         9
++#define ACE_RI_CPD_HEADER_LENGTH         10 /* entries start here */
++#define ACE_RI_CPD_HDR_SIZE              20
++#define ACE_RI_CPD_ENTRY_SIZE            24
++#define ACE_RI_CPD_ENTRY_NAME            0 /* 12 bytes */
++#define ACE_RI_CPD_ENTRY_NAME_SIZE       12
++#define ACE_RI_CPD_ENTRY_OFFSET          12
++#define ACE_RI_CPD_ENTRY_LENGTH          16
++#define ACE_RI_MAN_ENTRY                 "ADSP.man"
++#define ACE_RI_MAN_ENTRY_MAX             32
++
++#define ACE_RI_MAN_HEADER_TYPE           0 /* uint32: 4 */
++#define ACE_RI_MAN_HEADER_TYPE_VALUE     4
++#define ACE_RI_MAN_HDR_LEN_WORDS         4
++#define ACE_RI_MAN_VERSION               8
++#define ACE_RI_MAN_VENDOR                16 /* 0x8086 */
++#define ACE_RI_MAN_VENDOR_INTEL          0x8086u
++#define ACE_RI_MAN_DATE                  20
++#define ACE_RI_MAN_SIZE_PAGES            24
++#define ACE_RI_MAN_MAGIC                 28 /* "$MN2" */
++#define ACE_RI_MAN_MAGIC_VALUE           0x324e4d24u
++#define ACE_RI_MAN_VERSION_MAJOR         36 /* uint16 */
++#define ACE_RI_MAN_VERSION_MINOR         38
++#define ACE_RI_MAN_VERSION_HOTFIX        40
++#define ACE_RI_MAN_VERSION_BUILD         42
++#define ACE_RI_MAN_HDR_SIZE              0x50
++
++#define ACE_RI_FW_HDR_OFFSET             0x2000 /* in the payload */
++#define ACE_RI_FW_MAGIC                  0x314d4124u /* "$AM1" */
++#define ACE_RI_FW_HDR_LEN                4 /* 52 */
++#define ACE_RI_FW_HDR_SIZE               52
++#define ACE_RI_FW_IMAGE_ID               8 /* 8 bytes: "ADSPFW" */
++#define ACE_RI_FW_IMAGE_ID_TEXT          "ADSPFW"
++#define ACE_RI_FW_PRELOAD_PAGES          16
++#define ACE_RI_FW_FLAGS                  20
++#define ACE_RI_FW_FEATURE_MASK           24
++#define ACE_RI_FW_VERSION_MAJOR          28 /* uint16 */
++#define ACE_RI_FW_VERSION_MINOR          30
++#define ACE_RI_FW_VERSION_HOTFIX         32
++#define ACE_RI_FW_VERSION_BUILD          34
++#define ACE_RI_FW_MODULE_COUNT           36
++#define ACE_RI_FW_HW_BUFFER_BASE         40
++#define ACE_RI_FW_LOAD_OFFSET            48
++#define ACE_RI_FW_VERSION_MAJOR_ONLY     2 /* model rule: major version 2 */
++
++#define ACE_RI_MODULE_TABLE              (ACE_RI_FW_HDR_OFFSET + ACE_RI_FW_HDR_SIZE)
++#define ACE_RI_MODULE_ENTRY_SIZE         116
++#define ACE_RI_MODULE_MAGIC              0 /* "$AME" */
++#define ACE_RI_MODULE_MAGIC_VALUE        0x454d4124u /* "$AME" */
++#define ACE_RI_MODULE_TYPE               28
++#define ACE_RI_MODULE_SEGMENTS           80 /* three 12-byte descriptors */
++#define ACE_RI_MODULE_SEGMENT_COUNT      3
++#define ACE_RI_SEGMENT_SIZE              12
++#define ACE_RI_SEGMENT_FLAGS             0 /* bits 15:0 type, 31:16 pages */
++#define ACE_RI_SEGMENT_PAGE_COUNT_SHIFT  16
++#define ACE_RI_SEGMENT_VADDR             4
++#define ACE_RI_SEGMENT_FILE_OFFSET       8
++#define ACE_RI_MODULE_MAX                64
++
++/* --------------------------------------------------------------------- */
++/* Model values (not dictated by the ABI): each is a property of the      */
++/* device or a named constant printed as "(model value)".                 */
++/* --------------------------------------------------------------------- */
++
++/* HFINTIPPTR -> INTEN at BAR4 + 0x120 (model value: the driver and Linux
++ * address the register at BAR4 + the pointer; the real pointer is
++ * INFO_NEEDED 2 of the plan). */
++#define ACE_MODEL_INTIPPTR               0x120
++#define ACE_MODEL_INTEN                  (ACE_MODEL_INTIPPTR)      /* 0x1120 */
++#define ACE_MODEL_IRQSTS                 (ACE_MODEL_INTIPPTR + ACE_IRQSTS_OFFSET)
++/* ROM info word of the firmware register block (model value). */
++#define ACE_MODEL_ROM_INFO               0x0120315au
++/* Firmware configuration constants of the reply (model values). */
++#define ACE_MODEL_DL_MAILBOX_BYTES       4096
++#define ACE_MODEL_UL_MAILBOX_BYTES       4096
++#define ACE_MODEL_TRACE_LOG_BYTES        0x20000
++#define ACE_MODEL_MAX_PIPELINES          16
++#define ACE_MODEL_MAX_LIBRARIES          4
++#define ACE_MODEL_FW_CONTEXT_SAVE        1
++
++#endif /* HW_INTEL_HDA_ACE_REGS_H */
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+new file mode 100644
+index 000000000..7c386814b
+--- /dev/null
++++ b/hw/audio/intel-hda-ace.c
+@@ -0,0 +1,1428 @@
++/*
++ * QEMU model of the Intel ACE 1.0 audio DSP of the Arrow Lake-S "Smart
++ * Sound Technology BUS" function (8086:7f50): intel-hda-ace.
++ *
++ * Copyright (c) 2026 LiberNT Intel SST project contributors
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 or
++ * (at your option) version 3 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++/*
++ * The device is a variant of the Intel HD Audio controller: the same BAR0
++ * (the ICH6 register block and its codec bus) plus the DSP bar (BAR4) that
++ * carries the ACE 1.0 DSP registers and SRAM windows, the processing-power
++ * and software-position-in-buffer capabilities the DSP drivers walk, and the
++ * ROM boot handshake, the code-loader stream consumer and the IPC4
++ * receive/reply path a host driver exercises when it boots the firmware.
++ *
++ * What it simulates is a *model*: the firmware is a state machine driven by
++ * QEMU virtual-clock timers, not a DSP executing the streamed image.  Every
++ * value the hardware ABI does not dictate is a named property (x-bar4-size,
++ * x-powered-down-value, x-delay-scale, the capability offsets, the interrupt
++ * pointer value, the ROM info word) and is printed as "(model value)" in the
++ * traces.  Unlisted BAR4 offsets read the powered-down value and are traced
++ * as unexpected, so a VM log lists every register the guest touches that the
++ * model lacks.
++ *
++ * Sources studied (the register semantics and the boot handshake; nothing
++ * copied -- see intel-hda-ace-regs.h for the per-block citations): Linux
++ * v6.12 sound/soc/sof/intel/{mtl.h,hda.h,mtl.c,hda-loader.c} (dual
++ * BSD-3/GPL-2.0, declarations re-derived under LICENSING.md rule 7), the SOF
++ * repository's IPC4 headers (BSD-3), the SOF firmware initialisation
++ * documentation (BSD-3), and the boot handshake as described in prose in the
++ * P2a/P2b notes of the LiberNT Intel SST plan (facts only; the GPL-3 driver
++ * and fake-DSP sources were not opened).
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/log.h"
++#include "qemu/timer.h"
++#include "qapi/error.h"
++#include "qapi/visitor.h"
++#include "migration/vmstate.h"
++#include "hw/pci/pci.h"
++#include "hw/pci/pci_device.h"
++#include "hw/pci/msi.h"
++#include "hw/core/qdev-properties.h"
++#include "intel-hda-internal.h"
++#include "intel-hda-ace-regs.h"
++#include "trace.h"
++#include "qom/object.h"
++
++#define TYPE_INTEL_HDA_ACE "intel-hda-ace"
++OBJECT_DECLARE_SIMPLE_TYPE(IntelHDAAceState, INTEL_HDA_ACE)
++
++/* the DSP's state as the host's boot state machine sees it */
++typedef enum AceState {
++    ACE_OFF,        /* powered down: FSR, ROM error and windows read as powered down */
++    ACE_PURGING,    /* the purge request was taken: the ROM acknowledges, reaches INIT_DONE */
++    ACE_ROM_READY,  /* INIT_DONE: the ROM waits for the code-loader stream */
++    ACE_LOADING,    /* the stream ran: the ROM walks its states and enters the firmware */
++    ACE_RUNNING,    /* the firmware entered: FW_READY, then IPC */
++    ACE_HALTED,     /* the ROM or the firmware halted with an error code */
++} AceState;
++
++static const char *const ace_state_names[] = {
++    [ACE_OFF] = "off", [ACE_PURGING] = "purging", [ACE_ROM_READY] = "rom-ready",
++    [ACE_LOADING] = "loading", [ACE_RUNNING] = "running", [ACE_HALTED] = "halted",
++};
++
++typedef enum AceFault {
++    ACE_FAULT_NONE,
++    ACE_FAULT_NEVER_POWER,
++    ACE_FAULT_NEVER_ACK,
++    ACE_FAULT_NEVER_READY,
++    ACE_FAULT_NEVER_ENTER,
++    ACE_FAULT_NEVER_FWREADY,
++    ACE_FAULT_NEVER_REPLY,
++    ACE_FAULT_DROP_REQUESTS,
++    ACE_FAULT_HALT_ROM,
++    ACE_FAULT_HALT_FW,
++    ACE_FAULT_CRASH_NOTIFICATION,
++    ACE_FAULT_ABI,
++    ACE_FAULT_IPC_STATUS,
++    ACE_FAULT_BAD_TUPLES,
++    ACE_FAULT_TRUNCATED_REPLY,
++    ACE_FAULT_VERSION_SHIFT,
++    ACE_FAULT_WINDOW_READ_FAIL,
++} AceFault;
++
++static const struct {
++    const char *name;
++    AceFault id;
++    bool takes_arg;
++} ace_faults[] = {
++    { "none",               ACE_FAULT_NONE,               false },
++    { "never-power",        ACE_FAULT_NEVER_POWER,        false },
++    { "never-ack",          ACE_FAULT_NEVER_ACK,          false },
++    { "never-ready",        ACE_FAULT_NEVER_READY,        false },
++    { "never-enter",        ACE_FAULT_NEVER_ENTER,        false },
++    { "never-fwready",      ACE_FAULT_NEVER_FWREADY,      false },
++    { "never-reply",        ACE_FAULT_NEVER_REPLY,        false },
++    { "drop-requests",      ACE_FAULT_DROP_REQUESTS,      false },
++    { "halt-rom",           ACE_FAULT_HALT_ROM,           true  },
++    { "halt-fw",            ACE_FAULT_HALT_FW,            true  },
++    { "crash-notification", ACE_FAULT_CRASH_NOTIFICATION, false },
++    { "abi",                ACE_FAULT_ABI,                true  },
++    { "ipc-status",         ACE_FAULT_IPC_STATUS,         true  },
++    { "bad-tuples",         ACE_FAULT_BAD_TUPLES,         false },
++    { "truncated-reply",    ACE_FAULT_TRUNCATED_REPLY,    false },
++    { "version-shift",      ACE_FAULT_VERSION_SHIFT,      false },
++    { "window-read-fail",   ACE_FAULT_WINDOW_READ_FAIL,   false },
++};
++
++/* PCI identities of the ACE 1.0 controllers the host drivers know (the
++ * numeric ids are facts: Linux include/linux/pci_ids.h; the revisions other
++ * than Arrow Lake-S' were not observed and are model defaults) */
++typedef struct AcePersonality {
++    const char *name;
++    uint16_t device_id;
++    uint8_t revision;
++} AcePersonality;
++
++static const AcePersonality ace_personalities[] = {
++    { "arl-s", 0x7f50, 0x10 },
++    { "mtl",   0x7e28, 0x10 },
++    { "arl",   0x7728, 0x10 },
++    { "lnl-p", 0xa828, 0x10 },
++    { "ptl",   0xe428, 0x10 },
++    { "ptl-h", 0xe328, 0x10 },
++};
++
++/* the model's timings (nothing measured: the P2a model values, every one
++ * scaled by x-delay-scale) */
++#define ACE_US_CPA_SUBSYS_ON      100
++#define ACE_US_CPA_CORE_ON        200
++#define ACE_US_CPA_OFF             50
++#define ACE_US_ROM_PURGE_BOOT      50  /* PURGE_BOOT follows RESET_VECTOR_DONE */
++#define ACE_US_ROM_ACK            100  /* the DONE reply to the purge request */
++#define ACE_US_ROM_INIT_DONE      500  /* INIT_DONE after the ack */
++#define ACE_US_ROM_WALK_STEP      400  /* each of the five load states */
++#define ACE_US_FW_READY           200  /* FW_READY after the firmware entered */
++#define ACE_US_IPC_REPLY           50
++#define ACE_PAYLOAD_MAX (16 * 1024 * 1024)
++
++struct IntelHDAAceState {
++    IntelHDAState hda;
++
++    /* BAR4 */
++    MemoryRegion bar4;
++    MemoryRegion regs;           /* the whole bar: the sparse register block */
++    MemoryRegion window[2];      /* SRAM window 0 and 1 over ram[] */
++    uint8_t *ram[2];
++
++    /* registers */
++    uint32_t hfdsscs;
++    uint32_t dsp2cxctl;
++    uint32_t inten;
++    uint32_t hipcie;
++    uint32_t xtdr, xtda, xtddy;
++    uint32_t xidr, xiddy, xida, xctl;
++    uint32_t fsr, rom_error;
++
++    /* the model */
++    AceState state;
++    bool purge_pending;          /* the purge request waits for the core */
++    uint32_t purge_tag;          /* stream tag the ROM will consume */
++    bool reply_pending;          /* XIDA DONE is set and not yet cleared */
++    bool notif_pending;          /* XTDR BUSY is set and not yet acknowledged */
++    QEMUTimer *power_timer;
++    QEMUTimer *rom_timer;
++    QEMUTimer *reply_timer;
++    uint32_t power_event;        /* what power_timer does when it fires */
++    uint32_t rom_step;           /* where rom_timer is in the current walk */
++    uint32_t reply_primary, reply_ext;
++    uint8_t *payload;            /* the streamed firmware image */
++    uint32_t payload_len;
++    uint16_t fw_version[4];      /* major, minor, hotfix, build of the image */
++    bool have_version;
++
++    /* properties */
++    uint64_t bar4_size;
++    uint32_t powered_down_value;
++    double delay_scale;
++    char *personality;
++    char *fault;                 /* "name" or "name=value" */
++    AceFault fault_id;
++    uint32_t fault_arg;
++};
++
++static void ace_fw_ready(IntelHDAAceState *s);
++
++static const uint64_t ace_window_base[2] = { ACE_SRAM_WINDOW0, ACE_SRAM_WINDOW1 };
++
++static const AcePersonality *ace_personality(const char *name, Error **errp)
++{
++    for (size_t i = 0; i < ARRAY_SIZE(ace_personalities); i++) {
++        if (g_str_equal(name, ace_personalities[i].name)) {
++            return &ace_personalities[i];
++        }
++    }
++    error_setg(errp, "intel-hda-ace: unknown personality '%s' (one of "
++               "arl-s, mtl, arl, lnl-p, ptl, ptl-h)", name);
++    return NULL;
++}
++
++/* --------------------------------------------------------------------- */
++/* model helpers                                                         */
++
++static uint64_t ace_delay(IntelHDAAceState *s, uint32_t us)
++{
++    return (uint64_t)(us * 1000.0 * s->delay_scale);
++}
++
++static uint32_t ace_powered_down(IntelHDAAceState *s)
++{
++    return s->powered_down_value;
++}
++
++static bool ace_powered(IntelHDAAceState *s)
++{
++    return (s->hfdsscs & ACE_HFDSSCS_CPA) && (s->dsp2cxctl & ACE_DSP2CXCTL_CPA);
++}
++
++static void ace_set_state(IntelHDAAceState *s, AceState to)
++{
++    if (s->state == to) {
++        return;
++    }
++    trace_ace_state(ace_state_names[s->state], ace_state_names[to]);
++    s->state = to;
++}
++
++static void ace_set_fsr(IntelHDAAceState *s, uint32_t state, uint32_t wait,
++                        uint32_t module, bool halted)
++{
++    s->fsr = (state & ACE_FSR_STATE_MASK) |
++             ((wait << ACE_FSR_WAIT_SHIFT) & ACE_FSR_WAIT_MASK) |
++             ((module << ACE_FSR_MODULE_SHIFT) & ACE_FSR_MODULE_MASK) |
++             (halted ? ACE_FSR_HALTED : 0);
++    trace_ace_fsr(s->fsr & ACE_FSR_STATE_MASK,
++                  (s->fsr & ACE_FSR_WAIT_MASK) >> ACE_FSR_WAIT_SHIFT,
++                  (s->fsr & ACE_FSR_MODULE_MASK) >> ACE_FSR_MODULE_SHIFT,
++                  halted);
++    /* the firmware register block mirrors the FSR and the error code */
++    if (s->ram[0]) {
++        stl_le_p(s->ram[0] + ACE_FWREG_FSR, s->fsr);
++        stl_le_p(s->ram[0] + ACE_FWREG_LEC, s->rom_error);
++    }
++}
++
++static const char *ace_rom_error_name(uint32_t code)
++{
++    switch (code) {
++    case ACE_ROM_CSE_ERROR:             return "CSE error";
++    case ACE_ROM_CSE_WRONG_RESPONSE:    return "CSE wrong response";
++    case ACE_ROM_IMR_TO_SMALL:          return "IMR too small";
++    case ACE_ROM_BASE_FW_NOT_FOUND:     return "base firmware not found";
++    case ACE_ROM_CSE_VALIDATION_FAILED: return "CSE validation failed";
++    case ACE_ROM_IPC_FATAL_ERROR:       return "IPC fatal error";
++    case ACE_ROM_L2_CACHE_ERROR:        return "L2 cache error";
++    case ACE_ROM_LOAD_OFFSET_TO_SMALL:  return "load offset too small";
++    case ACE_ROM_API_PTR_INVALID:       return "API pointer invalid";
++    case ACE_ROM_BASEFW_INCOMPAT:       return "base firmware incompatible";
++    case ACE_ROM_UNHANDLED_INTERRUPT:   return "unhandled interrupt";
++    case ACE_ROM_MEMORY_HOLE_ECC:       return "memory hole ECC";
++    case ACE_ROM_KERNEL_EXCEPTION:      return "kernel exception";
++    case ACE_ROM_USER_EXCEPTION:        return "user exception";
++    case ACE_ROM_UNEXPECTED_RESET:      return "unexpected reset";
++    case ACE_ROM_NULL_FW_ENTRY:         return "null firmware entry";
++    default:                            return "unknown";
++    }
++}
++
++static void ace_halt(IntelHDAAceState *s, uint32_t state, uint32_t code)
++{
++    s->rom_error = code;
++    trace_ace_payload_check(ace_rom_error_name(code), false);
++    ace_set_fsr(s, state, 0, ACE_FSR_MOD_ROM, true);
++    ace_set_state(s, ACE_HALTED);
++}
++
++/* The controller-level interrupt: asserted while a message is pending and
++ * every enable the host programmed is set (the interrupt enable register the
++ * pointer names, the host IPC enable, and the busy or done interrupt enable
++ * of the IPC block); cleared when the host acknowledges the message.  The
++ * controller's INTCTL gates it like every other source (INTSTS bit 30). */
++static void ace_update_irq(IntelHDAAceState *s)
++{
++    IntelHDAState *d = &s->hda;
++    bool enabled = (s->inten & ACE_IRQ_INTEN_L_HOST_IPC) &&
++                   (s->hipcie & ACE_HfHIPCIE_IE);
++    bool level;
++
++    if (s->notif_pending) {
++        level = enabled && (s->xctl & ACE_HFIPCXCTL_BUSY);
++    } else if (s->reply_pending) {
++        level = enabled && (s->xctl & ACE_HFIPCXCTL_DONE);
++    } else {
++        level = false;
++    }
++    if (level != !!(d->ext_sts & (1u << 30))) {
++        trace_ace_irq(level, msi_enabled(&d->pci));
++        d->ext_sts = level ? (1u << 30) : 0;
++    }
++    intel_hda_update_irq(d);
++}
++
++/* a DSP -> host notification: the primary carries BUSY, the extension is the
++ * DSP -> host extension register (acknowledged: XTDR busy written 1, XTDA
++ * busy cleared) */
++static void ace_set_notif(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
++{
++    s->xtdr = ACE_HFIPCXTDR_BUSY | (primary & ACE_HFIPCXTDR_MSG_MASK);
++    s->xtddy = ext;
++    s->xtda = ACE_HFIPCXTDA_BUSY;
++    s->notif_pending = true;
++    trace_ace_ipc("notification", s->xtdr, s->xtddy);
++    ace_update_irq(s);
++}
++
++static void ace_set_reply(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
++{
++    s->xida = ACE_HFIPCXIDA_DONE | (primary & ACE_HFIPCXIDA_MSG_MASK);
++    s->xtddy = ext;
++    s->reply_pending = true;
++    trace_ace_ipc("reply", s->xida, s->xtddy);
++    ace_update_irq(s);
++}
++
++static void ace_arm(QEMUTimer *t, uint64_t ns)
++{
++    timer_mod(t, qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns);
++}
++
++/* --------------------------------------------------------------------- */
++/* power                                                                 */
++
++enum {
++    ACE_POWER_NONE,
++    ACE_POWER_SUBSYS_ON,
++    ACE_POWER_SUBSYS_OFF,
++    ACE_POWER_CORE_ON,
++    ACE_POWER_CORE_OFF,
++};
++
++static void ace_rom_restart(IntelHDAAceState *s);
++
++static void ace_power_off(IntelHDAAceState *s)
++{
++    timer_del(s->rom_timer);
++    timer_del(s->reply_timer);
++    s->reply_pending = false;
++    s->notif_pending = false;
++    s->purge_pending = false;
++    s->rom_step = 0;
++    s->xida &= ~ACE_HFIPCXIDA_DONE;
++    s->xtdr &= ~ACE_HFIPCXTDR_BUSY;
++    s->xtda = 0;
++    s->xtddy = 0;
++    s->fsr = 0;
++    s->rom_error = 0;
++    ace_set_state(s, ACE_OFF);
++    ace_update_irq(s);
++}
++
++static void ace_power_timer_cb(void *opaque)
++{
++    IntelHDAAceState *s = opaque;
++    uint32_t event = s->power_event;
++
++    s->power_event = ACE_POWER_NONE;
++    switch (event) {
++    case ACE_POWER_SUBSYS_ON:
++        if (s->hfdsscs & ACE_HFDSSCS_SPA) {
++            s->hfdsscs |= ACE_HFDSSCS_CPA;
++            trace_ace_state("subsystem-reset", "subsystem-powered (model value: CPA 100 us)");
++            /* a core power request that arrived while the subsystem was still
++             * powering up is honoured now */
++            if ((s->dsp2cxctl & ACE_DSP2CXCTL_SPA) &&
++                !(s->dsp2cxctl & ACE_DSP2CXCTL_CPA) &&
++                s->power_event == ACE_POWER_NONE) {
++                s->power_event = ACE_POWER_CORE_ON;
++                ace_arm(s->power_timer, ace_delay(s, ACE_US_CPA_CORE_ON));
++            }
++        }
++        break;
++    case ACE_POWER_SUBSYS_OFF:
++        if (!(s->hfdsscs & ACE_HFDSSCS_SPA)) {
++            s->hfdsscs &= ~ACE_HFDSSCS_CPA;
++            s->dsp2cxctl &= ~ACE_DSP2CXCTL_CPA;
++            ace_power_off(s);
++        }
++        break;
++    case ACE_POWER_CORE_ON:
++        if ((s->dsp2cxctl & ACE_DSP2CXCTL_SPA) && (s->hfdsscs & ACE_HFDSSCS_CPA)) {
++            s->dsp2cxctl |= ACE_DSP2CXCTL_CPA;
++            trace_ace_state("core-reset", "core-powered (model value: CPA 200 us)");
++            ace_rom_restart(s);
++        }
++        break;
++    case ACE_POWER_CORE_OFF:
++        if (!(s->dsp2cxctl & ACE_DSP2CXCTL_SPA)) {
++            s->dsp2cxctl &= ~ACE_DSP2CXCTL_CPA;
++            /* the ROM stops with its core; the subsystem may stay up */
++            timer_del(s->rom_timer);
++            s->purge_pending = false;
++            s->rom_step = 0;
++            s->fsr = 0;
++            s->rom_error = 0;
++            s->notif_pending = false;
++            s->reply_pending = false;
++            s->xtdr &= ~ACE_HFIPCXTDR_BUSY;
++            s->xida &= ~ACE_HFIPCXIDA_DONE;
++            ace_set_state(s, ACE_OFF);
++            ace_update_irq(s);
++        }
++        break;
++    default:
++        break;
++    }
++}
++
++/* --------------------------------------------------------------------- */
++/* the ROM                                                               */
++
++/* the core came up: the ROM runs (RESET_VECTOR_DONE) and walks to
++ * INIT_DONE when a purge request is waiting or arrives later */
++static void ace_rom_restart(IntelHDAAceState *s)
++{
++    s->rom_error = 0;
++    s->rom_step = 0;
++    ace_set_fsr(s, ACE_ROM_RESET_VECTOR_DONE, 0, ACE_FSR_MOD_ROM, false);
++    ace_set_state(s, ACE_PURGING);
++    if (s->purge_pending) {
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_PURGE_BOOT));
++    }
++}
++
++static void ace_rom_timer_cb(void *opaque)
++{
++    IntelHDAAceState *s = opaque;
++    bool fault;
++
++    if (s->state == ACE_PURGING || s->state == ACE_HALTED) {
++        /* the purge acknowledgement sequence */
++        switch (s->rom_step) {
++        case 0:
++            s->rom_step = 1;
++            ace_set_fsr(s, ACE_ROM_PURGE_BOOT, 0, ACE_FSR_MOD_ROM, false);
++            ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_ACK - ACE_US_ROM_PURGE_BOOT));
++            return;
++        case 1:
++            s->rom_step = 2;
++            if (s->fault_id != ACE_FAULT_NEVER_ACK) {
++                ace_set_reply(s, 0, 0);
++            }
++            if (s->fault_id == ACE_FAULT_HALT_ROM) {
++                ace_halt(s, ACE_ROM_PURGE_BOOT, s->fault_arg);
++            } else if (s->fault_id != ACE_FAULT_NEVER_READY) {
++                ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_INIT_DONE));
++            }
++            return;
++        case 2:
++            s->rom_step = 3;
++            ace_set_fsr(s, ACE_FSR_INIT_DONE, 0, ACE_FSR_MOD_ROM, false);
++            ace_set_state(s, ACE_ROM_READY);
++            return;
++        default:
++            return;
++        }
++    }
++    if (s->state != ACE_LOADING && s->state != ACE_RUNNING) {
++        return;
++    }
++    /* the load walk: FW_MANIFEST_IN_DMA_BUFF, LOAD_FW_MAN_TO_IMR,
++     * LOAD_FW_CODE_TO_IMR, FW_LOADING_DONE, FW_CODE_LOADED, then the
++     * firmware enters (bit 31 = running) and sends FW_READY */
++    fault = (s->fault_id == ACE_FAULT_HALT_FW);
++    switch (s->rom_step) {
++    case 0:
++        s->rom_step = 1;
++        ace_set_fsr(s, ACE_ROM_LOAD_FW_MAN_TO_IMR, 0, ACE_FSR_MOD_ROM, false);
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_WALK_STEP));
++        return;
++    case 1:
++        s->rom_step = 2;
++        ace_set_fsr(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, 0, ACE_FSR_MOD_ROM, false);
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_WALK_STEP));
++        return;
++    case 2:
++        s->rom_step = 3;
++        ace_set_fsr(s, ACE_ROM_FW_LOADING_DONE, 0, ACE_FSR_MOD_ROM, false);
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_WALK_STEP));
++        return;
++    case 3:
++        s->rom_step = 4;
++        ace_set_fsr(s, ACE_ROM_FW_CODE_LOADED, 0, ACE_FSR_MOD_ROM, false);
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_WALK_STEP));
++        return;
++    case 4:
++        s->rom_step = 5;
++        if (fault) {
++            ace_halt(s, ACE_ROM_FW_CODE_LOADED, s->fault_arg);
++            return;
++        }
++        if (s->fault_id == ACE_FAULT_NEVER_ENTER) {
++            return;         /* the ROM never enters the firmware */
++        }
++        ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true /* running */);
++        ace_set_state(s, ACE_RUNNING);
++        if (s->fault_id != ACE_FAULT_NEVER_FWREADY) {
++            ace_arm(s->rom_timer, ace_delay(s, ACE_US_FW_READY));
++        }
++        return;
++    case 5:
++        s->rom_step = 6;
++        ace_fw_ready(s);
++        return;
++    default:
++        return;
++    }
++}
++
++/* --------------------------------------------------------------------- */
++/* the code-loader stream: the ROM consumes the firmware                  */
++
++static bool ace_payload_u32(IntelHDAAceState *s, uint32_t off, uint32_t *val)
++{
++    if (!s->payload || off + 4 > s->payload_len) {
++        return false;
++    }
++    *val = ldl_le_p(s->payload + off);
++    return true;
++}
++
++static uint8_t ace_payload_u8(IntelHDAAceState *s, uint32_t off)
++{
++    return (s->payload && off < s->payload_len) ? s->payload[off] : 0;
++}
++
++static bool ace_payload_bytes(IntelHDAAceState *s, uint32_t off, uint32_t len,
++                              const uint8_t **ptr)
++{
++    if (!s->payload || off + len > s->payload_len) {
++        return false;
++    }
++    *ptr = s->payload + off;
++    return true;
++}
++
++/* The ROM's judgement of the streamed image -- the bytes the host streams
++ * are the file from the extended-manifest length on, so the stream starts
++ * with the CSE partition directory (the host parsed the extended manifest
++ * itself to find that offset).  Which checks the real ROM applies is not
++ * public (INFO_NEEDED 7 of the plan); these are *model rules*: the partition
++ * directory must hold the manifest, the manifest's signature header must be
++ * Arrow Lake's (type 4, Intel, "$MN2"), the firmware header must be a
++ * version-2 base firmware, and every segment the module table loads must lie
++ * inside the bytes that arrived.  The halt codes they map to follow the P2a
++ * model's choices. */
++static bool ace_rom_judge(IntelHDAAceState *s)
++{
++    uint32_t v, nb, hdr_len, i, man = 0, fw[13], nmod, off = 0, len;
++    const uint8_t *p;
++
++    /* the partition directory with the manifest entry */
++    if (!ace_payload_u32(s, off, &v) || v != ACE_RI_CPD_MAGIC) {
++        trace_ace_payload_check("partition directory magic", false);
++        ace_halt(s, ACE_ROM_PURGE_BOOT, ACE_ROM_BASE_FW_NOT_FOUND);
++        return false;
++    }
++    ace_payload_u32(s, off + ACE_RI_CPD_NB_ENTRIES, &nb);
++    hdr_len = ace_payload_u8(s, off + ACE_RI_CPD_HEADER_LENGTH);   /* a byte */
++    if (nb == 0 || nb > ACE_RI_MAN_ENTRY_MAX || hdr_len < ACE_RI_CPD_HDR_SIZE) {
++        trace_ace_payload_check("partition directory shape", false);
++        ace_halt(s, ACE_ROM_PURGE_BOOT, ACE_ROM_BASE_FW_NOT_FOUND);
++        return false;
++    }
++    for (i = 0; i < nb; i++) {
++        uint32_t e = off + hdr_len + i * ACE_RI_CPD_ENTRY_SIZE;
++        if (!ace_payload_bytes(s, e + ACE_RI_CPD_ENTRY_NAME, ACE_RI_CPD_ENTRY_NAME_SIZE, &p)) {
++            break;
++        }
++        if (strncmp((const char *)p, ACE_RI_MAN_ENTRY, ACE_RI_CPD_ENTRY_NAME_SIZE) == 0) {
++            ace_payload_u32(s, e + ACE_RI_CPD_ENTRY_OFFSET, &man);
++            break;
++        }
++    }
++    if (!man) {
++        trace_ace_payload_check("ADSP.man entry", false);
++        ace_halt(s, ACE_ROM_FW_MANIFEST_IN_DMA_BUFF, ACE_ROM_BASE_FW_NOT_FOUND);
++        return false;
++    }
++    trace_ace_payload_check("partition directory", true);
++
++    /* the manifest's signature header: Arrow Lake's type, Intel, "$MN2" */
++    if (!ace_payload_u32(s, off + man + ACE_RI_MAN_HEADER_TYPE, &v) ||
++        v != ACE_RI_MAN_HEADER_TYPE_VALUE) {
++        trace_ace_payload_check("manifest header type", false);
++        ace_halt(s, ACE_ROM_LOAD_CSE_MAN_TO_IMR, ACE_ROM_CSE_VALIDATION_FAILED);
++        return false;
++    }
++    ace_payload_u32(s, off + man + ACE_RI_MAN_VENDOR, &v);
++    if (v != ACE_RI_MAN_VENDOR_INTEL) {
++        trace_ace_payload_check("manifest vendor", false);
++        ace_halt(s, ACE_ROM_LOAD_CSE_MAN_TO_IMR, ACE_ROM_CSE_VALIDATION_FAILED);
++        return false;
++    }
++    ace_payload_u32(s, off + man + ACE_RI_MAN_MAGIC, &v);
++    if (v != ACE_RI_MAN_MAGIC_VALUE) {
++        trace_ace_payload_check("manifest magic", false);
++        ace_halt(s, ACE_ROM_LOAD_CSE_MAN_TO_IMR, ACE_ROM_CSE_VALIDATION_FAILED);
++        return false;
++    }
++    trace_ace_payload_check("manifest", true);
++
++    /* the base firmware header at payload + 0x2000: version 2 only */
++    for (i = 0; i < 13; i++) {
++        if (!ace_payload_u32(s, off + ACE_RI_FW_HDR_OFFSET + 4 * i, &fw[i])) {
++            trace_ace_payload_check("firmware header present", false);
++            ace_halt(s, ACE_ROM_LOAD_FW_MAN_TO_IMR, ACE_ROM_BASE_FW_NOT_FOUND);
++            return false;
++        }
++    }
++    if (fw[0] != ACE_RI_FW_MAGIC ||
++        memcmp(&fw[2], ACE_RI_FW_IMAGE_ID_TEXT, strlen(ACE_RI_FW_IMAGE_ID_TEXT)) != 0) {
++        trace_ace_payload_check("firmware header magic/image", false);
++        ace_halt(s, ACE_ROM_LOAD_FW_MAN_TO_IMR, ACE_ROM_BASE_FW_NOT_FOUND);
++        return false;
++    }
++    s->fw_version[0] = fw[7] & 0xffff;         /* major */
++    s->fw_version[1] = (fw[7] >> 16) & 0xffff; /* minor */
++    s->fw_version[2] = fw[8] & 0xffff;         /* hotfix */
++    s->fw_version[3] = (fw[8] >> 16) & 0xffff; /* build */
++    s->have_version = true;
++    if (s->fw_version[0] != ACE_RI_FW_VERSION_MAJOR_ONLY) {
++        trace_ace_payload_check("base firmware major version 2", false);
++        ace_halt(s, ACE_ROM_LOAD_FW_MAN_TO_IMR, ACE_ROM_BASEFW_INCOMPAT);
++        return false;
++    }
++    trace_ace_payload_check("firmware header", true);
++
++    /* every segment the module table loads lies inside the stream */
++    nmod = fw[9];
++    if (nmod > ACE_RI_MODULE_MAX) {
++        trace_ace_payload_check("module count", false);
++        ace_halt(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, ACE_ROM_BASEFW_INCOMPAT);
++        return false;
++    }
++    for (i = 0; i < nmod; i++) {
++        uint32_t m = off + ACE_RI_MODULE_TABLE + i * ACE_RI_MODULE_ENTRY_SIZE;
++        uint32_t seg;
++        if (!ace_payload_u32(s, m + ACE_RI_MODULE_MAGIC, &v) ||
++            v != ACE_RI_MODULE_MAGIC_VALUE) {
++            trace_ace_payload_check("module entry magic", false);
++            ace_halt(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, ACE_ROM_BASE_FW_NOT_FOUND);
++            return false;
++        }
++        for (seg = 0; seg < ACE_RI_MODULE_SEGMENT_COUNT; seg++) {
++            uint32_t d = m + ACE_RI_MODULE_SEGMENTS + seg * ACE_RI_SEGMENT_SIZE;
++            uint32_t flags, foff;
++            ace_payload_u32(s, d + ACE_RI_SEGMENT_FLAGS, &flags);
++            ace_payload_u32(s, d + ACE_RI_SEGMENT_FILE_OFFSET, &foff);
++            if ((flags >> ACE_RI_SEGMENT_PAGE_COUNT_SHIFT) == 0 || foff == 0) {
++                continue;       /* not loaded */
++            }
++            len = (flags >> ACE_RI_SEGMENT_PAGE_COUNT_SHIFT) * 0x1000;
++            if (foff + len > s->payload_len) {
++                trace_ace_payload_check("loaded segment inside the stream", false);
++                ace_halt(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, ACE_ROM_IMR_TO_SMALL);
++                return false;
++            }
++        }
++    }
++    trace_ace_payload_check("module segments", true);
++    return true;
++}
++
++static void ace_fw_ready(IntelHDAAceState *s)
++{
++    uint8_t *r = s->ram[0];
++
++    /* the firmware register block in window 0 (abi_ver, the ROM info word
++     * as a model value) and the FW_READY notification */
++    memset(r, 0, ACE_FWREG_SIZE);
++    stl_le_p(r + ACE_FWREG_FSR, s->fsr);
++    stl_le_p(r + ACE_FWREG_ROM_INFO, ACE_MODEL_ROM_INFO);
++    stl_le_p(r + ACE_FWREG_ABI_VER,
++             s->fault_id == ACE_FAULT_ABI ? s->fault_arg : ACE_IPC4_FW_REGS_ABI_VER);
++    trace_ace_payload_check("firmware registers written (rom_info model value)", true);
++    if (s->fault_id == ACE_FAULT_CRASH_NOTIFICATION) {
++        ace_set_notif(s, (ACE_IPC4_GLB_NOTIFICATION << ACE_IPC4_MSG_TYPE_SHIFT) |
++                      (ACE_IPC4_EXCEPTION_CAUGHT << ACE_IPC4_NOTIFY_TYPE_SHIFT), 0);
++        return;
++    }
++    ace_set_notif(s, (ACE_IPC4_GLB_NOTIFICATION << ACE_IPC4_MSG_TYPE_SHIFT) |
++                  (ACE_IPC4_NOTIFY_FW_READY << ACE_IPC4_NOTIFY_TYPE_SHIFT), 0);
++}
++
++/* --------------------------------------------------------------------- */
++/* IPC4 replies                                                          */
++
++/* the FW_CONFIG reply: the TLV list in the uplink mailbox (the version read
++ * from the streamed image, then the model's constants) and a zero header */
++static uint32_t ace_fw_config_reply(IntelHDAAceState *s)
++{
++    uint8_t *m = s->ram[0] + (ACE_SRAM_MBOX_UPLINK - ACE_SRAM_WINDOW0);
++    uint16_t ver[4];
++    uint32_t p = 0, i;
++    static const uint32_t tlvs[][2] = {
++        { ACE_TLV_DL_MAILBOX_BYTES, ACE_MODEL_DL_MAILBOX_BYTES },
++        { ACE_TLV_UL_MAILBOX_BYTES, ACE_MODEL_UL_MAILBOX_BYTES },
++        { ACE_TLV_TRACE_LOG_BYTES,  ACE_MODEL_TRACE_LOG_BYTES },
++        { ACE_TLV_MAX_PPL_CNT,      ACE_MODEL_MAX_PIPELINES },
++        { ACE_TLV_MAX_LIBS_COUNT,   ACE_MODEL_MAX_LIBRARIES },
++        { ACE_TLV_FW_CONTEXT_SAVE,  ACE_MODEL_FW_CONTEXT_SAVE },
++    };
++
++    memset(m, 0, ACE_SRAM_MBOX_SIZE);
++    if (!s->have_version) {
++        s->fw_version[0] = 2; s->fw_version[1] = 15;
++        s->fw_version[2] = 0; s->fw_version[3] = 1;
++        s->have_version = true;
++    }
++    memcpy(ver, s->fw_version, sizeof(ver));
++    if (s->fault_id == ACE_FAULT_VERSION_SHIFT) {
++        ver[3]++;    /* a version the host's image does not carry */
++    }
++    stl_le_p(m + p, ACE_TLV_FW_VERSION);
++    stl_le_p(m + p + 4, sizeof(ver));
++    memcpy(m + p + 8, ver, sizeof(ver));
++    p += 8 + sizeof(ver);
++    for (i = 0; i < ARRAY_SIZE(tlvs); i++) {
++        stl_le_p(m + p, tlvs[i][0]);
++        stl_le_p(m + p + 4, 4);
++        stl_le_p(m + p + 8, tlvs[i][1]);
++        p += 12;
++    }
++    /* the zero header ends the reply */
++    stl_le_p(m + p, 0);
++    stl_le_p(m + p + 4, 0);
++    p += 8;
++    if (s->fault_id == ACE_FAULT_BAD_TUPLES) {
++        /* a length that is not a multiple of four: the host cannot step on */
++        stl_le_p(m + 8 + sizeof(ver) + 4, 3);
++    } else if (s->fault_id == ACE_FAULT_TRUNCATED_REPLY) {
++        memset(m + 8 + sizeof(ver), 0, p - 8 - sizeof(ver));
++    }
++    return p;
++}
++
++static void ace_reply_timer_cb(void *opaque)
++{
++    IntelHDAAceState *s = opaque;
++    uint32_t primary = s->reply_primary, ext = s->reply_ext;
++    uint32_t type = (primary & ACE_IPC4_MSG_TYPE_MASK) >> ACE_IPC4_MSG_TYPE_SHIFT;
++    uint32_t status = ACE_IPC4_SUCCESS;
++    bool module_msg = primary & ACE_IPC4_MSG_TARGET_MASK;
++    bool fw_config = module_msg &&
++                    ((ext >> ACE_IPC4_FW_CONFIG_PARAM_SHIFT) & 0x3ff) ==
++                    ACE_IPC4_FW_CONFIG_PARAM &&
++                    (ext & 0x000fffff) == 0;   /* module 0, instance 0 */
++
++    if (s->state != ACE_RUNNING) {
++        return;
++    }
++    if (fw_config) {
++        ace_fw_config_reply(s);
++    } else {
++        status = ACE_IPC4_UNKNOWN_MESSAGE_TYPE;
++    }
++    if (s->fault_id == ACE_FAULT_IPC_STATUS) {
++        status = s->fault_arg;
++    }
++    /* the reply keeps the target and the type, sets the reply direction and
++     * carries the status in the low 24 bits; the register adds DONE */
++    ace_set_reply(s, (primary & (ACE_IPC4_MSG_TARGET_MASK | ACE_IPC4_MSG_TYPE_MASK)) |
++                  ACE_IPC4_MSG_DIR_REPLY | (status & ACE_IPC4_REPLY_STATUS_MASK),
++                  0);
++}
++
++/* a host -> DSP request: the primary was written with BUSY set */
++static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
++{
++    uint32_t type = (primary & ACE_IPC4_MSG_TYPE_MASK) >> ACE_IPC4_MSG_TYPE_SHIFT;
++
++    /* ROM control: a general-space message of type GLB_ROM_CONTROL (the
++     * IPC4 encoding the Linux ROM IPC_CONTROL bit belongs to); the purge
++     * request names the loader stream's tag.  Module-space messages are the
++     * firmware's, whatever their type. */
++    if (!(primary & ACE_IPC4_MSG_TARGET_MASK) && type == ACE_IPC4_GLB_ROM_CONTROL) {
++        if (primary & ACE_ROM_IPC_PURGE_FW) {
++            s->purge_tag = ((primary & ACE_ROM_IPC_STREAM_TAG_MASK) >>
++                            ACE_ROM_IPC_STREAM_TAG_SHIFT) + 1;
++            s->purge_pending = true;
++            trace_ace_ipc("purge-request", primary, s->purge_tag);
++            if (ace_powered(s) &&
++                (s->state == ACE_PURGING || s->state == ACE_HALTED)) {
++                /* the ROM walks from the top (a retry after a halt too) */
++                s->rom_error = 0;
++                s->rom_step = 0;
++                ace_set_state(s, ACE_PURGING);
++                ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_PURGE_BOOT));
++            }
++        }
++        return;
++    }
++    trace_ace_ipc("request", primary, ext);
++    if (s->fault_id == ACE_FAULT_DROP_REQUESTS ||
++        s->fault_id == ACE_FAULT_NEVER_REPLY) {
++        return;
++    }
++    s->reply_primary = primary;
++    s->reply_ext = ext;
++    ace_arm(s->reply_timer, ace_delay(s, ACE_US_IPC_REPLY));
++}
++
++/* --------------------------------------------------------------------- */
++/* the stream-run hook: the ROM consumes the code-loader stream           */
++
++static void ace_rom_consume(IntelHDAAceState *s, unsigned int idx)
++{
++    IntelHDAState *d = &s->hda;
++    IntelHDAStream *st = &d->st[idx];
++    uint32_t spib = d->spib[idx];
++    uint64_t total = 0, left;
++    uint32_t i, consumed = 0;
++    bool irq = false;
++    MemTxResult res;
++    const MemTxAttrs attrs = { .memory = true };
++
++    for (i = 0; i < st->bentries; i++) {
++        total += st->bpl[i].len;
++    }
++    left = spib ? MIN(spib, total) : total;
++    trace_ace_rom_consume((st->ctl >> 20) & 0xf, left, spib);
++
++    g_free(s->payload);
++    s->payload = NULL;
++    s->payload_len = 0;
++    s->have_version = false;
++    if (left == 0 || left > ACE_PAYLOAD_MAX) {
++        trace_ace_payload_check("payload size", false);
++        return;
++    }
++    s->payload = g_malloc(left);
++    s->payload_len = left;
++
++    /* exactly as intel_hda_xfer() walks the descriptors: up to SPIB bytes,
++     * then the position, the DPIB and the completion bits of the stream */
++    for (i = 0; i < st->bentries && left > 0; i++) {
++        uint32_t copy = MIN(left, (uint64_t)st->bpl[i].len);
++        res = pci_dma_rw(&d->pci, st->bpl[i].addr, s->payload + consumed, copy,
++                         DMA_DIRECTION_TO_DEVICE, attrs);
++        if (res != MEMTX_OK) {
++            trace_ace_payload_check("descriptor DMA", false);
++            g_free(s->payload);
++            s->payload = NULL;
++            s->payload_len = 0;
++            return;
++        }
++        consumed += copy;
++        left -= copy;
++        if (copy == st->bpl[i].len && (st->bpl[i].flags & 0x01)) {
++            irq = true;
++        }
++    }
++    st->lpib = MIN(consumed, st->cbl);
++    st->be = 0;
++    st->bp = 0;
++    if (d->dp_lbase & 0x01) {
++        hwaddr dpib = ((uint64_t)d->dp_ubase << 32) | (d->dp_lbase & ~0x01);
++        stl_le_pci_dma(&d->pci, dpib + 8 * idx, st->lpib, attrs);
++    }
++    if (irq) {
++        st->ctl |= (1 << 26);
++    }
++    intel_hda_update_irq(d);
++}
++
++static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(d);
++    IntelHDAStream *st = &d->st[idx];
++    uint32_t tag = (st->ctl >> 20) & 0x0f;
++
++    if (!running) {
++        return;
++    }
++    if (idx < 4 || tag == 0 || tag != s->purge_tag) {
++        return;             /* a codec stream, or not the loader stream */
++    }
++    if (s->state != ACE_ROM_READY) {
++        trace_ace_payload_check("stream ran with the ROM not ready", false);
++        return;
++    }
++    /* the descriptor contract of the loader stream: the format, the list */
++    if (st->fmt != ACE_CL_STREAM_FORMAT || !st->bpl || st->bentries == 0) {
++        trace_ace_payload_check("stream contract", false);
++        return;
++    }
++    trace_ace_payload_check("stream contract", true);
++    ace_rom_consume(s, idx);
++    if (!s->payload) {
++        return;
++    }
++    ace_set_state(s, ACE_LOADING);
++    s->rom_step = 0;
++    ace_set_fsr(s, ACE_ROM_FW_MANIFEST_IN_DMA_BUFF, ACE_FSR_WAIT_FOR_DMA_BUFFER_FULL,
++                ACE_FSR_MOD_ROM, false);
++    if (!ace_rom_judge(s)) {
++        return;
++    }
++    ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_WALK_STEP));
++}
++
++/* --------------------------------------------------------------------- */
++/* BAR4: registers and windows                                           */
++
++static const char *ace_reg_name(uint64_t off)
++{
++    switch (off) {
++    case ACE_HFDSSCS:                return "ADSPCS";
++    case ACE_DSP2CXCAP_PRIMARY_CORE: return "DSP2CXCAP";
++    case ACE_DSP2CXCTL_PRIMARY_CORE: return "DSP2CXCTL";
++    case ACE_HFINTIPPTR:             return "HFINTIPPTR (model value)";
++    case ACE_MODEL_INTEN:            return "INTEN (register the pointer names, model value)";
++    case ACE_MODEL_IRQSTS:           return "IRQSTS (model value)";
++    case ACE_HfHIPCIE:               return "HfHIPCIE";
++    case ACE_HFIPCXTDR:              return "HFIPCXTDR";
++    case ACE_HFIPCXTDA:              return "HFIPCXTDA";
++    case ACE_HFIPCXIDR:              return "HFIPCXIDR";
++    case ACE_HFIPCXIDA:              return "HFIPCXIDA";
++    case ACE_HFIPCXCTL:              return "HFIPCXCTL";
++    case ACE_HFIPCXTDDY:             return "HFIPCXTDDY";
++    case ACE_HFIPCXIDDY:             return "HFIPCXIDDY";
++    case ACE_HFFLGPXQWY:             return "FSR";
++    case ACE_HFFLGPXQWY_ERROR:       return "ROM error";
++    default:                         return NULL;
++    }
++}
++
++static uint32_t ace_reg_read(IntelHDAAceState *s, uint64_t off)
++{
++    uint32_t val;
++    bool dsp_side;
++
++    switch (off) {
++    case ACE_HFDSSCS:                val = s->hfdsscs; break;
++    case ACE_DSP2CXCAP_PRIMARY_CORE: val = 0; break;
++    case ACE_DSP2CXCTL_PRIMARY_CORE: val = s->dsp2cxctl; break;
++    case ACE_HFINTIPPTR:             val = ACE_MODEL_INTIPPTR; break;
++    case ACE_MODEL_INTEN:            val = s->inten; break;
++    case ACE_MODEL_IRQSTS:
++        val = (s->notif_pending || s->reply_pending) ? ACE_IRQSTS_IPC : 0;
++        break;
++    case ACE_HfHIPCIE:               val = s->hipcie; break;
++    case ACE_HFIPCXTDR:              val = s->xtdr; break;
++    case ACE_HFIPCXTDA:              val = s->xtda; break;
++    case ACE_HFIPCXIDR:              val = s->xidr; break;
++    case ACE_HFIPCXIDA:              val = s->xida; break;
++    case ACE_HFIPCXCTL:              val = s->xctl; break;
++    case ACE_HFIPCXTDDY:             val = s->xtddy; break;
++    case ACE_HFIPCXIDDY:             val = s->xiddy; break;
++    case ACE_HFFLGPXQWY:
++    case ACE_HFFLGPXQWY_ERROR:
++        dsp_side = off == ACE_HFFLGPXQWY;
++        val = ace_powered(s) ? (dsp_side ? s->fsr : s->rom_error)
++                             : ace_powered_down(s);
++        break;
++    default:
++        trace_ace_unexpected(off, false, 0);
++        return ace_powered_down(s);
++    }
++    trace_ace_reg_read(off, val, ace_reg_name(off));
++    return val;
++}
++
++static void ace_reg_write(IntelHDAAceState *s, uint64_t off, uint32_t val)
++{
++    uint32_t old;
++
++    switch (off) {
++    case ACE_HFDSSCS:
++        old = s->hfdsscs;
++        s->hfdsscs = (s->hfdsscs & ~ACE_HFDSSCS_SPA) | (val & ACE_HFDSSCS_SPA);
++        if ((val & ACE_HFDSSCS_SPA) && !(old & ACE_HFDSSCS_SPA)) {
++            if (s->fault_id != ACE_FAULT_NEVER_POWER) {
++                s->power_event = ACE_POWER_SUBSYS_ON;
++                ace_arm(s->power_timer, ace_delay(s, ACE_US_CPA_SUBSYS_ON));
++            }
++        } else if (!(val & ACE_HFDSSCS_SPA) && (old & ACE_HFDSSCS_SPA)) {
++            s->power_event = ACE_POWER_SUBSYS_OFF;
++            ace_arm(s->power_timer, ace_delay(s, ACE_US_CPA_OFF));
++        }
++        break;
++    case ACE_DSP2CXCTL_PRIMARY_CORE:
++        old = s->dsp2cxctl;
++        s->dsp2cxctl = (s->dsp2cxctl & ~(ACE_DSP2CXCTL_SPA | ACE_DSP2CXCTL_OSEL_MASK)) |
++                       (val & (ACE_DSP2CXCTL_SPA | ACE_DSP2CXCTL_OSEL_MASK));
++        if ((val & ACE_DSP2CXCTL_SPA) && !(old & ACE_DSP2CXCTL_SPA)) {
++            if (s->hfdsscs & ACE_HFDSSCS_CPA) {
++                s->power_event = ACE_POWER_CORE_ON;
++                ace_arm(s->power_timer, ace_delay(s, ACE_US_CPA_CORE_ON));
++            }
++        } else if (!(val & ACE_DSP2CXCTL_SPA) && (old & ACE_DSP2CXCTL_SPA)) {
++            s->power_event = ACE_POWER_CORE_OFF;
++            ace_arm(s->power_timer, ace_delay(s, ACE_US_CPA_OFF));
++        }
++        break;
++    case ACE_MODEL_INTEN:
++        s->inten = val & (ACE_IRQ_INTEN_L_HOST_IPC | ACE_IRQ_INTEN_L_SOUNDWIRE);
++        ace_update_irq(s);
++        break;
++    case ACE_HfHIPCIE:
++        s->hipcie = val & ACE_HfHIPCIE_IE;
++        ace_update_irq(s);
++        break;
++    case ACE_HFIPCXTDR:
++        /* the host accepts the notification by writing the busy bit */
++        if (val & ACE_HFIPCXTDR_BUSY) {
++            s->xtdr &= ~ACE_HFIPCXTDR_BUSY;
++            s->notif_pending = false;
++            ace_update_irq(s);
++        }
++        break;
++    case ACE_HFIPCXTDA:
++        s->xtda = val & ACE_HFIPCXTDA_BUSY;
++        break;
++    case ACE_HFIPCXTDDY:
++        trace_ace_unexpected(off, true, val);
++        break;
++    case ACE_HFIPCXIDR:
++        s->xidr = val;
++        if (val & ACE_HFIPCXIDR_BUSY) {
++            ace_request(s, val & ACE_HFIPCXIDR_MSG_MASK, s->xiddy);
++        }
++        break;
++    case ACE_HFIPCXIDDY:
++        s->xiddy = val;
++        break;
++    case ACE_HFIPCXIDA:
++        /* the host acknowledges the reply by writing the done bit */
++        if (val & ACE_HFIPCXIDA_DONE) {
++            s->xida &= ~ACE_HFIPCXIDA_DONE;
++            s->reply_pending = false;
++            ace_update_irq(s);
++        }
++        break;
++    case ACE_HFIPCXCTL:
++        s->xctl = val & (ACE_HFIPCXCTL_BUSY | ACE_HFIPCXCTL_DONE);
++        ace_update_irq(s);
++        break;
++    default:
++        trace_ace_unexpected(off, true, val);
++        return;
++    }
++    trace_ace_reg_write(off, val, ace_reg_name(off));
++}
++
++static uint64_t ace_bar4_read(void *opaque, hwaddr off, unsigned size)
++{
++    return ace_reg_read(opaque, off);
++}
++
++static void ace_bar4_write(void *opaque, hwaddr off, uint64_t val, unsigned size)
++{
++    ace_reg_write(opaque, off, (uint32_t)val);
++}
++
++static const MemoryRegionOps ace_bar4_ops = {
++    .read = ace_bar4_read,
++    .write = ace_bar4_write,
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++    .endianness = DEVICE_LITTLE_ENDIAN,
++};
++
++/* the SRAM windows: RAM while the DSP is powered, the powered-down value
++ * (property x-powered-down-value) otherwise; the host writes its request
++ * payloads into window 1 and reads the firmware's replies from window 0 */
++
++static uint64_t ace_window_read(void *opaque, hwaddr off, unsigned size, int idx)
++{
++    IntelHDAAceState *s = opaque;
++    uint32_t val;
++
++    if (!ace_powered(s)) {
++        trace_ace_unexpected(ace_window_base[idx] + off, false, 0);
++        return ace_powered_down(s);
++    }
++    if (idx == 0 && s->fault_id == ACE_FAULT_WINDOW_READ_FAIL) {
++        return 0xffffffffu;
++    }
++    memcpy(&val, s->ram[idx] + off, sizeof(val));
++    return val;
++}
++
++static void ace_window_write(void *opaque, hwaddr off, uint64_t val, unsigned size, int idx)
++{
++    IntelHDAAceState *s = opaque;
++
++    if (!ace_powered(s)) {
++        trace_ace_unexpected(ace_window_base[idx] + off, true, val);
++        return;
++    }
++    memcpy(s->ram[idx] + off, &val, sizeof(val));
++}
++
++static uint64_t ace_window0_read(void *opaque, hwaddr off, unsigned size)
++{
++    return ace_window_read(opaque, off, size, 0);
++}
++
++static void ace_window0_write(void *opaque, hwaddr off, uint64_t val, unsigned size)
++{
++    ace_window_write(opaque, off, val, size, 0);
++}
++
++static uint64_t ace_window1_read(void *opaque, hwaddr off, unsigned size)
++{
++    return ace_window_read(opaque, off, size, 1);
++}
++
++static void ace_window1_write(void *opaque, hwaddr off, uint64_t val, unsigned size)
++{
++    ace_window_write(opaque, off, val, size, 1);
++}
++
++static const MemoryRegionOps ace_window_ops[2] = {
++    {
++        .read = ace_window0_read,
++        .write = ace_window0_write,
++        .impl = { .min_access_size = 4, .max_access_size = 4 },
++        .endianness = DEVICE_LITTLE_ENDIAN,
++    }, {
++        .read = ace_window1_read,
++        .write = ace_window1_write,
++        .impl = { .min_access_size = 4, .max_access_size = 4 },
++        .endianness = DEVICE_LITTLE_ENDIAN,
++    },
++};
++
++/* --------------------------------------------------------------------- */
++/* run-time properties: the fault injector and the delay scale           */
++
++static void ace_apply_fault(IntelHDAAceState *s, const char *value, Error **errp)
++{
++    g_autofree char *base = NULL;
++    const char *arg = strchr(value, '=');
++    size_t i;
++
++    base = arg ? g_strndup(value, arg - value) : g_strdup(value);
++    for (i = 0; i < ARRAY_SIZE(ace_faults); i++) {
++        if (g_str_equal(base, ace_faults[i].name)) {
++            break;
++        }
++    }
++    if (i == ARRAY_SIZE(ace_faults)) {
++        error_setg(errp, "intel-hda-ace: unknown fault '%s'", value);
++        return;
++    }
++    if (ace_faults[i].takes_arg != (arg != NULL)) {
++        error_setg(errp, "intel-hda-ace: fault '%s' %s a value", base,
++                   ace_faults[i].takes_arg ? "needs (=number)" : "takes no");
++        return;
++    }
++    s->fault_id = ace_faults[i].id;
++    s->fault_arg = arg ? (uint32_t)strtoul(arg + 1, NULL, 0) : 0;
++    g_free(s->fault);
++    s->fault = g_strdup(value);
++    trace_ace_payload_check(value, true);
++}
++
++static void ace_get_fault(Object *obj, Visitor *v, const char *name,
++                          void *opaque, Error **errp)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(obj);
++    char *value = g_strdup(s->fault);
++
++    visit_type_str(v, name, &value, errp);
++    g_free(value);
++}
++
++static void ace_set_fault(Object *obj, Visitor *v, const char *name,
++                          void *opaque, Error **errp)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(obj);
++    char *value = NULL;
++
++    if (!visit_type_str(v, name, &value, errp)) {
++        return;
++    }
++    ace_apply_fault(s, value, errp);
++    g_free(value);
++}
++
++static void ace_get_delay_scale(Object *obj, Visitor *v, const char *name,
++                                void *opaque, Error **errp)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(obj);
++    double value = s->delay_scale;
++
++    visit_type_number(v, name, &value, errp);
++}
++
++static void ace_set_delay_scale(Object *obj, Visitor *v, const char *name,
++                                void *opaque, Error **errp)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(obj);
++    double value;
++
++    if (!visit_type_number(v, name, &value, errp)) {
++        return;
++    }
++    if (!(value > 0.0) || value > 10000.0) {
++        error_setg(errp, "intel-hda-ace: x-delay-scale must be in (0, 10000]");
++        return;
++    }
++    s->delay_scale = value;
++}
++
++/* --------------------------------------------------------------------- */
++/* realization, reset, class                                             */
++
++static void intel_hda_ace_reset(DeviceState *dev)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(dev);
++
++    intel_hda_reset(dev);
++    timer_del(s->power_timer);
++    timer_del(s->rom_timer);
++    timer_del(s->reply_timer);
++    s->hfdsscs = 0;
++    s->dsp2cxctl = 0;
++    s->inten = 0;
++    s->hipcie = 0;
++    s->xtdr = s->xtda = s->xtddy = 0;
++    s->xidr = s->xiddy = s->xida = s->xctl = 0;
++    s->fsr = 0;
++    s->rom_error = 0;
++    s->power_event = ACE_POWER_NONE;
++    s->rom_step = 0;
++    s->purge_pending = false;
++    s->reply_pending = false;
++    s->notif_pending = false;
++    s->state = ACE_OFF;
++    s->hda.ext_sts = 0;
++    g_free(s->payload);
++    s->payload = NULL;
++    s->payload_len = 0;
++    s->have_version = false;
++    memset(s->ram[0], 0, ACE_SRAM_WINDOW_SIZE);
++    memset(s->ram[1], 0, ACE_SRAM_WINDOW_SIZE);
++}
++
++static void intel_hda_ace_realize(PCIDevice *pci, Error **errp)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(pci);
++    IntelHDAState *d = &s->hda;
++    PCIDeviceClass *pc = PCI_DEVICE_GET_CLASS(pci);
++    PCIDeviceClass *parent = PCI_DEVICE_CLASS(object_class_get_parent(OBJECT_CLASS(pc)));
++    const AcePersonality *p;
++    Error *err = NULL;
++    int i;
++
++    if (!is_power_of_2(s->bar4_size) ||
++        s->bar4_size < ACE_SRAM_WINDOW1 + ACE_SRAM_WINDOW_SIZE) {
++        error_setg(errp, "intel-hda-ace: x-bar4-size must be a power of two of at "
++                   "least 0x%x (the host driver needs 0x189000)",
++                   ACE_SRAM_WINDOW1 + ACE_SRAM_WINDOW_SIZE);
++        return;
++    }
++    p = ace_personality(s->personality ?: "arl-s", errp);
++    if (!p) {
++        return;
++    }
++
++    /* the ACE controllers always carry the capability chain: the generic
++     * type's x-caps property is per class and cannot default differently
++     * here, so the variant turns it on before the controller realizes */
++    d->caps = true;
++
++    /* the controller: BAR0 (with the chain), the codec bus, MSI */
++    parent->realize(pci, &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
++    /* the function's identity: the personality's device id and revision,
++     * the "other audio device" programming interface of the ACE controllers */
++    pci_config_set_device_id(pci->config, p->device_id);
++    pci_config_set_revision(pci->config, p->revision);
++    pci_config_set_prog_interface(pci->config, 0x80);
++
++    /* BAR4: the whole bar answers as the (sparse) register block; the two
++     * SRAM windows sit on top of it as RAM */
++    memory_region_init(&s->bar4, OBJECT(s), "intel-hda-ace-bar4", s->bar4_size);
++    memory_region_init_io(&s->regs, OBJECT(s), &ace_bar4_ops, s,
++                          "intel-hda-ace-regs", s->bar4_size);
++    memory_region_add_subregion(&s->bar4, 0, &s->regs);
++    for (i = 0; i < 2; i++) {
++        s->ram[i] = g_malloc0(ACE_SRAM_WINDOW_SIZE);
++        memory_region_init_io(&s->window[i], OBJECT(s), &ace_window_ops[i], s,
++                              i ? "intel-hda-ace-window1" : "intel-hda-ace-window0",
++                              ACE_SRAM_WINDOW_SIZE);
++        memory_region_add_subregion_overlap(&s->bar4, ace_window_base[i],
++                                            &s->window[i], 1);
++    }
++    pci_register_bar(pci, 4, PCI_BASE_ADDRESS_SPACE_MEMORY, &s->bar4);
++
++    /* the controller's hooks */
++    d->stream_run = ace_stream_run;
++
++    s->power_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_power_timer_cb, s);
++    s->rom_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_rom_timer_cb, s);
++    s->reply_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_reply_timer_cb, s);
++}
++
++static void intel_hda_ace_exit(PCIDevice *pci)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(pci);
++
++    timer_free(s->power_timer);
++    timer_free(s->rom_timer);
++    timer_free(s->reply_timer);
++    g_free(s->payload);
++}
++
++static const VMStateDescription vmstate_intel_hda_ace = {
++    .name = "intel-hda-ace",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    /* the SRAM windows and the streamed payload are not carried over: the
++     * host re-boots the DSP after a migration */
++    .fields = (const VMStateField[]) {
++        VMSTATE_STRUCT(hda, IntelHDAAceState, 0, vmstate_intel_hda, IntelHDAState),
++        VMSTATE_UINT32(hfdsscs, IntelHDAAceState),
++        VMSTATE_UINT32(dsp2cxctl, IntelHDAAceState),
++        VMSTATE_UINT32(inten, IntelHDAAceState),
++        VMSTATE_UINT32(hipcie, IntelHDAAceState),
++        VMSTATE_UINT32(xtdr, IntelHDAAceState),
++        VMSTATE_UINT32(xtda, IntelHDAAceState),
++        VMSTATE_UINT32(xtddy, IntelHDAAceState),
++        VMSTATE_UINT32(xidr, IntelHDAAceState),
++        VMSTATE_UINT32(xiddy, IntelHDAAceState),
++        VMSTATE_UINT32(xida, IntelHDAAceState),
++        VMSTATE_UINT32(xctl, IntelHDAAceState),
++        VMSTATE_UINT32(fsr, IntelHDAAceState),
++        VMSTATE_UINT32(rom_error, IntelHDAAceState),
++        VMSTATE_UINT32(state, IntelHDAAceState),
++        VMSTATE_BOOL(purge_pending, IntelHDAAceState),
++        VMSTATE_UINT32(purge_tag, IntelHDAAceState),
++        VMSTATE_BOOL(reply_pending, IntelHDAAceState),
++        VMSTATE_BOOL(notif_pending, IntelHDAAceState),
++        VMSTATE_UINT16_ARRAY(fw_version, IntelHDAAceState, 4),
++        VMSTATE_BOOL(have_version, IntelHDAAceState),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static const Property intel_hda_ace_properties[] = {
++    DEFINE_PROP_UINT64("x-bar4-size", IntelHDAAceState, bar4_size, 0x200000),
++    DEFINE_PROP_UINT32("x-powered-down-value", IntelHDAAceState,
++                       powered_down_value, 0),
++    DEFINE_PROP_STRING("personality", IntelHDAAceState, personality),
++};
++
++static void intel_hda_ace_instance_init(Object *obj)
++{
++    IntelHDAAceState *s = INTEL_HDA_ACE(obj);
++
++    s->fault = g_strdup("none");
++    s->fault_id = ACE_FAULT_NONE;
++    s->delay_scale = 1.0;
++    /* settable on the command line and through QMP at run time */
++    object_property_add(obj, "fault", "str", ace_get_fault, ace_set_fault,
++                        NULL, NULL);
++    object_property_add(obj, "x-delay-scale", "number",
++                        ace_get_delay_scale, ace_set_delay_scale, NULL, NULL);
++}
++
++static void intel_hda_ace_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
++
++    k->realize = intel_hda_ace_realize;
++    k->exit = intel_hda_ace_exit;
++    k->device_id = 0x7f50;    /* the default personality, Arrow Lake-S */
++    k->revision = 0x10;
++    device_class_set_legacy_reset(dc, intel_hda_ace_reset);
++    dc->desc = "Intel HD Audio Controller with the ACE 1.0 audio DSP "
++               "(Arrow Lake-S, 8086:7f50)";
++    set_bit(DEVICE_CATEGORY_SOUND, dc->categories);
++    dc->vmsd = &vmstate_intel_hda_ace;
++    device_class_set_props(dc, intel_hda_ace_properties);
++}
++
++static const TypeInfo intel_hda_ace_info = {
++    .name = TYPE_INTEL_HDA_ACE,
++    .parent = TYPE_INTEL_HDA_GENERIC,
++    .instance_size = sizeof(IntelHDAAceState),
++    .instance_init = intel_hda_ace_instance_init,
++    .class_init = intel_hda_ace_class_init,
++};
++
++static void intel_hda_ace_register_types(void)
++{
++    type_register_static(&intel_hda_ace_info);
++}
++
++type_init(intel_hda_ace_register_types)
+diff --git a/hw/audio/meson.build b/hw/audio/meson.build
+index 2154cbdb5..0ba79ba71 100644
+--- a/hw/audio/meson.build
++++ b/hw/audio/meson.build
+@@ -7,6 +7,7 @@ system_ss.add(when: 'CONFIG_CS4231A', if_true: files('cs4231a.c'))
+ system_ss.add(when: 'CONFIG_ES1370', if_true: files('es1370.c'))
+ system_ss.add(when: 'CONFIG_GUS', if_true: files('gus.c', 'gusemu_hal.c', 'gusemu_mixer.c'))
+ system_ss.add(when: 'CONFIG_HDA', if_true: files('intel-hda.c', 'hda-codec.c'))
++system_ss.add(when: 'CONFIG_HDA_ACE', if_true: files('intel-hda-ace.c'))
+ system_ss.add(when: 'CONFIG_MARVELL_88W8618', if_true: files('marvell_88w8618.c'))
+ system_ss.add(when: 'CONFIG_PCSPK', if_true: files('pcspk.c'))
+ system_ss.add(when: 'CONFIG_PL041', if_true: files('pl041.c', 'lm4549.c'))
+diff --git a/hw/audio/trace-events b/hw/audio/trace-events
+index 30f592154..582701928 100644
+--- a/hw/audio/trace-events
++++ b/hw/audio/trace-events
+@@ -61,3 +61,14 @@ virtio_snd_handle_event(void) "event queue callback called"
+ virtio_snd_pcm_stream_flush(uint32_t stream) "flushing stream %"PRIu32
+ virtio_snd_handle_tx_xfer(void) "tx queue callback called"
+ virtio_snd_handle_rx_xfer(void) "rx queue callback called"
++
++# intel-hda-ace.c
++ace_reg_read(uint64_t off, uint32_t val, const char *reg) "BAR4 +0x%" PRIx64 " -> 0x%08x %s"
++ace_reg_write(uint64_t off, uint32_t val, const char *reg) "BAR4 +0x%" PRIx64 " <- 0x%08x %s"
++ace_unexpected(uint64_t off, bool write, uint32_t val) "BAR4 +0x%" PRIx64 " unexpected (write=%d) 0x%08x"
++ace_fsr(uint32_t state, uint32_t wait, uint32_t module, bool halted) "FSR state 0x%x wait 0x%x module %u halted %d"
++ace_rom_consume(uint32_t tag, uint64_t bytes, uint32_t spib) "ROM consumes stream %u: %" PRIu64 " bytes (SPIB %u)"
++ace_payload_check(const char *rule, bool ok) "ROM rule %s: %d"
++ace_ipc(const char *dir, uint32_t primary, uint32_t ext) "IPC %s primary 0x%08x ext 0x%08x"
++ace_irq(int level, bool msi) "DSP interrupt %d (msi %d)"
++ace_state(const char *from, const char *to) "state %s -> %s"
+-- 
+2.56.1
+

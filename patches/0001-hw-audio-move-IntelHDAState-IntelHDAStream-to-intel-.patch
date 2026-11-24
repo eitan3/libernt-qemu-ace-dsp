@@ -1,0 +1,302 @@
+From 5f15a3240bd38cd94a1b61d2f89f572cf7ecd00b Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 09:29:20 +0200
+Subject: [PATCH 1/5] hw/audio: move IntelHDAState/IntelHDAStream to
+ intel-hda-internal.h
+
+The controller state is private to intel-hda.c; the ACE audio DSP variant
+(intel-hda-ace.c, a later patch) needs the streams, the BAR0 container and
+the codec bus, so the structures move to an internal header beside the
+public one.  intel_hda_update_irq() becomes non-static for the same
+reason.  No behaviour change.
+
+Sources studied: QEMU own hw/audio/intel-hda.c only (no external file).
+---
+ hw/audio/intel-hda-internal.h | 138 ++++++++++++++++++++++++++++++++++
+ hw/audio/intel-hda.c          |  95 +----------------------
+ 2 files changed, 142 insertions(+), 91 deletions(-)
+ create mode 100644 hw/audio/intel-hda-internal.h
+
+diff --git a/hw/audio/intel-hda-internal.h b/hw/audio/intel-hda-internal.h
+new file mode 100644
+index 000000000..36ee247be
+--- /dev/null
++++ b/hw/audio/intel-hda-internal.h
+@@ -0,0 +1,138 @@
++/*
++ * Copyright (C) 2010 Red Hat, Inc.
++ *
++ * written by Gerd Hoffmann <kraxel@redhat.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 or
++ * (at your option) version 3 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_INTEL_HDA_INTERNAL_H
++#define HW_INTEL_HDA_INTERNAL_H
++
++#include "hw/pci/pci.h"
++#include "qemu/timer.h"
++#include "hw/audio/intel-hda.h"
++
++/* --------------------------------------------------------------------- */
++/* intel hda emulation                                                   */
++
++/*
++ * The controller's state, shared between intel-hda.c and the device
++ * variants built on it (intel-hda-ace.c).  Nothing here is part of the
++ * interface the codecs see; that is intel-hda.h.
++ */
++
++typedef struct IntelHDAStream IntelHDAStream;
++typedef struct IntelHDAState IntelHDAState;
++
++typedef struct bpl {
++    uint64_t addr;
++    uint32_t len;
++    uint32_t flags;
++} bpl;
++
++struct IntelHDAStream {
++    /* registers */
++    uint32_t ctl;
++    uint32_t lpib;
++    uint32_t cbl;
++    uint32_t lvi;
++    uint32_t fmt;
++    uint32_t bdlp_lbase;
++    uint32_t bdlp_ubase;
++
++    /* state */
++    bpl      *bpl;
++    uint32_t bentries;
++    uint32_t bsize, be, bp;
++};
++
++struct IntelHDAState {
++    PCIDevice pci;
++    const char *name;
++    HDACodecBus codecs;
++
++    /* registers */
++    uint32_t g_ctl;
++    uint32_t wake_en;
++    uint32_t state_sts;
++    uint32_t int_ctl;
++    uint32_t int_sts;
++    uint32_t wall_clk;
++
++    uint32_t corb_lbase;
++    uint32_t corb_ubase;
++    uint32_t corb_rp;
++    uint32_t corb_wp;
++    uint32_t corb_ctl;
++    uint32_t corb_sts;
++    uint32_t corb_size;
++
++    uint32_t rirb_lbase;
++    uint32_t rirb_ubase;
++    uint32_t rirb_wp;
++    uint32_t rirb_cnt;
++    uint32_t rirb_ctl;
++    uint32_t rirb_sts;
++    uint32_t rirb_size;
++
++    uint32_t dp_lbase;
++    uint32_t dp_ubase;
++
++    uint32_t icw;
++    uint32_t irr;
++    uint32_t ics;
++
++    /* streams */
++    IntelHDAStream st[8];
++
++    /* state */
++    MemoryRegion container;
++    MemoryRegion mmio;
++    MemoryRegion alias;
++    uint32_t rirb_count;
++    int64_t wall_base_ns;
++
++    /* debug logging */
++    const struct IntelHDAReg *last_reg;
++    uint32_t last_val;
++    uint32_t last_write;
++    uint32_t last_sec;
++    uint32_t repeat_count;
++
++    /* properties */
++    uint32_t debug;
++    OnOffAuto msi;
++    bool old_msi_addr;
++};
++
++#define TYPE_INTEL_HDA_GENERIC "intel-hda-generic"
++
++DECLARE_INSTANCE_CHECKER(IntelHDAState, INTEL_HDA,
++                         TYPE_INTEL_HDA_GENERIC)
++
++/*
++ * Recompute INTSTS from the controller's interrupt sources and update the
++ * line (INTx or MSI).  A variant that adds or clears a controller-level
++ * source calls this.
++ */
++void intel_hda_update_irq(IntelHDAState *d);
++
++/* the controller's reset handler and migration state, chained by variants */
++void intel_hda_reset(DeviceState *dev);
++extern const VMStateDescription vmstate_intel_hda;
++
++#endif
+diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
+index 3d361a497..a336e30f3 100644
+--- a/hw/audio/intel-hda.c
++++ b/hw/audio/intel-hda.c
+@@ -28,6 +28,7 @@
+ #include "qemu/module.h"
+ #include "hw/audio/model.h"
+ #include "intel-hda.h"
++#include "intel-hda-internal.h"
+ #include "migration/vmstate.h"
+ #include "intel-hda-defs.h"
+ #include "qobject/qdict.h"
+@@ -114,96 +115,8 @@ bool hda_codec_xfer(HDACodecDevice *dev, uint32_t stnr, bool output,
+ /* --------------------------------------------------------------------- */
+ /* intel hda emulation                                                   */
+ 
+-typedef struct IntelHDAStream IntelHDAStream;
+-typedef struct IntelHDAState IntelHDAState;
+ typedef struct IntelHDAReg IntelHDAReg;
+ 
+-typedef struct bpl {
+-    uint64_t addr;
+-    uint32_t len;
+-    uint32_t flags;
+-} bpl;
+-
+-struct IntelHDAStream {
+-    /* registers */
+-    uint32_t ctl;
+-    uint32_t lpib;
+-    uint32_t cbl;
+-    uint32_t lvi;
+-    uint32_t fmt;
+-    uint32_t bdlp_lbase;
+-    uint32_t bdlp_ubase;
+-
+-    /* state */
+-    bpl      *bpl;
+-    uint32_t bentries;
+-    uint32_t bsize, be, bp;
+-};
+-
+-struct IntelHDAState {
+-    PCIDevice pci;
+-    const char *name;
+-    HDACodecBus codecs;
+-
+-    /* registers */
+-    uint32_t g_ctl;
+-    uint32_t wake_en;
+-    uint32_t state_sts;
+-    uint32_t int_ctl;
+-    uint32_t int_sts;
+-    uint32_t wall_clk;
+-
+-    uint32_t corb_lbase;
+-    uint32_t corb_ubase;
+-    uint32_t corb_rp;
+-    uint32_t corb_wp;
+-    uint32_t corb_ctl;
+-    uint32_t corb_sts;
+-    uint32_t corb_size;
+-
+-    uint32_t rirb_lbase;
+-    uint32_t rirb_ubase;
+-    uint32_t rirb_wp;
+-    uint32_t rirb_cnt;
+-    uint32_t rirb_ctl;
+-    uint32_t rirb_sts;
+-    uint32_t rirb_size;
+-
+-    uint32_t dp_lbase;
+-    uint32_t dp_ubase;
+-
+-    uint32_t icw;
+-    uint32_t irr;
+-    uint32_t ics;
+-
+-    /* streams */
+-    IntelHDAStream st[8];
+-
+-    /* state */
+-    MemoryRegion container;
+-    MemoryRegion mmio;
+-    MemoryRegion alias;
+-    uint32_t rirb_count;
+-    int64_t wall_base_ns;
+-
+-    /* debug logging */
+-    const IntelHDAReg *last_reg;
+-    uint32_t last_val;
+-    uint32_t last_write;
+-    uint32_t last_sec;
+-    uint32_t repeat_count;
+-
+-    /* properties */
+-    uint32_t debug;
+-    OnOffAuto msi;
+-    bool old_msi_addr;
+-};
+-
+-#define TYPE_INTEL_HDA_GENERIC "intel-hda-generic"
+-
+-DECLARE_INSTANCE_CHECKER(IntelHDAState, INTEL_HDA,
+-                         TYPE_INTEL_HDA_GENERIC)
+-
+ struct IntelHDAReg {
+     const char *name;      /* register name */
+     uint32_t   size;       /* size in bytes */
+@@ -256,7 +169,7 @@ static void intel_hda_update_int_sts(IntelHDAState *d)
+     d->int_sts = sts;
+ }
+ 
+-static void intel_hda_update_irq(IntelHDAState *d)
++void intel_hda_update_irq(IntelHDAState *d)
+ {
+     bool msi = msi_enabled(&d->pci);
+     int level;
+@@ -1072,7 +985,7 @@ static const MemoryRegionOps intel_hda_mmio_ops = {
+ 
+ /* --------------------------------------------------------------------- */
+ 
+-static void intel_hda_reset(DeviceState *dev)
++void intel_hda_reset(DeviceState *dev)
+ {
+     BusChild *kid;
+     IntelHDAState *d = INTEL_HDA(dev);
+@@ -1172,7 +1085,7 @@ static const VMStateDescription vmstate_intel_hda_stream = {
+     }
+ };
+ 
+-static const VMStateDescription vmstate_intel_hda = {
++const VMStateDescription vmstate_intel_hda = {
+     .name = "intel-hda",
+     .version_id = 1,
+     .post_load = intel_hda_post_load,
+-- 
+2.56.1
+

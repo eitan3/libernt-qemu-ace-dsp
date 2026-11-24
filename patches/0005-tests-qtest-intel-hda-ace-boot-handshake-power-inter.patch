@@ -1,0 +1,791 @@
+From ab0a54db21765309e5e7271a10f9edc71e88579e Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 10:33:00 +0200
+Subject: [PATCH 5/5] tests/qtest: intel-hda-ace boot handshake, power,
+ interrupt and fault tests
+
+Level-0 acceptance of the ACE audio DSP model without an OS: enumeration
+(vendor, device, revision, class, programming interface, BAR sizes, the
+chain head), the capability chain's registers, the stock controllers'
+unchanged LLCH, the cold boot handshake end to end with a synthetic .ri
+image built in the test (power, purge, DONE, INIT_DONE, the loader stream
+consumed up to SPIB, the ROM walk, FW_ENTERED, FW_READY, the firmware
+register block, the FW_CONFIG reply and its TLVs), the power-down from
+every state (idempotent; x-powered-down-value), the controller interrupt
+under INTx (through the I/O APIC) and MSI, and every fault of the injector
+with its bounded shape.
+
+Sources studied: QEMU's own tests/qtest/intel-hda-test.c (shape),
+libqos; the ABI constants are the test's own copies (Linux v6.12
+sound/soc/sof/intel/mtl.h and hda.h, rule 7; the Intel HD Audio
+specification; SOF rimage headers for the .ri layout, BSD-3).
+---
+ tests/qtest/intel-hda-ace-test.c | 743 +++++++++++++++++++++++++++++++
+ tests/qtest/meson.build          |   1 +
+ 2 files changed, 744 insertions(+)
+ create mode 100644 tests/qtest/intel-hda-ace-test.c
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+new file mode 100644
+index 000000000..3578fa243
+--- /dev/null
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -0,0 +1,743 @@
++/*
++ * QTest testcase for the Intel ACE 1.0 audio DSP model (intel-hda-ace)
++ *
++ * Copyright (c) 2026 LiberNT Intel SST project contributors
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
++
++/*
++ * Drives the device from the host side with PCI configuration, MMIO and
++ * guest memory: the enumeration and the capability chain, the cold boot
++ * handshake end to end with a synthetic firmware image, the IPC4 reply, the
++ * interrupt under INTx and MSI, the power-down from every state and every
++ * fault of the injector.  Every case is meant to fail on a model with its
++ * piece removed (the mutation check of the acceptance).
++ *
++ * The register offsets below are the hardware ABI (Linux v6.12
++ * sound/soc/sof/intel/mtl.h and hda.h, the Intel HD Audio specification);
++ * the test declares its own copies so it checks the ABI the guest sees, not
++ * the model's header.  The synthetic image follows the SOF .ri layout
++ * (rimage headers, BSD-3): marker bytes and the fields the ROM model reads.
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/bswap.h"
++#include "libqtest-single.h"
++#include "hw/pci/pci_regs.h"
++#include "libqos/pci.h"
++#include "libqos/pci-pc.h"
++
++#define ACE_DEVFN          QPCI_DEVFN(0x1b, 0)   /* 00:1b.0, the PCH address */
++
++/* BAR0: the controller (ICH6 register block) and its capability chain */
++#define HDA_LLCH           0x14
++#define HDA_INTCTL         0x20
++#define HDA_INTSTS         0x24
++#define HDA_PP_CAP         0x180
++#define HDA_PPCTL          (HDA_PP_CAP + 0x04)
++#define HDA_PPSTS          (HDA_PP_CAP + 0x08)
++#define HDA_SPB_CAP        0x700
++#define HDA_SPBFCCTL       (HDA_SPB_CAP + 0x04)
++#define HDA_SPIB(n)        (HDA_SPB_CAP + 0x08 + 8 * (n))
++#define HDA_MAXFIFO(n)     (HDA_SPB_CAP + 0x0c + 8 * (n))
++#define HDA_ST_CTL(n)      (0x80 + 0x20 * (n))
++#define HDA_ST_LPIB(n)     (0x80 + 0x20 * (n) + 0x04)
++#define HDA_ST_CBL(n)      (0x80 + 0x20 * (n) + 0x08)
++#define HDA_ST_LVI(n)      (0x80 + 0x20 * (n) + 0x0c)
++#define HDA_ST_FMT(n)      (0x80 + 0x20 * (n) + 0x12)
++#define HDA_ST_BDLPL(n)    (0x80 + 0x20 * (n) + 0x18)
++#define HDA_ST_BDLPU(n)    (0x80 + 0x20 * (n) + 0x1c)
++#define OUT4               4                    /* output stream 4, tag 1 */
++
++/* BAR4: the ACE 1.0 DSP registers (model values: the interrupt pointer) */
++#define ACE_ADSPCS         0x1000
++#define ACE_ADSPCS_SPA     (1u << 16)
++#define ACE_ADSPCS_CPA     (1u << 24)
++#define ACE_DSP2CXCTL      0x178d04
++#define ACE_DSP2CXCTL_SPA  (1u << 0)
++#define ACE_DSP2CXCTL_CPA  (1u << 8)
++#define ACE_HFINTIPPTR     0x1108
++#define ACE_HfHIPCIE       0x1140
++#define ACE_XTDR           0x73200
++#define ACE_XTDA           0x73204
++#define ACE_XIDR           0x73210
++#define ACE_XIDA           0x73214
++#define ACE_XCTL           0x73228
++#define ACE_XTDDY          0x73300
++#define ACE_XIDDY          0x73380
++#define ACE_FSR            0x163200
++#define ACE_ROMERR         0x163204
++#define ACE_WIN0           0x180000
++#define ACE_FW_ROM_INFO    0x18
++#define ACE_FW_ABI_VER     0x1c
++#define ACE_MBOX_UL        0x181000
++#define ACE_BUSY           0x80000000u
++#define FSR_INIT_DONE      0x1
++#define FSR_FW_ENTERED     0x5
++#define FSR_RUNNING        (ACE_BUSY | 0x20000000u | FSR_FW_ENTERED)   /* running, module BASE_FW */
++#define IPC4_FW_CONFIG_REQ 0xc1000000u       /* FW gen -> module, type 1 */
++#define IPC4_FW_CONFIG_EXT 0x00700000u       /* module 0, instance 0, param 7 */
++#define IPC4_REPLY_DONE_OK 0xe1000000u       /* DONE | reply | type 1 | status 0 */
++#define NOTIFY_FW_READY    0x9b080000u       /* BUSY | notification 27 | type 8 */
++#define NOTIFY_EXCEPTION   0x9b0a0000u       /* BUSY | notification 27 | type 10 */
++
++#define US(x) ((int64_t)(x) * 1000)
++
++/* guest memory for the test: the BDL and the synthetic image */
++#define BDL_ADDR           0x00100000
++#define IMG_ADDR           0x00110000
++#define IMG_PAYLOAD        0x100            /* the payload offset of the image */
++#define IMG_LEN            (IMG_PAYLOAD + 0x9000)
++
++static const uint8_t ri_magic_ae1[] = "$AE1";
++static const uint8_t ri_magic_cpd[] = "$CPD";
++static const uint8_t ri_magic_mn2[] = "$MN2";
++static const uint8_t ri_magic_am1[] = "$AM1";
++static const uint8_t ri_magic_ame[] = "$AME";
++static const uint8_t ri_name_man[12] = "ADSP.man";      /* the entry name field */
++static const uint8_t ri_image_id[8] = "ADSPFW";        /* the firmware image id */
++static const uint8_t ri_mod_name[8] = "TESTMOD";       /* a module name field */
++
++typedef struct AceTest {
++    QTestState *qs;
++    QPCIBus *bus;
++    QPCIDevice *dev;
++    QPCIBar bar0, bar4;
++} AceTest;
++
++static AceTest t;
++
++static uint32_t r0(uint64_t off)
++{
++    return qpci_io_readl(t.dev, t.bar0, off);
++}
++
++static void w0(uint64_t off, uint32_t v)
++{
++    qpci_io_writel(t.dev, t.bar0, off, v);
++}
++
++static uint16_t r0w(uint64_t off)
++{
++    return qpci_io_readw(t.dev, t.bar0, off);
++}
++
++static void w0w(uint64_t off, uint16_t v)
++{
++    qpci_io_writew(t.dev, t.bar0, off, v);
++}
++
++static uint32_t r4(uint64_t off)
++{
++    return qpci_io_readl(t.dev, t.bar4, off);
++}
++
++static void w4(uint64_t off, uint32_t v)
++{
++    qpci_io_writel(t.dev, t.bar4, off, v);
++}
++
++static void boot_start(const char *extra)
++{
++    t.qs = qtest_initf("-machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* "
++                       "-device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace%s "
++                       "-device hda-duplex,audiodev=snd0", extra);
++    t.bus = qpci_new_pc(t.qs, NULL);
++    t.dev = qpci_device_find(t.bus, ACE_DEVFN);
++    g_assert_nonnull(t.dev);
++    qpci_device_enable(t.dev);
++    t.bar0 = qpci_iomap(t.dev, 0, NULL);
++    t.bar4 = qpci_iomap(t.dev, 4, NULL);
++}
++
++static void boot_end(void)
++{
++    qpci_iounmap(t.dev, t.bar0);
++    qpci_iounmap(t.dev, t.bar4);
++    qpci_free_pc(t.bus);
++    qtest_quit(t.qs);
++}
++
++/* the synthetic firmware image: the extended manifest, the partition
++ * directory with the manifest, the manifest header and the firmware header
++ * with one loadable module whose text lies inside the image */
++static void put32(uint8_t *p, uint32_t v)
++{
++    stl_le_p(p, v);
++}
++
++static void put16(uint8_t *p, uint16_t v)
++{
++    stw_le_p(p, v);
++}
++
++static void make_image(uint8_t *img, uint16_t major, uint16_t minor,
++                       uint16_t hotfix, uint16_t build)
++{
++    uint8_t *p = img + IMG_PAYLOAD;
++    uint8_t *man = p + 0x40;        /* after the directory and its entry */
++    uint8_t *fw = p + 0x2000;
++    uint8_t *mod = p + 0x2034;
++
++    memset(img, 0, IMG_LEN);
++    memcpy(img, ri_magic_ae1, 4);
++    put32(img + 4, IMG_PAYLOAD);
++    put16(img + 8, 1);                    /* version major 1 */
++    put16(img + 10, 0);
++    put32(img + 12, 1);                   /* one module entry */
++
++    memcpy(p, ri_magic_cpd, 4);
++    put32(p + 4, 1);                      /* one entry */
++    p[8] = 2;                             /* header version */
++    p[9] = 1;                             /* entry version */
++    p[10] = 20;                           /* header length */
++    memcpy(p + 12, "ADSP", 4);
++    memcpy(p + 20, ri_name_man, sizeof(ri_name_man));
++    put32(p + 20 + 12, 0x40);             /* offset */
++    put32(p + 20 + 16, 0x50);             /* length */
++
++    put32(man + 0, 4);                    /* header type */
++    put32(man + 4, 20);                   /* header length in words */
++    put32(man + 8, 0x21000);              /* version */
++    put32(man + 12, 1);
++    put32(man + 16, 0x8086);              /* vendor */
++    put32(man + 20, 0x20260101);          /* date */
++    put32(man + 24, 9);                   /* size in pages */
++    memcpy(man + 28, ri_magic_mn2, 4);
++    put16(man + 36, major);
++    put16(man + 38, minor);
++    put16(man + 40, hotfix);
++    put16(man + 42, build);
++
++    memcpy(fw, ri_magic_am1, 4);
++    put32(fw + 4, 52);
++    memcpy(fw + 8, ri_image_id, sizeof(ri_image_id));
++    put32(fw + 16, 9);                    /* preload pages */
++    put32(fw + 20, 2);                    /* flags */
++    put32(fw + 24, 2);                    /* feature mask */
++    put16(fw + 28, major);
++    put16(fw + 30, minor);
++    put16(fw + 32, hotfix);
++    put16(fw + 34, build);
++    put32(fw + 36, 1);                    /* one module */
++    put32(fw + 40, 0x100000);             /* hw buffer base */
++    put32(fw + 48, 0x40000);              /* load offset */
++
++    memcpy(mod, ri_magic_ame, 4);
++    memcpy(mod + 4, ri_mod_name, sizeof(ri_mod_name));
++    put32(mod + 28, 0x21);                /* type */
++    put32(mod + 64, 0xa1040000);          /* entry */
++    put32(mod + 72, 3);                   /* affinity */
++    put32(mod + 80, (1u << 16) | 0x1f);   /* text: one page */
++    put32(mod + 84, 0xa1048000);          /* vaddr */
++    put32(mod + 88, 0x8000);              /* file offset */
++    memset(p + 0x8000, 0x5a, 0x1000);     /* the module text */
++}
++
++static void load_image(uint16_t major, uint16_t minor, uint16_t hotfix, uint16_t build)
++{
++    static uint8_t img[IMG_LEN];
++    uint8_t bdl[16];
++
++    make_image(img, major, minor, hotfix, build);
++    qtest_memwrite(t.qs, IMG_ADDR, img, sizeof(img));
++    stq_le_p(bdl, IMG_ADDR + IMG_PAYLOAD);
++    stl_le_p(bdl + 8, IMG_LEN - IMG_PAYLOAD);
++    stl_le_p(bdl + 12, 0);                /* no interrupt on completion */
++    qtest_memwrite(t.qs, BDL_ADDR, bdl, sizeof(bdl));
++}
++
++/* power up: GPROCEN, the subsystem, the purge request, the core */
++static void power_up_quiet(void);
++
++static int asserted_gsi(void)
++{
++    for (int i = 16; i < 24; i++) {
++        if (qtest_get_irq(t.qs, i)) {
++            return i;
++        }
++    }
++    return -1;
++}
++
++static void power_up(void)
++{
++    w0(HDA_PPCTL, 1u << 30);
++    w4(ACE_ADSPCS, ACE_ADSPCS_SPA);
++    qtest_clock_step(t.qs, US(150));
++    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, ACE_ADSPCS_CPA);
++    w4(ACE_XIDR, 0x81004000);             /* BUSY | ROM control | purge | tag 1 */
++    w4(ACE_DSP2CXCTL, ACE_DSP2CXCTL_SPA);
++    qtest_clock_step(t.qs, US(250));
++    g_assert_cmpuint(r4(ACE_DSP2CXCTL) & ACE_DSP2CXCTL_CPA, ==, ACE_DSP2CXCTL_CPA);
++}
++
++/* the purge acknowledgement and INIT_DONE */
++static void rom_ready(void)
++{
++    qtest_clock_step(t.qs, US(600));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, ACE_BUSY);
++    g_assert_cmpuint(r4(ACE_XIDA), ==, ACE_BUSY);
++    w4(ACE_XIDA, ACE_BUSY);               /* the host clears DONE */
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_INIT_DONE);
++}
++
++/* run the loader stream: tag 1, format 0x40, one descriptor, SPIB = size */
++static void run_loader(uint32_t bytes)
++{
++    w0w(HDA_ST_FMT(OUT4), 0x40);
++    w0(HDA_ST_BDLPU(OUT4), 0);
++    w0(HDA_ST_BDLPL(OUT4), BDL_ADDR);
++    w0(HDA_ST_CBL(OUT4), bytes);
++    w0(HDA_ST_LVI(OUT4), 0);
++    w0(HDA_SPIB(OUT4), bytes);
++    w0(HDA_SPBFCCTL, 1u << OUT4);
++    w0(HDA_ST_CTL(OUT4), 1);              /* reset */
++    w0(HDA_ST_CTL(OUT4), 0);
++    w0(HDA_ST_CTL(OUT4), (1u << 20) | 0x02);   /* tag 1, run */
++}
++
++/* walk the ROM to FW_ENTERED and receive FW_READY */
++static void firmware_ready(void)
++{
++    qtest_clock_step(t.qs, US(2300));
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_RUNNING);
++    qtest_clock_step(t.qs, US(250));
++    g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_FW_READY);
++    g_assert_cmpuint(r4(ACE_XTDDY), ==, 0);
++    g_assert_cmpuint(r4(ACE_WIN0 + ACE_FW_ABI_VER), ==, 1);
++    g_assert_cmpuint(r4(ACE_WIN0 + ACE_FW_ROM_INFO), ==, 0x0120315a);
++    g_assert_cmpuint(r4(ACE_WIN0), ==, FSR_RUNNING);
++}
++
++static void ack_notification(void)
++{
++    w4(ACE_XTDR, ACE_BUSY);
++    w4(ACE_XTDA, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++}
++
++/* the FW_CONFIG request and its reply */
++static uint32_t fw_config(void)
++{
++    uint32_t reply;
++
++    w4(ACE_XIDDY, IPC4_FW_CONFIG_EXT);
++    w4(ACE_XIDR, IPC4_FW_CONFIG_REQ);
++    qtest_clock_step(t.qs, US(100));
++    reply = r4(ACE_XIDA);
++    w4(ACE_XIDA, ACE_BUSY);
++    return reply;
++}
++
++/* --------------------------------------------------------------------- */
++
++/* 1: enumeration */
++static void test_enumerate(void)
++{
++    uint32_t v;
++
++    boot_start("");
++    g_assert_cmpuint(qpci_config_readw(t.dev, PCI_VENDOR_ID), ==, 0x8086);
++    g_assert_cmpuint(qpci_config_readw(t.dev, PCI_DEVICE_ID), ==, 0x7f50);
++    g_assert_cmpuint(qpci_config_readb(t.dev, PCI_REVISION_ID), ==, 0x10);
++    g_assert_cmpuint(qpci_config_readb(t.dev, PCI_CLASS_PROG), ==, 0x80);
++    g_assert_cmpuint(qpci_config_readb(t.dev, PCI_CLASS_DEVICE), ==, 0x03);
++    g_assert_cmpuint(qpci_config_readb(t.dev, 0x0b)   /* base class */, ==, 0x04);
++    g_assert_cmpuint(qpci_config_readb(t.dev, PCI_HEADER_TYPE), ==, 0);
++
++    /* the BAR sizes: BAR0 0x4000, BAR4 2 MB, BAR1-3 absent */
++    for (int bar = 0; bar < 6; bar++) {
++        uint32_t old = qpci_config_readl(t.dev, PCI_BASE_ADDRESS_0 + 4 * bar);
++        uint32_t size;
++
++        qpci_config_writel(t.dev, PCI_BASE_ADDRESS_0 + 4 * bar, 0xffffffff);
++        size = qpci_config_readl(t.dev, PCI_BASE_ADDRESS_0 + 4 * bar);
++        qpci_config_writel(t.dev, PCI_BASE_ADDRESS_0 + 4 * bar, old);
++        v = ~(size & 0xfffffff0) + 1;
++        switch (bar) {
++        case 0:
++            g_assert_cmpuint(v, ==, 0x4000);
++            g_assert_cmpuint(size & 0xf, ==, 0);
++            break;
++        case 4:
++            g_assert_cmpuint(v, ==, 0x200000);
++            g_assert_cmpuint(size & 0xf, ==, 0);   /* 32-bit, not 64-bit */
++            break;
++        default:
++            g_assert_cmpuint(size, ==, 0);
++        }
++    }
++    /* the chain head and the model's interrupt pointer */
++    g_assert_cmpuint(r0w(HDA_LLCH), ==, 0x180);
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0x120);
++    boot_end();
++}
++
++/* 2: the capability chain and its registers */
++static void test_caps(void)
++{
++    boot_start("");
++    g_assert_cmpuint(r0(HDA_PP_CAP), ==, 0x10030700);   /* ver 1, id 3, next 0x700 */
++    g_assert_cmpuint(r0(HDA_SPB_CAP), ==, 0x10040000);  /* ver 1, id 4, no next */
++    g_assert_cmpuint(r0(HDA_PPCTL), ==, 0);
++    g_assert_cmpuint(r0(HDA_PPSTS), ==, 0);
++    w0(HDA_PPCTL, 0xffffffff);
++    g_assert_cmpuint(r0(HDA_PPCTL), ==, 0xc00000ff);    /* PIE, GPROCEN, PROCEN */
++    w0(HDA_PPCTL, 0);
++    w0(HDA_SPBFCCTL, 0x10);
++    g_assert_cmpuint(r0(HDA_SPBFCCTL), ==, 0x10);
++    w0(HDA_SPIB(4), 0x1234);
++    g_assert_cmpuint(r0(HDA_SPIB(4)), ==, 0x1234);
++    g_assert_cmpuint(r0(HDA_SPIB(5)), ==, 0);
++    g_assert_cmpuint(r0(HDA_MAXFIFO(4)), !=, 0);
++    g_assert_cmpuint(r0(HDA_MAXFIFO(4)), ==, r0(HDA_MAXFIFO(5)));
++    boot_end();
++}
++
++/* 7: the stock controllers read LLCH 0 (no chain) and still work */
++static void test_stock_controllers(void)
++{
++    QPCIBus *bus;
++    QPCIDevice *dev;
++    QPCIBar bar;
++
++    t.qs = qtest_initf("-machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* "
++                       "-device ich9-intel-hda,bus=pcie.0,addr=1b.0,id=hda0 "
++                       "-device hda-duplex,audiodev=snd0");
++    bus = qpci_new_pc(t.qs, NULL);
++    dev = qpci_device_find(bus, ACE_DEVFN);
++    g_assert_nonnull(dev);
++    qpci_device_enable(dev);
++    bar = qpci_iomap(dev, 0, NULL);
++    g_assert_cmpuint(qpci_io_readw(dev, bar, HDA_LLCH), ==, 0);
++    qpci_iounmap(dev, bar);
++    qpci_free_pc(bus);
++    qtest_quit(t.qs);
++
++    t.qs = qtest_initf("-machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* "
++                       "-device intel-hda,bus=pcie.0,addr=1b.0,id=hda0 "
++                       "-device hda-duplex,audiodev=snd0");
++    bus = qpci_new_pc(t.qs, NULL);
++    dev = qpci_device_find(bus, ACE_DEVFN);
++    g_assert_nonnull(dev);
++    qpci_device_enable(dev);
++    bar = qpci_iomap(dev, 0, NULL);
++    g_assert_cmpuint(qpci_io_readw(dev, bar, HDA_LLCH), ==, 0);
++    qpci_iounmap(dev, bar);
++    qpci_free_pc(bus);
++    qtest_quit(t.qs);
++}
++
++/* 3: the cold boot handshake end to end with the synthetic image */
++static void test_boot_handshake(void)
++{
++    uint32_t reply;
++
++    boot_start("");
++    load_image(2, 9, 9, 9);
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0);
++    power_up();
++    rom_ready();
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    g_assert_cmpuint(r0(HDA_ST_LPIB(OUT4)), ==, IMG_LEN - IMG_PAYLOAD);
++    firmware_ready();
++    ack_notification();
++
++    reply = fw_config();
++    g_assert_cmpuint(reply, ==, IPC4_REPLY_DONE_OK);
++    /* the TLV list in the uplink mailbox: the version from the image, then
++     * the model's constants, then a zero header */
++    g_assert_cmpuint(r4(ACE_MBOX_UL), ==, 0);              /* FW_VERSION */
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 4), ==, 8);
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 8), ==, (9u << 16) | 2);
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 12), ==, (9u << 16) | 9);
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 16), ==, 6);         /* DL mailbox */
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 20), ==, 4);
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 24), ==, 4096);
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 28), ==, 7);         /* UL mailbox */
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 36), ==, 4096);
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 40), ==, 8);          /* trace log bytes */
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 64), ==, 17);         /* max libraries */
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 88), ==, 0);          /* terminator */
++    g_assert_cmpuint(r4(ACE_MBOX_UL + 92), ==, 0);
++    /* an unknown request is answered with UNKNOWN_MESSAGE_TYPE */
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, 0xc2000000);
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r4(ACE_XIDA), ==, (ACE_BUSY | 0xe2000000u | 2));
++    boot_end();
++}
++
++/* 4: power-down from every state is idempotent, and the powered-down value */
++static void test_power_down(void)
++{
++    boot_start("");
++    /* from off: nothing happens, the registers read the powered-down value */
++    w4(ACE_ADSPCS, 0);
++    w4(ACE_DSP2CXCTL, 0);
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_ADSPCS), ==, 0);
++    g_assert_cmpuint(r4(ACE_DSP2CXCTL), ==, 0);
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0);
++
++    /* from rom-ready: the core off, then the subsystem off */
++    power_up();
++    rom_ready();
++    w4(ACE_DSP2CXCTL, 0);
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r4(ACE_DSP2CXCTL) & ACE_DSP2CXCTL_CPA, ==, 0);
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0);
++    w4(ACE_ADSPCS, 0);
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, 0);
++    g_assert_cmpuint(r4(ACE_XIDA), ==, 0);
++
++    /* from running: the host's cleanup sequence lands in off, twice */
++    for (int i = 0; i < 2; i++) {
++        load_image(2, 0, 0, 0);
++        power_up();
++        rom_ready();
++        run_loader(IMG_LEN - IMG_PAYLOAD);
++        firmware_ready();
++        w4(ACE_XCTL, 0);
++        w0(HDA_ST_CTL(OUT4), 0);
++        w4(ACE_DSP2CXCTL, 0);
++        qtest_clock_step(t.qs, US(100));
++        g_assert_cmpuint(r4(ACE_DSP2CXCTL) & ACE_DSP2CXCTL_CPA, ==, 0);
++        w4(ACE_ADSPCS, 0);
++        qtest_clock_step(t.qs, US(100));
++        g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, 0);
++        g_assert_cmpuint(r4(ACE_FSR), ==, 0);
++        g_assert_cmpuint(r4(ACE_WIN0), ==, 0);              /* powered down reads */
++        w4(ACE_ADSPCS, 0);                                  /* idempotent */
++        qtest_clock_step(t.qs, US(100));
++        w0(HDA_PPCTL, 0);
++    }
++    boot_end();
++
++    /* x-powered-down-value: the DSP-domain reads answer all ones */
++    boot_start(",x-powered-down-value=0xffffffff");
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0xffffffff);
++    g_assert_cmpuint(r4(ACE_ROMERR), ==, 0xffffffff);
++    g_assert_cmpuint(r4(ACE_WIN0), ==, 0xffffffff);
++    g_assert_cmpuint(r4(ACE_ADSPCS), ==, 0);               /* host-side registers stay */
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0x120);
++    boot_end();
++}
++
++/* 6: the interrupt: INTSTS bit 30, the line under INTx, nothing under MSI */
++static void check_irq(const char *msi)
++{
++    g_autofree char *extra = g_strdup_printf(",msi=%s", msi);
++    bool intx = g_str_equal(msi, "off");
++
++    boot_start(extra);
++    load_image(2, 0, 0, 0);
++    if (!intx) {
++        /* enable MSI with a message to the local APIC */
++        qpci_config_writel(t.dev, 0x60 + 4, 0xfee00000);    /* address */
++        qpci_config_writew(t.dev, 0x60 + 8, 0x4041);        /* data */
++        qpci_config_writew(t.dev, 0x60 + 2, 1);             /* enable */
++    } else {
++        qtest_irq_intercept_in(t.qs, "ioapic");
++    }
++    w0(HDA_INTCTL, 0xc0000000);
++    g_assert_cmpuint(r0(HDA_INTSTS) & 0x80000000, ==, 0);
++    if (intx) {
++        g_assert_cmpint(asserted_gsi(), ==, -1);
++    }
++    power_up();
++    rom_ready();
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    /* the enables the host programs before the firmware is ready */
++    w4(0x120, 1);                           /* INTEN at BAR4 + the pointer: host IPC */
++    w4(ACE_HfHIPCIE, 1);
++    w4(ACE_XCTL, 3);
++    qtest_clock_step(t.qs, US(2100));          /* entered (2000), not ready yet (2200) */
++    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 0);  /* not before FW_READY */
++    qtest_clock_step(t.qs, US(200));
++    g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_FW_READY);
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 1u << 30);
++    g_assert_cmpuint(r0(HDA_INTSTS) & 0x80000000, ==, 0x80000000);   /* global */
++    if (intx) {
++        g_assert_cmpint(asserted_gsi(), >=, 16);
++    }
++    /* masking one enable drops it; the acknowledgement drops it too */
++    w4(ACE_XCTL, 2);                        /* busy interrupt off, done kept */
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 0);
++    if (intx) {
++        g_assert_cmpint(asserted_gsi(), ==, -1);
++    }
++    w4(ACE_XCTL, 3);
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 1u << 30);
++    ack_notification();
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 0);
++    if (intx) {
++        g_assert_cmpint(asserted_gsi(), ==, -1);
++    }
++    /* the reply raises it through the done enable */
++    w4(ACE_XIDDY, IPC4_FW_CONFIG_EXT);
++    w4(ACE_XIDR, IPC4_FW_CONFIG_REQ);
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 1u << 30);
++    w4(ACE_XCTL, 1);                        /* done interrupt off */
++    g_assert_cmpuint(r0(HDA_INTSTS) & (1u << 30), ==, 0);
++    w4(ACE_XIDA, ACE_BUSY);
++    boot_end();
++}
++
++static void test_irq_intx(void)
++{
++    check_irq("off");
++}
++
++static void test_irq_msi(void)
++{
++    check_irq("on");
++}
++
++/* 5: every fault of the injector gives its bounded shape */
++typedef struct {
++    const char *fault;
++    uint32_t adspcs_cpa;     /* the subsystem CPA after the power-up */
++    uint32_t xida_done;      /* the purge reply */
++    uint32_t fsr;            /* the FSR when the ROM settled (before the stream) */
++    uint32_t fsr_loaded;     /* the FSR after the stream and the walk */
++    uint32_t xtdr;           /* the notification after FW_READY time */
++    uint32_t xida_reply;     /* the reply to FW_CONFIG */
++    uint32_t win0;           /* window 0 + 0 after FW_READY time */
++    uint32_t win0_abi;       /* window 0 + 0x1c */
++    uint32_t mbox_ver;       /* the version word of the reply (major | minor) */
++} FaultShape;
++
++static void check_fault(const FaultShape *f)
++{
++    g_autofree char *extra = g_strdup_printf(",fault=%s", f->fault);
++
++    boot_start(extra);
++    load_image(2, 9, 9, 9);                 /* the version the table expects */
++    power_up_quiet();
++    qtest_clock_step(t.qs, US(700));
++    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, f->adspcs_cpa);
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, f->xida_done);
++    g_assert_cmpuint(r4(ACE_FSR), ==, f->fsr);
++    if (f->fsr != FSR_INIT_DONE) {
++        /* nothing to load: the ROM never asked for the stream */
++        run_loader(IMG_LEN - IMG_PAYLOAD);
++        qtest_clock_step(t.qs, US(3000));
++        g_assert_cmpuint(r4(ACE_FSR), ==, f->fsr);
++        boot_end();
++        return;
++    }
++    w4(ACE_XIDA, ACE_BUSY);
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, f->fsr_loaded);
++    g_assert_cmpuint(r4(ACE_XTDR), ==, f->xtdr);
++    g_assert_cmpuint(r4(ACE_WIN0), ==, f->win0);
++    g_assert_cmpuint(r4(ACE_WIN0 + ACE_FW_ABI_VER), ==, f->win0_abi);
++    if (f->xtdr & ACE_BUSY) {
++        ack_notification();
++    }
++    if (f->fsr_loaded == FSR_RUNNING) {
++        /* running: ask for the configuration and read the reply */
++        g_assert_cmpuint(fw_config(), ==, f->xida_reply);
++        g_assert_cmpuint(r4(ACE_MBOX_UL + 8), ==, f->mbox_ver);
++    }
++    boot_end();
++}
++
++/* power up without asserting the CPA bits (the never-power fault must not trip) */
++static void power_up_quiet(void)
++{
++    w0(HDA_PPCTL, 1u << 30);
++    w4(ACE_ADSPCS, ACE_ADSPCS_SPA);
++    qtest_clock_step(t.qs, US(150));
++    w4(ACE_XIDR, 0x81004000);
++    w4(ACE_DSP2CXCTL, ACE_DSP2CXCTL_SPA);
++    qtest_clock_step(t.qs, US(250));
++}
++
++static void test_faults(void)
++{
++    const uint32_t cpa = ACE_ADSPCS_CPA;
++    const uint32_t halt = ACE_BUSY;
++    /*       fault            adspcs_cpa  xida_done  fsr before   fsr loaded         xtdr              xida reply        win0               win0 abi  mbox ver */
++    const FaultShape shapes[] = {
++        { "none", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, IPC4_REPLY_DONE_OK, FSR_RUNNING, 1, (9u << 16) | 2 },
++        { "never-power",        0,   0,         0,             0,                  0,                0,                 0,                  0, 0 },
++        { "never-ack",          cpa, 0,         FSR_INIT_DONE, FSR_RUNNING,        NOTIFY_FW_READY,  IPC4_REPLY_DONE_OK, FSR_RUNNING,        1, (9u << 16) | 2 },   /* the ROM still boots; the host waits for DONE */
++        { "never-ready", cpa, ACE_BUSY, 0x09, 0x09, 0, 0, 0x09, 0, 0 },
++        { "halt-rom=43", cpa, ACE_BUSY, halt | 0x09, halt | 0x09, 0, 0, halt | 0x09, 0, 0 },
++        { "halt-rom=51", cpa, ACE_BUSY, halt | 0x09, halt | 0x09, 0, 0, halt | 0x09, 0, 0 },
++        { "never-enter", cpa, ACE_BUSY, FSR_INIT_DONE, 0x2a, 0, 0, 0x2a, 0, 0 },
++        { "never-fwready", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, 0, IPC4_REPLY_DONE_OK, FSR_RUNNING, 0, (9u << 16) | 2 },   /* the firmware runs; only FW_READY is missing */
++        { "halt-fw=51", cpa, ACE_BUSY, FSR_INIT_DONE, halt | 0x2a, 0, 0, halt | 0x2a, 0, 0 },
++        { "crash-notification", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_EXCEPTION, IPC4_REPLY_DONE_OK, FSR_RUNNING, 1, (9u << 16) | 2 },
++        { "never-reply", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, 0, FSR_RUNNING, 1, 0 },
++        { "drop-requests", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, 0, FSR_RUNNING, 1, 0 },
++        { "abi=2", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, IPC4_REPLY_DONE_OK, FSR_RUNNING, 2, (9u << 16) | 2 },
++        { "ipc-status=5", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, (ACE_BUSY | 0xe1000000u | 5), FSR_RUNNING, 1, (9u << 16) | 2 },
++        { "bad-tuples", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, IPC4_REPLY_DONE_OK, FSR_RUNNING, 1, (9u << 16) | 2 },
++        { "truncated-reply", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, IPC4_REPLY_DONE_OK, FSR_RUNNING, 1, (9u << 16) | 2 },
++        { "version-shift", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, IPC4_REPLY_DONE_OK, FSR_RUNNING, 1, (9u << 16) | 2 },
++        { "window-read-fail", cpa, ACE_BUSY, FSR_INIT_DONE, FSR_RUNNING, NOTIFY_FW_READY, IPC4_REPLY_DONE_OK, 0xffffffff, 0xffffffff, 0xffffffff },   /* every window read fails */
++    };
++
++    /* the test image carries version 2.9.9.9: the version word of the reply
++     * is major | minor << 16 = 2 | 9 << 16 */
++    for (size_t i = 0; i < ARRAY_SIZE(shapes); i++) {
++        check_fault(&shapes[i]);
++    }
++    /* the truncated payload: the module's text lies outside the stream -> 42 */
++    boot_start("");
++    load_image(2, 9, 9, 9);
++    power_up();
++    rom_ready();
++    run_loader(0x8000);
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, halt | 0x28);
++    g_assert_cmpuint(r4(ACE_ROMERR), ==, 42);
++    boot_end();
++    /* a corrupted partition directory (the ROM sees the payload only) -> 43 */
++    boot_start("");
++    load_image(2, 9, 9, 9);
++    qtest_bufwrite(t.qs, IMG_ADDR + IMG_PAYLOAD, "XXXX", 4);
++    power_up();
++    rom_ready();
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, halt | 0x09);
++    g_assert_cmpuint(r4(ACE_ROMERR), ==, 43);
++    boot_end();
++    /* x-delay-scale: the whole walk stretches, nothing else moves */
++    boot_start(",x-delay-scale=10");
++    load_image(2, 9, 9, 9);
++    power_up_quiet();
++    qtest_clock_step(t.qs, US(6000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0x09);         /* the walk: every delay x10 */
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_INIT_DONE);
++    boot_end();
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++    if (qtest_has_machine("q35")) {
++        qtest_add_func("/intel-hda-ace/enumerate", test_enumerate);
++        qtest_add_func("/intel-hda-ace/caps", test_caps);
++        qtest_add_func("/intel-hda-ace/stock-controllers", test_stock_controllers);
++        qtest_add_func("/intel-hda-ace/boot-handshake", test_boot_handshake);
++        qtest_add_func("/intel-hda-ace/power-down", test_power_down);
++        qtest_add_func("/intel-hda-ace/irq-intx", test_irq_intx);
++        qtest_add_func("/intel-hda-ace/irq-msi", test_irq_msi);
++        qtest_add_func("/intel-hda-ace/faults", test_faults);
++    }
++    return g_test_run();
++}
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 78b301064..a27d19565 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -75,6 +75,7 @@ qtests_i386 = \
+   (config_all_devices.has_key('CONFIG_PVPANIC_ISA') ? ['pvpanic-test'] : []) +              \
+   (config_all_devices.has_key('CONFIG_PVPANIC_PCI') ? ['pvpanic-pci-test'] : []) +          \
+   (config_all_devices.has_key('CONFIG_HDA') ? ['intel-hda-test'] : []) +                    \
++  (config_all_devices.has_key('CONFIG_HDA_ACE') ? ['intel-hda-ace-test'] : []) +              \
+   (config_all_devices.has_key('CONFIG_I82801B11') ? ['i82801b11-test'] : []) +             \
+   (config_all_devices.has_key('CONFIG_IOH3420') ? ['ioh3420-test'] : []) +                  \
+   (config_all_devices.has_key('CONFIG_LPC_ICH9') ? ['lpc-ich9-test'] : []) +              \
+-- 
+2.56.1
+

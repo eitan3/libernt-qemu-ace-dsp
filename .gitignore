@@ -9,3 +9,4 @@ evidence/**/OVMF_VARS.fd
 evidence/**/*.sock
 evidence/**/*.ppm
 __pycache__/
+disk/

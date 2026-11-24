@@ -9,7 +9,8 @@
 # drop-requests, halt-rom=<code>, halt-fw=<code>, crash-notification, abi=<n>,
 # ipc-status=<n>, bad-tuples, truncated-reply, version-shift, window-read-fail);
 # any further name=value pairs are set on the same device (/machine/peripheral/ace).
-# Uses QMP over the socket lib-run.sh opens; the device is the one with id "ace".
+# Uses QMP over the socket lib-run.sh opens (its /tmp dir is recorded in the
+# evidence directory's sock-dir.txt); the device is the one with id "ace".
 # This work is licensed under the terms of the GNU GPL, version 2 or later.
 # See the COPYING file in the top-level directory.
 set -u
@@ -18,8 +19,9 @@ EV="${1:?usage: set-fault.sh <evidence-dir> <fault> [property=value ...]}"
 FAULT="${2:?fault name missing}"
 shift 2
 EV="$(cd "$EV" && pwd)"
+SOCK="$(cat "$EV/sock-dir.txt")"
 q=()
 for kv in "fault=$FAULT" "$@"; do
     q+=("qom-set" "/machine/peripheral/ace" "${kv%%=*}" "${kv#*=}")
 done
-python3 tools/qmp.py "$EV/qmp.sock" "${q[@]}"
+python3 tools/qmp.py "$SOCK/qmp.sock" "${q[@]}"

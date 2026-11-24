@@ -33,7 +33,8 @@ set -u
 
 QAD="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD="$QAD/build"
-QEMU="$BUILD/qemu-system-x86_64"
+QEMU="${QEMU:-$BUILD/qemu-system-x86_64}"
+BIOSDIR="${BIOSDIR:-$BUILD/pc-bios}"
 FW="$QAD/firmware"
 ISO="${ISO:-/home/megan/libernt-build-logs/test-audio-intel-sst-p2b-51f9711a/bootcd.iso}"
 SMP="${SMP:-1}"
@@ -48,18 +49,21 @@ case "$SMP" in 1) ;; *) echo "run: SMP=$SMP refused: every evidence run pins -sm
 EV="${EVID:-$QAD/evidence/$(date -u +%F)/run-$(date -u +%H%M%S)-$HDA}"
 mkdir -p "$EV"
 EV="$(cd "$EV" && pwd)"
-rm -f "$EV/monitor.sock" "$EV/qmp.sock" "$EV/qemu.pid"
+# unix sockets are limited to 108 bytes of path: keep them in a short /tmp dir
+SOCK=/tmp/qad-vm.$$
+rm -rf "$SOCK"; mkdir -p "$SOCK"
 cp -f "$FW/OVMF_VARS.4m.fd" "$EV/OVMF_VARS.fd"
+trap 'rm -rf "$SOCK"' EXIT
 
-args=("$QEMU" -L "$BUILD/pc-bios"
+args=("$QEMU" -L "$BIOSDIR"
       -machine q35 -accel tcg,thread=multi -cpu max -smp 1 -m 2048
       -drive if=pflash,format=raw,readonly=on,file="$FW/OVMF_CODE.4m.fd"
       -drive if=pflash,format=raw,file="$EV/OVMF_VARS.fd"
       -audiodev none,id=snd0 -display none -vga std -nic none
       -serial "file:$EV/serial.log"
-      -monitor "unix:$EV/monitor.sock,server,nowait"
-      -qmp "unix:$EV/qmp.sock,server,nowait"
-      -pidfile "$EV/qemu.pid"
+      -monitor "unix:$SOCK/monitor.sock,server,nowait"
+      -qmp "unix:$SOCK/qmp.sock,server,nowait"
+      -pidfile "$SOCK/qemu.pid"
       -d cpu_reset,guest_errors -D "$EV/qemu-dbg.log")
 if [ -n "${DISK:-}" ]; then
     args+=(-drive "file=$DISK,if=ide,index=0,media=disk,format=qcow2")
@@ -84,6 +88,7 @@ esac
 date -u +%FT%TZ > "$EV/start.txt"
 printf '%s\n' "${args[@]}" > "$EV/qemu-args.txt"
 echo "evidence: $EV"
+echo "$SOCK" > "$EV/sock-dir.txt"
 echo "command:  $(printf '%q ' "${args[@]}")" > "$EV/command.txt"
 
 "${args[@]}" > "$EV/qemu.log" 2>&1 &
@@ -104,12 +109,18 @@ while kill -0 "$qpid" 2>/dev/null; do
     fi
     sleep 2
 done
-[ "$stopped_by" = none ] || kill -TERM "$qpid" 2>/dev/null
+[ "$stopped_by" = none ] || {
+    # a screenshot before the VM goes away, when asked to (SNAP=1)
+    if [ "${SNAP:-0}" = 1 ] && [ -S "$SOCK/monitor.sock" ]; then
+        python3 "$QAD/tools/mon.py" "$SOCK/monitor.sock" "screendump $EV/desktop.png -f png" > /dev/null 2>&1
+    fi
+    kill -TERM "$qpid" 2>/dev/null
+}
 wait "$qpid"
 rc=$?
 date -u +%FT%TZ > "$EV/end.txt"
 echo "qemu exited rc=$rc ($stopped_by) at $(cat "$EV/end.txt"); wall $(( $(date +%s) - t0 )) s"
 echo "--- serial lines of the drivers under test (hdaudbus.sys / intcdsp.sys):"
 grep -aE "hdaudbus\.sys|intcdsp\.sys" "$EV/serial.log" | sed 's/\x1b\[[0-9;]*[A-Za-z]//g' | head -60
-echo "--- guest errors: $(grep -c "ace_unexpected" "$EV/qemu.log" 2>/dev/null || echo 0) ace_unexpected trace lines, $(grep -c "Fatal System Error\|bugcheck" "$EV/serial.log" 2>/dev/null || echo 0) fatal lines in serial.log"
+echo "--- device trace: $(grep -ac 'ace_' "$EV/qemu-dbg.log" 2>/dev/null || echo 0) ace_* lines, $(grep -ac 'ace_unexpected' "$EV/qemu-dbg.log" "$EV/qemu.log" 2>/dev/null | awk -F: '{s+=$2} END {print s+0}') ace_unexpected (in $EV/qemu-dbg.log, the -D log), $(grep -ac 'Fatal System Error\|bugcheck' "$EV/serial.log" 2>/dev/null || echo 0) fatal lines in serial.log"
 exit "$rc"

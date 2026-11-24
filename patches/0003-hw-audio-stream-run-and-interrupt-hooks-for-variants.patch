@@ -1,0 +1,71 @@
+From 7e2143561eee3bb2442bbc6e5eaf175feb686ba9 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 09:38:40 +0200
+Subject: [PATCH 3/5] hw/audio: stream-run and interrupt hooks for variants
+
+A variant of the controller that carries a consumer for a stream (the ACE
+audio DSP, which takes the firmware through an output stream no codec is
+attached to) needs to learn when a stream starts, after the BDL has been
+parsed, and when it stops; and it needs to raise a controller-level
+interrupt source.  intel_hda_set_st_ctl() now calls d->stream_run() on both
+edges of the run bit and intel_hda_update_int_sts() ORs d->ext_sts bit 30
+into INTSTS.  Both are zero/NULL by default, so intel-hda and
+ich9-intel-hda behave exactly as before.
+
+Sources studied: QEMU own hw/audio/intel-hda.c only.
+---
+ hw/audio/intel-hda-internal.h | 6 ++++++
+ hw/audio/intel-hda.c          | 9 +++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/hw/audio/intel-hda-internal.h b/hw/audio/intel-hda-internal.h
+index d69b3ef61..1ef84c7fd 100644
+--- a/hw/audio/intel-hda-internal.h
++++ b/hw/audio/intel-hda-internal.h
+@@ -116,6 +116,12 @@ struct IntelHDAState {
+     uint32_t spib[8], maxfifo[8];
+     MemoryRegion cap_pp, cap_spb;
+ 
++    /* hooks for the variants: a controller-level interrupt source they own
++     * (INTSTS bit 30) and a notifier for the run bit of a stream, called once
++     * the BDL is parsed (start) or after the codecs were told (stop) */
++    uint32_t ext_sts;
++    void (*stream_run)(IntelHDAState *d, unsigned int idx, bool running);
++
+     /* debug logging */
+     const struct IntelHDAReg *last_reg;
+     uint32_t last_val;
+diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
+index eb720aea7..ca1051e1a 100644
+--- a/hw/audio/intel-hda.c
++++ b/hw/audio/intel-hda.c
+@@ -161,6 +161,9 @@ static void intel_hda_update_int_sts(IntelHDAState *d)
+         }
+     }
+ 
++    /* a variant's controller-level source (the DSP's IPC interrupt) */
++    sts |= d->ext_sts & (1u << 30);
++
+     /* update global status */
+     if (sts & d->int_ctl) {
+         sts |= (1U << 31);
+@@ -508,10 +511,16 @@ static void intel_hda_set_st_ctl(IntelHDAState *d, const IntelHDAReg *reg, uint3
+                    reg->stream, stnr, st->cbl);
+             intel_hda_parse_bdl(d, st);
+             intel_hda_notify_codecs(d, stnr, true, output);
++            if (d->stream_run) {
++                d->stream_run(d, reg->stream, true);
++            }
+         } else {
+             /* stop */
+             dprint(d, 1, "st #%d: stop %d\n", reg->stream, stnr);
+             intel_hda_notify_codecs(d, stnr, false, output);
++            if (d->stream_run) {
++                d->stream_run(d, reg->stream, false);
++            }
+         }
+     }
+     intel_hda_update_irq(d);
+-- 
+2.56.1
+

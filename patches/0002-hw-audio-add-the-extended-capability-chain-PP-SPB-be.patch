@@ -1,0 +1,335 @@
+From 94c63c71fd181a95956549be68818d68f61ea28c Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 09:35:27 +0200
+Subject: [PATCH 2/5] hw/audio: add the extended-capability chain (PP, SPB)
+ behind a property
+
+The ACE-era Intel HD Audio controllers carry two extended capabilities in
+BAR0 that their DSP drivers walk from LLCH (0x14): the processing-power
+capability (id 3: PPCTL, PPSTS, PPCH) and the software position in buffer
+capability (id 4: SPBFCCTL, one SPIB/MAXFIFO pair per DMA engine).  With
+x-caps=true LLCH reads the chain head and the two capabilities appear as
+subregions of BAR0 at 0x180 and 0x700; the registers are plain storage, the
+chain ends at the SPB capability.  Off by default: intel-hda and
+ich9-intel-hda read LLCH 0 as before, byte for byte.
+
+Sources studied for the register layout (LICENSING.md rule 7, own
+declarations, no text copied): Linux v6.12 sound/soc/sof/intel/hda.h
+(SOF_HDA_LLCH, SOF_HDA_REG_PP_PPCTL/PPSTS/PPCH, SOF_HDA_PPCTL_PIE/GPROCEN,
+SOF_HDA_SPIB_CAP_ID/BASE/INTERVAL/SPIB/MAXFIFO), both (GPL-2.0-only OR
+BSD-3-Clause); the in-tree BSD-3 hdaudbus/hda_registers.h (HDA_REG_SPB_BASE_ADDR
+0x700, HDA_SPB_BASE 0x08, HDA_SPB_INTERVAL 8, HDA_PPCTL_PROCEN) and
+hdaudbus/adsp.cpp/fdo.cpp (the engine index of a stream is its 0..7 index).
+The capability header layout (version 31:28, id 27:16, next 15:0) is the
+Intel HD Audio specification extended capability header.
+---
+ hw/audio/intel-hda-defs.h     |  26 ++++++
+ hw/audio/intel-hda-internal.h |  11 +++
+ hw/audio/intel-hda.c          | 169 +++++++++++++++++++++++++++++++++-
+ 3 files changed, 205 insertions(+), 1 deletion(-)
+
+diff --git a/hw/audio/intel-hda-defs.h b/hw/audio/intel-hda-defs.h
+index 261bdb48f..0bab36b24 100644
+--- a/hw/audio/intel-hda-defs.h
++++ b/hw/audio/intel-hda-defs.h
+@@ -26,6 +26,7 @@
+ #define   ICH6_GCTL_UNSOL	(1 << 8)   /* accept unsol. response enable */
+ #define ICH6_REG_WAKEEN			0x0c
+ #define ICH6_REG_STATESTS		0x0e
++#define ICH6_REG_LLCH			0x14	/* lower layer control; bits 15:0 head of the extended capability list */
+ #define ICH6_REG_GSTS			0x10
+ #define   ICH6_GSTS_FSTS	(1 << 1)   /* flush status */
+ #define ICH6_REG_INTCTL			0x20
+@@ -151,6 +152,31 @@ enum { SDI0, SDI1, SDI2, SDI3, SDO0, SDO1, SDO2, SDO3 };
+ #define ICH6_INT_CTRL_EN	0x40000000 /* controller interrupt enable bit */
+ #define ICH6_INT_GLOBAL_EN	0x80000000 /* global interrupt enable bit */
+ 
++/*
++ * The extended capability chain the ACE-era Intel controllers carry in BAR0
++ * (the processing-power capability the Linux SOF and the hdaudbus drivers walk
++ * to, and the software position in buffer capability next to it).  Offsets
++ * are properties of the controller variant; the generic model has no chain.
++ */
++#define ICH6_CAP_PP_OFFSET		0x180	/* processing capabilities, id 3 */
++#define ICH6_CAP_SPB_OFFSET		0x700	/* software position in buffer, id 4 */
++#define ICH6_CAP_PP_SIZE		0x20
++#define ICH6_CAP_SPB_SIZE		0x48	/* header, SPBFCCTL, 8 engines x {SPIB, MAXFIFO} */
++#define ICH6_CAP_SPB_ENGINE_BASE	0x08
++#define ICH6_CAP_SPB_ENGINE_INTERVAL	0x08
++#define ICH6_CAP_HDR_VER_SHIFT		28
++#define ICH6_CAP_HDR_ID_SHIFT		16
++#define ICH6_CAP_HDR(ver, id, next)	(((ver) << ICH6_CAP_HDR_VER_SHIFT) | \
++						 ((id) << ICH6_CAP_HDR_ID_SHIFT) | (next))
++#define ICH6_PPCTL_WRITABLE		0xc00000ff /* PIE, GPROCEN, PROCEN per engine */
++#define ICH6_SPB_MAXFIFO		0x20
++#define ICH6_REG_PP_PPCTL		0x04	/* PPCTL: PIE 31, GPROCEN 30, PROCEN per engine */
++#define ICH6_REG_PP_PPSTS		0x08	/* PPSTS */
++#define ICH6_REG_PP_PPCH		0x10	/* PPCH */
++#define ICH6_REG_SPB_SPBFCCTL		0x04	/* SPBFCCTL: one FIFO-enable bit per engine */
++#define ICH6_SPB_SPIB			0x00	/* per engine: software position in buffer */
++#define ICH6_SPB_MAXFIFO_OFF		0x04	/* per engine: maximum FIFO */
++
+ /* below are so far hardcoded - should read registers in future */
+ #define ICH6_MAX_CORB_ENTRIES	256
+ #define ICH6_MAX_RIRB_ENTRIES	256
+diff --git a/hw/audio/intel-hda-internal.h b/hw/audio/intel-hda-internal.h
+index 36ee247be..d69b3ef61 100644
+--- a/hw/audio/intel-hda-internal.h
++++ b/hw/audio/intel-hda-internal.h
+@@ -106,6 +106,16 @@ struct IntelHDAState {
+     uint32_t rirb_count;
+     int64_t wall_base_ns;
+ 
++    /* the extended capability chain (property x-caps): the head read back at
++     * LLCH and the two capabilities the ACE-era Intel controllers carry, the
++     * processing-power capability (id 3) and the software position in buffer
++     * capability (id 4) with one SPIB/MAXFIFO pair per engine */
++    uint32_t llch;
++    uint32_t ppctl, ppsts, ppch;
++    uint32_t spbfcctl;
++    uint32_t spib[8], maxfifo[8];
++    MemoryRegion cap_pp, cap_spb;
++
+     /* debug logging */
+     const struct IntelHDAReg *last_reg;
+     uint32_t last_val;
+@@ -117,6 +127,7 @@ struct IntelHDAState {
+     uint32_t debug;
+     OnOffAuto msi;
+     bool old_msi_addr;
++    bool caps;
+ };
+ 
+ #define TYPE_INTEL_HDA_GENERIC "intel-hda-generic"
+diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
+index a336e30f3..eb720aea7 100644
+--- a/hw/audio/intel-hda.c
++++ b/hw/audio/intel-hda.c
+@@ -569,6 +569,11 @@ static const struct IntelHDAReg regtab[] = {
+         .offset   = offsetof(IntelHDAState, state_sts),
+         .whandler = intel_hda_set_state_sts,
+     },
++    [ ICH6_REG_LLCH ] = {
++        .name     = "LLCH",
++        .size     = 2,
++        .offset   = offsetof(IntelHDAState, llch),
++    },
+ 
+     /* interrupts */
+     [ ICH6_REG_INTCTL ] = {
+@@ -983,6 +988,116 @@ static const MemoryRegionOps intel_hda_mmio_ops = {
+     .endianness = DEVICE_NATIVE_ENDIAN,
+ };
+ 
++/* --------------------------------------------------------------------- */
++/* the extended capability chain (property x-caps)                        */
++
++static uint64_t intel_hda_cap_pp_read(void *opaque, hwaddr addr, unsigned size)
++{
++    IntelHDAState *d = opaque;
++
++    switch (addr) {
++    case 0x00:
++        return ICH6_CAP_HDR(1, 3, ICH6_CAP_SPB_OFFSET);
++    case ICH6_REG_PP_PPCTL:
++        return d->ppctl;
++    case ICH6_REG_PP_PPSTS:
++        return d->ppsts;
++    case ICH6_REG_PP_PPCH:
++        return d->ppch;
++    default:
++        qemu_log_mask(LOG_UNIMP, "intel-hda: PP capability read at +0x%" HWADDR_PRIX "\n",
++                      addr);
++        return 0;
++    }
++}
++
++static void intel_hda_cap_pp_write(void *opaque, hwaddr addr, uint64_t val,
++                                    unsigned size)
++{
++    IntelHDAState *d = opaque;
++
++    switch (addr) {
++    case ICH6_REG_PP_PPCTL:
++        d->ppctl = val & ICH6_PPCTL_WRITABLE;
++        break;
++    case ICH6_REG_PP_PPCH:
++        d->ppch = val;
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP, "intel-hda: PP capability write at +0x%" HWADDR_PRIX "\n",
++                      addr);
++    }
++}
++
++static const MemoryRegionOps intel_hda_cap_pp_ops = {
++    .read = intel_hda_cap_pp_read,
++    .write = intel_hda_cap_pp_write,
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++    .endianness = DEVICE_NATIVE_ENDIAN,
++};
++
++static uint64_t intel_hda_cap_spb_read(void *opaque, hwaddr addr, unsigned size)
++{
++    IntelHDAState *d = opaque;
++    hwaddr off;
++    unsigned idx;
++
++    switch (addr) {
++    case 0x00:
++        return ICH6_CAP_HDR(1, 4, 0);
++    case ICH6_REG_SPB_SPBFCCTL:
++        return d->spbfcctl;
++    }
++    off = addr - ICH6_CAP_SPB_ENGINE_BASE;
++    idx = off / ICH6_CAP_SPB_ENGINE_INTERVAL;
++    switch (off % ICH6_CAP_SPB_ENGINE_INTERVAL) {
++    case ICH6_SPB_SPIB:
++        return d->spib[idx];
++    case ICH6_SPB_MAXFIFO_OFF:
++        return d->maxfifo[idx];
++    }
++    qemu_log_mask(LOG_UNIMP, "intel-hda: SPB capability read at +0x%" HWADDR_PRIX "\n",
++                  addr);
++    return 0;
++}
++
++static void intel_hda_cap_spb_write(void *opaque, hwaddr addr, uint64_t val,
++                                     unsigned size)
++{
++    IntelHDAState *d = opaque;
++    hwaddr off;
++    unsigned idx;
++
++    switch (addr) {
++    case ICH6_REG_SPB_SPBFCCTL:
++        d->spbfcctl = val & 0xff;
++        return;
++    }
++    if (addr >= ICH6_CAP_SPB_ENGINE_BASE) {
++        off = addr - ICH6_CAP_SPB_ENGINE_BASE;
++        idx = off / ICH6_CAP_SPB_ENGINE_INTERVAL;
++        if (idx < 8 && off % ICH6_CAP_SPB_ENGINE_INTERVAL == ICH6_SPB_SPIB) {
++            d->spib[idx] = val;
++            return;
++        }
++    }
++    qemu_log_mask(LOG_UNIMP, "intel-hda: SPB capability write at +0x%" HWADDR_PRIX "\n",
++                  addr);
++}
++
++static const MemoryRegionOps intel_hda_cap_spb_ops = {
++    .read = intel_hda_cap_spb_read,
++    .write = intel_hda_cap_spb_write,
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++    .endianness = DEVICE_NATIVE_ENDIAN,
++};
++
+ /* --------------------------------------------------------------------- */
+ 
+ void intel_hda_reset(DeviceState *dev)
+@@ -994,6 +1109,16 @@ void intel_hda_reset(DeviceState *dev)
+     intel_hda_regs_reset(d);
+     d->wall_base_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+ 
++    if (d->caps) {
++        /* the capability chain: its head, and the registers it exposes */
++        d->llch = ICH6_CAP_PP_OFFSET;
++        d->ppctl = 0;
++        d->ppsts = 0;
++        d->ppch = 0;
++        d->spbfcctl = 0;
++        memset(d->spib, 0, sizeof(d->spib));
++    }
++
+     QTAILQ_FOREACH(kid, &d->codecs.qbus.children, sibling) {
+         DeviceState *qdev = kid->child;
+         cdev = HDA_CODEC_DEVICE(qdev);
+@@ -1007,7 +1132,7 @@ static void intel_hda_realize(PCIDevice *pci, Error **errp)
+     IntelHDAState *d = INTEL_HDA(pci);
+     uint8_t *conf = d->pci.config;
+     Error *err = NULL;
+-    int ret;
++    int ret, i;
+ 
+     d->name = object_get_typename(OBJECT(d));
+ 
+@@ -1044,6 +1169,21 @@ static void intel_hda_realize(PCIDevice *pci, Error **errp)
+     memory_region_add_subregion(&d->container, 0x2000, &d->alias);
+     pci_register_bar(&d->pci, 0, 0, &d->container);
+ 
++    if (d->caps) {
++        /* the extended capabilities sit inside BAR0 on top of the controller registers */
++        for (i = 0; i < 8; i++) {
++            d->maxfifo[i] = ICH6_SPB_MAXFIFO;
++        }
++        memory_region_init_io(&d->cap_pp, OBJECT(d), &intel_hda_cap_pp_ops, d,
++                              "intel-hda-pp", ICH6_CAP_PP_SIZE);
++        memory_region_add_subregion_overlap(&d->container, ICH6_CAP_PP_OFFSET,
++                                            &d->cap_pp, 1);
++        memory_region_init_io(&d->cap_spb, OBJECT(d), &intel_hda_cap_spb_ops, d,
++                              "intel-hda-spb", ICH6_CAP_SPB_SIZE);
++        memory_region_add_subregion_overlap(&d->container, ICH6_CAP_SPB_OFFSET,
++                                            &d->cap_spb, 1);
++    }
++
+     hda_codec_bus_init(DEVICE(pci), &d->codecs, sizeof(d->codecs),
+                        intel_hda_response, intel_hda_xfer);
+ }
+@@ -1085,6 +1225,28 @@ static const VMStateDescription vmstate_intel_hda_stream = {
+     }
+ };
+ 
++static bool intel_hda_caps_needed(void *opaque)
++{
++    return INTEL_HDA(opaque)->caps;
++}
++
++static const VMStateDescription vmstate_intel_hda_caps = {
++    .name = "intel-hda/caps",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = intel_hda_caps_needed,
++    .fields = (const VMStateField[]) {
++        VMSTATE_UINT32(llch, IntelHDAState),
++        VMSTATE_UINT32(ppctl, IntelHDAState),
++        VMSTATE_UINT32(ppsts, IntelHDAState),
++        VMSTATE_UINT32(ppch, IntelHDAState),
++        VMSTATE_UINT32(spbfcctl, IntelHDAState),
++        VMSTATE_UINT32_ARRAY(spib, IntelHDAState, 8),
++        VMSTATE_UINT32_ARRAY(maxfifo, IntelHDAState, 8),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_intel_hda = {
+     .name = "intel-hda",
+     .version_id = 1,
+@@ -1127,6 +1289,10 @@ const VMStateDescription vmstate_intel_hda = {
+         VMSTATE_INT64(wall_base_ns, IntelHDAState),
+ 
+         VMSTATE_END_OF_LIST()
++    },
++    .subsections = (const VMStateDescription * []) {
++        &vmstate_intel_hda_caps,
++        NULL
+     }
+ };
+ 
+@@ -1134,6 +1300,7 @@ static const Property intel_hda_properties[] = {
+     DEFINE_PROP_UINT32("debug", IntelHDAState, debug, 0),
+     DEFINE_PROP_ON_OFF_AUTO("msi", IntelHDAState, msi, ON_OFF_AUTO_AUTO),
+     DEFINE_PROP_BOOL("old_msi_addr", IntelHDAState, old_msi_addr, false),
++    DEFINE_PROP_BOOL("x-caps", IntelHDAState, caps, false),
+ };
+ 
+ static void intel_hda_class_init(ObjectClass *klass, const void *data)
+-- 
+2.56.1
+
