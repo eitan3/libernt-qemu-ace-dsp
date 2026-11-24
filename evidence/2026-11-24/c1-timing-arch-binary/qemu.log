@@ -1,2 +1,2 @@
-qemu-system-x86_64: -monitor unix:/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/evidence/2026-11-24/c1-timing-arch-binary/monitor.sock,server,nowait: UNIX socket path '/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/evidence/2026-11-24/c1-timing-arch-binary/monitor.sock' is too long
+qemu-system-x86_64: -monitor unix:<project>/evidence/2026-11-24/c1-timing-arch-binary/monitor.sock,server,nowait: UNIX socket path '<project>/evidence/2026-11-24/c1-timing-arch-binary/monitor.sock' is too long
 Path must be less than 108 bytes

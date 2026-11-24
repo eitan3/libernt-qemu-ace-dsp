@@ -1,0 +1,156 @@
+From 5ea6efafa138d74ddc6c98ba0b203eaf4fbf420e Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 13:01:43 +0200
+Subject: [PATCH 6/6] docs/system: document the intel-hda-ace ACE 1.0 audio DSP
+ model
+
+The device, its properties (personality, x-bar4-size, x-powered-down-value,
+x-delay-scale, fault), what the guest sees, the boot handshake as modelled,
+the model values pending hardware measurement, the traces and the limits.
+Listed in the device-emulation toctree beside the stock devices.
+---
+ docs/system/device-emulation.rst      |   1 +
+ docs/system/devices/intel-hda-ace.rst | 119 ++++++++++++++++++++++++++
+ 2 files changed, 120 insertions(+)
+ create mode 100644 docs/system/devices/intel-hda-ace.rst
+
+diff --git a/docs/system/device-emulation.rst b/docs/system/device-emulation.rst
+index 40054bb7d..850dff1b8 100644
+--- a/docs/system/device-emulation.rst
++++ b/docs/system/device-emulation.rst
+@@ -90,6 +90,7 @@ Emulated Devices
+    devices/cxl.rst
+    devices/emmc.rst
+    devices/igb.rst
++   devices/intel-hda-ace.rst
+    devices/ivshmem-flat.rst
+    devices/ivshmem.rst
+    devices/keyboard.rst
+diff --git a/docs/system/devices/intel-hda-ace.rst b/docs/system/devices/intel-hda-ace.rst
+new file mode 100644
+index 000000000..38edbd8c4
+--- /dev/null
++++ b/docs/system/devices/intel-hda-ace.rst
+@@ -0,0 +1,119 @@
++.. _intel-hda-ace:
++
++Intel ACE 1.0 audio DSP (``intel-hda-ace``)
++============================================
++
++``intel-hda-ace`` is a model of the Intel Smart Sound Technology BUS
++function of Arrow Lake-S/HX (PCI ``8086:7f50``, class 0403, programming
++interface 0x80): the Intel HD Audio controller of ``intel-hda`` (BAR0, with
++its codec bus and, on this variant, the extended-capability chain) plus the
++ACE 1.0 audio DSP behind the function's BAR4.  It exists so that an operating
++system's Intel SST driver can be run and observed in a VM without the
++hardware: the DSP's power-up, the ROM boot handshake, the code-loader stream
++that carries the firmware, the IPC4 receive/reply path and the
++controller-level interrupt are modelled as a state machine driven by
++virtual-clock timers.
++
++It is a *model*, not a DSP: the "firmware" does not execute, the image the
++host streams is only judged (its container markers and the segments its
++module table loads), and every value the hardware ABI does not dictate is a
++named property listed below.
++
++Usage
++-----
++
++::
++
++   -audiodev none,id=snd0 -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace \
++   -device hda-duplex,audiodev=snd0
++
++The codec attaches to the controller's HDA bus by itself.  ``1b.0`` is the
++PCH address the real function uses on Intel platforms; a guest PCI
++enumerator does not depend on it.
++
++What the guest sees
++-------------------
++
++- BAR0: the ICH6 register block (0x4000 bytes) with the extended-capability
++  chain the ACE-era controllers carry: ``LLCH`` (0x14) reads 0x180, the
++  processing-power capability (id 3: ``PPCTL``, ``PPSTS``, ``PPCH``) at
++  0x180, and the software-position-in-buffer capability (id 4: ``SPBFCCTL``
++  and one ``SPIB``/``MAXFIFO`` pair per engine) at 0x700.
++- BAR4 (2 MB by default): the ACE 1.0 register block (``ADSPCS``, the
++  core power control, the interrupt pointer and enables, the IPC
++  registers, the firmware status and ROM error registers), SRAM window 0
++  at 0x180000 (the firmware register block at +0, the uplink mailbox at
++  +0x1000) and the downlink window at 0x188000.
++
++The boot handshake as modelled: the subsystem and the core come up with a
++delay after their power-active requests (CPA), the purge request is
++acknowledged with DONE and the ROM reaches INIT_DONE, the code-loader
++stream (the output stream whose tag the purge request named) is consumed
++through DMA up to its SPIB value, the ROM walks its load states and enters
++the firmware, the firmware register block appears in window 0 and a
++FW_READY notification is posted; the FW_CONFIG request is answered with a
++TLV list whose version is read from the streamed image.  The interrupt
++(INTx or MSI) is asserted only while a notification or reply is pending and
++the host has set every enable (the register the interrupt pointer names,
++the host IPC enable, the IPC block's busy/done enables) and the
++controller's INTCTL gates it like any other source (INTSTS bit 30).
++
++Properties
++----------
++
++``personality``
++   The ACE 1.0 controller to present: ``arl-s`` (default, ``8086:7f50``),
++   ``mtl`` (``7e28``), ``arl`` (``7728``), ``lnl-p`` (``a828``), ``ptl``
++   (``e428``), ``ptl-h`` (``e328``).  All share the ACE 1.0 register map.
++``x-bar4-size``
++   Size of BAR4 (default 0x200000; the Linux and LiberNT drivers need at
++   least 0x189000).  Must be a power of two.
++``x-powered-down-value``
++   What the DSP-domain registers and SRAM windows read while the DSP is
++   powered down (default 0; the real value is unknown, INFO_NEEDED of the
++   plan).
++``x-delay-scale``
++   Multiplies every modelled delay (default 1.0): with 1.5 the firmware
++   entry takes 3 ms instead of 2, which sits at the edge of the Linux
++   loader's 3 s budget only when scaled further.
++``fault``
++   The fault injector, settable at run time through QMP (``qom-set
++   /machine/peripheral/ace fault <name>``): ``none`` (default),
++   ``never-power``, ``never-ack``, ``never-ready``, ``never-enter``,
++   ``never-fwready``, ``never-reply``, ``drop-requests``,
++   ``halt-rom=<code>``, ``halt-fw=<code>``, ``crash-notification``,
++   ``abi=<n>``, ``ipc-status=<n>``, ``bad-tuples``, ``truncated-reply``,
++   ``version-shift``, ``window-read-fail``.
++``msi``, ``debug``, ``old_msi_addr``
++   As for ``intel-hda``.  ``debug=2`` traces the controller's register
++   accesses.
++
++Model values (not measured on hardware)
++--------------------------------------
++
++BAR4 2 MB, the capability offsets 0x180/0x700, the interrupt pointer
++``HFINTIPPTR`` = 0x120 (the interrupt-enable register sits at BAR4 + 0x120),
++powered-down reads 0, the timings (CPA 100/200 us after the requests, DONE
++100 us after the purge, INIT_DONE 500 us later, firmware entry 2 ms after
++the stream runs, FW_READY 200 us later, a reply 50 us after a request), the
++ROM info word 0x0120315A and the firmware configuration constants of the
++reply (4096/4096-byte mailboxes, 128 KiB trace log, 16 pipelines, 4
++libraries).  Traces print them as "(model value)".
++
++Tracing
++-------
++
++``-trace 'ace_*'`` (BAR4 accesses, the ROM walk, the stream consumption,
++the payload rules, the IPC messages, the interrupt, the state changes) and
++``-trace 'intel_hda_cap_*'`` (the BAR0 capability registers).  Any BAR4
++offset outside the model reads the powered-down value and is traced as
++``ace_unexpected``, which lists every register a guest touches that the
++model lacks.
++
++Limits
++------
++
++Not modelled: the DSP's execution, signature verification (the host never
++verifies; the ROM's rules are choices), SoundWire, the ML capability, real
++DMA timing, D0i3 and wake, and anything the silicon does that no emulator
++can show (a hang on a bad power sequence, the true ROM checks and timings).
+-- 
+2.56.1
+

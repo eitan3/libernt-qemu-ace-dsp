@@ -10,3 +10,4 @@ evidence/**/*.sock
 evidence/**/*.ppm
 __pycache__/
 disk/
+.clean/

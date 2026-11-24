@@ -1,1 +1,1168 @@
 intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  LLCH            : 0x180 (ffff)
+intel-hda-ace: read  GCAP            : 0x4401 (ffff)
+intel-hda-ace: read  VMAJ            : 0x1 (ff)
+intel-hda-ace: read  VMIN            : 0x0 (ff)
+intel-hda-ace: read  CORBSIZE        : 0x42 (ff)
+intel-hda-ace: read  RIRBSIZE        : 0x42 (ff)
+intel-hda-ace: write STATESTS        : 0xffff (ffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  IN0 CTL         : 0x0 (ff)
+intel-hda-ace: write IN0 CTL         : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write IN0 CTL(sts)    : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  IN1 CTL         : 0x0 (ff)
+intel-hda-ace: write IN1 CTL         : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write IN1 CTL(sts)    : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  IN2 CTL         : 0x0 (ff)
+intel-hda-ace: write IN2 CTL         : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write IN2 CTL(sts)    : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  IN3 CTL         : 0x0 (ff)
+intel-hda-ace: write IN3 CTL         : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write IN3 CTL(sts)    : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT4 CTL(sts)   : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT5 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT5 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT5 CTL(sts)   : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT6 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT6 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT6 CTL(sts)   : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT7 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT7 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT7 CTL(sts)   : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write CORBCTL         : 0x0 (ff)
+intel-hda-ace: intel_hda_corb_run: !run
+intel-hda-ace: write RIRBCTL         : 0x0 (ff)
+intel-hda-ace: write DPLBASE         : 0x0 (ffffffff)
+intel-hda-ace: write DPUBASE         : 0x0 (ffffffff)
+intel-hda-ace: read  GCTL            : 0x0 (ffffffff)
+intel-hda-ace: write GCTL            : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  GCTL            : 0x0 (ffffffff)
+intel-hda-ace: previous register op repeated 1 times
+intel-hda-ace: write GCTL            : 0x1 (ffffffff)
+intel-hda-ace: read  GCTL            : 0x1 (ffffffff)
+intel-hda-ace: read  STATESTS        : 0x1 (ffff)
+intel-hda-ace: write STATESTS        : 0xffff (ffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write CORBLBASE       : 0x3f1c000 (ffffffff)
+intel-hda-ace: write CORBUBASE       : 0x0 (ffffffff)
+intel-hda-ace: write CORBWP          : 0x0 (ffff)
+intel-hda-ace: intel_hda_corb_run: !run
+intel-hda-ace: write CORBRP          : 0x8000 (ffff)
+intel-hda-ace: write CORBRP          : 0x0 (ffff)
+intel-hda-ace: write RIRBLBASE       : 0x3f1c800 (ffffffff)
+intel-hda-ace: write RIRBUBASE       : 0x0 (ffffffff)
+intel-hda-ace: write RIRBWP          : 0x8000 (ffff)
+intel-hda-ace: write RINTCNT         : 0x1 (ffff)
+intel-hda-ace: write RIRBCTL         : 0x1 (ff)
+intel-hda-ace: read  CORBCTL         : 0x0 (ff)
+intel-hda-ace: write CORBCTL         : 0x2 (ff)
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBCTL         : 0x1 (ff)
+intel-hda-ace: write RIRBCTL         : 0x3 (ff)
+intel-hda-ace: read  GCTL            : 0x1 (ffffffff)
+intel-hda-ace: write GCTL            : 0x101 (ffffffff)
+intel-hda-ace: write INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write DPLBASE         : 0x3f1b000 (ffffffff)
+intel-hda-ace: write DPUBASE         : 0x0 (ffffffff)
+intel-hda-ace: read  INTCTL          : 0x0 (ffffffff)
+intel-hda-ace: write INTCTL          : 0xc0000000 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  INTCTL          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  CORBWP          : 0x0 (ffff)
+intel-hda-ace: read  CORBRP          : 0x0 (ffff)
+intel-hda-ace: write CORBWP          : 0x1 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1] verb 0x000f0000
+intel-hda-ace: intel_hda_response: [wp 0x1] response 0x1af40022, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1 (ffff)
+intel-hda-ace: read  CORBWP          : 0x1 (ffff)
+intel-hda-ace: read  CORBRP          : 0x1 (ffff)
+intel-hda-ace: write CORBWP          : 0x2 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2] verb 0x000f0000
+intel-hda-ace: intel_hda_response: [wp 0x2] response 0x1af40022, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2 (ffff)
+intel-hda-ace: read  CORBWP          : 0x2 (ffff)
+intel-hda-ace: read  CORBRP          : 0x2 (ffff)
+intel-hda-ace: write CORBWP          : 0x3 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3] verb 0x000f0002
+intel-hda-ace: intel_hda_response: [wp 0x3] response 0x100101, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3 (ffff)
+intel-hda-ace: read  CORBWP          : 0x3 (ffff)
+intel-hda-ace: read  CORBRP          : 0x3 (ffff)
+intel-hda-ace: write CORBWP          : 0x4 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x4] verb 0x000f0004
+intel-hda-ace: intel_hda_response: [wp 0x4] response 0x10001, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x4 (ffff)
+intel-hda-ace: read  CORBWP          : 0x4 (ffff)
+intel-hda-ace: read  CORBRP          : 0x4 (ffff)
+intel-hda-ace: write CORBWP          : 0x5 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x5] verb 0x001f0005
+intel-hda-ace: intel_hda_response: [wp 0x5] response 0x1, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x5 (ffff)
+intel-hda-ace: read  CORBWP          : 0x5 (ffff)
+intel-hda-ace: read  CORBRP          : 0x5 (ffff)
+intel-hda-ace: write CORBWP          : 0x6 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x6] verb 0x001f2000
+intel-hda-ace: intel_hda_response: [wp 0x6] response 0x1af40022, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x6 (ffff)
+intel-hda-ace: read  CORBWP          : 0x6 (ffff)
+intel-hda-ace: read  CORBRP          : 0x6 (ffff)
+intel-hda-ace: write CORBWP          : 0x7 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x7] verb 0x000f0000
+intel-hda-ace: intel_hda_response: [wp 0x7] response 0x1af40022, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: write CORBWP          : 0x8 (ffff)
+intel-hda-ace: intel_hda_corb_run: rirb count reached
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: [rp 0x8] verb 0x000f0002
+intel-hda-ace: intel_hda_response: [wp 0x8] response 0x100101, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x8 (ffff)
+intel-hda-ace: read  CORBWP          : 0x8 (ffff)
+intel-hda-ace: read  CORBRP          : 0x8 (ffff)
+intel-hda-ace: write CORBWP          : 0x9 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x9] verb 0x00170500
+intel-hda-ace: intel_hda_response: [wp 0x9] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x9 (ffff)
+intel-hda-ace: read  CORBWP          : 0x9 (ffff)
+intel-hda-ace: read  CORBRP          : 0x9 (ffff)
+intel-hda-ace: write CORBWP          : 0xa (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0xa] verb 0x001f0004
+intel-hda-ace: intel_hda_response: [wp 0xa] response 0x20004, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0xa (ffff)
+intel-hda-ace: read  CORBWP          : 0xa (ffff)
+intel-hda-ace: read  CORBRP          : 0xa (ffff)
+intel-hda-ace: write CORBWP          : 0xb (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0xb] verb 0x002f0009
+intel-hda-ace: intel_hda_response: [wp 0xb] response 0x1d, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0xb (ffff)
+intel-hda-ace: read  CORBWP          : 0xb (ffff)
+intel-hda-ace: read  CORBRP          : 0xb (ffff)
+intel-hda-ace: write CORBWP          : 0xc (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0xc] verb 0x003f0009
+intel-hda-ace: intel_hda_response: [wp 0xc] response 0x400101, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0xc (ffff)
+intel-hda-ace: read  CORBWP          : 0xc (ffff)
+intel-hda-ace: read  CORBRP          : 0xc (ffff)
+intel-hda-ace: write CORBWP          : 0xd (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0xd] verb 0x003f1c00
+intel-hda-ace: intel_hda_response: [wp 0xd] response 0x4010, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0xd (ffff)
+intel-hda-ace: read  CORBWP          : 0xd (ffff)
+intel-hda-ace: read  CORBRP          : 0xd (ffff)
+intel-hda-ace: write CORBWP          : 0xe (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0xe] verb 0x003f000e
+intel-hda-ace: intel_hda_response: [wp 0xe] response 0x1, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0xe (ffff)
+intel-hda-ace: read  CORBWP          : 0xe (ffff)
+intel-hda-ace: read  CORBRP          : 0xe (ffff)
+intel-hda-ace: write CORBWP          : 0xf (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0xf] verb 0x003f0200
+intel-hda-ace: intel_hda_response: [wp 0xf] response 0x2, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0xf (ffff)
+intel-hda-ace: read  CORBWP          : 0xf (ffff)
+intel-hda-ace: read  CORBRP          : 0xf (ffff)
+intel-hda-ace: write CORBWP          : 0x10 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x10] verb 0x004f0009
+intel-hda-ace: intel_hda_response: [wp 0x10] response 0x10011b, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x10 (ffff)
+intel-hda-ace: read  CORBWP          : 0x10 (ffff)
+intel-hda-ace: read  CORBRP          : 0x10 (ffff)
+intel-hda-ace: write CORBWP          : 0x11 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x11] verb 0x004f000e
+intel-hda-ace: intel_hda_response: [wp 0x11] response 0x1, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x11 (ffff)
+intel-hda-ace: read  CORBWP          : 0x11 (ffff)
+intel-hda-ace: read  CORBRP          : 0x11 (ffff)
+intel-hda-ace: write CORBWP          : 0x12 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x12] verb 0x004f0200
+intel-hda-ace: intel_hda_response: [wp 0x12] response 0x5, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x12 (ffff)
+intel-hda-ace: read  CORBWP          : 0x12 (ffff)
+intel-hda-ace: read  CORBRP          : 0x12 (ffff)
+intel-hda-ace: write CORBWP          : 0x13 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x13] verb 0x005f0009
+intel-hda-ace: intel_hda_response: [wp 0x13] response 0x400001, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x13 (ffff)
+intel-hda-ace: read  CORBWP          : 0x13 (ffff)
+intel-hda-ace: read  CORBRP          : 0x13 (ffff)
+intel-hda-ace: write CORBWP          : 0x14 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x14] verb 0x005f1c00
+intel-hda-ace: intel_hda_response: [wp 0x14] response 0x805020, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x14 (ffff)
+intel-hda-ace: read  CORBWP          : 0x14 (ffff)
+intel-hda-ace: read  CORBRP          : 0x14 (ffff)
+intel-hda-ace: write CORBWP          : 0x15 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x15] verb 0x003f1c00
+intel-hda-ace: intel_hda_response: [wp 0x15] response 0x4010, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x15 (ffff)
+intel-hda-ace: read  CORBWP          : 0x15 (ffff)
+intel-hda-ace: read  CORBRP          : 0x15 (ffff)
+intel-hda-ace: write CORBWP          : 0x16 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x16] verb 0x003f000c
+intel-hda-ace: intel_hda_response: [wp 0x16] response 0x10, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x16 (ffff)
+intel-hda-ace: read  CORBWP          : 0x16 (ffff)
+intel-hda-ace: read  CORBRP          : 0x16 (ffff)
+intel-hda-ace: write CORBWP          : 0x17 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x17] verb 0x00370740
+intel-hda-ace: intel_hda_response: [wp 0x17] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x17 (ffff)
+intel-hda-ace: read  CORBWP          : 0x17 (ffff)
+intel-hda-ace: read  CORBRP          : 0x17 (ffff)
+intel-hda-ace: write CORBWP          : 0x18 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x18] verb 0x00371601
+intel-hda-ace: intel_hda_response: [wp 0x18] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x18 (ffff)
+intel-hda-ace: read  CORBWP          : 0x18 (ffff)
+intel-hda-ace: read  CORBRP          : 0x18 (ffff)
+intel-hda-ace: write CORBWP          : 0x19 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x19] verb 0x00371701
+intel-hda-ace: intel_hda_response: [wp 0x19] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x19 (ffff)
+intel-hda-ace: read  CORBWP          : 0x19 (ffff)
+intel-hda-ace: read  CORBRP          : 0x19 (ffff)
+intel-hda-ace: write CORBWP          : 0x1a (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1a] verb 0x00371501
+intel-hda-ace: intel_hda_response: [wp 0x1a] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1a (ffff)
+intel-hda-ace: read  CORBWP          : 0x1a (ffff)
+intel-hda-ace: read  CORBRP          : 0x1a (ffff)
+intel-hda-ace: write CORBWP          : 0x1b (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1b] verb 0x003f000c
+intel-hda-ace: intel_hda_response: [wp 0x1b] response 0x10, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1b (ffff)
+intel-hda-ace: read  CORBWP          : 0x1b (ffff)
+intel-hda-ace: read  CORBRP          : 0x1b (ffff)
+intel-hda-ace: write CORBWP          : 0x1c (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1c] verb 0x003f1c00
+intel-hda-ace: intel_hda_response: [wp 0x1c] response 0x4010, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1c (ffff)
+intel-hda-ace: read  CORBWP          : 0x1c (ffff)
+intel-hda-ace: read  CORBRP          : 0x1c (ffff)
+intel-hda-ace: write CORBWP          : 0x1d (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1d] verb 0x003f1c00
+intel-hda-ace: intel_hda_response: [wp 0x1d] response 0x4010, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1d (ffff)
+intel-hda-ace: read  CORBWP          : 0x1d (ffff)
+intel-hda-ace: read  CORBRP          : 0x1d (ffff)
+intel-hda-ace: write CORBWP          : 0x1e (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1e] verb 0x003f000c
+intel-hda-ace: intel_hda_response: [wp 0x1e] response 0x10, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1e (ffff)
+intel-hda-ace: read  CORBWP          : 0x1e (ffff)
+intel-hda-ace: read  CORBRP          : 0x1e (ffff)
+intel-hda-ace: write CORBWP          : 0x1f (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x1f] verb 0x00370740
+intel-hda-ace: intel_hda_response: [wp 0x1f] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x1f (ffff)
+intel-hda-ace: read  CORBWP          : 0x1f (ffff)
+intel-hda-ace: read  CORBRP          : 0x1f (ffff)
+intel-hda-ace: write CORBWP          : 0x20 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x20] verb 0x003f0009
+intel-hda-ace: intel_hda_response: [wp 0x20] response 0x400101, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x20 (ffff)
+intel-hda-ace: read  CORBWP          : 0x20 (ffff)
+intel-hda-ace: read  CORBRP          : 0x20 (ffff)
+intel-hda-ace: write CORBWP          : 0x21 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x21] verb 0x00271601
+intel-hda-ace: intel_hda_response: [wp 0x21] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x21 (ffff)
+intel-hda-ace: read  CORBWP          : 0x21 (ffff)
+intel-hda-ace: read  CORBRP          : 0x21 (ffff)
+intel-hda-ace: write CORBWP          : 0x22 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x22] verb 0x00271701
+intel-hda-ace: intel_hda_response: [wp 0x22] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x22 (ffff)
+intel-hda-ace: read  CORBWP          : 0x22 (ffff)
+intel-hda-ace: read  CORBRP          : 0x22 (ffff)
+intel-hda-ace: write CORBWP          : 0x23 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x23] verb 0x00271501
+intel-hda-ace: intel_hda_response: [wp 0x23] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x23 (ffff)
+intel-hda-ace: read  CORBWP          : 0x23 (ffff)
+intel-hda-ace: read  CORBRP          : 0x23 (ffff)
+intel-hda-ace: write CORBWP          : 0x24 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x24] verb 0x002f000a
+intel-hda-ace: intel_hda_response: [wp 0x24] response 0x201fc, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x24 (ffff)
+intel-hda-ace: read  CORBWP          : 0x24 (ffff)
+intel-hda-ace: read  CORBRP          : 0x24 (ffff)
+intel-hda-ace: write CORBWP          : 0x25 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x25] verb 0x002f000b
+intel-hda-ace: intel_hda_response: [wp 0x25] response 0x1, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x25 (ffff)
+intel-hda-ace: read  CORBWP          : 0x25 (ffff)
+intel-hda-ace: read  CORBRP          : 0x25 (ffff)
+intel-hda-ace: write CORBWP          : 0x26 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x26] verb 0x003f1c00
+intel-hda-ace: intel_hda_response: [wp 0x26] response 0x4010, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x26 (ffff)
+intel-hda-ace: read  CORBWP          : 0x26 (ffff)
+intel-hda-ace: read  CORBRP          : 0x26 (ffff)
+intel-hda-ace: write CORBWP          : 0x27 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x27] verb 0x002f0009
+intel-hda-ace: intel_hda_response: [wp 0x27] response 0x1d, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x27 (ffff)
+intel-hda-ace: read  CORBWP          : 0x27 (ffff)
+intel-hda-ace: read  CORBRP          : 0x27 (ffff)
+intel-hda-ace: write CORBWP          : 0x28 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x28] verb 0x002f0012
+intel-hda-ace: intel_hda_response: [wp 0x28] response 0x80034a4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x28 (ffff)
+intel-hda-ace: read  CORBWP          : 0x28 (ffff)
+intel-hda-ace: read  CORBRP          : 0x28 (ffff)
+intel-hda-ace: write CORBWP          : 0x29 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x29] verb 0x002ba000
+intel-hda-ace: intel_hda_response: [wp 0x29] response 0x4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x29 (ffff)
+intel-hda-ace: read  CORBWP          : 0x29 (ffff)
+intel-hda-ace: read  CORBRP          : 0x29 (ffff)
+intel-hda-ace: write CORBWP          : 0x2a (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2a] verb 0x0023a04a
+intel-hda-ace: intel_hda_response: [wp 0x2a] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2a (ffff)
+intel-hda-ace: read  CORBWP          : 0x2a (ffff)
+intel-hda-ace: read  CORBRP          : 0x2a (ffff)
+intel-hda-ace: write CORBWP          : 0x2b (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2b] verb 0x002b8000
+intel-hda-ace: intel_hda_response: [wp 0x2b] response 0x4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2b (ffff)
+intel-hda-ace: read  CORBWP          : 0x2b (ffff)
+intel-hda-ace: read  CORBRP          : 0x2b (ffff)
+intel-hda-ace: write CORBWP          : 0x2c (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2c] verb 0x0023904a
+intel-hda-ace: intel_hda_response: [wp 0x2c] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2c (ffff)
+intel-hda-ace: read  CORBWP          : 0x2c (ffff)
+intel-hda-ace: read  CORBRP          : 0x2c (ffff)
+intel-hda-ace: write CORBWP          : 0x2d (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2d] verb 0x003f1c00
+intel-hda-ace: intel_hda_response: [wp 0x2d] response 0x4010, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2d (ffff)
+intel-hda-ace: read  CORBWP          : 0x2d (ffff)
+intel-hda-ace: read  CORBRP          : 0x2d (ffff)
+intel-hda-ace: write CORBWP          : 0x2e (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2e] verb 0x003f000c
+intel-hda-ace: intel_hda_response: [wp 0x2e] response 0x10, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2e (ffff)
+intel-hda-ace: read  CORBWP          : 0x2e (ffff)
+intel-hda-ace: read  CORBRP          : 0x2e (ffff)
+intel-hda-ace: write CORBWP          : 0x2f (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x2f] verb 0x00371601
+intel-hda-ace: intel_hda_response: [wp 0x2f] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x2f (ffff)
+intel-hda-ace: read  CORBWP          : 0x2f (ffff)
+intel-hda-ace: read  CORBRP          : 0x2f (ffff)
+intel-hda-ace: write CORBWP          : 0x30 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x30] verb 0x00371701
+intel-hda-ace: intel_hda_response: [wp 0x30] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x30 (ffff)
+intel-hda-ace: read  CORBWP          : 0x30 (ffff)
+intel-hda-ace: read  CORBRP          : 0x30 (ffff)
+intel-hda-ace: write CORBWP          : 0x31 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x31] verb 0x00371501
+intel-hda-ace: intel_hda_response: [wp 0x31] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x31 (ffff)
+intel-hda-ace: read  CORBWP          : 0x31 (ffff)
+intel-hda-ace: read  CORBRP          : 0x31 (ffff)
+intel-hda-ace: write CORBWP          : 0x32 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x32] verb 0x003f000c
+intel-hda-ace: intel_hda_response: [wp 0x32] response 0x10, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x32 (ffff)
+intel-hda-ace: read  CORBWP          : 0x32 (ffff)
+intel-hda-ace: read  CORBRP          : 0x32 (ffff)
+intel-hda-ace: write CORBWP          : 0x33 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x33] verb 0x005f1c00
+intel-hda-ace: intel_hda_response: [wp 0x33] response 0x805020, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x33 (ffff)
+intel-hda-ace: read  CORBWP          : 0x33 (ffff)
+intel-hda-ace: read  CORBRP          : 0x33 (ffff)
+intel-hda-ace: write CORBWP          : 0x34 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x34] verb 0x005f000c
+intel-hda-ace: intel_hda_response: [wp 0x34] response 0x20, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x34 (ffff)
+intel-hda-ace: read  CORBWP          : 0x34 (ffff)
+intel-hda-ace: read  CORBRP          : 0x34 (ffff)
+intel-hda-ace: write CORBWP          : 0x35 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x35] verb 0x00570720
+intel-hda-ace: intel_hda_response: [wp 0x35] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x35 (ffff)
+intel-hda-ace: read  CORBWP          : 0x35 (ffff)
+intel-hda-ace: read  CORBRP          : 0x35 (ffff)
+intel-hda-ace: write CORBWP          : 0x36 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x36] verb 0x00571601
+intel-hda-ace: intel_hda_response: [wp 0x36] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x36 (ffff)
+intel-hda-ace: read  CORBWP          : 0x36 (ffff)
+intel-hda-ace: read  CORBRP          : 0x36 (ffff)
+intel-hda-ace: write CORBWP          : 0x37 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x37] verb 0x00571701
+intel-hda-ace: intel_hda_response: [wp 0x37] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x37 (ffff)
+intel-hda-ace: read  CORBWP          : 0x37 (ffff)
+intel-hda-ace: read  CORBRP          : 0x37 (ffff)
+intel-hda-ace: write CORBWP          : 0x38 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x38] verb 0x00571501
+intel-hda-ace: intel_hda_response: [wp 0x38] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x38 (ffff)
+intel-hda-ace: read  CORBWP          : 0x38 (ffff)
+intel-hda-ace: read  CORBRP          : 0x38 (ffff)
+intel-hda-ace: write CORBWP          : 0x39 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x39] verb 0x005f000c
+intel-hda-ace: intel_hda_response: [wp 0x39] response 0x20, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x39 (ffff)
+intel-hda-ace: read  CORBWP          : 0x39 (ffff)
+intel-hda-ace: read  CORBRP          : 0x39 (ffff)
+intel-hda-ace: write CORBWP          : 0x3a (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3a] verb 0x005f1c00
+intel-hda-ace: intel_hda_response: [wp 0x3a] response 0x805020, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3a (ffff)
+intel-hda-ace: read  CORBWP          : 0x3a (ffff)
+intel-hda-ace: read  CORBRP          : 0x3a (ffff)
+intel-hda-ace: write CORBWP          : 0x3b (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3b] verb 0x004f0009
+intel-hda-ace: intel_hda_response: [wp 0x3b] response 0x10011b, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3b (ffff)
+intel-hda-ace: read  CORBWP          : 0x3b (ffff)
+intel-hda-ace: read  CORBRP          : 0x3b (ffff)
+intel-hda-ace: write CORBWP          : 0x3c (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3c] verb 0x004f000d
+intel-hda-ace: intel_hda_response: [wp 0x3c] response 0x80034a4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3c (ffff)
+intel-hda-ace: read  CORBWP          : 0x3c (ffff)
+intel-hda-ace: read  CORBRP          : 0x3c (ffff)
+intel-hda-ace: write CORBWP          : 0x3d (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3d] verb 0x0043704a
+intel-hda-ace: intel_hda_response: [wp 0x3d] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3d (ffff)
+intel-hda-ace: read  CORBWP          : 0x3d (ffff)
+intel-hda-ace: read  CORBRP          : 0x3d (ffff)
+intel-hda-ace: write CORBWP          : 0x3e (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3e] verb 0x00471601
+intel-hda-ace: intel_hda_response: [wp 0x3e] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3e (ffff)
+intel-hda-ace: read  CORBWP          : 0x3e (ffff)
+intel-hda-ace: read  CORBRP          : 0x3e (ffff)
+intel-hda-ace: write CORBWP          : 0x3f (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x3f] verb 0x00471701
+intel-hda-ace: intel_hda_response: [wp 0x3f] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x3f (ffff)
+intel-hda-ace: read  CORBWP          : 0x3f (ffff)
+intel-hda-ace: read  CORBRP          : 0x3f (ffff)
+intel-hda-ace: write CORBWP          : 0x40 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x40] verb 0x00471501
+intel-hda-ace: intel_hda_response: [wp 0x40] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x40 (ffff)
+intel-hda-ace: read  CORBWP          : 0x40 (ffff)
+intel-hda-ace: read  CORBRP          : 0x40 (ffff)
+intel-hda-ace: write CORBWP          : 0x41 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x41] verb 0x004f000a
+intel-hda-ace: intel_hda_response: [wp 0x41] response 0x201fc, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x41 (ffff)
+intel-hda-ace: read  CORBWP          : 0x41 (ffff)
+intel-hda-ace: read  CORBRP          : 0x41 (ffff)
+intel-hda-ace: write CORBWP          : 0x42 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x42] verb 0x004f000b
+intel-hda-ace: intel_hda_response: [wp 0x42] response 0x1, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x42 (ffff)
+intel-hda-ace: read  CORBWP          : 0x42 (ffff)
+intel-hda-ace: read  CORBRP          : 0x42 (ffff)
+intel-hda-ace: write CORBWP          : 0x43 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x43] verb 0x005f1c00
+intel-hda-ace: intel_hda_response: [wp 0x43] response 0x805020, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x43 (ffff)
+intel-hda-ace: read  CORBWP          : 0x43 (ffff)
+intel-hda-ace: read  CORBRP          : 0x43 (ffff)
+intel-hda-ace: write CORBWP          : 0x44 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x44] verb 0x002f0009
+intel-hda-ace: intel_hda_response: [wp 0x44] response 0x1d, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x44 (ffff)
+intel-hda-ace: read  CORBWP          : 0x44 (ffff)
+intel-hda-ace: read  CORBRP          : 0x44 (ffff)
+intel-hda-ace: write CORBWP          : 0x45 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x45] verb 0x002f0012
+intel-hda-ace: intel_hda_response: [wp 0x45] response 0x80034a4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x45 (ffff)
+intel-hda-ace: read  CORBWP          : 0x45 (ffff)
+intel-hda-ace: read  CORBRP          : 0x45 (ffff)
+intel-hda-ace: write CORBWP          : 0x46 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x46] verb 0x002ba000
+intel-hda-ace: intel_hda_response: [wp 0x46] response 0x4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x46 (ffff)
+intel-hda-ace: read  CORBWP          : 0x46 (ffff)
+intel-hda-ace: read  CORBRP          : 0x46 (ffff)
+intel-hda-ace: write CORBWP          : 0x47 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x47] verb 0x0023a04a
+intel-hda-ace: intel_hda_response: [wp 0x47] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x47 (ffff)
+intel-hda-ace: read  CORBWP          : 0x47 (ffff)
+intel-hda-ace: read  CORBRP          : 0x47 (ffff)
+intel-hda-ace: write CORBWP          : 0x48 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x48] verb 0x002b8000
+intel-hda-ace: intel_hda_response: [wp 0x48] response 0x4a, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x48 (ffff)
+intel-hda-ace: read  CORBWP          : 0x48 (ffff)
+intel-hda-ace: read  CORBRP          : 0x48 (ffff)
+intel-hda-ace: write CORBWP          : 0x49 (ffff)
+intel-hda-ace: intel_hda_corb_run: [rp 0x49] verb 0x0023904a
+intel-hda-ace: intel_hda_response: [wp 0x49] response 0x0, extra 0x0
+intel-hda-ace: intel_hda_response: rirb count reached (1)
+intel-hda-ace: intel_hda_update_irq: level 1 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  INTSTS          : 0xc0000000 (ffffffff)
+intel-hda-ace: read  RIRBSTS         : 0x1 (ff)
+intel-hda-ace: write RIRBSTS         : 0x5 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: intel_hda_corb_run: corb ring empty
+intel-hda-ace: read  RIRBWP          : 0x49 (ffff)
+intel-hda-ace: read  OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT4 CTL(sts)   : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT4 CTL        : 0x1 (ff)
+intel-hda-ace: st #4: reset
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT4 CTL        : 0x1 (ff)
+intel-hda-ace: write OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT4 BDLPL      : 0x0 (ffffffff)
+intel-hda-ace: write OUT4 BDLPU      : 0x0 (ffffffff)
+intel-hda-ace: read  OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: write OUT4 CTL        : 0x0 (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT4 CTL(sts)   : 0x1c (ff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT4 CTL        : 0x20000000 (ffffffff)
+intel-hda-ace: write OUT4 CTL        : 0x20100000 (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: write OUT4 CBL        : 0x11a000 (ffffffff)
+intel-hda-ace: write OUT4 FMT        : 0x40 (ffff)
+intel-hda-ace: write OUT4 LVI        : 0x0 (ffff)
+intel-hda-ace: write OUT4 BDLPL      : 0x3f21000 (ffffffff)
+intel-hda-ace: write OUT4 BDLPU      : 0x0 (ffffffff)
+intel-hda-ace: read  DPLBASE         : 0x3f1b000 (ffffffff)
+intel-hda-ace: write DPLBASE         : 0x3f1b001 (ffffffff)
+intel-hda-ace: read  OUT4 CTL        : 0x20100000 (ffffffff)
+intel-hda-ace: write OUT4 CTL        : 0x2010001c (ffffffff)
+intel-hda-ace: intel_hda_update_irq: level 0 [intx]
+intel-hda-ace: read  OUT4 FIFOS      : 0x100 (ffff)
+qemu-system-x86_64: terminating on signal 15 from pid 425773 (/bin/bash)

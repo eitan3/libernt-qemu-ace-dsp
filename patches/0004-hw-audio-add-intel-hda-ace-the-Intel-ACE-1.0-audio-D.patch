@@ -1,7 +1,7 @@
-From 74ca70f5bdaf437703668b5b8f61534b5d7c0f34 Mon Sep 17 00:00:00 2001
+From 76a47a39f5d7e422d583bac64b8c8b2a58f718e1 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 10:12:38 +0200
-Subject: [PATCH 4/5] hw/audio: add intel-hda-ace, the Intel ACE 1.0 audio DSP
+Subject: [PATCH 4/6] hw/audio: add intel-hda-ace, the Intel ACE 1.0 audio DSP
  (Arrow Lake-S 8086:7f50)
 
 A variant of intel-hda for the Intel Smart Sound Technology BUS function of
@@ -35,10 +35,10 @@ f37a055c...dc647c6e); the boot handshake as prose in the P2a/P2b NOTES
 ---
  hw/audio/Kconfig              |    5 +
  hw/audio/intel-hda-ace-regs.h |  336 ++++++++
- hw/audio/intel-hda-ace.c      | 1428 +++++++++++++++++++++++++++++++++
+ hw/audio/intel-hda-ace.c      | 1432 +++++++++++++++++++++++++++++++++
  hw/audio/meson.build          |    1 +
  hw/audio/trace-events         |   11 +
- 5 files changed, 1781 insertions(+)
+ 5 files changed, 1785 insertions(+)
  create mode 100644 hw/audio/intel-hda-ace-regs.h
  create mode 100644 hw/audio/intel-hda-ace.c
 
@@ -402,10 +402,10 @@ index 000000000..253bbd045
 +#endif /* HW_INTEL_HDA_ACE_REGS_H */
 diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
 new file mode 100644
-index 000000000..7c386814b
+index 000000000..336741e59
 --- /dev/null
 +++ b/hw/audio/intel-hda-ace.c
-@@ -0,0 +1,1428 @@
+@@ -0,0 +1,1432 @@
 +/*
 + * QEMU model of the Intel ACE 1.0 audio DSP of the Arrow Lake-S "Smart
 + * Sound Technology BUS" function (8086:7f50): intel-hda-ace.
@@ -774,8 +774,10 @@ index 000000000..7c386814b
 +    s->notif_pending = false;
 +    s->purge_pending = false;
 +    s->rom_step = 0;
-+    s->xida &= ~ACE_HFIPCXIDA_DONE;
-+    s->xtdr &= ~ACE_HFIPCXTDR_BUSY;
++    /* the DSP-side IPC registers belong to the core's power domain: they
++     * reset with it, the host-side ones (the request, the enables) do not */
++    s->xida = 0;
++    s->xtdr = 0;
 +    s->xtda = 0;
 +    s->xtddy = 0;
 +    s->fsr = 0;
@@ -830,8 +832,10 @@ index 000000000..7c386814b
 +            s->rom_error = 0;
 +            s->notif_pending = false;
 +            s->reply_pending = false;
-+            s->xtdr &= ~ACE_HFIPCXTDR_BUSY;
-+            s->xida &= ~ACE_HFIPCXIDA_DONE;
++            s->xtdr = 0;
++            s->xida = 0;
++            s->xtda = 0;
++            s->xtddy = 0;
 +            ace_set_state(s, ACE_OFF);
 +            ace_update_irq(s);
 +        }

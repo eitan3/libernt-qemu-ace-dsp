@@ -1,7 +1,7 @@
-From 39c271a87acd9cc8689b942c878213db3be767a6 Mon Sep 17 00:00:00 2001
+From df24d04b8bbaf4240e77b6515db407090149ffb6 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 10:33:00 +0200
-Subject: [PATCH 5/5] tests/qtest: intel-hda-ace boot handshake, power,
+Subject: [PATCH 5/6] tests/qtest: intel-hda-ace boot handshake, power,
  interrupt and fault tests
 
 Level-0 acceptance of the ACE audio DSP model without an OS: enumeration
@@ -20,17 +20,17 @@ libqos; the ABI constants are the test's own copies (Linux v6.12
 sound/soc/sof/intel/mtl.h and hda.h, rule 7; the Intel HD Audio
 specification; SOF rimage headers for the .ri layout, BSD-3).
 ---
- tests/qtest/intel-hda-ace-test.c | 743 +++++++++++++++++++++++++++++++
+ tests/qtest/intel-hda-ace-test.c | 767 +++++++++++++++++++++++++++++++
  tests/qtest/meson.build          |   1 +
- 2 files changed, 744 insertions(+)
+ 2 files changed, 768 insertions(+)
  create mode 100644 tests/qtest/intel-hda-ace-test.c
 
 diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
 new file mode 100644
-index 000000000..3578fa243
+index 000000000..2576416a8
 --- /dev/null
 +++ b/tests/qtest/intel-hda-ace-test.c
-@@ -0,0 +1,743 @@
+@@ -0,0 +1,767 @@
 +/*
 + * QTest testcase for the Intel ACE 1.0 audio DSP model (intel-hda-ace)
 + *
@@ -303,14 +303,24 @@ index 000000000..3578fa243
 +    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, ACE_ADSPCS_CPA);
 +    w4(ACE_XIDR, 0x81004000);             /* BUSY | ROM control | purge | tag 1 */
 +    w4(ACE_DSP2CXCTL, ACE_DSP2CXCTL_SPA);
-+    qtest_clock_step(t.qs, US(250));
++    qtest_clock_step(t.qs, US(200));                /* CPA (model value: 200 us) */
 +    g_assert_cmpuint(r4(ACE_DSP2CXCTL) & ACE_DSP2CXCTL_CPA, ==, ACE_DSP2CXCTL_CPA);
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0x08);        /* RESET_VECTOR_DONE */
 +}
 +
-+/* the purge acknowledgement and INIT_DONE */
++/* the purge acknowledgement and INIT_DONE, sampled as the model walks:
++ * PURGE_BOOT at +50 us, DONE at +100 us, INIT_DONE at +600 us */
 +static void rom_ready(void)
 +{
-+    qtest_clock_step(t.qs, US(600));
++    qtest_clock_step(t.qs, US(60));
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0x09);        /* PURGE_BOOT */
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    qtest_clock_step(t.qs, US(50));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, ACE_BUSY);
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0x09);        /* not yet: INIT_DONE comes at 600 */
++    qtest_clock_step(t.qs, US(480));
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0x09);        /* still PURGE_BOOT at +580 */
++    qtest_clock_step(t.qs, US(30));
 +    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, ACE_BUSY);
 +    g_assert_cmpuint(r4(ACE_XIDA), ==, ACE_BUSY);
 +    w4(ACE_XIDA, ACE_BUSY);               /* the host clears DONE */
@@ -333,12 +343,26 @@ index 000000000..3578fa243
 +    w0(HDA_ST_CTL(OUT4), (1u << 20) | 0x02);   /* tag 1, run */
 +}
 +
-+/* walk the ROM to FW_ENTERED and receive FW_READY */
++/* walk the ROM to FW_ENTERED and receive FW_READY, sampled at every state:
++ * FW_MANIFEST_IN_DMA_BUFF at +0, LOAD_FW_MAN_TO_IMR +400, LOAD_FW_CODE_TO_IMR
++ * +800, FW_LOADING_DONE +1200, FW_CODE_LOADED +1600, entered at +2000,
++ * FW_READY at +2200 */
 +static void firmware_ready(void)
 +{
-+    qtest_clock_step(t.qs, US(2300));
++    static const uint32_t walk[] = { 0x27, 0x28, 0x29, 0x2a };
++    uint32_t i;
++
++    g_assert_cmpuint(r4(ACE_FSR), ==, (0x5u << 24) | 0x25);   /* waiting for the DMA buffer */
++    for (i = 0; i < ARRAY_SIZE(walk); i++) {
++        qtest_clock_step(t.qs, US(400));
++        g_assert_cmpuint(r4(ACE_FSR) & 0x00ffffff, ==, walk[i]);
++    }
++    qtest_clock_step(t.qs, US(390));
++    g_assert_cmpuint(r4(ACE_FSR), ==, 0x2a);        /* not yet entered */
++    qtest_clock_step(t.qs, US(20));
 +    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_RUNNING);
-+    qtest_clock_step(t.qs, US(250));
++    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);          /* FW_READY comes 200 us later */
++    qtest_clock_step(t.qs, US(200));
 +    g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_FW_READY);
 +    g_assert_cmpuint(r4(ACE_XTDDY), ==, 0);
 +    g_assert_cmpuint(r4(ACE_WIN0 + ACE_FW_ABI_VER), ==, 1);

@@ -36,7 +36,7 @@ BUILD="$QAD/build"
 QEMU="${QEMU:-$BUILD/qemu-system-x86_64}"
 BIOSDIR="${BIOSDIR:-$BUILD/pc-bios}"
 FW="$QAD/firmware"
-ISO="${ISO:-/home/megan/libernt-build-logs/test-audio-intel-sst-p2b-51f9711a/bootcd.iso}"
+ISO="${ISO:-$QAD/disk/bootcd.iso}"   # the image under test: put it under disk/ or set ISO=
 SMP="${SMP:-1}"
 HDA="${HDA:-ace}"
 WAIT="${WAIT:-300}"
@@ -82,7 +82,7 @@ case "$HDA" in
     none) ;;
     *) echo "run: HDA must be ace, ich9 or none" >&2; exit 2 ;;
 esac
-[ "${TRACE:-0}" = 1 ] && args+=(-trace 'ace_*')
+[ "${TRACE:-0}" = 1 ] && args+=(-trace 'ace_*' -trace 'intel_hda_cap_*')
 [ "${REBOOT:-0}" = 1 ] || args+=(-no-reboot)
 
 date -u +%FT%TZ > "$EV/start.txt"
