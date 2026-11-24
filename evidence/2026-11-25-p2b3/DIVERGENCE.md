@@ -8,13 +8,15 @@ Model: the qemu-ace-dsp series at `f53ff8b` (patches 0001–0008, QEMU 11.1.3; b
 `84cb786c86fa…`, rebuilt from the committed series before the first VM run, qtest 8/8), q35,
 TCG, `-smp 1`.
 
-**Result of this rerun: no new driver-side divergence.** The two divergences of the p2b2 round
-(D1, D2) are fixed in the image as PROVENANCE.txt says, and the acceptance runs that they
-blocked (AC3, AC4) are measured below. What this round did find is (E1) an **environment**
-limitation of the simulator host that the D2 fix turned from a hang into a bounded, named
-failure — not a driver fault — and three places where the *plan's* or TESTING.md's expected
-words differ from what the driver prints (N1–N3), none of them faults. The known R1/R2 items of
-the read-only review are not repeated here.
+**Result of this rerun: the two divergences of the p2b2 round (D1, D2) are fixed in the image as
+PROVENANCE.txt says, and the acceptance runs they blocked (AC3, AC4) are closed below; one new
+driver-side divergence was found (D3: the FW_CONFIG tuple list is validated by its version tuple
+only, so a malformed or truncated reply boots `ok`).** What this round also found is (E1) an
+**environment** limitation of the simulator host that the D2 fix turned from a hang into a
+bounded, named failure — not a driver fault — three places where the *plan's* or TESTING.md's
+expected words differ from what the driver prints (N1–N3), and one matrix row that no longer
+measures what the plan wanted from it (N4), none of them faults. The known R1/R2 items of the
+read-only review are not repeated here.
 
 ## D1 — FIXED in `39e50ba6036` (verified)
 
@@ -47,12 +49,58 @@ boot), `ac3-interactive`, `ac3-cycles-icount`, every `fm-*` row.
   `boot base firmware timeout after 3126051 us … failed in loading (base firmware timeout), ROM
   status 0x05000025` (3 s budget), and in the matrix the `never-*`/`drop-requests`/`ipc-status`/
   `bad-tuples`/`truncated-reply`/`version-shift`/`x-delay-scale=1550` rows (table in
-  `fault-matrix.md`). The bounded rows of the p2b2 round that depended on a single sample read the
-  same as before.
+  `fault-matrix.md`: `never-power` 52080 µs, `never-ack` 1573309 µs, `never-ready` 925159 µs,
+  `never-enter` 3037514 µs, `never-fwready` 1022485 µs, `never-reply` 539340 µs, `drop-requests`
+  573398 µs — each on its documented budget). The bounded rows of the p2b2 round that depended on
+  a single sample read the same as before.
 - `clock stalled` did **not** appear in any run of this round (0 lines in every serial log; the
   cycle summary counts them), on either environment: under TCG the poll bound (2× the polls a
   budget needs) never fired before the clock budget — the driver polls at 0.5–0.83 ms per
   iteration and the budgets are met by the clock first.
+
+## D3 — the FW_CONFIG tuple list is validated by its version tuple only: a malformed or truncated reply boots `ok` (driver)
+
+### What was seen (rows `bad-tuples` and `truncated-reply` of the matrix, under icount; `fm-bad-tuples`, `fm-truncated-reply`)
+
+- `bad-tuples` (the model sets the second TLV's length to 3 — not a multiple of four, so every
+  following header sits at a misaligned offset):
+  `boot ok after 21344 us (clock 21989564 us): state ready, … IPC status 0, last DSP message
+  0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok`, then `firmware ready: version
+  2.15.0.1, ABI 1, …, downlink mailbox 0 bytes, uplink mailbox 0 bytes, trace log 0 bytes, 0
+  pipelines, 0 libraries, context save 0, 3 tuples`.
+- `truncated-reply` (the version TLV alone, the rest of the mailbox zero): `boot ok after 21303 us
+  … state ready …`, `… 1 tuples`.
+
+Both rows are bounded and recover, but no failure is named: the plan (§6.5) and the image's
+TESTING.md expect `boot ipc error` / `ipc bad reply` / `truncated` for them.
+
+### Why (read in `sdk/lib/drivers/fwload/fwboot.c` at `1f37c158557`, diagnosis only)
+
+`FwloadParseFwConfig` (fwboot.c:473) walks the TLVs as `type, length (bytes), value`: a zero
+header ends the reply, a length past the mailbox returns `FwloadTruncated`, every other tuple is
+counted (`TupleCount++`) and handed to `FwloadTupleValue`, which stores a word when `Bytes >= 4`
+and 0 otherwise, and ignores unknown types; it returns `FwloadOk` whenever at least one tuple was
+counted. `FwloadQueryFwConfig` (fwboot.c:615) then checks only `HasVersion` and that the version
+equals the image's. With the faulted length 3 the walk is: FW_VERSION (ok) → DL_MAILBOX_BYTES with
+`Bytes = 3` → `DownlinkMailboxBytes = 0`, `HasDownlinkMailbox = TRUE` → the next header is read
+at offset 27 (type `0x700`, length 1024: unknown, skipped) → the zeroed area ends the walk:
+`TupleCount = 3`, `FwloadOk`. The downlink mailbox is then 0 bytes and the uplink mailbox, trace
+log, pipeline and library counts are simply absent; the boot is declared ready. The walk itself is
+bounds-checked (no over-read), so this is a validation gap, not a memory-safety one.
+
+### Expected, per which source
+
+- Plan §6.5: `ipc-status=<n>` / `bad-tuples` / `truncated-reply` → `boot ipc error` / `ipc bad reply`
+  / `truncated`; TESTING.md of this image: "`bad-tuples` as `truncated`".
+- The qtest asserts that the model's two faults produce the malformed lists it intends
+  (`intel-hda-ace-test.c`, case `faults`), so the model side is as designed.
+
+Expected fix (driver side, for Megan to route): reject a tuple length that is not a multiple of
+four (and an unknown type, if the firmware's list is closed), and require the tuples the driver
+later relies on — at least non-zero downlink and uplink mailbox sizes — before `boot ok`; a
+truncated list (version only) should end as `truncated`/`ipc bad reply` with the DSP powered down.
+Until then a firmware that answers FW_CONFIG wrongly is reported as `firmware ready` with 0-byte
+mailboxes, and the first real IPC would run against that configuration.
 
 ## E1 — environment: on this host the guest's clock runs while the model's timers stand still (not a driver divergence)
 
@@ -127,6 +175,16 @@ SOF `ipc4_fw_regs` layout decides which is right on the device.
 The model's FW_CONFIG reply carries FW_VERSION plus six constants (downlink/uplink mailbox bytes,
 trace log bytes, pipelines, libraries, context save) = 7 TLVs, and the driver counts 7. TESTING.md's
 "the tuples count is 8 on the model" is off by one in the expectation, not in the driver.
+
+## N4 — the `x-delay-scale=1550` row measures the power-up budget, not the 3 s base-firmware edge (scenario note)
+
+Plan §6.5 wanted this row to show `boot timeout … failed in loading` with FW_ENTERED 3.1 s out.
+With every model delay scaled 1550×, the power-up itself (CPA at 155 ms) exceeds the 50 ms
+power-up budget long before FW_ENTERED is due, and the driver correctly reports `boot power-up
+timeout after 52503 us … attempt 0`. (On the p2b2 image the same row reached `FW_READY received`
+at 9.4 s only because no budget fired.) The 3 s edge is measured by `never-enter`:
+`boot base firmware timeout after 3037514 us`. A row for the edge as planned would need a model
+fault that delays the firmware's entry alone.
 
 ## Still unfixed in this image (known from the read-only review, invisible to the model)
 

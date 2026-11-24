@@ -101,10 +101,25 @@ forever** (> 500 000 reads, no line, no power-down): its receive path consumes
 the reply's DONE bit but never hands the reply to the state machine, so `D0Entry`
 never returns and PnP cannot finish starting the device (`Work queue 1 has made
 no progress`). D2: every "after N us" figure reads 0 and no documented budget
-(50 ms … 3 s) ever fires — a `never-power` boot polls for minutes. The VM
-acceptance runs that depend on these (`boot ok`, the power cycles, the bounded
-fault matrix) are **blocked on the driver** below; the model side is proven by
-the qtest.
+(50 ms … 3 s) ever fires — a `never-power` boot polls for minutes. These blocked the VM
+acceptance runs (`boot ok`, the power cycles, the bounded fault matrix) on the p2b2 image; the
+model side was proven by the qtest only.
+
+**Round 3 (image p2b3, 2026-11-25): both driver fixes verified, AC3 and AC4 closed, one new divergence.**
+D1 and D2 were fixed in LiberNT `39e50ba6036` and `ee1338426b1` (published as image p2b3, built
+on master `a19eacb7fea`). Against the same model (`f53ff8b`, patches 0001–0008, unchanged) the
+driver now takes the reply on its first poll and acknowledges it after reading the payload (the
+`mtl_ipc_irq_thread` order, visible in every trace), prints `boot ok after 21334 us (clock
+17954746 us) … attempt 1, 1 DSP interrupts, cleanup ok` on a plain boot and `firmware ready:
+version 2.15.0.1, ABI 1`; 22 disable/enable cycles in one VM each end in `boot ok` with the
+model's registers reading identically before and after every one; all 20 fault rows end bounded
+on their documented budgets, leave the device started and recover on the next power cycle
+(`evidence/2026-11-25-p2b3`). What this round found: **D3** — the FW_CONFIG tuple list is
+validated by its version tuple only, so the `bad-tuples` and `truncated-reply` rows boot `ok` with
+0-byte mailboxes where the plan expected `truncated`/`ipc bad reply`; **E1**, an environment
+limitation of the simulator host (the model's timers stand still while the guest's clock runs:
+`-icount` is the fix); and three expectation corrections (N1–N3).
+`evidence/2026-11-25-p2b3/DIVERGENCE.md`.
 
 ## Build and run
 
@@ -236,49 +251,49 @@ On the p2b2 image the same boot stopped after `FW_READY received` (D1); that blo
 | AC1 | qtest passes; mutation check recorded | **PASS** — 8 cases, with the two-step FSR since this rerun (patches 0007/0008); `mutation-check.sh` (rows `fsr-running` retargeted and `fsr-entry-running` added; the new assertion fails on the old model), results in `evidence/<date>/mutation-check.md` |
 | AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`) |
 | AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b3 image** (`ee1338426b1`), with one correction to the expectation. Plain boot under icount: `boot ok after 21334 us (clock 17954746 us) … attempt 1, 1 DSP interrupts, cleanup ok`, end clock = start clock + M within 50 µs; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **1 DSP interrupt, not 2** (N1: the ISR masks the three enables before the FW_CONFIG request, so the reply is taken by the poll; the FW_READY interrupt is raised and taken on every boot). 22 disable/enable cycles in one VM (the two of the plan and the 20-cycle rehearsal), each `boot ok after 21318–21472 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, 0 `clock stalled`, clean S5 at the end (`ac3-cycles-icount`). A first interactive session on the non-icount host (`ac3-interactive`) had 17 `boot ok` and 5 bounded `power-up timeout after ≈53 ms` at the host's main-loop stalls (E1), each followed by an unassisted `boot ok` |
-| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b2 image: **7 of 20 rows** bounded (the single-sample failures: `halt-rom=43/44`, `halt-fw=51`, `crash-notification`, `abi=2`, `window-read-fail`, `x-delay-scale=0.001`); the other 13 are **unbounded** by D2 (no budget fires) or D1 (the reply hang) — the `x-delay-scale=1550` row shows the 3 s budget not firing. Table below; `evidence/2026-11-24-p2b2/fault-matrix.md` |
+| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b3 image: **PASS — 20 of 20 rows bounded** (on the p2b2 image 7 of 20, the other 13 hung on D1/D2), every row with a real `after N us` on its documented budget and its two clock readings consistent, the device started, no bugcheck, no hang, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b3/fault-matrix.md`; `tools/fm-check.sh`: 0 failed checks). 18 rows name the expected failure; `bad-tuples` and `truncated-reply` end in `boot ok` with 0-byte mailboxes instead of `truncated`/`ipc bad reply` — **driver divergence D3**. Table below |
 | AC5 | README + scripts reproduce AC2 from a clean checkout | **PASS** — see "Reproducibility" |
+## The fault matrix in the VM (p2b3 image, 2026-11-25)
 
-> **Paused 2026-11-25 00:55 (+02:00) for a host restart:** the p2b3 fault matrix is 9 of 20
-> rows in (all bounded, all recovered); the AC4 row and the matrix section below still carry the
-> p2b2 text until the run resumes — `evidence/2026-11-25-p2b3/PAUSED.md`.
+Rule: *bounded* = the driver logs its terminal line within 30 s of its `booting:` line in guest
+time and powers the DSP down; the driver returns `STATUS_SUCCESS` from `D0Entry` on a failed
+boot, so a bounded row leaves the device started and the boot continues. Every row below is one
+boot of the overlay under `-icount` with the logs on tmpfs, followed by a recovery cycle: the
+fault cleared over QMP, one `pnputil` disable/enable → a second boot, which must be `boot ok`.
+The elapsed figures are the driver's own (`after N us`); its end clock equals its start clock
+plus N within 41–1812 µs on every row, and the serial-observed duration agrees within one kernel
+clock tick (`tools/fm-check.sh`; `evidence/2026-11-25-p2b3/fault-matrix.md`). No bugcheck and no
+`Work queue … no progress` line in any row; 20 of 20 rows recovered with `boot ok`.
 
-Re-running AC3/AC4: `VHD=<p2b3 LiberNT.vhd> ./make-overlay.sh p2b3`, boot the overlay once
-(`ICOUNT=1 ISO=<p2b3 bootcd.iso> DISK=/tmp/<overlay copy> CDROM=none EVID=/tmp/<run> ./run.sh`;
-copy the overlay, every run boots it and is stopped rather than shut down), dismiss the wizard
-and set `BootDsp=1` in the guest (Start → search "cmd" → `reg add
-"HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" /v BootDsp /t REG_DWORD /d 1 /f`),
-power it off; then `ICOUNT=1 DISK=<overlay copy> EVID=/tmp/<run> tools/ac3-cycles.sh 22` is
-AC3's cycle rehearsal and `ICOUNT=1 RECOVER=1 COLLECT=<evidence dir> DISK=<overlay copy>
-EVROOT=/tmp/<dir> tools/fault-matrix.sh` is AC4 (`tools/fm-check.sh <evidence dir>` adds
-the checks beyond "bounded"). Keep the live logs on tmpfs.
+| fault | the driver's terminal line (after its `booting:` line) | after N us | booting → line | bounded |
+|---|---|---|---|---|
+| `none` | `boot ok after 21299 us (clock 17881193 us): state ready, failed in off (ok), …, last DSP message 0x61000000\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` | 21299 | 0.031 s | yes |
+| `halt-rom=43` | `boot ROM error … failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, … attempt 3, 0 DSP interrupts, cleanup ok` | 73086 | 0.062 s | yes (3 power-downs) |
+| `halt-rom=44` | `… ROM error 0x0000002c CSE validation failed … attempt 3 … cleanup ok` | 50415 | 0.047 s | yes (3) |
+| `halt-fw=51` | `boot ROM error … failed in loading (ROM error), ROM status 0x8000002a ROM firmware code loaded, ROM error 0x00000033 base firmware incompatible … attempt 1 … cleanup ok` | 261959 | 0.266 s | yes |
+| `crash-notification` | `boot firmware crash … failed in FW_READY wait (firmware crash), ROM status 0x00000005 firmware entered, ROM error 0x0000000a unknown ROM error, …, last DSP message 0x1b0a0000\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` | 39018 | 0.047 s | yes |
+| `abi=2` | `boot ABI mismatch … failed in FW_READY wait (ABI mismatch), ROM status 0x00000005 firmware entered … 1 DSP interrupts, cleanup ok` | 39025 | 0.031 s | yes |
+| `window-read-fail` | the same ABI mismatch (window 0 reads all ones) | 69180 | 0.078 s | yes |
+| `x-delay-scale=0.001` | `boot ROM error … failed in loading (ROM error), ROM status 0xa0000005 firmware entered …`: every model delay 1000× shorter, so the driver's first FSR sample is the firmware's status word | 71074 | 0.062 s | yes |
+| `never-power` | `boot power-up timeout … failed in powering up (power-up timeout), ROM status 0x00000000 init … attempt 0, 0 DSP interrupts, cleanup ok` (50 ms budget) | 52080 | 0.047 s | yes |
+| `never-ack` | `boot ROM init timeout … failed in ROM init (ROM init timeout), ROM status 0x00000000 init … attempt 3 … cleanup ok` (3 × 500 ms) | 1573309 | 1.563 s | yes (3) |
+| `never-ready` | `boot ROM status timeout … failed in ROM init (ROM status timeout), ROM status 0x00000009 ROM purge boot … attempt 3 … cleanup ok` (3 × 300 ms) | 925159 | 0.925 s | yes (3) |
+| `never-enter` | `boot base firmware timeout … failed in loading (base firmware timeout), ROM status 0x0000002a ROM firmware code loaded … attempt 1 … cleanup ok` (3 s budget) | 3037514 | 3.047 s | yes |
+| `never-fwready` | `boot FW_READY timeout … failed in FW_READY wait (FW_READY timeout), ROM status 0x00000005 firmware entered … cleanup ok` (1 s budget) | 1022485 | 1.016 s | yes |
+| `never-reply` | `boot IPC reply timeout … failed in configuring (IPC reply timeout) …, last DSP message 0x1b080000\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` (500 ms budget) | 539340 | 0.547 s | yes |
+| `drop-requests` | `boot IPC reply timeout …` (the request is dropped; the same 500 ms budget) | 573398 | 0.578 s | yes |
+| `ipc-status=5` | `boot IPC error … failed in configuring (IPC error), … IPC status 5, last DSP message 0x61000005\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` | 40403 | 0.047 s | yes |
+| `version-shift` | `boot version mismatch … failed in configuring (version mismatch) … cleanup ok` | 40416 | 0.047 s | yes |
+| `x-delay-scale=1550` | `boot power-up timeout … failed in powering up (power-up timeout) …`: every model delay 1550× longer, so the power-up itself (155 ms) exceeds its 50 ms budget long before FW_ENTERED is due — the row measures the power-up budget, not the 3 s base-firmware edge (that edge is `never-enter`'s 3.04 s) | 52503 | 0.047 s | yes |
+| `bad-tuples` | **`boot ok after 21344 us … state ready …`**, then `firmware ready: … downlink mailbox 0 bytes, uplink mailbox 0 bytes, trace log 0 bytes, 0 pipelines, 0 libraries, context save 0, 3 tuples` | 21344 | 0.021 s | yes — **but no failure named: D3** |
+| `truncated-reply` | **`boot ok after 21303 us … state ready …`**, `… 1 tuples` | 21303 | 0.016 s | yes — **D3** |
 
-## The fault matrix in the VM (p2b2 image, 2026-11-24)
-
-Rule: *bounded* = the driver logs its terminal line (its named failure) within
-30 s of its `booting:` line in guest time and powers the DSP down. The driver
-always returns `STATUS_SUCCESS` from `D0Entry`, so a bounded row leaves the
-device started and the boot continues; an unbounded row is the `D0Entry` hang of
-D1/D2 (the device never finishes starting: `Work queue 1 has made no progress`).
-
-| fault | the driver's terminal line (after its `booting:` line) | bounded | booting → line |
-|---|---|---|---|
-| `halt-rom=43` | `ROM init attempt failed` ×2, `boot ROM error … failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found … attempt 3, 0 DSP interrupts, cleanup ok`, `DSP power down … ok` | yes | 4.66 s |
-| `halt-rom=44` | `… ROM error 0x0000002c CSE validation failed … attempt 3 … cleanup ok` | yes | 0.05 s |
-| `halt-fw=51` | `boot ROM error … failed in loading (ROM error), ROM status 0x8000002a ROM firmware code loaded, ROM error 0x00000033 base firmware incompatible … attempt 1 … cleanup ok` | yes | 0.05 s |
-| `crash-notification` | `DSP message 0x1b0a0000\|0x00000000`, `boot firmware crash … failed in FW_READY wait (firmware crash) … 1 DSP interrupts, cleanup ok` | yes | 1.32 s |
-| `abi=2` | `boot ABI mismatch … failed in FW_READY wait (ABI mismatch), ROM status 0x00000005 firmware entered … 1 DSP interrupts, cleanup ok` | yes | 0.05 s |
-| `window-read-fail` | the same ABI mismatch (window 0 reads all ones) | yes | 0.05 s |
-| `x-delay-scale=0.001` | `boot ROM error … ROM status 0xa0000005 firmware entered`: every model delay is 1000× shorter, so the driver's first FSR sample sees the firmware's status word | yes | 0.56 s |
-| `never-power` | none: polls CPA (50 ms budget) for as long as the VM runs | **no** (D2) | — |
-| `never-ack` | none: polls the purge DONE (500 ms budget) forever | **no** (D2) | — |
-| `never-ready` | none: polls INIT_DONE (300 ms budget) forever | **no** (D2) | — |
-| `never-enter` | none: polls FW_ENTERED (3 s budget) forever | **no** (D2) | — |
-| `never-fwready` | none after `firmware entered`: polls FW_READY (1 s budget) forever | **no** (D2) | — |
-| `x-delay-scale=1550` (FW_ENTERED at 3.1 s) | `firmware entered`, `FW_READY received` at 9.4 s — **the 3 s base-firmware budget did not fire** — then the D1 hang | **no** (D2, D1) | — |
-| `never-reply`, `drop-requests` | none after `FW_READY received`: polls the reply (500 ms budget) forever | **no** (D1/D2) | — |
-| `none`, `ipc-status=5`, `bad-tuples`, `truncated-reply`, `version-shift` | none after `FW_READY received`: the reply is acknowledged, never consumed, polls forever | **no** (D1) | — |
-
+20 of 20 rows bounded (on the p2b2 image: 7 of 20, the other 13 hung on D1/D2 —
+`evidence/2026-11-24-p2b2/fault-matrix.md`). Eighteen rows name the failure the plan and the
+image's TESTING.md expect, each on its documented budget. Two rows end bounded but **not with a
+failure**: `bad-tuples` and `truncated-reply` boot as `ok` — the driver validates the FW_CONFIG
+tuple list by its version tuple only (**D3**, `DIVERGENCE.md`). The run was interrupted by a host
+restart after row 9 and resumed with the same command (`evidence/2026-11-25-p2b3/PAUSED.md`).
 Measured on this host, with its timer stalls: 7 of 20 rows bounded, 13 unbounded. The
 bounded rows are the failures the driver detects from a single sample (a halted ROM,
 the exception notification, the ABI word, the version word read as all ones); every
@@ -333,9 +348,10 @@ filled from measurements on the real device; "—" means not yet measured.
 | `ac3-interactive` | the first boot of the fresh overlay on the non-icount host: stage 1 unchanged, the first-boot wizard, `BootDsp=1` set, the first D0 entry failing bounded (`boot power-up timeout after 53231 us`, E1), then 22 disable/enable cycles with the qtest heartbeat (17 `boot ok`, 5 `power-up timeout` at the host's 250–285 ms main-loop stalls, each read by the heartbeat: `heartbeat-c*.log`); the model's registers between cycles in `cycles.log` and `model-state.log`; clean S5 |
 | `ac3-boot2-icount` | **AC3 at boot**: a plain reboot of the overlay under `-icount`, no heartbeat: `boot ok after 21334 us (clock 17954746 us) … attempt 1, 1 DSP interrupts`, `firmware ready: version 2.15.0.1, ABI 1`; the device trace of the whole boot (94 lines) |
 | `ac3-cycles-icount` | **AC3's cycles**: 22 disable/enable cycles under icount, 22 `boot ok` (21318–21472 us), the model's registers read before and after each (`cycles.log`: one distinct disabled-state reading, one distinct D0 reading), 0 `clock stalled`, clean S5 (`summary.txt`) |
-| `fm-<fault>` | one boot per fault of the matrix under icount, each followed by a recovery cycle (`serial.log`, `recover.out`, the trace excerpt + the whole trace gzipped, `desktop.png`/`console.png`) |
-| `fault-matrix.md` | the matrix table (fault → the driver's line → elapsed → bounded → recovery) and the checks beyond "bounded" (`tools/fm-check.sh`) |
-| `DIVERGENCE.md` | D1 and D2 marked fixed with the rerun evidence; E1 (environment), N1–N3 (expectation corrections); the result "no new driver divergence" |
+| `fm-<fault>` | one boot per fault of the matrix under icount, each followed by a recovery cycle (`serial.log`, `recover.out`, the trace excerpt + the whole trace gzipped, `desktop.png`/`console.png`); `fm-never-ready-partial` is the row that was in flight when the host was restarted (not a result) |
+| `fault-matrix.md` | the matrix table (fault → the driver's line → elapsed → bounded → recovery; the first 9 rows from before the restart, the rest from the resumed run) and the checks beyond "bounded" (`tools/fm-check.sh`: 0 failed) |
+| `DIVERGENCE.md` | D1 and D2 marked fixed with the rerun evidence; **D3** (FW_CONFIG tuple validation, driver); E1 (environment), N1–N3 (expectation corrections), N4 (scenario note) |
+| `PAUSED.md` | where the run stood when the host was restarted (9 of 20 rows in) and how it was resumed |
 
 ### 2026-11-24-p2b2 (the rerun with the fixed driver, image `5286c0598d6`)
 
@@ -367,7 +383,7 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 
 ## INFO_NEEDED
 
-1. Resolved by image p2b3 (`39e50ba6036`, `ee1338426b1`): AC3 and AC4 are measured above. Still open on the driver side, from the read-only review and invisible to the model as it is: **R1** (the interrupt-enable offset is read before the subsystem is powered; the model answers `0x120` at any power state — a model that answers all-ones while unpowered would make it visible) and **R2** (no ISR storm guard). An image with their fixes is the next thing to rerun.
+1. Resolved by image p2b3 (`39e50ba6036`, `ee1338426b1`): AC3 and AC4 are measured above. Open on the driver side now: **D3** (the FW_CONFIG tuple list is validated by its version tuple only — `bad-tuples` and `truncated-reply` boot `ok` with 0-byte mailboxes; `evidence/2026-11-25-p2b3/DIVERGENCE.md`), and from the read-only review, invisible to the model as it is: **R1** (the interrupt-enable offset is read before the subsystem is powered; the model answers `0x120` at any power state — a model that answers all-ones while unpowered would make it visible) and **R2** (no ISR storm guard). An image with their fixes is the next thing to rerun.
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.

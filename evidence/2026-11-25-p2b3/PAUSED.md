@@ -49,7 +49,7 @@ remaining work can be resumed without re-deriving anything.
    empty after the restart, so the script starts a fresh summary):
 
    ```sh
-   cd /home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp
+   cd <project>
    cp disk/p2b3.qcow2 /tmp/p2b3-fm.qcow2
    export ISO=$HOME/libernt-build-logs/test-audio-intel-sst-p2b3-a19eacb7fea/bootcd.iso DISK=/tmp/p2b3-fm.qcow2 EVROOT=/tmp/qad-fm-p2b3 ICOUNT=1 HEARTBEAT=0 RECOVER=1 WINDOW=30 COLLECT=$PWD/evidence/2026-11-25-p2b3
    tools/fault-matrix.sh FAULT=never-ready never-enter never-fwready never-reply drop-requests ipc-status=5 bad-tuples truncated-reply version-shift scale:1550 scale:0.001
@@ -64,3 +64,10 @@ remaining work can be resumed without re-deriving anything.
    p2b2 table), `./normalise-evidence.sh`, and the final commit. Board task `33b94861` stays open
    until the report is in.
 4. Task C (unpowered `HFINTIPPTR` read = all-ones, qtest case, mutation row) was **not started**.
+
+---
+
+**Resumed 2026-11-25 01:00 (+02:00)** after the restart: the 11 remaining rows ran with the
+regex fix (rows 10–20 of `fault-matrix.md`, each bounded, each recovered), `tools/fm-check.sh`
+reports 0 failed checks over the 20 rows, and the documentation listed under step 3 was completed
+in the following commit. `fm-never-ready-partial/` is kept only as the record of the interruption.

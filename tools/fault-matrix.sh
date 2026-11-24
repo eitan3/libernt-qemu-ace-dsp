@@ -29,9 +29,9 @@
 #                   command, screenshot, the trace from the booting line as an
 #                   excerpt + the whole trace gzipped)
 #
-# bounded := the driver logs a terminal line (boot ok / timeout / ROM error /
-#            stopped / ABI / version / ipc / crashed / ipc bad reply /
-#            truncated / DSP power down, case-insensitive) within WINDOW
+# bounded := the driver logs a terminal line (boot ok / boot <step> timeout /
+#            ROM error / stopped / ABI / version / ipc / ... crash / ipc bad
+#            reply / truncated / DSP power down, case-insensitive) within WINDOW
 #            guest-seconds of its "booting:" line.
 #
 # This work is licensed under the terms of the GNU GPL, version 2 or later.
@@ -41,7 +41,7 @@ QAD="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 EVROOT="${EVROOT:-/tmp/qad-fault-matrix}"
 DISK="${DISK:-$QAD/disk/p2b2.qcow2}"
 WINDOW="${WINDOW:-30}"
-TERM='intcdsp.*(boot (ok|timeout|ROM error|stopped|ABI|version|ipc|.*crashed)|ipc bad reply|truncated|DSP power down)'
+TERM='intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|.*crash)|ipc bad reply|truncated|DSP power down)'
 mkdir -p "$EVROOT"
 SUMMARY="$EVROOT/fault-matrix.md"
 

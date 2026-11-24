@@ -1,20 +1,20 @@
 ## cycle recover 2026-11-24T22:46:22Z (serial line 162)
 [00:46:32] [  133.344338] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
 Traceback (most recent call last):
-  File "/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/tools/qtest.py", line 68, in <module>
+  File "<project>/tools/qtest.py", line 68, in <module>
     sys.exit(main())
              ~~~~^^
-  File "/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/tools/qtest.py", line 46, in main
+  File "<project>/tools/qtest.py", line 46, in main
     s.connect(sys.argv[1])
     ~~~~~~~~~^^^^^^^^^^^^^
 FileNotFoundError: [Errno 2] No such file or directory
 model (disabled): 
 [00:47:04] [  555.592463] intcdsp.sys: boot ok after 21708 us (clock 566371118 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
 Traceback (most recent call last):
-  File "/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/tools/qtest.py", line 68, in <module>
+  File "<project>/tools/qtest.py", line 68, in <module>
     sys.exit(main())
              ~~~~^^
-  File "/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/tools/qtest.py", line 46, in main
+  File "<project>/tools/qtest.py", line 46, in main
     s.connect(sys.argv[1])
     ~~~~~~~~~^^^^^^^^^^^^^
 FileNotFoundError: [Errno 2] No such file or directory

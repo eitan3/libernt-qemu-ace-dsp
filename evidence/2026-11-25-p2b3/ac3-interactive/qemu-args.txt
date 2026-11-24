@@ -1,6 +1,6 @@
-/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/build/qemu-system-x86_64
+<project>/build/qemu-system-x86_64
 -L
-/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/build/pc-bios
+<project>/build/pc-bios
 -machine
 q35
 -accel
@@ -12,9 +12,9 @@ max
 -m
 2048
 -drive
-if=pflash,format=raw,readonly=on,file=/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/firmware/OVMF_CODE.4m.fd
+if=pflash,format=raw,readonly=on,file=<project>/firmware/OVMF_CODE.4m.fd
 -drive
-if=pflash,format=raw,file=/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/evidence/2026-11-25-p2b3/ac3-interactive/OVMF_VARS.fd
+if=pflash,format=raw,file=<project>/evidence/2026-11-25-p2b3/ac3-interactive/OVMF_VARS.fd
 -audiodev
 none,id=snd0
 -display
@@ -24,7 +24,7 @@ std
 -nic
 none
 -serial
-file:/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/evidence/2026-11-25-p2b3/ac3-interactive/serial.log
+file:<project>/evidence/2026-11-25-p2b3/ac3-interactive/serial.log
 -monitor
 unix:/tmp/qad-vm.654374/monitor.sock,server,nowait
 -qmp
@@ -34,7 +34,7 @@ unix:/tmp/qad-vm.654374/qmp.sock,server,nowait
 -d
 cpu_reset,guest_errors
 -D
-/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/evidence/2026-11-25-p2b3/ac3-interactive/qemu-dbg.log
+<project>/evidence/2026-11-25-p2b3/ac3-interactive/qemu-dbg.log
 -drive
 file=disk/p2b3.qcow2,if=ide,index=0,media=disk,format=qcow2
 -qtest

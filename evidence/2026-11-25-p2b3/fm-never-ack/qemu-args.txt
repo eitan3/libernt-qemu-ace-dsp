@@ -1,6 +1,6 @@
-/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/build/qemu-system-x86_64
+<project>/build/qemu-system-x86_64
 -L
-/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/build/pc-bios
+<project>/build/pc-bios
 -machine
 q35
 -cpu
@@ -10,7 +10,7 @@ max
 -m
 2048
 -drive
-if=pflash,format=raw,readonly=on,file=/home/megan/Projects/LiberNT-IntelDSP-plan/qemu-ace-dsp/firmware/OVMF_CODE.4m.fd
+if=pflash,format=raw,readonly=on,file=<project>/firmware/OVMF_CODE.4m.fd
 -drive
 if=pflash,format=raw,file=/tmp/qad-fm-p2b3/fm-never-ack/OVMF_VARS.fd
 -audiodev
