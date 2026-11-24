@@ -1,4 +1,4 @@
-From ab0a54db21765309e5e7271a10f9edc71e88579e Mon Sep 17 00:00:00 2001
+From 39c271a87acd9cc8689b942c878213db3be767a6 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 10:33:00 +0200
 Subject: [PATCH 5/5] tests/qtest: intel-hda-ace boot handshake, power,

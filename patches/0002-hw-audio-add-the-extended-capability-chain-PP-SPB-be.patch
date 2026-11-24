@@ -1,4 +1,4 @@
-From 94c63c71fd181a95956549be68818d68f61ea28c Mon Sep 17 00:00:00 2001
+From 651a91676fbfdf6f0e654ea54adc36543759f94f Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 09:35:27 +0200
 Subject: [PATCH 2/5] hw/audio: add the extended-capability chain (PP, SPB)
@@ -23,10 +23,11 @@ hdaudbus/adsp.cpp/fdo.cpp (the engine index of a stream is its 0..7 index).
 The capability header layout (version 31:28, id 27:16, next 15:0) is the
 Intel HD Audio specification extended capability header.
 ---
- hw/audio/intel-hda-defs.h     |  26 ++++++
- hw/audio/intel-hda-internal.h |  11 +++
- hw/audio/intel-hda.c          | 169 +++++++++++++++++++++++++++++++++-
- 3 files changed, 205 insertions(+), 1 deletion(-)
+ hw/audio/intel-hda-defs.h     |  26 +++++
+ hw/audio/intel-hda-internal.h |  11 ++
+ hw/audio/intel-hda.c          | 189 +++++++++++++++++++++++++++++++++-
+ hw/audio/trace-events         |   4 +
+ 4 files changed, 229 insertions(+), 1 deletion(-)
 
 diff --git a/hw/audio/intel-hda-defs.h b/hw/audio/intel-hda-defs.h
 index 261bdb48f..0bab36b24 100644
@@ -102,10 +103,18 @@ index 36ee247be..d69b3ef61 100644
  
  #define TYPE_INTEL_HDA_GENERIC "intel-hda-generic"
 diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
-index a336e30f3..eb720aea7 100644
+index a336e30f3..7de1657f9 100644
 --- a/hw/audio/intel-hda.c
 +++ b/hw/audio/intel-hda.c
-@@ -569,6 +569,11 @@ static const struct IntelHDAReg regtab[] = {
+@@ -31,6 +31,7 @@
+ #include "intel-hda-internal.h"
+ #include "migration/vmstate.h"
+ #include "intel-hda-defs.h"
++#include "trace.h"
+ #include "qobject/qdict.h"
+ #include "qapi/error.h"
+ #include "qom/object.h"
+@@ -569,6 +570,11 @@ static const struct IntelHDAReg regtab[] = {
          .offset   = offsetof(IntelHDAState, state_sts),
          .whandler = intel_hda_set_state_sts,
      },
@@ -117,7 +126,7 @@ index a336e30f3..eb720aea7 100644
  
      /* interrupts */
      [ ICH6_REG_INTCTL ] = {
-@@ -983,6 +988,116 @@ static const MemoryRegionOps intel_hda_mmio_ops = {
+@@ -983,6 +989,135 @@ static const MemoryRegionOps intel_hda_mmio_ops = {
      .endianness = DEVICE_NATIVE_ENDIAN,
  };
  
@@ -127,21 +136,28 @@ index a336e30f3..eb720aea7 100644
 +static uint64_t intel_hda_cap_pp_read(void *opaque, hwaddr addr, unsigned size)
 +{
 +    IntelHDAState *d = opaque;
++    uint32_t val;
 +
 +    switch (addr) {
 +    case 0x00:
-+        return ICH6_CAP_HDR(1, 3, ICH6_CAP_SPB_OFFSET);
++        val = ICH6_CAP_HDR(1, 3, ICH6_CAP_SPB_OFFSET);
++        break;
 +    case ICH6_REG_PP_PPCTL:
-+        return d->ppctl;
++        val = d->ppctl;
++        break;
 +    case ICH6_REG_PP_PPSTS:
-+        return d->ppsts;
++        val = d->ppsts;
++        break;
 +    case ICH6_REG_PP_PPCH:
-+        return d->ppch;
++        val = d->ppch;
++        break;
 +    default:
 +        qemu_log_mask(LOG_UNIMP, "intel-hda: PP capability read at +0x%" HWADDR_PRIX "\n",
 +                      addr);
 +        return 0;
 +    }
++    trace_intel_hda_cap_read(ICH6_CAP_PP_OFFSET + addr, val);
++    return val;
 +}
 +
 +static void intel_hda_cap_pp_write(void *opaque, hwaddr addr, uint64_t val,
@@ -159,7 +175,9 @@ index a336e30f3..eb720aea7 100644
 +    default:
 +        qemu_log_mask(LOG_UNIMP, "intel-hda: PP capability write at +0x%" HWADDR_PRIX "\n",
 +                      addr);
++        return;
 +    }
++    trace_intel_hda_cap_write(ICH6_CAP_PP_OFFSET + addr, val);
 +}
 +
 +static const MemoryRegionOps intel_hda_cap_pp_ops = {
@@ -177,24 +195,32 @@ index a336e30f3..eb720aea7 100644
 +    IntelHDAState *d = opaque;
 +    hwaddr off;
 +    unsigned idx;
++    uint32_t val;
 +
 +    switch (addr) {
 +    case 0x00:
-+        return ICH6_CAP_HDR(1, 4, 0);
++        val = ICH6_CAP_HDR(1, 4, 0);
++        goto out;
 +    case ICH6_REG_SPB_SPBFCCTL:
-+        return d->spbfcctl;
++        val = d->spbfcctl;
++        goto out;
 +    }
 +    off = addr - ICH6_CAP_SPB_ENGINE_BASE;
 +    idx = off / ICH6_CAP_SPB_ENGINE_INTERVAL;
 +    switch (off % ICH6_CAP_SPB_ENGINE_INTERVAL) {
 +    case ICH6_SPB_SPIB:
-+        return d->spib[idx];
++        val = d->spib[idx];
++        goto out;
 +    case ICH6_SPB_MAXFIFO_OFF:
-+        return d->maxfifo[idx];
++        val = d->maxfifo[idx];
++        goto out;
 +    }
 +    qemu_log_mask(LOG_UNIMP, "intel-hda: SPB capability read at +0x%" HWADDR_PRIX "\n",
 +                  addr);
 +    return 0;
++out:
++    trace_intel_hda_cap_read(ICH6_CAP_SPB_OFFSET + addr, val);
++    return val;
 +}
 +
 +static void intel_hda_cap_spb_write(void *opaque, hwaddr addr, uint64_t val,
@@ -207,6 +233,7 @@ index a336e30f3..eb720aea7 100644
 +    switch (addr) {
 +    case ICH6_REG_SPB_SPBFCCTL:
 +        d->spbfcctl = val & 0xff;
++        trace_intel_hda_cap_write(ICH6_CAP_SPB_OFFSET + addr, val);
 +        return;
 +    }
 +    if (addr >= ICH6_CAP_SPB_ENGINE_BASE) {
@@ -214,6 +241,7 @@ index a336e30f3..eb720aea7 100644
 +        idx = off / ICH6_CAP_SPB_ENGINE_INTERVAL;
 +        if (idx < 8 && off % ICH6_CAP_SPB_ENGINE_INTERVAL == ICH6_SPB_SPIB) {
 +            d->spib[idx] = val;
++            trace_intel_hda_cap_write(ICH6_CAP_SPB_OFFSET + addr, val);
 +            return;
 +        }
 +    }
@@ -234,7 +262,7 @@ index a336e30f3..eb720aea7 100644
  /* --------------------------------------------------------------------- */
  
  void intel_hda_reset(DeviceState *dev)
-@@ -994,6 +1109,16 @@ void intel_hda_reset(DeviceState *dev)
+@@ -994,6 +1129,16 @@ void intel_hda_reset(DeviceState *dev)
      intel_hda_regs_reset(d);
      d->wall_base_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
  
@@ -251,7 +279,7 @@ index a336e30f3..eb720aea7 100644
      QTAILQ_FOREACH(kid, &d->codecs.qbus.children, sibling) {
          DeviceState *qdev = kid->child;
          cdev = HDA_CODEC_DEVICE(qdev);
-@@ -1007,7 +1132,7 @@ static void intel_hda_realize(PCIDevice *pci, Error **errp)
+@@ -1007,7 +1152,7 @@ static void intel_hda_realize(PCIDevice *pci, Error **errp)
      IntelHDAState *d = INTEL_HDA(pci);
      uint8_t *conf = d->pci.config;
      Error *err = NULL;
@@ -260,7 +288,7 @@ index a336e30f3..eb720aea7 100644
  
      d->name = object_get_typename(OBJECT(d));
  
-@@ -1044,6 +1169,21 @@ static void intel_hda_realize(PCIDevice *pci, Error **errp)
+@@ -1044,6 +1189,21 @@ static void intel_hda_realize(PCIDevice *pci, Error **errp)
      memory_region_add_subregion(&d->container, 0x2000, &d->alias);
      pci_register_bar(&d->pci, 0, 0, &d->container);
  
@@ -282,7 +310,7 @@ index a336e30f3..eb720aea7 100644
      hda_codec_bus_init(DEVICE(pci), &d->codecs, sizeof(d->codecs),
                         intel_hda_response, intel_hda_xfer);
  }
-@@ -1085,6 +1225,28 @@ static const VMStateDescription vmstate_intel_hda_stream = {
+@@ -1085,6 +1245,28 @@ static const VMStateDescription vmstate_intel_hda_stream = {
      }
  };
  
@@ -311,7 +339,7 @@ index a336e30f3..eb720aea7 100644
  const VMStateDescription vmstate_intel_hda = {
      .name = "intel-hda",
      .version_id = 1,
-@@ -1127,6 +1289,10 @@ const VMStateDescription vmstate_intel_hda = {
+@@ -1127,6 +1309,10 @@ const VMStateDescription vmstate_intel_hda = {
          VMSTATE_INT64(wall_base_ns, IntelHDAState),
  
          VMSTATE_END_OF_LIST()
@@ -322,7 +350,7 @@ index a336e30f3..eb720aea7 100644
      }
  };
  
-@@ -1134,6 +1300,7 @@ static const Property intel_hda_properties[] = {
+@@ -1134,6 +1320,7 @@ static const Property intel_hda_properties[] = {
      DEFINE_PROP_UINT32("debug", IntelHDAState, debug, 0),
      DEFINE_PROP_ON_OFF_AUTO("msi", IntelHDAState, msi, ON_OFF_AUTO_AUTO),
      DEFINE_PROP_BOOL("old_msi_addr", IntelHDAState, old_msi_addr, false),
@@ -330,6 +358,18 @@ index a336e30f3..eb720aea7 100644
  };
  
  static void intel_hda_class_init(ObjectClass *klass, const void *data)
+diff --git a/hw/audio/trace-events b/hw/audio/trace-events
+index 30f592154..46a84c407 100644
+--- a/hw/audio/trace-events
++++ b/hw/audio/trace-events
+@@ -61,3 +61,7 @@ virtio_snd_handle_event(void) "event queue callback called"
+ virtio_snd_pcm_stream_flush(uint32_t stream) "flushing stream %"PRIu32
+ virtio_snd_handle_tx_xfer(void) "tx queue callback called"
+ virtio_snd_handle_rx_xfer(void) "rx queue callback called"
++
++# intel-hda.c (the capability chain of the ACE-era controllers)
++intel_hda_cap_read(uint64_t off, uint32_t val) "BAR0 cap +0x%" PRIx64 " -> 0x%08x"
++intel_hda_cap_write(uint64_t off, uint32_t val) "BAR0 cap +0x%" PRIx64 " <- 0x%08x"
 -- 
 2.56.1
 

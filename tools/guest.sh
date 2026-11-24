@@ -10,16 +10,16 @@
 # This work is licensed under the terms of the GNU GPL, version 2 or later.
 # See the COPYING file in the top-level directory.
 set -u
-cd "$(dirname "$0")"
 EV="${1:?usage: guest.sh <evidence-dir> key|type|shot|mon|stop ...}"
-EV="$(cd "$EV" && pwd)"
+EV="$(cd "$EV" 2>/dev/null && pwd)" || { echo "guest.sh: no such evidence dir: $1" >&2; exit 2; }
 shift
-SOCK="$(cat "$EV/sock-dir.txt")"
+QAD="$(cd "$(dirname "$0")/.." && pwd)"
+SOCK="$(cat "$EV/sock-dir.txt" 2>/dev/null)" || { echo "guest.sh: no sock-dir.txt in $EV" >&2; exit 2; }
 case "$1" in
-    key)  shift; python3 tools/mon.py "$SOCK/monitor.sock" key "$@" ;;
-    type) shift; python3 tools/mon.py "$SOCK/monitor.sock" type "$@" ;;
-    shot) shift; NAME="${1:-shot}"; python3 tools/mon.py "$SOCK/monitor.sock" "screendump $EV/$NAME.png -f png" >/dev/null; ls -la "$EV/$NAME.png" ;;
-    mon)  shift; python3 tools/mon.py "$SOCK/monitor.sock" "$@" ;;
+    key)  shift; python3 "$QAD/tools/mon.py" "$SOCK/monitor.sock" key "$@" ;;
+    type) shift; python3 "$QAD/tools/mon.py" "$SOCK/monitor.sock" type "$@" ;;
+    shot) shift; NAME="${1:-shot}"; python3 "$QAD/tools/mon.py" "$SOCK/monitor.sock" "screendump $EV/$NAME.png -f png" >/dev/null; ls -la "$EV/$NAME.png" ;;
+    mon)  shift; python3 "$QAD/tools/mon.py" "$SOCK/monitor.sock" "$@" ;;
     stop) kill -TERM "$(cat "$SOCK/qemu.pid")" && echo "terminated $(cat "$SOCK/qemu.pid")" ;;
     *) echo "usage: guest.sh <evidence-dir> key|type|shot|mon|stop ..." >&2; exit 2 ;;
 esac

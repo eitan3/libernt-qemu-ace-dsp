@@ -1,4 +1,4 @@
-From 301bdbc6f6819aa27e6ec9a8b46d869baaa74277 Mon Sep 17 00:00:00 2001
+From 74ca70f5bdaf437703668b5b8f61534b5d7c0f34 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 10:12:38 +0200
 Subject: [PATCH 4/5] hw/audio: add intel-hda-ace, the Intel ACE 1.0 audio DSP
@@ -1847,13 +1847,13 @@ index 2154cbdb5..0ba79ba71 100644
  system_ss.add(when: 'CONFIG_PCSPK', if_true: files('pcspk.c'))
  system_ss.add(when: 'CONFIG_PL041', if_true: files('pl041.c', 'lm4549.c'))
 diff --git a/hw/audio/trace-events b/hw/audio/trace-events
-index 30f592154..582701928 100644
+index 46a84c407..a50ff0e80 100644
 --- a/hw/audio/trace-events
 +++ b/hw/audio/trace-events
-@@ -61,3 +61,14 @@ virtio_snd_handle_event(void) "event queue callback called"
- virtio_snd_pcm_stream_flush(uint32_t stream) "flushing stream %"PRIu32
- virtio_snd_handle_tx_xfer(void) "tx queue callback called"
- virtio_snd_handle_rx_xfer(void) "rx queue callback called"
+@@ -65,3 +65,14 @@ virtio_snd_handle_rx_xfer(void) "rx queue callback called"
+ # intel-hda.c (the capability chain of the ACE-era controllers)
+ intel_hda_cap_read(uint64_t off, uint32_t val) "BAR0 cap +0x%" PRIx64 " -> 0x%08x"
+ intel_hda_cap_write(uint64_t off, uint32_t val) "BAR0 cap +0x%" PRIx64 " <- 0x%08x"
 +
 +# intel-hda-ace.c
 +ace_reg_read(uint64_t off, uint32_t val, const char *reg) "BAR4 +0x%" PRIx64 " -> 0x%08x %s"

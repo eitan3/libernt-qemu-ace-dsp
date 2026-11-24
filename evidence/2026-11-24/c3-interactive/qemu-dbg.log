@@ -63,3 +63,11 @@ ace_reg_read BAR4 +0x73228 -> 0x00000000 HFIPCXCTL
 ace_reg_read BAR4 +0x120 -> 0x00000000 INTEN (register the pointer names, model value)
 ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
 ace_reg_read BAR4 +0x163204 -> 0x00000000 ROM error
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1108 -> 0x00000120 HFINTIPPTR (model value)
+ace_reg_read BAR4 +0x1140 -> 0x00000000 HfHIPCIE
+ace_reg_read BAR4 +0x73228 -> 0x00000000 HFIPCXCTL
+ace_reg_read BAR4 +0x120 -> 0x00000000 INTEN (register the pointer names, model value)
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_reg_read BAR4 +0x163204 -> 0x00000000 ROM error
+ace_reg_read BAR4 +0x1108 -> 0x00000120 HFINTIPPTR (model value)

@@ -1,0 +1,2 @@
+intel-hda-ace: st #4: reset
+qemu-system-x86_64: terminating on signal 15 from pid 423084 (/bin/bash)

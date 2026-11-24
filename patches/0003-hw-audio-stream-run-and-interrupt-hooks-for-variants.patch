@@ -1,4 +1,4 @@
-From 7e2143561eee3bb2442bbc6e5eaf175feb686ba9 Mon Sep 17 00:00:00 2001
+From deef3538408b31289ccc3244e83664693758d04c Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 09:38:40 +0200
 Subject: [PATCH 3/5] hw/audio: stream-run and interrupt hooks for variants
@@ -36,10 +36,10 @@ index d69b3ef61..1ef84c7fd 100644
      const struct IntelHDAReg *last_reg;
      uint32_t last_val;
 diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
-index eb720aea7..ca1051e1a 100644
+index 7de1657f9..4dac85831 100644
 --- a/hw/audio/intel-hda.c
 +++ b/hw/audio/intel-hda.c
-@@ -161,6 +161,9 @@ static void intel_hda_update_int_sts(IntelHDAState *d)
+@@ -162,6 +162,9 @@ static void intel_hda_update_int_sts(IntelHDAState *d)
          }
      }
  
@@ -49,7 +49,7 @@ index eb720aea7..ca1051e1a 100644
      /* update global status */
      if (sts & d->int_ctl) {
          sts |= (1U << 31);
-@@ -508,10 +511,16 @@ static void intel_hda_set_st_ctl(IntelHDAState *d, const IntelHDAReg *reg, uint3
+@@ -509,10 +512,16 @@ static void intel_hda_set_st_ctl(IntelHDAState *d, const IntelHDAReg *reg, uint3
                     reg->stream, stnr, st->cbl);
              intel_hda_parse_bdl(d, st);
              intel_hda_notify_codecs(d, stnr, true, output);

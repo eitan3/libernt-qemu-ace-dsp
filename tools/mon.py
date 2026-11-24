@@ -33,7 +33,10 @@ def hmp(s, cmd, wait=0.4):
             out += s.recv(65536)
     except socket.timeout:
         pass
-    return out.decode(errors='replace').strip()
+    text = out.decode(errors='replace')
+    # the monitor echoes the command (readline): keep only what follows the
+    # last prompt, i.e. the command's own output
+    return text.rsplit('(qemu) ', 1)[-1].strip()
 
 
 # QEMU key names for the characters a command line needs (shift chords for
@@ -58,10 +61,10 @@ def key_for(ch):
     return KEYS.get(ch, ch)
 
 
-def type_text(s, text, hold=40):
+def type_text(s, text, hold=20):
     for ch in text:
-        hmp(s, 'sendkey %s %d' % (key_for(ch), hold), wait=0.03)
-        time.sleep(0.02)
+        hmp(s, 'sendkey %s %d' % (key_for(ch), hold), wait=0.01)
+        time.sleep(0.01)
 
 
 def main():
