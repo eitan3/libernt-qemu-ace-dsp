@@ -1,0 +1,46 @@
+1795541244.218512193 ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+1795541244.220735565 ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+1795541244.256938103 ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1795541244.259239604 ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+1795541244.261252115 ace_reg_write BAR4 +0x178d04 <- 0x02000000 DSP2CXCTL
+1795541244.263344828 ace_reg_write BAR4 +0x178d04 <- 0x02000001 DSP2CXCTL
+1795541244.265845140 ace_state state core-reset -> core-powered (model value: CPA 200 us)
+1795541244.267912261 ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+1795541244.270300912 ace_state state off -> purging
+1795541244.272051207 ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+1795541244.274375132 ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+1795541244.276689613 ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1795541244.278769130 ace_reg_write BAR4 +0x120 <- 0x00000001 INTEN (register the pointer names, model value)
+1795541244.280703563 ace_reg_write BAR4 +0x1140 <- 0x00000001 HfHIPCIE
+1795541244.282841014 ace_reg_write BAR4 +0x73228 <- 0x00000003 HFIPCXCTL
+1795541244.284427248 ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+1795541244.285712304 ace_state state purging -> rom-ready
+1795541244.287236386 ace_payload_check ROM rule stream contract: 1
+1795541244.289614830 ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+1795541244.291059083 ace_state state rom-ready -> loading
+1795541244.293928736 ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+1795541244.295606588 ace_payload_check ROM rule partition directory: 1
+1795541244.296834978 ace_payload_check ROM rule manifest: 1
+1795541244.298462629 ace_payload_check ROM rule firmware header: 1
+1795541244.300231296 ace_payload_check ROM rule module segments: 1
+1795541244.301933925 ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+1795541244.303998290 ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+1795541244.305966406 ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+1795541244.307497249 ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+1795541244.308721336 ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+1795541244.310328934 ace_state state loading -> running
+1795541244.311747744 ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+1795541244.312910453 ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+1795541244.314319362 ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1795541244.316243023 ace_irq DSP interrupt 1 (msi 0)
+1795541244.318580303 ace_irq DSP interrupt 0 (msi 0)
+1795541244.320450799 ace_reg_write BAR4 +0x120 <- 0x00000000 INTEN (register the pointer names, model value)
+1795541244.322267743 ace_reg_write BAR4 +0x1140 <- 0x00000000 HfHIPCIE
+1795541244.324682666 ace_reg_write BAR4 +0x73228 <- 0x00000000 HFIPCXCTL
+1795541244.326531730 ace_reg_write BAR4 +0x73200 <- 0x9b080000 HFIPCXTDR
+1795541244.328363697 ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+1795541244.329951128 ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+1795541244.332311931 ace_ipc IPC request primary 0x41000000 ext 0x00700000
+1795541244.333961517 ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+1795541244.335826522 ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+1795541244.337917835 ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<tmp-run>/rawhmp.py", line 8, in <module>
+    s.connect(sys.argv[1])
+    ~~~~~~~~~^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory

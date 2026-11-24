@@ -1,0 +1,69 @@
+From f2c2b2d5140ccac324f76b95aec2600c9f220c4d Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 21:19:36 +0200
+Subject: [PATCH 8/8] tests/qtest: intel-hda-ace: sample FW_ENTERED before the
+ running bit
+
+The ROM's FW_ENTERED (top bit clear) is asserted at +2000 and still at the
+FW_READY time +2200, the firmware's status word at +4000, so the case fails
+on a model that sets the top bit with the state code or with FW_READY.
+---
+ tests/qtest/intel-hda-ace-test.c | 22 ++++++++++++++++++----
+ 1 file changed, 18 insertions(+), 4 deletions(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index 2576416a8..acfa9d307 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -312,8 +312,9 @@ static void run_loader(uint32_t bytes)
+ 
+ /* walk the ROM to FW_ENTERED and receive FW_READY, sampled at every state:
+  * FW_MANIFEST_IN_DMA_BUFF at +0, LOAD_FW_MAN_TO_IMR +400, LOAD_FW_CODE_TO_IMR
+- * +800, FW_LOADING_DONE +1200, FW_CODE_LOADED +1600, entered at +2000,
+- * FW_READY at +2200 */
++ * +800, FW_LOADING_DONE +1200, FW_CODE_LOADED +1600, entered at +2000
++ * (the ROM's status: the top bit clear), FW_READY at +2200 (the status still
++ * the ROM's), the firmware's status word at +4000 */
+ static void firmware_ready(void)
+ {
+     static const uint32_t walk[] = { 0x27, 0x28, 0x29, 0x2a };
+@@ -327,13 +328,26 @@ static void firmware_ready(void)
+     qtest_clock_step(t.qs, US(390));
+     g_assert_cmpuint(r4(ACE_FSR), ==, 0x2a);        /* not yet entered */
+     qtest_clock_step(t.qs, US(20));
+-    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_RUNNING);
++    /* entered: the ROM's own status, the top bit clear -- a host that
++     * checks the halt bit before the state code must see this first */
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_FW_ENTERED);
+     g_assert_cmpuint(r4(ACE_XTDR), ==, 0);          /* FW_READY comes 200 us later */
+     qtest_clock_step(t.qs, US(200));
+     g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_FW_READY);
+     g_assert_cmpuint(r4(ACE_XTDDY), ==, 0);
+     g_assert_cmpuint(r4(ACE_WIN0 + ACE_FW_ABI_VER), ==, 1);
+     g_assert_cmpuint(r4(ACE_WIN0 + ACE_FW_ROM_INFO), ==, 0x0120315a);
++    /* FW_READY at +2200: the ROM's word is still the status (and window 0's
++     * mirror of it); the firmware's status word comes at +4000, so that the
++     * ROM's FW_ENTERED stays readable for several 500 us host polls */
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_FW_ENTERED);
++    g_assert_cmpuint(r4(ACE_WIN0), ==, FSR_FW_ENTERED);
++    /* from FW_READY: the status word is entry + 2 ms, i.e. 1.77 ms away here
++     * (the 20 us step above lands 30 us after the FW_READY timer) */
++    qtest_clock_step(t.qs, US(1700));
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_FW_ENTERED); /* not yet */
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r4(ACE_FSR), ==, FSR_RUNNING); /* the firmware's status, with its module */
+     g_assert_cmpuint(r4(ACE_WIN0), ==, FSR_RUNNING);
+ }
+ 
+@@ -660,7 +674,7 @@ static void check_fault(const FaultShape *f)
+     }
+     w4(ACE_XIDA, ACE_BUSY);
+     run_loader(IMG_LEN - IMG_PAYLOAD);
+-    qtest_clock_step(t.qs, US(3000));
++    qtest_clock_step(t.qs, US(4200));     /* past the firmware's status word at +4000 */
+     g_assert_cmpuint(r4(ACE_FSR), ==, f->fsr_loaded);
+     g_assert_cmpuint(r4(ACE_XTDR), ==, f->xtdr);
+     g_assert_cmpuint(r4(ACE_WIN0), ==, f->win0);
+-- 
+2.56.1
+

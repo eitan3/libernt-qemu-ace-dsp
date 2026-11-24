@@ -1,0 +1,123 @@
+From 43ca41f32356b282c6b14651c78424cdf461246b Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Tue, 24 Nov 2026 21:19:36 +0200
+Subject: [PATCH 7/8] hw/audio: intel-hda-ace: FW_ENTERED is the ROM's word,
+ the running bit the firmware's
+
+The model set the firmware status register to running | BASE_FW | FW_ENTERED
+(0xA0000005) in the same instant the ROM reported FW_ENTERED.  The real
+sequence has two events: the ROM reports FW_ENTERED with the top bit clear,
+and the firmware sets the top bit (ipc4_fw_status_reg.running) once it runs.
+A host that samples the top bit before the state code -- the LiberNT driver
+checks the halt bit first -- therefore read its first sample of state 5 as a
+halt and reported "boot ROM error ... ROM status 0xa0000005 firmware entered".
+
+Report FW_ENTERED as the ROM's own status (module ROM, top bit clear), post
+FW_READY 200 us later as before, and write the firmware's status word only
+2 ms after entry (a model value): the ROM's word has to stay readable for
+several 500 us host polls, or a host that polls slower than the FW_READY delay
+sees the running bit in its first sample again.  The never-fwready fault keeps
+the firmware's status word (the firmware runs; only the notification is
+missing).
+---
+ docs/system/devices/intel-hda-ace.rst |  7 +++++--
+ hw/audio/intel-hda-ace-regs.h         |  7 +++++--
+ hw/audio/intel-hda-ace.c              | 28 ++++++++++++++++++++++-----
+ 3 files changed, 33 insertions(+), 9 deletions(-)
+
+diff --git a/docs/system/devices/intel-hda-ace.rst b/docs/system/devices/intel-hda-ace.rst
+index 38edbd8c4..a9c3c55fd 100644
+--- a/docs/system/devices/intel-hda-ace.rst
++++ b/docs/system/devices/intel-hda-ace.rst
+@@ -51,7 +51,9 @@ acknowledged with DONE and the ROM reaches INIT_DONE, the code-loader
+ stream (the output stream whose tag the purge request named) is consumed
+ through DMA up to its SPIB value, the ROM walks its load states and enters
+ the firmware, the firmware register block appears in window 0 and a
+-FW_READY notification is posted; the FW_CONFIG request is answered with a
++FW_READY notification is posted (the ROM's FW_ENTERED status word, top bit
++clear, is followed by the firmware's own status word, running, module
++BASE_FW, so that a host polling for the halt bit sees FW_ENTERED first); the FW_CONFIG request is answered with a
+ TLV list whose version is read from the streamed image.  The interrupt
+ (INTx or MSI) is asserted only while a notification or reply is pending and
+ the host has set every enable (the register the interrupt pointer names,
+@@ -95,7 +97,8 @@ BAR4 2 MB, the capability offsets 0x180/0x700, the interrupt pointer
+ ``HFINTIPPTR`` = 0x120 (the interrupt-enable register sits at BAR4 + 0x120),
+ powered-down reads 0, the timings (CPA 100/200 us after the requests, DONE
+ 100 us after the purge, INIT_DONE 500 us later, firmware entry 2 ms after
+-the stream runs, FW_READY 200 us later, a reply 50 us after a request), the
++the stream runs, FW_READY 200 us later, the firmware's status word 2 ms
++after entry, a reply 50 us after a request), the
+ ROM info word 0x0120315A and the firmware configuration constants of the
+ reply (4096/4096-byte mailboxes, 128 KiB trace log, 16 pipelines, 4
+ libraries).  Traces print them as "(model value)".
+diff --git a/hw/audio/intel-hda-ace-regs.h b/hw/audio/intel-hda-ace-regs.h
+index 253bbd045..abaaaa242 100644
+--- a/hw/audio/intel-hda-ace-regs.h
++++ b/hw/audio/intel-hda-ace-regs.h
+@@ -101,8 +101,11 @@
+ #define ACE_FSR_WAIT_MASK        0x0f000000u
+ #define ACE_FSR_MODULE_SHIFT     28
+ #define ACE_FSR_MODULE_MASK      0x70000000u
+-#define ACE_FSR_HALTED           (1u << 31) /* while the ROM runs */
+-#define ACE_FSR_RUNNING          (1u << 31) /* once the firmware entered */
++/* the top bit has two owners: the ROM sets it when it halts, the firmware
++ * sets it once it runs (its own status word, 2 ms after entry: a model
++ * value); the ROM's FW_ENTERED carries neither */
++#define ACE_FSR_HALTED           (1u << 31) /* a halted ROM */
++#define ACE_FSR_RUNNING          (1u << 31) /* the running firmware */
+ 
+ #define ACE_FSR_INIT_DONE        0x1 /* module independent */
+ #define ACE_FSR_FW_ENTERED       0x5 /* module independent */
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 336741e59..3b529030b 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -152,6 +152,7 @@ static const AcePersonality ace_personalities[] = {
+ #define ACE_US_ROM_INIT_DONE      500  /* INIT_DONE after the ack */
+ #define ACE_US_ROM_WALK_STEP      400  /* each of the five load states */
+ #define ACE_US_FW_READY           200  /* FW_READY after the firmware entered */
++#define ACE_US_FW_RUNNING         2000  /* the firmware's own status word after entry */
+ #define ACE_US_IPC_REPLY           50
+ #define ACE_PAYLOAD_MAX (16 * 1024 * 1024)
+ 
+@@ -523,15 +524,32 @@ static void ace_rom_timer_cb(void *opaque)
+         if (s->fault_id == ACE_FAULT_NEVER_ENTER) {
+             return;         /* the ROM never enters the firmware */
+         }
+-        ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true /* running */);
++        /* the ROM's last word: the firmware entered.  It is the ROM's own
++         * status (module ROM, the top bit clear); the top bit is set later
++         * by the firmware itself, when it runs.  A host that samples the
++         * top bit before the state code must be able to see FW_ENTERED
++         * without it (P2a NOTES: after FW_ENTERED bit 31 means running,
++         * the firmware's ipc4_fw_status_reg.running) */
++        ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);
+         ace_set_state(s, ACE_RUNNING);
+-        if (s->fault_id != ACE_FAULT_NEVER_FWREADY) {
+-            ace_arm(s->rom_timer, ace_delay(s, ACE_US_FW_READY));
+-        }
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_FW_READY));
+         return;
+     case 5:
+         s->rom_step = 6;
+-        ace_fw_ready(s);
++        /* the firmware's register block and the notification (model value:
++         * the firmware's init takes the FW_READY delay); a missing FW_READY
++         * is the never-fwready fault, the firmware still runs */
++        if (s->fault_id != ACE_FAULT_NEVER_FWREADY) {
++            ace_fw_ready(s);
++        }
++        /* the firmware's status word comes later still, so that the ROM's
++         * FW_ENTERED stays readable for several host polls (the LiberNT
++         * driver polls every 500 us): model value */
++        ace_arm(s->rom_timer, ace_delay(s, ACE_US_FW_RUNNING - ACE_US_FW_READY));
++        return;
++    case 6:
++        s->rom_step = 7;
++        ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true /* running */);
+         return;
+     default:
+         return;
+-- 
+2.56.1
+

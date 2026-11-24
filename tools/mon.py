@@ -8,6 +8,7 @@
 #
 # This work is licensed under the terms of the GNU GPL, version 2 or later.
 # See the COPYING file in the top-level directory.
+import os
 import socket
 import sys
 import time
@@ -24,13 +25,22 @@ def connect(path):
     return s
 
 
-def hmp(s, cmd, wait=0.4):
+def hmp(s, cmd, wait=0.0, timeout=1.5):
     s.sendall((cmd + '\n').encode())
-    time.sleep(wait)
+    if wait:
+        time.sleep(wait)
     out = b''
+    s.settimeout(timeout)
     try:
+        # the monitor answers a command with its output followed by a new
+        # prompt: stop there instead of waiting for the socket timeout
         while True:
-            out += s.recv(65536)
+            chunk = s.recv(65536)
+            if not chunk:
+                break
+            out += chunk
+            if out.rstrip().endswith(b'(qemu)'):
+                break
     except socket.timeout:
         pass
     text = out.decode(errors='replace')
@@ -61,10 +71,15 @@ def key_for(ch):
     return KEYS.get(ch, ch)
 
 
-def type_text(s, text, hold=20):
+def type_text(s, text, hold=None, delay=None):
+    # per key: hold ms and the pause after it, both from the environment
+    # (GUEST_TYPE_HOLD, GUEST_TYPE_DELAY); the PS/2 queue holds 256 bytes, so
+    # a guest under TCG keeps up at ~100 ms per key
+    hold = int(os.environ.get('GUEST_TYPE_HOLD', 20)) if hold is None else hold
+    delay = float(os.environ.get('GUEST_TYPE_DELAY', 0.1)) if delay is None else delay
     for ch in text:
-        hmp(s, 'sendkey %s %d' % (key_for(ch), hold), wait=0.01)
-        time.sleep(0.01)
+        hmp(s, 'sendkey %s %d' % (key_for(ch), hold))
+        time.sleep(delay)
 
 
 def main():

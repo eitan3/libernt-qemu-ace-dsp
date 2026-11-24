@@ -1,0 +1,210 @@
+1795541231.537668571 
+1795541231.541665783 LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+1795541231.548936338 Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+1795541231.554707624 UDP log broadcast to port 6666 on 0 network adapters
+1795541231.564577720 OS loader: describing the platform
+1795541231.580304582 OS loader: reading the memory map
+1795541231.606418011 OS loader: allocating the loader stack
+1795541231.611549855 OS loader: switching to the loader stack at 000000007D426000
+1795541231.617877881 OS loader: selecting the boot entry
+1795541231.625004047 OS loader: reading the boot entry
+1795541231.636086931 OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+1795541231.667378758 OS loader: loading the SYSTEM hive
+1795541231.806041615 OS loader: loading ntoskrnl.exe and hal.dll
+1795541238.813455806 OS loader: loading the NLS files
+1795541238.860182080 OS loader: loading the boot drivers
+1795541239.260644260 OS loader: preparing the kernel address space
+1795541239.268436683 OS loader: machine-dependent state built, amd64 ready
+1795541239.317535871 OS loader: kernel memory layout built, its pml4 at 000000007DEAE000, firmware cr3 still 000000007F801000
+1795541239.321603623 OS loader: leaving the firmware boot services
+1795541239.344534999 OS loader: firmware boot services exited
+1795541239.349642252 OS loader: processor context set, cr3 000000007DEAE000 cr4 0000000000000668
+1795541239.353157364 OS loader: firmware runtime moved to its virtual addresses
+1795541239.356861780 OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+1795541239.359350742 OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+1795541239.362202913 OS loader: entry FFFFF8007BE872C0, loader block FFFFF8007DEB0000, arc disks FFFFF8007DEB11B0, registry 3112960 bytes at FFFFF8007CCF6000
+1795541239.373034979 [    0.000000] KDLOGWD: disabled, timeout 0 seconds
+1795541239.375209849 [    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC5C700, Gdt = FFFFF8007DEAB000, Idt = FFFFF8007BC37340, Tss = FFFFF8007DEAD000
+1795541239.377056238 [    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+1795541239.392757912 [    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+1795541239.398236857 [    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+1795541239.400342644 [    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+1795541239.536750335 [    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1008292000 Hz
+1795541239.539791102 [    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+1795541239.543437866 [    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+1795541239.545810991 [    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+1795541239.547440442 [    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC5C880
+1795541239.849058971 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+1795541239.851413917 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+1795541239.853694067 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+1795541239.855839696 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+1795541239.857505082 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+1795541239.859359248 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+1795541239.861349415 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+1795541239.863175884 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+1795541239.864545142 [    0.299243] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+1795541240.312377506 [    0.771365] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+1795541240.314004354 [    0.771365] (\ntos\ke\cpuctrl.c:831) All 1 processors have efficiency class 0
+1795541240.770245002 [0m[s[999;999H[6n[u[    1.228153] ACPI: RSDP 0x000000000C3C8560 000024 (v02 ROS   )
+1795541240.772300218 [    1.228153] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+1795541240.774381055 [    1.228153] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+1795541240.776288992 [    1.228153] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+1795541240.778508875 [    1.228153] ACPI: FACS 0x000000007FECA000 000040
+1795541240.780301491 [    1.228153] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+1795541240.782226121 [    1.228153] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+1795541240.783851205 [    1.228153] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+1795541240.785739877 [    1.228153] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+1795541240.787538076 [    1.228153] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+1795541240.811473834 [    1.259957] ACPI: 1 ACPI AML tables successfully acquired and loaded
+1795541240.831117974 [    1.291008] ACPI: Enabled 2 GPEs in block 00 to 3F
+1795541240.909465738 [    1.369956] (\ntos\po\sleep.c:372) Power state handler 2 registered
+1795541240.911413002 [    1.369956] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+1795541240.913211534 [    1.369956] (\ntos\po\sleep.c:372) Power state handler 3 registered
+1795541240.914680289 [    1.369956] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+1795541240.922228979 [    1.385780] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+1795541240.942952732 [    1.401445] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+1795541240.997558317 [    1.448746] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+1795541241.013833268 [    1.464511] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+1795541241.016223562 [    1.464511] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+1795541241.163871078 [    1.621935] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATAPI 'QEMU DVD-ROM' fw '2.5+' 0 sectors of 0 bytes
+1795541241.679408553 [    2.141827] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011AB90 FFFF81803F213B00)
+1795541241.853532139 [    2.315085] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001605D0
+1795541241.875711082 [    2.331224] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+1795541241.882484691 [    2.331224] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+1795541243.298695476 [    3.748713] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+1795541243.301011630 [    3.748713] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 363483, disk byte 1556983808
+1795541243.307555148 [    3.748713] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+1795541243.658144714 0000œ€€è04‰€€\SystemRoot\system32\drivers\BasicDisplay.sysª[    3.991393] (\drivers\directx\dxgkrnl\adapter.c:13161) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF81800053B1A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+1795541243.792201340 [    4.148444] (\drivers\directx\dxgkrnl\adapter.c:15092) DXGKRNL: DxgkAdapterStart: adapter FFFF81800053B1A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+1795541243.794480516 [    4.148444] (\drivers\directx\dxgkrnl\adapter.c:6424) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+1795541243.881840151 [    4.239968] (\drivers\directx\dxgkrnl\display.c:6516) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800053B1A0 desktop ready 1280x800 (scanout)
+1795541243.883630744 [    4.241847] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+1795541244.016720811 [    4.366720] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+1795541244.018600020 [    4.366720] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007200000, processing capabilities at BAR0 +0x180
+1795541244.023449205 [    4.366720] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+1795541244.025411122 [    4.383276] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+1795541244.105483210 [    4.461743] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+1795541244.111464278 [    4.461743] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+1795541244.113823634 [    4.461743] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+1795541244.119290567 [    4.476736] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1188) HDAUDIO: SubdeviceName eLineOutWave
+1795541244.126931492 [    4.476736] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1864) HDAUDIO: SubdeviceName eLineOutTopo
+1795541244.135815628 [    4.492316] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1249) HDAUDIO: SubdeviceName eLineInWave
+1795541244.138750640 [    4.492316] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1864) HDAUDIO: SubdeviceName eLineInTopo
+1795541244.171919500 [    4.523768] intcdsp.sys: loaded for the Intel audio DSP child
+1795541244.176387797 [    4.523768] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+1795541244.178592898 [    4.523768] intcdsp.sys: NHLT table: the bus driver reports none
+1795541244.180717010 [    4.523768] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+1795541244.182515502 [    4.523768] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+1795541244.184306656 [    4.523768] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+1795541244.186196344 [    4.523768] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+1795541244.205383552 [    4.555104] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+1795541244.207365310 [    4.555104] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+1795541244.212740266 [    4.555104] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+1795541244.218188986 [    4.570958] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000
+1795541244.220737459 [    4.570958] intcdsp.sys: subsystem powered
+1795541244.255911709 [    4.602592] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+1795541244.261596311 [    4.618026] intcdsp.sys: ROM ready for the firmware
+1795541244.268209852 [    4.618026] intcdsp.sys: firmware entered
+1795541244.271501485 [    4.618026] intcdsp.sys: DSP message 0x1b080000|0x00000000
+1795541244.274904837 [    4.618026] intcdsp.sys: FW_READY received
+1795541247.569652877 [    7.926313] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541250.596438225 [   10.950680] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541253.665894162 [   14.022379] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541256.721785328 [   17.078161] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541259.779218340 [   20.134194] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541262.834669941 [   23.190263] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541265.876153552 [   26.230449] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541268.963840364 [   29.318255] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541272.019855121 [   32.374038] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541275.091633306 [   35.445339] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541278.164519763 [   38.517019] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541281.189749972 [   41.541407] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541284.229776305 [   44.581760] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541287.303370387 [   47.653887] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541290.360106254 [   50.711099] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541293.415456633 [   53.765471] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541296.471327973 [   56.820826] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541299.543625458 [   59.892731] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541302.615193183 [   62.964192] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541305.655769738 [   66.004508] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541308.696829017 [   69.044948] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541311.737885010 [   72.084778] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541314.778354286 [   75.125059] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541317.866362509 [   78.212224] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541320.923480121 [   81.268994] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541323.947846905 [   84.292885] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541326.989806357 [   87.333359] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541330.094002914 [   90.437946] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541333.164336411 [   93.507897] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541336.269563333 [   96.612512] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541339.308067425 [   99.650954] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541352.226800741 [  112.567887] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541355.298959454 [  115.639532] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541358.339772943 [  118.679149] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541385.200286856 [  145.528764] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541388.242382825 [  148.575214] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541391.298105254 [  151.631052] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541394.354562060 [  154.686889] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541397.410971214 [  157.743053] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541400.436621488 [  160.767053] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541403.475837246 [  163.807222] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541406.517317522 [  166.847416] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541409.588534876 [  169.918600] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541412.646656916 [  172.974858] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541415.706155362 [  176.034282] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541418.758762004 [  179.086182] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541421.814783153 [  182.142493] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541424.934440581 [  185.260971] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541447.122511323 [  207.441310] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541450.173126412 [  210.495601] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541453.214747704 [  213.535216] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541456.254687429 [  216.575747] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541459.294802568 [  219.615621] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541487.460576439 [  247.756704] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541490.488911248 [  250.804172] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541493.546437745 [  253.860034] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541496.635387229 [  256.950281] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541552.847267962 [  313.151168] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541555.934232927 [  316.237546] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541558.990456135 [  319.293698] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541562.062364044 [  322.365392] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541565.103205779 [  325.404871] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541568.143350064 [  328.445281] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541571.184401618 [  331.485235] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541574.224466478 [  334.525148] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541577.249490768 [  337.549591] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541580.305469036 [  340.605344] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541596.738103881 [  357.034779] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541599.810390788 [  360.106929] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541602.865834284 [  363.161978] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541605.922697586 [  366.218110] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541608.994503900 [  369.289699] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541612.036656757 [  372.330155] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541615.060437690 [  375.353931] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541618.116654886 [  378.409935] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541621.142046891 [  381.434159] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541624.166446142 [  384.458703] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541627.192285213 [  387.483459] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541630.247692137 [  390.539125] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541633.304530796 [  393.594585] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541636.344923365 [  396.634772] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541639.417441794 [  399.706323] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541642.476531179 [  402.763972] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541645.530353269 [  405.818887] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541648.601765398 [  408.889781] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541651.625839425 [  411.914115] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541654.651403161 [  414.938460] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541657.723499956 [  418.010015] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541660.795240942 [  421.081521] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541663.852581534 [  424.137664] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541666.893484414 [  427.177651] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541669.996524849 [  430.280585] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541673.052040603 [  433.336442] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541676.108933092 [  436.392094] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541679.149468577 [  439.432339] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541682.189781602 [  442.472583] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541685.215447558 [  445.496958] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541688.271537776 [  448.552665] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541691.328309879 [  451.608492] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541694.384660703 [  454.664326] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+1795541697.457246088 [  457.735968] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes

@@ -1,0 +1,25 @@
+evidence: <tmp-run>/evidence/fm-halt-fw=51
+qemu exited rc=0 (none) at 2026-11-24T18:39:26Z; wall 18 s
+--- serial lines of the drivers under test (hdaudbus.sys / intcdsp.sys):
+[    4.298278] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    4.298278] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007200000, processing capabilities at BAR0 +0x180
+[    4.298278] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    4.298278] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    4.402662] intcdsp.sys: loaded for the Intel audio DSP child
+[    4.402662] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    4.402662] intcdsp.sys: NHLT table: the bus driver reports none
+[    4.402662] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    4.402662] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    4.402662] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[    4.402662] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    4.434173] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    4.434173] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[    4.434173] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    4.449942] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000
+[    4.449942] intcdsp.sys: subsystem powered
+[    4.481499] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[    4.481499] intcdsp.sys: ROM ready for the firmware
+[    4.497078] intcdsp.sys: boot ROM error after 0 us: state failed, failed in loading (ROM error), ROM status 0x8000002a ROM firmware code loaded, ROM error 0x00000033 base firmware incompatible, IPC status 0, attempt 1, 0 DSP interrupts, cleanup ok
+[    4.497078] intcdsp.sys: DSP power down from state off: ok, cleanup ok
+--- device trace: 92 ace_* lines, 0 ace_unexpected (in <tmp-run>/evidence/fm-halt-fw=51/qemu-dbg.log, the -D log), 0
+0 fatal lines in serial.log

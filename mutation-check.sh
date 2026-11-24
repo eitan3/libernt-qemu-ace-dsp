@@ -20,7 +20,8 @@ MUTATIONS=(
 "ack-sense|$C|s/s->xtdr \&= ~ACE_HFIPCXTDR_BUSY;/s->xtdr = s->xtdr;   /* MUTATED *//|the host's acknowledgement of a notification never clears BUSY"
 "done-polarity|$C|s/s->xida \&= ~ACE_HFIPCXIDA_DONE;/s->xida = s->xida;   /* MUTATED *//|the DONE bit is never cleared by the host"
 "fsr-order|$C|s/ace_set_fsr(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, 0, ACE_FSR_MOD_ROM, false);/ace_set_fsr(s, ACE_ROM_FW_LOADING_DONE, 0, ACE_FSR_MOD_ROM, false);/|the ROM walk emits FW_LOADING_DONE before FW_CODE_TO_IMR"
-"fsr-running|$C|s/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true \/\* running \*\/);/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);/|FW_ENTERED without the running bit, module ROM"
+"fsr-running|$C|s/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true \/\* running \*\/);/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);/|the firmware never writes its running status word: the FSR stays the ROM's after FW_READY"
+"fsr-entry-running|$C|s/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true);/|FW_ENTERED carries the running bit in the same instant (the single-instant model the LiberNT driver read as a halt)"
 "spib-cut|$C|s/left = spib ? MIN(spib, total) : total;/left = total;   /* MUTATED *//|SPIB ignored: the ROM consumes the whole buffer"
 "tag-mask|$R|s/0x00001e00u/0x0000fe00u/|the purge request's tag field read as bits 15:9"
 "cpd-length|$C|s/hdr_len = ace_payload_u8(s, off + ACE_RI_CPD_HEADER_LENGTH);   \/\* a byte \*\//hdr_len = ace_payload_u8(s, off + ACE_RI_CPD_HEADER_LENGTH + 2);/|the partition directory header length misread"
@@ -37,6 +38,7 @@ MUTATIONS=(
 "abi-fault|$C|s/s->fault_id == ACE_FAULT_ABI ? s->fault_arg : ACE_IPC4_FW_REGS_ABI_VER/ACE_IPC4_FW_REGS_ABI_VER/|the abi= fault not applied to the register block"
 "init-done-delay|$C|s/define ACE_US_ROM_INIT_DONE      500/define ACE_US_ROM_INIT_DONE      300/|INIT_DONE 200 us early"
 "fw-ready-delay|$C|s/define ACE_US_FW_READY           200/define ACE_US_FW_READY           100/|FW_READY 100 us early"
+"fw-running-early|$C|s/define ACE_US_FW_RUNNING         2000/define ACE_US_FW_RUNNING         200/|the firmware's status word written with FW_READY (the ROM's FW_ENTERED no longer readable for a host poll)"
 "purge-tag-plus|$C|s/ACE_ROM_IPC_STREAM_TAG_SHIFT) + 1;/ACE_ROM_IPC_STREAM_TAG_SHIFT);/|the purge tag off by one"
 "win0-mirror|$C|s/stl_le_p(s->ram\[0\] + ACE_FWREG_FSR, s->fsr);/stl_le_p(s->ram[0] + ACE_FWREG_FSR, 0);/|window 0 no longer mirrors the FSR"
 )

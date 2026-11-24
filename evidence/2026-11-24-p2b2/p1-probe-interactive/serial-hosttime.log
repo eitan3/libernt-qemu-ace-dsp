@@ -1,0 +1,41 @@
+1795539394.421196737 [ 1893.363041] (\ntos\po\standby.c:207) The console display is now on
+1795539403.853508936 [ 1902.797143] (\base\services\umpnpmgr\rpcserver.c:4089) PNP_DisableDevInst(000000EA7EFF2950 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+1795539403.855725860 [ 1902.797143] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+1795539403.880687257 [ 1902.813330] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+1795539427.426789863 [ 1923.791005] intcdsp.sys: loaded for the Intel audio DSP child
+1795539427.433511912 [ 1923.791005] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+1795539427.435573712 [ 1923.791005] intcdsp.sys: NHLT table: the bus driver reports none
+1795539427.437526943 [ 1923.791005] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+1795539427.439377438 [ 1923.791005] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+1795539427.441030044 [ 1923.791005] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+1795539427.442526838 [ 1923.791005] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+1795539427.446621996 [ 1923.791005] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+1795539427.449007110 [ 1923.791005] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+1795539427.450941655 [ 1923.791005] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+1795539427.453015518 [ 1923.791005] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000
+1795539427.454996029 [ 1926.365161] intcdsp.sys: subsystem powered
+1795539427.456381280 [ 1926.387713] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+1795539427.457496296 [ 1926.395470] intcdsp.sys: ROM ready for the firmware
+1795539428.665713516 [ 1927.607509] intcdsp.sys: boot ROM error after 0 us: state failed, failed in loading (ROM error), ROM status 0xa0000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, attempt 1, 1 DSP interrupts, cleanup ok
+1795539428.667642688 [ 1927.609626] intcdsp.sys: DSP power down from state off: ok, cleanup ok
+1795539841.853175090 [ 2340.725452] (\base\services\umpnpmgr\rpcserver.c:4089) PNP_DisableDevInst(000000EA7EFF5DD0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+1795539841.855400686 [ 2340.725452] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+1795539841.883233389 [ 2340.756755] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+1795539862.995404611 [ 2361.859500] intcdsp.sys: loaded for the Intel audio DSP child
+1795539863.000684076 [ 2361.875048] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+1795539863.002797271 [ 2361.875048] intcdsp.sys: NHLT table: the bus driver reports none
+1795539863.005429086 [ 2361.875048] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+1795539863.007883419 [ 2361.875048] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+1795539863.010424993 [ 2361.875048] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+1795539863.012583651 [ 2361.875048] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+1795539863.014900327 [ 2361.890410] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+1795539863.016861738 [ 2361.890410] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+1795539863.024927416 [ 2361.890410] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+1795539863.036984928 [ 2361.906480] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000
+1795539863.040484808 [ 2361.906480] intcdsp.sys: subsystem powered
+1795539863.052590127 [ 2361.922509] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+1795539863.055430473 [ 2361.922509] intcdsp.sys: ROM ready for the firmware
+1795539863.068588979 [ 2361.939587] intcdsp.sys: boot ROM error after 0 us: state failed, failed in loading (ROM error), ROM status 0xa0000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, attempt 1, 1 DSP interrupts, cleanup ok
+1795539863.071198088 [ 2361.939587] intcdsp.sys: DSP power down from state off: ok, cleanup ok
+1795540462.340397114 [ 2961.127158] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+1795540462.342416814 [ 2961.127158] (\ntos\po\standby.c:207) The console display is now off

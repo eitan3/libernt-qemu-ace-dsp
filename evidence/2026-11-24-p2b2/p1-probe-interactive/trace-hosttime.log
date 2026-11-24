@@ -1,0 +1,9 @@
+1795539863.037813677 ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+1795539863.054516043 ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1795539863.059301667 ace_state state core-reset -> core-powered (model value: CPA 200 us)
+1795539863.061921128 ace_state state off -> purging
+1795539863.064175812 ace_state state purging -> rom-ready
+1795539863.066793297 ace_state state rom-ready -> loading
+1795539863.069723206 ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+1795539863.071946007 ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1795539863.074938187 ace_state state running -> off
