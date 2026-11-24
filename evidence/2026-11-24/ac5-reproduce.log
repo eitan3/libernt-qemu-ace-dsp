@@ -1,0 +1,21 @@
+== fetch
+done: src/qemu-11.1.3 at v11.1.3, firmware/OVMF_CODE.4m.fd present
+== build
+== build ok in 162 s: 6 patch(es) applied
+QEMU emulator version 11.1.3
+== qtest
+ok 1 /x86_64/intel-hda-ace/enumerate ok 2 /x86_64/intel-hda-ace/caps ok 3 /x86_64/intel-hda-ace/stock-controllers ok 4 /x86_64/intel-hda-ace/boot-handshake ok 5 /x86_64/intel-hda-ace/power-down ok 6 /x86_64/intel-hda-ace/irq-intx ok 7 /x86_64/intel-hda-ace/irq-msi ok 8 /x86_64/intel-hda-ace/faults 
+== control (ich9)
+qemu exited rc=0 (marker) at 2026-11-24T11:12:43Z; wall 332 s
+[    1.124372] hdaudbus.sys: ADSP child not created on PCI 8086:293e (subclass 03): not an ACE-era Intel controller
+[    1.124372] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+== stage 1 (ace)
+qemu exited rc=0 (marker) at 2026-11-24T11:13:43Z; wall 60 s
+[    2.598661] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007280000, p
+[    2.685512] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+--- device trace: 7 ace_* lines, 0 ace_unexpected (in <project>/.clean/qemu-ace-dsp/evidence/clean-stage
+== stored evidence
+[    2.906246] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007280000, p
+[    2.965598] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+== diff of the driver lines (clean vs stored)
+IDENTICAL (timestamps aside)
