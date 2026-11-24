@@ -28,6 +28,16 @@
 #              serial line matches (the acceptance line of the stage under test)
 #   SETTLE     seconds to keep running after STOP_ON matched (default 20)
 #   REBOOT     1 -> drop -no-reboot (a guest reboot reboots; default: QEMU exits)
+#   ACCEL      the TCG accelerator line (default tcg,thread=multi)
+#   ICOUNT     1 -> -icount shift=auto,align=off,sleep=off on tcg,thread=single:
+#              the guest clock and the model's timers then advance together
+#              (README, "A note on the host": on a host whose timer delivery
+#              stalls under a spinning TCG guest, the host-clock guest TSC runs
+#              on while the main loop stops running the model's timers)
+#   QTESTSOCK  1 -> also open a qtest socket (<sock-dir>/qtest.sock) so an
+#              external client can read the model's registers while the guest
+#              runs (tools/qtest.py; reads only -- every ace_reg_read is free
+#              of side effects); the acceptance runs leave it off
 #   SMP        fixed at 1 (refuses any other value: never evidence)
 set -u
 
@@ -56,7 +66,7 @@ cp -f "$FW/OVMF_VARS.4m.fd" "$EV/OVMF_VARS.fd"
 trap 'rm -rf "$SOCK"' EXIT
 
 args=("$QEMU" -L "$BIOSDIR"
-      -machine q35 -accel tcg,thread=multi -cpu max -smp 1 -m 2048
+      -machine q35 -cpu max -smp 1 -m 2048
       -drive if=pflash,format=raw,readonly=on,file="$FW/OVMF_CODE.4m.fd"
       -drive if=pflash,format=raw,file="$EV/OVMF_VARS.fd"
       -audiodev none,id=snd0 -display none -vga std -nic none
@@ -68,6 +78,14 @@ args=("$QEMU" -L "$BIOSDIR"
 if [ -n "${DISK:-}" ]; then
     args+=(-drive "file=$DISK,if=ide,index=0,media=disk,format=qcow2")
 fi
+[ "${QTESTSOCK:-0}" = 1 ] && args+=(-qtest "unix:$SOCK/qtest.sock,server,nowait")
+ACCEL="${ACCEL:-tcg,thread=multi}"
+icount=()
+if [ "${ICOUNT:-0}" = 1 ]; then
+    ACCEL="tcg,thread=single"
+    icount=(-icount shift=auto,align=off,sleep=off)
+fi
+args=("${args[@]}" -accel "$ACCEL" "${icount[@]}")
 if [ "${CDROM:-$ISO}" != none ]; then
     args+=(-cdrom "${CDROM:-$ISO}" -boot "order=${BOOT:-d}")
 fi

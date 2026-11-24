@@ -128,26 +128,45 @@ The image under test is set with `ISO=` (a live ISO) or `DISK=` (a disk
 image, e.g. a qcow2 overlay made by `make-overlay.sh`), `CDROM=none` to boot
 the disk alone; `TRACE=1` enables the device traces; `FAULT=never-reply` (or
 `ACE_ARGS=`) configures the model; `STOP_ON='<regex>'` stops the VM at a
-serial line; see `lib-run.sh` for the rest. `tools/guest.sh` types into the
-guest through the monitor (~100 ms per key), `snapshot.sh` screenshots it,
-`set-fault.sh` injects a fault at run time over QMP, `tools/fault-matrix.sh`
-boots one fault after another and tabulates the driver's outcome.
-
-The image of this rerun: `~/libernt-build-logs/test-audio-intel-sst-p2b2-a676708a/`
-(`bootcd.iso` sha256 `7cb3a12f0ed9…`, `LiberNT.vhd` `2533f34fd44a…`, built from
-`feat/audio-control-polish @ 5286c0598d6`). Its boot chain changed since round 1
-(FreeLoader is gone; `LiberNT Boot Manager` reads a BCD store and hands over to
-the OS loader with `SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200` — the kernel's
-debug output is still on the serial log), and the first boot of a fresh overlay
-shows a **first-boot Setup wizard** (`oobe.exe`, from the HKLM `Run` key; Cancel
-is harmless — it deletes its own `Run` value at start). The ADSP instance id on
-the installed image is `CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000`.
+serial line; `ICOUNT=1` runs under icount (see "A note on the host");
+`QTESTSOCK=1` opens a qtest socket for `tools/qtest.py`; see `lib-run.sh` for
+the rest. `tools/guest.sh` types into the guest through the monitor (~100 ms
+per key), `snapshot.sh` screenshots it, `set-fault.sh` injects a fault at run
+time over QMP, `tools/waitline.sh` waits (bounded) for a serial line,
+The image of this rerun: `~/libernt-build-logs/test-audio-intel-sst-p2b3-a19eacb7fea/`
+(`bootcd.iso` sha256 `2b12b75066da32a8…`, `LiberNT.vhd` `12a232c8ce73e955…`, in-ISO
+`intcdsp.sys` `b42955ef…`, built from `feat/audio-control-polish @ ee1338426b1`, 62 commits
+over master `a19eacb7fea`; the images of the earlier rounds are
+`test-audio-intel-sst-p2b2-a676708a/` and `test-audio-intel-sst-p2b-*`). Its boot chain
+changed since round 1 (FreeLoader is gone; `LiberNT Boot Manager` reads a BCD store and hands
+over to the OS loader with `SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200` — the kernel's debug
+output is still on the serial log), and the first boot of a fresh overlay shows a **first-boot
+Setup wizard** (`oobe.exe`, from the HKLM `Run` key; it deletes its own `Run` value at start,
+so it comes once — dismiss it with `tab`, `tab`, `ret` from its first page; Escape and Alt+C
+are ignored). The ADSP instance id on the installed image is
+`CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000`.
 
 **A note on the host.** These runs were made on a 4-vCPU VM (CachyOS under its
-hypervisor). While a TCG guest spins on time — OVMF's ACPI-PM-timer delay loops,
-or the LiberNT driver's TSC stall loop — the host's own timer wakeups are delayed
-by seconds to minutes (`rcu: rcu_preempt kthread timer wakeup didn't happen for
-116308 jiffies`, `sleep 0.1` taking 98 s) while its clocks stay exact; a plain
+hypervisor) whose timer delivery stalls under a spinning TCG guest — OVMF's ACPI-PM-timer
+delay loops or the LiberNT driver's TSC stall loop (`rcu: rcu_preempt kthread timer wakeup
+didn't happen for 116308 jiffies`, `sleep 0.1` taking 98 s) while its clocks stay exact. The
+model arms `QEMU_CLOCK_VIRTUAL` timers from its MMIO handlers; without icount that clock is
+the host clock and the timers are run by QEMU's main loop, which sleeps in `poll()` until a
+host timer or an fd event wakes it — so while the guest polls, the model's µs timers are seen
+late (seconds to minutes) although the guest's TSC, read from the host clock, keeps running.
+A second, larger stall comes from the evidence logs themselves: every trace and serial line is
+a `write()` made from the vCPU thread under the BQL, and on this host's disk (`/home`, btrfs
+on the VM's disk; 3.5 ms per 4 KB sync write) a blocked write holds the BQL for 250–285 ms at
+a time — measured by a qtest read that was answered that late (`ac3-interactive/heartbeat-*.log`).
+With the driver's budgets real since image p2b3, each such stall became a bounded
+`boot … timeout` instead of the p2b2 hang (`evidence/2026-11-25-p2b3/DIVERGENCE.md`, E1).
+**Every run after the first is made under `ICOUNT=1`** — `-icount shift=auto,align=off,
+sleep=off` on `tcg,thread=single`, so the guest clock and the model's timers advance together
+by executed instructions and a stall pauses both — **with the live logs on tmpfs** (`EVID=`
+under `/tmp`, copied into the evidence tree afterwards). `HEARTBEAT=1` (a side-effect-free
+qtest read per millisecond, `tools/heartbeat.py`) keeps the main loop running on a non-icount
+VM when that is what you want to measure. A VM boots to the driver's `boot ok` in 40 s of wall
+time under icount; every run is scripted, bounded and stopped from its script.
 host `rdtsc` loop does not reproduce it. The effect: QEMU's virtual clock crawls
 while the driver polls (model timers are seen to fire late), some boots sit at
 the boot manager for minutes, and the serial output arrives in bursts. It is a
@@ -174,51 +193,65 @@ intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
 ```
 
 with exactly those seven BAR4 reads in the device trace and no `ace_unexpected`
-(unchanged on the p2b2 image: `evidence/2026-11-24-p2b2/p1-probe-interactive`).
+(unchanged on the p2b2 image: `evidence/2026-11-24-p2b2/p1-probe-interactive`; and on the
+p2b3 image: `evidence/2026-11-25-p2b3/ac3-interactive`).
 
-Stage 2 (`BootDsp=1`), measured on the p2b2 image up to the point where the
-driver diverges:
+Stage 2 (`BootDsp=1`), measured on the p2b3 image (`ee1338426b1`, the driver with the D1/D2
+fixes) on a plain boot of the overlay under icount (`evidence/2026-11-25-p2b3/ac3-boot2-icount`):
 
 ```
 intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
-intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000
+intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 17933371 us at 10000000 Hz
 intcdsp.sys: subsystem powered
 intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
 intcdsp.sys: ROM ready for the firmware
 intcdsp.sys: firmware entered
-intcdsp.sys: DSP message 0x1b080000|0x00000000
 intcdsp.sys: FW_READY received
-                       <-- D1: the FW_CONFIG reply is acknowledged but never consumed; nothing further
+intcdsp.sys: boot ok after 21334 us (clock 17954746 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
 ```
 
-The model's side of the same boot (device trace): power-up → purge request
-`0x81004000` → core up → FSR `0x8`, `0x9`, the DONE reply, `0x1` (INIT_DONE) →
-the stream consumed (`ROM consumes stream 1: 1155072 bytes`, all ROM rules pass)
-→ the walk `0x25 0x27 0x28 0x29 0x2a` → `FSR state 0x5 module 0 halted 0` (the
-ROM's FW_ENTERED) → 200 µs later the firmware registers and the FW_READY
-notification (and, 2 ms after entry, `FSR state 0x5 module 2 halted 1`, the
-firmware's status word) → `DSP interrupt 1` on the controller line → the
-FW_CONFIG request `0xC1000000|0x00700000` → the reply `0xE1000000` 50 µs later →
-the host's `HFIPCXIDA ← 0x80000000`.
+The model's side of the same boot (device trace, 94 lines): power-up (`CPA` on the driver's
+first `ADSPCS` poll) → the purge request `0x81004000` → core up → FSR `0x8`, `0x9`, the DONE
+reply (`0x80000000`, read, then acknowledged) → the driver enables the three interrupts → FSR
+`0x1` (INIT_DONE) → the stream consumed (`ROM consumes stream 1: 1155072 bytes`, all ROM rules
+pass) → the walk `0x25 0x27 0x28 0x29 0x2a`, each state seen on the driver's first FSR poll →
+`FSR state 0x5 module 0 halted 0` (the ROM's FW_ENTERED) → the FW_READY notification
+(`0x9b080000`) → `DSP interrupt 1` → the ISR reads `HFIPCXIDA`, `HFIPCXTDR`, `INTEN` and masks
+the three enables → `DSP interrupt 0` → the receive path reads the notification's extension and
+acknowledges it → the FW_CONFIG request `0xC1000000|0x00700000` → the reply `0xE1000000` 50 µs
+later → `HFIPCXIDA` read (`0xE1000000`), `HFIPCXTDDY` read, then DONE acknowledged — the
+`mtl_ipc_irq_thread` order of the D1 fix. (2 ms after entry, `FSR state 0x5 module 2 halted 1`,
+the firmware's status word.) The per-message `DSP message` line of the p2b2 image is gone: the
+last message is the `last DSP message 0x61000000|…` field of the `boot ok` line (the reply:
+module target, direction reply, status 0).
+
+On the p2b2 image the same boot stopped after `FW_READY received` (D1); that block is kept in
+`evidence/2026-11-24-p2b2/DIVERGENCE.md`.
 
 ## Acceptance status
 
 | AC | What | Status |
 |---|---|---|
 | AC1 | qtest passes; mutation check recorded | **PASS** — 8 cases, with the two-step FSR since this rerun (patches 0007/0008); `mutation-check.sh` (rows `fsr-running` retargeted and `fsr-entry-running` added; the new assertion fails on the old model), results in `evidence/<date>/mutation-check.md` |
-| AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) |
-| AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **BLOCKED — driver divergence D1** on the p2b2 image: the driver reaches `FW_READY received` (so `firmware entered`, the FW_READY interrupt and the version-carrying reply are produced by the model) but never consumes the configuration reply; `D0Entry` hangs. `boot ok`, the cycles and the 20-cycle loop are not reachable with this driver. Model side proven by the qtest; `evidence/2026-11-24-p2b2/DIVERGENCE.md` |
+| AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`) |
+| AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b3 image** (`ee1338426b1`), with one correction to the expectation. Plain boot under icount: `boot ok after 21334 us (clock 17954746 us) … attempt 1, 1 DSP interrupts, cleanup ok`, end clock = start clock + M within 50 µs; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **1 DSP interrupt, not 2** (N1: the ISR masks the three enables before the FW_CONFIG request, so the reply is taken by the poll; the FW_READY interrupt is raised and taken on every boot). 22 disable/enable cycles in one VM (the two of the plan and the 20-cycle rehearsal), each `boot ok after 21318–21472 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, 0 `clock stalled`, clean S5 at the end (`ac3-cycles-icount`). A first interactive session on the non-icount host (`ac3-interactive`) had 17 `boot ok` and 5 bounded `power-up timeout after ≈53 ms` at the host's main-loop stalls (E1), each followed by an unassisted `boot ok` |
 | AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b2 image: **7 of 20 rows** bounded (the single-sample failures: `halt-rom=43/44`, `halt-fw=51`, `crash-notification`, `abi=2`, `window-read-fail`, `x-delay-scale=0.001`); the other 13 are **unbounded** by D2 (no budget fires) or D1 (the reply hang) — the `x-delay-scale=1550` row shows the 3 s budget not firing. Table below; `evidence/2026-11-24-p2b2/fault-matrix.md` |
 | AC5 | README + scripts reproduce AC2 from a clean checkout | **PASS** — see "Reproducibility" |
 
-Re-running AC3/AC4 once the driver is fixed: `VHD=<p2b2 LiberNT.vhd>
-./make-overlay.sh p2b2`, boot the overlay with `ISO=<p2b2 bootcd.iso>
-DISK=disk/p2b2.qcow2 CDROM=none ./run.sh`, set `BootDsp=1` in the guest (Start →
-search "cmd" → `reg add "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings"
-/v BootDsp /t REG_DWORD /d 1 /f`, then `pnputil /disable-device` and
-`/enable-device` on the instance id above — or a reboot, the value persists in
-the overlay); each fault is `FAULT=<name>` on the command line or `set-fault.sh`;
-`tools/fault-matrix.sh` runs them all.
+> **Paused 2026-11-25 00:55 (+02:00) for a host restart:** the p2b3 fault matrix is 9 of 20
+> rows in (all bounded, all recovered); the AC4 row and the matrix section below still carry the
+> p2b2 text until the run resumes — `evidence/2026-11-25-p2b3/PAUSED.md`.
+
+Re-running AC3/AC4: `VHD=<p2b3 LiberNT.vhd> ./make-overlay.sh p2b3`, boot the overlay once
+(`ICOUNT=1 ISO=<p2b3 bootcd.iso> DISK=/tmp/<overlay copy> CDROM=none EVID=/tmp/<run> ./run.sh`;
+copy the overlay, every run boots it and is stopped rather than shut down), dismiss the wizard
+and set `BootDsp=1` in the guest (Start → search "cmd" → `reg add
+"HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" /v BootDsp /t REG_DWORD /d 1 /f`),
+power it off; then `ICOUNT=1 DISK=<overlay copy> EVID=/tmp/<run> tools/ac3-cycles.sh 22` is
+AC3's cycle rehearsal and `ICOUNT=1 RECOVER=1 COLLECT=<evidence dir> DISK=<overlay copy>
+EVROOT=/tmp/<dir> tools/fault-matrix.sh` is AC4 (`tools/fm-check.sh <evidence dir>` adds
+the checks beyond "bounded"). Keep the live logs on tmpfs.
 
 ## The fault matrix in the VM (p2b2 image, 2026-11-24)
 
@@ -286,12 +319,23 @@ filled from measurements on the real device; "—" means not yet measured.
 | `COPYING` | QEMU's licence text (GPL-2.0-or-later) |
 | `fetch.sh`, `build.sh`, `export-patches.sh` | the pinned source, the build, the series export |
 | `patches/0001…0008` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest) |
-| `run.sh`, `run-control.sh`, `lib-run.sh`, `make-overlay.sh` | the VM runs |
-| `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults, monitor/typing helpers, the fault-matrix driver |
+| `run.sh`, `run-control.sh`, `lib-run.sh`, `make-overlay.sh` | the VM runs (`lib-run.sh`: `ICOUNT=1`, `QTESTSOCK=1`, `FAULT`, `TRACE`, `STOP_ON`, …) |
+| `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults; in `tools/`: the monitor/typing helpers (`guest.sh`, `mon.py`, `qmp.py`), the qtest client and heartbeat (`qtest.py`, `heartbeat.py`), `waitline.sh`, `cycle.sh`, `ac3-cycles.sh`, the fault-matrix driver and its post-check (`fault-matrix.sh`, `fm-check.sh`) |
 | `mutation-check.sh` | AC1's mutation run |
 | `evidence/<date>/` | serial logs, device traces and screenshots of every acceptance run (paths normalised) |
 
 ## Evidence index
+
+### 2026-11-25-p2b3 (AC3/AC4 closed on the image with the D1/D2 fixes, `ee1338426b1`)
+
+| Run | What it shows |
+|---|---|
+| `ac3-interactive` | the first boot of the fresh overlay on the non-icount host: stage 1 unchanged, the first-boot wizard, `BootDsp=1` set, the first D0 entry failing bounded (`boot power-up timeout after 53231 us`, E1), then 22 disable/enable cycles with the qtest heartbeat (17 `boot ok`, 5 `power-up timeout` at the host's 250–285 ms main-loop stalls, each read by the heartbeat: `heartbeat-c*.log`); the model's registers between cycles in `cycles.log` and `model-state.log`; clean S5 |
+| `ac3-boot2-icount` | **AC3 at boot**: a plain reboot of the overlay under `-icount`, no heartbeat: `boot ok after 21334 us (clock 17954746 us) … attempt 1, 1 DSP interrupts`, `firmware ready: version 2.15.0.1, ABI 1`; the device trace of the whole boot (94 lines) |
+| `ac3-cycles-icount` | **AC3's cycles**: 22 disable/enable cycles under icount, 22 `boot ok` (21318–21472 us), the model's registers read before and after each (`cycles.log`: one distinct disabled-state reading, one distinct D0 reading), 0 `clock stalled`, clean S5 (`summary.txt`) |
+| `fm-<fault>` | one boot per fault of the matrix under icount, each followed by a recovery cycle (`serial.log`, `recover.out`, the trace excerpt + the whole trace gzipped, `desktop.png`/`console.png`) |
+| `fault-matrix.md` | the matrix table (fault → the driver's line → elapsed → bounded → recovery) and the checks beyond "bounded" (`tools/fm-check.sh`) |
+| `DIVERGENCE.md` | D1 and D2 marked fixed with the rerun evidence; E1 (environment), N1–N3 (expectation corrections); the result "no new driver divergence" |
 
 ### 2026-11-24-p2b2 (the rerun with the fixed driver, image `5286c0598d6`)
 
@@ -323,7 +367,7 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 
 ## INFO_NEEDED
 
-1. The driver fixes for **D1** (the configuration reply never handed to the state machine; `D0Entry` hangs) and **D2** (the elapsed-time clock reads 0 µs, no budget fires), then an image for the AC3/AC4 reruns: `boot ok`, the power cycles, the 20-cycle loop and a bounded matrix are all one driver fix away from being measurable.
+1. Resolved by image p2b3 (`39e50ba6036`, `ee1338426b1`): AC3 and AC4 are measured above. Still open on the driver side, from the read-only review and invisible to the model as it is: **R1** (the interrupt-enable offset is read before the subsystem is powered; the model answers `0x120` at any power state — a model that answers all-ones while unpowered would make it visible) and **R2** (no ISR storm guard). An image with their fixes is the next thing to rerun.
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
-4. A host whose timer delivery survives a spinning TCG guest (the matrix here needed a script and retries; see "A note on the host").
+4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.

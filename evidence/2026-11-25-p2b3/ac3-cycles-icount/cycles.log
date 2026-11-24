@@ -1,0 +1,506 @@
+## cycle c1 2026-11-24T22:26:58Z (serial line 155)
+[00:27:08] [  149.174999] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:27:20] [  195.925530] intcdsp.sys: boot ok after 21353 us (clock 206571099 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  195.897529] intcdsp.sys: loaded for the Intel audio DSP child
+[  195.897529] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  195.897529] intcdsp.sys: NHLT table: the bus driver reports none
+[  195.897529] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  195.897529] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  195.897529] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  195.897529] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  195.899529] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  195.900529] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  195.902529] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  195.904529] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 206549704 us at 10000000 Hz
+[  195.905529] intcdsp.sys: subsystem powered
+[  195.921530] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  195.922530] intcdsp.sys: ROM ready for the firmware
+[  195.924530] intcdsp.sys: firmware entered
+[  195.925530] intcdsp.sys: FW_READY received
+[  195.925530] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c2 2026-11-24T22:27:23Z (serial line 177)
+[00:27:33] [  246.448326] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:27:46] [  291.156226] intcdsp.sys: boot ok after 21364 us (clock 301801439 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  291.119622] intcdsp.sys: loaded for the Intel audio DSP child
+[  291.119622] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  291.119622] intcdsp.sys: NHLT table: the bus driver reports none
+[  291.119622] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  291.119622] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  291.119622] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  291.119622] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  291.119622] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  291.119622] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  291.119622] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  291.135226] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 301779996 us at 10000000 Hz
+[  291.136226] intcdsp.sys: subsystem powered
+[  291.152226] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  291.153226] intcdsp.sys: ROM ready for the firmware
+[  291.155226] intcdsp.sys: firmware entered
+[  291.155226] intcdsp.sys: FW_READY received
+[  291.156226] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c3 2026-11-24T22:27:49Z (serial line 199)
+[00:27:59] [  341.196146] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:28:11] [  385.087042] intcdsp.sys: boot ok after 21376 us (clock 395732013 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  385.058042] intcdsp.sys: loaded for the Intel audio DSP child
+[  385.058042] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  385.058042] intcdsp.sys: NHLT table: the bus driver reports none
+[  385.058042] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  385.058042] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  385.058042] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  385.058042] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  385.061042] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  385.062042] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  385.063042] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  385.065042] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 395710596 us at 10000000 Hz
+[  385.066042] intcdsp.sys: subsystem powered
+[  385.083042] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  385.084042] intcdsp.sys: ROM ready for the firmware
+[  385.086042] intcdsp.sys: firmware entered
+[  385.086042] intcdsp.sys: FW_READY received
+[  385.087042] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c4 2026-11-24T22:28:14Z (serial line 221)
+[00:28:24] [  433.958083] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:28:36] [  480.152862] intcdsp.sys: boot ok after 21371 us (clock 490798090 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  480.123862] intcdsp.sys: loaded for the Intel audio DSP child
+[  480.123862] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  480.123862] intcdsp.sys: NHLT table: the bus driver reports none
+[  480.123862] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  480.124879] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  480.124879] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  480.124879] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  480.126862] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  480.127862] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  480.128862] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  480.130862] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 490776678 us at 10000000 Hz
+[  480.131862] intcdsp.sys: subsystem powered
+[  480.148862] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  480.149862] intcdsp.sys: ROM ready for the firmware
+[  480.151862] intcdsp.sys: firmware entered
+[  480.151862] intcdsp.sys: FW_READY received
+[  480.152862] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c5 2026-11-24T22:28:39Z (serial line 243)
+[00:28:50] [  532.411288] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:29:02] [  576.253935] intcdsp.sys: boot ok after 21388 us (clock 586899470 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  576.224935] intcdsp.sys: loaded for the Intel audio DSP child
+[  576.225935] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  576.225935] intcdsp.sys: NHLT table: the bus driver reports none
+[  576.225935] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  576.225935] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  576.225935] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  576.225935] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  576.227935] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  576.228935] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  576.229935] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  576.232935] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 586878041 us at 10000000 Hz
+[  576.233935] intcdsp.sys: subsystem powered
+[  576.249935] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  576.250935] intcdsp.sys: ROM ready for the firmware
+[  576.252935] intcdsp.sys: firmware entered
+[  576.253935] intcdsp.sys: FW_READY received
+[  576.253935] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c6 2026-11-24T22:29:05Z (serial line 265)
+[00:29:15] [  629.135490] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:29:27] [  674.214767] intcdsp.sys: boot ok after 21368 us (clock 684860265 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  674.185767] intcdsp.sys: loaded for the Intel audio DSP child
+[  674.186767] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  674.186767] intcdsp.sys: NHLT table: the bus driver reports none
+[  674.186767] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  674.186767] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  674.186767] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  674.186767] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  674.188767] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  674.189767] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  674.190767] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  674.193767] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 684838856 us at 10000000 Hz
+[  674.194767] intcdsp.sys: subsystem powered
+[  674.210767] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  674.211767] intcdsp.sys: ROM ready for the firmware
+[  674.213767] intcdsp.sys: firmware entered
+[  674.214767] intcdsp.sys: FW_READY received
+[  674.214767] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c7 2026-11-24T22:29:30Z (serial line 287)
+[00:29:41] [  724.297811] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:29:53] [  772.468848] intcdsp.sys: boot ok after 21376 us (clock 783114527 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  772.439848] intcdsp.sys: loaded for the Intel audio DSP child
+[  772.440848] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  772.440848] intcdsp.sys: NHLT table: the bus driver reports none
+[  772.440848] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  772.440848] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  772.440848] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  772.440848] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  772.442848] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  772.443848] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  772.444848] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  772.447848] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 783093110 us at 10000000 Hz
+[  772.448848] intcdsp.sys: subsystem powered
+[  772.464848] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  772.465848] intcdsp.sys: ROM ready for the firmware
+[  772.467848] intcdsp.sys: firmware entered
+[  772.468848] intcdsp.sys: FW_READY received
+[  772.468848] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c8 2026-11-24T22:29:56Z (serial line 310)
+[00:30:06] [  821.608392] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:30:18] [  868.283922] intcdsp.sys: boot ok after 21371 us (clock 878929778 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  868.255922] intcdsp.sys: loaded for the Intel audio DSP child
+[  868.255922] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  868.255922] intcdsp.sys: NHLT table: the bus driver reports none
+[  868.255922] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  868.255922] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  868.255922] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  868.255922] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  868.257922] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  868.258922] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  868.260922] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  868.262922] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 878908365 us at 10000000 Hz
+[  868.263922] intcdsp.sys: subsystem powered
+[  868.279922] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  868.280922] intcdsp.sys: ROM ready for the firmware
+[  868.282922] intcdsp.sys: firmware entered
+[  868.283922] intcdsp.sys: FW_READY received
+[  868.283922] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c9 2026-11-24T22:30:21Z (serial line 332)
+[00:30:31] [  915.354084] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:30:44] [  962.207613] intcdsp.sys: boot ok after 21321 us (clock 972866965 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[  962.192009] intcdsp.sys: loaded for the Intel audio DSP child
+[  962.192009] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  962.192009] intcdsp.sys: NHLT table: the bus driver reports none
+[  962.192009] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  962.192009] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  962.192009] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  962.192009] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  962.192009] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  962.192009] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  962.192009] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  962.192009] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 972845602 us at 10000000 Hz
+[  962.192009] intcdsp.sys: subsystem powered
+[  962.207613] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  962.207613] intcdsp.sys: ROM ready for the firmware
+[  962.207613] intcdsp.sys: firmware entered
+[  962.207613] intcdsp.sys: FW_READY received
+[  962.207613] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c10 2026-11-24T22:30:47Z (serial line 354)
+[00:30:57] [ 1014.935185] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:31:09] [ 1059.445561] intcdsp.sys: boot ok after 21347 us (clock 1070103181 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1059.414333] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1059.414333] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1059.414333] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1059.414333] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1059.414333] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1059.414333] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1059.414333] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1059.429936] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1059.429936] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1059.429936] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1059.429936] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1070081792 us at 10000000 Hz
+[ 1059.429936] intcdsp.sys: subsystem powered
+[ 1059.445561] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1059.445561] intcdsp.sys: ROM ready for the firmware
+[ 1059.445561] intcdsp.sys: firmware entered
+[ 1059.445561] intcdsp.sys: FW_READY received
+[ 1059.445561] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c11 2026-11-24T22:31:12Z (serial line 376)
+[00:31:22] [ 1106.009594] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:31:34] [ 1146.342729] intcdsp.sys: boot ok after 21322 us (clock 1156991579 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1146.311500] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1146.311500] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1146.311500] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1146.311500] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1146.311500] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1146.311500] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1146.311500] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1146.311500] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1146.311500] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1146.311500] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1146.311500] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1156970215 us at 10000000 Hz
+[ 1146.311500] intcdsp.sys: subsystem powered
+[ 1146.327104] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1146.342729] intcdsp.sys: ROM ready for the firmware
+[ 1146.342729] intcdsp.sys: firmware entered
+[ 1146.342729] intcdsp.sys: FW_READY received
+[ 1146.342729] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c12 2026-11-24T22:31:38Z (serial line 398)
+[00:31:48] [ 1199.145033] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:32:00] [ 1244.842183] intcdsp.sys: boot ok after 21384 us (clock 1255497745 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1244.810955] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1244.810955] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1244.810955] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1244.810955] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1244.810955] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1244.810955] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1244.810955] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1244.826558] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1244.826558] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1244.826558] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1244.826558] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1255476319 us at 10000000 Hz
+[ 1244.826558] intcdsp.sys: subsystem powered
+[ 1244.842183] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1244.842183] intcdsp.sys: ROM ready for the firmware
+[ 1244.842183] intcdsp.sys: firmware entered
+[ 1244.842183] intcdsp.sys: FW_READY received
+[ 1244.842183] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c13 2026-11-24T22:32:03Z (serial line 420)
+[00:32:13] [ 1298.846137] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:32:26] [ 1346.856275] intcdsp.sys: boot ok after 21370 us (clock 1357502353 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1346.828275] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1346.828275] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1346.828275] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1346.828275] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1346.828275] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1346.828275] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1346.828275] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1346.830275] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1346.831275] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1346.833275] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1346.835275] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1357480942 us at 10000000 Hz
+[ 1346.836275] intcdsp.sys: subsystem powered
+[ 1346.852275] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1346.853275] intcdsp.sys: ROM ready for the firmware
+[ 1346.855275] intcdsp.sys: firmware entered
+[ 1346.856275] intcdsp.sys: FW_READY received
+[ 1346.856275] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c14 2026-11-24T22:32:29Z (serial line 442)
+[00:32:39] [ 1394.421686] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:32:51] [ 1439.944586] intcdsp.sys: boot ok after 21331 us (clock 1450599662 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1439.913357] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1439.913357] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1439.913357] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1439.913357] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1439.913357] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1439.913357] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1439.913357] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1439.913357] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1439.928961] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1439.928961] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1439.928961] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1450578290 us at 10000000 Hz
+[ 1439.928961] intcdsp.sys: subsystem powered
+[ 1439.944586] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1439.944586] intcdsp.sys: ROM ready for the firmware
+[ 1439.944586] intcdsp.sys: firmware entered
+[ 1439.944586] intcdsp.sys: FW_READY received
+[ 1439.944586] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c15 2026-11-24T22:32:54Z (serial line 464)
+[00:33:04] [ 1486.042387] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:33:16] [ 1532.111019] intcdsp.sys: boot ok after 21327 us (clock 1542770364 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1532.095414] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1532.095414] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1532.095414] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1532.095414] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1532.095414] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1532.095414] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1532.095414] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1532.095414] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1532.095414] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1532.095414] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1532.095414] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1542748996 us at 10000000 Hz
+[ 1532.095414] intcdsp.sys: subsystem powered
+[ 1532.111019] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1532.111019] intcdsp.sys: ROM ready for the firmware
+[ 1532.111019] intcdsp.sys: firmware entered
+[ 1532.111019] intcdsp.sys: FW_READY received
+[ 1532.111019] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c16 2026-11-24T22:33:19Z (serial line 486)
+[00:33:30] [ 1581.788956] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:33:42] [ 1624.949203] intcdsp.sys: boot ok after 21328 us (clock 1635596944 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1624.917975] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1624.917975] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1624.917975] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1624.917975] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1624.917975] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1624.917975] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1624.917975] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1624.917975] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1624.917975] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1624.917975] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1624.917975] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1635575575 us at 10000000 Hz
+[ 1624.917975] intcdsp.sys: subsystem powered
+[ 1624.933578] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1624.933578] intcdsp.sys: ROM ready for the firmware
+[ 1624.949203] intcdsp.sys: firmware entered
+[ 1624.949203] intcdsp.sys: FW_READY received
+[ 1624.949203] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c17 2026-11-24T22:33:45Z (serial line 508)
+[00:33:55] [ 1682.169396] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:34:07] [ 1728.530923] intcdsp.sys: boot ok after 21318 us (clock 1739179814 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1728.499695] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1728.499695] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1728.499695] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1728.499695] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1728.499695] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1728.499695] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1728.499695] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1728.499695] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1728.499695] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1728.499695] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1728.499695] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1739158455 us at 10000000 Hz
+[ 1728.499695] intcdsp.sys: subsystem powered
+[ 1728.515298] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1728.530923] intcdsp.sys: ROM ready for the firmware
+[ 1728.530923] intcdsp.sys: firmware entered
+[ 1728.530923] intcdsp.sys: FW_READY received
+[ 1728.530923] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c18 2026-11-24T22:34:11Z (serial line 530)
+[00:34:21] [ 1780.548869] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:34:33] [ 1824.261119] intcdsp.sys: boot ok after 21318 us (clock 1834920779 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1824.245515] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1824.245515] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1824.245515] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1824.245515] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1824.245515] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1824.245515] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1824.245515] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1824.245515] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1824.245515] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1824.245515] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1824.245515] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1834899420 us at 10000000 Hz
+[ 1824.245515] intcdsp.sys: subsystem powered
+[ 1824.261119] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1824.261119] intcdsp.sys: ROM ready for the firmware
+[ 1824.261119] intcdsp.sys: firmware entered
+[ 1824.261119] intcdsp.sys: FW_READY received
+[ 1824.261119] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c19 2026-11-24T22:34:36Z (serial line 552)
+[00:34:46] [ 1871.031671] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:34:58] [ 1917.497054] intcdsp.sys: boot ok after 21321 us (clock 1928144997 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 1917.465826] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1917.465826] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1917.465826] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1917.465826] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1917.465826] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1917.465826] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 1917.465826] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1917.465826] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1917.465826] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 1917.465826] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1917.465826] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 1928123634 us at 10000000 Hz
+[ 1917.465826] intcdsp.sys: subsystem powered
+[ 1917.481429] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1917.481429] intcdsp.sys: ROM ready for the firmware
+[ 1917.497054] intcdsp.sys: firmware entered
+[ 1917.497054] intcdsp.sys: FW_READY received
+[ 1917.497054] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c20 2026-11-24T22:35:01Z (serial line 574)
+[00:35:12] [ 1973.179012] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:35:24] [ 2019.870894] intcdsp.sys: boot ok after 21321 us (clock 2030521263 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 2019.839666] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2019.839666] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2019.839666] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2019.839666] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2019.839666] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2019.839666] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 2019.839666] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2019.839666] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2019.839666] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 2019.839666] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2019.839666] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 2030499900 us at 10000000 Hz
+[ 2019.855269] intcdsp.sys: subsystem powered
+[ 2019.870894] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2019.870894] intcdsp.sys: ROM ready for the firmware
+[ 2019.870894] intcdsp.sys: firmware entered
+[ 2019.870894] intcdsp.sys: FW_READY received
+[ 2019.870894] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c21 2026-11-24T22:35:27Z (serial line 596)
+[00:35:37] [ 2070.799941] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:35:49] [ 2115.464589] intcdsp.sys: boot ok after 21321 us (clock 2126117845 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 2115.433361] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2115.433361] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2115.433361] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2115.433361] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2115.433361] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2115.433361] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 2115.433361] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2115.433361] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2115.433361] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 2115.433361] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2115.448964] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 2126096482 us at 10000000 Hz
+[ 2115.448964] intcdsp.sys: subsystem powered
+[ 2115.464589] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2115.464589] intcdsp.sys: ROM ready for the firmware
+[ 2115.464589] intcdsp.sys: firmware entered
+[ 2115.464589] intcdsp.sys: FW_READY received
+[ 2115.464589] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+## cycle c22 2026-11-24T22:35:52Z (serial line 618)
+[00:36:02] [ 2164.782274] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[00:36:14] [ 2211.346158] intcdsp.sys: boot ok after 21472 us (clock 2221995245 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=61000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+[ 2211.314930] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2211.314930] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2211.314930] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2211.314930] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2211.314930] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2211.314930] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[ 2211.314930] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2211.314930] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2211.314930] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[ 2211.314930] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2211.314930] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 2221973731 us at 10000000 Hz
+[ 2211.314930] intcdsp.sys: subsystem powered
+[ 2211.330533] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2211.346158] intcdsp.sys: ROM ready for the firmware
+[ 2211.346158] intcdsp.sys: firmware entered
+[ 2211.346158] intcdsp.sys: FW_READY received
+[ 2211.346158] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples

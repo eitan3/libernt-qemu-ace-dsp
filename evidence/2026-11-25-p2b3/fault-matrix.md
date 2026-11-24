@@ -1,0 +1,13 @@
+# AC4 fault matrix -- 2026-11-24T22:39:47Z -- overlay /tmp/p2b3-fm.qcow2 -- -icount shift=auto,align=off,sleep=off -- recovery cycle per row
+
+| fault | the driver's terminal line (after its booting line) | booting -> line (guest s) | the line's own elapsed | bounded | register polls (power-downs in the trace; wall; recovery) |
+|---|---|---|---|---|---|
+| none | boot ok after 21299 us (clock 17881193 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0 | 0.031 | after 21299 us | bounded | 42 (power-downs in the trace: 0; wall 90s; recovered: boot ok) |
+| halt-rom=43 | boot ROM error after 73086 us (clock 18815533 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, IPC status 0, last  | 0.062 | after 73086 us | bounded | 75 (power-downs in the trace: 3; wall 92s; recovered: boot ok) |
+| halt-rom=44 | boot ROM error after 50415 us (clock 18029571 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002c CSE validation failed, IPC status 0, last DS | 0.047 | after 50415 us | bounded | 75 (power-downs in the trace: 3; wall 145s; recovered: boot ok) |
+| halt-fw=51 | boot ROM error after 261959 us (clock 18863031 us): state failed, failed in loading (ROM error), ROM status 0x8000002a ROM firmware code loaded, ROM error 0x00000033 base firmware incompatible, IPC st | 0.266 | after 261959 us | bounded | 40 (power-downs in the trace: 1; wall 110s; recovered: boot ok) |
+| crash-notification | DSP power down from state off: ok, cleanup ok | 0.047 | - | bounded | 49 (power-downs in the trace: 1; wall 88s; recovered: boot ok) |
+| abi=2 | boot ABI mismatch after 39025 us (clock 18614976 us): state failed, failed in FW_READY wait (ABI mismatch), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0 | 0.031 | after 39025 us | bounded | 51 (power-downs in the trace: 1; wall 89s; recovered: boot ok) |
+| window-read-fail | boot ABI mismatch after 69180 us (clock 18407908 us): state failed, failed in FW_READY wait (ABI mismatch), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0 | 0.078 | after 69180 us | bounded | 51 (power-downs in the trace: 1; wall 87s; recovered: boot ok) |
+| never-power | DSP power down from state off: ok, cleanup ok | 0.047 | - | bounded | 120 (power-downs in the trace: 0; wall 88s; recovered: boot ok) |
+| never-ack | DSP power down from state off: ok, cleanup ok | 1.563 | - | bounded | 3047 (power-downs in the trace: 3; wall 91s; recovered: boot ok) |

@@ -1,0 +1,65 @@
+evidence: /tmp/qad-ev/ac3-cycles-icount
+qemu exited rc=0 (none) at 2026-11-24T22:36:22Z; wall 632 s
+--- serial lines of the drivers under test (hdaudbus.sys / intcdsp.sys):
+[    8.012581] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    8.012581] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007200000, processing capabilities at BAR0 +0x180
+[    8.012581] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    8.012581] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    8.184147] intcdsp.sys: loaded for the Intel audio DSP child
+[    8.184147] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    8.184147] intcdsp.sys: NHLT table: the bus driver reports none
+[    8.184147] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    8.184147] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    8.184147] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[    8.184147] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    8.184147] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    8.184147] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[    8.199772] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    8.199772] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 18850945 us at 10000000 Hz
+[    8.199772] intcdsp.sys: subsystem powered
+[    8.231022] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[    8.231022] intcdsp.sys: ROM ready for the firmware
+[    8.231022] intcdsp.sys: firmware entered
+[    8.231022] intcdsp.sys: FW_READY received
+[    8.231022] intcdsp.sys: boot ok after 37619 us (clock 18888646 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+[    8.231022] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[  149.168020] intcdsp.sys: DSP power down from state off: ok, cleanup ok
+[  195.897529] intcdsp.sys: loaded for the Intel audio DSP child
+[  195.897529] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  195.897529] intcdsp.sys: NHLT table: the bus driver reports none
+[  195.897529] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  195.897529] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  195.897529] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  195.897529] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  195.899529] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  195.900529] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  195.902529] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  195.904529] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 206549704 us at 10000000 Hz
+[  195.905529] intcdsp.sys: subsystem powered
+[  195.921530] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  195.922530] intcdsp.sys: ROM ready for the firmware
+[  195.924530] intcdsp.sys: firmware entered
+[  195.925530] intcdsp.sys: FW_READY received
+[  195.925530] intcdsp.sys: boot ok after 21353 us (clock 206571099 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+[  195.925530] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[  246.442347] intcdsp.sys: DSP power down from state off: ok, cleanup ok
+[  291.119622] intcdsp.sys: loaded for the Intel audio DSP child
+[  291.119622] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007200000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  291.119622] intcdsp.sys: NHLT table: the bus driver reports none
+[  291.119622] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  291.119622] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0x00000120, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  291.119622] intcdsp.sys: BAR4 +0x120 (the interrupt enable register the pointer names) 0x00000000
+[  291.119622] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  291.119622] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  291.119622] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  291.119622] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, ok, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  291.135226] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 301779996 us at 10000000 Hz
+[  291.136226] intcdsp.sys: subsystem powered
+[  291.152226] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  291.153226] intcdsp.sys: ROM ready for the firmware
+[  291.155226] intcdsp.sys: firmware entered
+[  291.155226] intcdsp.sys: FW_READY received
+[  291.156226] intcdsp.sys: boot ok after 21364 us (clock 301801439 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+[  291.156226] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+--- device trace: 3016 ace_* lines, 0 ace_unexpected (in /tmp/qad-ev/ac3-cycles-icount/qemu-dbg.log, the -D log), 0
+0 fatal lines in serial.log
