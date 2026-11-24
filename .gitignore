@@ -1,0 +1,11 @@
+# build products, the QEMU source checkout and the downloads (fetch.sh / build.sh recreate them)
+build/
+src/
+dl/
+# OVMF firmware blobs (edk2, BSD-2-Clause-Patent; fetched, not part of this GPL project)
+firmware/
+# per-run binary copies and sockets inside the evidence tree
+evidence/**/OVMF_VARS.fd
+evidence/**/*.sock
+evidence/**/*.ppm
+__pycache__/
