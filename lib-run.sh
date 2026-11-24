@@ -68,8 +68,8 @@ args=("$QEMU" -L "$BIOSDIR"
 if [ -n "${DISK:-}" ]; then
     args+=(-drive "file=$DISK,if=ide,index=0,media=disk,format=qcow2")
 fi
-if [ -n "${CDROM:-$ISO}" ]; then
-    args+=(-cdrom "$ISO" -boot "order=${BOOT:-d}")
+if [ "${CDROM:-$ISO}" != none ]; then
+    args+=(-cdrom "${CDROM:-$ISO}" -boot "order=${BOOT:-d}")
 fi
 case "$HDA" in
     ace)
