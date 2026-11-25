@@ -42,6 +42,12 @@ The image identifies itself in the guest: the console's banner `LiberNT [Version
 (`r1-stage1-firstboot/s5-cmd.png`), the desktop's watermark
 `feat/audio-control-polish.2285127.amd64.clang.4715-251126` — both name the build tip (C1's E7 is gone).
 
+The published tip of the branch, `d5e2a039be6` (86 commits over master `20d6e5d988fbf`), has the **same driver
+sources** as the image's commit: `git diff --stat 2285127b060 d5e2a039be6 -- drivers/wdm/audio/intcdsp
+drivers/wdm/audio/hdaudbus sdk/lib/drivers/audio/softplg` is empty (read in the tree, 2026-11-25). The binary in the
+image is the build of `2285127b060` (its stamp names it); the two findings read in the sources (T1, X1) hold for the
+published tip as well.
+
 ## Model
 
 - qemu-ace-dsp `main` at `d2dc604` (patches 0001–0018 on QEMU 11.1.3; `build/applied-patches.txt` lists the 18
