@@ -1,0 +1,77 @@
+From 408345faeb5139070734a005aab83878fe1f545b Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 10:21:50 +0200
+Subject: [PATCH 16/18] tests/qtest: intel-hda-ace: a stream that ends inside a
+ structure is refused
+
+short-stream: the loader stream is cut just before a word of each structure
+of the test image -- the entry count of the directory, the offset of the
+ADSP.man entry, the vendor and the magic of the manifest, the flags of a
+module segment, and (the flags read) its file offset -- and the ROM must
+halt in the state of that structure with its code, never judge a word it
+did not read.  On the model before this series the cut at 0x2084 entered
+the firmware (FSR 5, ROM error 0); at 0x2088 the file offset stayed
+uninitialised.
+
+Mutation rows: judge-count-code, judge-entry-offset-code,
+judge-segment-code and judge-segment-inverted.
+---
+ tests/qtest/intel-hda-ace-test.c | 35 ++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index e2a263e4f..f94712f09 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1021,6 +1021,39 @@ static void test_pipeline_faults(void)
+     boot_end();
+ }
+ 
++/* 13: a stream that ends inside a structure of the image is refused with the
++ * walk halted and a named code -- never judged on a word that was not read.
++ * Before patches 0015/0016 the directory's entry count, the ADSP.man entry's
++ * offset and the module's segment words were read without their result
++ * checked, so a word of the stack decided. */
++static void check_short_stream(uint32_t bytes, uint32_t state, uint32_t code)
++{
++    boot_start("");
++    load_image(2, 9, 9, 9);
++    power_up();
++    rom_ready();
++    run_loader(bytes);
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, ACE_BUSY | state);
++    g_assert_cmpuint(r4(ACE_ROMERR), ==, code);
++    boot_end();
++}
++
++static void test_short_stream(void)
++{
++    /* payload offsets of the test image: the directory's entry count at 4;
++     * the ADSP.man entry at 20, its offset field at +12; the manifest at
++     * 0x40, its vendor at +16 and its magic at +28; the firmware header at
++     * 0x2000; the module entry at 0x2034, its segment flags at +80 and file
++     * offset at +88.  Each length ends the stream just before the word. */
++    check_short_stream(4, 0x09, 43);          /* the entry count: no directory */
++    check_short_stream(32, 0x25, 43);         /* the entry's offset: no ADSP.man entry */
++    check_short_stream(0x50, 0x26, 44);       /* the manifest's vendor */
++    check_short_stream(0x5c, 0x26, 44);       /* the manifest's magic */
++    check_short_stream(0x2084, 0x28, 43);     /* a segment's flags (and so its offset) */
++    check_short_stream(0x2088, 0x28, 43);     /* its flags read, its file offset not */
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -1037,6 +1070,8 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/pipeline-table", test_pipeline_table);
+         qtest_add_func("/intel-hda-ace/pipeline-illegal", test_pipeline_illegal);
+         qtest_add_func("/intel-hda-ace/pipeline-faults", test_pipeline_faults);
++        qtest_add_func("/intel-hda-ace/short-stream", test_short_stream);
++
+     }
+     return g_test_run();
+ }
+-- 
+2.56.1
+

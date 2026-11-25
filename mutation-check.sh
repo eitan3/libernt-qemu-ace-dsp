@@ -21,6 +21,11 @@
 #    the expression's delimiter must not occur in its text.
 #  - the build and the qtest run in the main build/ directory: after the
 #    check it holds the last mutation, so build.sh is run again afterwards.
+#    A run's output is kept up to LOGMAX bytes (a mutant that prints without
+#    end must not fill the disk); a run cut by the cap counts as an abort.
+#  - a row whose mutation makes the emulator itself die (a segfault on a
+#    malformed image) ends the qtest without a "not ok" line: it is one of
+#    the aborts above.
 #  - SELFTEST=1 runs the detector on synthetic logs (a clean run, a red run
 #    that stops early, a timeout, a crash, a truncated run) and fails if any
 #    verdict is wrong; it builds nothing.
@@ -80,11 +85,18 @@ MUTATIONS=(
 "fault-ipc-status-all|$C|s/               ace_fault_applies(s, type);/               true;/|ipc-status=<n>:<type> answers every type with the status"
 "fault-never-reply-all|$C|s/(s->fault_id == ACE_FAULT_NEVER_REPLY \&\& ace_fault_applies(s, type))) {/(s->fault_id == ACE_FAULT_NEVER_REPLY)) {/|never-reply=<type> drops every request"
 "fault-type-off-by-one|$C|s/    s->fault_type = fault_type;/    s->fault_type = (fault_type + 1) \& 0x1f;/|the fault's message type stored one past the one it names"
+"judge-count-code|$C|s/ACE_ROM_BASE_FW_NOT_FOUND\(, .partition directory entries.\)/ACE_ROM_CSE_VALIDATION_FAILED\1/|a directory whose entry count lies outside the stream is refused with another code"
+"judge-entry-offset-code|$C|s/ACE_ROM_BASE_FW_NOT_FOUND\(, .ADSP.man entry offset.\)/ACE_ROM_IMR_TO_SMALL\1/|an ADSP.man entry whose offset lies outside the stream is refused with another code"
+"judge-segment-code|$C|s/ACE_ROM_BASE_FW_NOT_FOUND\(, .module segment flags.\)/ACE_ROM_IMR_TO_SMALL\1/|a module segment whose flags lie outside the stream is refused with another code"
+"judge-segment-inverted|$C|s/if (!ace_judge_u32(s, d + ACE_RI_SEGMENT_FLAGS/if (ace_judge_u32(s, d + ACE_RI_SEGMENT_FLAGS/|a segment whose flags were read is refused: every image with a module"
+"payload-bounds-wrap|$C|s/off > s->payload_len .. s->payload_len - off < 4/off + 4 > s->payload_len/|the bounds of a payload word checked with a wrapping addition again (the emulator dies on the wrapped offset)"
+"segment-end-wrap|$C|s/if (foff > s->payload_len .. len > s->payload_len - foff) {/if (foff + len > s->payload_len) {/|the end of a segment checked with a wrapping addition again"
 )
 
 # the cases of a clean run (the un-mutated test file), for the abort note
 M=$(grep -c "qtest_add_func(" "$SRC/tests/qtest/intel-hda-ace-test.c")
 LOG="$(mktemp /tmp/mutation-check.XXXXXX.log)"
+LOGMAX=$((64 * 1024 * 1024))     # a mutant that prints without end must not fill the disk
 trap 'rm -f "$LOG"' EXIT
 
 # one bounded table cell: a single line, the separator replaced, at most $2
@@ -189,7 +201,10 @@ for m in "${MUTATIONS[@]}"; do
         failed=$((failed + 1))
         printf '| %d | %s | %s | BUILD FAILED: %s | - |\n' "$n" "$name" "$(cell "$what" 200)" "$(cell "$(echo "$res" | tr '\n' ' ')" 120)" >> "$OUT"
     else
-        (cd build && QTEST_QEMU_BINARY=./qemu-system-x86_64 timeout 400 ./tests/qtest/intel-hda-ace-test > "$LOG" 2>&1); rc=$?
+        # the run's output is capped (LOGMAX bytes): its exit status is the
+        # qtest's own, also when the cap closes the pipe under it
+        (cd build && QTEST_QEMU_BINARY=./qemu-system-x86_64 timeout 400 ./tests/qtest/intel-hda-ace-test 2>&1 \
+            | head -c "$LOGMAX" > "$LOG"; exit "${PIPESTATUS[0]}"); rc=$?
         got=$(verdict "$rc" "$LOG")
         kind=${got%%$'\t'*}
         cells=${got#*$'\t'}

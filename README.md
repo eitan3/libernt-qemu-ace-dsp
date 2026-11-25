@@ -52,13 +52,14 @@ serial log next to the device's own trace.
 | The interrupt | raised only while a message is pending and every enable is set; observed on the INTx line through the I/O APIC and as MSI; counted by the p2b3 driver's ISR (`1 DSP interrupts` on the rows that reach FW_READY); the p2b4 driver masks the enables and polls (`0 DSP interrupts`, the mask in every trace) |
 | Fault handling | 16 injectable faults — 18 forms, two of them naming one IPC4 message type (`ipc-status=<n>:<type>`, `never-reply=<type>`) — each with a bounded shape asserted by the qtest |
 | The pipeline table | create, set-state and delete pipeline are tracked by instance id and answered with the request's type and a status; a pipeline asked to run before it was paused answers the plan's status 5 and does not move; the table is empty again at every firmware start (patches 0011–0014; qtest `pipeline-table`, `pipeline-illegal`, `pipeline-faults`) |
+| A malformed image | a stream that ends inside a structure of the image is refused with the walk halted in that structure's state and with its code; an offset of the image near 2^32 never makes a read leave the stream (patches 0015–0018; qtest `short-stream`, `wrapped-offset`) |
 
 **Never proves** (silicon truth — only the real device can): the ROM's real
 behaviour, its undocumented checks and signature enforcement, powered-down read
 values, real timings, the interrupt's trigger type on the real line, the
-controller's DMA details, SoundWire, D0i3, and the firmware's real pipeline
-state machine and status codes beyond the plan's one rule. A green VM boot is
-not silicon proof.
+controller's DMA details, SoundWire, D0i3, the firmware's real pipeline state
+machine and status codes beyond the plan's one rule, and the ROM's real codes for a malformed
+image. A green VM boot is not silicon proof.
 
 ### What the simulator caught on its real boots
 
@@ -168,6 +169,20 @@ owners (`evidence/2026-11-25-p3c1/DIVERGENCE.md`): the VM acceptance line's
 `fault=ipc-status=19:17` must read `ipc-status=5:19` under the plan's own `<n>:<type>`
 notation, and "status 5" is `IPC4_BAD_STATE` in SOF's error list
 (`IPC4_INVALID_RESOURCE_STATE` is 12) — the model answers the plan's number.
+
+**P3 C1, the follow-up (same day; Megan's go after she verified and pushed `4bb8022`).** Three pre-existing
+items of the model were fixed or documented, and fixing them found a fourth, worse one. **A guest could crash
+the emulator**: the bounds of a read of the streamed image were checked with an addition that wraps in 32-bit
+arithmetic, and the offsets are the image's own — with the manifest offset of the test image set to `0xfffffffe`
+the model read four gigabytes past the stream and died on a SIGSEGV
+(`evidence/2026-11-25-p3c1/n1-payload-reads.md`). Since patches 0017/0018 an image with such an offset is
+refused like any other malformed one. **N1**: the ROM's judgement read six words of the image without looking
+at the result, so a stream that ended inside a structure was judged on a word of the stack — a stream of 8 KB
+was accepted as a firmware and entered; since patches 0015/0016 every such stream is refused with the
+structure's state and code. **N3**: `normalise-evidence.sh` prints its summary and exits 0 in every case.
+**N2** (the reply register keeps the old message's bits after an acknowledgement) stays as it is by ruling and
+is listed as a model value. The qtest grew to 14 cases and the mutation check to 50 rows; the boot-path
+comparison was re-run for 18 patches: still 1137 old trace lines in order, none gone.
 
 ## Build and run
 
@@ -309,7 +324,7 @@ On the p2b2 image the same boot stopped after `FW_READY received` (D1); that blo
 
 | AC | What | Status |
 |---|---|---|
-| AC1 | qtest passes; mutation check recorded | **PASS** — 12 cases (`evidence/2026-11-25-p3c1/qtest.txt`, 12/12): the 9 earlier ones unchanged (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down) and, since patches 0011–0014, `pipeline-table`, `pipeline-illegal`, `pipeline-faults`. `mutation-check.sh`: **44 mutations, 43 killed, 1 survivor** (`personality-id`, an equivalent mutant: the class default it changes is overwritten by the personality at realise) — `evidence/2026-11-25-p3c1/mutation-check.md`; each of the 19 rows added for the pipeline table and the typed faults is killed by the case that pins it, and the detector no longer reads an aborted run as a survivor (`SELFTEST=1`). **The boot path itself did not change** (`evidence/2026-11-25-p3c1/boot-path-diff.txt`): the 10-patch model's 1137 `ace_*` trace lines of cases 1–9 are all present, in order, in the 14-patch model's run, with 16 lines added — all of them the new decoded ones. History: `evidence/2026-11-25-p2b3/mutation-check.md` (25 mutations, 24 killed, 1 survivor) |
+| AC1 | qtest passes; mutation check recorded | **PASS** — 14 cases (`evidence/2026-11-25-p3c1/qtest.txt`, 14/14): the 9 earlier ones unchanged (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down) and, since patches 0011–0018, `pipeline-table`, `pipeline-illegal`, `pipeline-faults`, `short-stream`, `wrapped-offset`. `mutation-check.sh`: **50 mutations, 49 killed, 1 survivor** (`personality-id`, an equivalent mutant: the class default it changes is overwritten by the personality at realise) — `evidence/2026-11-25-p3c1/mutation-check.md`; each of the 25 rows added since p2b3 is killed by the case that pins it, one of them (`payload-bounds-wrap`, which makes the emulator die) as an abort, and the detector no longer reads an aborted run as a survivor (`SELFTEST=1`). **The boot path itself did not change** (`evidence/2026-11-25-p3c1/boot-path-diff.txt`, re-run for 18 patches): the 10-patch model's 1137 `ace_*` trace lines of cases 1–9 are all present, in order, in the 18-patch model's run, with 16 lines added — all of them the new decoded ones. History: `evidence/2026-11-25-p2b3/mutation-check.md` (25 mutations, 24 killed, 1 survivor) |
 | AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`); **on the p2b4 image** (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`): the same thirteen lines except the two R1 lines (`HFINTIPPTR 0xffffffff`, `names no 32-bit register inside BAR4`), the six BAR4 reads, 0 `ace_unexpected` |
 | AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b4 image** (`b392065b2cf`, poll-only). Plain boot under icount: `boot ok after 67971 us (clock 17821036 us) … attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000`; end clock = start clock + M within 0.4 ms; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **0 DSP interrupts** (R2: the enables are masked before the ROM request and never enabled; p2b3's `1` was the FW_READY interrupt its ISR took). 22 disable/enable cycles in one VM, 22 `boot ok after 21406–21726 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, the clock rule within 80–82 µs on all 23 boots, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p2b4/ac3-cycles`). Earlier rounds: p2b3 `1 DSP interrupts` (N1), p2b2 the D1 hang |
 | AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale; since patches 0013/0014 the case `pipeline-faults`: `ipc-status=5:19`, `ipc-status=7`, `ipc-status=7:1`, `never-reply=19`, `never-reply=1`, `never-reply` — the two typed forms have **no VM row yet**, they need the C1 image). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
@@ -405,7 +420,7 @@ filled from measurements on the real device; "—" means not yet measured.
 |---|---|
 | `COPYING` | QEMU's licence text (GPL-2.0-or-later) |
 | `fetch.sh`, `build.sh`, `export-patches.sh` | the pinned source, the build, the series export |
-| `patches/0001…0014` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest); the interrupt pointer that does not answer while unpowered (model, qtest); the pipeline table with every reply traced decoded (model, qtest); the faults that name one message type (model, qtest) |
+| `patches/0001…0018` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest); the interrupt pointer that does not answer while unpowered (model, qtest); the pipeline table with every reply traced decoded (model, qtest); the faults that name one message type (model, qtest); the ROM's judgement refusing a stream cut short (model, qtest); a payload read that never wraps (model, qtest) |
 | `run.sh`, `run-control.sh`, `lib-run.sh`, `make-overlay.sh` | the VM runs (`lib-run.sh`: `ICOUNT=1`, `QTESTSOCK=1`, `FAULT`, `TRACE`, `STOP_ON`, …) |
 | `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults; in `tools/`: the monitor/typing helpers (`guest.sh`, `mon.py`, `qmp.py`), the qtest client and heartbeat (`qtest.py`, `heartbeat.py`), `waitline.sh`, `cycle.sh`, `ac3-cycles.sh`, the fault-matrix driver and its post-check (`fault-matrix.sh`, `fm-check.sh`) |
 | `mutation-check.sh` | AC1's mutation run: one row per model behaviour, each breaking one piece and naming the case that goes red (the detector's rules are in the header; `SELFTEST=1` proves them on synthetic logs; `ONLY=<regex>` runs the rows whose name matches) |
@@ -413,17 +428,18 @@ filled from measurements on the real device; "—" means not yet measured.
 
 ## Evidence index
 
-### 2026-11-25-p3c1 (P3 C1, the model half: the pipeline table and the faults that name one message type — no VM run)
+### 2026-11-25-p3c1 (P3 C1, the model half: the pipeline table and the faults that name one message type; the follow-up fixes — no VM run)
 
 | File | What it shows |
 |---|---|
-| `qtest.txt` | 12/12: the 9 earlier cases unchanged + `pipeline-table`, `pipeline-illegal`, `pipeline-faults`; the model and qtest binary hashes (the complete transcript with the `ace_*` trace: `qtest-0001-0014.txt.gz`) |
-| `boot-path-diff.txt` | the boot path unchanged: the 10-patch model (`qtest-old-0001-0010.txt.gz`) against the 14-patch one, case by case — 1137 old trace lines all present in order, 16 added, all the new decoded lines |
+| `qtest.txt` | 14/14: the 9 earlier cases unchanged + `pipeline-table`, `pipeline-illegal`, `pipeline-faults`, `short-stream`, `wrapped-offset`; the model and qtest binary hashes (the complete transcript with the `ace_*` trace: `qtest-0001-018.txt.gz`) |
+| `boot-path-diff.txt` | the boot path unchanged: the 10-patch model (`qtest-old-0001-0010.txt.gz`) against the 18-patch one, case by case — 1137 old trace lines all present in order, 16 added, all the new decoded lines |
 | `pipeline-trace.txt` | the `ace_ipc` trace of one create → state → delete sequence (request, reply, decoded type and status, acknowledgement), then the table's other answers, the illegal transition, and the typed faults |
-| `mutation-check.md` | 44 mutations: 43 killed (the first red case and how many cases ran in each row), 1 survivor (`personality-id`), 0 not applied |
-| `MODEL-NOTES.md` | every reply value the model chooses — plan-given or model value — with the silicon column left for C6, and the INFO_NEEDED list |
-| `fault-values.txt` | the fault property on the final binary: the six bad values refused on the command line and over QMP (the fault in place kept), the good ones accepted |
-| `DIVERGENCE.md` | no driver ran: the plan-side findings (the `ipc-status=19:17` notation, the name of status 5, the answers the plan does not give), three pre-existing model/tooling items noticed and not changed, the detector fix |
+| `mutation-check.md` | 50 mutations: 49 killed (the first red case and how many cases ran in each row; one row, which makes the emulator die, as an abort), 1 survivor (`personality-id`), 0 not applied |
+| `n1-payload-reads.md` | **a guest could crash the emulator**: the record of the SIGSEGV on a wrapped offset of the streamed image and its backtrace; and N1 — what the old model did at each cut of the stream, what the fixed model answers |
+| `MODEL-NOTES.md` | every reply value the model chooses — plan-given or model value — with the silicon column left for C6 (rows 1–22), and the INFO_NEEDED list |
+| `fault-values.txt` | the fault property on the final binary: the bad values refused on the command line and over QMP (the fault in place kept), the good ones accepted |
+| `DIVERGENCE.md` | no driver ran: the follow-up's crash finding and its fix, the rulings P1–P3, N1 and N3 fixed, N2 documented, the detector fix |
 
 ### 2026-11-25-p2b4 (the fix round R1/R2/D3/R6 verified on `b392065b2cf`; AC3 and AC4 closed again)
 
@@ -487,4 +503,5 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.
-5. **The pipeline table (P3 C1, the model half).** On silicon: the status code of an illegal pipeline transition (the plan's 5, or SOF's 12 `IPC4_INVALID_RESOURCE_STATE`), the state a new pipeline is in, the transitions the firmware allows beyond "paused before running", the answers to a duplicate create, an unknown pipeline, instance id 0 (R-G) and the multi-pipeline form, the reply's delay and extension — every row of `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. In the plan: §8 C1's `fault=ipc-status=19:17` has to read `ipc-status=5:19` under the plan's own `<n>:<type>` notation.
+5. **The pipeline table (P3 C1, the model half).** On silicon: the status code of an illegal pipeline transition (the plan's 5, or SOF's 12 `IPC4_INVALID_RESOURCE_STATE`), the state a new pipeline is in, the transitions the firmware allows beyond "paused before running", the answers to a duplicate create, an unknown pipeline, instance id 0 (R-G) and the multi-pipeline form, the reply's delay and extension — every row of `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. In the plan: §8 C1's `fault=ipc-status=19:17` had to read `ipc-status=5:19` under the plan's own `<n>:<type>` notation (corrected 2026-11-25).
+6. **A malformed image on silicon (the follow-up).** In which state the real ROM halts, and with which error, when the stream ends inside each structure of the image; whether it reads past the stream at all on an offset near 2^32 (`evidence/2026-11-25-p3c1/MODEL-NOTES.md`, rows 17–22); and whether silicon clears the reply register on the acknowledgement (row 16). The model's answers there are model values; what it no longer does is crash.

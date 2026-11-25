@@ -43,7 +43,7 @@ reply shape the plan's §5.4 gives for every reply (plan-given).
 | 13 | The reply's delay after the request | 50 µs (the FW_CONFIG reply's delay, `ACE_US_IPC_REPLY`, scaled by `x-delay-scale`) | model value (existing) | — |
 | 14 | The reply's extension register (`HFIPCXTDDY`) | 0 | model value | — |
 | 15 | When the table is emptied | at every firmware start (the moment the ROM enters the firmware), at core power-off, at subsystem power-off and at device reset: a re-booted firmware finds no pipeline (the plan's recovery re-boots "from scratch", §5.8) | model value | — |
-| 16 | The acknowledgement of a reply | clears DONE only; the register keeps the reply's message bits (the qtest masks DONE) | existing behaviour, unchanged | — |
+| 16 | The acknowledgement of a reply, and of a notification | clears DONE (BUSY for a notification) only; the register keeps the previous message's bits — `HFIPCXIDA` reads `0x61000000` after the FW_CONFIG reply was acknowledged, `HFIPCXTDR` reads `0x1b080000` after FW_READY | **model value for C6** (N2 of `DIVERGENCE.md`, left as it is by Megan's ruling of 2026-11-25: the driver's receive path masks DONE, so it never misreads the residue; whether silicon clears the register on the acknowledgement is unknown) | — |
 
 ## The two new faults, as the plan names them
 
@@ -60,6 +60,22 @@ In the trace every replied message carries its decoded type and status:
 `IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running`,
 an injected status says so, and a dropped request is
 `IPC request dropped (set-pipeline-state) primary 0x13010003 ext 0x00000000`.
+
+## The ROM's judgement of a malformed image (the follow-up, patches 0015–0018)
+
+Not part of the pipeline table, but answered by the same model, so listed for C6 the same way. Before the
+follow-up, a stream that ended inside a structure of the image was judged on a word that had never been
+read (N1), and an offset of the image near 2^32 made a read go outside the stream — the emulator died
+(`n1-payload-reads.md`). Both are fixed; **what the model answers now is still a model value**:
+
+| # | Item | The model's answer | Kind | Silicon (C6 fills) |
+|---|---|---|---|---|
+| 17 | The stream ends before the directory's entry count | walk halted in PURGE_BOOT (0x09), ROM error 43 (`BASE_FW_NOT_FOUND`) | model value (the code of a directory of the wrong shape) | — |
+| 18 | The stream ends before the `ADSP.man` entry's offset | FW_MANIFEST_IN_DMA_BUFF (0x25), 43 — as a directory without the entry | model value | — |
+| 19 | The stream ends before the manifest's vendor or magic word | LOAD_CSE_MAN_TO_IMR (0x26), 44 (`CSE_VALIDATION_FAILED`) — as a word of the wrong value | model value | — |
+| 20 | The stream ends before a module segment's flags, or before its file offset | LOAD_FW_CODE_TO_IMR (0x28), 43 — as a module entry that cannot be read | model value | — |
+| 21 | An offset of the image (the entry's, the manifest's, a segment's) so large that the bounds check of a read would wrap | the read fails: the image is refused as in rows 17–20, never read outside the stream | plan-given in spirit (a read must not leave the stream); no reply value of its own | — |
+| 22 | A segment whose end (`file offset + pages × 4 KiB`) wraps | LOAD_FW_CODE_TO_IMR (0x28), 42 (`IMR_TO_SMALL`) — as a segment outside the stream | model value | — |
 
 ## INFO_NEEDED — for silicon (C6) and for the plan
 
@@ -80,6 +96,14 @@ an injected status says so, and a dropped request is
    *status 19 for create pipeline (17)*. To obtain the quoted line the driver's
    run must use **`ipc-status=5:19`** (status 5 for set-state) — or the plan's
    line is corrected. The model implements the definition, not the example.
+   *Corrected in the plan on 2026-11-25 (Megan's ruling P1): the line now
+   reads `ipc-status=5:19`, with a note.*
+7. The ROM's real codes for a malformed image (rows 17–22): in which state the
+   walk halts, and with which error, when the stream ends inside each
+   structure — and whether the real ROM reads past the stream at all on an
+   offset near 2^32.
+8. Whether silicon clears `HFIPCXIDA` / `HFIPCXTDR` on the acknowledgement
+   (row 16).
 
 Sources read for the numbers (cited in `intel-hda-ace-regs.h`): Linux
 `include/sound/sof/ipc4/header.h` (the copy of 6.18.60 on the build host: types

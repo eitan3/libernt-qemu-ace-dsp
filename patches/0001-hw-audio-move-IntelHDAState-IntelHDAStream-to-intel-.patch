@@ -1,7 +1,7 @@
 From 5f15a3240bd38cd94a1b61d2f89f572cf7ecd00b Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 09:29:20 +0200
-Subject: [PATCH 01/14] hw/audio: move IntelHDAState/IntelHDAStream to
+Subject: [PATCH 01/18] hw/audio: move IntelHDAState/IntelHDAStream to
  intel-hda-internal.h
 
 The controller state is private to intel-hda.c; the ACE audio DSP variant

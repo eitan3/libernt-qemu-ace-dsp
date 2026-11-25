@@ -1,6 +1,6 @@
-# The fault property's values: refused and accepted (2026-11-25T07:25:48Z)
+# The fault property's values: refused and accepted (2026-11-25T08:29:27Z)
 #
-# The final binary: build/qemu-system-x86_64 sha256 646ff22682bf74ad7230d5dd4f16a64b68079846740756c6abb7604954b7b99a.
+# The final binary: build/qemu-system-x86_64 sha256 be8667eb822902f712334caf3484762285bd0c936787e5906cfea8895750481d.
 
 ## On the command line: -device intel-hda-ace,bus=pcie.0,addr=1b.0,fault=<value>
 

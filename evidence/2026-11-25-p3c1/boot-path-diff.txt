@@ -1,23 +1,22 @@
-# The boot path, unchanged: the 10-patch model against the 14-patch model (2026-11-25T07:20:04Z)
+# The boot path, unchanged: the 10-patch model against the 18-patch model (2026-11-25T08:29:27Z)
 
-Question: do patches 0011-0014 change one register access of the boot path? (The rule for the model half:
-the qtest of 0001-0010 must still pass unchanged.)
+Question: do the patches after 0010 change one register access of the boot path? (The rule for the model
+half: the qtest of 0001-0010 must still pass unchanged.  Re-run for the follow-up that added patches
+0015-0018 on top of 0011-0014.)
 
-Method -- two builds of the same build/ directory, each running its qtest with the full `ace_*` trace:
+Method -- the two models' qtest transcripts with the full `ace_*` trace:
 
-- **old**: `build.sh` with `PATCHDIR` holding patches 0001-0010 only (the model of `main` 7b972af) and the
-  qtest binary of that series (9 cases, 9 ok). Raw transcript: `qtest-old-0001-0010.txt.gz`.
-- **new**: `build.sh` with `patches/` (0001-0014) and its qtest binary (12 cases, 12 ok). Raw transcript:
-  `qtest-0001-0014.txt.gz`. `build/qemu-system-x86_64` sha256 `646ff22682bf74ad7230d5dd4f16a64b68079846740756c6abb7604954b7b99a`,
-  `build/tests/qtest/intel-hda-ace-test` sha256 `265a577604201304802a20e39d07433f64cba8d1a8fcb135c47b162a0ce9242f`.
+- **old**: the 10-patch model (the model of `main` 7b972af) and its own qtest binary (9 cases, 9 ok):
+  `qtest-old-0001-0010.txt.gz`, the transcript taken in the first p3c1 run.
+- **new**: `build.sh` with `patches/` (18 patches) and its qtest binary (14 cases ok, exit 0):
+  `qtest-0001-018.txt.gz`.  `build/qemu-system-x86_64` sha256 `be8667eb822902f712334caf3484762285bd0c936787e5906cfea8895750481d`,
+  `build/tests/qtest/intel-hda-ace-test` sha256 `5d908c0786cb7c35e00ef352dfecd53ffce52f13b5cff7f572e57cefec468ab4`.
 
-The cases 1-9 are the same test code in both (the test patches 0005/0008/0010 are byte-identical in the two
-series except for `format-patch`'s `[PATCH n/N]` counter). For every case the `ace_*` trace lines of the old
-run are compared with the new run: each old line must still be there, in the same order (a subsequence test),
-and every added line is classified. GLib's host-timing comments (`# slow test ... executed in ... secs`) and the
-qtest socket name differ between runs, are not model output, and are outside the comparison. The old binaries
-were replaced by the final build before being hashed: the old model is reproducible from the ten patches with
-`PATCHDIR=<a directory holding patches/0001-0010> bash build.sh`.
+The cases 1-9 are the same test code in both (the test patches 0005/0008/0010 are byte-identical in the
+two series except for `format-patch`'s `[PATCH n/N]` counter).  For every case the `ace_*` trace lines of
+the old run are compared with the new run: each old line must still be there, in the same order (a
+subsequence test), and every added line is classified.  GLib's host-timing comments and the qtest socket
+name differ between runs, are not model output, and are outside the comparison.
 
 ```
 case 1: old    1 trace lines, new    1: 0 old lines gone, 0 added; old lines in order inside the new: yes

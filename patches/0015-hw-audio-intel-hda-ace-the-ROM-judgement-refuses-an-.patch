@@ -1,0 +1,129 @@
+From e3d91b07076cf1607b1d9635ecf97f7dd3ecb792 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 10:20:10 +0200
+Subject: [PATCH 15/18] hw/audio: intel-hda-ace: the ROM judgement refuses an
+ image a stream cut short
+
+ace_rom_judge() read six words of the streamed image without looking at the
+result: the entry count of the partition directory, the offset of the
+ADSP.man entry, the vendor and the magic of the manifest, and the flags and
+the file offset of each module segment.  When the stream ended inside one
+of those structures the word kept whatever the stack held: gcc warned on
+every build for the segment words, and a stream of 0x2084 bytes -- the
+directory, the manifest header, the firmware header and four bytes of the
+module entry -- was accepted as a firmware and entered (the uninitialised
+flags read as "segment not loaded").
+
+Every read now goes through ace_judge_u32(), which refuses the image with
+the walk halted in the state and with the ROM code of the structure being
+read, as a word of the wrong value already was: the entry count
+(PURGE_BOOT, 43), the entry offset (FW_MANIFEST_IN_DMA_BUFF, 43, like a
+missing ADSP.man entry), the manifest words (LOAD_CSE_MAN_TO_IMR, 44), the
+segment words (LOAD_FW_CODE_TO_IMR, 43).  The codes are model values (the
+codes of the real ROM are INFO_NEEDED).
+---
+ hw/audio/intel-hda-ace.c | 48 ++++++++++++++++++++++++++++++++++------
+ 1 file changed, 41 insertions(+), 7 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 3f9f266bb..217037dca 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -607,6 +607,22 @@ static bool ace_payload_bytes(IntelHDAAceState *s, uint32_t off, uint32_t len,
+     return true;
+ }
+ 
++/* A word of the stream for the ROM's judgement.  A word the stream does not
++ * hold refuses the image: the walk is halted in `state` with the ROM's
++ * `code`, as a word of the wrong value would be, instead of leaving the
++ * caller's word uninitialised or stale (the stream ended inside the
++ * structure being read). */
++static bool ace_judge_u32(IntelHDAAceState *s, uint32_t off, uint32_t state,
++                          uint32_t code, const char *rule, uint32_t *val)
++{
++    if (!ace_payload_u32(s, off, val)) {
++        trace_ace_payload_check(rule, false);
++        ace_halt(s, state, code);
++        return false;
++    }
++    return true;
++}
++
+ /* The ROM's judgement of the streamed image -- the bytes the host streams
+  * are the file from the extended-manifest length on, so the stream starts
+  * with the CSE partition directory (the host parsed the extended manifest
+@@ -616,7 +632,8 @@ static bool ace_payload_bytes(IntelHDAAceState *s, uint32_t off, uint32_t len,
+  * Arrow Lake's (type 4, Intel, "$MN2"), the firmware header must be a
+  * version-2 base firmware, and every segment the module table loads must lie
+  * inside the bytes that arrived.  The halt codes they map to follow the P2a
+- * model's choices. */
++ * model's choices.  A structure the stream ends inside is refused like one of
++ * the wrong value: every read goes through ace_judge_u32. */
+ static bool ace_rom_judge(IntelHDAAceState *s)
+ {
+     uint32_t v, nb, hdr_len, i, man = 0, fw[13], nmod, off = 0, len;
+@@ -628,7 +645,10 @@ static bool ace_rom_judge(IntelHDAAceState *s)
+         ace_halt(s, ACE_ROM_PURGE_BOOT, ACE_ROM_BASE_FW_NOT_FOUND);
+         return false;
+     }
+-    ace_payload_u32(s, off + ACE_RI_CPD_NB_ENTRIES, &nb);
++    if (!ace_judge_u32(s, off + ACE_RI_CPD_NB_ENTRIES, ACE_ROM_PURGE_BOOT,
++                       ACE_ROM_BASE_FW_NOT_FOUND, "partition directory entries", &nb)) {
++        return false;
++    }
+     hdr_len = ace_payload_u8(s, off + ACE_RI_CPD_HEADER_LENGTH);   /* a byte */
+     if (nb == 0 || nb > ACE_RI_MAN_ENTRY_MAX || hdr_len < ACE_RI_CPD_HDR_SIZE) {
+         trace_ace_payload_check("partition directory shape", false);
+@@ -641,7 +661,10 @@ static bool ace_rom_judge(IntelHDAAceState *s)
+             break;
+         }
+         if (strncmp((const char *)p, ACE_RI_MAN_ENTRY, ACE_RI_CPD_ENTRY_NAME_SIZE) == 0) {
+-            ace_payload_u32(s, e + ACE_RI_CPD_ENTRY_OFFSET, &man);
++            if (!ace_judge_u32(s, e + ACE_RI_CPD_ENTRY_OFFSET, ACE_ROM_FW_MANIFEST_IN_DMA_BUFF,
++                               ACE_ROM_BASE_FW_NOT_FOUND, "ADSP.man entry offset", &man)) {
++                return false;
++            }
+             break;
+         }
+     }
+@@ -659,13 +682,19 @@ static bool ace_rom_judge(IntelHDAAceState *s)
+         ace_halt(s, ACE_ROM_LOAD_CSE_MAN_TO_IMR, ACE_ROM_CSE_VALIDATION_FAILED);
+         return false;
+     }
+-    ace_payload_u32(s, off + man + ACE_RI_MAN_VENDOR, &v);
++    if (!ace_judge_u32(s, off + man + ACE_RI_MAN_VENDOR, ACE_ROM_LOAD_CSE_MAN_TO_IMR,
++                       ACE_ROM_CSE_VALIDATION_FAILED, "manifest vendor word", &v)) {
++        return false;
++    }
+     if (v != ACE_RI_MAN_VENDOR_INTEL) {
+         trace_ace_payload_check("manifest vendor", false);
+         ace_halt(s, ACE_ROM_LOAD_CSE_MAN_TO_IMR, ACE_ROM_CSE_VALIDATION_FAILED);
+         return false;
+     }
+-    ace_payload_u32(s, off + man + ACE_RI_MAN_MAGIC, &v);
++    if (!ace_judge_u32(s, off + man + ACE_RI_MAN_MAGIC, ACE_ROM_LOAD_CSE_MAN_TO_IMR,
++                       ACE_ROM_CSE_VALIDATION_FAILED, "manifest magic word", &v)) {
++        return false;
++    }
+     if (v != ACE_RI_MAN_MAGIC_VALUE) {
+         trace_ace_payload_check("manifest magic", false);
+         ace_halt(s, ACE_ROM_LOAD_CSE_MAN_TO_IMR, ACE_ROM_CSE_VALIDATION_FAILED);
+@@ -718,8 +747,13 @@ static bool ace_rom_judge(IntelHDAAceState *s)
+         for (seg = 0; seg < ACE_RI_MODULE_SEGMENT_COUNT; seg++) {
+             uint32_t d = m + ACE_RI_MODULE_SEGMENTS + seg * ACE_RI_SEGMENT_SIZE;
+             uint32_t flags, foff;
+-            ace_payload_u32(s, d + ACE_RI_SEGMENT_FLAGS, &flags);
+-            ace_payload_u32(s, d + ACE_RI_SEGMENT_FILE_OFFSET, &foff);
++
++            if (!ace_judge_u32(s, d + ACE_RI_SEGMENT_FLAGS, ACE_ROM_LOAD_FW_CODE_TO_IMR,
++                               ACE_ROM_BASE_FW_NOT_FOUND, "module segment flags", &flags) ||
++                !ace_judge_u32(s, d + ACE_RI_SEGMENT_FILE_OFFSET, ACE_ROM_LOAD_FW_CODE_TO_IMR,
++                               ACE_ROM_BASE_FW_NOT_FOUND, "module segment file offset", &foff)) {
++                return false;
++            }
+             if ((flags >> ACE_RI_SEGMENT_PAGE_COUNT_SHIFT) == 0 || foff == 0) {
+                 continue;       /* not loaded */
+             }
+-- 
+2.56.1
+

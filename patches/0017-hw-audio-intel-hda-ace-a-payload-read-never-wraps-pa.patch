@@ -1,0 +1,65 @@
+From 39fcb704496f6843594e8bc0e8d941f4ac1e994a Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 10:22:46 +0200
+Subject: [PATCH 17/18] hw/audio: intel-hda-ace: a payload read never wraps
+ past the end of the stream
+
+The bounds of a read of the streamed image were checked with an addition,
+"off + 4 > payload_len", in 32-bit arithmetic -- and the offsets are those
+of the image itself, which the guest streams: the offset of the ADSP.man
+entry in the partition directory, the file offset of a module segment.  An
+offset just under 2^32 passed the check (the sum wrapped to a small number)
+and the read went four gigabytes past the stream: with the offset field of
+the test image set to 0xfffffffe the emulator died on a SIGSEGV inside
+ace_rom_judge (the qtest: "kill_qemu() detected QEMU death from signal
+11").  The end of a segment was checked the same way, "foff + len >
+payload_len", and a file offset of 0xfffff000 with one page passed as
+lying inside the stream.
+
+Both bounds are now checked without an addition that can wrap.  An image
+with such an offset is refused like any other whose word cannot be read or
+whose segment lies outside the stream.
+---
+ hw/audio/intel-hda-ace.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 217037dca..07811ddd2 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -583,9 +583,13 @@ static void ace_rom_timer_cb(void *opaque)
+ /* --------------------------------------------------------------------- */
+ /* the code-loader stream: the ROM consumes the firmware                  */
+ 
++/* The bounds are checked without an addition: the offsets are the image's
++ * own (a directory entry's offset, a segment's file offset), and before this
++ * was written `off + 4 > payload_len`, which an offset just under 2^32 passed
++ * -- the read then went far outside the stream. */
+ static bool ace_payload_u32(IntelHDAAceState *s, uint32_t off, uint32_t *val)
+ {
+-    if (!s->payload || off + 4 > s->payload_len) {
++    if (!s->payload || off > s->payload_len || s->payload_len - off < 4) {
+         return false;
+     }
+     *val = ldl_le_p(s->payload + off);
+@@ -600,7 +604,7 @@ static uint8_t ace_payload_u8(IntelHDAAceState *s, uint32_t off)
+ static bool ace_payload_bytes(IntelHDAAceState *s, uint32_t off, uint32_t len,
+                               const uint8_t **ptr)
+ {
+-    if (!s->payload || off + len > s->payload_len) {
++    if (!s->payload || off > s->payload_len || s->payload_len - off < len) {
+         return false;
+     }
+     *ptr = s->payload + off;
+@@ -758,7 +762,7 @@ static bool ace_rom_judge(IntelHDAAceState *s)
+                 continue;       /* not loaded */
+             }
+             len = (flags >> ACE_RI_SEGMENT_PAGE_COUNT_SHIFT) * 0x1000;
+-            if (foff + len > s->payload_len) {
++            if (foff > s->payload_len || len > s->payload_len - foff) {
+                 trace_ace_payload_check("loaded segment inside the stream", false);
+                 ace_halt(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, ACE_ROM_IMR_TO_SMALL);
+                 return false;
+-- 
+2.56.1
+

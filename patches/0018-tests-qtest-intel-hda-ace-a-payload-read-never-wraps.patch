@@ -1,0 +1,77 @@
+From bfc7b18a636a8b4786d8aaeb6a33c3909ed46a6f Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 10:24:05 +0200
+Subject: [PATCH 18/18] tests/qtest: intel-hda-ace: a payload read never wraps
+ past the end of the stream
+
+wrapped-offset: the offset field of the ADSP.man entry of the test image is
+set to 0xfffffffe, so that the read of the manifest header would wrap its
+bounds check -- the emulator died on a SIGSEGV before patch 0017 -- and the
+image must be refused like any other whose manifest header cannot be read
+(LOAD_CSE_MAN_TO_IMR, 44).  Then the file offset of the module segment is
+set to 0xfffff000 with one page, so that its end would wrap: the segment
+must be refused as lying outside the stream (LOAD_FW_CODE_TO_IMR, 42).
+
+Mutation rows: payload-bounds-wrap and segment-end-wrap.
+---
+ tests/qtest/intel-hda-ace-test.c | 37 +++++++++++++++++++++++++++++++-
+ 1 file changed, 36 insertions(+), 1 deletion(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index f94712f09..870ffcb8b 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1054,6 +1054,41 @@ static void test_short_stream(void)
+     check_short_stream(0x2088, 0x28, 43);     /* its flags read, its file offset not */
+ }
+ 
++/* 14: a payload read never wraps past the end of the stream.  The offsets
++ * are the image's own; a manifest offset just under 2^32 made the bounds
++ * check of a read wrap before patches 0017/0018 (the model read far outside
++ * the stream and crashed), and a segment's file offset just under 2^32 made
++ * its end wrap to a small number (the segment passed as inside the stream).
++ * The images are refused like any other of their kind. */
++static void test_wrapped_offset(void)
++{
++    uint8_t v[4];
++
++    boot_start("");
++    load_image(2, 9, 9, 9);
++    put32(v, 0xfffffffeu);
++    qtest_bufwrite(t.qs, IMG_ADDR + IMG_PAYLOAD + 20 + 12, v, 4);
++    power_up();
++    rom_ready();
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, ACE_BUSY | 0x26);
++    g_assert_cmpuint(r4(ACE_ROMERR), ==, 44);
++    boot_end();
++
++    boot_start("");
++    load_image(2, 9, 9, 9);
++    put32(v, 0xfffff000u);
++    qtest_bufwrite(t.qs, IMG_ADDR + IMG_PAYLOAD + 0x2034 + 88, v, 4);
++    power_up();
++    rom_ready();
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    qtest_clock_step(t.qs, US(3000));
++    g_assert_cmpuint(r4(ACE_FSR), ==, ACE_BUSY | 0x28);
++    g_assert_cmpuint(r4(ACE_ROMERR), ==, 42);
++    boot_end();
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -1071,7 +1106,7 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/pipeline-illegal", test_pipeline_illegal);
+         qtest_add_func("/intel-hda-ace/pipeline-faults", test_pipeline_faults);
+         qtest_add_func("/intel-hda-ace/short-stream", test_short_stream);
+-
++        qtest_add_func("/intel-hda-ace/wrapped-offset", test_wrapped_offset);
+     }
+     return g_test_run();
+ }
+-- 
+2.56.1
+
