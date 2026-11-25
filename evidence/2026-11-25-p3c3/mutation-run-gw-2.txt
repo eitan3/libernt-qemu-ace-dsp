@@ -1,0 +1,10 @@
+# Mutation check of tests/qtest/intel-hda-ace-test.c (2026-11-25T17:34:31Z)
+
+Model `46998f810` (tests/qtest: intel-hda-ace: the host gateways move a loopbac); 55 mutations, one per row (ONLY=^gw-(forwarding|interrupts)$: the rows whose name matches); a clean run is 15 cases.
+
+| # | mutation | what it breaks | qtest result | red cases |
+|---|---|---|---|---|
+| 1 | gw-forwarding | the forwarding removed: the render stream is drained and its position moves, nothing is written into the capture stream | KILLED | audio-loopback (test line 1269) check_position: assertion failed (r0(HDA_ST_LPIB(n)) == want): (0 == 2048) |
+| 2 | gw-interrupts | the streams' completion bits never set: no period interrupt on either stream | KILLED | audio-loopback (test line 1315) check_loop_irq: assertion failed (got == asserted ? (1u << OUT5) / (1u << IN0) / (1u << 31) : 0): (0 == 2147483681) |
+
+2 mutations: 2 killed (0 of them by an abort), **0 survived**, 0 not applied, 0 build failures.

@@ -1,0 +1,13 @@
+# Mutation check of tests/qtest/intel-hda-ace-test.c (2026-11-25T17:31:15Z)
+
+Model `46998f810` (tests/qtest: intel-hda-ace: the host gateways move a loopbac); 55 mutations, one per row (ONLY=^gw-: the rows whose name matches); a clean run is 15 cases.
+
+| # | mutation | what it breaks | qtest result | red cases |
+|---|---|---|---|---|
+| 1 | gw-forwarding | the gateway never copies a period: the render stream is drained on paper, nothing reaches the capture stream | KILLED | audio-loopback (test line 1269) check_position: assertion failed (r0(HDA_ST_LPIB(n)) == want): (0 == 2048) |
+| 2 | gw-tag-mapping | the gateway's node index taken for the stream tag itself (the plan's tag minus one gone) | KILLED | audio-loopback (test line 1269) check_position: assertion failed (r0(HDA_ST_LPIB(n)) == want): (0 == 2048) |
+| 3 | gw-position | the positions never advance: LPIB, the position buffer and the extended register stay at 0 while the bytes move | KILLED | audio-loopback (test line 1269) check_position: assertion failed (r0(HDA_ST_LPIB(n)) == want): (0 == 2048) |
+| 4 | gw-position-mirror | the position buffer's entries never written after a period (LPIB and the extended register still move) | KILLED | audio-loopback (test line 1271) check_position: assertion failed (posbuf == want): (0 == 2048) |
+| 5 | gw-interrupts | = (1u << 26);/;//the streams' completion bits never set: no period interrupt on either stream | NOT APPLIED (sed matched nothing) | - |
+
+5 mutations: 4 killed (0 of them by an abort), **0 survived**, 1 not applied, 0 build failures.

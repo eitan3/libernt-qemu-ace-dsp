@@ -1,0 +1,55 @@
+ack-sense hw/audio/intel-hda-ace.c outside-hunks changed: 2060 
+done-polarity hw/audio/intel-hda-ace.c outside-hunks changed: 2083 
+fsr-order hw/audio/intel-hda-ace.c outside-hunks changed: 566 
+fsr-running hw/audio/intel-hda-ace.c outside-hunks changed: 614 
+fsr-entry-running hw/audio/intel-hda-ace.c outside-hunks changed: 594 
+spib-cut hw/audio/intel-hda-ace.c outside-hunks changed: 1416 
+tag-mask hw/audio/intel-hda-ace-regs.h outside-hunks changed: 156 
+cpd-length hw/audio/intel-hda-ace.c outside-hunks changed: 694 
+ame-magic hw/audio/intel-hda-ace-regs.h outside-hunks changed: 411 
+rom-control-target hw/audio/intel-hda-ace.c outside-hunks changed: 1365 
+running-guard hw/audio/intel-hda-ace.c outside-hunks changed: 551 
+irq-gating hw/audio/intel-hda-ace.c outside-hunks changed: 368 
+powered-down hw/audio/intel-hda-ace.c outside-hunks changed: 289 
+intipptr-unpowered hw/audio/intel-hda-ace.c outside-hunks changed: 1989 
+personality-id hw/audio/intel-hda-ace.c outside-hunks changed: 2502 
+version-stream hw/audio/intel-hda-ace.c outside-hunks changed: 860 
+delay-scale hw/audio/intel-hda-ace.c outside-hunks changed: 284 
+core-before-subsys hw/audio/intel-hda-ace.c outside-hunks changed: 455 471 
+reply-dir hw/audio/intel-hda-ace.c outside-hunks changed: 1335 
+abi-fault hw/audio/intel-hda-ace.c outside-hunks changed: 824 
+init-done-delay hw/audio/intel-hda-ace.c outside-hunks changed: 164 
+fw-ready-delay hw/audio/intel-hda-ace.c outside-hunks changed: 166 
+fw-running-early hw/audio/intel-hda-ace.c outside-hunks changed: 167 
+purge-tag-plus hw/audio/intel-hda-ace.c outside-hunks changed: 1368 
+win0-mirror hw/audio/intel-hda-ace.c outside-hunks changed: 319 
+ppl-running-guard hw/audio/intel-hda-ace.c outside-hunks changed: 990 
+ppl-state-tracked hw/audio/intel-hda-ace.c outside-hunks changed: 1000 
+ppl-create-tracked hw/audio/intel-hda-ace.c outside-hunks changed: 959 
+ppl-delete-tracked hw/audio/intel-hda-ace.c outside-hunks changed: 1010 
+ppl-instance-shift hw/audio/intel-hda-ace-regs.h outside-hunks changed: 190 
+ppl-state-decode hw/audio/intel-hda-ace.c outside-hunks changed: 972 
+ppl-status-five hw/audio/intel-hda-ace-regs.h outside-hunks changed: 301 
+ppl-id-range hw/audio/intel-hda-ace.c outside-hunks changed: 951 
+ppl-limit hw/audio/intel-hda-ace-regs.h outside-hunks changed: 487 
+ppl-exists hw/audio/intel-hda-ace.c IN-HUNK changed: 956 1146 
+ppl-missing hw/audio/intel-hda-ace.c IN-HUNK changed: 983 1006 1186 1216 1231 
+ppl-table-clear hw/audio/intel-hda-ace.c outside-hunks changed: 437 492 596 2341 
+ppl-multi-flag hw/audio/intel-hda-ace.c outside-hunks changed: 974 
+ppl-target-check hw/audio/intel-hda-ace.c outside-hunks changed: 1279 
+ipc-reply-delay hw/audio/intel-hda-ace.c outside-hunks changed: 168 
+fault-applies-all hw/audio/intel-hda-ace.c outside-hunks changed: 1298 
+fault-ipc-status-all hw/audio/intel-hda-ace.c outside-hunks changed: 1328 
+fault-never-reply-all hw/audio/intel-hda-ace.c outside-hunks changed: 1384 
+fault-type-off-by-one hw/audio/intel-hda-ace.c outside-hunks changed: 2263 
+judge-count-code hw/audio/intel-hda-ace.c outside-hunks changed: 691 
+judge-entry-offset-code hw/audio/intel-hda-ace.c outside-hunks changed: 707 
+judge-segment-code hw/audio/intel-hda-ace.c outside-hunks changed: 794 
+judge-segment-inverted hw/audio/intel-hda-ace.c outside-hunks changed: 793 
+payload-bounds-wrap hw/audio/intel-hda-ace.c outside-hunks changed: 630 
+segment-end-wrap hw/audio/intel-hda-ace.c outside-hunks changed: 803 
+gw-forwarding hw/audio/intel-hda-ace.c IN-HUNK changed: 1683 
+gw-tag-mapping hw/audio/intel-hda-ace.c IN-HUNK changed: 1594 
+gw-position hw/audio/intel-hda-ace.c IN-HUNK changed: 1748 1752 
+gw-position-mirror hw/audio/intel-hda-ace.c IN-HUNK changed: 1764 
+gw-interrupts hw/audio/intel-hda-ace.c IN-HUNK changed: 1667 1670 

@@ -1,0 +1,134 @@
+# One loopback sequence on the p3c3 model: the ace_ipc, ace_ipc_msg, ace_gateway and ace_audio
+# lines of the qtest case audio-loopback (qtest-full.txt.gz, case 15; the register-level ace_reg_*
+# lines are left out).  The guest values: copier module 5, gain module 7, pipeline 1, the render
+# stream output 5 with tag 2, the capture stream input 0 with tag 3, 32-bit stereo at 48 kHz.
+#
+# The driver's topology and order: create pipeline 1; init copier 5.0 (host output, index 1 =
+# tag 2), copier 5.1 (host input, index 2 = tag 3), gain 7.0; bind 5.0 -> 7.0 and 7.0 -> 5.1;
+# paused; running; the capture stream runs, then the render stream.  Two periods (the cycle
+# wraps), a pause, a resume, one period, the render stream stops.  Then the second sequence: the
+# placeholder index 0xff names no stream and nothing moves; a large-config set names the stream
+# (84 bytes, one block) and the gateway arms; the teardown.
+
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway index 1 (stream tag 2), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 2 (stream tag 3), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40000007 ext 0x0001000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 0: base configuration, ibs 384 obs 384, pipeline 1, core 0, 10 words
+ace_ipc IPC request primary 0x45000005 ext 0x00000007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 0 bound to module 7 instance 0 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45000007 ext 0x00010005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 0 bound to module 5 instance 1 (queues 0 -> 0)
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 2 into host-input copier 5.1's stream 3; 384000 bytes a second
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> paused
+ace_gateway gateway stopped (pipeline 1): pipeline 1 is paused
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 2 into host-input copier 5.1's stream 3; 384000 bytes a second
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_gateway gateway stopped (pipeline 1): stream 2, the host-output gateway's, is not running
+ace_ipc IPC request primary 0x40000005 ext 0x0001000a
+ace_ipc IPC reply primary 0xe000000a ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 10: module 5 instance 0 exists
+ace_ipc IPC request primary 0x45000005 ext 0x00090009
+ace_ipc IPC reply primary 0xe5000009 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 9: destination module 9 instance 9: no such instance
+ace_ipc IPC request primary 0x45090009 ext 0x00000007
+ace_ipc IPC reply primary 0xe5000009 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 9: source module 9 instance 9: no such instance
+ace_ipc IPC request primary 0x44090009 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000009 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 9: module 9 instance 9: no such instance
+ace_ipc IPC request primary 0x44000005 ext 0x20000000
+ace_ipc IPC reply primary 0xe4000007 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 7: module 5 instance 0: a configuration in several blocks is not modelled
+ace_ipc IPC request primary 0x4b090009 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000009 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 9: module 9 instance 9: no such instance
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 0 deleted
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_ipc IPC request primary 0x4b000007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 0 deleted
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was running)
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000009 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 9: module 5 instance 0: no such instance
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway without a stream (the placeholder index 0xff), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 2 (stream tag 3), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40000007 ext 0x0001000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 0: base configuration, ibs 384 obs 384, pipeline 1, core 0, 10 words
+ace_ipc IPC request primary 0x45000005 ext 0x00000007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 0 bound to module 7 instance 0 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45000007 ext 0x00010005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 0 bound to module 5 instance 1 (queues 0 -> 0)
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_ipc IPC request primary 0x44000005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 0: copier, host-output gateway index 1 (stream tag 2), ibs 384 obs 384, parameter 0, 84 bytes
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 2 into host-input copier 5.1's stream 3; 384000 bytes a second
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_gateway gateway stopped (pipeline 1): stream 2, the host-output gateway's, is not running
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 0 deleted
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_ipc IPC request primary 0x4b000007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 0 deleted
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was running)

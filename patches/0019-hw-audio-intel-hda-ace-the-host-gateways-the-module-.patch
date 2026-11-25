@@ -1,0 +1,1138 @@
+From 5a90cf7b7b4e4532228b20da91344e7b21787ca5 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 19:30:58 +0200
+Subject: [PATCH 19/20] hw/audio: intel-hda-ace: the host gateways (the module
+ table, audio forwarding, the extended DMA-position registers)
+
+The firmware's module table: init instance (0), large-config set (4),
+bind (5) and delete instance (11) are parsed as the IPC4 header lays them
+out (module id and instance in the primary; the size in dwords, the
+pipeline, the core and the domain in the init-instance extension; the
+destination module and the queues in the bind extension; the block flags,
+the parameter id and the size of a large config), kept by module id and
+instance, and answered like the pipeline messages.  Of a module's
+configuration the model reads only what the plan's 5.6 defines and the
+gateways need: the base configuration's buffer sizes and input audio
+format, and -- when the configuration is 21 words and up, the copier's
+tail -- the output format of pin 0 and the gateway node id, whose index
+is the stream tag minus one (0xff: no stream yet, the driver's
+placeholder).
+
+The host gateways of the plan's 5.9: while a pipeline is RUNNING and a
+host-output copier in it names a stream that is running, each period
+drains that stream through DMA exactly as the ROM consumer drains the
+loader stream -- the descriptor list walked as intel_hda_xfer() walks
+it, bounded by SPIB -- and writes the bytes into the host-input gateway
+stream of the copier bound behind it (through the modules bound in
+between, which change nothing: the pipeline is a wire).  A period is the
+run of descriptors up to the next that interrupts on completion and
+takes as long as its bytes at the stream's rate, so the positions (LPIB,
+the position buffer, and the vendor-specific extended DMA-position
+registers at BAR0 + 0x1084, read-only, a mirror of the position buffer)
+and the stream interrupts advance as the host expects.  Per period one
+evidence line is traced for each stream: ace_audio <tag> <bytes> rms <r>
+peak <p> first <s0> ... <s7>.
+
+The wire, the pacing, a capture stream that is not running losing its
+period, a frame that changes across the pipeline not being forwarded and
+the table's answers the plan does not fix are model values.  The boot
+path is unchanged: the ace_* trace of the 14 existing qtest cases is
+that of 5680026's, case for case.
+---
+ docs/system/devices/intel-hda-ace.rst |  33 +-
+ hw/audio/intel-hda-ace-regs.h         | 106 ++++
+ hw/audio/intel-hda-ace.c              | 763 +++++++++++++++++++++++++-
+ hw/audio/trace-events                 |   2 +
+ 4 files changed, 899 insertions(+), 5 deletions(-)
+
+diff --git a/docs/system/devices/intel-hda-ace.rst b/docs/system/devices/intel-hda-ace.rst
+index e41606497..59486dd63 100644
+--- a/docs/system/devices/intel-hda-ace.rst
++++ b/docs/system/devices/intel-hda-ace.rst
+@@ -75,6 +75,26 @@ answers 7: these numbers and the state a new pipeline is tracked in
+ running``, and a request a fault drops is traced with its type:
+ ``IPC request dropped (set-pipeline-state) primary 0x91310004 ext 0x00000000``.
+ 
++The host gateways: the module messages init instance (0), large-config
++set (4), bind (5) and delete instance (11) are tracked the same way, and
++of a module's configuration the model reads what a host copier's gateway
++needs -- its audio formats and its gateway node id, whose index is the HD
++Audio stream tag minus one (0xff: no stream yet).  While a pipeline is
++RUNNING, each period the host-output gateway's stream is drained through
++DMA exactly as the loader stream is (the descriptor list, bounded by SPIB)
++and the bytes are written into the host-input gateway stream of the copier
++bound behind it (through the modules bound in between, which change
++nothing): the pipeline is a wire.  A period is the run of descriptors up
++to the next that interrupts on completion and takes as long as its bytes
++at the stream's rate, so the positions (LPIB, the position buffer and the
++vendor-specific extended DMA-position registers at BAR0 +0x1084, 0x20
++apart, a mirror of the position buffer) and the stream interrupts advance
++as the host expects.  Per period and stream one evidence line is traced,
++for the render stream and the capture stream alike:
++``ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 ...``
++(tag, bytes, the RMS and the peak of the period's samples in the
++container's units, the first eight samples).
++
+ Properties
+ ----------
+ 
+@@ -121,13 +141,18 @@ ROM info word 0x0120315A and the firmware configuration constants of the
+ reply (4096/4096-byte mailboxes, 128 KiB trace log, 16 pipelines, 4
+ libraries), and the pipeline table's answers (the status numbers other
+ than the plan's 5, the state a new pipeline is tracked in, the table
+-vanishing with the firmware's power).  Traces print them as "(model value)".
++vanishing with the firmware's power), and the host gateways (the pipeline as
++a wire with no latency, the period paced at the stream's rate, a capture
++stream that is not running losing its period, a frame that changes across
++the pipeline not forwarded, the extended DMA-position register mirroring
++the position buffer).  Traces print them as "(model value)".
+ 
+ Tracing
+ -------
+ 
+ ``-trace 'ace_*'`` (BAR4 accesses, the ROM walk, the stream consumption,
+-the payload rules, the IPC messages, the interrupt, the state changes) and
++the payload rules, the IPC messages, the interrupt, the state changes, the
++gateways' start and stop and the ``ace_audio`` lines of every period) and
+ ``-trace 'intel_hda_cap_*'`` (the BAR0 capability registers).  Any BAR4
+ offset outside the model reads the powered-down value and is traced as
+ ``ace_unexpected``, which lists every register a guest touches that the
+@@ -138,5 +163,7 @@ Limits
+ 
+ Not modelled: the DSP's execution, signature verification (the host never
+ verifies; the ROM's rules are choices), SoundWire, the ML capability, real
+-DMA timing, D0i3 and wake, and anything the silicon does that no emulator
++DMA timing, any processing of the audio (the gain of the loopback's gain
++module is unity until the plan's C5 configures it), gateways other than
++the host's, D0i3 and wake, and anything the silicon does that no emulator
+ can show (a hang on a bad power sequence, the true ROM checks and timings).
+diff --git a/hw/audio/intel-hda-ace-regs.h b/hw/audio/intel-hda-ace-regs.h
+index 93e374c73..87f5017b4 100644
+--- a/hw/audio/intel-hda-ace-regs.h
++++ b/hw/audio/intel-hda-ace-regs.h
+@@ -210,6 +210,53 @@
+ #define ACE_IPC4_PIPE_RUNNING            4
+ #define ACE_IPC4_PIPE_EOS                5
+ 
++/* --------------------------------------------------------------------- */
++/* The module messages (target bit 30 = 1).  Studied: Linux              */
++/* include/sound/sof/ipc4/header.h:305-311 (the types), :336-341 (the    */
++/* module id and the instance), :343-361 (the init-instance extension),   */
++/* :364-378 (the bind extension) and :384-398 (the large-config           */
++/* extension); the plan's 5.5 lays them out as the tables below.           */
++/* --------------------------------------------------------------------- */
++
++#define ACE_IPC4_MOD_INIT_INSTANCE       0
++#define ACE_IPC4_MOD_LARGE_CONFIG_SET    4
++#define ACE_IPC4_MOD_BIND                5
++#define ACE_IPC4_MOD_DELETE_INSTANCE     11
++
++#define ACE_IPC4_MOD_ID_MASK             0x0000ffffu  /* bits 15:0 */
++#define ACE_IPC4_MOD_INSTANCE_SHIFT      16           /* bits 23:16 */
++#define ACE_IPC4_MOD_INSTANCE_MASK       0x00ff0000u
++
++/* init instance: extension = core (27:24) | domain (28) | pipeline
++ * instance (23:16) | size in dwords (15:0); the configuration is in the
++ * downlink mailbox */
++#define ACE_IPC4_MOD_EXT_SIZE_MASK       0x0000ffffu
++#define ACE_IPC4_MOD_EXT_PPL_SHIFT       16
++#define ACE_IPC4_MOD_EXT_PPL_MASK        0x00ff0000u
++#define ACE_IPC4_MOD_EXT_CORE_SHIFT      24
++#define ACE_IPC4_MOD_EXT_CORE_MASK       0x0f000000u
++#define ACE_IPC4_MOD_EXT_DOMAIN          (1u << 28)
++
++/* bind: the primary names the source, the extension the destination
++ * (module id 15:0, instance 23:16, destination queue 26:24, source queue
++ * 29:27) */
++#define ACE_IPC4_BIND_DST_ID_MASK        0x0000ffffu
++#define ACE_IPC4_BIND_DST_INSTANCE_SHIFT 16
++#define ACE_IPC4_BIND_DST_INSTANCE_MASK  0x00ff0000u
++#define ACE_IPC4_BIND_DST_QUEUE_SHIFT    24
++#define ACE_IPC4_BIND_DST_QUEUE_MASK     0x00700000u
++#define ACE_IPC4_BIND_SRC_QUEUE_SHIFT    27
++#define ACE_IPC4_BIND_SRC_QUEUE_MASK     0x03800000u
++
++/* large config set: extension = first block (29) | last block (28) |
++ * parameter id (27:20) | size or offset (19:0); the block is in the
++ * downlink mailbox */
++#define ACE_IPC4_LC_SIZE_MASK            0x000fffffu
++#define ACE_IPC4_LC_PARAM_SHIFT          20
++#define ACE_IPC4_LC_PARAM_MASK           0x0ff00000u
++#define ACE_IPC4_LC_LAST                 (1u << 28)
++#define ACE_IPC4_LC_FIRST                (1u << 29)
++
+ /* The module-message extension of the FW_CONFIG GET: the parameter id at
+  * bits 29:20 and module 0 / instance 0 in the low bits (0x00700000), as the
+  * P2a facts table records the request the host sends. */
+@@ -225,6 +272,17 @@
+ #define ACE_IPC4_WATCHDOG_TIMEOUT        15
+ #define ACE_IPC4_FW_READY_LIB_RESTORED   (1u << 15) /* extension flag */
+ 
++/* --------------------------------------------------------------------- */
++/* BAR0: the vendor-specific extended DMA-position registers, one per     */
++/* stream, read-only.  Studied: the LiberNT bus driver's                  */
++/* hda_registers.h (HDA_REG_VS_SDXDPIB_XBASE / _XINTERVAL, 0x1084 / 0x20, */
++/* the same numbers as Linux AZX_REG_VS_SDXDPIB_XBASE of hda_register.h); */
++/* the plan's 5.9 names the register as the position the host reads.      */
++/* --------------------------------------------------------------------- */
++
++#define ACE_BAR0_XDPIB_BASE              0x1084
++#define ACE_BAR0_XDPIB_INTERVAL          0x20
++
+ /* --------------------------------------------------------------------- */
+ /* Reply status.  Studied: SOF src/include/ipc4/error_status.h (BSD-3).   */
+ /* --------------------------------------------------------------------- */
+@@ -361,11 +419,59 @@
+ #define ACE_RI_SEGMENT_FILE_OFFSET       8
+ #define ACE_RI_MODULE_MAX                64
+ 
++/* --------------------------------------------------------------------- */
++/* The module configuration of a copier as the plan's 5.6 tables lay it   */
++/* out (every word little-endian, in the downlink mailbox): the base       */
++/* module configuration of ten words, then for a copier the output format  */
++/* of pin 0, the feature mask, the gateway node id, the gateway DMA        */
++/* buffer size, the gateway configuration length and the gateway           */
++/* attributes.  Studied: SOF src/include/module/ipc4/base-config.h and     */
++/* src/audio/copier/copier.h, src/include/ipc4/gateway.h (BSD-3).           */
++/* --------------------------------------------------------------------- */
++
++#define ACE_CFG_AUDIO_FORMAT_WORDS       6
++#define ACE_CFG_BASE_CONFIG_WORDS        10  /* cpc, ibs, obs, pages, the input format */
++#define ACE_CFG_COPIER_CONFIG_WORDS      21  /* a host copier: 84 bytes */
++#define ACE_CFG_OUT_FORMAT_WORD          10
++#define ACE_CFG_FEATURE_MASK_WORD        16
++#define ACE_CFG_NODE_ID_WORD             17
++#define ACE_CFG_DMA_BUFFER_WORD          18
++#define ACE_CFG_GATEWAY_LENGTH_WORD      19
++#define ACE_CFG_ATTRIBUTES_WORD          20
++
++/* the audio format's words: sampling frequency, container depth, channel
++ * map, channel configuration, interleaving style, and the format config
++ * (channels 7:0, valid bits 15:8, sample type 23:16) */
++#define ACE_FMT_SAMPLING_RATE            0
++#define ACE_FMT_CONTAINER_DEPTH          1
++#define ACE_FMT_CHANNELS                 5
++#define ACE_FMT_CHANNELS_MASK            0x000000ffu
++
++/* the gateway node id: the index (7:0) is the stream tag minus one; the
++ * type (12:8) is the copier's node type token (0 host output, 1 host
++ * input).  The index the driver's builder leaves when no stream tag is
++ * known yet is the placeholder 0xff. */
++#define ACE_CFG_NODE_INDEX_MASK          0x000000ffu
++#define ACE_CFG_NODE_TYPE_SHIFT          8
++#define ACE_CFG_NODE_TYPE_MASK           0x00001f00u
++#define ACE_CFG_NODE_HOST_OUTPUT         0
++#define ACE_CFG_NODE_HOST_INPUT          1
++#define ACE_CFG_NODE_INDEX_PLACEHOLDER   0xffu
++
+ /* --------------------------------------------------------------------- */
+ /* Model values (not dictated by the ABI): each is a property of the      */
+ /* device or a named constant printed as "(model value)".                 */
+ /* --------------------------------------------------------------------- */
+ 
++/* The size of the module table: the instances the firmware tracks (model
++ * value; the plan bounds the driver's instance ids by the module's limit,
++ * which is INFO_NEEDED 3). */
++#define ACE_MODEL_MAX_MODULES            64
++/* how many bound modules a host-output copier's output is followed through
++ * before the model gives up looking for its host-input copier (model
++ * value: the plan's pipelines bind copier -> gain -> copier, two edges) */
++#define ACE_MODEL_MAX_BINDING_DEPTH      16
++
+ /* HFINTIPPTR -> INTEN at BAR4 + 0x120 (model value: the driver and Linux
+  * address the register at BAR4 + the pointer; the real pointer is
+  * INFO_NEEDED 2 of the plan). */
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 07811ddd2..af96bf1ce 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -27,8 +27,9 @@
+  * and software-position-in-buffer capabilities the DSP drivers walk, and the
+  * ROM boot handshake, the code-loader stream consumer and the IPC4
+  * receive/reply path a host driver exercises when it boots the firmware,
+- * and the pipeline table the firmware keeps of the host's pipelines once
+- * it runs.
++ * the pipeline table the firmware keeps of the host's pipelines once it
++ * runs, and the host gateways that move a running pipeline's PCM between
++ * the host's streams.
+  *
+  * What it simulates is a *model*: the firmware is a state machine driven by
+  * QEMU virtual-clock timers, not a DSP executing the streamed image.  Every
+@@ -52,6 +53,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "qemu/timer.h"
++#include "math.h"
+ #include "qapi/error.h"
+ #include "qapi/visitor.h"
+ #include "migration/vmstate.h"
+@@ -173,6 +175,36 @@ typedef struct AcePipeline {
+     uint32_t state;             /* ACE_IPC4_PIPE_* */
+ } AcePipeline;
+ 
++/* one entry of the firmware's module table: a module instance the host
++ * initialised (the fields of its configuration are those the gateways
++ * read; the rest of the configuration is not kept) */
++typedef struct AceModule {
++    bool used;
++    uint32_t id, instance;      /* as the messages address the instance */
++    uint32_t ppl;               /* the pipeline of its init-instance extension */
++    uint32_t src;               /* the module bound to its input, an index or ACE_MODEL_NO_MODULE */
++    bool copier;                /* its configuration carried the copier's tail */
++    bool gateway;               /* ... with a gateway node id */
++    uint32_t gw_type;           /* the gateway's type (host output, host input, ...) */
++    uint32_t gw_index;          /* the node index = stream tag - 1; the placeholder: none */
++    uint32_t ibs, obs;          /* the base configuration's buffer sizes */
++    uint32_t rate;              /* the input format's sampling frequency */
++    uint32_t sample;            /* bytes of one sample of the input format */
++    uint32_t frame_in, frame_out;   /* bytes of one frame, in and out */
++} AceModule;
++
++/* one pipeline's host gateway at work: its host-output gateway's stream
++ * is drained period by period into its host-input gateway's stream */
++typedef struct AceGateway {
++    bool active;
++    QEMUTimer *timer;           /* the period */
++    IntelHDAAceState *s;
++    unsigned int ppl;           /* the pipeline instance id */
++    int render, capture;        /* controller stream indices; capture -1: dropped */
++    uint32_t bps;               /* the stream's rate in bytes a second */
++    uint32_t sample;            /* bytes of one sample, for the evidence line */
++} AceGateway;
++
+ struct IntelHDAAceState {
+     IntelHDAState hda;
+ 
+@@ -181,6 +213,7 @@ struct IntelHDAAceState {
+     MemoryRegion regs;           /* the whole bar: the sparse register block */
+     MemoryRegion window[2];      /* SRAM window 0 and 1 over ram[] */
+     uint8_t *ram[2];
++    MemoryRegion xdpib;          /* BAR0's extended DMA-position registers */
+ 
+     /* registers */
+     uint32_t hfdsscs;
+@@ -208,6 +241,9 @@ struct IntelHDAAceState {
+     uint16_t fw_version[4];      /* major, minor, hotfix, build of the image */
+     bool have_version;
+     AcePipeline ppl[ACE_MODEL_MAX_PIPELINES];   /* by instance id - 1 */
++    AceModule mod[ACE_MODEL_MAX_MODULES];       /* the instances the host initialised */
++    AceGateway gw[ACE_MODEL_MAX_PIPELINES];     /* by pipeline instance id - 1 */
++    uint8_t *audio_buf;          /* one chunk of a period's PCM */
+ 
+     /* properties */
+     uint64_t bar4_size;
+@@ -223,6 +259,8 @@ struct IntelHDAAceState {
+ 
+ static void ace_fw_ready(IntelHDAAceState *s);
+ static void ace_ppl_clear(IntelHDAAceState *s);
++static void ace_gateways_update(IntelHDAAceState *s);
++static void ace_stream_report(IntelHDAState *d, unsigned int idx);
+ 
+ static const uint64_t ace_window_base[2] = { ACE_SRAM_WINDOW0, ACE_SRAM_WINDOW1 };
+ 
+@@ -860,7 +898,15 @@ static uint32_t ace_fw_config_reply(IntelHDAAceState *s)
+ 
+ static void ace_ppl_clear(IntelHDAAceState *s)
+ {
++    unsigned int p;
++
+     memset(s->ppl, 0, sizeof(s->ppl));
++    /* the module table and the gateways belong to the firmware's pipelines */
++    memset(s->mod, 0, sizeof(s->mod));
++    for (p = 0; p < ACE_MODEL_MAX_PIPELINES; p++) {
++        s->gw[p].active = false;
++        timer_del(s->gw[p].timer);
++    }
+ }
+ 
+ static AcePipeline *ace_ppl_find(IntelHDAAceState *s, uint32_t id)
+@@ -969,6 +1015,236 @@ static uint32_t ace_pipeline_status(IntelHDAAceState *s, uint32_t type,
+     return status;
+ }
+ 
++/* --------------------------------------------------------------------- */
++/* the module table                                                       */
++
++/* What the firmware tracks of the host's module instances: init instance
++ * adds one with its configuration, large-config set replaces a copier's
++ * configuration, bind records which module feeds which, delete instance
++ * removes it.  Of a configuration the model reads only what the plan's 5.6
++ * defines and the gateways need -- the base configuration's buffer sizes
++ * and input format, and a copier's output format and gateway -- and judges
++ * nothing else in it.  Which module id is a copier is the firmware's own
++ * knowledge (the driver resolves it from the image's manifest), so the
++ * model knows a copier by the length of its configuration: 21 words and up
++ * carry the copier's tail.  The answers the plan does not fix are model
++ * values (MODEL-NOTES.md lists them). */
++
++#define ACE_MODEL_NO_MODULE 0xffffffffu
++
++static int ace_mod_find(IntelHDAAceState *s, uint32_t id, uint32_t instance)
++{
++    unsigned int i;
++
++    for (i = 0; i < ACE_MODEL_MAX_MODULES; i++) {
++        if (s->mod[i].used && s->mod[i].id == id &&
++            s->mod[i].instance == instance) {
++            return i;
++        }
++    }
++    return -1;
++}
++
++/* the bytes of one frame of an audio format: the container depth (word 1)
++ * over eight, times the channels (word 5, bits 7:0); 0 for a depth or a
++ * channel count the model does not carry */
++static uint32_t ace_frame_bytes(uint32_t depth, uint32_t channels)
++{
++    if ((depth != 16 && depth != 24 && depth != 32) ||
++        channels == 0 || channels > 8) {
++        return 0;
++    }
++    return (depth == 16 ? 2 : 4) * channels;
++}
++
++/* the configuration of `words` dwords at the start of the downlink mailbox
++ * read into *m (the instance's identity and binding are the caller's) */
++static void ace_config_parse(IntelHDAAceState *s, uint32_t words, AceModule *m)
++{
++    const uint8_t *dl = s->ram[1];      /* the downlink mailbox: window 1 at +0 */
++    uint32_t w[ACE_CFG_COPIER_CONFIG_WORDS] = { 0 };
++    uint32_t i, depth, channels, node;
++
++    for (i = 0; i < MIN(words, ACE_CFG_COPIER_CONFIG_WORDS); i++) {
++        w[i] = ldl_le_p(dl + 4 * i);
++    }
++    m->ibs = w[1];
++    m->obs = w[2];
++    m->rate = w[ACE_CFG_BASE_CONFIG_WORDS - ACE_CFG_AUDIO_FORMAT_WORDS +
++               ACE_FMT_SAMPLING_RATE];
++    depth = w[ACE_CFG_BASE_CONFIG_WORDS - ACE_CFG_AUDIO_FORMAT_WORDS +
++            ACE_FMT_CONTAINER_DEPTH];
++    channels = w[ACE_CFG_BASE_CONFIG_WORDS - ACE_CFG_AUDIO_FORMAT_WORDS +
++                ACE_FMT_CHANNELS] & ACE_FMT_CHANNELS_MASK;
++    m->sample = depth == 16 ? 2 : 4;
++    m->frame_in = ace_frame_bytes(depth, channels);
++    m->copier = words >= ACE_CFG_COPIER_CONFIG_WORDS;
++    m->gateway = false;
++    m->gw_type = 0;
++    m->gw_index = ACE_CFG_NODE_INDEX_PLACEHOLDER;
++    m->frame_out = 0;
++    if (!m->copier) {
++        return;
++    }
++    m->frame_out = ace_frame_bytes(
++        w[ACE_CFG_OUT_FORMAT_WORD + ACE_FMT_CONTAINER_DEPTH],
++        w[ACE_CFG_OUT_FORMAT_WORD + ACE_FMT_CHANNELS] & ACE_FMT_CHANNELS_MASK);
++    node = w[ACE_CFG_NODE_ID_WORD];
++    m->gateway = true;
++    m->gw_type = (node & ACE_CFG_NODE_TYPE_MASK) >> ACE_CFG_NODE_TYPE_SHIFT;
++    m->gw_index = node & ACE_CFG_NODE_INDEX_MASK;
++}
++
++/* the configuration as the trace names it */
++static char *ace_mod_kind(const AceModule *m)
++{
++    const char *side;
++
++    if (!m->copier) {
++        return g_strdup_printf("base configuration, ibs %u obs %u", m->ibs, m->obs);
++    }
++    if (m->gw_type == ACE_CFG_NODE_HOST_OUTPUT ||
++        m->gw_type == ACE_CFG_NODE_HOST_INPUT) {
++        side = m->gw_type == ACE_CFG_NODE_HOST_OUTPUT ? "host-output" : "host-input";
++        if (m->gw_index == ACE_CFG_NODE_INDEX_PLACEHOLDER) {
++            return g_strdup_printf("copier, %s gateway without a stream (the "
++                                   "placeholder index 0xff), ibs %u obs %u",
++                                   side, m->ibs, m->obs);
++        }
++        return g_strdup_printf("copier, %s gateway index %u (stream tag %u), "
++                               "ibs %u obs %u", side, m->gw_index,
++                               m->gw_index + 1, m->ibs, m->obs);
++    }
++    return g_strdup_printf("copier, gateway type %u (not forwarded), ibs %u obs %u",
++                           m->gw_type, m->ibs, m->obs);
++}
++
++/* the status of a module message, with the table updated as the firmware
++ * would.  *detail receives the decoded message for the trace. */
++static uint32_t ace_module_status(IntelHDAAceState *s, uint32_t type,
++                                  uint32_t primary, uint32_t ext,
++                                  char **detail)
++{
++    uint32_t id = primary & ACE_IPC4_MOD_ID_MASK;
++    uint32_t instance = (primary & ACE_IPC4_MOD_INSTANCE_MASK) >>
++                        ACE_IPC4_MOD_INSTANCE_SHIFT;
++    uint32_t dst_id = ext & ACE_IPC4_BIND_DST_ID_MASK;
++    uint32_t dst_instance = (ext & ACE_IPC4_BIND_DST_INSTANCE_MASK) >>
++                            ACE_IPC4_BIND_DST_INSTANCE_SHIFT;
++    int mi = ace_mod_find(s, id, instance), di;
++    unsigned int i;
++    AceModule *m;
++
++    switch (type) {
++    case ACE_IPC4_MOD_INIT_INSTANCE: {
++        uint32_t size = ext & ACE_IPC4_MOD_EXT_SIZE_MASK;
++        uint32_t ppl = (ext & ACE_IPC4_MOD_EXT_PPL_MASK) >> ACE_IPC4_MOD_EXT_PPL_SHIFT;
++        g_autofree char *kind = NULL;
++
++        if (mi >= 0) {
++            *detail = g_strdup_printf("module %u instance %u exists", id, instance);
++            return ACE_IPC4_RESOURCE_ID_EXISTS;
++        }
++        if (size > ACE_SRAM_MBOX_SIZE / 4) {
++            *detail = g_strdup_printf("module %u instance %u: %u dwords do not fit "
++                                      "the downlink mailbox", id, instance, size);
++            return ACE_IPC4_ERROR_INVALID_PARAM;
++        }
++        mi = -1;
++        for (i = 0; i < ACE_MODEL_MAX_MODULES && mi < 0; i++) {
++            if (!s->mod[i].used) {
++                mi = i;
++            }
++        }
++        if (mi < 0) {
++            *detail = g_strdup_printf("module %u instance %u: the module table is full",
++                                      id, instance);
++            return ACE_IPC4_ERROR_INVALID_PARAM;
++        }
++        m = &s->mod[mi];
++        memset(m, 0, sizeof(*m));
++        m->used = true;
++        m->id = id;
++        m->instance = instance;
++        m->ppl = ppl;
++        m->src = ACE_MODEL_NO_MODULE;
++        ace_config_parse(s, size, m);
++        kind = ace_mod_kind(m);
++        *detail = g_strdup_printf("module %u instance %u: %s, pipeline %u, core %u, "
++                                  "%u words", id, instance, kind, ppl,
++                                  (ext & ACE_IPC4_MOD_EXT_CORE_MASK) >>
++                                  ACE_IPC4_MOD_EXT_CORE_SHIFT, size);
++        break;
++    }
++    case ACE_IPC4_MOD_LARGE_CONFIG_SET: {
++        uint32_t bytes = ext & ACE_IPC4_LC_SIZE_MASK;
++        g_autofree char *kind = NULL;
++
++        if (mi < 0) {
++            *detail = g_strdup_printf("module %u instance %u: no such instance", id,
++                                      instance);
++            return ACE_IPC4_INVALID_RESOURCE_ID;
++        }
++        if (!(ext & ACE_IPC4_LC_FIRST) || !(ext & ACE_IPC4_LC_LAST)) {
++            /* the plan's 5.7 splits a large configuration into blocks; a
++             * host copier's 84 bytes never need one (not modelled) */
++            *detail = g_strdup_printf("module %u instance %u: a configuration in "
++                                      "several blocks is not modelled", id, instance);
++            return ACE_IPC4_INVALID_REQUEST;
++        }
++        if (bytes > ACE_SRAM_MBOX_SIZE || bytes % 4) {
++            *detail = g_strdup_printf("module %u instance %u: %u bytes do not fit the "
++                                      "downlink mailbox whole", id, instance, bytes);
++            return ACE_IPC4_ERROR_INVALID_PARAM;
++        }
++        m = &s->mod[mi];
++        ace_config_parse(s, bytes / 4, m);
++        kind = ace_mod_kind(m);
++        *detail = g_strdup_printf("module %u instance %u: %s, parameter %u, %u bytes",
++                                  id, instance, kind,
++                                  (ext & ACE_IPC4_LC_PARAM_MASK) >> ACE_IPC4_LC_PARAM_SHIFT,
++                                  bytes);
++        break;
++    }
++    case ACE_IPC4_MOD_BIND:
++        di = ace_mod_find(s, dst_id, dst_instance);
++        if (mi < 0 || di < 0) {
++            *detail = g_strdup_printf("%s module %u instance %u: no such instance",
++                                      mi < 0 ? "source" : "destination",
++                                      mi < 0 ? id : dst_id,
++                                      mi < 0 ? instance : dst_instance);
++            return ACE_IPC4_INVALID_RESOURCE_ID;
++        }
++        s->mod[di].src = mi;
++        *detail = g_strdup_printf("module %u instance %u bound to module %u instance %u "
++                                  "(queues %u -> %u)", id, instance, dst_id,
++                                  dst_instance,
++                                  (ext & ACE_IPC4_BIND_SRC_QUEUE_MASK) >>
++                                  ACE_IPC4_BIND_SRC_QUEUE_SHIFT,
++                                  (ext & ACE_IPC4_BIND_DST_QUEUE_MASK) >>
++                                  ACE_IPC4_BIND_DST_QUEUE_SHIFT);
++        break;
++    case ACE_IPC4_MOD_DELETE_INSTANCE:
++        if (mi < 0) {
++            *detail = g_strdup_printf("module %u instance %u: no such instance", id,
++                                      instance);
++            return ACE_IPC4_INVALID_RESOURCE_ID;
++        }
++        /* whatever was bound behind it is unbound with it */
++        for (i = 0; i < ACE_MODEL_MAX_MODULES; i++) {
++            if (s->mod[i].used && s->mod[i].src == mi) {
++                s->mod[i].src = ACE_MODEL_NO_MODULE;
++            }
++        }
++        s->mod[mi].used = false;
++        *detail = g_strdup_printf("module %u instance %u deleted", id, instance);
++        break;
++    default:
++        g_assert_not_reached();
++    }
++    return ACE_IPC4_SUCCESS;
++}
++
+ /* the IPC4 message types by name, for the trace: the two enumerations of
+  * the header (LINUX-H header.h), global (target 0) and module (target 1) */
+ static const char *ace_msg_name(bool module_msg, uint32_t type)
+@@ -1005,6 +1281,15 @@ static bool ace_is_pipeline_msg(bool module_msg, uint32_t type)
+                            type == ACE_IPC4_GLB_SET_PIPELINE_STATE);
+ }
+ 
++/* the module messages the module table answers */
++static bool ace_is_module_msg(uint32_t type)
++{
++    return type == ACE_IPC4_MOD_INIT_INSTANCE ||
++           type == ACE_IPC4_MOD_LARGE_CONFIG_SET ||
++           type == ACE_IPC4_MOD_BIND ||
++           type == ACE_IPC4_MOD_DELETE_INSTANCE;
++}
++
+ /* whether the fault of the ipc-status / never-reply family applies to a
+  * message of this type: a fault that names a type applies to it alone, one
+  * that does not applies to every message */
+@@ -1034,6 +1319,8 @@ static void ace_reply_timer_cb(void *opaque)
+         ace_fw_config_reply(s);
+     } else if (ace_is_pipeline_msg(module_msg, type)) {
+         status = ace_pipeline_status(s, type, primary, ext, &detail);
++    } else if (module_msg && ace_is_module_msg(type)) {
++        status = ace_module_status(s, type, primary, ext, &detail);
+     } else {
+         status = ACE_IPC4_UNKNOWN_MESSAGE_TYPE;
+     }
+@@ -1060,6 +1347,10 @@ static void ace_reply_timer_cb(void *opaque)
+     }
+     trace_ace_ipc_msg("reply", type, ace_msg_name(module_msg, type), status,
+                       detail);
++    /* the gateways follow the tables the message may have changed */
++    if (!fw_config) {
++        ace_gateways_update(s);
++    }
+ }
+ 
+ /* a host -> DSP request: the primary was written with BUSY set */
+@@ -1174,6 +1465,10 @@ static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
+     IntelHDAStream *st = &d->st[idx];
+     uint32_t tag = (st->ctl >> 20) & 0x0f;
+ 
++    ace_gateways_update(s);
++    if (running) {
++        ace_stream_report(d, idx);   /* a stream that starts reports its position */
++    }
+     if (!running) {
+         return;
+     }
+@@ -1204,6 +1499,453 @@ static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
+     ace_arm(s->rom_timer, ace_delay(s, ACE_US_ROM_WALK_STEP));
+ }
+ 
++/* --------------------------------------------------------------------- */
++/* the host gateways: a running pipeline's PCM between the host's streams */
++
++/* The plan's 5.9: a host copier's gateway names an HD Audio stream by its
++ * tag (the node index is the tag minus one) and the stream carries the PCM
++ * between the host's cyclic buffer and the firmware's copier.  The model's
++ * pipeline is a wire: while the pipeline is RUNNING, each period drains the
++ * host-output gateway's stream through DMA exactly as the ROM consumer
++ * drains the loader stream -- the descriptor list walked as
++ * intel_hda_xfer() walks it, bounded by SPIB -- and writes the bytes into
++ * the host-input gateway stream of the copier bound behind it (through the
++ * modules bound in between, which change nothing here).  A period is the
++ * run of descriptors up to the next that interrupts on completion and
++ * takes as long as its bytes at the stream's rate, so positions and
++ * interrupts advance as the host expects.  The wire, the pacing and a
++ * capture stream that is not running losing the period are model values
++ * (MODEL-NOTES.md lists them). */
++
++/* the bytes one DMA read and one DMA write move at most */
++#define ACE_AUDIO_CHUNK 4096
++
++/* the bytes of one cycle of a stream: the whole descriptor list, or the
++ * SPIB value when the host set a smaller one (the loader stream's bound) */
++static uint32_t ace_stream_cycle(IntelHDAState *d, unsigned int idx)
++{
++    uint64_t total = 0;
++    uint32_t i;
++
++    for (i = 0; i < d->st[idx].bentries; i++) {
++        total += d->st[idx].bpl[i].len;
++    }
++    if (total > UINT32_MAX) {
++        total = UINT32_MAX;
++    }
++    if (d->spib[idx] && d->spib[idx] < total) {
++        return d->spib[idx];
++    }
++    return total;
++}
++
++/* completes the stream's current descriptor when it is used up, noting its
++ * interrupt on completion; the cycle restarts at the end of the list */
++static void ace_entry_done(IntelHDAStream *st, bool *irq)
++{
++    if (st->bp != st->bpl[st->be].len) {
++        return;
++    }
++    if (st->bpl[st->be].flags & 0x01) {
++        *irq = true;
++    }
++    st->bp = 0;
++    if (++st->be == st->bentries) {
++        st->be = 0;
++        st->lpib = 0;
++    }
++}
++
++/* the bytes the stream's current descriptor still holds */
++static uint32_t ace_entry_left(IntelHDAStream *st, bool *irq)
++{
++    ace_entry_done(st, irq);
++    return st->bpl[st->be].len - st->bp;
++}
++
++/* the bytes of the stream's next period: from its position to the end of
++ * the next descriptor that interrupts on completion, or to the end of the
++ * cycle when none does */
++static uint32_t ace_period_bytes(IntelHDAStream *st, uint32_t cycle)
++{
++    uint32_t i = st->be, bytes = 0, n;
++
++    if (st->lpib >= cycle) {
++        return 0;       /* the SPIB value no longer reaches the position */
++    }
++    for (n = 0; n < st->bentries; n++) {
++        bytes += st->bpl[i].len - (n == 0 ? st->bp : 0);
++        if ((st->bpl[i].flags & 0x01) && st->bpl[i].len > 0) {
++            break;
++        }
++        if (++i == st->bentries) {
++            i = 0;
++        }
++    }
++    return MIN(bytes, cycle - st->lpib);
++}
++
++/* the controller stream of a host gateway: the output (host -> DSP) or the
++ * input (DSP -> host) stream that runs with the gateway's tag, the node
++ * index being the tag minus one (the plan's 5.6); -1 when there is none */
++static int ace_gateway_stream(IntelHDAAceState *s, uint32_t gw_index, bool output)
++{
++    IntelHDAState *d = &s->hda;
++    unsigned int i, tag = gw_index + 1;
++
++    if (gw_index == ACE_CFG_NODE_INDEX_PLACEHOLDER) {
++        return -1;
++    }
++    for (i = output ? 4 : 0; i < (output ? 8 : 4); i++) {
++        if ((d->st[i].ctl & 0x02) && ((d->st[i].ctl >> 20) & 0x0f) == tag) {
++            return i;
++        }
++    }
++    return -1;
++}
++
++/* the host-input copier the host-output copier `from` feeds: the module
++ * bound behind it, then the one bound behind that, up to the binding depth
++ * (copier -> gain -> copier); -1 when there is none */
++static int ace_mod_sink(IntelHDAAceState *s, int from)
++{
++    unsigned int i, depth;
++    int cur = from, next;
++
++    for (depth = 0; depth < ACE_MODEL_MAX_BINDING_DEPTH; depth++) {
++        next = -1;
++        for (i = 0; i < ACE_MODEL_MAX_MODULES; i++) {
++            if (s->mod[i].used && s->mod[i].src == cur) {
++                next = i;
++                break;
++            }
++        }
++        if (next < 0) {
++            return -1;
++        }
++        if (s->mod[next].copier && s->mod[next].gateway &&
++            s->mod[next].gw_type == ACE_CFG_NODE_HOST_INPUT) {
++            return next;
++        }
++        cur = next;
++    }
++    return -1;
++}
++
++/* the position of a stream as the host reads it: the position buffer's
++ * entry, written whenever the model writes the position; the extended
++ * DMA-position register reads the same value */
++static void ace_stream_report(IntelHDAState *d, unsigned int idx)
++{
++    const MemTxAttrs attrs = { .memory = true };
++    hwaddr dpib;
++
++    if (!(d->dp_lbase & 0x01)) {
++        return;
++    }
++    dpib = ((uint64_t)d->dp_ubase << 32) | (d->dp_lbase & ~0x01);
++    stl_le_pci_dma(&d->pci, dpib + 8 * idx, d->st[idx].lpib, attrs);
++}
++
++/* the positions of the two streams after a period */
++static void ace_gateway_position(IntelHDAState *d, IntelHDAStream *src,
++                                 IntelHDAStream *dst)
++{
++    ace_stream_report(d, src - d->st);
++    if (dst) {
++        ace_stream_report(d, dst - d->st);
++    }
++}
++
++/* the period's interrupts: a descriptor that interrupts on completion was
++ * used up, so the stream's completion bit is set and the controller's line
++ * follows INTCTL */
++static void ace_gateway_irq(IntelHDAState *d, IntelHDAStream *src,
++                            IntelHDAStream *dst, bool irq_src, bool irq_dst)
++{
++    if (irq_src) {
++        src->ctl |= (1u << 26);
++    }
++    if (dst && irq_dst) {
++        dst->ctl |= (1u << 26);
++    }
++    intel_hda_update_irq(d);
++}
++
++/* one period: `bytes` read from the render stream's descriptors and, when
++ * the capture stream runs, written into its own, the two walked as
++ * intel_hda_xfer() walks a stream; then the positions, the interrupts and
++ * the evidence lines */
++static void ace_gateway_copy(IntelHDAAceState *s, AceGateway *g, uint32_t bytes)
++{
++    IntelHDAState *d = &s->hda;
++    IntelHDAStream *src = &d->st[g->render];
++    IntelHDAStream *dst = g->capture >= 0 ? &d->st[g->capture] : NULL;
++    uint32_t cycle_src = ace_stream_cycle(d, g->render);
++    uint32_t cycle_dst = dst ? ace_stream_cycle(d, g->capture) : 0;
++    uint32_t left = bytes, sample = g->sample;
++    bool irq_src = false, irq_dst = false;
++    bool failed = false, stop = false;
++    uint32_t i, k, n, nfirst = 0;
++    uint64_t count = 0;
++    int32_t first[8];
++    double sumsq = 0;
++    int64_t peak = 0;
++    const MemTxAttrs attrs = { .memory = true };
++    g_autofree char *rms = NULL;
++    char first_text[9 + 8 * 12];
++    size_t len = 5;
++
++    /* every step moves bytes or completes an empty descriptor, of which
++     * the list holds at most 256: the bound is the guest's, not a loop */
++    for (i = 0; left > 0 && i < bytes + 2 * 256 + 16; i++) {
++        /* a cycle the SPIB value cut short restarts at the first descriptor */
++        if (src->lpib >= cycle_src) {
++            src->be = 0;
++            src->bp = 0;
++            src->lpib = 0;
++        }
++        if (dst && dst->lpib >= cycle_dst) {
++            dst->be = 0;
++            dst->bp = 0;
++            dst->lpib = 0;
++        }
++        n = MIN(left, ace_entry_left(src, &irq_src));
++        n = MIN(n, cycle_src - src->lpib);
++        if (dst) {
++            n = MIN(n, ace_entry_left(dst, &irq_dst));
++            n = MIN(n, cycle_dst - dst->lpib);
++        }
++        n = MIN(n, ACE_AUDIO_CHUNK);
++        if (n == 0) {
++            continue;
++        }
++        if (pci_dma_rw(&d->pci, src->bpl[src->be].addr + src->bp, s->audio_buf, n,
++                       DMA_DIRECTION_TO_DEVICE, attrs) != MEMTX_OK) {
++            failed = true;
++            break;
++        }
++        if (dst &&
++            pci_dma_rw(&d->pci, dst->bpl[dst->be].addr + dst->bp, s->audio_buf, n,
++                       DMA_DIRECTION_FROM_DEVICE, attrs) != MEMTX_OK) {
++            failed = true;
++            break;
++        }
++        for (k = 0; k + sample <= n; k += sample) {
++            int64_t v = sample == 2 ? (int16_t)lduw_le_p(s->audio_buf + k)
++                                    : (int32_t)ldl_le_p(s->audio_buf + k);
++
++            if (nfirst < 8) {
++                first[nfirst++] = v;
++            }
++            count++;
++            sumsq += (double)v * v;
++            if (v < 0 ? -v > peak : v > peak) {
++                peak = v < 0 ? -v : v;
++            }
++        }
++        src->bp += n;
++        src->lpib += n;
++        left -= n;
++        if (dst) {
++            dst->bp += n;
++            dst->lpib += n;
++        }
++    }
++    if (failed || left > 0) {
++        /* the period is not whole: the gateway stops on it (the positions
++         * and the interrupts of what did move are still reported) */
++        stop = true;
++    }
++    ace_entry_done(src, &irq_src);
++    if (dst) {
++        ace_entry_done(dst, &irq_dst);
++    }
++    ace_gateway_position(d, src, dst);
++    ace_gateway_irq(d, src, dst, irq_src, irq_dst);
++
++    /* one evidence line per stream and period: what the host sent and what
++     * it will read back, the same bytes */
++    memcpy(first_text, "first", len);
++    first_text[len] = '\0';
++    for (k = 0; k < nfirst; k++) {
++        len += snprintf(first_text + len, sizeof(first_text) - len,
++                        " %" PRId32, first[k]);
++    }
++    rms = g_strdup_printf("%.3f", count ? sqrt(sumsq / count) : 0.0);
++    trace_ace_audio((src->ctl >> 20) & 0x0f, bytes - left, rms, peak, first_text);
++    if (dst) {
++        trace_ace_audio((dst->ctl >> 20) & 0x0f, bytes - left, rms, peak,
++                        first_text);
++    }
++    if (stop) {
++        g->active = false;
++        trace_ace_gateway("stopped", g->ppl,
++                          failed ? "a descriptor's DMA failed: the period is cut short"
++                                 : "the period could not be moved whole");
++    }
++}
++
++static void ace_gateway_cb(void *opaque)
++{
++    AceGateway *g = opaque;
++    IntelHDAAceState *s = g->s;
++    IntelHDAStream *st;
++    uint32_t cycle, bytes;
++
++    if (!g->active) {
++        return;
++    }
++    /* the streams' run bits are the contract: a stream reset or stopped
++     * behind the model's back ends or narrows the gateway here */
++    ace_gateways_update(s);
++    if (!g->active) {
++        return;             /* stopped: its trace says why */
++    }
++    st = &s->hda.st[g->render];
++    cycle = ace_stream_cycle(&s->hda, g->render);
++    bytes = ace_period_bytes(st, cycle);
++    if (bytes > 0) {
++        ace_gateway_copy(s, g, bytes);
++        if (!g->active) {
++            return;         /* stopped on it: its trace says why */
++        }
++        bytes = ace_period_bytes(st, cycle);
++    }
++    if (bytes == 0) {
++        g->active = false;
++        trace_ace_gateway("stopped", g->ppl, "the render stream has no more bytes to move");
++        return;
++    }
++    /* the next period takes as long as its bytes at the stream's rate */
++    ace_arm(g->timer, (uint64_t)bytes * 1000000000 / g->bps);
++}
++
++/* arms, narrows and stops the gateways after anything that may have
++ * changed them: a pipeline's state, the module table, a stream's run bit */
++static void ace_gateways_update(IntelHDAAceState *s)
++{
++    unsigned int p, i;
++
++    for (p = 0; p < ACE_MODEL_MAX_PIPELINES; p++) {
++        AceGateway *g = &s->gw[p];
++        AcePipeline *ppl = &s->ppl[p];
++        AceModule *m = NULL, *k = NULL;
++        g_autofree char *why = NULL;
++        int src = -1, sink = -1, render = -1, capture = -1;
++        uint32_t bps = 0, sample = 0;
++
++        if (!ppl->used) {
++            why = g_strdup("the pipeline is gone");
++        } else if (ppl->state != ACE_IPC4_PIPE_RUNNING) {
++            why = g_strdup_printf("pipeline %u is %s", p + 1,
++                                  ace_ppl_state_name(ppl->state));
++        } else {
++            for (i = 0; i < ACE_MODEL_MAX_MODULES && src < 0; i++) {
++                m = &s->mod[i];
++                if (m->used && m->copier && m->gateway && m->ppl == p + 1 &&
++                    m->gw_type == ACE_CFG_NODE_HOST_OUTPUT &&
++                    m->gw_index != ACE_CFG_NODE_INDEX_PLACEHOLDER) {
++                    src = i;
++                }
++            }
++            if (src < 0) {
++                why = g_strdup("no host-output copier with a stream");
++            } else {
++                m = &s->mod[src];
++                sink = ace_mod_sink(s, src);
++                k = sink >= 0 ? &s->mod[sink] : NULL;
++                if (!k) {
++                    why = g_strdup("no host-input copier bound behind the "
++                                   "host-output copier");
++                } else if (k->gw_index == ACE_CFG_NODE_INDEX_PLACEHOLDER) {
++                    why = g_strdup("the host-input copier has no stream");
++                } else if (!m->frame_in || k->frame_out != m->frame_in) {
++                    why = g_strdup_printf("the frame changes across the pipeline "
++                                          "(%u bytes in, %u out): not modelled",
++                                          m->frame_in, k->frame_out);
++                } else if (!m->rate) {
++                    why = g_strdup("the input format names no sampling frequency");
++                } else if ((render = ace_gateway_stream(s, m->gw_index, true)) < 0) {
++                    why = g_strdup_printf("stream %u, the host-output gateway's, "
++                                          "is not running", m->gw_index + 1);
++                } else {
++                    capture = ace_gateway_stream(s, k->gw_index, false);
++                    bps = m->rate * m->frame_in;
++                    sample = m->sample;
++                }
++            }
++        }
++        if (render >= 0) {
++            uint32_t bytes;
++
++            if (!g->active) {
++                g_autofree char *id = g_strdup_printf("%u.%u", m->id, m->instance);
++                g_autofree char *kd = g_strdup_printf("%u.%u", k->id, k->instance);
++                g_autofree char *msg = g_strdup_printf(
++                    "host-output copier %s drains stream %u into host-input "
++                    "copier %s's stream %u%s; %u bytes a second", id,
++                    m->gw_index + 1, kd, k->gw_index + 1,
++                    capture < 0 ? " (not running: its samples are dropped)" : "",
++                    bps);
++
++                g->active = true;
++                trace_ace_gateway("armed", p + 1, msg);
++                bytes = ace_period_bytes(&s->hda.st[render],
++                                         ace_stream_cycle(&s->hda, render));
++                ace_arm(g->timer, (uint64_t)bytes * 1000000000 / bps);
++            }
++            g->ppl = p + 1;
++            g->render = render;
++            g->capture = capture;
++            g->bps = bps;
++            g->sample = sample;
++        } else if (g->active) {
++            g->active = false;
++            timer_del(g->timer);
++            trace_ace_gateway("stopped", p + 1, why);
++        }
++    }
++}
++
++/* --------------------------------------------------------------------- */
++/* BAR0: the extended DMA-position registers                              */
++
++/* The vendor-specific block the host reads a DSP stream's position from:
++ * one read-only register per stream, the mirror of the position buffer's
++ * entry (a model value: the plan's 5.9 has the host read this register and
++ * log the position buffer beside it, for silicon to say which is right). */
++static uint64_t ace_xdpib_read(void *opaque, hwaddr off, unsigned size)
++{
++    IntelHDAAceState *s = opaque;
++
++    if (off % ACE_BAR0_XDPIB_INTERVAL == 0) {
++        return s->hda.st[off / ACE_BAR0_XDPIB_INTERVAL].lpib;
++    }
++    qemu_log_mask(LOG_UNIMP, "intel-hda-ace: read at BAR0 +0x%" HWADDR_PRIX
++                  " (the extended DMA-position block)\n",
++                  ACE_BAR0_XDPIB_BASE + off);
++    return 0;
++}
++
++static void ace_xdpib_write(void *opaque, hwaddr off, uint64_t val,
++                            unsigned size)
++{
++    qemu_log_mask(LOG_GUEST_ERROR, "intel-hda-ace: write 0x%" PRIx64 " to the "
++                  "read-only extended DMA-position block at BAR0 +0x%" HWADDR_PRIX "\n",
++                  val, ACE_BAR0_XDPIB_BASE + off);
++}
++
++static const MemoryRegionOps ace_xdpib_ops = {
++    .read = ace_xdpib_read,
++    .write = ace_xdpib_write,
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++    .endianness = DEVICE_LITTLE_ENDIAN,
++};
++
+ /* --------------------------------------------------------------------- */
+ /* BAR4: registers and windows                                           */
+ 
+@@ -1662,21 +2404,38 @@ static void intel_hda_ace_realize(PCIDevice *pci, Error **errp)
+     }
+     pci_register_bar(pci, 4, PCI_BASE_ADDRESS_SPACE_MEMORY, &s->bar4);
+ 
++    /* BAR0: the extended DMA-position block over the controller's registers */
++    memory_region_init_io(&s->xdpib, OBJECT(s), &ace_xdpib_ops, s,
++                          "intel-hda-ace-xdpib", 8 * ACE_BAR0_XDPIB_INTERVAL);
++    memory_region_add_subregion_overlap(&d->container, ACE_BAR0_XDPIB_BASE,
++                                        &s->xdpib, 1);
++
+     /* the controller's hooks */
+     d->stream_run = ace_stream_run;
+ 
+     s->power_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_power_timer_cb, s);
+     s->rom_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_rom_timer_cb, s);
+     s->reply_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_reply_timer_cb, s);
++    s->audio_buf = g_malloc(ACE_AUDIO_CHUNK);
++    for (i = 0; i < ACE_MODEL_MAX_PIPELINES; i++) {
++        s->gw[i].s = s;
++        s->gw[i].timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_gateway_cb,
++                                       &s->gw[i]);
++    }
+ }
+ 
+ static void intel_hda_ace_exit(PCIDevice *pci)
+ {
+     IntelHDAAceState *s = INTEL_HDA_ACE(pci);
++    int i;
+ 
+     timer_free(s->power_timer);
+     timer_free(s->rom_timer);
+     timer_free(s->reply_timer);
++    for (i = 0; i < ACE_MODEL_MAX_PIPELINES; i++) {
++        timer_free(s->gw[i].timer);
++    }
++    g_free(s->audio_buf);
+     g_free(s->payload);
+ }
+ 
+diff --git a/hw/audio/trace-events b/hw/audio/trace-events
+index 796d76a86..8df0595cd 100644
+--- a/hw/audio/trace-events
++++ b/hw/audio/trace-events
+@@ -77,3 +77,5 @@ ace_ipc(const char *dir, uint32_t primary, uint32_t ext) "IPC %s primary 0x%08x
+ ace_ipc_msg(const char *dir, uint32_t type, const char *name, uint32_t status, const char *detail) "IPC %s type %u (%s) status %u: %s"
+ ace_irq(int level, bool msi) "DSP interrupt %d (msi %d)"
+ ace_state(const char *from, const char *to) "state %s -> %s"
++ace_gateway(const char *event, uint32_t ppl, const char *detail) "gateway %s (pipeline %u): %s"
++ace_audio(uint32_t tag, uint32_t bytes, const char *rms, int64_t peak, const char *first) "ace_audio %u %u rms %s peak %" PRId64 " %s"
+-- 
+2.56.1
+

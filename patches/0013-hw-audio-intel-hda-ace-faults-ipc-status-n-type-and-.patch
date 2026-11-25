@@ -1,7 +1,7 @@
 From 09acbdac5fcdcc925d215f5d274d3bbbea86cc9c Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 08:05:21 +0200
-Subject: [PATCH 13/18] hw/audio: intel-hda-ace: faults ipc-status=<n>:<type>
+Subject: [PATCH 13/20] hw/audio: intel-hda-ace: faults ipc-status=<n>:<type>
  and never-reply=<type>
 
 Two faults may now name one IPC4 message type (bits 28:24 of the

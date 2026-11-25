@@ -1,0 +1,66 @@
+# The boot path, unchanged: the 14 existing cases on the p3c3 model against 5680026 (2026-11-25)
+
+Question: do patches 0019/0020 (the host gateways) change one trace line of the fourteen existing qtest cases?
+
+Method -- the `ace_*` trace lines of each case, compared case for case between the transcript of
+the series at main 5680026 (evidence/2026-11-25-p3c2/qtest-before-vm.txt.gz, the binary be8667eb of
+p3c1) and the p3c3 transcript (qtest-full.txt.gz; the binary a894197dc0b040dd3d5a94d163e70dc631168e1d820b7a9468c2ecb83919e8bc): the lines before each result
+line belong to that case.  Each old case must be exactly the new case (`exact`); and, for the
+1137-line baseline of the 10-patch model (evidence/2026-11-25-p3c1/qtest-old-0001-0010.txt.gz,
+cases 1-9), every old line must still be there in order, every added line listed (`sub`).  The
+script is boot-path-check.sh beside this file.
+
+## exact: 5680026 (14 cases) against p3c3
+
+```
+case 1: old 1 trace lines, new 1: identical
+case 2: old 0 trace lines, new 0: identical
+case 3: old 0 trace lines, new 0: identical
+case 4: old 72 trace lines, new 72: identical
+case 5: old 170 trace lines, new 170: identical
+case 6: old 20 trace lines, new 20: identical
+case 7: old 65 trace lines, new 65: identical
+case 8: old 65 trace lines, new 65: identical
+case 9: old 760 trace lines, new 760: identical
+case 10: old 286 trace lines, new 286: identical
+case 11: old 156 trace lines, new 156: identical
+case 12: old 478 trace lines, new 478: identical
+case 13: old 218 trace lines, new 218: identical
+case 14: old 74 trace lines, new 74: identical
+cases 1-14: old 2365 trace lines, new 2365, 0 case(s) differ
+```
+
+## sub: the 1137-line baseline (cases 1-9) against p3c3
+
+```
+case 1: old 1 trace lines, new 1: identical
+case 2: old 0 trace lines, new 0: identical
+case 3: old 0 trace lines, new 0: identical
+case 4: old 70 trace lines, new 72: 0 old lines gone
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 2 (config-set) status 2: not handled
+case 5: old 170 trace lines, new 170: identical
+case 6: old 20 trace lines, new 20: identical
+case 7: old 64 trace lines, new 65: 0 old lines gone
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+case 8: old 64 trace lines, new 65: 0 old lines gone
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+case 9: old 748 trace lines, new 760: 0 old lines gone
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+      + ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 5: FW_CONFIG; status 5 injected by the fault
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+      + ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+cases 1-9: old 1137 trace lines, new 1153: 0 old lines gone, 16 added
+```
+
+The 16 added lines are the reply traces patch 0011 introduced (`ace_ipc_msg`), the same sixteen
+p3c1's boot-path-diff.txt classified; none comes from 0019/0020.  (The "1137 lines" of the brief
+are this baseline: cases 1-9 of the 10-patch model.)

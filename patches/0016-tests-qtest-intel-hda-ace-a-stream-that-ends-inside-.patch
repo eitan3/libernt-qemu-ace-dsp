@@ -1,7 +1,7 @@
 From 408345faeb5139070734a005aab83878fe1f545b Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 10:21:50 +0200
-Subject: [PATCH 16/18] tests/qtest: intel-hda-ace: a stream that ends inside a
+Subject: [PATCH 16/20] tests/qtest: intel-hda-ace: a stream that ends inside a
  structure is refused
 
 short-stream: the loader stream is cut just before a word of each structure

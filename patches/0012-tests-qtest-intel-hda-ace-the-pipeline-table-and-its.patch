@@ -1,7 +1,7 @@
 From 5e63ffa2ad4bf0b25fb3d058184893b2d8b182ce Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 08:04:33 +0200
-Subject: [PATCH 12/18] tests/qtest: intel-hda-ace: the pipeline table and its
+Subject: [PATCH 12/20] tests/qtest: intel-hda-ace: the pipeline table and its
  illegal transition
 
 Two cases on the pipeline table of the model:

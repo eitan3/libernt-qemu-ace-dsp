@@ -91,6 +91,11 @@ MUTATIONS=(
 "judge-segment-inverted|$C|s/if (!ace_judge_u32(s, d + ACE_RI_SEGMENT_FLAGS/if (ace_judge_u32(s, d + ACE_RI_SEGMENT_FLAGS/|a segment whose flags were read is refused: every image with a module"
 "payload-bounds-wrap|$C|s/off > s->payload_len .. s->payload_len - off < 4/off + 4 > s->payload_len/|the bounds of a payload word checked with a wrapping addition again (the emulator dies on the wrapped offset)"
 "segment-end-wrap|$C|s/if (foff > s->payload_len .. len > s->payload_len - foff) {/if (foff + len > s->payload_len) {/|the end of a segment checked with a wrapping addition again"
+"gw-forwarding|$C|s/IntelHDAStream \*dst = g->capture >= 0 ? &d->st\[g->capture\] : NULL;/IntelHDAStream *dst = NULL;/|the forwarding removed: the render stream is drained and its position moves, nothing is written into the capture stream"
+"gw-tag-mapping|$C|s/unsigned int i, tag = gw_index + 1;/unsigned int i, tag = gw_index;/|the gateway's node index taken for the stream tag itself (the plan's tag minus one gone)"
+"gw-position|$C|s/lpib += n;/lpib += 0;/|the positions never advance: LPIB, the position buffer and the extended register stay at 0 while the bytes move"
+"gw-position-mirror|$C|s/ace_gateway_position(d, src, dst);/;/|the position buffer's entries never written after a period (LPIB and the extended register still move)"
+"gw-interrupts|$C|s/->ctl .= (1u << 26);/;/|the streams' completion bits never set: no period interrupt on either stream"
 )
 
 # the cases of a clean run (the un-mutated test file), for the abort note

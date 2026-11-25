@@ -1,0 +1,9 @@
+# Mutation check of tests/qtest/intel-hda-ace-test.c (2026-11-25T17:42:45Z)
+
+Model `46998f810` (tests/qtest: intel-hda-ace: the host gateways move a loopbac); 55 mutations, one per row (ONLY=^ppl-exists$: the rows whose name matches); a clean run is 15 cases.
+
+| # | mutation | what it breaks | qtest result | red cases |
+|---|---|---|---|---|
+| 1 | ppl-exists | a second create of an instance id answers 0 instead of 10 | KILLED | pipeline-table (test line 921) test_pipeline_table: assertion failed (ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)) == PPL_REPLY(IPC4_CREATE_PIPELINE, 10)): (2969567232 == 2969567242) -- the run aborted there: cases 11-15 not evaluated |
+
+1 mutations: 1 killed (0 of them by an abort), **0 survived**, 0 not applied, 0 build failures.
