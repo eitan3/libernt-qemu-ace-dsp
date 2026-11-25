@@ -1,0 +1,10 @@
+# the first boot of r2-stage2-no-topology against p3c1 a2-stage2-boot: the whole device trace (the ace_* lines of qemu-dbg.log), diffed line for line
+# p3c1 a2: 106 lines; p3c2 r2: 416 lines (the boot, then the power-down after the fail-safe, two disable/enable cycles and the S5 power-down)
+# diff <(p3c1 a2 ace_* lines) <(p3c2 r2 ace_* lines | head -n 106):
+80a81,82
+> ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+> ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+105,106d106
+< ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+< ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+# so: p3c1 a2's 106 lines all present, in order, with 2 lines added at 81-82 (one more poll of HFIPCXIDA/HFIPCXTDR between firmware entered and the FW_READY notification)

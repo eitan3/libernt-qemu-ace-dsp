@@ -209,6 +209,26 @@ show of N5 (the mask is where TESTING.md says; its effect is not reachable) and 
 model's stale reply bits; E5 (`after N us` is about a quarter of p2b4's on this host's launches; the self-test's 62–66 µs is
 the same everywhere). `evidence/2026-11-25-p3c1/vm` (`c1-acceptance.md`, `DIVERGENCE.md`). Not run: `UseInterrupts = 1`.
 
+**Round 6 (image p3c2, 2026-11-25): the C2 micro round — the topology selection after `boot ok`.** The first
+micro round (the owner's ruling of 2026-11-25: from now on a round is one checkpoint's own acceptance plus one boot
+regression; the one full regression runs before C6): three VM boots, four DSP boots, 14 minutes. The driver at
+`2285127b060` (86 commits over master `93ab8fd2fc4`: the topology model, the selection, the loopback file on the image,
+D4, N9) against the model of `d2dc604` — C1's binary, rebuilt from the series, qtest 14/14 first. **D4 and N9 are
+fixed:** every power-down of a booted DSP says `DSP power down from state ready: …` (three), and the settings line
+appears once per start (6 for 6). **Without a topology** the boot block is p3c1's, line for line, on all four DSP
+boots (`boot ok … attempt 1, 0 DSP interrupts, cleanup ok`), followed by `topology: none selected (no override, no
+quirk, no _DSD name); the DSP is powered down, no audio endpoint` and the power-down line — TESTING.md (a)'s two lines
+exactly. **With `Topology = sof-ipc4-loopback.tplg`** (two disable/enable cycles and a plain boot) the two lines of
+TESTING.md (b) follow `ipc: link ready` with no power-down; the modules line (`copier → id 5, gain → id 7; endpoint
+'Loopback' render+capture 48000 Hz 2 ch 16/24/32`) is byte-exact. **Found: T1**, a driver-side wording defect — the
+summary line says `2288 bytes` where the file has 4286: it prints the built model's size (`Bytes` is reused for the
+measure before the log); **X1** — a disable/enable is a new device object and reads the file again by design, so the
+brief's "the second D0 entry keeps the model" is not what a cycle shows: the kept-model line needs an S3 resume, which
+the VM cannot do ("no re-read beyond the first" stays unverified). The model: no finding (the first boot's trace is
+p3c1 a2's 106 lines plus one more poll; nothing between the FW_CONFIG reply and the power-down).
+`evidence/2026-11-25-p3c2` (`c2-acceptance.md`, `DIVERGENCE.md`). Not run: the refusal rows, the self-test with a
+topology, the resume.
+
 ## Build and run
 
 Requirements: Linux with gcc, ninja, python3 and the glib/pixman development
@@ -236,11 +256,12 @@ serial line; `ICOUNT=1` runs under icount (see "A note on the host");
 the rest. `tools/guest.sh` types into the guest through the monitor (~100 ms
 per key), `snapshot.sh` screenshots it, `set-fault.sh` injects a fault at run
 time over QMP, `tools/waitline.sh` waits (bounded) for a serial line,
-The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p3c1-f2bf7a98990/`
-(`bootcd.iso` sha256 `1e381a4be043…`, `LiberNT.vhd` `97c09c3acee9…`, in-ISO `intcdsp.sys`
-`cc6c1309…`, built from `feat/audio-control-polish @ 5773fcfa7af` — the published tip
-`9c9a876c6a3` has the same tree content — 84 commits over master `f2bf7a98990`; the images of
-the earlier rounds are `test-audio-intel-sst-p2b4-f2bf7a98990/` (`b392065b2cf`),
+The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p3c2-93ab8fd2fc4/`
+(`LiberNT.iso` sha256 `5ba330522bd7…` — the CD image's name since master renamed `bootcd.iso` —, `LiberNT.vhd`
+`4fc35027f7af…`, in-ISO `intcdsp.sys`
+`7bca0a5741c8…`, built from `feat/audio-control-polish @ 2285127b060`, 86 commits over master `93ab8fd2fc4`; the images of
+the earlier rounds are `test-audio-intel-sst-p3c1-f2bf7a98990/` (`bootcd.iso` `1e381a4be043…`, `9c9a876c6a3`),
+`test-audio-intel-sst-p2b4-f2bf7a98990/` (`b392065b2cf`),
 `test-audio-intel-sst-p2b3-a19eacb7fea/`, `test-audio-intel-sst-p2b2-a676708a/` and
 `test-audio-intel-sst-p2b-*`). Its boot chain
 changed since round 1 (FreeLoader is gone; `LiberNT Boot Manager` reads a BCD store and hands
@@ -398,6 +419,21 @@ transport is not disturbed by).
 | R2 | poll-only: the enables masked right after power, `0 DSP interrupts`, no `first DSP interrupt`, no `interrupt storm` | `0 DSP interrupts` on all 23 boots of the cycle run and all 40 matrix boots; the mask in every trace (`HfHIPCIE` ← 0 read back, `HFIPCXCTL` ← 0, no `+0x120` write); 0 `interrupt storm`, 0 `interrupt enable timeout`, 0 `clock stalled` | `a2-stage2-boot`, `ac3-cycles`, `fm-*` |
 | D3 | `bad-tuples` → `boot bad IPC reply` + the tuple line; `truncated-reply` → `boot truncated` | `boot bad IPC reply after 70083 us (clock 17618589 us): state failed, failed in configuring (bad IPC reply), … 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000` + `firmware configuration: tuple type 0x6 at offset 0x10 of the reply is malformed`; `boot truncated after 23398 us (clock 18124993 us): state failed, failed in configuring (truncated), …`; both powered down, both recovered with `boot ok` | `fm-bad-tuples`, `fm-truncated-reply` |
 | R6 | no second `firmware … bytes, ok` line on a second boot | **not observable**: the line is printed on every `IntcDspLoadFirmware` call, read or resident; the second boot prints it twice, as p2b3 did (N6) | `a4-second-boot` |
+
+### The C2 micro round (image p3c2, 2026-11-25): TESTING.md's expectations and the measured lines
+
+Rounds are micro from now on (the owner's ruling of 2026-11-25): one checkpoint's own acceptance plus one boot regression; the one full regression runs before C6.
+
+| run | expectation (TESTING.md of the image) | measured (model `d2dc604`) | evidence (`evidence/2026-11-25-p3c2/`) |
+|---|---|---|---|
+| 1 | stage 1 (`BootDsp = 0`): the probe lines unchanged; the settings line once per start (N9) | p3c1's fifteen stage-1 lines minus the second settings line: **1 settings line**; 6 `ace_*` lines, 0 `ace_unexpected`; clean S5 | `r1-stage1-firstboot` |
+| 2 | stage 2, no `Topology`: `boot ok … 0 DSP interrupts`; `topology: none selected (…)`; `DSP power down from state ready: …` (D4); the device stays started | `boot ok after 6477 us … attempt 1, 0 DSP interrupts, cleanup ok`; the two lines **exact**, in order, after `ipc: link ready`; the boot block = p3c1 `a2`'s (timings aside); 1 settings line; the device was disabled and enabled twice afterwards | `r2-stage2-no-topology` |
+| 3 | `Topology = sof-ipc4-loopback.tplg`, D0 re-entered: the summary line, the modules line, the `boot ok` regression | `boot ok after 5366 us … 0 DSP interrupts`; the modules line **byte-exact**; the summary line = TESTING.md's with **`2288 bytes` for `4286`** (**T1**); no power-down follows | `r2-stage2-no-topology` (`cycle1-override-lines.txt`) |
+| 4 | one disable/enable with the override: the second D0 entry keeps the model; the firmware line `resident`; one settings line per entry | firmware `read` then `resident`, 1 settings line, `boot ok after 5366 us … 0 DSP interrupts`; the topology line is the full summary `from the registry override` again — a new device object (**X1**: the kept-model line needs an S3; not shown) | `r2-stage2-no-topology` (`cycle2-override-lines.txt`) |
+| 3b | the same by reboot: "exactly these two lines" after `boot ok` and `ipc: link ready` | `boot ok after 5370 us … 0 DSP interrupts`, then the two lines of run 3; 0 power-down lines in the boot | `r3b-topology-plainboot` |
+
+Three VM boots, four DSP boots, 14 minutes: `0 DSP interrupts` on 4 of 4, no `1 DSP interrupts`, no `clock stalled`, no `interrupt storm`, no bugcheck; 6 settings lines for 6 device starts; the model's registers identical to p3c1's cycle readings. The lines in full: `evidence/2026-11-25-p3c2/c2-acceptance.md`; the findings: `DIVERGENCE.md` there.
+
 ## The fault matrix in the VM (p2b4 image, 2026-11-25)
 
 Rule: *bounded* = the driver logs its terminal line within 30 s of its `booting:` line in guest
@@ -505,6 +541,18 @@ filled from measurements on the real device; "—" means not yet measured.
 
 ## Evidence index
 
+### 2026-11-25-p3c2 (P3 C2, the micro simulator round: the topology selection after `boot ok` on image p3c2)
+
+| Run | What it shows |
+|---|---|
+| `PROVENANCE.md`, `qtest.txt` | the image hashes verified (`LiberNT.iso`, `LiberNT.vhd`, `LiberNT.img`); the in-ISO `intcdsp.sys`, `hdaudbus.sys` and `sof-ipc4-loopback.tplg` hashed from an independent extraction; the model binary rebuilt from the series (C1's hashes); the qtest 14/14 before the first VM run; the overlay |
+| `c2-acceptance.md` | **the C2 acceptance table**: runs 1–4 and the plain boot 3b — TESTING.md's expectation next to the measured line; the round's counts; what was not run |
+| `r1-stage1-firstboot` | **run 1**: the first boot of the fresh overlay — the wizard, `BootDsp=1` set (`s6-reg-query`), p3c1's stage-1 lines with one settings line (`stage1-lines.txt`), clean S5 |
+| `r2-stage2-no-topology` | **runs 2–4** in one VM: the fail-safe's two lines (`stage2-lines-none.txt`); the override set and the file listed and hashed in the guest (`topology-set.png`, `topology-dir.png`); two disable/enable cycles (`cycles.log` with the model's registers, `cycle1-` / `cycle2-override-lines.txt`); all 416 `ace_*` lines (`ace-trace.txt`); clean S5 |
+| `r3b-topology-plainboot` | a plain boot with the override persisted: TESTING.md (b)'s two lines at boot time, no power-down (`stage2-lines-override.txt`) |
+| `trace-regression.txt` | the first boot's device trace against p3c1 `a2-stage2-boot`'s: its 106 lines all present, in order, 2 added |
+| `DIVERGENCE.md` | **T1** (the summary line's byte count is the built model's size, not the file's), X1 (a disable/enable is not the kept-model entry: no S3 in the VM), D4 and N9 measured fixed, the environment notes |
+
 ### 2026-11-25-p3c1/vm (P3 C1, the simulator round: the driver's IPC self-test against the pipeline table on image p3c1)
 
 | Run | What it shows |
@@ -590,9 +638,10 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 
 ## INFO_NEEDED
 
-1. Resolved by image p2b4 (`b392065b2cf`): **D3 is fixed** (`bad-tuples` → `boot bad IPC reply` naming the tuple, `truncated-reply` → `boot truncated`; both power the DSP down and recover); R1 and R2 are measured as TESTING.md describes them (`HFINTIPPTR` all ones before power-up, `0 DSP interrupts` on every boot, the mask in every trace); the earlier rounds are in their evidence trees. Open now: **N5** — whether silicon's `HFINTIPPTR` also reads all ones right after the subsystem's CPA (since image p3c1 the driver repeats the `INTEN` mask at ROM ready, where the pointer first answers on the model: the mask is in every trace of `evidence/2026-11-25-p3c1/vm`, but its effect is not reachable there, since `INTEN` reads 0 before and after — the silicon question stays); **N6** — its log signature exists since image p3c1 (`read` / `resident` in the firmware line; 72 pairs measured); open is R6 on a real sleep/resume, where the line must say `resident` alone (no S3 in the VM); **N8** — TESTING.md's `drop-requests` row; **D4** — the power-down line's state (`evidence/2026-11-25-p3c1/vm/DIVERGENCE.md`); **`UseInterrupts = 1`** — not run in the VM; the storm guard of R2 stays invisible to the model.
+1. Resolved by image p2b4 (`b392065b2cf`): **D3 is fixed** (`bad-tuples` → `boot bad IPC reply` naming the tuple, `truncated-reply` → `boot truncated`; both power the DSP down and recover); R1 and R2 are measured as TESTING.md describes them (`HFINTIPPTR` all ones before power-up, `0 DSP interrupts` on every boot, the mask in every trace); the earlier rounds are in their evidence trees. Open now: **N5** — whether silicon's `HFINTIPPTR` also reads all ones right after the subsystem's CPA (since image p3c1 the driver repeats the `INTEN` mask at ROM ready, where the pointer first answers on the model: the mask is in every trace of `evidence/2026-11-25-p3c1/vm`, but its effect is not reachable there, since `INTEN` reads 0 before and after — the silicon question stays); **N6** — its log signature exists since image p3c1 (`read` / `resident` in the firmware line; 72 pairs measured); open is R6 on a real sleep/resume, where the line must say `resident` alone (no S3 in the VM); **N8** — TESTING.md's `drop-requests` row; **D4** — fixed on the p3c2 image (`DSP power down from state ready` on its three power-downs of a booted DSP: `evidence/2026-11-25-p3c2/DIVERGENCE.md`), N9 likewise (one settings line per start, 6 of 6); **`UseInterrupts = 1`** — not run in the VM; the storm guard of R2 stays invisible to the model.
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.
 5. **The pipeline table (P3 C1, the model half).** On silicon: the status code of an illegal pipeline transition (the plan's 5, or SOF's 12 `IPC4_INVALID_RESOURCE_STATE`), the state a new pipeline is in, the transitions the firmware allows beyond "paused before running", the answers to a duplicate create, an unknown pipeline, instance id 0 (R-G) and the multi-pipeline form, the reply's delay and extension — every row of `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. In the plan: §8 C1's `fault=ipc-status=19:17` had to read `ipc-status=5:19` under the plan's own `<n>:<type>` notation (corrected 2026-11-25). The VM row of the C1 acceptance is measured on image p3c1 (`evidence/2026-11-25-p3c1/vm`): the six `status 0` and the 62–66 µs are the model's (its 50 µs timer, the plan's status 0) seen through the driver's 20 µs poll; what the real firmware answers, and how fast, is the open item.
 6. **A malformed image on silicon (the follow-up).** In which state the real ROM halts, and with which error, when the stream ends inside each structure of the image; whether it reads past the stream at all on an offset near 2^32 (`evidence/2026-11-25-p3c1/MODEL-NOTES.md`, rows 17–22); and whether silicon clears the reply register on the acknowledgement (row 16). The model's answers there are model values; what it no longer does is crash.
+7. **The topology selection (P3 C2, the micro round on image p3c2).** **T1:** the summary line's byte count is the built model's size (`2288`), not the file's (`4286`) as TESTING.md says — a driver-side wording defect (`drivers/wdm/audio/intcdsp/topology.c:363–396` at `2285127b060`: `Bytes` is reused for the measure before the log). **X1:** "the model is kept while the selection names the same file" is written for a resume; a disable/enable is a new device object and reads the file again by design, so the `resident, the model of the device's first boot` line and "no re-read beyond the first" need an S3 resume (not in the VM): open for silicon. Also not run there: TESTING.md (c)'s refusal rows, "released before any other", the `_DSD` path (no `_DSD` names on this VM's controller), the WIM medium (`BOOTLOADER_WIM_RAMDISK` is off in the image), the self-test with a topology.
