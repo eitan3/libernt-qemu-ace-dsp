@@ -13,5 +13,6 @@ found=$(grep -rIl --exclude='*.png' --exclude='*.fd' -e "$Q" -e "$H" evidence/ 2
 for f in $found; do
     sed -i -e "s|$Q|<project>|g" -e "s|$H|<home>|g" "$f"
 done
-left=$(grep -rIl --exclude='*.png' --exclude='*.fd' -e "$Q" -e "$H" evidence/ 2>/dev/null | wc -l)
+# "no file left" is grep's "no match" exit: not an error (pipefail would stop the script here)
+left=$({ grep -rIl --exclude='*.png' --exclude='*.fd' -e "$Q" -e "$H" evidence/ 2>/dev/null || true; } | wc -l)
 echo "normalised $(echo "$found" | grep -c . || true) files; remaining: $left"
