@@ -1,0 +1,55 @@
+# The boot path, unchanged: the 10-patch model against the 14-patch model (2026-11-25T07:20:04Z)
+
+Question: do patches 0011-0014 change one register access of the boot path? (The rule for the model half:
+the qtest of 0001-0010 must still pass unchanged.)
+
+Method -- two builds of the same build/ directory, each running its qtest with the full `ace_*` trace:
+
+- **old**: `build.sh` with `PATCHDIR` holding patches 0001-0010 only (the model of `main` 7b972af) and the
+  qtest binary of that series (9 cases, 9 ok). Raw transcript: `qtest-old-0001-0010.txt.gz`.
+- **new**: `build.sh` with `patches/` (0001-0014) and its qtest binary (12 cases, 12 ok). Raw transcript:
+  `qtest-0001-0014.txt.gz`. `build/qemu-system-x86_64` sha256 `646ff22682bf74ad7230d5dd4f16a64b68079846740756c6abb7604954b7b99a`,
+  `build/tests/qtest/intel-hda-ace-test` sha256 `265a577604201304802a20e39d07433f64cba8d1a8fcb135c47b162a0ce9242f`.
+
+The cases 1-9 are the same test code in both (the test patches 0005/0008/0010 are byte-identical in the two
+series except for `format-patch`'s `[PATCH n/N]` counter). For every case the `ace_*` trace lines of the old
+run are compared with the new run: each old line must still be there, in the same order (a subsequence test),
+and every added line is classified. GLib's host-timing comments (`# slow test ... executed in ... secs`) and the
+qtest socket name differ between runs, are not model output, and are outside the comparison. The old binaries
+were replaced by the final build before being hashed: the old model is reproducible from the ten patches with
+`PATCHDIR=<a directory holding patches/0001-0010> bash build.sh`.
+
+```
+case 1: old    1 trace lines, new    1: 0 old lines gone, 0 added; old lines in order inside the new: yes
+case 2: old    0 trace lines, new    0: 0 old lines gone, 0 added; old lines in order inside the new: yes
+case 3: old    0 trace lines, new    0: 0 old lines gone, 0 added; old lines in order inside the new: yes
+case 4: old   70 trace lines, new   72: 0 old lines gone, 2 added; old lines in order inside the new: yes
+      +2 decoded reply / dropped request
+case 5: old  170 trace lines, new  170: 0 old lines gone, 0 added; old lines in order inside the new: yes
+case 6: old   20 trace lines, new   20: 0 old lines gone, 0 added; old lines in order inside the new: yes
+case 7: old   64 trace lines, new   65: 0 old lines gone, 1 added; old lines in order inside the new: yes
+      +1 decoded reply / dropped request
+case 8: old   64 trace lines, new   65: 0 old lines gone, 1 added; old lines in order inside the new: yes
+      +1 decoded reply / dropped request
+case 9: old  748 trace lines, new  760: 0 old lines gone, 12 added; old lines in order inside the new: yes
+      +12 decoded reply / dropped request
+cases 1-9: old 1137 trace lines, new 1153: 0 old lines gone, 16 added
+
+The added lines, verbatim (case: line):
+  4: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  4: ace_ipc_msg IPC reply type 2 (config-set) status 2: not handled
+  7: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  8: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+  9: ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+  9: ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+  9: ace_ipc_msg IPC reply type 1 (config-get) status 5: FW_CONFIG; status 5 injected by the fault
+```

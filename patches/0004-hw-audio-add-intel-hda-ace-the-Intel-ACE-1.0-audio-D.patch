@@ -1,7 +1,7 @@
 From 76a47a39f5d7e422d583bac64b8c8b2a58f718e1 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 10:12:38 +0200
-Subject: [PATCH 04/10] hw/audio: add intel-hda-ace, the Intel ACE 1.0 audio
+Subject: [PATCH 04/14] hw/audio: add intel-hda-ace, the Intel ACE 1.0 audio
  DSP (Arrow Lake-S 8086:7f50)
 
 A variant of intel-hda for the Intel Smart Sound Technology BUS function of

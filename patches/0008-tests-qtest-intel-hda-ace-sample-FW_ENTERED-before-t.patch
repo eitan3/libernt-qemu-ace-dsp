@@ -1,7 +1,7 @@
 From f2c2b2d5140ccac324f76b95aec2600c9f220c4d Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 21:19:36 +0200
-Subject: [PATCH 08/10] tests/qtest: intel-hda-ace: sample FW_ENTERED before
+Subject: [PATCH 08/14] tests/qtest: intel-hda-ace: sample FW_ENTERED before
  the running bit
 
 The ROM's FW_ENTERED (top bit clear) is asserted at +2000 and still at the

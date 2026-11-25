@@ -8,6 +8,9 @@ registers, its SRAM windows, the processing-power and software-position-in-buffe
 capabilities the DSP drivers walk, and the **boot handshake** a host driver
 performs: power-up, the ROM purge, the code-loader stream that carries the
 firmware, FW_READY, the IPC4 configuration reply and the controller interrupt.
+Once the firmware runs it also keeps the **pipeline table** a host driver's
+streams are made of: create, set-state and delete pipeline are tracked and
+answered.
 
 It exists so that an operating system's Intel SST driver can be run and observed
 in a VM without the laptop: every MMIO access, the DMA of the firmware, the
@@ -47,12 +50,15 @@ serial log next to the device's own trace.
 | Code-loader DMA | the firmware is streamed on an HDA output stream; the model consumes exactly SPIB bytes through QEMU's DMA and writes the stream's completion status as the controller does |
 | The P2a boot state machine | power-up, purge, DONE, INIT_DONE, the ROM walk, FW_ENTERED, FW_READY, the IPC4 reply — with virtual-clock timers, polled by the real driver under its real budgets |
 | The interrupt | raised only while a message is pending and every enable is set; observed on the INTx line through the I/O APIC and as MSI; counted by the p2b3 driver's ISR (`1 DSP interrupts` on the rows that reach FW_READY); the p2b4 driver masks the enables and polls (`0 DSP interrupts`, the mask in every trace) |
-| Fault handling | 17 injectable faults, each with a bounded shape asserted by the qtest |
+| Fault handling | 16 injectable faults — 18 forms, two of them naming one IPC4 message type (`ipc-status=<n>:<type>`, `never-reply=<type>`) — each with a bounded shape asserted by the qtest |
+| The pipeline table | create, set-state and delete pipeline are tracked by instance id and answered with the request's type and a status; a pipeline asked to run before it was paused answers the plan's status 5 and does not move; the table is empty again at every firmware start (patches 0011–0014; qtest `pipeline-table`, `pipeline-illegal`, `pipeline-faults`) |
 
 **Never proves** (silicon truth — only the real device can): the ROM's real
 behaviour, its undocumented checks and signature enforcement, powered-down read
 values, real timings, the interrupt's trigger type on the real line, the
-controller's DMA details, SoundWire, D0i3. A green VM boot is not silicon proof.
+controller's DMA details, SoundWire, D0i3, and the firmware's real pipeline
+state machine and status codes beyond the plan's one rule. A green VM boot is
+not silicon proof.
 
 ### What the simulator caught on its real boots
 
@@ -146,6 +152,22 @@ the silicon list: the `INTEN` mask is skipped when the pointer names no register
 repeated), N6, N7 (TESTING.md's "`INTEN` reads 1 before"), N8 (TESTING.md's `drop-requests` row)
 and the environment notes E2–E4 (`after N us` is TCG execution time on this host; the wizard's
 three pages; sync #14's display-idle lines). `evidence/2026-11-25-p2b4/DIVERGENCE.md`.
+
+**P3 C1, the model half (2026-11-25; no VM run).** The model gained the pipeline table
+(patches 0011–0014): create, set-state and delete pipeline are parsed as the IPC4 header
+lays them out, kept by instance id and answered with the request's type and a status. The
+plan gives one rule — a pipeline must be paused before it can run, anything else asked to
+run answers status 5 and does not move — and every other answer is a model value, listed
+one by one for C6 in `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. Two faults learned to name
+one message type: `ipc-status=<n>:<type>` and `never-reply=<type>`. The qtest grew from 9
+to 12 cases, the mutation check from 25 to 44 rows, and every reply is now traced decoded
+(`IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running`). No
+driver ran against it yet: the C1 image is the driver half's (`SelfTest=1`), so this round
+embarrassed nobody — it prepared the ground. Two plan-side findings for the driver's
+owners (`evidence/2026-11-25-p3c1/DIVERGENCE.md`): the VM acceptance line's
+`fault=ipc-status=19:17` must read `ipc-status=5:19` under the plan's own `<n>:<type>`
+notation, and "status 5" is `IPC4_BAD_STATE` in SOF's error list
+(`IPC4_INVALID_RESOURCE_STATE` is 12) — the model answers the plan's number.
 
 ## Build and run
 
@@ -287,10 +309,10 @@ On the p2b2 image the same boot stopped after `FW_READY received` (D1); that blo
 
 | AC | What | Status |
 |---|---|---|
-| AC1 | qtest passes; mutation check recorded | **PASS** — 9 cases (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down); `mutation-check.sh`: 25 mutations, 24 killed, 1 survivor (`personality-id`, an equivalent mutant) — `evidence/2026-11-25-p2b3/mutation-check.md`. The script's seven sed rows whose expressions could not apply (delimiter and `\|` collisions) and one stale locked worktree were repaired in this round, so the table is complete from the script alone |
+| AC1 | qtest passes; mutation check recorded | **PASS** — 12 cases (`evidence/2026-11-25-p3c1/qtest.txt`, 12/12): the 9 earlier ones unchanged (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down) and, since patches 0011–0014, `pipeline-table`, `pipeline-illegal`, `pipeline-faults`. `mutation-check.sh`: **44 mutations, 43 killed, 1 survivor** (`personality-id`, an equivalent mutant: the class default it changes is overwritten by the personality at realise) — `evidence/2026-11-25-p3c1/mutation-check.md`; each of the 19 rows added for the pipeline table and the typed faults is killed by the case that pins it, and the detector no longer reads an aborted run as a survivor (`SELFTEST=1`). **The boot path itself did not change** (`evidence/2026-11-25-p3c1/boot-path-diff.txt`): the 10-patch model's 1137 `ace_*` trace lines of cases 1–9 are all present, in order, in the 14-patch model's run, with 16 lines added — all of them the new decoded ones. History: `evidence/2026-11-25-p2b3/mutation-check.md` (25 mutations, 24 killed, 1 survivor) |
 | AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`); **on the p2b4 image** (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`): the same thirteen lines except the two R1 lines (`HFINTIPPTR 0xffffffff`, `names no 32-bit register inside BAR4`), the six BAR4 reads, 0 `ace_unexpected` |
 | AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b4 image** (`b392065b2cf`, poll-only). Plain boot under icount: `boot ok after 67971 us (clock 17821036 us) … attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000`; end clock = start clock + M within 0.4 ms; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **0 DSP interrupts** (R2: the enables are masked before the ROM request and never enabled; p2b3's `1` was the FW_READY interrupt its ISR took). 22 disable/enable cycles in one VM, 22 `boot ok after 21406–21726 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, the clock rule within 80–82 µs on all 23 boots, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p2b4/ac3-cycles`). Earlier rounds: p2b3 `1 DSP interrupts` (N1), p2b2 the D1 hang |
-| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
+| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale; since patches 0013/0014 the case `pipeline-faults`: `ipc-status=5:19`, `ipc-status=7`, `ipc-status=7:1`, `never-reply=19`, `never-reply=1`, `never-reply` — the two typed forms have **no VM row yet**, they need the C1 image). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
 | AC5 | README + scripts reproduce AC2 from a clean checkout | **PASS** — see "Reproducibility" |
 
 ### The fix round's expectations (p2b4, TESTING.md of the image) and the measured lines
@@ -346,6 +368,15 @@ figures of the unfaulted steps are TCG execution time on this host, not DSP timi
 (`never-*`, `drop-requests`, `x-delay-scale=1550`) measure their budgets.
 
 
+Two forms of the injector have **no VM row yet**: `ipc-status=<n>:<type>` and
+`never-reply=<type>` (patches 0013/0014). On an image without the IPC self-test they boot
+exactly as `none` does unless the type they name is the boot's own (type 1), so a row is
+only meaningful on the C1 image; the model side is the qtest case `pipeline-faults`
+(`ipc-status=5:19` answers set-state with 5 and leaves FW_CONFIG, create and delete alone;
+`never-reply=19` leaves set-state unanswered and the others answered). The rows the C1
+simulator round expects: `ipc-status=5:19` → `ipc: set pipeline state (19) … status 5 …;
+the link is faulted`, `never-reply=19` → the self-test's timeout line.
+
 ## Model versus silicon
 
 Every value the hardware ABI does not dictate is a model choice, exposed as a
@@ -365,6 +396,7 @@ filled from measurements on the real device; "—" means not yet measured.
 | Mailboxes / reply constants | 4096 / 4096 B, 128 KiB trace, 16 pipelines, 4 libraries | compile-time | — |
 | FSR at FW_ENTERED | the ROM's word: module ROM, state 5, top bit clear = `0x00000005` | compile-time | — |
 | FSR once the firmware runs | `running` (bit 31) \| module BASE_FW \| state 5 = `0xA0000005`, written 2 ms after entry (a model value; silicon: the firmware writes its status during its init, duration unknown) | compile-time | — |
+| Pipeline table | 16 entries, instance ids 1–16; a new pipeline is tracked as `uninitialized`; **one rule is judged** — running needs paused, else status 5 (the plan's number; SOF's error list names 5 `IPC4_BAD_STATE`, 12 `IPC4_INVALID_RESOURCE_STATE`: INFO_NEEDED) — every other transition is tracked as asked; set-state/delete of a pipeline that does not exist 9, a second create of an id 10, id 0 or past 16 → 1, a state the ABI lacks → 1, the multi-pipeline form → 7 (not modelled); a reply 50 µs after the request with extension 0; the table emptied at every firmware start and power-down (`evidence/*/MODEL-NOTES.md`) | compile-time | — |
 | Interrupt | MSI or INTx | `msi=` | — |
 
 ## Layout
@@ -373,13 +405,25 @@ filled from measurements on the real device; "—" means not yet measured.
 |---|---|
 | `COPYING` | QEMU's licence text (GPL-2.0-or-later) |
 | `fetch.sh`, `build.sh`, `export-patches.sh` | the pinned source, the build, the series export |
-| `patches/0001…0010` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest); the interrupt pointer that does not answer while unpowered (model, qtest) |
+| `patches/0001…0014` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest); the interrupt pointer that does not answer while unpowered (model, qtest); the pipeline table with every reply traced decoded (model, qtest); the faults that name one message type (model, qtest) |
 | `run.sh`, `run-control.sh`, `lib-run.sh`, `make-overlay.sh` | the VM runs (`lib-run.sh`: `ICOUNT=1`, `QTESTSOCK=1`, `FAULT`, `TRACE`, `STOP_ON`, …) |
 | `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults; in `tools/`: the monitor/typing helpers (`guest.sh`, `mon.py`, `qmp.py`), the qtest client and heartbeat (`qtest.py`, `heartbeat.py`), `waitline.sh`, `cycle.sh`, `ac3-cycles.sh`, the fault-matrix driver and its post-check (`fault-matrix.sh`, `fm-check.sh`) |
-| `mutation-check.sh` | AC1's mutation run |
+| `mutation-check.sh` | AC1's mutation run: one row per model behaviour, each breaking one piece and naming the case that goes red (the detector's rules are in the header; `SELFTEST=1` proves them on synthetic logs; `ONLY=<regex>` runs the rows whose name matches) |
 | `evidence/<date>/` | serial logs, device traces and screenshots of every acceptance run (paths normalised) |
 
 ## Evidence index
+
+### 2026-11-25-p3c1 (P3 C1, the model half: the pipeline table and the faults that name one message type — no VM run)
+
+| File | What it shows |
+|---|---|
+| `qtest.txt` | 12/12: the 9 earlier cases unchanged + `pipeline-table`, `pipeline-illegal`, `pipeline-faults`; the model and qtest binary hashes (the complete transcript with the `ace_*` trace: `qtest-0001-0014.txt.gz`) |
+| `boot-path-diff.txt` | the boot path unchanged: the 10-patch model (`qtest-old-0001-0010.txt.gz`) against the 14-patch one, case by case — 1137 old trace lines all present in order, 16 added, all the new decoded lines |
+| `pipeline-trace.txt` | the `ace_ipc` trace of one create → state → delete sequence (request, reply, decoded type and status, acknowledgement), then the table's other answers, the illegal transition, and the typed faults |
+| `mutation-check.md` | 44 mutations: 43 killed (the first red case and how many cases ran in each row), 1 survivor (`personality-id`), 0 not applied |
+| `MODEL-NOTES.md` | every reply value the model chooses — plan-given or model value — with the silicon column left for C6, and the INFO_NEEDED list |
+| `fault-values.txt` | the fault property on the final binary: the six bad values refused on the command line and over QMP (the fault in place kept), the good ones accepted |
+| `DIVERGENCE.md` | no driver ran: the plan-side findings (the `ipc-status=19:17` notation, the name of status 5, the answers the plan does not give), three pre-existing model/tooling items noticed and not changed, the detector fix |
 
 ### 2026-11-25-p2b4 (the fix round R1/R2/D3/R6 verified on `b392065b2cf`; AC3 and AC4 closed again)
 
@@ -443,3 +487,4 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.
+5. **The pipeline table (P3 C1, the model half).** On silicon: the status code of an illegal pipeline transition (the plan's 5, or SOF's 12 `IPC4_INVALID_RESOURCE_STATE`), the state a new pipeline is in, the transitions the firmware allows beyond "paused before running", the answers to a duplicate create, an unknown pipeline, instance id 0 (R-G) and the multi-pipeline form, the reply's delay and extension — every row of `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. In the plan: §8 C1's `fault=ipc-status=19:17` has to read `ipc-status=5:19` under the plan's own `<n>:<type>` notation.

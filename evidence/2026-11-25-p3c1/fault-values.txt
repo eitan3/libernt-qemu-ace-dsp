@@ -1,0 +1,43 @@
+# The fault property's values: refused and accepted (2026-11-25T07:25:48Z)
+#
+# The final binary: build/qemu-system-x86_64 sha256 646ff22682bf74ad7230d5dd4f16a64b68079846740756c6abb7604954b7b99a.
+
+## On the command line: -device intel-hda-ace,bus=pcie.0,addr=1b.0,fault=<value>
+
+A bad value is refused when the device is realised (QEMU exits with the line below); a good one starts QEMU
+(stopped here one second later).
+
+```
+fault=never-reply=99 -> fault=never-reply=99: intel-hda-ace: fault 'never-reply': '99' is not a message type (0 to 31) 
+fault=never-reply= -> fault=never-reply=: intel-hda-ace: fault 'never-reply': '' is not a message type (0 to 31) 
+fault=never-reply=abc -> fault=never-reply=abc: intel-hda-ace: fault 'never-reply': 'abc' is not a message type (0 to 31) 
+fault=ipc-status=5:32 -> fault=ipc-status=5:32: intel-hda-ace: fault 'ipc-status': '32' is not a message type (0 to 31) 
+fault=ipc-status=5:19:1 -> fault=ipc-status=5:19:1: intel-hda-ace: fault 'ipc-status': '19:1' is not a message type (0 to 31) 
+fault=ipc-status -> fault=ipc-status: intel-hda-ace: fault 'ipc-status' needs a value (=<status>, or =<status>:<type> for one message type) 
+fault=never-power=1 -> fault=never-power=1: intel-hda-ace: fault 'never-power' takes no value 
+fault=ipc-status=5:19 -> started (accepted)
+fault=never-reply=19 -> started (accepted)
+fault=ipc-status=5 -> started (accepted)
+fault=never-reply -> started (accepted)
+fault=none -> started (accepted)
+```
+
+## Over QMP at run time (tools/qmp.py on a stopped VM): a refused value leaves the fault in place
+
+```
+{"execute": "query-status"} -> {"return": {"status": "prelaunch", "running": false}}
+-- set ipc-status=5:19, read back
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "ipc-status=5:19"}} -> {"return": {}}
+{"execute": "qom-get", "arguments": {"path": "/machine/peripheral/ace", "property": "fault"}} -> {"return": "ipc-status=5:19"}
+-- set never-reply=abc: refused; read back: still ipc-status=5:19
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "never-reply=abc"}} -> {"error": {"class": "GenericError", "desc": "intel-hda-ace: fault 'never-reply': 'abc' is not a message type (0 to 31)"}}
+{"execute": "qom-get", "arguments": {"path": "/machine/peripheral/ace", "property": "fault"}} -> {"return": "ipc-status=5:19"}
+-- set ipc-status=5:32: refused; read back
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "ipc-status=5:32"}} -> {"error": {"class": "GenericError", "desc": "intel-hda-ace: fault 'ipc-status': '32' is not a message type (0 to 31)"}}
+{"execute": "qom-get", "arguments": {"path": "/machine/peripheral/ace", "property": "fault"}} -> {"return": "ipc-status=5:19"}
+-- set never-reply=19, read back; set none, read back
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "never-reply=19"}} -> {"return": {}}
+{"execute": "qom-get", "arguments": {"path": "/machine/peripheral/ace", "property": "fault"}} -> {"return": "never-reply=19"}
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "none"}} -> {"return": {}}
+{"execute": "qom-get", "arguments": {"path": "/machine/peripheral/ace", "property": "fault"}} -> {"return": "none"}
+```

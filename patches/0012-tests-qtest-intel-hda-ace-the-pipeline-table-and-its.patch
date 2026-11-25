@@ -1,0 +1,239 @@
+From 5e63ffa2ad4bf0b25fb3d058184893b2d8b182ce Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 08:04:33 +0200
+Subject: [PATCH 12/14] tests/qtest: intel-hda-ace: the pipeline table and its
+ illegal transition
+
+Two cases on the pipeline table of the model:
+
+- pipeline-table: the plan's self-test order (create pipeline 1, paused,
+  running, paused, reset, delete) answers status 0 with the request's type
+  and the reply direction, the reply coming 50 us after the request; the
+  table is by instance id (a second pipeline 1 is refused, pipeline 2 is
+  not pipeline 1), the ids run from 1 (the plan's R-G) to the pipeline
+  count of the FW_CONFIG reply, a deleted pipeline is gone, the
+  multi-pipeline form of set-state is refused, a module-space message of a
+  pipeline's type number is not a pipeline message, and the table does
+  not survive a power cycle.
+- pipeline-illegal: running before paused answers the plan's status 5 and
+  does not move the pipeline (it can then be paused and run); the states
+  the plan's sequences never send are tracked as asked, and the states
+  the ABI does not have are refused.
+
+Each pinned behaviour has a mutation row in mutation-check.sh.
+---
+ tests/qtest/intel-hda-ace-test.c | 170 ++++++++++++++++++++++++++++++-
+ 1 file changed, 167 insertions(+), 3 deletions(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index b5621a308..a1710872f 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -11,9 +11,11 @@
+  * Drives the device from the host side with PCI configuration, MMIO and
+  * guest memory: the enumeration and the capability chain, the cold boot
+  * handshake end to end with a synthetic firmware image, the IPC4 reply, the
+- * interrupt under INTx and MSI, the power-down from every state and every
+- * fault of the injector.  Every case is meant to fail on a model with its
+- * piece removed (the mutation check of the acceptance).
++ * interrupt under INTx and MSI, the power-down from every state, every
++ * fault of the injector, and the pipeline table the firmware keeps of the
++ * host's pipelines (create, set-state, delete, the illegal transition, the
++ * faults that name one message type).  Every case is meant to fail on a
++ * model with its piece removed (the mutation check of the acceptance).
+  *
+  * The register offsets below are the hardware ABI (Linux v6.12
+  * sound/soc/sof/intel/mtl.h and hda.h, the Intel HD Audio specification);
+@@ -83,6 +85,22 @@
+ #define NOTIFY_FW_READY    0x9b080000u       /* BUSY | notification 27 | type 8 */
+ #define NOTIFY_EXCEPTION   0x9b0a0000u       /* BUSY | notification 27 | type 10 */
+ 
++/* the pipeline messages (global: target 0) and the shape of their replies:
++ * DONE | reply (bit 29) | the request's type | the status (bits 23:0) */
++#define IPC4_CREATE_PIPELINE    17u
++#define IPC4_DELETE_PIPELINE    18u
++#define IPC4_SET_PIPELINE_STATE 19u
++#define IPC4_MODULE             0x40000000u  /* the target bit */
++#define PPL_REQ(type, id)       (ACE_BUSY | ((type) << 24) | ((id) << 16))
++#define PPL_REPLY(type, status) (ACE_BUSY | 0x20000000u | ((type) << 24) | (status))
++#define PPL_STATE(id, state)    (PPL_REQ(IPC4_SET_PIPELINE_STATE, id) | (state))
++#define PPL_UNINITIALIZED       1u
++#define PPL_RESET               2u
++#define PPL_PAUSED              3u
++#define PPL_RUNNING             4u
++#define PPL_EOS                 5u
++#define IPC4_ILLEGAL_TRANSITION 5u    /* the plan's status: "invalid resource state" */
++
+ #define US(x) ((int64_t)(x) * 1000)
+ 
+ /* guest memory for the test: the BDL and the synthetic image */
+@@ -371,6 +389,39 @@ static uint32_t fw_config(void)
+     return reply;
+ }
+ 
++/* boot to the running firmware with FW_READY acknowledged */
++static void boot_firmware(void)
++{
++    load_image(2, 9, 9, 9);
++    power_up();
++    rom_ready();
++    run_loader(IMG_LEN - IMG_PAYLOAD);
++    firmware_ready();
++    ack_notification();
++}
++
++/* ... and FW_CONFIG answered: the state the pipeline messages are answered in */
++static void boot_running(void)
++{
++    boot_firmware();
++    g_assert_cmpuint(fw_config(), ==, IPC4_REPLY_DONE_OK);
++}
++
++/* one request and its reply: the extension first, then the primary with
++ * BUSY; the reply is read 100 us later (the model answers after 50) and
++ * acknowledged */
++static uint32_t ipc(uint32_t ext, uint32_t primary)
++{
++    uint32_t reply;
++
++    w4(ACE_XIDDY, ext);
++    w4(ACE_XIDR, primary);
++    qtest_clock_step(t.qs, US(100));
++    reply = r4(ACE_XIDA);
++    w4(ACE_XIDA, ACE_BUSY);
++    return reply;
++}
++
+ /* --------------------------------------------------------------------- */
+ 
+ /* 1: enumeration */
+@@ -784,6 +835,116 @@ static void test_faults(void)
+     boot_end();
+ }
+ 
++/* 10: the pipeline table: create, set-state and delete are tracked and
++ * answered with the request's type, the reply direction and the status */
++static void test_pipeline_table(void)
++{
++    boot_start("");
++    boot_running();
++
++    /* create pipeline 1: the reply comes 50 us after the request (a model
++     * value, the FW_CONFIG reply's delay), not at 40; no extension */
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_REQ(IPC4_CREATE_PIPELINE, 1));
++    qtest_clock_step(t.qs, US(40));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    qtest_clock_step(t.qs, US(20));
++    g_assert_cmpuint(r4(ACE_XIDA), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(r4(ACE_XTDDY), ==, 0);
++    w4(ACE_XIDA, ACE_BUSY);
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++
++    /* the plan's self-test order: paused, running, paused, reset, delete */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RESET)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    /* deleted: the pipeline is gone (a model value: the ABI's "resource not found") */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 9));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 9));
++
++    /* one entry per instance id: pipeline 2 is not pipeline 1, and a second
++     * pipeline 1 is refused (a model value: the ABI's "resource id exists") */
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(2, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 9));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 10));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 2)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++
++    /* the instance ids start at 1 (the plan's R-G) and stop at the pipeline
++     * count of the FW_CONFIG reply (a model value: 16, the last valid id) */
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 0)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 1));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 17)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 1));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 16)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(16, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 16)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++
++    /* the other fields of the create ride along (priority 5, 0x155 pages,
++     * core 1, low-power): nothing in the reply depends on them */
++    g_assert_cmpuint(ipc((1u << 20) | 1, PPL_REQ(IPC4_CREATE_PIPELINE, 3) |
++                         (5u << 11) | 0x155), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++
++    /* the multi-pipeline form of set-state is refused, not ignored (a model
++     * value: not modelled) */
++    g_assert_cmpuint(ipc(1, PPL_STATE(3, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 7));
++
++    /* a module-space message of a pipeline's type number is not a pipeline
++     * message: it is answered as any unhandled module message */
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 4) | IPC4_MODULE),
++                     ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 2) | IPC4_MODULE);
++
++    /* nothing is left pending: no notification */
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++
++    /* the table does not survive a power cycle: the firmware that comes up
++     * starts with no pipelines (the plan's recovery re-boots from scratch) */
++    w4(ACE_XCTL, 0);
++    w0(HDA_ST_CTL(OUT4), 0);
++    w4(ACE_DSP2CXCTL, 0);
++    qtest_clock_step(t.qs, US(100));
++    w4(ACE_ADSPCS, 0);
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, 0);
++    w0(HDA_PPCTL, 0);
++    boot_firmware();
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(3, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 9));
++    boot_end();
++}
++
++/* 11: an illegal transition is refused with the plan's status 5 and leaves
++ * the pipeline where it was: a pipeline must be paused before it can run */
++static void test_pipeline_illegal(void)
++{
++    boot_start("");
++    boot_running();
++
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    /* running straight after the creation */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, IPC4_ILLEGAL_TRANSITION));
++    /* refused means not moved: the pipeline is still there to be paused,
++     * and then it runs */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    /* reset, then running again without a pause in between */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RESET)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, IPC4_ILLEGAL_TRANSITION));
++    /* the states the plan's sequences never send are tracked without
++     * judgement (model values: the plan gives one rule only), and none of
++     * them is paused */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_EOS)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_UNINITIALIZED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, IPC4_ILLEGAL_TRANSITION));
++    /* the states the ABI does not have (0 invalid, 6 and up) */
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, 0)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 1));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, 6)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 1));
++    /* a refused request leaves the exchange clean: the next one is answered */
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    /* a pipeline that was never created: no such pipeline, whatever the state */
++    g_assert_cmpuint(ipc(0, PPL_STATE(7, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 9));
++    boot_end();
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -797,6 +958,9 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/irq-intx", test_irq_intx);
+         qtest_add_func("/intel-hda-ace/irq-msi", test_irq_msi);
+         qtest_add_func("/intel-hda-ace/faults", test_faults);
++        qtest_add_func("/intel-hda-ace/pipeline-table", test_pipeline_table);
++        qtest_add_func("/intel-hda-ace/pipeline-illegal", test_pipeline_illegal);
++
+     }
+     return g_test_run();
+ }
+-- 
+2.56.1
+

@@ -5,13 +5,32 @@
 # cases go red.  A mutation that leaves the suite green is a survivor and is
 # reported as such.  Runs on a throw-away git worktree; master is untouched.
 # usage: mutation-check.sh [out.md]   (default: evidence/<date>/mutation-check.md)
-# This work is licensed under the terms of the GNU GPL, version 2 or later.
+#
+# The detector's rules (kept from the earlier rounds):
+#  - the qtest aborts at its first failed assertion, so a KILLED row names
+#    that first red case and, when it was not the last, says how many of the
+#    M cases ran: the cases after it were not evaluated by that mutation;
+#  - a run that ends with no "not ok" line but a non-zero exit (a timeout, a
+#    crash) is an abort: reported as KILLED (aborted) with its reason, never
+#    as a survivor.  A survivor is a zero exit with M "ok" lines and nothing
+#    else, and only the un-mutated model produces that;
+#  - every cell is one line of at most 200 characters, with the table's
+#    separator replaced, so the table stays a table whatever the qtest prints;
+#  - a row is "name|file|sed expression|what it breaks" split on "|": no
+#    expression may contain it (use "." for one character, or rewrite), and
+#    the expression's delimiter must not occur in its text.
+#  - the build and the qtest run in the main build/ directory: after the
+#    check it holds the last mutation, so build.sh is run again afterwards.
+#  - SELFTEST=1 runs the detector on synthetic logs (a clean run, a red run
+#    that stops early, a timeout, a crash, a truncated run) and fails if any
+#    verdict is wrong; it builds nothing.
+#
+# This work is licensed under the terms of your GNU GPL, version 2 or later.
 # See the COPYING file in the top-level directory.
 set -u
 cd "$(dirname "$0")"
 SRC="$PWD/src/qemu-11.1.3"
 OUT="${1:-$PWD/evidence/$(date -u +%F)/mutation-check.md}"
-mkdir -p "$(dirname "$OUT")"
 C='hw/audio/intel-hda-ace.c'
 R='hw/audio/intel-hda-ace-regs.h'
 
@@ -41,13 +60,111 @@ MUTATIONS=(
 "fw-ready-delay|$C|s/define ACE_US_FW_READY           200/define ACE_US_FW_READY           100/|FW_READY 100 us early"
 "fw-running-early|$C|s/define ACE_US_FW_RUNNING         2000/define ACE_US_FW_RUNNING         200/|the firmware's status word written with FW_READY (the ROM's FW_ENTERED no longer readable for a host poll)"
 "purge-tag-plus|$C|s/ACE_ROM_IPC_STREAM_TAG_SHIFT) + 1;/ACE_ROM_IPC_STREAM_TAG_SHIFT);/|the purge tag off by one"
-"win0-mirror|$C|s/stl_le_p(s->ram\[0\] + ACE_FWREG_FSR, s->fsr);/stl_le_p(s->ram[0] + ACE_FWREG_FSR, 0);/|window 0 no longer mirrors the FSR"
+"win0-mirror|$C|s/stl_le_p(s->ram\[0\] + ACE_FWREG_FSR, s->fsr);/stl_le_p(s->ram\[0\] + ACE_FWREG_FSR, 0);/|window 0 no longer mirrors the FSR"
+"ppl-running-guard|$C|s/if (state == ACE_IPC4_PIPE_RUNNING \&\& p->state != ACE_IPC4_PIPE_PAUSED) {/if (false) {/|a pipeline asked to run is never refused: the paused-before-running rule gone"
+"ppl-state-tracked|$C|s/        p->state = state;/        ;/|the pipeline's state is never stored: a pipeline that was asked to pause is still uninitialized when asked to run"
+"ppl-create-tracked|$C|s/        p->used = true;/        ;/|create does not add the pipeline to the table"
+"ppl-delete-tracked|$C|s/        p->used = false;/        ;/|delete does not remove the pipeline from the table"
+"ppl-instance-shift|$R|s/ACE_IPC4_PIPE_INSTANCE_SHIFT     16/ACE_IPC4_PIPE_INSTANCE_SHIFT     15/|the pipeline instance id read from bits 22:15 (pipeline 16 decodes past the limit)"
+"ppl-state-decode|$C|s/uint32_t state = primary \& ACE_IPC4_PIPE_STATE_MASK;/uint32_t state = (primary >> 8) \& ACE_IPC4_PIPE_STATE_MASK;/|the pipeline state read from the wrong bits"
+"ppl-status-five|$R|s/ACE_IPC4_ILLEGAL_TRANSITION      5/ACE_IPC4_ILLEGAL_TRANSITION     12/|the illegal transition answers 12 instead of the plan's 5"
+"ppl-id-range|$C|0,/return ACE_IPC4_ERROR_INVALID_PARAM;/s//return ACE_IPC4_SUCCESS;/|an instance id out of range (0, 17) is answered 0 instead of 1"
+"ppl-limit|$R|s/ACE_MODEL_MAX_PIPELINES          16/ACE_MODEL_MAX_PIPELINES          32/|the pipeline count of the model doubled: instance 17 is accepted"
+"ppl-exists|$C|s/return ACE_IPC4_RESOURCE_ID_EXISTS;/return ACE_IPC4_SUCCESS;/|a second create of an instance id answers 0 instead of 10"
+"ppl-missing|$C|s/return ACE_IPC4_INVALID_RESOURCE_ID;/return ACE_IPC4_SUCCESS;/|a set-state or delete of a pipeline that does not exist answers 0 instead of 9"
+"ppl-table-clear|$C|s/ace_ppl_clear(s);/;/g|the pipeline table is never cleared: it survives a power cycle"
+"ppl-multi-flag|$C|s/if (ext \& ACE_IPC4_PIPE_STATE_EXT_MULTI) {/if (false) {/|the multi-pipeline form of set-state is taken for a single pipeline's"
+"ppl-target-check|$C|s/return !module_msg \&\& (/return (/|a module-space message of a pipeline's type number is taken for a pipeline message"
+"ipc-reply-delay|$C|s/define ACE_US_IPC_REPLY           50/define ACE_US_IPC_REPLY           40/|a pipeline reply 10 us early (the FW_CONFIG reply's delay no longer the model's)"
+"fault-applies-all|$C|s/return !s->fault_typed .. s->fault_type == type;/return true;/|a fault that names a message type applies to every type"
+"fault-ipc-status-all|$C|s/               ace_fault_applies(s, type);/               true;/|ipc-status=<n>:<type> answers every type with the status"
+"fault-never-reply-all|$C|s/(s->fault_id == ACE_FAULT_NEVER_REPLY \&\& ace_fault_applies(s, type))) {/(s->fault_id == ACE_FAULT_NEVER_REPLY)) {/|never-reply=<type> drops every request"
+"fault-type-off-by-one|$C|s/    s->fault_type = fault_type;/    s->fault_type = (fault_type + 1) \& 0x1f;/|the fault's message type stored one past the one it names"
 )
 
+# the cases of a clean run (the un-mutated test file), for the abort note
+M=$(grep -c "qtest_add_func(" "$SRC/tests/qtest/intel-hda-ace-test.c")
+LOG="$(mktemp /tmp/mutation-check.XXXXXX.log)"
+trap 'rm -f "$LOG"' EXIT
+
+# one bounded table cell: a single line, the separator replaced, at most $2
+# characters; the qtest's source path (of the worktree the mutation built)
+# is shortened
+cell() {
+    printf '%s' "$1" | tr '\n' ' ' | sed 's/|/\//g; s#\.\./src/qemu-11\.1\.3[^/]*/tests/qtest/##' | cut -c1-"$2"
+}
+
+# ONLY=<regex>: run just the rows whose name matches (a trial of new rows);
+# the un-mutated model is what the counts of a full run refer to
+ONLY="${ONLY:-}"
+
+# The verdict of one qtest run from its exit status and its log: the first
+# field names the kind (killed, survived or aborted), the rest are the two
+# table cells.  A failed case prints "not ok <path>" (GLib's TAP has no
+# number there) and is the last line of results, so the cases after it were
+# not evaluated; a non-zero exit without such a line is a timeout or a crash.
+verdict() {    # $1 = the exit status, $2 = the log
+    local rc=$1 log=$2 n_ok n_not ran red note why last
+
+    n_ok=$(grep -cE '^ok ' "$log")
+    n_not=$(grep -cE '^not ok ' "$log")
+    ran=$((n_ok + n_not))
+    if [ "$n_not" -gt 0 ]; then
+        red=$(grep -m1 -E '^not ok ' "$log" | sed -E 's#^not ok( [0-9]+)? /x86_64/intel-hda-ace/##; s# - ERROR:[^ ]*intel-hda-ace-test\.c:([0-9]+):# (test line \1) #')
+        note=""
+        [ "$ran" -lt "$M" ] && note=" -- the run aborted there: cases $((ran + 1))-$M not evaluated"
+        printf 'killed\tKILLED\t%s%s\n' "$(cell "$red" 240)" "$note"
+    elif [ "$rc" -eq 0 ] && [ "$n_ok" -eq "$M" ]; then
+        printf 'survived\t**SURVIVED**\t- (all %d cases ok)\n' "$M"
+    else
+        case "$rc" in
+            124) why="timeout" ;;
+            *)   if [ "$rc" -gt 128 ]; then why="killed by signal $((rc - 128))"; else why="exit $rc"; fi ;;
+        esac
+        last=$(grep -v '^$' "$log" | tail -1)
+        printf 'aborted\tKILLED (aborted)\t%s after %d of %d cases, no "not ok" line; last output: %s\n' \
+            "$why" "$ran" "$M" "$(cell "$last" 120)"
+    fi
+}
+
+# SELFTEST=1: the detector on synthetic logs -- a clean run is a survivor, a
+# red run that stops early is killed with the cases after it named, and a
+# timeout or a crash without a "not ok" line is an abort, never a survivor
+if [ "${SELFTEST:-0}" = 1 ]; then
+    T=$(mktemp -d)
+    trap 'rm -rf "$T"' EXIT
+    for i in $(seq 1 "$M"); do echo "ok $i /x86_64/intel-hda-ace/case"; done > "$T/clean"
+    { echo "ok 1 /x86_64/intel-hda-ace/enumerate"
+      echo "not ok /x86_64/intel-hda-ace/boot-handshake - ERROR:../src/qemu-11.1.3-wt-x/tests/qtest/intel-hda-ace-test.c:42:step: assertion failed (r4(X) == halt | 0x28): (5 == 2147483688)"
+      echo "Bail out!"; } > "$T/red"
+    : > "$T/timeout"
+    echo "ERROR:../x.c:1:qtest: the emulator died" > "$T/crash"
+    head -n $((M - 1)) "$T/clean" > "$T/truncated"
+    bad=0
+    check() {    # $1 = what is fed, $2 = exit status, $3 = the log, $4 = the verdict wanted
+        got=$(verdict "$2" "$T/$3" | cut -f1)
+        if [ "$got" != "$4" ]; then bad=$((bad + 1)); echo "SELFTEST FAILED: $1 -> $got, wanted $4"; else echo "selftest ok: $1 -> $4"; fi
+    }
+    check "a clean run (exit 0, M ok lines)" 0 clean survived
+    check "a red run that stops at case 2 (exit 134)" 134 red killed
+    check "a timeout (exit 124, no output)" 124 timeout aborted
+    check "a crash (exit 139, no not-ok line)" 139 crash aborted
+    check "a truncated run (exit 0, M-1 ok lines, no not-ok line)" 0 truncated aborted
+    check "a red run that reported its failure but exited 0" 0 red killed
+    echo "verdict of the red log: $(verdict 134 "$T/red" | cut -f2-)"
+    [ "$bad" -eq 0 ] || exit 1
+    exit 0
+fi
+
+mkdir -p "$(dirname "$OUT")"
 printf '# Mutation check of tests/qtest/intel-hda-ace-test.c (%s)\n\n' "$(date -u +%FT%TZ)" > "$OUT"
+printf 'Model `%s` (%s); %d mutations, one per row%s; a clean run is %d cases.\n\n' \
+    "$(git -C "$SRC" rev-parse --short master)" "$(git -C "$SRC" log -1 --format=%s master | cut -c1-60)" \
+    "${#MUTATIONS[@]}" "${ONLY:+ (ONLY=$ONLY: the rows whose name matches)}" "$M" >> "$OUT"
 printf '| # | mutation | what it breaks | qtest result | red cases |\n|---|---|---|---|---|\n' >> "$OUT"
-n=0; survivors=0
+n=0; survivors=0; aborted=0; notapplied=0; failed=0
 for m in "${MUTATIONS[@]}"; do
+    if [ -n "$ONLY" ] && ! grep -qE -- "$ONLY" <<< "${m%%|*}"; then continue; fi
     n=$((n + 1))
     IFS='|' read -r name file expr what <<< "$m"
     WT="$SRC-wt-$name"
@@ -60,7 +177,8 @@ for m in "${MUTATIONS[@]}"; do
     if ! git -C "$WT" diff --quiet; then
         git -C "$WT" -c user.name=mutation -c user.email=mutation@localhost commit -q -am "mutation: $name"
     else
-        printf '| %d | %s | %s | NOT APPLIED (sed matched nothing) | - |\n' "$n" "$name" "$what" >> "$OUT"
+        printf '| %d | %s | %s | NOT APPLIED (sed matched nothing) | - |\n' "$n" "$name" "$(cell "$what" 200)" >> "$OUT"
+        notapplied=$((notapplied + 1))
         git -C "$SRC" worktree remove --force "$WT" >/dev/null 2>&1
         continue
     fi
@@ -68,17 +186,21 @@ for m in "${MUTATIONS[@]}"; do
     git -C "$WT" format-patch -q v11.1.3..HEAD -o "$PD"
     res=$(PATCHDIR="$PD" bash build.sh 2>&1 | grep -E 'error:|FAILED|build ok' | head -3)
     if ! grep -q 'build ok' <<< "$res"; then
-        printf '| %d | %s | %s | BUILD FAILED: %s | - |\n' "$n" "$name" "$what" "$(echo "$res" | tr '\n' ' ' | cut -c1-80)" >> "$OUT"
+        failed=$((failed + 1))
+        printf '| %d | %s | %s | BUILD FAILED: %s | - |\n' "$n" "$name" "$(cell "$what" 200)" "$(cell "$(echo "$res" | tr '\n' ' ')" 120)" >> "$OUT"
     else
-        red=$(cd build && QTEST_QEMU_BINARY=./qemu-system-x86_64 timeout 400 ./tests/qtest/intel-hda-ace-test 2>&1 | grep -E '^not ok' | sed 's/^not ok [0-9]* //' | tr '\n' ';')
-        if [ -n "$red" ]; then
-            printf '| %d | %s | %s | KILLED | %s |\n' "$n" "$name" "$what" "${red%;}" >> "$OUT"
-        else
-            survivors=$((survivors + 1))
-            printf '| %d | %s | %s | **SURVIVED** | - |\n' "$n" "$name" "$what" >> "$OUT"
-        fi
+        (cd build && QTEST_QEMU_BINARY=./qemu-system-x86_64 timeout 400 ./tests/qtest/intel-hda-ace-test > "$LOG" 2>&1); rc=$?
+        got=$(verdict "$rc" "$LOG")
+        kind=${got%%$'\t'*}
+        cells=${got#*$'\t'}
+        case "$kind" in
+            survived) survivors=$((survivors + 1)) ;;
+            aborted)  aborted=$((aborted + 1)) ;;
+        esac
+        printf '| %d | %s | %s | %s |\n' "$n" "$name" "$(cell "$what" 200)" "${cells//$'\t'/ | }" >> "$OUT"
     fi
     git -C "$SRC" worktree remove --force "$WT" >/dev/null 2>&1
 done
-printf '\n%d mutations, %d survived.\n' "$n" "$survivors" >> "$OUT"
-echo "done: $n mutations, $survivors survivors -> $OUT"
+printf '\n%d mutations: %d killed (%d of them by an abort), **%d survived**, %d not applied, %d build failures.\n' \
+    "$n" "$((n - survivors - notapplied - failed))" "$aborted" "$survivors" "$notapplied" "$failed" >> "$OUT"
+echo "done: $n mutations, $survivors survivors, $notapplied not applied, $failed build failures -> $OUT"

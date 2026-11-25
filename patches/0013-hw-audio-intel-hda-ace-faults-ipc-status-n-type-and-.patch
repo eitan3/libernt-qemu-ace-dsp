@@ -1,0 +1,229 @@
+From 09acbdac5fcdcc925d215f5d274d3bbbea86cc9c Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 08:05:21 +0200
+Subject: [PATCH 13/14] hw/audio: intel-hda-ace: faults ipc-status=<n>:<type>
+ and never-reply=<type>
+
+Two faults may now name one IPC4 message type (bits 28:24 of the
+primary): ipc-status=<n>:<type> makes the replies of that type alone carry
+status n, never-reply=<type> leaves the requests of that type alone
+unanswered.  Without a type both faults keep their meaning (every reply,
+every request), so the existing rows of the fault matrix are unchanged.
+A type that is not a number from 0 to 31 is refused when the property is
+set and leaves the previous fault in place.
+---
+ docs/system/devices/intel-hda-ace.rst |  11 ++-
+ hw/audio/intel-hda-ace.c              | 123 ++++++++++++++++++++------
+ 2 files changed, 105 insertions(+), 29 deletions(-)
+
+diff --git a/docs/system/devices/intel-hda-ace.rst b/docs/system/devices/intel-hda-ace.rst
+index 5fcb298f3..e41606497 100644
+--- a/docs/system/devices/intel-hda-ace.rst
++++ b/docs/system/devices/intel-hda-ace.rst
+@@ -97,10 +97,13 @@ Properties
+    The fault injector, settable at run time through QMP (``qom-set
+    /machine/peripheral/ace fault <name>``): ``none`` (default),
+    ``never-power``, ``never-ack``, ``never-ready``, ``never-enter``,
+-   ``never-fwready``, ``never-reply``, ``drop-requests``,
+-   ``halt-rom=<code>``, ``halt-fw=<code>``, ``crash-notification``,
+-   ``abi=<n>``, ``ipc-status=<n>``, ``bad-tuples``, ``truncated-reply``,
+-   ``version-shift``, ``window-read-fail``.
++   ``never-fwready``, ``never-reply`` (every request) or
++   ``never-reply=<type>`` (the requests of one IPC4 message type only),
++   ``drop-requests``, ``halt-rom=<code>``, ``halt-fw=<code>``,
++   ``crash-notification``, ``abi=<n>``, ``ipc-status=<n>`` (every reply)
++   or ``ipc-status=<n>:<type>`` (the replies of one message type only),
++   ``bad-tuples``, ``truncated-reply``, ``version-shift``,
++   ``window-read-fail``.
+ ``msi``, ``debug``, ``old_msi_addr``
+    As for ``intel-hda``.  ``debug=2`` traces the controller's register
+    accesses.
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 714b0f1f2..3f9f266bb 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -102,28 +102,36 @@ typedef enum AceFault {
+     ACE_FAULT_WINDOW_READ_FAIL,
+ } AceFault;
+ 
++/* whether a fault takes a value: none, a required one, or an optional one
++ * (never-reply answers every message without a value, one type with one) */
++typedef enum AceFaultArg {
++    ACE_ARG_NONE,
++    ACE_ARG_REQUIRED,
++    ACE_ARG_OPTIONAL,
++} AceFaultArg;
++
+ static const struct {
+     const char *name;
+     AceFault id;
+-    bool takes_arg;
++    AceFaultArg arg;
+ } ace_faults[] = {
+-    { "none",               ACE_FAULT_NONE,               false },
+-    { "never-power",        ACE_FAULT_NEVER_POWER,        false },
+-    { "never-ack",          ACE_FAULT_NEVER_ACK,          false },
+-    { "never-ready",        ACE_FAULT_NEVER_READY,        false },
+-    { "never-enter",        ACE_FAULT_NEVER_ENTER,        false },
+-    { "never-fwready",      ACE_FAULT_NEVER_FWREADY,      false },
+-    { "never-reply",        ACE_FAULT_NEVER_REPLY,        false },
+-    { "drop-requests",      ACE_FAULT_DROP_REQUESTS,      false },
+-    { "halt-rom",           ACE_FAULT_HALT_ROM,           true  },
+-    { "halt-fw",            ACE_FAULT_HALT_FW,            true  },
+-    { "crash-notification", ACE_FAULT_CRASH_NOTIFICATION, false },
+-    { "abi",                ACE_FAULT_ABI,                true  },
+-    { "ipc-status",         ACE_FAULT_IPC_STATUS,         true  },
+-    { "bad-tuples",         ACE_FAULT_BAD_TUPLES,         false },
+-    { "truncated-reply",    ACE_FAULT_TRUNCATED_REPLY,    false },
+-    { "version-shift",      ACE_FAULT_VERSION_SHIFT,      false },
+-    { "window-read-fail",   ACE_FAULT_WINDOW_READ_FAIL,   false },
++    { "none",               ACE_FAULT_NONE,               ACE_ARG_NONE },
++    { "never-power",        ACE_FAULT_NEVER_POWER,        ACE_ARG_NONE },
++    { "never-ack",          ACE_FAULT_NEVER_ACK,          ACE_ARG_NONE },
++    { "never-ready",        ACE_FAULT_NEVER_READY,        ACE_ARG_NONE },
++    { "never-enter",        ACE_FAULT_NEVER_ENTER,        ACE_ARG_NONE },
++    { "never-fwready",      ACE_FAULT_NEVER_FWREADY,      ACE_ARG_NONE },
++    { "never-reply",        ACE_FAULT_NEVER_REPLY,        ACE_ARG_OPTIONAL },
++    { "drop-requests",      ACE_FAULT_DROP_REQUESTS,      ACE_ARG_NONE },
++    { "halt-rom",           ACE_FAULT_HALT_ROM,           ACE_ARG_REQUIRED },
++    { "halt-fw",            ACE_FAULT_HALT_FW,            ACE_ARG_REQUIRED },
++    { "crash-notification", ACE_FAULT_CRASH_NOTIFICATION, ACE_ARG_NONE },
++    { "abi",                ACE_FAULT_ABI,                ACE_ARG_REQUIRED },
++    { "ipc-status",         ACE_FAULT_IPC_STATUS,         ACE_ARG_REQUIRED },
++    { "bad-tuples",         ACE_FAULT_BAD_TUPLES,         ACE_ARG_NONE },
++    { "truncated-reply",    ACE_FAULT_TRUNCATED_REPLY,    ACE_ARG_NONE },
++    { "version-shift",      ACE_FAULT_VERSION_SHIFT,      ACE_ARG_NONE },
++    { "window-read-fail",   ACE_FAULT_WINDOW_READ_FAIL,   ACE_ARG_NONE },
+ };
+ 
+ /* PCI identities of the ACE 1.0 controllers the host drivers know (the
+@@ -209,6 +217,8 @@ struct IntelHDAAceState {
+     char *fault;                 /* "name" or "name=value" */
+     AceFault fault_id;
+     uint32_t fault_arg;
++    bool fault_typed;            /* the fault names one message type */
++    uint32_t fault_type;         /* ... this one (bits 28:24 of the primary) */
+ };
+ 
+ static void ace_fw_ready(IntelHDAAceState *s);
+@@ -957,6 +967,14 @@ static bool ace_is_pipeline_msg(bool module_msg, uint32_t type)
+                            type == ACE_IPC4_GLB_SET_PIPELINE_STATE);
+ }
+ 
++/* whether the fault of the ipc-status / never-reply family applies to a
++ * message of this type: a fault that names a type applies to it alone, one
++ * that does not applies to every message */
++static bool ace_fault_applies(IntelHDAAceState *s, uint32_t type)
++{
++    return !s->fault_typed || s->fault_type == type;
++}
++
+ static void ace_reply_timer_cb(void *opaque)
+ {
+     IntelHDAAceState *s = opaque;
+@@ -981,7 +999,8 @@ static void ace_reply_timer_cb(void *opaque)
+     } else {
+         status = ACE_IPC4_UNKNOWN_MESSAGE_TYPE;
+     }
+-    injected = s->fault_id == ACE_FAULT_IPC_STATUS;
++    injected = s->fault_id == ACE_FAULT_IPC_STATUS &&
++               ace_fault_applies(s, type);
+     if (injected) {
+         status = s->fault_arg;
+     }
+@@ -1033,7 +1052,7 @@ static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
+     }
+     trace_ace_ipc("request", primary, ext);
+     if (s->fault_id == ACE_FAULT_DROP_REQUESTS ||
+-        s->fault_id == ACE_FAULT_NEVER_REPLY) {
++        (s->fault_id == ACE_FAULT_NEVER_REPLY && ace_fault_applies(s, type))) {
+         /* the message is dropped: named by its type, so that a fault which
+          * names one type shows which requests it took */
+         g_autofree char *dir = g_strdup_printf(
+@@ -1385,10 +1404,31 @@ static const MemoryRegionOps ace_window_ops[2] = {
+ /* --------------------------------------------------------------------- */
+ /* run-time properties: the fault injector and the delay scale           */
+ 
++/* a message type as the typed faults name it: bits 28:24 of the primary */
++static bool ace_parse_type(const char *text, uint32_t *type)
++{
++    char *end;
++    unsigned long value;
++
++    if (*text == '\0') {
++        return false;
++    }
++    value = strtoul(text, &end, 0);
++    if (*end != '\0' ||
++        value > (ACE_IPC4_MSG_TYPE_MASK >> ACE_IPC4_MSG_TYPE_SHIFT)) {
++        return false;
++    }
++    *type = value;
++    return true;
++}
++
+ static void ace_apply_fault(IntelHDAAceState *s, const char *value, Error **errp)
+ {
+     g_autofree char *base = NULL;
+     const char *arg = strchr(value, '=');
++    const char *type = NULL;    /* the <type> of a value that names one */
++    AceFault fault;
++    uint32_t fault_arg = 0, fault_type = 0;
+     size_t i;
+ 
+     base = arg ? g_strndup(value, arg - value) : g_strdup(value);
+@@ -1401,13 +1441,46 @@ static void ace_apply_fault(IntelHDAAceState *s, const char *value, Error **errp
+         error_setg(errp, "intel-hda-ace: unknown fault '%s'", value);
+         return;
+     }
+-    if (ace_faults[i].takes_arg != (arg != NULL)) {
+-        error_setg(errp, "intel-hda-ace: fault '%s' %s a value", base,
+-                   ace_faults[i].takes_arg ? "needs (=number)" : "takes no");
++    fault = ace_faults[i].id;
++    if (ace_faults[i].arg == ACE_ARG_NONE && arg) {
++        error_setg(errp, "intel-hda-ace: fault '%s' takes no value", base);
++        return;
++    }
++    if (ace_faults[i].arg == ACE_ARG_REQUIRED && !arg) {
++        error_setg(errp, "intel-hda-ace: fault '%s' needs a value (%s)", base,
++                   fault == ACE_FAULT_IPC_STATUS ?
++                   "=<status>, or =<status>:<type> for one message type" :
++                   "=<number>");
+         return;
+     }
+-    s->fault_id = ace_faults[i].id;
+-    s->fault_arg = arg ? (uint32_t)strtoul(arg + 1, NULL, 0) : 0;
++    if (arg) {
++        if (fault == ACE_FAULT_IPC_STATUS) {
++            /* ipc-status=<status>: every reply; ipc-status=<status>:<type>:
++             * the replies of that message type alone */
++            g_autofree char *status = NULL;
++            const char *colon = strchr(arg + 1, ':');
++
++            status = colon ? g_strndup(arg + 1, colon - arg - 1)
++                           : g_strdup(arg + 1);
++            fault_arg = (uint32_t)strtoul(status, NULL, 0);
++            type = colon ? colon + 1 : NULL;
++        } else if (fault == ACE_FAULT_NEVER_REPLY) {
++            /* never-reply: every request; never-reply=<type>: the requests
++             * of that message type alone */
++            type = arg + 1;
++        } else {
++            fault_arg = (uint32_t)strtoul(arg + 1, NULL, 0);
++        }
++        if (type && !ace_parse_type(type, &fault_type)) {
++            error_setg(errp, "intel-hda-ace: fault '%s': '%s' is not a message "
++                       "type (0 to 31)", base, type);
++            return;
++        }
++    }
++    s->fault_id = fault;
++    s->fault_arg = fault_arg;
++    s->fault_typed = type != NULL;
++    s->fault_type = fault_type;
+     g_free(s->fault);
+     s->fault = g_strdup(value);
+     trace_ace_payload_check(value, true);
+-- 
+2.56.1
+

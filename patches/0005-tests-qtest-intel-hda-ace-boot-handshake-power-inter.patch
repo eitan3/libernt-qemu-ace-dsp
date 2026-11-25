@@ -1,7 +1,7 @@
 From df24d04b8bbaf4240e77b6515db407090149ffb6 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 10:33:00 +0200
-Subject: [PATCH 05/10] tests/qtest: intel-hda-ace boot handshake, power,
+Subject: [PATCH 05/14] tests/qtest: intel-hda-ace boot handshake, power,
  interrupt and fault tests
 
 Level-0 acceptance of the ACE audio DSP model without an OS: enumeration

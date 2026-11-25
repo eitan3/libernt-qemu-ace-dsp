@@ -1,0 +1,452 @@
+From 4e2eb4d8c23e2f90b2d8e465c8b49a831b227bbf Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 08:01:55 +0200
+Subject: [PATCH 11/14] hw/audio: intel-hda-ace: the pipeline table (create,
+ set-state, delete)
+
+Once the firmware runs, the three pipeline messages of IPC4 -- create
+pipeline (17), set pipeline state (19) and delete pipeline (18) -- are
+parsed as the IPC4 header lays them out (instance at primary 23:16,
+priority at 15:11, memory pages at 10:0; core and the low-power flag in
+the extension; the state at primary 15:0), kept in a table by instance id
+and answered after the FW_CONFIG reply's delay with the request's type,
+the reply direction and a status.
+
+The plan (P3, 5.5 and 8 C1) gives one rule of the firmware's state machine,
+which the model judges: a pipeline must be paused before it can run, and
+any other pipeline asked to run answers status 5.  Every other transition
+is tracked as asked (the plan gives no rule for it: INFO_NEEDED).  The
+answers the plan does not fix are model values: a set-state or delete of a
+pipeline that does not exist answers 9 (IPC4_INVALID_RESOURCE_ID), a second
+create of an id answers 10 (IPC4_RESOURCE_ID_EXISTS), an instance id of 0
+(the plan's R-G) or past the pipeline count of the FW_CONFIG reply answers 1
+(IPC4_ERROR_INVALID_PARAM), the multi-pipeline form of set-state answers 7
+(IPC4_INVALID_REQUEST), and a new pipeline is tracked as uninitialized.
+
+The table starts empty with every firmware start and goes with its power.
+Every reply is now traced decoded with its type and status (ace_ipc_msg),
+and a request a fault drops is traced with its type, so a log shows every
+message the host sent and what the firmware answered.
+---
+ docs/system/devices/intel-hda-ace.rst |  19 ++-
+ hw/audio/intel-hda-ace-regs.h         |  46 ++++++
+ hw/audio/intel-hda-ace.c              | 203 +++++++++++++++++++++++++-
+ hw/audio/trace-events                 |   1 +
+ 4 files changed, 266 insertions(+), 3 deletions(-)
+
+diff --git a/docs/system/devices/intel-hda-ace.rst b/docs/system/devices/intel-hda-ace.rst
+index a9c3c55fd..5fcb298f3 100644
+--- a/docs/system/devices/intel-hda-ace.rst
++++ b/docs/system/devices/intel-hda-ace.rst
+@@ -60,6 +60,21 @@ the host has set every enable (the register the interrupt pointer names,
+ the host IPC enable, the IPC block's busy/done enables) and the
+ controller's INTCTL gates it like any other source (INTSTS bit 30).
+ 
++The pipeline table: once the firmware runs, the three pipeline messages of
++IPC4 -- create pipeline (17), set pipeline state (19) and delete pipeline
++(18) -- are tracked by instance id and answered after the same 50 us with
++the request's type, the reply direction and a status: 0, or 5 when a
++pipeline is asked to run before it was paused (the one transition the
++model judges; every other transition is tracked as asked).  A set-state or
++delete for a pipeline that does not exist answers 9, a second create of an
++id answers 10, an instance id of 0 or past the pipeline count of the
++FW_CONFIG reply (16) answers 1, the multi-pipeline form of set-state
++answers 7: these numbers and the state a new pipeline is tracked in
++(uninitialized) are model values.  Every reply is traced decoded, e.g.
++``IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused ->
++running``, and a request a fault drops is traced with its type:
++``IPC request dropped (set-pipeline-state) primary 0x91310004 ext 0x00000000``.
++
+ Properties
+ ----------
+ 
+@@ -101,7 +116,9 @@ the stream runs, FW_READY 200 us later, the firmware's status word 2 ms
+ after entry, a reply 50 us after a request), the
+ ROM info word 0x0120315A and the firmware configuration constants of the
+ reply (4096/4096-byte mailboxes, 128 KiB trace log, 16 pipelines, 4
+-libraries).  Traces print them as "(model value)".
++libraries), and the pipeline table's answers (the status numbers other
++than the plan's 5, the state a new pipeline is tracked in, the table
++vanishing with the firmware's power).  Traces print them as "(model value)".
+ 
+ Tracing
+ -------
+diff --git a/hw/audio/intel-hda-ace-regs.h b/hw/audio/intel-hda-ace-regs.h
+index abaaaa242..93e374c73 100644
+--- a/hw/audio/intel-hda-ace-regs.h
++++ b/hw/audio/intel-hda-ace-regs.h
+@@ -174,6 +174,42 @@
+ #define ACE_IPC4_GLB_ROM_CONTROL         1
+ #define ACE_IPC4_GLB_NOTIFICATION        27
+ 
++/* --------------------------------------------------------------------- */
++/* The pipeline messages.  Studied: Linux v6.12                           */
++/* include/sound/sof/ipc4/header.h:137-145 (the pipeline states) and       */
++/* :170-200 (struct sof_ipc4_pipeline_create, the state change; BSD-3 /    */
++/* GPL-2.0).  Global messages: their target bit is 0.                      */
++/* --------------------------------------------------------------------- */
++
++#define ACE_IPC4_GLB_CREATE_PIPELINE     17
++#define ACE_IPC4_GLB_DELETE_PIPELINE     18
++#define ACE_IPC4_GLB_SET_PIPELINE_STATE  19
++
++/* create pipeline: primary = instance (23:16) | priority (15:11) | memory
++ * pages (10:0); extension = core (23:20) | low-power flag (0) */
++#define ACE_IPC4_PIPE_INSTANCE_SHIFT     16 /* bits 23:16 */
++#define ACE_IPC4_PIPE_INSTANCE_MASK      0x00ff0000u
++#define ACE_IPC4_PIPE_PRIORITY_SHIFT     11 /* bits 15:11 */
++#define ACE_IPC4_PIPE_PRIORITY_MASK      0x0000f800u
++#define ACE_IPC4_PIPE_MEM_SIZE_SHIFT     0  /* bits 10:0 */
++#define ACE_IPC4_PIPE_MEM_SIZE_MASK      0x000007ffu
++#define ACE_IPC4_PIPE_EXT_CORE_ID_SHIFT  20 /* bits 23:20 */
++#define ACE_IPC4_PIPE_EXT_CORE_ID_MASK   0x00f00000u
++#define ACE_IPC4_PIPE_EXT_LP             (1u << 0)
++
++/* set pipeline state: primary = state (15:0) | instance (23:16); the
++ * extension is 0, or the multi-pipeline flag (0) with the instance ids in
++ * the downlink mailbox (a count, then the ids) */
++#define ACE_IPC4_PIPE_STATE_SHIFT        0  /* bits 15:0 */
++#define ACE_IPC4_PIPE_STATE_MASK         0x0000ffffu
++#define ACE_IPC4_PIPE_STATE_EXT_MULTI    (1u << 0)
++
++#define ACE_IPC4_PIPE_UNINITIALIZED      1
++#define ACE_IPC4_PIPE_RESET              2
++#define ACE_IPC4_PIPE_PAUSED             3
++#define ACE_IPC4_PIPE_RUNNING            4
++#define ACE_IPC4_PIPE_EOS                5
++
+ /* The module-message extension of the FW_CONFIG GET: the parameter id at
+  * bits 29:20 and module 0 / instance 0 in the low bits (0x00700000), as the
+  * P2a facts table records the request the host sends. */
+@@ -194,7 +230,17 @@
+ /* --------------------------------------------------------------------- */
+ 
+ #define ACE_IPC4_SUCCESS                 0
++#define ACE_IPC4_ERROR_INVALID_PARAM     1
+ #define ACE_IPC4_UNKNOWN_MESSAGE_TYPE    2
++#define ACE_IPC4_INVALID_REQUEST         7
++#define ACE_IPC4_INVALID_RESOURCE_ID     9
++#define ACE_IPC4_RESOURCE_ID_EXISTS      10
++/* The status of an illegal pipeline transition, which the plan (P3, 5.5 and
++ * 8 C1) gives as "status 5 (invalid resource state)": the model answers the
++ * plan's number.  The header names value 5 IPC4_BAD_STATE and value 12
++ * IPC4_INVALID_RESOURCE_STATE -- which one the firmware returns is
++ * INFO_NEEDED (checked on silicon at C6). */
++#define ACE_IPC4_ILLEGAL_TRANSITION      5
+ 
+ /* --------------------------------------------------------------------- */
+ /* Firmware configuration parameters (TLVs of the FW_CONFIG reply).        */
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 9a6782d95..714b0f1f2 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -26,7 +26,9 @@
+  * carries the ACE 1.0 DSP registers and SRAM windows, the processing-power
+  * and software-position-in-buffer capabilities the DSP drivers walk, and the
+  * ROM boot handshake, the code-loader stream consumer and the IPC4
+- * receive/reply path a host driver exercises when it boots the firmware.
++ * receive/reply path a host driver exercises when it boots the firmware,
++ * and the pipeline table the firmware keeps of the host's pipelines once
++ * it runs.
+  *
+  * What it simulates is a *model*: the firmware is a state machine driven by
+  * QEMU virtual-clock timers, not a DSP executing the streamed image.  Every
+@@ -156,6 +158,13 @@ static const AcePersonality ace_personalities[] = {
+ #define ACE_US_IPC_REPLY           50
+ #define ACE_PAYLOAD_MAX (16 * 1024 * 1024)
+ 
++/* one entry of the firmware's pipeline table: the host creates a pipeline
++ * by its instance id and moves it between the IPC4 pipeline states */
++typedef struct AcePipeline {
++    bool used;
++    uint32_t state;             /* ACE_IPC4_PIPE_* */
++} AcePipeline;
++
+ struct IntelHDAAceState {
+     IntelHDAState hda;
+ 
+@@ -190,6 +199,7 @@ struct IntelHDAAceState {
+     uint32_t payload_len;
+     uint16_t fw_version[4];      /* major, minor, hotfix, build of the image */
+     bool have_version;
++    AcePipeline ppl[ACE_MODEL_MAX_PIPELINES];   /* by instance id - 1 */
+ 
+     /* properties */
+     uint64_t bar4_size;
+@@ -202,6 +212,7 @@ struct IntelHDAAceState {
+ };
+ 
+ static void ace_fw_ready(IntelHDAAceState *s);
++static void ace_ppl_clear(IntelHDAAceState *s);
+ 
+ static const uint64_t ace_window_base[2] = { ACE_SRAM_WINDOW0, ACE_SRAM_WINDOW1 };
+ 
+@@ -375,6 +386,7 @@ static void ace_power_off(IntelHDAAceState *s)
+     s->xtddy = 0;
+     s->fsr = 0;
+     s->rom_error = 0;
++    ace_ppl_clear(s);
+     ace_set_state(s, ACE_OFF);
+     ace_update_irq(s);
+ }
+@@ -429,6 +441,7 @@ static void ace_power_timer_cb(void *opaque)
+             s->xida = 0;
+             s->xtda = 0;
+             s->xtddy = 0;
++            ace_ppl_clear(s);
+             ace_set_state(s, ACE_OFF);
+             ace_update_irq(s);
+         }
+@@ -532,6 +545,7 @@ static void ace_rom_timer_cb(void *opaque)
+          * the firmware's ipc4_fw_status_reg.running) */
+         ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);
+         ace_set_state(s, ACE_RUNNING);
++        ace_ppl_clear(s);      /* the firmware starts with no pipelines */
+         ace_arm(s->rom_timer, ace_delay(s, ACE_US_FW_READY));
+         return;
+     case 5:
+@@ -784,6 +798,165 @@ static uint32_t ace_fw_config_reply(IntelHDAAceState *s)
+     return p;
+ }
+ 
++/* --------------------------------------------------------------------- */
++/* the pipeline table                                                     */
++
++/* What the firmware tracks of the host's pipelines: one entry per instance
++ * id.  The id is the host's choice, assigned from 1 in creation order (the
++ * plan's R-G: 0 is deliberately unused); the table holds the pipeline count
++ * of the FW_CONFIG reply.  The plan gives one rule of the firmware's state
++ * machine -- a pipeline must be paused before it can run -- and leaves every
++ * other transition to silicon (INFO_NEEDED), so the model tracks the others
++ * without judging them.  The answers the plan does not fix are model values
++ * (the README's model-values table lists them). */
++
++static void ace_ppl_clear(IntelHDAAceState *s)
++{
++    memset(s->ppl, 0, sizeof(s->ppl));
++}
++
++static AcePipeline *ace_ppl_find(IntelHDAAceState *s, uint32_t id)
++{
++    if (id < 1 || id > ACE_MODEL_MAX_PIPELINES || !s->ppl[id - 1].used) {
++        return NULL;
++    }
++    return &s->ppl[id - 1];
++}
++
++static const char *ace_ppl_state_name(uint32_t state)
++{
++    static const char *const names[] = {
++        [ACE_IPC4_PIPE_UNINITIALIZED] = "uninitialized",
++        [ACE_IPC4_PIPE_RESET] = "reset",
++        [ACE_IPC4_PIPE_PAUSED] = "paused",
++        [ACE_IPC4_PIPE_RUNNING] = "running",
++        [ACE_IPC4_PIPE_EOS] = "end-of-stream",
++    };
++
++    return state < ARRAY_SIZE(names) && names[state] ? names[state] : "invalid";
++}
++
++/* the status of a pipeline message, with the table updated as the firmware
++ * would: create adds the entry (in the uninitialized state: a model value),
++ * set-state moves it, delete removes it.  *detail receives the decoded
++ * message for the trace. */
++static uint32_t ace_pipeline_status(IntelHDAAceState *s, uint32_t type,
++                                    uint32_t primary, uint32_t ext,
++                                    char **detail)
++{
++    uint32_t id = (primary & ACE_IPC4_PIPE_INSTANCE_MASK) >>
++                  ACE_IPC4_PIPE_INSTANCE_SHIFT;
++    uint32_t status = ACE_IPC4_SUCCESS;
++    AcePipeline *p = ace_ppl_find(s, id);
++
++    switch (type) {
++    case ACE_IPC4_GLB_CREATE_PIPELINE:
++        if (id < 1 || id > ACE_MODEL_MAX_PIPELINES) {
++            *detail = g_strdup_printf("instance %u: not a pipeline id (1 to %u)",
++                                      id, ACE_MODEL_MAX_PIPELINES);
++            return ACE_IPC4_ERROR_INVALID_PARAM;
++        }
++        if (p) {
++            *detail = g_strdup_printf("pipeline %u exists (state %s)", id,
++                                      ace_ppl_state_name(p->state));
++            return ACE_IPC4_RESOURCE_ID_EXISTS;
++        }
++        p = &s->ppl[id - 1];
++        p->used = true;
++        p->state = ACE_IPC4_PIPE_UNINITIALIZED;
++        *detail = g_strdup_printf("pipeline %u created: priority %u, %u pages, "
++                                  "core %u, low-power %u", id,
++                                  (primary & ACE_IPC4_PIPE_PRIORITY_MASK) >>
++                                  ACE_IPC4_PIPE_PRIORITY_SHIFT,
++                                  (primary & ACE_IPC4_PIPE_MEM_SIZE_MASK) >>
++                                  ACE_IPC4_PIPE_MEM_SIZE_SHIFT,
++                                  (ext & ACE_IPC4_PIPE_EXT_CORE_ID_MASK) >>
++                                  ACE_IPC4_PIPE_EXT_CORE_ID_SHIFT,
++                                  ext & ACE_IPC4_PIPE_EXT_LP);
++        break;
++    case ACE_IPC4_GLB_SET_PIPELINE_STATE: {
++        uint32_t state = primary & ACE_IPC4_PIPE_STATE_MASK;
++
++        if (ext & ACE_IPC4_PIPE_STATE_EXT_MULTI) {
++            /* the list of pipelines in the downlink mailbox: not modelled
++             * (the plan's driver sends one pipeline per message) */
++            *detail = g_strdup_printf("pipeline %u: the multi-pipeline form "
++                                      "is not modelled", id);
++            return ACE_IPC4_INVALID_REQUEST;
++        }
++        if (!p) {
++            *detail = g_strdup_printf("pipeline %u: no such pipeline", id);
++            return ACE_IPC4_INVALID_RESOURCE_ID;
++        }
++        if (state < ACE_IPC4_PIPE_UNINITIALIZED || state > ACE_IPC4_PIPE_EOS) {
++            *detail = g_strdup_printf("pipeline %u: state %u is not a pipeline "
++                                      "state", id, state);
++            return ACE_IPC4_ERROR_INVALID_PARAM;
++        }
++        if (state == ACE_IPC4_PIPE_RUNNING && p->state != ACE_IPC4_PIPE_PAUSED) {
++            /* the plan's rule: a pipeline must be paused before it can run */
++            *detail = g_strdup_printf("pipeline %u is %s: running refused, "
++                                      "not paused first", id,
++                                      ace_ppl_state_name(p->state));
++            return ACE_IPC4_ILLEGAL_TRANSITION;
++        }
++        *detail = g_strdup_printf("pipeline %u: %s -> %s", id,
++                                  ace_ppl_state_name(p->state),
++                                  ace_ppl_state_name(state));
++        p->state = state;
++        break;
++    }
++    case ACE_IPC4_GLB_DELETE_PIPELINE:
++        if (!p) {
++            *detail = g_strdup_printf("pipeline %u: no such pipeline", id);
++            return ACE_IPC4_INVALID_RESOURCE_ID;
++        }
++        *detail = g_strdup_printf("pipeline %u deleted (was %s)", id,
++                                  ace_ppl_state_name(p->state));
++        p->used = false;
++        break;
++    default:
++        g_assert_not_reached();
++    }
++    return status;
++}
++
++/* the IPC4 message types by name, for the trace: the two enumerations of
++ * the header (LINUX-H header.h), global (target 0) and module (target 1) */
++static const char *ace_msg_name(bool module_msg, uint32_t type)
++{
++    static const char *const global_names[] = {
++        [0] = "boot-config", [1] = "rom-control", [2] = "ipc-gateway",
++        [13] = "perf-measurements", [14] = "chain-dma",
++        [15] = "load-multiple-modules", [16] = "unload-multiple-modules",
++        [17] = "create-pipeline", [18] = "delete-pipeline",
++        [19] = "set-pipeline-state", [20] = "get-pipeline-state",
++        [21] = "get-pipeline-context-size", [22] = "save-pipeline",
++        [23] = "restore-pipeline", [24] = "load-library",
++        [25] = "load-library-prepare", [26] = "internal",
++        [27] = "notification",
++    };
++    static const char *const module_names[] = {
++        [0] = "init-instance", [1] = "config-get", [2] = "config-set",
++        [3] = "large-config-get", [4] = "large-config-set", [5] = "bind",
++        [6] = "unbind", [7] = "set-dx", [8] = "set-d0ix",
++        [9] = "enter-module-restore", [10] = "exit-module-restore",
++        [11] = "delete-instance",
++    };
++    const char *const *names = module_msg ? module_names : global_names;
++    size_t count = module_msg ? ARRAY_SIZE(module_names) : ARRAY_SIZE(global_names);
++    const char *name = type < count ? names[type] : NULL;
++
++    return name ? name : "unknown";
++}
++
++static bool ace_is_pipeline_msg(bool module_msg, uint32_t type)
++{
++    return !module_msg && (type == ACE_IPC4_GLB_CREATE_PIPELINE ||
++                           type == ACE_IPC4_GLB_DELETE_PIPELINE ||
++                           type == ACE_IPC4_GLB_SET_PIPELINE_STATE);
++}
++
+ static void ace_reply_timer_cb(void *opaque)
+ {
+     IntelHDAAceState *s = opaque;
+@@ -795,16 +968,21 @@ static void ace_reply_timer_cb(void *opaque)
+                     ((ext >> ACE_IPC4_FW_CONFIG_PARAM_SHIFT) & 0x3ff) ==
+                     ACE_IPC4_FW_CONFIG_PARAM &&
+                     (ext & 0x000fffff) == 0;   /* module 0, instance 0 */
++    bool injected;
++    g_autofree char *detail = NULL;
+ 
+     if (s->state != ACE_RUNNING) {
+         return;
+     }
+     if (fw_config) {
+         ace_fw_config_reply(s);
++    } else if (ace_is_pipeline_msg(module_msg, type)) {
++        status = ace_pipeline_status(s, type, primary, ext, &detail);
+     } else {
+         status = ACE_IPC4_UNKNOWN_MESSAGE_TYPE;
+     }
+-    if (s->fault_id == ACE_FAULT_IPC_STATUS) {
++    injected = s->fault_id == ACE_FAULT_IPC_STATUS;
++    if (injected) {
+         status = s->fault_arg;
+     }
+     /* the reply keeps the target and the type, sets the reply direction and
+@@ -812,6 +990,19 @@ static void ace_reply_timer_cb(void *opaque)
+     ace_set_reply(s, (primary & (ACE_IPC4_MSG_TARGET_MASK | ACE_IPC4_MSG_TYPE_MASK)) |
+                   ACE_IPC4_MSG_DIR_REPLY | (status & ACE_IPC4_REPLY_STATUS_MASK),
+                   0);
++    /* the message decoded, with the status it was answered with */
++    if (!detail) {
++        detail = g_strdup(fw_config ? "FW_CONFIG" : "not handled");
++    }
++    if (injected) {
++        char *decoded = g_steal_pointer(&detail);
++
++        detail = g_strdup_printf("%s; status %u injected by the fault", decoded,
++                                 s->fault_arg);
++        g_free(decoded);
++    }
++    trace_ace_ipc_msg("reply", type, ace_msg_name(module_msg, type), status,
++                      detail);
+ }
+ 
+ /* a host -> DSP request: the primary was written with BUSY set */
+@@ -843,6 +1034,13 @@ static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
+     trace_ace_ipc("request", primary, ext);
+     if (s->fault_id == ACE_FAULT_DROP_REQUESTS ||
+         s->fault_id == ACE_FAULT_NEVER_REPLY) {
++        /* the message is dropped: named by its type, so that a fault which
++         * names one type shows which requests it took */
++        g_autofree char *dir = g_strdup_printf(
++            "request dropped (%s)",
++            ace_msg_name(primary & ACE_IPC4_MSG_TARGET_MASK, type));
++
++        trace_ace_ipc(dir, primary, ext);
+         return;
+     }
+     s->reply_primary = primary;
+@@ -1287,6 +1485,7 @@ static void intel_hda_ace_reset(DeviceState *dev)
+     s->purge_pending = false;
+     s->reply_pending = false;
+     s->notif_pending = false;
++    ace_ppl_clear(s);
+     s->state = ACE_OFF;
+     s->hda.ext_sts = 0;
+     g_free(s->payload);
+diff --git a/hw/audio/trace-events b/hw/audio/trace-events
+index a50ff0e80..796d76a86 100644
+--- a/hw/audio/trace-events
++++ b/hw/audio/trace-events
+@@ -74,5 +74,6 @@ ace_fsr(uint32_t state, uint32_t wait, uint32_t module, bool halted) "FSR state
+ ace_rom_consume(uint32_t tag, uint64_t bytes, uint32_t spib) "ROM consumes stream %u: %" PRIu64 " bytes (SPIB %u)"
+ ace_payload_check(const char *rule, bool ok) "ROM rule %s: %d"
+ ace_ipc(const char *dir, uint32_t primary, uint32_t ext) "IPC %s primary 0x%08x ext 0x%08x"
++ace_ipc_msg(const char *dir, uint32_t type, const char *name, uint32_t status, const char *detail) "IPC %s type %u (%s) status %u: %s"
+ ace_irq(int level, bool msi) "DSP interrupt %d (msi %d)"
+ ace_state(const char *from, const char *to) "state %s -> %s"
+-- 
+2.56.1
+

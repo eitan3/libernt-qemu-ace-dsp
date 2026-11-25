@@ -1,0 +1,269 @@
+# The pipeline table in the ace_ipc trace (the qtest run of qtest.txt; the model of patches 0001-0014)
+#
+# Verbatim ace_* lines of the full qtest transcript (qtest-0001-0014.txt.gz), the number being that transcript's line;
+# in the register lines only the IPC registers are kept (HFIPCXIDR the request, HFIPCXIDDY its extension, HFIPCXIDA the
+# reply, HFIPCXTDDY the reply extension). The request is traced without its BUSY bit (the register write line shows it);
+# a reply read without DONE is the previous reply's message bits left in the register after the host's acknowledgement.
+# A reply comes 50 us after its request (model value); each exchange below is request, reply, reply read, acknowledgement.
+
+## 1. Case pipeline-table: one create -> state -> delete sequence (the plan's self-test order)
+
+1270	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1271	ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+1272	ace_reg_read BAR4 +0x73214 -> 0x61000000 HFIPCXIDA
+1273	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1274	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1275	ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+1276	ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+1277	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1278	ace_reg_read BAR4 +0x73214 -> 0x31000000 HFIPCXIDA
+1279	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1280	ace_ipc IPC request primary 0x13010003 ext 0x00000000
+1281	ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+1282	ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+1283	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+1284	ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+1285	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1286	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1287	ace_ipc IPC request primary 0x13010004 ext 0x00000000
+1288	ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+1289	ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+1290	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+1291	ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+1292	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1293	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1294	ace_ipc IPC request primary 0x13010003 ext 0x00000000
+1295	ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+1296	ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+1297	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> paused
+1298	ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+1299	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1300	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1301	ace_ipc IPC request primary 0x13010002 ext 0x00000000
+1302	ace_reg_write BAR4 +0x73210 <- 0x93010002 HFIPCXIDR
+1303	ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+1304	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> reset
+1305	ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+1306	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1307	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1308	ace_ipc IPC request primary 0x12010000 ext 0x00000000
+1309	ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+1310	ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+1311	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was reset)
+1312	ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+1313	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+
+## 2. The rest of case pipeline-table: the table's rules, then the power cycle
+
+1315	ace_ipc IPC request primary 0x13010003 ext 0x00000000
+1316	ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+1317	ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+1318	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 1: no such pipeline
+1319	ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+1320	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1321	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1322	ace_ipc IPC request primary 0x12010000 ext 0x00000000
+1323	ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+1324	ace_ipc IPC reply primary 0xb2000009 ext 0x00000000
+1325	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 9: pipeline 1: no such pipeline
+1326	ace_reg_read BAR4 +0x73214 -> 0xb2000009 HFIPCXIDA
+1327	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1328	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1329	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1330	ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+1331	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1332	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1333	ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+1334	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1335	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1336	ace_ipc IPC request primary 0x13020003 ext 0x00000000
+1337	ace_reg_write BAR4 +0x73210 <- 0x93020003 HFIPCXIDR
+1338	ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+1339	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 2: no such pipeline
+1340	ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+1341	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1342	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1343	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1344	ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+1345	ace_ipc IPC reply primary 0xb100000a ext 0x00000000
+1346	ace_ipc_msg IPC reply type 17 (create-pipeline) status 10: pipeline 1 exists (state uninitialized)
+1347	ace_reg_read BAR4 +0x73214 -> 0xb100000a HFIPCXIDA
+1348	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1349	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1350	ace_ipc IPC request primary 0x11020000 ext 0x00000000
+1351	ace_reg_write BAR4 +0x73210 <- 0x91020000 HFIPCXIDR
+1352	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1353	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 2 created: priority 0, 0 pages, core 0, low-power 0
+1354	ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+1355	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1356	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1357	ace_ipc IPC request primary 0x11000000 ext 0x00000000
+1358	ace_reg_write BAR4 +0x73210 <- 0x91000000 HFIPCXIDR
+1359	ace_ipc IPC reply primary 0xb1000001 ext 0x00000000
+1360	ace_ipc_msg IPC reply type 17 (create-pipeline) status 1: instance 0: not a pipeline id (1 to 16)
+1361	ace_reg_read BAR4 +0x73214 -> 0xb1000001 HFIPCXIDA
+1362	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1363	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1364	ace_ipc IPC request primary 0x11110000 ext 0x00000000
+1365	ace_reg_write BAR4 +0x73210 <- 0x91110000 HFIPCXIDR
+1366	ace_ipc IPC reply primary 0xb1000001 ext 0x00000000
+1367	ace_ipc_msg IPC reply type 17 (create-pipeline) status 1: instance 17: not a pipeline id (1 to 16)
+1368	ace_reg_read BAR4 +0x73214 -> 0xb1000001 HFIPCXIDA
+1369	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1370	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1371	ace_ipc IPC request primary 0x11100000 ext 0x00000000
+1372	ace_reg_write BAR4 +0x73210 <- 0x91100000 HFIPCXIDR
+1373	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1374	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 16 created: priority 0, 0 pages, core 0, low-power 0
+1375	ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+1376	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1377	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1378	ace_ipc IPC request primary 0x13100003 ext 0x00000000
+1379	ace_reg_write BAR4 +0x73210 <- 0x93100003 HFIPCXIDR
+1380	ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+1381	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 16: uninitialized -> paused
+1382	ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+1383	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1384	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1385	ace_ipc IPC request primary 0x12100000 ext 0x00000000
+1386	ace_reg_write BAR4 +0x73210 <- 0x92100000 HFIPCXIDR
+1387	ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+1388	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 16 deleted (was paused)
+1389	ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+1390	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1391	ace_reg_write BAR4 +0x73380 <- 0x00100001 HFIPCXIDDY
+1392	ace_ipc IPC request primary 0x11032955 ext 0x00100001
+1393	ace_reg_write BAR4 +0x73210 <- 0x91032955 HFIPCXIDR
+1394	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1395	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 3 created: priority 5, 341 pages, core 1, low-power 1
+1396	ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+1397	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1398	ace_reg_write BAR4 +0x73380 <- 0x00000001 HFIPCXIDDY
+1399	ace_ipc IPC request primary 0x13030004 ext 0x00000001
+1400	ace_reg_write BAR4 +0x73210 <- 0x93030004 HFIPCXIDR
+1401	ace_ipc IPC reply primary 0xb3000007 ext 0x00000000
+1402	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 7: pipeline 3: the multi-pipeline form is not modelled
+1403	ace_reg_read BAR4 +0x73214 -> 0xb3000007 HFIPCXIDA
+1404	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1405	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1406	ace_ipc IPC request primary 0x51040000 ext 0x00000000
+1407	ace_reg_write BAR4 +0x73210 <- 0xd1040000 HFIPCXIDR
+1408	ace_ipc IPC reply primary 0xf1000002 ext 0x00000000
+1409	ace_ipc_msg IPC reply type 17 (unknown) status 2: not handled
+1410	ace_reg_read BAR4 +0x73214 -> 0xf1000002 HFIPCXIDA
+1411	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1421	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1422	ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+1431	ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+1432	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+1433	ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+1438	ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+1439	ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+1440	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1441	ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+1466	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1468	ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+1476	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1477	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1478	ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+1479	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1480	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1481	ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+1482	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+1483	ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+1484	ace_ipc IPC request primary 0x13030003 ext 0x00000000
+1485	ace_reg_write BAR4 +0x73210 <- 0x93030003 HFIPCXIDR
+1486	ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+1487	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 3: no such pipeline
+1488	ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+1489	ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+
+## 3. Case pipeline-illegal (the decoded replies only)
+
+1554	ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+1561	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1568	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1 is uninitialized: running refused, not paused first
+1575	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+1582	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+1589	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> reset
+1596	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1 is reset: running refused, not paused first
+1603	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: reset -> end-of-stream
+1610	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: end-of-stream -> uninitialized
+1617	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1 is uninitialized: running refused, not paused first
+1624	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 1: pipeline 1: state 0 is not a pipeline state
+1631	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 1: pipeline 1: state 6 is not a pipeline state
+1638	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was uninitialized)
+1645	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 7: no such pipeline
+
+## 4. Case pipeline-faults: the faults that name one message type (the IPC lines only)
+
+1654	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1665	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+1699	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1710	ace_ipc IPC request primary 0x41000000 ext 0x00700000
+1712	ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+1713	ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+1717	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1719	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1720	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1724	ace_ipc IPC request primary 0x13010003 ext 0x00000000
+1726	ace_ipc IPC reply primary 0xb3000005 ext 0x00000000
+1727	ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1: uninitialized -> paused; status 5 injected by the fault
+1731	ace_ipc IPC request primary 0x12010000 ext 0x00000000
+1733	ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+1734	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was paused)
+1742	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1753	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+1787	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1798	ace_ipc IPC request primary 0x41000000 ext 0x00700000
+1800	ace_ipc IPC reply primary 0xe1000007 ext 0x00000000
+1801	ace_ipc_msg IPC reply type 1 (config-get) status 7: FW_CONFIG; status 7 injected by the fault
+1805	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1807	ace_ipc IPC reply primary 0xb1000007 ext 0x00000000
+1808	ace_ipc_msg IPC reply type 17 (create-pipeline) status 7: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0; status 7 injected by the fault
+1812	ace_ipc IPC request primary 0x12010000 ext 0x00000000
+1814	ace_ipc IPC reply primary 0xb2000007 ext 0x00000000
+1815	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 7: pipeline 1 deleted (was uninitialized); status 7 injected by the fault
+1823	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1834	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+1868	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1879	ace_ipc IPC request primary 0x41000000 ext 0x00700000
+1881	ace_ipc IPC reply primary 0xe1000007 ext 0x00000000
+1882	ace_ipc_msg IPC reply type 1 (config-get) status 7: FW_CONFIG; status 7 injected by the fault
+1886	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1888	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1889	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1893	ace_ipc IPC request primary 0x12010000 ext 0x00000000
+1895	ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+1896	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was uninitialized)
+1904	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+1915	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+1949	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+1960	ace_ipc IPC request primary 0x41000000 ext 0x00700000
+1962	ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+1963	ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+1967	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+1969	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+1970	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+1974	ace_ipc IPC request primary 0x13010003 ext 0x00000000
+1975	ace_ipc IPC request dropped (set-pipeline-state) primary 0x13010003 ext 0x00000000
+1980	ace_ipc IPC request primary 0x12010000 ext 0x00000000
+1982	ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+1983	ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was uninitialized)
+1987	ace_ipc IPC request primary 0x13010003 ext 0x00000000
+1988	ace_ipc IPC request dropped (set-pipeline-state) primary 0x13010003 ext 0x00000000
+1996	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+2007	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+2041	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+2052	ace_ipc IPC request primary 0x41000000 ext 0x00700000
+2053	ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+2057	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+2059	ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+2060	ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+2068	ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+2079	ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+2113	ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+2124	ace_ipc IPC request primary 0x41000000 ext 0x00700000
+2125	ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+2129	ace_ipc IPC request primary 0x11010000 ext 0x00000000
+2130	ace_ipc IPC request dropped (create-pipeline) primary 0x11010000 ext 0x00000000

@@ -1,0 +1,119 @@
+From fc39137160d9f0b571fa83487961dc928ec0a30b Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 08:06:33 +0200
+Subject: [PATCH 14/14] tests/qtest: intel-hda-ace: the faults that name one
+ message type
+
+pipeline-faults: ipc-status=5:19 answers set-pipeline-state with 5 while
+FW_CONFIG and the pipeline's create and delete keep their own statuses
+(the plan's VM acceptance row), ipc-status=7:1 does the same to the
+boot's FW_CONFIG, never-reply=19 leaves set-pipeline-state unanswered
+while create and delete are answered, never-reply=1 leaves FW_CONFIG
+unanswered and the pipeline messages not; and the two faults without a
+type still take every reply and every request, the pipeline messages
+included.
+
+Each pinned behaviour has a mutation row in mutation-check.sh.
+---
+ tests/qtest/intel-hda-ace-test.c | 78 +++++++++++++++++++++++++++++++-
+ 1 file changed, 77 insertions(+), 1 deletion(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index a1710872f..e2a263e4f 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -945,6 +945,82 @@ static void test_pipeline_illegal(void)
+     boot_end();
+ }
+ 
++/* 12: the faults that name one message type -- ipc-status=<n>:<type> answers
++ * that type with the status, never-reply=<type> leaves that type unanswered
++ * -- and every other message is answered as without the fault */
++static void test_pipeline_faults(void)
++{
++    /* the plan's VM acceptance row: set-state (19) answers status 5 while
++     * FW_CONFIG (1) and the pipeline's create and delete (17, 18) do not */
++    boot_start(",fault=ipc-status=5:19");
++    boot_running();
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 5));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    boot_end();
++
++    /* ipc-status=<n> without a type, the existing fault: every reply carries
++     * the status, the pipeline messages' too */
++    boot_start(",fault=ipc-status=7");
++    boot_firmware();
++    g_assert_cmpuint(fw_config(), ==, IPC4_REPLY_DONE_OK | 7);
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 7));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 7));
++    boot_end();
++
++    /* ipc-status=<n>:<type> for the boot's own message: FW_CONFIG (type 1)
++     * answers 7, the pipeline messages answer 0 */
++    boot_start(",fault=ipc-status=7:1");
++    boot_firmware();
++    g_assert_cmpuint(fw_config(), ==, IPC4_REPLY_DONE_OK | 7);
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    boot_end();
++
++    /* never-reply=19: the set-state is never answered (20 reply times
++     * later there is nothing), create and delete are; a dropped request
++     * leaves nothing pending, and a refused one would be status 9 */
++    boot_start(",fault=never-reply=19");
++    boot_running();
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_STATE(1, PPL_PAUSED));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_STATE(1, PPL_PAUSED));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    boot_end();
++
++    /* never-reply=1: the boot's FW_CONFIG (type 1) is left unanswered, the
++     * pipeline messages are not */
++    boot_start(",fault=never-reply=1");
++    boot_firmware();
++    w4(ACE_XIDDY, IPC4_FW_CONFIG_EXT);
++    w4(ACE_XIDR, IPC4_FW_CONFIG_REQ);
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    boot_end();
++
++    /* never-reply without a type, the existing fault: the pipeline's
++     * messages are dropped like the boot's */
++    boot_start(",fault=never-reply");
++    boot_firmware();
++    w4(ACE_XIDDY, IPC4_FW_CONFIG_EXT);
++    w4(ACE_XIDR, IPC4_FW_CONFIG_REQ);
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_REQ(IPC4_CREATE_PIPELINE, 1));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    boot_end();
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -960,7 +1036,7 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/faults", test_faults);
+         qtest_add_func("/intel-hda-ace/pipeline-table", test_pipeline_table);
+         qtest_add_func("/intel-hda-ace/pipeline-illegal", test_pipeline_illegal);
+-
++        qtest_add_func("/intel-hda-ace/pipeline-faults", test_pipeline_faults);
+     }
+     return g_test_run();
+ }
+-- 
+2.56.1
+
