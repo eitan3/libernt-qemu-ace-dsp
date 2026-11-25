@@ -15,8 +15,8 @@ only, so a malformed or truncated reply boots `ok`).** What this round also foun
 **environment** limitation of the simulator host that the D2 fix turned from a hang into a
 bounded, named failure — not a driver fault — three places where the *plan's* or TESTING.md's
 expected words differ from what the driver prints (N1–N3), and one matrix row that no longer
-measures what the plan wanted from it (N4), none of them faults. The known R1/R2 items of the
-read-only review are not repeated here.
+measures what the plan wanted from it (N4), none of them faults. R1/R2 of the read-only review are
+only touched where this round adds to them (R1, Task C, at the end).
 
 ## D1 — FIXED in `39e50ba6036` (verified)
 
@@ -186,9 +186,15 @@ at 9.4 s only because no budget fired.) The 3 s edge is measured by `never-enter
 `boot base firmware timeout after 3037514 us`. A row for the edge as planned would need a model
 fault that delays the firmware's entry alone.
 
-## Still unfixed in this image (known from the read-only review, invisible to the model)
+## Still unfixed in this image (known from the read-only review)
 
-R1 (the interrupt-enable offset `HFINTIPPTR` is read before the subsystem is powered — the trace
-shows the read before the SPA write on every D0 entry; the model answers `0x120` at any power
-state) and R2 (no ISR storm guard). Both are on silicon's checklist; Task C below would make R1
-visible to the model if wanted.
+R2 (no ISR storm guard) stays invisible to the model. **R1 is visible since Task C** (patches
+0009/0010, a separate commit after the evidence above): the model now answers `HFINTIPPTR` with
+all ones while the subsystem is unpowered, as a DSP-domain register would. One plain boot with
+that model (`ac3-r1-model`) shows what the driver does with it: the probe logs
+`+0x1108 HFINTIPPTR 0xffffffff`, bounds-checks the pointer (`IntcDspInterruptEnableOffset`,
+hwops.c:287) and so prints no `+0x120 (the interrupt enable register the pointer names)` line;
+the boot reads the pointer again in `FwloadInterruptsEnable` (fwboot.c:301) after power-up,
+gets `0x120`, and is unchanged: `boot ok after 71859 us … 1 DSP interrupts`. So on this boot R1
+has no effect — the two pre-power-up reads (probe and D0 entry) are logged and discarded, not
+used. What remains a silicon question is the unpowered value itself (all ones is a model value).

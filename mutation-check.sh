@@ -17,24 +17,25 @@ R='hw/audio/intel-hda-ace-regs.h'
 
 # name|file|sed expression (applied to the file)|what it breaks
 MUTATIONS=(
-"ack-sense|$C|s/s->xtdr \&= ~ACE_HFIPCXTDR_BUSY;/s->xtdr = s->xtdr;   /* MUTATED *//|the host's acknowledgement of a notification never clears BUSY"
-"done-polarity|$C|s/s->xida \&= ~ACE_HFIPCXIDA_DONE;/s->xida = s->xida;   /* MUTATED *//|the DONE bit is never cleared by the host"
+"ack-sense|$C|s#s->xtdr \&= ~ACE_HFIPCXTDR_BUSY;#s->xtdr = s->xtdr;   /* MUTATED */#|the host's acknowledgement of a notification never clears BUSY"
+"done-polarity|$C|s#s->xida \&= ~ACE_HFIPCXIDA_DONE;#s->xida = s->xida;   /* MUTATED */#|the DONE bit is never cleared by the host"
 "fsr-order|$C|s/ace_set_fsr(s, ACE_ROM_LOAD_FW_CODE_TO_IMR, 0, ACE_FSR_MOD_ROM, false);/ace_set_fsr(s, ACE_ROM_FW_LOADING_DONE, 0, ACE_FSR_MOD_ROM, false);/|the ROM walk emits FW_LOADING_DONE before FW_CODE_TO_IMR"
 "fsr-running|$C|s/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true \/\* running \*\/);/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);/|the firmware never writes its running status word: the FSR stays the ROM's after FW_READY"
 "fsr-entry-running|$C|s/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_ROM, false);/ace_set_fsr(s, ACE_FSR_FW_ENTERED, 0, ACE_FSR_MOD_BASE_FW, true);/|FW_ENTERED carries the running bit in the same instant (the single-instant model the LiberNT driver read as a halt)"
-"spib-cut|$C|s/left = spib ? MIN(spib, total) : total;/left = total;   /* MUTATED *//|SPIB ignored: the ROM consumes the whole buffer"
+"spib-cut|$C|s#left = spib ? MIN(spib, total) : total;#left = total;   /* MUTATED */#|SPIB ignored: the ROM consumes the whole buffer"
 "tag-mask|$R|s/0x00001e00u/0x0000fe00u/|the purge request's tag field read as bits 15:9"
 "cpd-length|$C|s/hdr_len = ace_payload_u8(s, off + ACE_RI_CPD_HEADER_LENGTH);   \/\* a byte \*\//hdr_len = ace_payload_u8(s, off + ACE_RI_CPD_HEADER_LENGTH + 2);/|the partition directory header length misread"
 "ame-magic|$R|s/0x454d4124u/0x314d4524u/|the module entry magic wrong"
 "rom-control-target|$C|s/!(primary \& ACE_IPC4_MSG_TARGET_MASK) \&\& type == ACE_IPC4_GLB_ROM_CONTROL/(primary \& ACE_ROM_IPC_CONTROL)/|ROM control detected by the type bit alone (module messages too)"
 "running-guard|$C|s/if (s->state != ACE_LOADING \&\& s->state != ACE_RUNNING) {/if (s->state != ACE_LOADING) {/|the FW_READY step skipped once the firmware runs"
-"irq-gating|$C|s/level = enabled \&\& (s->xctl \& ACE_HFIPCXCTL_BUSY);/level = enabled;   /* MUTATED *//|the busy interrupt enable ignored"
-"powered-down|$C|s/    return s->powered_down_value;/    return 0;   /* MUTATED *//|x-powered-down-value ignored"
+"irq-gating|$C|s#level = enabled \&\& (s->xctl \& ACE_HFIPCXCTL_BUSY);#level = enabled;   /* MUTATED */#|the busy interrupt enable ignored"
+"powered-down|$C|s#    return s->powered_down_value;#    return 0;   /* MUTATED */#|x-powered-down-value ignored"
+"intipptr-unpowered|$C|s/val = ace_powered(s) ? ACE_MODEL_INTIPPTR : 0xffffffffu;/val = ACE_MODEL_INTIPPTR;/|the interrupt pointer answers while unpowered (R1 of the driver review invisible again)"
 "personality-id|$C|s/k->device_id = 0x7f50;/k->device_id = 0x7e28;/|the default personality's PCI id"
-"version-stream|$C|s/    memcpy(ver, s->fw_version, sizeof(ver));/    ver[0] = 2; ver[1] = 15; ver[2] = 0; ver[3] = 1;   /* MUTATED *//|the reply's version hardcoded instead of read from the stream"
-"delay-scale|$C|s/return (uint64_t)(us \* 1000.0 \* s->delay_scale);/return us * 1000;   /* MUTATED *//|x-delay-scale ignored"
+"version-stream|$C|s#    memcpy(ver, s->fw_version, sizeof(ver));#    ver[0] = 2; ver[1] = 15; ver[2] = 0; ver[3] = 1;   /* MUTATED */#|the reply's version hardcoded instead of read from the stream"
+"delay-scale|$C|s#return (uint64_t)(us \* 1000.0 \* s->delay_scale);#return us * 1000;   /* MUTATED */#|x-delay-scale ignored"
 "core-before-subsys|$C|s/if ((s->dsp2cxctl \& ACE_DSP2CXCTL_SPA) \&\&/if (0 \&\& (s->dsp2cxctl \& ACE_DSP2CXCTL_SPA) \&\&/|a core request made before the subsystem is up is dropped"
-"reply-dir|$C|s/                  ACE_IPC4_MSG_DIR_REPLY | (status \& ACE_IPC4_REPLY_STATUS_MASK),/                  (status \& ACE_IPC4_REPLY_STATUS_MASK),/|the reply's direction bit missing"
+"reply-dir|$C|s/ACE_IPC4_MSG_DIR_REPLY . (status \& ACE_IPC4_REPLY_STATUS_MASK)/(status \& ACE_IPC4_REPLY_STATUS_MASK)/|the reply's direction bit missing"
 "abi-fault|$C|s/s->fault_id == ACE_FAULT_ABI ? s->fault_arg : ACE_IPC4_FW_REGS_ABI_VER/ACE_IPC4_FW_REGS_ABI_VER/|the abi= fault not applied to the register block"
 "init-done-delay|$C|s/define ACE_US_ROM_INIT_DONE      500/define ACE_US_ROM_INIT_DONE      300/|INIT_DONE 200 us early"
 "fw-ready-delay|$C|s/define ACE_US_FW_READY           200/define ACE_US_FW_READY           100/|FW_READY 100 us early"
@@ -50,7 +51,10 @@ for m in "${MUTATIONS[@]}"; do
     n=$((n + 1))
     IFS='|' read -r name file expr what <<< "$m"
     WT="$SRC-wt-$name"
+    # an interrupted run leaves its worktree locked and half-initialised
+    git -C "$SRC" worktree unlock "$WT" >/dev/null 2>&1 || true
     git -C "$SRC" worktree remove --force "$WT" >/dev/null 2>&1 || true
+    if [ -d "$WT" ]; then rm -rf "$WT"; git -C "$SRC" worktree prune; fi
     git -C "$SRC" worktree add -q --detach "$WT" master || { echo "worktree failed for $name" >&2; continue; }
     sed -i "$expr" "$WT/$file"
     if ! git -C "$WT" diff --quiet; then

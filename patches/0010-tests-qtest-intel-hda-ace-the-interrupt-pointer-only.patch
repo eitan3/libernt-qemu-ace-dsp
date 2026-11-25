@@ -1,0 +1,81 @@
+From c7d45671482a34ca1c2c5228a64b9589c89eff30 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 01:24:09 +0200
+Subject: [PATCH 10/10] tests/qtest: intel-hda-ace: the interrupt pointer only
+ answers while powered
+
+Case intipptr: all ones while unpowered, 0x120 after power-up, all ones again after power-down; the enumerate and power-down cases assert the unpowered value, the interrupt case the powered one.
+---
+ tests/qtest/intel-hda-ace-test.c | 27 ++++++++++++++++++++++++---
+ 1 file changed, 24 insertions(+), 3 deletions(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index acfa9d307..b5621a308 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -409,9 +409,10 @@ static void test_enumerate(void)
+             g_assert_cmpuint(size, ==, 0);
+         }
+     }
+-    /* the chain head and the model's interrupt pointer */
++    /* the chain head; the interrupt pointer is a DSP-domain register that does
++     * not answer while the subsystem is unpowered (test_intipptr) */
+     g_assert_cmpuint(r0w(HDA_LLCH), ==, 0x180);
+-    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0x120);
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0xffffffff);
+     boot_end();
+ }
+ 
+@@ -563,7 +564,7 @@ static void test_power_down(void)
+     g_assert_cmpuint(r4(ACE_ROMERR), ==, 0xffffffff);
+     g_assert_cmpuint(r4(ACE_WIN0), ==, 0xffffffff);
+     g_assert_cmpuint(r4(ACE_ADSPCS), ==, 0);               /* host-side registers stay */
+-    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0x120);
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0xffffffff); /* the pointer is all ones whatever the property (a model value) */
+     boot_end();
+ }
+ 
+@@ -589,6 +590,7 @@ static void check_irq(const char *msi)
+         g_assert_cmpint(asserted_gsi(), ==, -1);
+     }
+     power_up();
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0x120);     /* answers once powered */
+     rom_ready();
+     run_loader(IMG_LEN - IMG_PAYLOAD);
+     /* the enables the host programs before the firmware is ready */
+@@ -639,6 +641,24 @@ static void test_irq_msi(void)
+     check_irq("on");
+ }
+ 
++/* 9: the interrupt pointer answers only while the subsystem is powered: a host
++ * that reads it before power-up (R1 of the LiberNT driver review) gets all ones */
++static void test_intipptr(void)
++{
++    boot_start("");
++    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_SPA, ==, 0);
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0xffffffff);
++    power_up();
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0x120);        /* INTEN is at BAR4 + 0x120 */
++    w4(ACE_DSP2CXCTL, 0);
++    qtest_clock_step(t.qs, US(100));
++    w4(ACE_ADSPCS, 0);
++    qtest_clock_step(t.qs, US(100));
++    g_assert_cmpuint(r4(ACE_ADSPCS) & ACE_ADSPCS_CPA, ==, 0);
++    g_assert_cmpuint(r4(ACE_HFINTIPPTR), ==, 0xffffffff);     /* and all ones again once down */
++    boot_end();
++}
++
+ /* 5: every fault of the injector gives its bounded shape */
+ typedef struct {
+     const char *fault;
+@@ -773,6 +793,7 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/stock-controllers", test_stock_controllers);
+         qtest_add_func("/intel-hda-ace/boot-handshake", test_boot_handshake);
+         qtest_add_func("/intel-hda-ace/power-down", test_power_down);
++        qtest_add_func("/intel-hda-ace/intipptr", test_intipptr);
+         qtest_add_func("/intel-hda-ace/irq-intx", test_irq_intx);
+         qtest_add_func("/intel-hda-ace/irq-msi", test_irq_msi);
+         qtest_add_func("/intel-hda-ace/faults", test_faults);
+-- 
+2.56.1
+

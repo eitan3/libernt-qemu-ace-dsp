@@ -1,7 +1,7 @@
 From deef3538408b31289ccc3244e83664693758d04c Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 09:38:40 +0200
-Subject: [PATCH 3/8] hw/audio: stream-run and interrupt hooks for variants
+Subject: [PATCH 03/10] hw/audio: stream-run and interrupt hooks for variants
 
 A variant of the controller that carries a consumer for a stream (the ACE
 audio DSP, which takes the firmware through an output stream no codec is

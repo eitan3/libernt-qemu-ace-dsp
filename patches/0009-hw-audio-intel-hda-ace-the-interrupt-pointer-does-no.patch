@@ -1,0 +1,33 @@
+From a8142792cfe344755884d6b01b6d17bea2962811 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Wed, 25 Nov 2026 01:24:08 +0200
+Subject: [PATCH 09/10] hw/audio: intel-hda-ace: the interrupt pointer does not
+ answer while unpowered
+
+HFINTIPPTR is a DSP-domain register: while ADSPCS.SPA is clear it reads all ones (a model value), so a host that reads it before power-up -- as R1 of the LiberNT driver review does -- derives its interrupt-enable offset from all ones instead of the 0x120 it gets once the subsystem is up.
+---
+ hw/audio/intel-hda-ace.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 3b529030b..9a6782d95 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -984,7 +984,13 @@ static uint32_t ace_reg_read(IntelHDAAceState *s, uint64_t off)
+     case ACE_HFDSSCS:                val = s->hfdsscs; break;
+     case ACE_DSP2CXCAP_PRIMARY_CORE: val = 0; break;
+     case ACE_DSP2CXCTL_PRIMARY_CORE: val = s->dsp2cxctl; break;
+-    case ACE_HFINTIPPTR:             val = ACE_MODEL_INTIPPTR; break;
++    case ACE_HFINTIPPTR:
++        /* the interrupt pointer is a DSP-domain register: it does not answer
++         * while the subsystem is unpowered (a model value -- a host that reads
++         * it before power-up, as R1 of the LiberNT driver review does, gets all
++         * ones and derives its interrupt-enable offset from them) */
++        val = ace_powered(s) ? ACE_MODEL_INTIPPTR : 0xffffffffu;
++        break;
+     case ACE_MODEL_INTEN:            val = s->inten; break;
+     case ACE_MODEL_IRQSTS:
+         val = (s->notif_pending || s->reply_pending) ? ACE_IRQSTS_IPC : 0;
+-- 
+2.56.1
+

@@ -119,7 +119,10 @@ validated by its version tuple only, so the `bad-tuples` and `truncated-reply` r
 0-byte mailboxes where the plan expected `truncated`/`ipc bad reply`; **E1**, an environment
 limitation of the simulator host (the model's timers stand still while the guest's clock runs:
 `-icount` is the fix); and three expectation corrections (N1–N3).
-`evidence/2026-11-25-p2b3/DIVERGENCE.md`.
+`evidence/2026-11-25-p2b3/DIVERGENCE.md`. After the evidence was taken, Task C (patches
+0009/0010) made **R1** visible in the model — `HFINTIPPTR` reads all ones while the DSP is
+unpowered — and one boot with it shows the driver bounds-checking the pointer and re-reading it
+after power-up, so its boot is unchanged (`ac3-r1-model`).
 
 ## Build and run
 
@@ -209,7 +212,13 @@ intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
 
 with exactly those seven BAR4 reads in the device trace and no `ace_unexpected`
 (unchanged on the p2b2 image: `evidence/2026-11-24-p2b2/p1-probe-interactive`; and on the
-p2b3 image: `evidence/2026-11-25-p2b3/ac3-interactive`).
+p2b3 image: `evidence/2026-11-25-p2b3/ac3-interactive`). **Since patches 0009/0010 (Task C) the
+same probe reads `+0x1108 HFINTIPPTR 0xffffffff` and prints no `+0x120 (the interrupt enable
+register the pointer names)` line**: the pointer register is a DSP-domain one and does not answer
+while the subsystem is unpowered (a model value, the R1 scenario); the driver bounds-checks it,
+skips the read and re-reads it after power-up, so its boot is unchanged
+(`evidence/2026-11-25-p2b3/ac3-r1-model`). The AC2–AC4 evidence above was measured with the model
+of `f53ff8b` (patches 0001–0008).
 
 Stage 2 (`BootDsp=1`), measured on the p2b3 image (`ee1338426b1`, the driver with the D1/D2
 fixes) on a plain boot of the overlay under icount (`evidence/2026-11-25-p2b3/ac3-boot2-icount`):
@@ -248,7 +257,7 @@ On the p2b2 image the same boot stopped after `FW_READY received` (D1); that blo
 
 | AC | What | Status |
 |---|---|---|
-| AC1 | qtest passes; mutation check recorded | **PASS** — 8 cases, with the two-step FSR since this rerun (patches 0007/0008); `mutation-check.sh` (rows `fsr-running` retargeted and `fsr-entry-running` added; the new assertion fails on the old model), results in `evidence/<date>/mutation-check.md` |
+| AC1 | qtest passes; mutation check recorded | **PASS** — 9 cases (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down); `mutation-check.sh`: 25 mutations, 24 killed, 1 survivor (`personality-id`, an equivalent mutant) — `evidence/2026-11-25-p2b3/mutation-check.md`. The script's seven sed rows whose expressions could not apply (delimiter and `\|` collisions) and one stale locked worktree were repaired in this round, so the table is complete from the script alone |
 | AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`) |
 | AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b3 image** (`ee1338426b1`), with one correction to the expectation. Plain boot under icount: `boot ok after 21334 us (clock 17954746 us) … attempt 1, 1 DSP interrupts, cleanup ok`, end clock = start clock + M within 50 µs; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **1 DSP interrupt, not 2** (N1: the ISR masks the three enables before the FW_CONFIG request, so the reply is taken by the poll; the FW_READY interrupt is raised and taken on every boot). 22 disable/enable cycles in one VM (the two of the plan and the 20-cycle rehearsal), each `boot ok after 21318–21472 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, 0 `clock stalled`, clean S5 at the end (`ac3-cycles-icount`). A first interactive session on the non-icount host (`ac3-interactive`) had 17 `boot ok` and 5 bounded `power-up timeout after ≈53 ms` at the host's main-loop stalls (E1), each followed by an unassisted `boot ok` |
 | AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b3 image: **PASS — 20 of 20 rows bounded** (on the p2b2 image 7 of 20, the other 13 hung on D1/D2), every row with a real `after N us` on its documented budget and its two clock readings consistent, the device started, no bugcheck, no hang, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b3/fault-matrix.md`; `tools/fm-check.sh`: 0 failed checks). 18 rows name the expected failure; `bad-tuples` and `truncated-reply` end in `boot ok` with 0-byte mailboxes instead of `truncated`/`ipc bad reply` — **driver divergence D3**. Table below |
@@ -318,7 +327,7 @@ filled from measurements on the real device; "—" means not yet measured.
 | BAR0 | 0x4000 | — | — |
 | BAR4 | 0x200000 (2 MB) | `x-bar4-size` | — (≥ 0x189000 per the driver) |
 | LLCH → PP → SPB | 0x14 = 0x0180 → PP (id 3, v1, next 0x700) → SPB (id 4, v1) | compile-time | — |
-| `HFINTIPPTR` | 0x120 (INTEN at BAR4 + 0x120) | compile-time | — |
+| `HFINTIPPTR` | 0x120 once powered (INTEN at BAR4 + 0x120); **all ones while the subsystem is unpowered** (patches 0009/0010, the R1 scenario: a host that reads it before power-up gets all ones) | compile-time | — |
 | Powered-down reads | 0 | `x-powered-down-value` | — |
 | Timings | CPA 100/200 µs, DONE 100 µs, INIT_DONE 500 µs, entry 2 ms, FW_READY 200 µs, reply 50 µs | `x-delay-scale` | — |
 | ROM info | 0x0120315A | compile-time | — |
@@ -333,7 +342,7 @@ filled from measurements on the real device; "—" means not yet measured.
 |---|---|
 | `COPYING` | QEMU's licence text (GPL-2.0-or-later) |
 | `fetch.sh`, `build.sh`, `export-patches.sh` | the pinned source, the build, the series export |
-| `patches/0001…0008` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest) |
+| `patches/0001…0010` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest); the interrupt pointer that does not answer while unpowered (model, qtest) |
 | `run.sh`, `run-control.sh`, `lib-run.sh`, `make-overlay.sh` | the VM runs (`lib-run.sh`: `ICOUNT=1`, `QTESTSOCK=1`, `FAULT`, `TRACE`, `STOP_ON`, …) |
 | `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults; in `tools/`: the monitor/typing helpers (`guest.sh`, `mon.py`, `qmp.py`), the qtest client and heartbeat (`qtest.py`, `heartbeat.py`), `waitline.sh`, `cycle.sh`, `ac3-cycles.sh`, the fault-matrix driver and its post-check (`fault-matrix.sh`, `fm-check.sh`) |
 | `mutation-check.sh` | AC1's mutation run |
@@ -352,6 +361,8 @@ filled from measurements on the real device; "—" means not yet measured.
 | `fault-matrix.md` | the matrix table (fault → the driver's line → elapsed → bounded → recovery; the first 9 rows from before the restart, the rest from the resumed run) and the checks beyond "bounded" (`tools/fm-check.sh`: 0 failed) |
 | `DIVERGENCE.md` | D1 and D2 marked fixed with the rerun evidence; **D3** (FW_CONFIG tuple validation, driver); E1 (environment), N1–N3 (expectation corrections), N4 (scenario note) |
 | `PAUSED.md` | where the run stood when the host was restarted (9 of 20 rows in) and how it was resumed |
+| `ac3-r1-model` | one plain boot with the model **after** Task C (patches 0009/0010): the probe reads `HFINTIPPTR 0xffffffff` and skips the register it names; the boot is unchanged (`boot ok after 71859 us … 1 DSP interrupts`) because the driver re-reads the pointer after power-up |
+| `mutation-check.md` | AC1's mutation run with the model of this commit: 25 mutations, the `intipptr-unpowered` row added |
 
 ### 2026-11-24-p2b2 (the rerun with the fixed driver, image `5286c0598d6`)
 
@@ -383,7 +394,7 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 
 ## INFO_NEEDED
 
-1. Resolved by image p2b3 (`39e50ba6036`, `ee1338426b1`): AC3 and AC4 are measured above. Open on the driver side now: **D3** (the FW_CONFIG tuple list is validated by its version tuple only — `bad-tuples` and `truncated-reply` boot `ok` with 0-byte mailboxes; `evidence/2026-11-25-p2b3/DIVERGENCE.md`), and from the read-only review, invisible to the model as it is: **R1** (the interrupt-enable offset is read before the subsystem is powered; the model answers `0x120` at any power state — a model that answers all-ones while unpowered would make it visible) and **R2** (no ISR storm guard). An image with their fixes is the next thing to rerun.
+1. Resolved by image p2b3 (`39e50ba6036`, `ee1338426b1`): AC3 and AC4 are measured above. Open on the driver side now: **D3** (the FW_CONFIG tuple list is validated by its version tuple only — `bad-tuples` and `truncated-reply` boot `ok` with 0-byte mailboxes; `evidence/2026-11-25-p2b3/DIVERGENCE.md`); **R1** is visible in the model since Task C (patches 0009/0010: `HFINTIPPTR` reads all ones while unpowered) and shown harmless on the VM boot — the driver bounds-checks the pointer at probe and re-reads it after power-up — but whether silicon answers all ones there is still to be measured; **R2** (no ISR storm guard) stays invisible to the model. An image with their fixes is the next thing to rerun.
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.

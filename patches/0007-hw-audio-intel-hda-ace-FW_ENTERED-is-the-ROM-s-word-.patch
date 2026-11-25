@@ -1,7 +1,7 @@
 From 43ca41f32356b282c6b14651c78424cdf461246b Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 21:19:36 +0200
-Subject: [PATCH 7/8] hw/audio: intel-hda-ace: FW_ENTERED is the ROM's word,
+Subject: [PATCH 07/10] hw/audio: intel-hda-ace: FW_ENTERED is the ROM's word,
  the running bit the firmware's
 
 The model set the firmware status register to running | BASE_FW | FW_ENTERED

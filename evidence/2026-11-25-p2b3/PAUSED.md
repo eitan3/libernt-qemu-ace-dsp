@@ -63,7 +63,9 @@ remaining work can be resumed without re-deriving anything.
    the AC4 row (it still carries the p2b2 text), the "fault matrix in the VM" section (still the
    p2b2 table), `./normalise-evidence.sh`, and the final commit. Board task `33b94861` stays open
    until the report is in.
-4. Task C (unpowered `HFINTIPPTR` read = all-ones, qtest case, mutation row) was **not started**.
+4. Task C (unpowered `HFINTIPPTR` read = all-ones, qtest case, mutation row) was not started
+   before the pause; it was done after the resume (patches 0009/0010, `ac3-r1-model`,
+   `mutation-check.md`).
 
 ---
 
