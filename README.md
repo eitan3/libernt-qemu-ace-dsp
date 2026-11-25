@@ -46,7 +46,7 @@ serial log next to the device's own trace.
 | BAR mapping | BAR0 (0x4000) and BAR4 (2 MB) are mapped by the guest's PCI stack; the driver's own probe lines name the offsets it reads |
 | Code-loader DMA | the firmware is streamed on an HDA output stream; the model consumes exactly SPIB bytes through QEMU's DMA and writes the stream's completion status as the controller does |
 | The P2a boot state machine | power-up, purge, DONE, INIT_DONE, the ROM walk, FW_ENTERED, FW_READY, the IPC4 reply — with virtual-clock timers, polled by the real driver under its real budgets |
-| The interrupt | raised only while a message is pending and every enable is set; observed on the INTx line through the I/O APIC and as MSI; counted by the real driver's ISR (`1 DSP interrupts` on the rows that reach FW_READY) |
+| The interrupt | raised only while a message is pending and every enable is set; observed on the INTx line through the I/O APIC and as MSI; counted by the p2b3 driver's ISR (`1 DSP interrupts` on the rows that reach FW_READY); the p2b4 driver masks the enables and polls (`0 DSP interrupts`, the mask in every trace) |
 | Fault handling | 17 injectable faults, each with a bounded shape asserted by the qtest |
 
 **Never proves** (silicon truth — only the real device can): the ROM's real
@@ -124,6 +124,29 @@ limitation of the simulator host (the model's timers stand still while the guest
 unpowered — and one boot with it shows the driver bounds-checking the pointer and re-reading it
 after power-up, so its boot is unchanged (`ac3-r1-model`).
 
+**Round 4 (image p2b4, 2026-11-25): the fix round verified — R1, R2, D3 and R6 measured against the
+model of `b139810`; AC3 and AC4 closed again; no new driver divergence.** The driver at `b392065b2cf`
+(76 commits over master `f2bf7a98990`, with upstream sync #14) against the model with patches
+0001–0010 (unchanged): the stage-1 lines are p2b3's except the two R1 lines (`+0x1108 HFINTIPPTR
+0xffffffff` and `HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt
+enable cannot be reached` in place of the `+0x120` read); the boot is **poll-only** — `boot ok …
+attempt 1, 0 DSP interrupts` on all 23 boots of the cycle run and on every fault row, no `first DSP
+interrupt`, no `interrupt storm` — with the mask in every trace (`HfHIPCIE` read back 0,
+`HFIPCXCTL` written 0; nothing written through the pointer, which names no register at that
+point); the new `interrupts before power-up` / `subsystem powered` / step lines carry `ADSPCS`,
+`HFINTIPPTR`, `INTEN`, `HfHIPCIE` and `HFIPCXCTL` (the pointer reads `0x120` on this model only
+from `ROM ready for the firmware`, with the core's power: N5); **D3 is fixed** — `bad-tuples` ends
+`boot bad IPC reply … tuple type 0x6 at offset 0x10 of the reply is malformed`, `truncated-reply`
+ends `boot truncated`, both power the DSP down and recover; R6 is **not visible in the serial
+log** (the `firmware … bytes, ok` line is printed whether or not anything was read: N6). 22
+disable/enable cycles: 22 `boot ok` (21406–21726 µs), identical model registers before and after
+every one, clean S5; 20 of 20 fault rows bounded, every one with its named failure, and recovered
+(`evidence/2026-11-25-p2b4`). What this round found: N5 (a model ordering, with a question for
+the silicon list: the `INTEN` mask is skipped when the pointer names no register and is not
+repeated), N6, N7 (TESTING.md's "`INTEN` reads 1 before"), N8 (TESTING.md's `drop-requests` row)
+and the environment notes E2–E4 (`after N us` is TCG execution time on this host; the wizard's
+three pages; sync #14's display-idle lines). `evidence/2026-11-25-p2b4/DIVERGENCE.md`.
+
 ## Build and run
 
 Requirements: Linux with gcc, ninja, python3 and the glib/pixman development
@@ -151,17 +174,20 @@ serial line; `ICOUNT=1` runs under icount (see "A note on the host");
 the rest. `tools/guest.sh` types into the guest through the monitor (~100 ms
 per key), `snapshot.sh` screenshots it, `set-fault.sh` injects a fault at run
 time over QMP, `tools/waitline.sh` waits (bounded) for a serial line,
-The image of this rerun: `~/libernt-build-logs/test-audio-intel-sst-p2b3-a19eacb7fea/`
-(`bootcd.iso` sha256 `2b12b75066da32a8…`, `LiberNT.vhd` `12a232c8ce73e955…`, in-ISO
-`intcdsp.sys` `b42955ef…`, built from `feat/audio-control-polish @ ee1338426b1`, 62 commits
-over master `a19eacb7fea`; the images of the earlier rounds are
+The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p2b4-f2bf7a98990/`
+(`bootcd.iso` sha256 `f4c4636d5e1351…`, `LiberNT.vhd` `8e079736612f84…`, in-ISO
+`intcdsp.sys` `41bd1405…`, built from `feat/audio-control-polish @ 24b0394e1e0` — the published
+tip `b392065b2cf` has the same tree content — 76 commits over master `f2bf7a98990`; the images
+of the earlier rounds are `test-audio-intel-sst-p2b3-a19eacb7fea/`,
 `test-audio-intel-sst-p2b2-a676708a/` and `test-audio-intel-sst-p2b-*`). Its boot chain
 changed since round 1 (FreeLoader is gone; `LiberNT Boot Manager` reads a BCD store and hands
 over to the OS loader with `SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200` — the kernel's debug
 output is still on the serial log), and the first boot of a fresh overlay shows a **first-boot
 Setup wizard** (`oobe.exe`, from the HKLM `Run` key; it deletes its own `Run` value at start,
-so it comes once — dismiss it with `tab`, `tab`, `ret` from its first page; Escape and Alt+C
-are ignored). The ADSP instance id on the installed image is
+so it comes once). Since sync #14 the wizard has **three pages** — language and keyboard, an
+account page (Skip), a component-download page (Cancel) — closed with `tab tab ret`, `ret`,
+`tab tab tab ret` (Escape and Alt+C are ignored; the p2b3 one-step `tab, tab, ret` only reaches
+page 2). The ADSP instance id on the installed image is
 `CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000`.
 
 **A note on the host.** These runs were made on a 4-vCPU VM (CachyOS under its
@@ -212,43 +238,47 @@ intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
 
 with exactly those seven BAR4 reads in the device trace and no `ace_unexpected`
 (unchanged on the p2b2 image: `evidence/2026-11-24-p2b2/p1-probe-interactive`; and on the
-p2b3 image: `evidence/2026-11-25-p2b3/ac3-interactive`). **Since patches 0009/0010 (Task C) the
-same probe reads `+0x1108 HFINTIPPTR 0xffffffff` and prints no `+0x120 (the interrupt enable
-register the pointer names)` line**: the pointer register is a DSP-domain one and does not answer
-while the subsystem is unpowered (a model value, the R1 scenario); the driver bounds-checks it,
-skips the read and re-reads it after power-up, so its boot is unchanged
-(`evidence/2026-11-25-p2b3/ac3-r1-model`). The AC2–AC4 evidence above was measured with the model
-of `f53ff8b` (patches 0001–0008).
+p2b3 image: `evidence/2026-11-25-p2b3/ac3-interactive`). **On the p2b4 image, with the model of
+patches 0009/0010, the same probe reads `+0x1108 HFINTIPPTR 0xffffffff` and prints
+`HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot
+be reached` in place of the `+0x120 (the interrupt enable register the pointer names)` line**
+(`evidence/2026-11-25-p2b4/a1-stage1-firstboot`: the other eleven lines byte-identical to p2b3's,
+the six BAR4 reads, 0 `ace_unexpected`): the pointer register is a DSP-domain one and does not
+answer while the DSP is unpowered (a model value, the R1 scenario), and the driver (R1) trusts
+it only where it is used.
 
-Stage 2 (`BootDsp=1`), measured on the p2b3 image (`ee1338426b1`, the driver with the D1/D2
-fixes) on a plain boot of the overlay under icount (`evidence/2026-11-25-p2b3/ac3-boot2-icount`):
+Stage 2 (`BootDsp=1`), measured on the p2b4 image (`b392065b2cf`: R1, poll-only) on a plain boot
+of the stage-2 overlay under icount (`evidence/2026-11-25-p2b4/a2-stage2-boot`; the p2b3 block,
+with a bare `subsystem powered` and `1 DSP interrupts`, is in
+`evidence/2026-11-25-p2b3/ac3-boot2-icount`):
 
 ```
-intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
-intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 17933371 us at 10000000 Hz
-intcdsp.sys: subsystem powered
+intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007200000, clock 17752743 us at 10000000 Hz
+intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
 intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
-intcdsp.sys: ROM ready for the firmware
-intcdsp.sys: firmware entered
-intcdsp.sys: FW_READY received
-intcdsp.sys: boot ok after 21334 us (clock 17954746 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok
+intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+intcdsp.sys: boot ok after 67971 us (clock 17821036 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
 intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
 ```
 
-The model's side of the same boot (device trace, 94 lines): power-up (`CPA` on the driver's
-first `ADSPCS` poll) → the purge request `0x81004000` → core up → FSR `0x8`, `0x9`, the DONE
-reply (`0x80000000`, read, then acknowledged) → the driver enables the three interrupts → FSR
-`0x1` (INIT_DONE) → the stream consumed (`ROM consumes stream 1: 1155072 bytes`, all ROM rules
-pass) → the walk `0x25 0x27 0x28 0x29 0x2a`, each state seen on the driver's first FSR poll →
-`FSR state 0x5 module 0 halted 0` (the ROM's FW_ENTERED) → the FW_READY notification
-(`0x9b080000`) → `DSP interrupt 1` → the ISR reads `HFIPCXIDA`, `HFIPCXTDR`, `INTEN` and masks
-the three enables → `DSP interrupt 0` → the receive path reads the notification's extension and
+The model's side of the same boot (device trace, 98 lines): power-up (`CPA` on the driver's
+first `ADSPCS` poll) → the `subsystem powered` reads (`HFINTIPPTR` all ones: names no register) →
+the mask (`HfHIPCIE` ← 0 read back, `HFIPCXCTL` ← 0; no write through the pointer) → the purge
+request `0x81004000` → core up → FSR `0x8`, `0x9`, the DONE reply (`0x80000000`, read, then
+acknowledged) → `HFINTIPPTR 0x120`, `INTEN 0` (the `ROM ready` reads) → FSR `0x1` (INIT_DONE) →
+the stream consumed (`ROM consumes stream 1: 1155072 bytes`, all ROM rules pass) → the walk
+`0x25 0x27 0x28 0x29 0x2a`, each state seen on the driver's first FSR poll → `FSR state 0x5
+module 0 halted 0` (the ROM's FW_ENTERED) → the FW_READY notification (`0x9b080000`), **no
+`DSP interrupt` line: the enables are 0** → the poll reads the notification's extension and
 acknowledges it → the FW_CONFIG request `0xC1000000|0x00700000` → the reply `0xE1000000` 50 µs
 later → `HFIPCXIDA` read (`0xE1000000`), `HFIPCXTDDY` read, then DONE acknowledged — the
-`mtl_ipc_irq_thread` order of the D1 fix. (2 ms after entry, `FSR state 0x5 module 2 halted 1`,
-the firmware's status word.) The per-message `DSP message` line of the p2b2 image is gone: the
-last message is the `last DSP message 0x61000000|…` field of the `boot ok` line (the reply:
-module target, direction reply, status 0).
+`mtl_ipc_irq_thread` order of the D1 fix, now taken by the poll. (2 ms after entry, `FSR state
+0x5 module 2 halted 1`, the firmware's status word.) The p2b3 boot's `DSP interrupt 1` and the
+ISR's reads are gone from the trace; the interrupt path itself is still proven by the qtest
+(`irq-intx`, `irq-msi`).
 
 On the p2b2 image the same boot stopped after `FW_READY received` (D1); that block is kept in
 `evidence/2026-11-24-p2b2/DIVERGENCE.md`.
@@ -258,62 +288,63 @@ On the p2b2 image the same boot stopped after `FW_READY received` (D1); that blo
 | AC | What | Status |
 |---|---|---|
 | AC1 | qtest passes; mutation check recorded | **PASS** — 9 cases (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down); `mutation-check.sh`: 25 mutations, 24 killed, 1 survivor (`personality-id`, an equivalent mutant) — `evidence/2026-11-25-p2b3/mutation-check.md`. The script's seven sed rows whose expressions could not apply (delimiter and `\|` collisions) and one stale locked worktree were repaired in this round, so the table is complete from the script alone |
-| AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`) |
-| AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b3 image** (`ee1338426b1`), with one correction to the expectation. Plain boot under icount: `boot ok after 21334 us (clock 17954746 us) … attempt 1, 1 DSP interrupts, cleanup ok`, end clock = start clock + M within 50 µs; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **1 DSP interrupt, not 2** (N1: the ISR masks the three enables before the FW_CONFIG request, so the reply is taken by the poll; the FW_READY interrupt is raised and taken on every boot). 22 disable/enable cycles in one VM (the two of the plan and the 20-cycle rehearsal), each `boot ok after 21318–21472 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, 0 `clock stalled`, clean S5 at the end (`ac3-cycles-icount`). A first interactive session on the non-icount host (`ac3-interactive`) had 17 `boot ok` and 5 bounded `power-up timeout after ≈53 ms` at the host's main-loop stalls (E1), each followed by an unassisted `boot ok` |
-| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b3 image: **PASS — 20 of 20 rows bounded** (on the p2b2 image 7 of 20, the other 13 hung on D1/D2), every row with a real `after N us` on its documented budget and its two clock readings consistent, the device started, no bugcheck, no hang, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b3/fault-matrix.md`; `tools/fm-check.sh`: 0 failed checks). 18 rows name the expected failure; `bad-tuples` and `truncated-reply` end in `boot ok` with 0-byte mailboxes instead of `truncated`/`ipc bad reply` — **driver divergence D3**. Table below |
+| AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`); **on the p2b4 image** (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`): the same thirteen lines except the two R1 lines (`HFINTIPPTR 0xffffffff`, `names no 32-bit register inside BAR4`), the six BAR4 reads, 0 `ace_unexpected` |
+| AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b4 image** (`b392065b2cf`, poll-only). Plain boot under icount: `boot ok after 67971 us (clock 17821036 us) … attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000`; end clock = start clock + M within 0.4 ms; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **0 DSP interrupts** (R2: the enables are masked before the ROM request and never enabled; p2b3's `1` was the FW_READY interrupt its ISR took). 22 disable/enable cycles in one VM, 22 `boot ok after 21406–21726 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, the clock rule within 80–82 µs on all 23 boots, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p2b4/ac3-cycles`). Earlier rounds: p2b3 `1 DSP interrupts` (N1), p2b2 the D1 hang |
+| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
 | AC5 | README + scripts reproduce AC2 from a clean checkout | **PASS** — see "Reproducibility" |
-## The fault matrix in the VM (p2b3 image, 2026-11-25)
+
+### The fix round's expectations (p2b4, TESTING.md of the image) and the measured lines
+
+| item | expectation | measured (model `b139810`) | evidence |
+|---|---|---|---|
+| R1 | the pointer is read where it is used; all ones / zero / odd name no register | stage 1: `+0x1108 HFINTIPPTR 0xffffffff`, `HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached`, no `+0x120` read; stage 2: `interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000`, then `0x00000120` from `ROM ready for the firmware` on — **still all ones on `subsystem powered` (N5: the model's domain wakes with the core)** | `a1-stage1-firstboot`, `a2-stage2-boot` |
+| R2 | poll-only: the enables masked right after power, `0 DSP interrupts`, no `first DSP interrupt`, no `interrupt storm` | `0 DSP interrupts` on all 23 boots of the cycle run and all 40 matrix boots; the mask in every trace (`HfHIPCIE` ← 0 read back, `HFIPCXCTL` ← 0, no `+0x120` write); 0 `interrupt storm`, 0 `interrupt enable timeout`, 0 `clock stalled` | `a2-stage2-boot`, `ac3-cycles`, `fm-*` |
+| D3 | `bad-tuples` → `boot bad IPC reply` + the tuple line; `truncated-reply` → `boot truncated` | `boot bad IPC reply after 70083 us (clock 17618589 us): state failed, failed in configuring (bad IPC reply), … 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000` + `firmware configuration: tuple type 0x6 at offset 0x10 of the reply is malformed`; `boot truncated after 23398 us (clock 18124993 us): state failed, failed in configuring (truncated), …`; both powered down, both recovered with `boot ok` | `fm-bad-tuples`, `fm-truncated-reply` |
+| R6 | no second `firmware … bytes, ok` line on a second boot | **not observable**: the line is printed on every `IntcDspLoadFirmware` call, read or resident; the second boot prints it twice, as p2b3 did (N6) | `a4-second-boot` |
+## The fault matrix in the VM (p2b4 image, 2026-11-25)
 
 Rule: *bounded* = the driver logs its terminal line within 30 s of its `booting:` line in guest
 time and powers the DSP down; the driver returns `STATUS_SUCCESS` from `D0Entry` on a failed
 boot, so a bounded row leaves the device started and the boot continues. Every row below is one
-boot of the overlay under `-icount` with the logs on tmpfs, followed by a recovery cycle: the
-fault cleared over QMP, one `pnputil` disable/enable → a second boot, which must be `boot ok`.
+boot of the stage-2 overlay under `-icount` with the logs on tmpfs, followed by a recovery cycle:
+the fault cleared over QMP, one `pnputil` disable/enable → a second boot, which must be `boot ok`.
 The elapsed figures are the driver's own (`after N us`); its end clock equals its start clock
-plus N within 41–1812 µs on every row, and the serial-observed duration agrees within one kernel
-clock tick (`tools/fm-check.sh`; `evidence/2026-11-25-p2b3/fault-matrix.md`). No bugcheck and no
-`Work queue … no progress` line in any row; 20 of 20 rows recovered with `boot ok`.
+plus N within 80–324 µs on every row, and the serial-observed duration agrees within one kernel
+clock tick (`tools/fm-check.sh`: 0 rows with a failed check; `evidence/2026-11-25-p2b4/fault-matrix.md`).
+No bugcheck, no `Work queue … no progress`, no `interrupt storm`, no `clock stalled`, and
+`0 DSP interrupts` on every one of the 40 boots; 20 of 20 rows recovered with `boot ok`. The p2b3
+table is kept in `evidence/2026-11-25-p2b3/fault-matrix.md`.
 
 | fault | the driver's terminal line (after its `booting:` line) | after N us | booting → line | bounded |
 |---|---|---|---|---|
-| `none` | `boot ok after 21299 us (clock 17881193 us): state ready, failed in off (ok), …, last DSP message 0x61000000\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` | 21299 | 0.031 s | yes |
-| `halt-rom=43` | `boot ROM error … failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, … attempt 3, 0 DSP interrupts, cleanup ok` | 73086 | 0.062 s | yes (3 power-downs) |
-| `halt-rom=44` | `… ROM error 0x0000002c CSE validation failed … attempt 3 … cleanup ok` | 50415 | 0.047 s | yes (3) |
-| `halt-fw=51` | `boot ROM error … failed in loading (ROM error), ROM status 0x8000002a ROM firmware code loaded, ROM error 0x00000033 base firmware incompatible … attempt 1 … cleanup ok` | 261959 | 0.266 s | yes |
-| `crash-notification` | `boot firmware crash … failed in FW_READY wait (firmware crash), ROM status 0x00000005 firmware entered, ROM error 0x0000000a unknown ROM error, …, last DSP message 0x1b0a0000\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` | 39018 | 0.047 s | yes |
-| `abi=2` | `boot ABI mismatch … failed in FW_READY wait (ABI mismatch), ROM status 0x00000005 firmware entered … 1 DSP interrupts, cleanup ok` | 39025 | 0.031 s | yes |
-| `window-read-fail` | the same ABI mismatch (window 0 reads all ones) | 69180 | 0.078 s | yes |
-| `x-delay-scale=0.001` | `boot ROM error … failed in loading (ROM error), ROM status 0xa0000005 firmware entered …`: every model delay 1000× shorter, so the driver's first FSR sample is the firmware's status word | 71074 | 0.062 s | yes |
-| `never-power` | `boot power-up timeout … failed in powering up (power-up timeout), ROM status 0x00000000 init … attempt 0, 0 DSP interrupts, cleanup ok` (50 ms budget) | 52080 | 0.047 s | yes |
-| `never-ack` | `boot ROM init timeout … failed in ROM init (ROM init timeout), ROM status 0x00000000 init … attempt 3 … cleanup ok` (3 × 500 ms) | 1573309 | 1.563 s | yes (3) |
-| `never-ready` | `boot ROM status timeout … failed in ROM init (ROM status timeout), ROM status 0x00000009 ROM purge boot … attempt 3 … cleanup ok` (3 × 300 ms) | 925159 | 0.925 s | yes (3) |
-| `never-enter` | `boot base firmware timeout … failed in loading (base firmware timeout), ROM status 0x0000002a ROM firmware code loaded … attempt 1 … cleanup ok` (3 s budget) | 3037514 | 3.047 s | yes |
-| `never-fwready` | `boot FW_READY timeout … failed in FW_READY wait (FW_READY timeout), ROM status 0x00000005 firmware entered … cleanup ok` (1 s budget) | 1022485 | 1.016 s | yes |
-| `never-reply` | `boot IPC reply timeout … failed in configuring (IPC reply timeout) …, last DSP message 0x1b080000\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` (500 ms budget) | 539340 | 0.547 s | yes |
-| `drop-requests` | `boot IPC reply timeout …` (the request is dropped; the same 500 ms budget) | 573398 | 0.578 s | yes |
-| `ipc-status=5` | `boot IPC error … failed in configuring (IPC error), … IPC status 5, last DSP message 0x61000005\|0x00000000, attempt 1, 1 DSP interrupts, cleanup ok` | 40403 | 0.047 s | yes |
-| `version-shift` | `boot version mismatch … failed in configuring (version mismatch) … cleanup ok` | 40416 | 0.047 s | yes |
-| `x-delay-scale=1550` | `boot power-up timeout … failed in powering up (power-up timeout) …`: every model delay 1550× longer, so the power-up itself (155 ms) exceeds its 50 ms budget long before FW_ENTERED is due — the row measures the power-up budget, not the 3 s base-firmware edge (that edge is `never-enter`'s 3.04 s) | 52503 | 0.047 s | yes |
-| `bad-tuples` | **`boot ok after 21344 us … state ready …`**, then `firmware ready: … downlink mailbox 0 bytes, uplink mailbox 0 bytes, trace log 0 bytes, 0 pipelines, 0 libraries, context save 0, 3 tuples` | 21344 | 0.021 s | yes — **but no failure named: D3** |
-| `truncated-reply` | **`boot ok after 21303 us … state ready …`**, `… 1 tuples` | 21303 | 0.016 s | yes — **D3** |
+| `none` | `boot ok after 56708 us (clock 17617895 us): state ready, failed in off (ok), …, last DSP message 0x61000000\|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000` | 56708 | 0.062 s | yes |
+| `halt-rom=43` | `boot ROM error … failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, …, attempt 3, 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000` | 40800 | 0.047 s | yes (3 power-downs) |
+| `halt-rom=44` | `… ROM error 0x0000002c CSE validation failed … attempt 3 … cleanup ok` | 119685 | 0.125 s | yes (3) |
+| `halt-fw=51` | `boot ROM error … failed in loading (ROM error), ROM status 0x8000002a ROM firmware code loaded, ROM error 0x00000033 base firmware incompatible, … attempt 1 … cleanup ok` | 38589 | 0.031 s | yes |
+| `crash-notification` | `boot firmware crash … failed in FW_READY wait (firmware crash), ROM status 0x00000005 firmware entered, ROM error 0x0000000a unknown ROM error, …, last DSP message 0x1b0a0000\|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok` | 23291 | 0.024 s | yes |
+| `abi=2` | `boot ABI mismatch … failed in FW_READY wait (ABI mismatch), ROM status 0x00000005 firmware entered … 0 DSP interrupts, cleanup ok` | 40007 | 0.047 s | yes |
+| `window-read-fail` | the same ABI mismatch (window 0 reads all ones) | 73523 | 0.078 s | yes |
+| `never-power` | `boot power-up timeout … failed in powering up (power-up timeout), ROM status 0x00000000 init … attempt 0, 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000` (50 ms budget) | 52059 | 0.047 s | yes |
+| `never-ack` | `boot ROM init timeout … failed in ROM init (ROM init timeout), ROM status 0x00000000 init … attempt 3 … cleanup ok` (3 × 500 ms) | 1541752 | 1.547 s | yes (3) |
+| `never-ready` | `boot ROM status timeout … failed in ROM init (ROM status timeout), ROM status 0x00000009 ROM purge boot … attempt 3 … cleanup ok` (3 × 300 ms) | 941059 | 0.938 s | yes (3) |
+| `never-enter` | `boot base firmware timeout … failed in loading (base firmware timeout), ROM status 0x0000002a ROM firmware code loaded … attempt 1 … cleanup ok` (3 s budget) | 3020523 | 3.016 s | yes |
+| `never-fwready` | `boot FW_READY timeout … failed in FW_READY wait (FW_READY timeout), ROM status 0x00000005 firmware entered … cleanup ok` (1 s budget) | 1023709 | 1.031 s | yes |
+| `never-reply` | `boot IPC reply timeout … failed in configuring (IPC reply timeout) …, last DSP message 0x1b080000\|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok` (500 ms budget) | 539309 | 0.547 s | yes |
+| `drop-requests` | `boot IPC reply timeout …` (the FW_CONFIG request is dropped; the same 500 ms budget — TESTING.md's "`boot ok` attempt 3" cannot arise from this fault, N8) | 539659 | 0.531 s | yes |
+| `ipc-status=5` | `boot IPC error … failed in configuring (IPC error), … IPC status 5, last DSP message 0x61000005\|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok` | 26956 | 0.016 s | yes |
+| `bad-tuples` | **`boot bad IPC reply after 70083 us (clock 17618589 us): state failed, failed in configuring (bad IPC reply), …, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000`**, then `firmware configuration: tuple type 0x6 at offset 0x10 of the reply is malformed`, then the power-down line — **D3 fixed** | 70083 | 0.078 s | yes |
+| `truncated-reply` | **`boot truncated after 23398 us (clock 18124993 us): state failed, failed in configuring (truncated), …, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000`**, then the power-down line — **D3 fixed** | 23398 | 0.016 s | yes |
+| `version-shift` | `boot version mismatch … failed in configuring (version mismatch) … cleanup ok` | 40620 | 0.047 s | yes |
+| `x-delay-scale=1550` | `boot power-up timeout … failed in powering up (power-up timeout) …`: every model delay 1550× longer, so the power-up itself (155 ms) exceeds its 50 ms budget long before FW_ENTERED is due — the row measures the power-up budget, not the 3 s base-firmware edge (N4; that edge is `never-enter`'s 3.02 s) | 52378 | 0.047 s | yes |
+| `x-delay-scale=0.001` | `boot ROM error … failed in loading (ROM error), ROM status 0xa0000005 firmware entered …`: every model delay 1000× shorter, so the driver's first FSR sample is the firmware's status word | 37083 | 0.031 s | yes |
 
-20 of 20 rows bounded (on the p2b2 image: 7 of 20, the other 13 hung on D1/D2 —
-`evidence/2026-11-24-p2b2/fault-matrix.md`). Eighteen rows name the failure the plan and the
-image's TESTING.md expect, each on its documented budget. Two rows end bounded but **not with a
-failure**: `bad-tuples` and `truncated-reply` boot as `ok` — the driver validates the FW_CONFIG
-tuple list by its version tuple only (**D3**, `DIVERGENCE.md`). The run was interrupted by a host
-restart after row 9 and resumed with the same command (`evidence/2026-11-25-p2b3/PAUSED.md`).
-Measured on this host, with its timer stalls: 7 of 20 rows bounded, 13 unbounded. The
-bounded rows are the failures the driver detects from a single sample (a halted ROM,
-the exception notification, the ABI word, the version word read as all ones); every
-row that depends on a budget, or on the reply reaching the state machine, hangs. On
-a bounded row the driver powers the DSP down and returns; the boot went on without a
-bugcheck (the VM was stopped a few seconds after the line, so "device started" was
-not verified in the guest; in the interactive session, three disable/enable cycles
-after such a failure each produced a fresh boot attempt). Two first attempts that
-sat at the boot manager (host stall) were retried; one bounded row (`bad-tuples`, first
-pass) came out as the ROM-error path because a stall let the firmware's status word
-land before the driver's next FSR poll — the retry on a quieter host shows the D1 hang.
+20 of 20 rows bounded and named (p2b3: 20 bounded, 18 named — `bad-tuples` and `truncated-reply`
+booted `ok` with 0-byte mailboxes, D3; p2b2: 7 of 20, the other 13 hung on D1/D2). The elapsed
+figures of the unfaulted steps are TCG execution time on this host, not DSP timings (E2 in
+`evidence/2026-11-25-p2b4/DIVERGENCE.md`: the loader copies the 1.15 MB payload byte by byte and
+`-icount shift=auto` prices those instructions differently per launch); the budget rows
+(`never-*`, `drop-requests`, `x-delay-scale=1550`) measure their budgets.
+
 
 ## Model versus silicon
 
@@ -327,7 +358,7 @@ filled from measurements on the real device; "—" means not yet measured.
 | BAR0 | 0x4000 | — | — |
 | BAR4 | 0x200000 (2 MB) | `x-bar4-size` | — (≥ 0x189000 per the driver) |
 | LLCH → PP → SPB | 0x14 = 0x0180 → PP (id 3, v1, next 0x700) → SPB (id 4, v1) | compile-time | — |
-| `HFINTIPPTR` | 0x120 once powered (INTEN at BAR4 + 0x120); **all ones while the subsystem is unpowered** (patches 0009/0010, the R1 scenario: a host that reads it before power-up gets all ones) | compile-time | — |
+| `HFINTIPPTR` | 0x120 once powered (INTEN at BAR4 + 0x120); **all ones while the DSP domain is unpowered** (patches 0009/0010, the R1 scenario: a host that reads it before power-up gets all ones; on the model the domain is powered only with the core's CPA, so the register still reads all ones right after the subsystem's CPA — N5 of the p2b4 round) | compile-time | — |
 | Powered-down reads | 0 | `x-powered-down-value` | — |
 | Timings | CPA 100/200 µs, DONE 100 µs, INIT_DONE 500 µs, entry 2 ms, FW_READY 200 µs, reply 50 µs | `x-delay-scale` | — |
 | ROM info | 0x0120315A | compile-time | — |
@@ -349,6 +380,20 @@ filled from measurements on the real device; "—" means not yet measured.
 | `evidence/<date>/` | serial logs, device traces and screenshots of every acceptance run (paths normalised) |
 
 ## Evidence index
+
+### 2026-11-25-p2b4 (the fix round R1/R2/D3/R6 verified on `b392065b2cf`; AC3 and AC4 closed again)
+
+| Run | What it shows |
+|---|---|
+| `PROVENANCE.md`, `qtest.txt` | the image hashes verified, the in-ISO `intcdsp.sys` hash, the model binary hash, the qtest 9/9 before the first VM run |
+| `a1-stage1-firstboot` | the first boot of the fresh overlay: the three-page first-boot wizard (`s1`–`s6`), the stage-1 lines (`stage1-lines.txt`: p2b3's thirteen with the two R1 lines in place of the `+0x120` line), `BootDsp=1` set, clean S5 |
+| `a2-stage2-boot` | the full stage-2 sequence with the `interrupts …` lines (`stage2-lines.txt`) and the device trace of the boot (`qemu-dbg.excerpt.txt`): the mask, no `+0x120` write, no `DSP interrupt` line |
+| `a4-second-boot` | one disable/enable cycle: the second boot `boot ok … 0 DSP interrupts`; the two `firmware … bytes, ok` lines per start (N6) |
+| `ac3-cycles` | 22 disable/enable cycles under icount: 22 `boot ok` (21406–21726 µs), the model's registers before and after each (`cycles.log`: one distinct disabled-state reading, one distinct D0 reading), 0 `clock stalled`, clean S5 (`summary.txt`) |
+| `fm-<fault>` | one boot per fault of the matrix under icount, each followed by a recovery cycle (`serial.log`, `recover.out`, the trace excerpt + the whole trace gzipped, `desktop.png`/`console.png`) |
+| `fault-matrix.md` | the matrix table in the canonical order (the two D3 rows ran first as a pre-pass) and the checks beyond "bounded" (`tools/fm-check.sh`: 0 rows with a failed check) |
+| `task-a.md` | the fix-round expectations → the measured lines (A1–A4), with the environment findings of these boots |
+| `DIVERGENCE.md` | D1/D2 re-verified, **D3 fixed**; R1/R2 measured; N5 (the pointer still all ones on `subsystem powered`: a model ordering, the `INTEN` mask skipped), N6 (R6 not observable in the log), N7, N8 (`drop-requests`), E2–E4 (environment); what remains unverified on silicon |
 
 ### 2026-11-25-p2b3 (AC3/AC4 closed on the image with the D1/D2 fixes, `ee1338426b1`)
 
@@ -394,7 +439,7 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 
 ## INFO_NEEDED
 
-1. Resolved by image p2b3 (`39e50ba6036`, `ee1338426b1`): AC3 and AC4 are measured above. Open on the driver side now: **D3** (the FW_CONFIG tuple list is validated by its version tuple only — `bad-tuples` and `truncated-reply` boot `ok` with 0-byte mailboxes; `evidence/2026-11-25-p2b3/DIVERGENCE.md`); **R1** is visible in the model since Task C (patches 0009/0010: `HFINTIPPTR` reads all ones while unpowered) and shown harmless on the VM boot — the driver bounds-checks the pointer at probe and re-reads it after power-up — but whether silicon answers all ones there is still to be measured; **R2** (no ISR storm guard) stays invisible to the model. An image with their fixes is the next thing to rerun.
+1. Resolved by image p2b4 (`b392065b2cf`): **D3 is fixed** (`bad-tuples` → `boot bad IPC reply` naming the tuple, `truncated-reply` → `boot truncated`; both power the DSP down and recover); R1 and R2 are measured as TESTING.md describes them (`HFINTIPPTR` all ones before power-up, `0 DSP interrupts` on every boot, the mask in every trace); the earlier rounds are in their evidence trees. Open now: **N5** — whether silicon's `HFINTIPPTR` also reads all ones right after the subsystem's CPA (on the model it answers only with the core's power, and the driver's `INTEN` mask is skipped at that point and not repeated: a BIOS-left `INTEN = 1` would stay set through the boot there); **N6** — R6's log signature (the `firmware … bytes, ok` line is printed read or resident; a distinct text would make it checkable) and R6 on a real sleep/resume; **N8** — TESTING.md's `drop-requests` row; the storm guard of R2 stays invisible to the model.
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.

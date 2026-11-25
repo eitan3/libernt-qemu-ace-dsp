@@ -11,7 +11,9 @@
 #   - the duration the serial log shows between the two lines (its print
 #     timestamps carry up to one kernel clock tick of staleness, +-16 ms) is
 #     consistent with M: observed - M/1e6 in [-20 ms, 500 ms];
-#   - no bugcheck, no "Work queue ... no progress" (a hang);
+#   - no bugcheck, no "Work queue ... no progress" (a hang); the terminal
+#     line is also looked up by the p2b4 names (boot bad IPC reply, boot
+#     interrupt storm, boot clock stalled),
 #   - the recovery cycle's "boot ok" (RECOVER=1).
 #
 #   tools/fm-check.sh <collected evidence dir>
@@ -33,7 +35,7 @@ for row in "$D"/fm-*; do
     case "$name" in *-partial) continue;; esac
     [ -f "$row/serial.log" ] || continue
     boot=$(norm "$row/serial.log" | grep -a "intcdsp.sys: booting:" | head -1)
-    term=$(norm "$row/serial.log" | awk -v t="$boot" 'f{print} $0==t{f=1}' | grep -aiE "intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|.*crash)|ipc bad reply|truncated)" | head -1)
+    term=$(norm "$row/serial.log" | awk -v t="$boot" 'f{print} $0==t{f=1}' | grep -aiE "intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|bad IPC reply|.*crash|interrupt storm|clock stalled)|ipc bad reply|truncated)" | head -1)
     short=$(echo "$term" | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //' | cut -c1-150 | tr '|' '/')
     if [ -z "$term" ]; then
         printf "| %s | **no terminal line** | - | - | - | - | **NO** | - | - | - |\n" "$name" >> "$OUT"; allok=$((allok+1)); continue

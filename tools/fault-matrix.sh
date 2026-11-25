@@ -30,9 +30,11 @@
 #                   excerpt + the whole trace gzipped)
 #
 # bounded := the driver logs a terminal line (boot ok / boot <step> timeout /
-#            ROM error / stopped / ABI / version / ipc / ... crash / ipc bad
-#            reply / truncated / DSP power down, case-insensitive) within WINDOW
-#            guest-seconds of its "booting:" line.
+#            ROM error / stopped / ABI / version / ipc / bad IPC reply / ... crash /
+#            interrupt storm / clock stalled / ipc bad reply / truncated / DSP power
+#            down, case-insensitive) within WINDOW guest-seconds of its "booting:"
+#            line. (bad IPC reply is p2b4's D3 line; without it the row fell back
+#            to the DSP power down line and fm-check.sh saw no terminal line.)
 #
 # This work is licensed under the terms of the GNU GPL, version 2 or later.
 # See the COPYING file in the top-level directory.
@@ -41,7 +43,7 @@ QAD="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 EVROOT="${EVROOT:-/tmp/qad-fault-matrix}"
 DISK="${DISK:-$QAD/disk/p2b2.qcow2}"
 WINDOW="${WINDOW:-30}"
-TERM='intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|.*crash)|ipc bad reply|truncated|DSP power down)'
+TERM='intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|bad IPC reply|.*crash|interrupt storm|clock stalled)|ipc bad reply|truncated|DSP power down)'
 mkdir -p "$EVROOT"
 SUMMARY="$EVROOT/fault-matrix.md"
 

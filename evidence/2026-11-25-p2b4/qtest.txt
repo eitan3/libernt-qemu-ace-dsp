@@ -1,0 +1,9 @@
+ok 1 /x86_64/intel-hda-ace/enumerate
+ok 2 /x86_64/intel-hda-ace/caps
+ok 3 /x86_64/intel-hda-ace/stock-controllers
+ok 4 /x86_64/intel-hda-ace/boot-handshake
+ok 5 /x86_64/intel-hda-ace/power-down
+ok 6 /x86_64/intel-hda-ace/intipptr
+ok 7 /x86_64/intel-hda-ace/irq-intx
+ok 8 /x86_64/intel-hda-ace/irq-msi
+ok 9 /x86_64/intel-hda-ace/faults
