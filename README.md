@@ -52,6 +52,7 @@ serial log next to the device's own trace.
 | The interrupt | raised only while a message is pending and every enable is set; observed on the INTx line through the I/O APIC and as MSI; counted by the p2b3 driver's ISR (`1 DSP interrupts` on the rows that reach FW_READY); the p2b4 driver masks the enables and polls (`0 DSP interrupts`, the mask in every trace) |
 | Fault handling | 16 injectable faults — 18 forms, two of them naming one IPC4 message type (`ipc-status=<n>:<type>`, `never-reply=<type>`) — each with a bounded shape asserted by the qtest |
 | The pipeline table | create, set-state and delete pipeline are tracked by instance id and answered with the request's type and a status; a pipeline asked to run before it was paused answers the plan's status 5 and does not move; the table is empty again at every firmware start (patches 0011–0014; qtest `pipeline-table`, `pipeline-illegal`, `pipeline-faults`) |
+| The IPC self-test (C1) | the real driver's `SelfTest = 1` path against the pipeline table, on image p3c1: the seven lines of the plan's §8, every exchange `status 0 after 62–66 us`, `6 requests, 6 replies, 0 notifications, 0 timeouts, 0 DSP interrupts, ok`; the two typed fault rows end bounded, power the DSP down and recover (`evidence/2026-11-25-p3c1/vm`) |
 | A malformed image | a stream that ends inside a structure of the image is refused with the walk halted in that structure's state and with its code; an offset of the image near 2^32 never makes a read leave the stream (patches 0015–0018; qtest `short-stream`, `wrapped-offset`) |
 
 **Never proves** (silicon truth — only the real device can): the ROM's real
@@ -154,7 +155,7 @@ repeated), N6, N7 (TESTING.md's "`INTEN` reads 1 before"), N8 (TESTING.md's `dro
 and the environment notes E2–E4 (`after N us` is TCG execution time on this host; the wizard's
 three pages; sync #14's display-idle lines). `evidence/2026-11-25-p2b4/DIVERGENCE.md`.
 
-**P3 C1, the model half (2026-11-25; no VM run).** The model gained the pipeline table
+**P3 C1, the model half (2026-11-25; no VM run in it — the VM half is Round 5 below).** The model gained the pipeline table
 (patches 0011–0014): create, set-state and delete pipeline are parsed as the IPC4 header
 lays them out, kept by instance id and answered with the request's type and a status. The
 plan gives one rule — a pipeline must be paused before it can run, anything else asked to
@@ -184,6 +185,30 @@ structure's state and code. **N3**: `normalise-evidence.sh` prints its summary a
 is listed as a model value. The qtest grew to 14 cases and the mutation check to 50 rows; the boot-path
 comparison was re-run for 18 patches: still 1137 old trace lines in order, none gone.
 
+**Round 5 (image p3c1, 2026-11-25): the C1 simulator round — the driver's self-test against the pipeline table.** The
+driver at `9c9a876c6a3` (84 commits over master `f2bf7a98990`, built from `5773fcfa7af`: the `sofipc` transport, the
+`SelfTest = 1` path, N5, N6) against the model of `9713aa0` (patches 0001–0018, the binary rebuilt from the series, qtest
+14/14 first). **A — regression:** the unfaulted boot is p2b4's (`boot ok … attempt 1, 0 DSP interrupts`, `firmware ready …
+7 tuples`); its trace differs from p2b4's in N5's mask at `rom-ready` (+9 lines: the write of 0 through the interrupt
+pointer, `HfHIPCIE` and `HFIPCXCTL` masked again), the model's decoded reply line and one timing-dependent poll; the firmware
+line says `read` then `resident` at every D0 entry that boots (the VM cannot show `resident` alone: no S3). **B — the C1
+acceptance:** with `SelfTest = 1`, after `ipc: link ready, polled, 500 ms per message`, the seven lines of the plan's §8 —
+`create pipeline 1`, `paused`, `running`, `paused`, `reset`, `delete pipeline 1`, each `status 0 after 62–66 us`, then `6
+requests, 6 replies, 0 notifications, 0 timeouts, 0 DSP interrupts, ok` — on two disable/enable cycles and a plain boot; the
+trace holds FW_CONFIG, then type 17, 19 × 4, 18, each reply with the request's type and status 0 after three polls without
+one (the model's 50 µs). **C — the self-test fault rows:** `ipc-status=5:19` → `ipc: set pipeline state (19)
+0x93010003|0x00000000 status 5 (bad state) after 63 us; the link is faulted`, `2 requests, 2 replies, … failed at pipeline 1
+paused`, power-down; `never-reply=19` → `… reply timeout after 500025 us; the link is faulted`, `2 requests, 1 replies, … 1
+timeouts …`; both bounded, the DSP off (`adspcs=00000000`), the device started, and a later power cycle `boot ok` with a
+passing self-test. **D — the regression:** AC3 22 of 22 (`boot ok after 5366–5693 us`, the model's registers identical before
+and after every cycle, p2b4's two readings); AC4 20 of 20 bounded on their budgets with p2b4's terminal lines, recovered, 0
+rows with a failed check; `0 DSP interrupts` on every one of the round's 72 DSP boots, no storm, no `clock stalled`. What
+this round found: **D4**, a driver-side wording defect (the power-down line names the state *after* the power-down — always
+`off` — where TESTING.md expects `ready`); **N9** (the settings line is printed twice per start); what the VM can and cannot
+show of N5 (the mask is where TESTING.md says; its effect is not reachable) and of N6; the transport unaffected by the
+model's stale reply bits; E5 (`after N us` is about a quarter of p2b4's on this host's launches; the self-test's 62–66 µs is
+the same everywhere). `evidence/2026-11-25-p3c1/vm` (`c1-acceptance.md`, `DIVERGENCE.md`). Not run: `UseInterrupts = 1`.
+
 ## Build and run
 
 Requirements: Linux with gcc, ninja, python3 and the glib/pixman development
@@ -211,12 +236,13 @@ serial line; `ICOUNT=1` runs under icount (see "A note on the host");
 the rest. `tools/guest.sh` types into the guest through the monitor (~100 ms
 per key), `snapshot.sh` screenshots it, `set-fault.sh` injects a fault at run
 time over QMP, `tools/waitline.sh` waits (bounded) for a serial line,
-The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p2b4-f2bf7a98990/`
-(`bootcd.iso` sha256 `f4c4636d5e1351…`, `LiberNT.vhd` `8e079736612f84…`, in-ISO
-`intcdsp.sys` `41bd1405…`, built from `feat/audio-control-polish @ 24b0394e1e0` — the published
-tip `b392065b2cf` has the same tree content — 76 commits over master `f2bf7a98990`; the images
-of the earlier rounds are `test-audio-intel-sst-p2b3-a19eacb7fea/`,
-`test-audio-intel-sst-p2b2-a676708a/` and `test-audio-intel-sst-p2b-*`). Its boot chain
+The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p3c1-f2bf7a98990/`
+(`bootcd.iso` sha256 `1e381a4be043…`, `LiberNT.vhd` `97c09c3acee9…`, in-ISO `intcdsp.sys`
+`cc6c1309…`, built from `feat/audio-control-polish @ 5773fcfa7af` — the published tip
+`9c9a876c6a3` has the same tree content — 84 commits over master `f2bf7a98990`; the images of
+the earlier rounds are `test-audio-intel-sst-p2b4-f2bf7a98990/` (`b392065b2cf`),
+`test-audio-intel-sst-p2b3-a19eacb7fea/`, `test-audio-intel-sst-p2b2-a676708a/` and
+`test-audio-intel-sst-p2b-*`). Its boot chain
 changed since round 1 (FreeLoader is gone; `LiberNT Boot Manager` reads a BCD store and hands
 over to the OS loader with `SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200` — the kernel's debug
 output is still on the serial log), and the first boot of a fresh overlay shows a **first-boot
@@ -282,7 +308,9 @@ be reached` in place of the `+0x120 (the interrupt enable register the pointer n
 (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`: the other eleven lines byte-identical to p2b3's,
 the six BAR4 reads, 0 `ace_unexpected`): the pointer register is a DSP-domain one and does not
 answer while the DSP is unpowered (a model value, the R1 scenario), and the driver (R1) trusts
-it only where it is used.
+it only where it is used. **On the p3c1 image** (`evidence/2026-11-25-p3c1/vm/a1-stage1-firstboot`) the same
+thirteen lines except the firmware line's wording (N6: `1158164 bytes, read, image`), followed by `intcdsp.sys: SelfTest
+= 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms` — printed twice (N9).
 
 Stage 2 (`BootDsp=1`), measured on the p2b4 image (`b392065b2cf`: R1, poll-only) on a plain boot
 of the stage-2 overlay under icount (`evidence/2026-11-25-p2b4/a2-stage2-boot`; the p2b3 block,
@@ -320,14 +348,46 @@ ISR's reads are gone from the trace; the interrupt path itself is still proven b
 On the p2b2 image the same boot stopped after `FW_READY received` (D1); that block is kept in
 `evidence/2026-11-24-p2b2/DIVERGENCE.md`.
 
+On the p3c1 image (`9c9a876c6a3`, the C1 driver half) the same boot (`evidence/2026-11-25-p3c1/vm/a2-stage2-boot`) has
+three additions and N5's mask in its trace: the settings line `intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs
+= 500 ms` (twice: N9), the firmware line's `… 1158164 bytes, read, image …` at the device object's first call and `…
+bytes, resident, image …` at the boot's (N6), and the transport's line `intcdsp.sys: ipc: link ready, polled, 500 ms per
+message` after `firmware ready`; `boot ok after 10546 us (clock 17990619 us) … attempt 1, 0 DSP interrupts, cleanup ok`.
+From the power-up on the trace is p2b4's (92 lines) plus nine — at `rom-ready`, after the pointer first answers `0x120`:
+the read of `INTEN`, the write of 0 through the pointer, the read-back, `HfHIPCIE` and `HFIPCXCTL` masked again (N5; the
+VM shows the action, not an effect: `INTEN` reads 0 before and after) — plus the model's decoded reply line, minus two
+polls that p2b4's launch made before the FW_READY notification.
+
+With `SelfTest = 1` (set in the guest, then a disable/enable: `evidence/2026-11-25-p3c1/vm/b1-selftest`; the settings line
+reads `SelfTest = 1, UseInterrupts = 0, IpcTimeoutMs = 500 ms`), the block above is followed by the C1 acceptance lines of
+the plan's §8:
+
+```
+intcdsp.sys: ipc self-test: create pipeline 1: status 0 after 63 us
+intcdsp.sys: ipc self-test: pipeline 1 paused: status 0 after 63 us
+intcdsp.sys: ipc self-test: pipeline 1 running: status 0 after 63 us
+intcdsp.sys: ipc self-test: pipeline 1 paused: status 0 after 63 us
+intcdsp.sys: ipc self-test: pipeline 1 reset: status 0 after 63 us
+intcdsp.sys: ipc self-test: delete pipeline 1: status 0 after 63 us
+intcdsp.sys: ipc self-test: 6 requests, 6 replies, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+```
+
+Each exchange sits on the model's 50 µs reply timer and is seen by the driver's fourth 20 µs poll (62–66 µs in every launch
+of the round). In the trace the six requests are `0x91010000`, `0x93010003`, `0x93010004`, `0x93010003`, `0x93010002`,
+`0x92010000` (create, paused, running, paused, reset, delete; instance id 1), each acknowledged before the next, each reply
+`status 0` with its type decoded (`IPC reply type 17 (create-pipeline) …`, `type 19 (set-pipeline-state) … pipeline 1:
+uninitialized -> paused`, …, `type 18 (delete-pipeline) …`). The model's registers after the self-test are p2b4's D0
+reading except `hfipcxida=32000000`, the delete reply's bits kept after the acknowledgement (the model's N2, which the
+transport is not disturbed by).
+
 ## Acceptance status
 
 | AC | What | Status |
 |---|---|---|
 | AC1 | qtest passes; mutation check recorded | **PASS** — 14 cases (`evidence/2026-11-25-p3c1/qtest.txt`, 14/14): the 9 earlier ones unchanged (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down) and, since patches 0011–0018, `pipeline-table`, `pipeline-illegal`, `pipeline-faults`, `short-stream`, `wrapped-offset`. `mutation-check.sh`: **50 mutations, 49 killed, 1 survivor** (`personality-id`, an equivalent mutant: the class default it changes is overwritten by the personality at realise) — `evidence/2026-11-25-p3c1/mutation-check.md`; each of the 25 rows added since p2b3 is killed by the case that pins it, one of them (`payload-bounds-wrap`, which makes the emulator die) as an abort, and the detector no longer reads an aborted run as a survivor (`SELFTEST=1`). **The boot path itself did not change** (`evidence/2026-11-25-p3c1/boot-path-diff.txt`, re-run for 18 patches): the 10-patch model's 1137 `ace_*` trace lines of cases 1–9 are all present, in order, in the 18-patch model's run, with 16 lines added — all of them the new decoded ones. History: `evidence/2026-11-25-p2b3/mutation-check.md` (25 mutations, 24 killed, 1 survivor) |
-| AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`); **on the p2b4 image** (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`): the same thirteen lines except the two R1 lines (`HFINTIPPTR 0xffffffff`, `names no 32-bit register inside BAR4`), the six BAR4 reads, 0 `ace_unexpected` |
-| AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b4 image** (`b392065b2cf`, poll-only). Plain boot under icount: `boot ok after 67971 us (clock 17821036 us) … attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000`; end clock = start clock + M within 0.4 ms; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **0 DSP interrupts** (R2: the enables are masked before the ROM request and never enabled; p2b3's `1` was the FW_READY interrupt its ISR took). 22 disable/enable cycles in one VM, 22 `boot ok after 21406–21726 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, the clock rule within 80–82 µs on all 23 boots, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p2b4/ac3-cycles`). Earlier rounds: p2b3 `1 DSP interrupts` (N1), p2b2 the D1 hang |
-| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale; since patches 0013/0014 the case `pipeline-faults`: `ipc-status=5:19`, `ipc-status=7`, `ipc-status=7:1`, `never-reply=19`, `never-reply=1`, `never-reply` — the two typed forms have **no VM row yet**, they need the C1 image). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
+| AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`); **on the p2b4 image** (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`): the same thirteen lines except the two R1 lines (`HFINTIPPTR 0xffffffff`, `names no 32-bit register inside BAR4`), the six BAR4 reads, 0 `ace_unexpected`; **on the p3c1 image** (`evidence/2026-11-25-p3c1/vm/a1-stage1-firstboot`): p2b4's thirteen lines with the firmware line's `read` (N6) and the settings line twice (N9), the six BAR4 reads, 0 `ace_unexpected` |
+| AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b4 image** (`b392065b2cf`, poll-only). Plain boot under icount: `boot ok after 67971 us (clock 17821036 us) … attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000`; end clock = start clock + M within 0.4 ms; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **0 DSP interrupts** (R2: the enables are masked before the ROM request and never enabled; p2b3's `1` was the FW_READY interrupt its ISR took). 22 disable/enable cycles in one VM, 22 `boot ok after 21406–21726 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, the clock rule within 80–82 µs on all 23 boots, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p2b4/ac3-cycles`). **PASS on the p3c1 image** (`9c9a876c6a3`, `SelfTest = 0`): `boot ok after 10415 us (clock 17814116 us) … attempt 1, 0 DSP interrupts` at boot (end clock − start clock − N = 1289 µs there, E5), then 22 disable/enable cycles: 22 `boot ok after 5366–5693 us`, end − start − N 80–82 µs on each, the model's registers identical before and after every cycle and equal to p2b4's two readings, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p3c1/vm/ac3-cycles`). Earlier rounds: p2b3 `1 DSP interrupts` (N1), p2b2 the D1 hang |
+| AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale; since patches 0013/0014 the case `pipeline-faults`: `ipc-status=5:19`, `ipc-status=7`, `ipc-status=7:1`, `never-reply=19`, `never-reply=1`, `never-reply` — the two typed forms got their VM rows on the C1 image: below). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. **On the p3c1 image: PASS — 20 of 20 boot rows bounded on their budgets with p2b4's terminal lines (timings aside) and recovered (`evidence/2026-11-25-p3c1/vm/fault-matrix.md`, 0 rows with a failed check), and the two typed forms have their VM rows: `ipc-status=5:19` and `never-reply=19` end bounded with TESTING.md's lines, power the DSP down, leave the device started and recover (`selftest-faults/`, 0 failed checks, D4 noted).** History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
 | AC5 | README + scripts reproduce AC2 from a clean checkout | **PASS** — see "Reproducibility" |
 
 ### The fix round's expectations (p2b4, TESTING.md of the image) and the measured lines
@@ -383,14 +443,31 @@ figures of the unfaulted steps are TCG execution time on this host, not DSP timi
 (`never-*`, `drop-requests`, `x-delay-scale=1550`) measure their budgets.
 
 
-Two forms of the injector have **no VM row yet**: `ipc-status=<n>:<type>` and
-`never-reply=<type>` (patches 0013/0014). On an image without the IPC self-test they boot
-exactly as `none` does unless the type they name is the boot's own (type 1), so a row is
-only meaningful on the C1 image; the model side is the qtest case `pipeline-faults`
-(`ipc-status=5:19` answers set-state with 5 and leaves FW_CONFIG, create and delete alone;
-`never-reply=19` leaves set-state unanswered and the others answered). The rows the C1
-simulator round expects: `ipc-status=5:19` → `ipc: set pipeline state (19) … status 5 …;
-the link is faulted`, `never-reply=19` → the self-test's timeout line.
+On the p3c1 image the same 20 rows are bounded on the same budgets with the same terminal lines
+(`evidence/2026-11-25-p3c1/vm/fault-matrix.md`: `after N us` from 5365 µs to the 3 s of `never-enter`; the
+budget rows measure their budgets, the others about a quarter of p2b4's figures — E5), 0 rows with a failed
+check, every boot `0 DSP interrupts`.
+
+### The self-test rows (p3c1 image, the guest's `SelfTest = 1`)
+
+The two forms of the injector that name one message type (patches 0013/0014) had no VM row until the C1 image:
+on an image without the self-test they boot as `none` does unless the type they name is the boot's own. On
+the p3c1 image with `SelfTest = 1` persisted in the guest they are the rows the plan's §8 asks for
+(`evidence/2026-11-25-p3c1/vm/selftest-faults`; `tools/fault-matrix.sh` ends such a row with the self-test's
+summary, and `tools/fm-check.sh` checks it against TESTING.md: 0 rows with a failed check):
+
+| fault | the driver's lines after `boot ok` and `ipc: link ready` | bounded | the model after the row | recovery (fault cleared, disable/enable) |
+|---|---|---|---|---|
+| `ipc-status=5:19` | `ipc self-test: create pipeline 1: status 0 after 63 us` · `ipc: set pipeline state (19) 0x93010003\|0x00000000 status 5 (bad state) after 63 us; the link is faulted` · `ipc self-test: 2 requests, 2 replies, 0 notifications, 0 timeouts, 0 DSP interrupts, failed at pipeline 1 paused` · `DSP power down from state off: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)` (D4: `off`, not `ready`) | 0.000 s | `adspcs=00000000` (powered down) | `boot ok after 5388 us … 0 DSP interrupts`, the seven lines at 62–63 µs, `… ok` |
+| `never-reply=19` | `ipc self-test: create pipeline 1: status 0 after 66 us` · `ipc: set pipeline state (19) 0x93010003\|0x00000000 reply timeout after 500025 us; the link is faulted` · `ipc self-test: 2 requests, 1 replies, 0 notifications, 1 timeouts, 0 DSP interrupts, failed at pipeline 1 paused` · the same power-down line | 0.500 s | `adspcs=00000000` | `boot ok after 5366 us …`, the seven lines at 63 µs, `… ok` |
+
+In both rows the device stays started (the shell comes up; the started device is disabled and enabled again)
+and the model's table, emptied by the power-down, accepts pipeline 1's create a second time. In the trace the
+first row's set-state reply is `0xb3000005` (`IPC reply type 19 (set-pipeline-state) status 5 … status 5 injected
+by the fault`); in the second the request is `IPC request dropped (set-pipeline-state)` and the driver polls 1049
+times — reading the model's stale reply bits without taking them for a reply or a notification — until its
+500 ms budget. The rows were run three times in the round with the same end (63–78 µs; 500025–500295 µs; the
+last pass is kept), and the status row once more with the final scripts.
 
 ## Model versus silicon
 
@@ -422,13 +499,27 @@ filled from measurements on the real device; "—" means not yet measured.
 | `fetch.sh`, `build.sh`, `export-patches.sh` | the pinned source, the build, the series export |
 | `patches/0001…0018` | internal header; capability chain (`x-caps`); stream-run + interrupt hooks; `intel-hda-ace`; the qtest; the docs page; the two-step FSR (model, qtest); the interrupt pointer that does not answer while unpowered (model, qtest); the pipeline table with every reply traced decoded (model, qtest); the faults that name one message type (model, qtest); the ROM's judgement refusing a stream cut short (model, qtest); a payload read that never wraps (model, qtest) |
 | `run.sh`, `run-control.sh`, `lib-run.sh`, `make-overlay.sh` | the VM runs (`lib-run.sh`: `ICOUNT=1`, `QTESTSOCK=1`, `FAULT`, `TRACE`, `STOP_ON`, …) |
-| `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults; in `tools/`: the monitor/typing helpers (`guest.sh`, `mon.py`, `qmp.py`), the qtest client and heartbeat (`qtest.py`, `heartbeat.py`), `waitline.sh`, `cycle.sh`, `ac3-cycles.sh`, the fault-matrix driver and its post-check (`fault-matrix.sh`, `fm-check.sh`) |
+| `snapshot.sh`, `set-fault.sh`, `tools/` | screenshots, QMP faults; in `tools/`: the monitor/typing helpers (`guest.sh`, `mon.py`, `qmp.py`), the qtest client and heartbeat (`qtest.py`, `heartbeat.py`), `waitline.sh`, `cycle.sh`, `ac3-cycles.sh`, the fault-matrix driver and its post-check (`fault-matrix.sh`, `fm-check.sh` — a `SelfTest = 1` guest's rows end with the self-test's summary) |
 | `mutation-check.sh` | AC1's mutation run: one row per model behaviour, each breaking one piece and naming the case that goes red (the detector's rules are in the header; `SELFTEST=1` proves them on synthetic logs; `ONLY=<regex>` runs the rows whose name matches) |
 | `evidence/<date>/` | serial logs, device traces and screenshots of every acceptance run (paths normalised) |
 
 ## Evidence index
 
-### 2026-11-25-p3c1 (P3 C1, the model half: the pipeline table and the faults that name one message type; the follow-up fixes — no VM run)
+### 2026-11-25-p3c1/vm (P3 C1, the simulator round: the driver's IPC self-test against the pipeline table on image p3c1)
+
+| Run | What it shows |
+|---|---|
+| `PROVENANCE.md`, `qtest.txt` | the image hashes verified, the in-ISO `intcdsp.sys` hash, the model binary rebuilt from the series (the model half's hash), the qtest 14/14 before the first VM run; the two overlays |
+| `c1-acceptance.md` | Tasks A–D: the image's expectations → the measured lines (the P2 block with N5 in the trace and N6's wording, the seven self-test lines and the trace sequence of the six requests, the two fault rows, AC3 and AC4); what was not run |
+| `a1-stage1-firstboot` | the first boot of the fresh overlay: the three-page wizard, `BootDsp=1` set, p2b4's thirteen stage-1 lines with N6's `read` and the settings line (`stage1-lines.txt`), clean S5 |
+| `a2-stage2-boot` | the stage-2 block with the `ipc: link ready` line; the boot's trace next to p2b4's: N5's mask at `rom-ready` (+9 lines), the decoded reply, one poll fewer |
+| `b1-selftest`, `b2-selftest-boot` | **the C1 acceptance**: `SelfTest = 1` set in the guest, two disable/enable cycles and a plain boot — the seven lines at 63–66 µs each, the summary `ok`, the settings line `SelfTest = 1`; `ipc-trace.txt`: type 17, 19 × 4, 18, each `status 0` |
+| `selftest-faults` | the two self-test fault rows (`ipc-status=5:19`: `status 5 (bad state)`; `never-reply=19`: the 500 ms timeout), each bounded, powered down, recovered with a passing self-test; `fault-matrix.md` with `tools/fm-check.sh`'s self-test table |
+| `ac3-cycles` | 22 disable/enable cycles under icount: 22 `boot ok` (5366–5693 µs), the model's registers identical before and after each (= p2b4's), clean S5 (`summary.txt`) |
+| `fm-<fault>`, `fault-matrix.md` | the 20 boot rows of the matrix with their recovery cycles; the table in the canonical order and the checks beyond "bounded" (0 rows with a failed check); the terminal lines are p2b4's |
+| `DIVERGENCE.md` | **D4** (the power-down line names the state after the power-down), N9 (the settings line twice per start), what the VM can and cannot show of N5 and N6, the transport against the model's stale reply bits, E5–E7, the tooling changes |
+
+### 2026-11-25-p3c1 (P3 C1, the model half: the pipeline table and the faults that name one message type; the follow-up fixes)
 
 | File | What it shows |
 |---|---|
@@ -439,7 +530,7 @@ filled from measurements on the real device; "—" means not yet measured.
 | `n1-payload-reads.md` | **a guest could crash the emulator**: the record of the SIGSEGV on a wrapped offset of the streamed image and its backtrace; and N1 — what the old model did at each cut of the stream, what the fixed model answers |
 | `MODEL-NOTES.md` | every reply value the model chooses — plan-given or model value — with the silicon column left for C6 (rows 1–22), and the INFO_NEEDED list |
 | `fault-values.txt` | the fault property on the final binary: the bad values refused on the command line and over QMP (the fault in place kept), the good ones accepted |
-| `DIVERGENCE.md` | no driver ran: the follow-up's crash finding and its fix, the rulings P1–P3, N1 and N3 fixed, N2 documented, the detector fix |
+| `DIVERGENCE.md` | no driver ran: the follow-up's crash finding and its fix, the rulings P1–P3, N1 and N3 fixed, N2 documented, the detector fix; a pointer to the VM half (`vm/DIVERGENCE.md`) |
 
 ### 2026-11-25-p2b4 (the fix round R1/R2/D3/R6 verified on `b392065b2cf`; AC3 and AC4 closed again)
 
@@ -499,9 +590,9 @@ stage-1 VM run of AC2 and compares the driver's lines with the ones above
 
 ## INFO_NEEDED
 
-1. Resolved by image p2b4 (`b392065b2cf`): **D3 is fixed** (`bad-tuples` → `boot bad IPC reply` naming the tuple, `truncated-reply` → `boot truncated`; both power the DSP down and recover); R1 and R2 are measured as TESTING.md describes them (`HFINTIPPTR` all ones before power-up, `0 DSP interrupts` on every boot, the mask in every trace); the earlier rounds are in their evidence trees. Open now: **N5** — whether silicon's `HFINTIPPTR` also reads all ones right after the subsystem's CPA (on the model it answers only with the core's power, and the driver's `INTEN` mask is skipped at that point and not repeated: a BIOS-left `INTEN = 1` would stay set through the boot there); **N6** — R6's log signature (the `firmware … bytes, ok` line is printed read or resident; a distinct text would make it checkable) and R6 on a real sleep/resume; **N8** — TESTING.md's `drop-requests` row; the storm guard of R2 stays invisible to the model.
+1. Resolved by image p2b4 (`b392065b2cf`): **D3 is fixed** (`bad-tuples` → `boot bad IPC reply` naming the tuple, `truncated-reply` → `boot truncated`; both power the DSP down and recover); R1 and R2 are measured as TESTING.md describes them (`HFINTIPPTR` all ones before power-up, `0 DSP interrupts` on every boot, the mask in every trace); the earlier rounds are in their evidence trees. Open now: **N5** — whether silicon's `HFINTIPPTR` also reads all ones right after the subsystem's CPA (since image p3c1 the driver repeats the `INTEN` mask at ROM ready, where the pointer first answers on the model: the mask is in every trace of `evidence/2026-11-25-p3c1/vm`, but its effect is not reachable there, since `INTEN` reads 0 before and after — the silicon question stays); **N6** — its log signature exists since image p3c1 (`read` / `resident` in the firmware line; 72 pairs measured); open is R6 on a real sleep/resume, where the line must say `resident` alone (no S3 in the VM); **N8** — TESTING.md's `drop-requests` row; **D4** — the power-down line's state (`evidence/2026-11-25-p3c1/vm/DIVERGENCE.md`); **`UseInterrupts = 1`** — not run in the VM; the storm guard of R2 stays invisible to the model.
 2. The real BAR4 size, the capability offsets, the `HFINTIPPTR` value, the powered-down read values, the ROM timings, MSI vs INTx — each replaces a model value above.
 3. Whether the real ROM accepts the firmware from this boot path (never answerable by the model).
 4. A host whose timer delivery survives a spinning TCG guest and whose disk does not hold a 4 KB write for a quarter second — no longer needed, since every run after the first is made under `-icount` with its logs on tmpfs ("A note on the host"), but such a host would let the non-icount environment be measured too.
-5. **The pipeline table (P3 C1, the model half).** On silicon: the status code of an illegal pipeline transition (the plan's 5, or SOF's 12 `IPC4_INVALID_RESOURCE_STATE`), the state a new pipeline is in, the transitions the firmware allows beyond "paused before running", the answers to a duplicate create, an unknown pipeline, instance id 0 (R-G) and the multi-pipeline form, the reply's delay and extension — every row of `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. In the plan: §8 C1's `fault=ipc-status=19:17` had to read `ipc-status=5:19` under the plan's own `<n>:<type>` notation (corrected 2026-11-25).
+5. **The pipeline table (P3 C1, the model half).** On silicon: the status code of an illegal pipeline transition (the plan's 5, or SOF's 12 `IPC4_INVALID_RESOURCE_STATE`), the state a new pipeline is in, the transitions the firmware allows beyond "paused before running", the answers to a duplicate create, an unknown pipeline, instance id 0 (R-G) and the multi-pipeline form, the reply's delay and extension — every row of `evidence/2026-11-25-p3c1/MODEL-NOTES.md`. In the plan: §8 C1's `fault=ipc-status=19:17` had to read `ipc-status=5:19` under the plan's own `<n>:<type>` notation (corrected 2026-11-25). The VM row of the C1 acceptance is measured on image p3c1 (`evidence/2026-11-25-p3c1/vm`): the six `status 0` and the 62–66 µs are the model's (its 50 µs timer, the plan's status 0) seen through the driver's 20 µs poll; what the real firmware answers, and how fast, is the open item.
 6. **A malformed image on silicon (the follow-up).** In which state the real ROM halts, and with which error, when the stream ends inside each structure of the image; whether it reads past the stream at all on an offset near 2^32 (`evidence/2026-11-25-p3c1/MODEL-NOTES.md`, rows 17–22); and whether silicon clears the reply register on the acknowledgement (row 16). The model's answers there are model values; what it no longer does is crash.

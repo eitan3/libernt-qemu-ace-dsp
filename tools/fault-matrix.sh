@@ -29,6 +29,19 @@
 #                   command, screenshot, the trace from the booting line as an
 #                   excerpt + the whole trace gzipped)
 #
+# Self-test rows: on an overlay whose guest has SelfTest = 1 (persisted in its
+# registry; set in the guest, see the README), a boot that ends "boot ok" goes on
+# to the driver's IPC self-test. Such a row is recognised by the driver's settings
+# line before its "booting:" line (SelfTest = 1); its terminal line is then the
+# self-test's summary ("ipc self-test: N requests, ... ok" or "... failed at <step>"),
+# which has the rest of WINDOW to show up like any terminal line (a self-test that
+# prints no summary is unbounded, whatever its boot ok said). The row quotes the
+# boot's own "boot ok" line and the failing exchange ("ipc: ... the link is
+# faulted", whose "after N us" is the row's own elapsed) after the summary, and the
+# model's registers read over qtest once the row is over. The recovery cycle then
+# needs "boot ok" and the summary's "ok". A ':' of a typed fault (ipc-status=<n>:<type>)
+# becomes '_' in the row's directory name (a portable path); the table keeps the value.
+#
 # bounded := the driver logs a terminal line (boot ok / boot <step> timeout /
 #            ROM error / stopped / ABI / version / ipc / bad IPC reply / ... crash /
 #            interrupt storm / clock stalled / ipc bad reply / truncated / DSP power
@@ -44,6 +57,8 @@ EVROOT="${EVROOT:-/tmp/qad-fault-matrix}"
 DISK="${DISK:-$QAD/disk/p2b2.qcow2}"
 WINDOW="${WINDOW:-30}"
 TERM='intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|bad IPC reply|.*crash|interrupt storm|clock stalled)|ipc bad reply|truncated|DSP power down)'
+TERM_ST='intcdsp.*ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, (ok|failed at .+)'
+TERM_ST_OK='intcdsp.*ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, ok'
 mkdir -p "$EVROOT"
 SUMMARY="$EVROOT/fault-matrix.md"
 
@@ -52,6 +67,8 @@ gtime() { echo "$1" | grep -oE "^\[ *[0-9.]+\]" | tr -d "[] "; }
 wall() { date +%s; }
 # the serial log from the driver's "booting:" line on
 after_booting() { norm "$1" | awk -v t="$(norm "$1" | grep -a 'intcdsp.sys: booting:' | head -1)" 'f{print} $0==t{f=1}'; }
+# a self-test row: the driver's settings line before its "booting:" line says so
+st_row() { norm "$1" | awk '/intcdsp.sys: booting:/{exit} /intcdsp.sys: SelfTest = 1,/{f=1} END{print f ? "yes" : "no"}'; }
 q() { "$@" >/dev/null 2>&1; }
 
 collect() {
@@ -72,12 +89,15 @@ collect() {
 run_one() {
     local fault="$1" scale="${2:-}"
     local name="fm-$fault${scale:+-scale$scale}"
+    name="${name//:/_}"
     local EV="$EVROOT/$name"
     rm -rf "$EV"; mkdir -p "$EV"
     local args=()
     [ "$fault" != none ] && args+=("FAULT=$fault")
     [ -n "$scale" ] && args+=("ACE_ARGS=x-delay-scale=$scale")
     [ "${HEARTBEAT:-0}" = 1 ] && args+=("QTESTSOCK=1")
+    # the recovery cycle reads the model's registers over qtest (tools/cycle.sh)
+    [ "${RECOVER:-0}" = 1 ] && args+=("QTESTSOCK=1")
     [ "${ICOUNT:-0}" = 1 ] && args+=("ICOUNT=1")
     local w0; w0=$(wall)
     ( cd "$QAD" && env DISK="$DISK" CDROM=none TRACE=1 WAIT=$(( WINDOW * 8 + 600 )) SETTLE=2 EVID="$EV" \
@@ -101,6 +121,7 @@ run_one() {
             "${fault}${scale:+ scale=$scale}" | tee -a "$SUMMARY"
         ( cd "$QAD" && q tools/guest.sh "$EV" stop ); wait $lr 2>/dev/null; return
     fi
+    local strow; strow=$(st_row "$EV/serial.log")
     if [ "${HEARTBEAT:-0}" = 1 ] && [ -S "$SOCK/qtest.sock" ]; then
         ( python3 "$QAD/tools/heartbeat.py" "$SOCK/qtest.sock" $(( WINDOW * 3 + 120 )) "${PERIOD:-1000}" > "$EV/heartbeat.log" 2>&1 & )
     fi
@@ -108,6 +129,11 @@ run_one() {
     for i in $(seq 1 $(( WINDOW * 4 + 40 ))); do
         term=$(after_booting "$EV/serial.log" | grep -aiE "$TERM" | grep -aiv "DSP power down" | head -1)
         [ -z "$term" ] && term=$(after_booting "$EV/serial.log" | grep -aiE "intcdsp.*DSP power down" | head -1)
+        if [ "$strow" = yes ] && [ -n "$term" ] && echo "$term" | grep -aq "boot ok"; then
+            # SelfTest = 1: boot ok is not the end of the row -- the self-test's
+            # summary is, or the row is unbounded
+            term=$(after_booting "$EV/serial.log" | grep -aiE "$TERM_ST" | head -1)
+        fi
         if [ -n "$term" ]; then
             gdt=$(awk -v a="$t0" -v b="$(gtime "$term")" 'BEGIN{printf "%.3f", b-a}')
             break
@@ -117,7 +143,7 @@ run_one() {
     done
     sleep 3
     [ -n "$SOCK" ] && pkill -f "heartbeat.py $SOCK" 2>/dev/null
-    local reads off txt verdict after
+    local reads off txt verdict after bootline faultline model
     # the heartbeat's own reads (+0x1108) are not the driver's polls
     reads=$(( $(grep -ac "ace_reg_read" "$EV/qemu-dbg.log" 2>/dev/null) - $(grep -ac "ace_reg_read BAR4 +0x1108" "$EV/qemu-dbg.log" 2>/dev/null) ))
     off=$(grep -ac -- "-> off" "$EV/qemu-dbg.log" 2>/dev/null)
@@ -125,8 +151,19 @@ run_one() {
     if [ -z "$term" ]; then
         verdict="**unbounded**"; txt="none: $reads register polls, no line, no power-down"
     else
-        txt=$(echo "$term" | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //' | cut -c1-200)
+        txt=$(echo "$term" | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //' | cut -c1-200 | sed 's/|/\\|/g')
         if awk -v d="$gdt" -v w="$WINDOW" 'BEGIN{exit !(d <= w)}'; then verdict="bounded"; else verdict="**late**"; fi
+    fi
+    if [ "$strow" = yes ] && echo "$term" | grep -aq "ipc self-test:"; then
+        # the boot's own line and the failing exchange after the summary; the
+        # summary has no elapsed of its own, the failing exchange's is the row's
+        bootline=$(after_booting "$EV/serial.log" | grep -a "intcdsp.sys: boot ok" | head -1 | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //;s/[[:space:]]*$//' | cut -c1-270 | sed 's/|/\\|/g')
+        faultline=$(after_booting "$EV/serial.log" | grep -aE "intcdsp.sys: ipc: .*the link is faulted" | head -1 | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //;s/[[:space:]]*$//' | cut -c1-200)
+        model=$(python3 "$QAD/tools/qtest.py" "$SOCK/qtest.sock" adspcs hfipcxida fsr 2>/dev/null | awk '{printf "%s=%s ", $NF, substr($4, 11, 8)}')
+        after=$(echo "$faultline" | grep -aoE "after [0-9]+ us" | head -1)
+        [ -n "$bootline" ] && txt="$txt; boot: $bootline"
+        [ -n "$faultline" ] && txt="$txt; $(echo "$faultline" | sed 's/|/\\|/g')"
+        [ -n "$model" ] && txt="$txt; model after it: ${model% }"
     fi
     ( cd "$QAD" && q tools/guest.sh "$EV" shot desktop )
     local rec="-"
@@ -138,7 +175,13 @@ run_one() {
             if [ -n "$scale" ]; then ( cd "$QAD" && q ./set-fault.sh "$EV" none x-delay-scale=1 )
             else ( cd "$QAD" && q ./set-fault.sh "$EV" none ); fi
             ( cd "$QAD" && HEARTBEAT="${HEARTBEAT:-0}" TIMEOUT="${TIMEOUT:-60}" tools/cycle.sh "$EV" recover > "$EV/recover.out" 2>&1 )
-            if grep -aq "intcdsp.sys: boot ok" "$EV/recover.out"; then rec="recovered: boot ok"; else rec="recovered: NO"; fi
+            if grep -aq "intcdsp.sys: boot ok" "$EV/recover.out"; then
+                rec="recovered: boot ok"
+                if [ "$strow" = yes ]; then
+                    if grep -aqE "$TERM_ST_OK" "$EV/recover.out"; then rec="recovered: boot ok, self-test ok"
+                    else rec="recovered: boot ok, **self-test not ok**"; fi
+                fi
+            else rec="recovered: NO"; fi
             ( cd "$QAD" && q tools/guest.sh "$EV" shot console )
         else
             rec="recovered: shell not reached"

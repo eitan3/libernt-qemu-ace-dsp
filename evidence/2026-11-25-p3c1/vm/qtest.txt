@@ -1,0 +1,20 @@
+# qtest before the first VM run of the p3c1 round -- 2026-11-25T09:52Z (the binary rebuilt from the series on main 9713aa0: ./build.sh 2026-11-25T09:51:42Z, 18 patches, rc=0)
+# build/qemu-system-x86_64 sha256 be8667eb822902f712334caf3484762285bd0c936787e5906cfea8895750481d
+# build/tests/qtest/intel-hda-ace-test sha256 5d908c0786cb7c35e00ef352dfecd53ffce52f13b5cff7f572e57cefec468ab4
+# both equal the hashes the model half recorded (../qtest.txt): the binary of this round is the model half's, rebuilt from the series
+# command: cd build && QTEST_QEMU_BINARY=./qemu-system-x86_64 ./tests/qtest/intel-hda-ace-test
+1..14
+ok 1 /x86_64/intel-hda-ace/enumerate
+ok 2 /x86_64/intel-hda-ace/caps
+ok 3 /x86_64/intel-hda-ace/stock-controllers
+ok 4 /x86_64/intel-hda-ace/boot-handshake
+ok 5 /x86_64/intel-hda-ace/power-down
+ok 6 /x86_64/intel-hda-ace/intipptr
+ok 7 /x86_64/intel-hda-ace/irq-intx
+ok 8 /x86_64/intel-hda-ace/irq-msi
+ok 9 /x86_64/intel-hda-ace/faults
+ok 10 /x86_64/intel-hda-ace/pipeline-table
+ok 11 /x86_64/intel-hda-ace/pipeline-illegal
+ok 12 /x86_64/intel-hda-ace/pipeline-faults
+ok 13 /x86_64/intel-hda-ace/short-stream
+ok 14 /x86_64/intel-hda-ace/wrapped-offset

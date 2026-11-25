@@ -10,6 +10,13 @@ item noticed while working, or a tooling fix.
 the first delivery as `main` 4bb8022): P1, P2 and P3 ruled; **N1 and N3 fixed, N2 documented**;
 and one finding the follow-up made on its own — **a guest could crash the emulator** — fixed.
 
+**Amended again — the VM half** (the C1 simulator round, same day: image p3c1 against the model of `9713aa0`, the
+first run of the driver's `SelfTest = 1` path). Its divergences are in `vm/DIVERGENCE.md`: **D4** (the
+power-down line names the state *after* the power-down — always `off` — where TESTING.md expects `ready`),
+**N9** (the settings line is printed twice per start), what the VM can and cannot show of N5 and N6, the
+transport against the model's stale reply bits, and E5–E7. "No VM run was made in this round" above refers to
+the model half; its text is unchanged.
+
 ## The finding of the follow-up: a guest could crash the emulator (fixed)
 
 | | |
