@@ -1,0 +1,11 @@
+[ 2231.566378] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2231.573378] intcdsp.sys: boot ok after 5371 us (clock 2242101308 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2231.573378] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2231.573378] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2231.576378] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 2231.576378] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 2231.576378] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 2232.249755] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 671 ms (0xc00000b5), failed
+[ 2232.249755] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 2232.249755] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[ 2232.249755] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running

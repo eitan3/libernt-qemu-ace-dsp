@@ -1,0 +1,1 @@
+serial.log: 258 lines, 92 driver lines; qemu-dbg.log: 1359 lines, 1179 ace_* of which 856 register accesses (kept in the .gz only); ace-trace.txt: 503 decoded lines

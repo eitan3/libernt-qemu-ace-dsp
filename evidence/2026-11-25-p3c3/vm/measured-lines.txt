@@ -1,0 +1,83 @@
+# The lines of the C3 VM round as measured (ANSI escapes and CR LF removed; the timestamps are the guest's)
+== r1-firstboot-t1-selftest: 2026-11-25T20:50:30Z .. 2026-11-25T21:12:01Z
+[    6.883622] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1813.745790] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1858.447296] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1858.455296] intcdsp.sys: boot ok after 5371 us (clock 1868982719 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1858.458296] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 1858.458296] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 2191.540138] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2191.542118] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2231.566378] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2231.573378] intcdsp.sys: boot ok after 5371 us (clock 2242101308 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2231.576378] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 2231.576378] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 2231.576378] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 2232.249755] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 671 ms (0xc00000b5), failed
+[ 2232.249755] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 2232.249755] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[ 2232.249755] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running
+[ 6027.390318] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 6027.390318] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+== r2-selftest-plainboot: 2026-11-25T21:12:34Z .. 2026-11-25T21:27:34Z
+[    8.107275] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    8.122900] intcdsp.sys: boot ok after 5744 us (clock 19017006 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    8.122900] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    8.122900] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    8.122900] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[    8.810403] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 677 ms (0xc00000b5), failed
+[    8.810403] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    8.810403] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[    8.810403] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running
+[ 4732.278369] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 4732.287349] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 4768.443130] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 4768.443130] intcdsp.sys: boot ok after 5371 us (clock 4779345673 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 4768.443130] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 4768.443130] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 4768.443130] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 4769.126133] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 670 ms (0xc00000b5), failed
+[ 4769.126133] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 4769.126133] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[ 4769.126133] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running
+[ 4911.546275] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 4911.555254] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 4953.581444] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 4953.589434] intcdsp.sys: boot ok after 5373 us (clock 4964484053 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 4953.592434] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 4953.592434] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 4953.592434] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 4954.264437] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 670 ms (0xc00000b5), failed
+[ 4954.264437] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 4954.264437] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[ 4954.264437] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running
+== r3-selftest0-set: 2026-11-25T21:28:53Z .. 2026-11-25T21:34:17Z
+[    8.001850] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    8.001850] intcdsp.sys: boot ok after 5365 us (clock 18439666 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    8.001850] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    8.001850] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    8.001850] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[    8.689352] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 674 ms (0xc00000b5), failed
+[    8.689352] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    8.689352] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[    8.689352] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running
+[ 1352.696735] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1352.696735] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+== r4-regression-selftest0: 2026-11-25T21:35:02Z .. 2026-11-25T21:39:58Z
+[    7.465809] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.465809] intcdsp.sys: boot ok after 5736 us (clock 18156981 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    7.481434] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    7.481434] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    7.481434] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[    8.168937] intcdsp.sys: loopback self-test: 4096 frames not captured: 1 of 2 periods after 679 ms (0xc00000b5), failed
+[    8.168937] intcdsp.sys: loopback self-test: stopped at render position 8192 (LPIB 8192, buffer 8192), capture position 8192 (LPIB 8192, buffer 8192), 1 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    8.168937] intcdsp.sys: loopback self-test: 1 runs, 0 matched, 1 failed, 15 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, failed
+[    8.168937] intcdsp.sys: loopback self-test: failed (0xc00000b5), the DSP is left running
+[  819.967393] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[  819.974372] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  862.480978] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  862.488978] intcdsp.sys: boot ok after 5366 us (clock 873167361 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[  862.490978] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[  862.491978] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 1142.416181] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1142.416181] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.

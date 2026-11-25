@@ -1,0 +1,32 @@
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 1 into host-input copier 5.1's stream 1; 192000 bytes a second
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 5788.873 peak 8192 first 7094 7094 6499 6499 5792 5792 4986 4986
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_audio ace_audio 1 8192 rms 4100.957 peak 8192 first 0 0 0 0 0 0 0 0
+ace_gateway gateway stopped (pipeline 1): pipeline 1 is paused

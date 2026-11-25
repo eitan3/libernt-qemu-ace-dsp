@@ -1,0 +1,10 @@
+## livecapture selftest-cycle2 2026-11-25T21:26:37Z (serial line 226)
+[23:26:48] [ 4911.555254] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+## enable typed at 2026-11-25T21:26:50Z (serial line 230)
+## stopped 1109 ms after the enable; the serial log's last driver lines:
+[ 4953.589434] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 4953.592434] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry overrid
+[ 4953.592434] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 4953.592434] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+## descriptors live on read 1: /tmp/qad-ev/p3c3/r2-selftest-plainboot/livecapture-selftest-cycle2.txt
+## continued at 2026-11-25T21:27:01Z

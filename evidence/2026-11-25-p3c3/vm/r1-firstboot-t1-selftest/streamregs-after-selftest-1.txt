@@ -1,0 +1,8 @@
+st[0] input  ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=8192 cbl=16384 lvi=3 fmt=0x0011 bdl=0x0
+st[1] input  ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+st[2] input  ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+st[3] input  ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+st[4] output ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=8192 cbl=16384 lvi=3 fmt=0x0011 bdl=0x0
+st[5] output ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+st[6] output ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+st[7] output ctl=0x000000 (RUN 0, tag 0, IOCE 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
