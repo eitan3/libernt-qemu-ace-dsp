@@ -1,0 +1,80 @@
+2026-11-26T08:57:25Z probe: r0b-firstboot-nodisk on disk/p4c4b-probe.qcow2, REBOOT=1, no data disk
+2026-11-26T08:57:26Z VM r0b-firstboot-nodisk started (lib-run pid 1069635, sockets /tmp/qad-vm.1069637, data disk none)
+2026-11-26T08:57:46Z the read primitive's check (rc=0): [08:57:46] b'AUTOCHK: Checking' reached the log; stopped 0.8 ms later (20.0 s of wait)    !! not found in an image file (RIP in a driver, in the page-fault path?) CHECK failed 
+2026-11-26T08:58:34Z the bugcheck's register line: [08:58:29] b'RIP=' reached the log; stopped 5.7 ms later (42.1 s of wait) VM status: paused 
+2026-11-26T08:58:34Z bugread at the first boot's bugcheck (RSP ffff8080004bc750): rc=0, 50 lines to bugread.txt
+2026-11-26T08:59:53Z the next boot bugchecked too (RSP ffff8080004dc750): bugread rc=0
+2026-11-26T08:59:58Z the serial lines after the crash point of r0a (KsCreateBusEnumObject onward, kernel lines only):
+[   51.772878] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000686850
+[   52.022879] 
+[   52.022879] Check to be sure you have adequate disk space. If a driver is
+[   52.022879] 
+[   52.022879]   Parameter 1: 0xFFFFFFFFC0000005
+[   52.022879]   Parameter 2: 0xFFFFF8007B4A3EB9
+[   52.022879]   Parameter 3: 0xFFFF8080004BC520
+[   52.022879]   Parameter 4: 0xFFFF8080004BBEE0
+[   52.022879] 
+[   52.022879] 
+[   52.022879] #00 ntoskrnl.exe+0x17deb9
+[   52.022879] #01 ntoskrnl.exe+0x17ddf1
+[   52.022879] #02 ntoskrnl.exe+0x17a568
+[   52.022879] #03 ntoskrnl.exe+0x17a074
+[   52.022879] #04 ntoskrnl.exe+0x17e8e3
+[   52.022879] #05 ntoskrnl.exe+0x17ac4d
+[   52.022879] #06 ntoskrnl.exe+0xa124d
+[   52.022879] #07 ntoskrnl.exe+0x30976d
+[   52.022879] #08 ntoskrnl.exe+0x3120
+[   52.022879] #09 ntoskrnl.exe+0x3125
+[   52.022879] 
+[   52.022879] 
+[   52.022879] RIP=fffff8007b4a3eb9 RSP=ffff8080004bc750 RBP=ffff8080004bcb50 EFL=00010246
+[   52.022879] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+[   52.022879] RDX=0000000000000000 RSI=0000000000000000 RDI=0000000000000000
+[   52.022879] R8 =fffff8007bbd6bf8 R9 =0000000000000001 R10=0000000000000001
+[   52.022879] R11=ffff81800010a060 R12=0000000000000000 R13=0000000000000000
+[   52.022879] R14=0000000000000000 R15=0000000000000000
+[   52.022879] Dumping memory to storage:   0% completeKD: Crash dump selected 48758 pages, writing 48758 pages (199790592 bytes) to a 267609088-byte target.
+[   52.022879] Dumping memory to storage:   5% completeDumping memory to storage:  10% completeDumping memory to storage:  15% completeDumping memory to storage:  20% completeDumping memory to storage:  25% completeDumping memory to s
+[   52.022879] 
+[   52.022879] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20F80, Gdt = FFFFF8007DEAB000, Idt = FFFFF8007BBFBBD0, Tss = FFFFF8007DEAD000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SS
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000008200 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC21100
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.484381] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.484381] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.937508] ACPI: RSDP 0x00000000100318B0 000024 (v02 ROS   )
+[    2.937508] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.937508] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: FACS 0x000000007FECA000 000040
+[    2.937508] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+--
+[   36.472086] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+[   36.893961] 
+[   36.893961] Check to be sure you have adequate disk space. If a driver is
+[   36.893961] 
+[   36.893961]   Parameter 1: 0xFFFFFFFFC0000005
+[   36.893961]   Parameter 2: 0xFFFFF8007B4A3EB9
+[   36.893961]   Parameter 3: 0xFFFF8080004DC520
+[   36.893961]   Parameter 4: 0xFFFF8080004DBEE0
+2026-11-26T09:01:32Z the guest did not power off in 90 s: the monitor's quit
+2026-11-26T09:01:34Z VM r0b-firstboot-nodisk ended: qemu exited rc=0 (none) at 2026-11-26T09:01:34Z; wall 249 s
+2026-11-26T09:01:34Z probe done

@@ -1,0 +1,20 @@
+== r1-firstboot-cycle-dsploop-selftest2.img: 33586688 bytes
+label: dos
+label-id: 0x51fb6def
+device: /tmp/qad-ev/p4c4b/pouch/r1-firstboot-cycle-dsploop-selftest2.img
+unit: sectors
+sector-size: 512
+/tmp/qad-ev/p4c4b/pouch/r1-firstboot-cycle-dsploop-selftest2.img1 : start=          63, size=       65536, type=6
+fsck.fat -n of the partition: clean
+== the files on it (mdir):
+ Volume in drive : is P4C4B      
+ Volume Serial Number is A6EB-8A58
+Directory for ::/
+
+DSPLOO~1 EXE    215040 2026-11-26  10:14  dsploop_apitest.exe
+pouch    tag        38 2026-11-26  10:14 
+        2 files             215 078 bytes
+                         33 253 376 bytes free
+
+== the exe read back from the image: b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7
+== the staging directory's exe:            b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7

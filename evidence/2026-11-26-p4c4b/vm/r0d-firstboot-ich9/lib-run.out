@@ -1,0 +1,18 @@
+evidence: /tmp/qad-ev/p4c4b/r0d-firstboot-ich9
+qemu exited rc=0 (none) at 2026-11-26T09:28:20Z; wall 242 s
+--- serial lines of the drivers under test (hdaudbus.sys / intcdsp.sys):
+[   27.572741] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[   27.572741] hdaudbus.sys: ADSP child not created on PCI 8086:293e (subclass 03): not an ACE-era Intel controller
+[   27.572741] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[   27.572741] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+[    8.094842] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    8.094842] hdaudbus.sys: ADSP child not created on PCI 8086:293e (subclass 03): not an ACE-era Intel controller
+[    8.094842] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    8.094842] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+[    7.261795] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    7.261795] hdaudbus.sys: ADSP child not created on PCI 8086:293e (subclass 03): not an ACE-era Intel controller
+[    7.261795] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    7.261795] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+--- device trace: 0
+0 ace_* lines, 0 ace_unexpected (in /tmp/qad-ev/p4c4b/r0d-firstboot-ich9/qemu-dbg.log, the -D log), 0
+0 fatal lines in serial.log

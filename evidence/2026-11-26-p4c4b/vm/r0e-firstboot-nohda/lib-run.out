@@ -1,0 +1,6 @@
+evidence: /tmp/qad-ev/p4c4b/r0e-firstboot-nohda
+qemu exited rc=0 (none) at 2026-11-26T09:30:18Z; wall 99 s
+--- serial lines of the drivers under test (hdaudbus.sys / intcdsp.sys):
+--- device trace: 0
+0 ace_* lines, 0 ace_unexpected (in /tmp/qad-ev/p4c4b/r0e-firstboot-nohda/qemu-dbg.log, the -D log), 0
+0 fatal lines in serial.log

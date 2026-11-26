@@ -246,6 +246,26 @@ topology (E11 closed). One note for the driver (the 16-bit rms figure's truncati
 `evidence/2026-11-26-p3c3b`. Not run: `UseInterrupts = 1` with the self-test, the refusal rows, the fault
 matrix, silicon.
 
+**Round 8 (image p4c4b, 2026-11-26): the C4 micro round — the image's first boot bugchecks before the Setup wizard; the runs not reached.**
+On p4c4b (`0d90fbd22c9` on master `a81cf9e65cf`) against the unchanged model of `main 232bffb`, every boot
+on which an HDA codec is present stops with `0x0000001E` / `0xC0000005` at `ntoskrnl.exe + 0x17deb9`, 0.2–0.5 s
+after swenum's `KsCreateBusEnumObject Devices BusDeviceObject …` line: 11 of 11 such boots — with the model
+and the round's data disk, with the model and no disk, with QEMU's own ICH9 controller (no model, no DSP
+child), and on the first boot that sees the controller after a first boot without one. The one boot without
+an HDA controller was clean. **U1, upstream**: the kernel's walk of a removed device's stack
+(`PiSetStackRemovePending`, pnpstate.c:1665 — a walk p3c3b's master already had) reads the PnP software bus's
+device object, `ROOT\SYSTEM\0000` (service `swenum`), which `swenum.sys` deletes on its remove request
+**without `IoDetachDevice`**; the removal is user mode's `CM_Query_And_Remove_SubTree` on the started node, and
+what is new in this image's master is its trigger, the audio devices' finish-install in user mode
+(`82783d979f9`). Attributed from the image's own `ntoskrnl.exe` and from the paused VM (the PDO of
+`\Driver\PnpManager`, its `AttachedDevice` the very object swenum's line names, the node's state
+`AwaitingQueuedRemoval`, its instance path and service); the stopped round's handover named the `|=` statement
+of the surprise-removed walk for the faulting line — the fault is the other statement of that loop. Not in the
+DSP driver, the bus driver or the model; nothing tuned or fixed. Six QEMU launches, 16.9 minutes, no console ever
+opened; `evidence/2026-11-26-p4c4b`. Not run: TESTING.md's runs 1 to 4 (the stream through the endpoint,
+`SelfTest = 2` on this image) and its run 3 (the three leftovers of C4a) — blocked by U1 until the image is
+fixed (`SwDispatchPnp`'s missing detach, or a defensive kernel change).
+
 ## Build and run
 
 Requirements: Linux with gcc, ninja, python3 and the glib/pixman development
@@ -273,7 +293,10 @@ serial line; `ICOUNT=1` runs under icount (see "A note on the host");
 the rest. `tools/guest.sh` types into the guest through the monitor (~100 ms
 per key), `snapshot.sh` screenshots it, `set-fault.sh` injects a fault at run
 time over QMP, `tools/waitline.sh` waits (bounded) for a serial line,
-The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p3c3b-d8f3a5bc81e/`
+The image of this round: `~/libernt-build-logs/test-audio-intel-sst-p4c4b-a81cf9e65cf/`
+(`LiberNT.iso` sha256 `59e0cce88f0a…`, `LiberNT.vhd` `220c401579a4…`, in-ISO `intcdsp.sys`
+`b559a66c57ba…` and `hdaudbus.sys` `9f1eb00fa8d7…`, built from `feat/audio-control-polish @ 0d90fbd22c9`, 107 commits over master `a81cf9e65cf`, the tree of the published tip `7940c6d2deba`; the image did not reach its desktop in the VM: `evidence/2026-11-26-p4c4b/DIVERGENCE.md`, U1).
+The image of the C3 rounds: `~/libernt-build-logs/test-audio-intel-sst-p3c3b-d8f3a5bc81e/`
 (`LiberNT.iso` sha256 `a3c8fe73361b…`, `LiberNT.vhd` `cd2ca58e47c3…`, in-ISO `intcdsp.sys`
 `633354e6f142…` and `hdaudbus.sys` `13ba7ecdfd80…`, built from `feat/audio-control-polish @ 1619498f85e`, 95 commits over master `d8f3a5bc81e`; the images of
 the earlier rounds are `test-audio-intel-sst-p3c3-d8f3a5bc81e/` (`LiberNT.iso` `4134a83dfc49…`, `LiberNT.vhd` `07cd865f1930…`, `intcdsp.sys` `4df4d43b23da…`, `hdaudbus.sys` `9d0af5977e5c…`, `c595e373b3a`; the published tip `dc8c4a75be7` has the same tree), `test-audio-intel-sst-p3c2-93ab8fd2fc4/` (`LiberNT.iso` `5ba330522bd7…`, `2285127b060`),
@@ -422,7 +445,7 @@ transport is not disturbed by).
 
 | AC | What | Status |
 |---|---|---|
-| AC1 | qtest passes; mutation check recorded | **PASS** — 15 cases (`evidence/2026-11-25-p3c3/qtest.txt`, 15/15; the 14 of p3c1 in `evidence/2026-11-25-p3c1/qtest.txt`): the 9 earlier ones unchanged (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down) and, since patches 0011–0018, `pipeline-table`, `pipeline-illegal`, `pipeline-faults`, `short-stream`, `wrapped-offset`. `mutation-check.sh`: **50 mutations, 49 killed, 1 survivor** (`personality-id`, an equivalent mutant: the class default it changes is overwritten by the personality at realise) — `evidence/2026-11-25-p3c1/mutation-check.md`; each of the 25 rows added since p2b3 is killed by the case that pins it, one of them (`payload-bounds-wrap`, which makes the emulator die) as an abort, and the detector no longer reads an aborted run as a survivor (`SELFTEST=1`); since patches 0019/0020 (the host gateways) the 15th case `audio-loopback`, 5 new rows (`gw-*`) and the 2 affected rows (`ppl-exists`, `ppl-missing`) killed with 0 survivors (`evidence/2026-11-25-p3c3/mutation-check.md`), the full 55-row run before C6; the same binary (`a894197d…`) passed 15/15 again before the p3c3b boots (`evidence/2026-11-26-p3c3b/vm/qtest-before-vm.txt.gz`). **The boot path itself did not change** (`evidence/2026-11-25-p3c1/boot-path-diff.txt`, re-run for 18 patches): the 10-patch model's 1137 `ace_*` trace lines of cases 1–9 are all present, in order, in the 18-patch model's run, with 16 lines added — all of them the new decoded ones. History: `evidence/2026-11-25-p2b3/mutation-check.md` (25 mutations, 24 killed, 1 survivor) |
+| AC1 | qtest passes; mutation check recorded | **PASS** — 15 cases (`evidence/2026-11-25-p3c3/qtest.txt`, 15/15; the 14 of p3c1 in `evidence/2026-11-25-p3c1/qtest.txt`): the 9 earlier ones unchanged (the two-step FSR since patches 0007/0008; case `intipptr` since 0009/0010: all ones unpowered, `0x120` powered, all ones after power-down) and, since patches 0011–0018, `pipeline-table`, `pipeline-illegal`, `pipeline-faults`, `short-stream`, `wrapped-offset`. `mutation-check.sh`: **50 mutations, 49 killed, 1 survivor** (`personality-id`, an equivalent mutant: the class default it changes is overwritten by the personality at realise) — `evidence/2026-11-25-p3c1/mutation-check.md`; each of the 25 rows added since p2b3 is killed by the case that pins it, one of them (`payload-bounds-wrap`, which makes the emulator die) as an abort, and the detector no longer reads an aborted run as a survivor (`SELFTEST=1`); since patches 0019/0020 (the host gateways) the 15th case `audio-loopback`, 5 new rows (`gw-*`) and the 2 affected rows (`ppl-exists`, `ppl-missing`) killed with 0 survivors (`evidence/2026-11-25-p3c3/mutation-check.md`), the full 55-row run before C6; the same binary (`a894197d…`) passed 15/15 again before the p3c3b boots (`evidence/2026-11-26-p3c3b/vm/qtest-before-vm.txt.gz`), and again before the p4c4b probes of 2026-11-26 (`evidence/2026-11-26-p4c4b/vm/qtest-before-vm.txt`). **The boot path itself did not change** (`evidence/2026-11-25-p3c1/boot-path-diff.txt`, re-run for 18 patches): the 10-patch model's 1137 `ace_*` trace lines of cases 1–9 are all present, in order, in the 18-patch model's run, with 16 lines added — all of them the new decoded ones. History: `evidence/2026-11-25-p2b3/mutation-check.md` (25 mutations, 24 killed, 1 survivor) |
 | AC2 | VM stage 1: all lines with the model's values, no unexpected access | **PASS** — `evidence/2026-11-24/c2-stage1-run1`; unchanged on the p2b2 image (`evidence/2026-11-24-p2b2/p1-probe-interactive`) and on the p2b3 image (`evidence/2026-11-25-p2b3/ac3-interactive`: the same `intcdsp.sys` lines, the seven BAR4 reads, 0 `ace_unexpected`); **on the p2b4 image** (`evidence/2026-11-25-p2b4/a1-stage1-firstboot`): the same thirteen lines except the two R1 lines (`HFINTIPPTR 0xffffffff`, `names no 32-bit register inside BAR4`), the six BAR4 reads, 0 `ace_unexpected`; **on the p3c1 image** (`evidence/2026-11-25-p3c1/vm/a1-stage1-firstboot`): p2b4's thirteen lines with the firmware line's `read` (N6) and the settings line twice (N9), the six BAR4 reads, 0 `ace_unexpected` |
 | AC3 | VM stage 2: `boot ok` attempt 1, version 2.15.0.1 from the streamed bytes, `2 DSP interrupts`, power-down/re-enable twice, 20 cycles | **PASS on the p2b4 image** (`b392065b2cf`, poll-only). Plain boot under icount: `boot ok after 67971 us (clock 17821036 us) … attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000`; end clock = start clock + M within 0.4 ms; `firmware ready: version 2.15.0.1, ABI 1` from the bytes that crossed the DMA. **0 DSP interrupts** (R2: the enables are masked before the ROM request and never enabled; p2b3's `1` was the FW_READY interrupt its ISR took). 22 disable/enable cycles in one VM, 22 `boot ok after 21406–21726 us`, the model's registers identical before (all zero but the host's own `DSP2CXCTL` field) and after every cycle, the clock rule within 80–82 µs on all 23 boots, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p2b4/ac3-cycles`). **PASS on the p3c1 image** (`9c9a876c6a3`, `SelfTest = 0`): `boot ok after 10415 us (clock 17814116 us) … attempt 1, 0 DSP interrupts` at boot (end clock − start clock − N = 1289 µs there, E5), then 22 disable/enable cycles: 22 `boot ok after 5366–5693 us`, end − start − N 80–82 µs on each, the model's registers identical before and after every cycle and equal to p2b4's two readings, 0 `clock stalled`, clean S5 (`evidence/2026-11-25-p3c1/vm/ac3-cycles`). Earlier rounds: p2b3 `1 DSP interrupts` (N1), p2b2 the D1 hang |
 | AC4 | Fault matrix | model side **PASS** (qtest case `faults`, 17 rows + truncated/corrupted/delay-scale; since patches 0013/0014 the case `pipeline-faults`: `ipc-status=5:19`, `ipc-status=7`, `ipc-status=7:1`, `never-reply=19`, `never-reply=1`, `never-reply` — the two typed forms got their VM rows on the C1 image: below). VM matrix on the p2b4 image: **PASS — 20 of 20 rows bounded and named**, every row with a real `after N us` on its documented budget and its two clock readings consistent (80–324 µs), the device started, no bugcheck, no hang, `0 DSP interrupts` on every boot, and a `boot ok` on the next power cycle (`evidence/2026-11-25-p2b4/fault-matrix.md`; `tools/fm-check.sh`: 0 rows with a failed check). `bad-tuples` and `truncated-reply` now end `boot bad IPC reply` / `boot truncated` — **D3 fixed**. **On the p3c1 image: PASS — 20 of 20 boot rows bounded on their budgets with p2b4's terminal lines (timings aside) and recovered (`evidence/2026-11-25-p3c1/vm/fault-matrix.md`, 0 rows with a failed check), and the two typed forms have their VM rows: `ipc-status=5:19` and `never-reply=19` end bounded with TESTING.md's lines, power the DSP down, leave the device started and recover (`selftest-faults/`, 0 failed checks, D4 noted).** History: p2b3 20 of 20 bounded, 18 named (D3); p2b2 7 of 20, the other 13 hung on D1/D2. Table below |
@@ -488,6 +511,26 @@ lines are quoted without their timestamps and CR LF; the lines in full are
 
 The findings with their readings: `DIVERGENCE.md` there (D1 and D2 measured fixed; O1, a reporting note for
 the driver; the environment notes E15–E21, among them the three faults of the round's live-read tool).
+
+### The C4 micro round (image p4c4b, 2026-11-26): TESTING.md's runs not reached — the image bugchecks at its first boot
+
+Image p4c4b (`0d90fbd22c9` on master `a81cf9e65cf`, the tree of the published tip `7940c6d2deba`) against the model of
+`main 232bffb` (the binary `a894197d…`, qtest 15/15 before the first VM run). **The image does not reach its Setup
+wizard in the VM**: every boot on which an HDA codec is present bugchecks — `Stop code: 0x0000001E`,
+`0xFFFFFFFFC0000005` at `ntoskrnl.exe + 0x17deb9` — 0.2–0.5 s after `KsCreateBusEnumObject Devices BusDeviceObject …`.
+Six QEMU launches, 16.9 minutes, 15 guest boots, 11 bugchecks, no console ever opened; the drivers under test did
+no more than their probe lines (`BootDsp = 0` at every boot, 6 `ace_*` lines and 0 `ace_unexpected` a boot,
+`dsppcm.sys` never loaded). The lines per boot: `evidence/2026-11-26-p4c4b/vm/measured-lines.txt`; the attribution
+with its evidence: `DIVERGENCE.md` there (**U1**, upstream; the fix is not on this side).
+
+| run | expectation (TESTING.md of the image) | measured | evidence (`evidence/2026-11-26-p4c4b/`) |
+|---|---|---|---|
+| 1 | `BootDsp = 1` + `Topology = sof-ipc4-loopback.tplg`: `BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'`, the topology line, `audio child 'INTCDSP\PCM&…\00' … 2 endpoints`, the four `endpoint 'Loopback' …` lines and the four `registered as` lines; then `dsploop: 48000 frames compared, max abs error 0, offset <k>, ok` (16-bit; 24-in-32 and 32, or `skipped` with its HRESULT); `latency: fifo <F>` under one period of the engine's buffer | **not run — blocked (U1)**: no boot reaches the wizard, so `BootDsp` was never set and `dsploop_apitest.exe` never ran | the six `vm/` runs |
+| 2 | `SelfTest = 2` and one cycle: `4096 frames captured after <ms> ms, offset <k> frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok`; the summary `3 runs, 3 matched, 0 failed` | **not run — blocked (U1)** | — |
+| 3 (i) | no `Topology`, from a fresh boot: `topology: none selected …`, no `audio child` line, no `INTCDSP\PCM` entry | **not run — blocked (U1)** | — |
+| 3 (ii) | the disable attribution (the child alone, the codec, the DSP device): completes with a `Safe removal` line, or stalls | **not run — blocked (U1)** | — |
+| 3 (iii) | `SelfTest = 0`: no self-test line at a system boot and at a cycle | **not run — blocked (U1)** | — |
+| — | the first boot itself | **bugcheck on 11 of 11 boots with an HDA codec**: with the data disk 1, without it 6, with QEMU's ICH9 controller (no model, no DSP child) 3, on the first boot that sees the controller after one without 1; **clean without any audio controller** (one boot, through `Storage expansion not offered`, clean S5) | `vm/measured-lines.txt`, `vm/device-stack-readings.txt`, `fault-site.txt` |
 
 ## The fault matrix in the VM (p2b4 image, 2026-11-25)
 
@@ -595,6 +638,21 @@ filled from measurements on the real device; "—" means not yet measured.
 | `evidence/<date>/` | serial logs, device traces and screenshots of every acceptance run (paths normalised) |
 
 ## Evidence index
+
+### 2026-11-26-p4c4b (P3 C4b: the image bugchecks at its first boot — U1, upstream; TESTING.md's runs not reached)
+
+| Run | What it shows |
+|---|---|
+| `PROVENANCE.md`, `DIVERGENCE.md` | the image verified (`LiberNT.iso` `59e0cce8…`, `LiberNT.vhd` `220c4015…`, `LiberNT.img`; fourteen in-ISO files from an independent extraction; `ntoskrnl.exe` `17b1a066…` and `hal.dll` hashed for the attribution); the model's binary of record and the qtest 15/15 before the first VM run; a generic host description; **U1**: the first-boot bugcheck attributed from the image's own kernel and the paused VM — `swenum.sys` deletes its bus device object on `IRP_MN_REMOVE_DEVICE` without detaching it, the kernel's walk after the remove request reads it; the trigger is this master's user-mode finish-install of the audio devices; not the DSP driver, the bus driver or the model; **E22** (a first boot without the audio controller does not avoid it), **E23** (the data disk is not a factor); what was not run |
+| `fault-site.txt` | the image's `ntoskrnl.exe`: the faulting function (`PiSetStackRemovePending`, the `&= ~DOE_REMOVE_PENDING` statement of pnpstate.c:1665 at `+0x17deb9`) and the frame that queued the removal (`PiRunDeviceAction`, `case PiActionRemoveDevice`) disassembled; the functions of the backtrace by the image's `.pdata` table |
+| `image-check.txt`, `in-iso.txt`, `vm/qtest-before-vm.txt` | the staging directory's images verified; the in-ISO files hashed from an independent extraction; the qtest before the first VM run (the stopped round's pre-flight) |
+| `vm/measured-lines.txt`, `vm/device-stack-readings.txt` | per VM and per guest boot: the configuration's lines, swenum's line, the bugcheck's lines (11 of them, all at `+0x17deb9`), the reset — and the clean lines of the one boot without an audio controller; the paused reads of r0b, r0c and r0d: the PDO, its freed `AttachedDevice`, the device node's fields and strings |
+| `vm/tools-used/` | the round's throwaway scripts: `vmcommon.sh`, `probe-nodisk.sh` (the probes r0b–r0e), `boot1b.sh`; the stopped round's `boot1.sh`–`boot4.sh` (written, never run) and `livecap.py`; `bugpause.py` (stop on a serial line; the read check), `bugread.py` (the memory of the paused VM), `pefuncs.py` and `fault-site.sh` (the binary evidence), `measured-lines.py`, `collect.sh`, `stack-readings.sh`, `make-pouch.sh`, `preflight.sh` |
+| `vm/r0a-firstboot-crash-with-disk` | the stopped round's VM 1: the model, the data disk attached; the first boot's bugcheck at 44.8 s (its run directory renamed) |
+| `vm/r0b-firstboot-nodisk`, `vm/r0c-firstboot-nodisk-read` | **no data disk**: three bugchecks each; the first reads of the faulting thread's stack (`bugread.txt`, `bugread-2.txt`), r0c's following the PDO |
+| `vm/r0d-firstboot-ich9` | **QEMU's own ICH9 controller**: no model, no DSP child; three bugchecks; the node's instance path read verbatim (`ROOT\SYSTEM\0000`) |
+| `vm/r0e-firstboot-nohda` | **no audio controller**: the one clean boot, through `Storage expansion not offered`, clean S5 |
+| `vm/r1b-secondboot-ace-dsploop-selftest2` | the workaround attempt (E22): r0e's overlay booted with the model — the first boot that sees the controller bugchecks the same way |
 
 ### 2026-11-26-p3c3b (P3 C3, the micro rerun on the fixed image p3c3b: the loopback self-test sample-exact; D1 and D2 fixed)
 

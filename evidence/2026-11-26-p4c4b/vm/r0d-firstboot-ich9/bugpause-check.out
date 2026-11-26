@@ -1,0 +1,19 @@
+[09:24:37] b'AUTOCHK: Checking' reached the log; stopped 1.0 ms later (18.1 s of wait)
+VM status: paused
+Traceback (most recent call last):
+  File "/tmp/qad-ev/p4c4b/tools/bugpause.py", line 136, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/tmp/qad-ev/p4c4b/tools/bugpause.py", line 129, in main
+    base, text = check(mon, os.environ['CHECK'].split(':'), log)
+                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/qad-ev/p4c4b/tools/bugpause.py", line 92, in check
+    pcr_check(out, mon, log)
+    ~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/tmp/qad-ev/p4c4b/tools/bugpause.py", line 108, in pcr_check
+    % (pcr, ' '.join('%016x' % w for w in words)))
+            ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/qad-ev/p4c4b/tools/bugpause.py", line 108, in <genexpr>
+    % (pcr, ' '.join('%016x' % w for w in words)))
+                     ~~~~~~~~^~~
+TypeError: %x format: an integer is required, not list

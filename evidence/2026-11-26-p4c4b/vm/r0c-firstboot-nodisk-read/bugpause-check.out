@@ -1,0 +1,9 @@
+[09:08:21] b'AUTOCHK: Checking' reached the log; stopped 1.1 ms later (18.8 s of wait)
+VM status: paused
+   x at RIP+0x0: 8a44244e8844243e488b442440488944; the same 16 bytes in the image file(s) at file offset(s) ntoskrnl.exe:0x3bd3a1, ntoskrnl.exe:0x3bd551
+      image base by this read: 0xfffff8007b325e50, 0xfffff8007b326000 (a .text or .rdata read gives a page-aligned one)
+   x at RIP+0x10: 2450488b442450488b0065488b0c2588; the same 16 bytes in the image file(s) at file offset(s) ntoskrnl.exe:0x1a9989, ntoskrnl.exe:0x3bd3b1, ntoskrnl.exe:0x3bd561, ntoskrnl.exe:0x3e8b59
+      image base by this read: 0xfffff8007b2fa858, 0xfffff8007b325e50, 0xfffff8007b326000, 0xfffff8007b539a28 (a .text or .rdata read gives a page-aligned one)
+   !! the two reads give different bases
+   the KPCR the loader named, 0xfffff8007bc20f80: [0x18] read back as 0x0000000000000000 (!! not itself)
+CHECK failed

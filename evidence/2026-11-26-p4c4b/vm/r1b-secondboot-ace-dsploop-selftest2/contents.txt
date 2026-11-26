@@ -1,0 +1,10 @@
+1327 command.txt
+0 contents.txt
+352 driver.log
+65 lib-run.out
+865 pouch-made.out
+1286 qemu-args.txt
+5504 qemu-dbg.log
+32230 serial.log
+31360 serial.txt
+21 start.txt

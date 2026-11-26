@@ -1,0 +1,9 @@
+[09:28:58] b'AUTOCHK: Checking' reached the log; stopped 7.7 ms later (18.7 s of wait)
+VM status: paused
+   x at RIP+0x0: e89b001d004883f8000f95c0908845d2; the same 16 bytes in the image file(s) at file offset(s) ntoskrnl.exe:0x10a660
+   x at RIP+0x0 gives image base candidate(s) 0xfffff8007b326000 (a code read gives the page-aligned one)
+   x at RIP+0x10: 8a45d224010fb6c00fb6c083f8000f95; the same 16 bytes in the image file(s) at file offset(s) ntoskrnl.exe:0x10a670
+   x at RIP+0x10 gives image base candidate(s) 0xfffff8007b326000 (a code read gives the page-aligned one)
+   the KPCR the loader named, 0xfffff8007bc20f80: its first four qwords fffff8007deab000 fffff8007dead000 00000066a12ff808 fffff8007bc20f80
+   read primitive checked at 0xfffff8007b430660: the 16 bytes at RIP and at RIP+16 are image bytes, base 0xfffff8007b326000 both times
+CHECK_BASE=0xfffff8007b326000

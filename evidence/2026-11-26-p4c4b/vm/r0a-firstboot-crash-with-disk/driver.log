@@ -1,0 +1,2 @@
+2026-11-26T08:14:38Z boot1: r1-firstboot-cycle-dsploop-selftest2 on disk/p4c4b.qcow2
+2026-11-26T08:14:40Z VM r1-firstboot-cycle-dsploop-selftest2 started (lib-run pid 1067507, sockets /tmp/qad-vm.1067509, data disk /tmp/qad-ev/p4c4b/pouch/r1-firstboot-cycle-dsploop-selftest2.img)

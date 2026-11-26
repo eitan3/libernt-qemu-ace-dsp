@@ -1,0 +1,5 @@
+[08:57:46] b'AUTOCHK: Checking' reached the log; stopped 0.8 ms later (20.0 s of wait)
+VM status: paused
+   x at RIP+0x0: 8a44244e8844243e488b442440488944; the same 16 bytes in the image file(s) at offset(s) none
+   !! not found in an image file (RIP in a driver, in the page-fault path?)
+CHECK failed

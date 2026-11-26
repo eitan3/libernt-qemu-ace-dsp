@@ -1,0 +1,8 @@
+2026-11-26T09:28:39Z probe: r0e-firstboot-nohda on disk/p4c4b-fresh.qcow2, REBOOT=1, no data disk
+2026-11-26T09:28:40Z VM r0e-firstboot-nohda started (lib-run pid 1072304, sockets /tmp/qad-vm.1072306, data disk none)
+2026-11-26T09:28:58Z the read primitive's check (rc=0): [09:28:58] b'AUTOCHK: Checking' reached the log; stopped 7.7 ms later (18.7 s of wait)    x at RIP+0x0 gives image base candidate(s) 0xfffff8007b326000 (a code read gives the page-aligned one)    x at RIP+0x10 gives image base candidate(s) 0xfffff8007b326000 (a code read gives the page-aligned one)    the KPCR the loader named, 0xfffff8007bc20f80: its first four qwords fffff8007deab000 fffff8007dead000 00000066a12ff808 fffff8007bc20f80 CHECK_BASE=0xfffff8007b326000 
+2026-11-26T09:30:10Z no bugcheck before the first-boot setup's component list (the crash point of r0a, serial line ~125, is past): waiting for the storage-expansion line
+[11:30:10] [   77.741923] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T09:30:15Z the serial lines after the crash point of r0a (KsCreateBusEnumObject onward, kernel lines only):
+2026-11-26T09:30:18Z VM r0e-firstboot-nohda ended: qemu exited rc=0 (none) at 2026-11-26T09:30:18Z; wall 99 s
+2026-11-26T09:30:18Z probe done

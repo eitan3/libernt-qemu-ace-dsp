@@ -1,0 +1,74 @@
+# the binary evidence of the first-boot bugcheck (p4c4b), 2026-11-26T09:30:26Z
+# Windows/system32/ntoskrnl.exe of LiberNT.iso (bsdtar -x -f LiberNT.iso Windows/system32/ntoskrnl.exe):
+#   10055680 bytes, sha256 17b1a0666b93a8f97fc3e318e061165c0a27a18d8697531e24fd59638782ce40
+# objdump VMA = 0x400000 + RVA: the bugcheck text's 'ntoskrnl.exe + 0x<rva>' is the RVA. No symbols and no
+# DWARF in the image (nm: 0 lines; sections .debug_*: none): names below are from the tree's source
+# (ntos/io/pnpmgr/pnpstate.c at the image's tree) matched to the code, each match stated.
+
+## the faulting function: RVA 0x17de60..0x17deea (PiSetStackRemovePending, pnpstate.c:1649-1670; its frame is 0x48 bytes,
+## its first argument is spilled to +0x40 and the device object of the loop to +0x30; DeviceObjectExtension is
+## at +0x138 of a device object, ExtensionFlags at +0x20 of the extension, AttachedDevice at +0x18)
+##   ntoskrnl.exe + 0x17deb9 = 'mov 0x20(%rax),%ecx' of the ELSE branch: ExtensionFlags &= ~DOE_REMOVE_PENDING, the
+##   Pending = FALSE walk (pnpstate.c:1665) -- not the '|=' of the surprise-removed walk (line 1663, +0x17dea2)
+000000000057de60 <.text+0x17ce60>:
+  57de60:	sub    $0x48,%rsp
+  57de64:	mov    %rcx,0x40(%rsp)
+  57de69:	mov    %dl,0x3f(%rsp)
+  57de6d:	mov    0x4d0e8c(%rip),%rcx        # 0xa4ed00
+  57de74:	call   0x7bd370
+  57de79:	mov    %al,0x2f(%rsp)
+  57de7d:	mov    0x40(%rsp),%rax
+  57de82:	mov    %rax,0x30(%rsp)
+  57de87:	cmpq   $0x0,0x30(%rsp)
+  57de8d:	je     0x57ded4
+  57de8f:	cmpb   $0x0,0x3f(%rsp)
+  57de94:	je     0x57dead
+  57de96:	mov    0x30(%rsp),%rax
+  57de9b:	mov    0x138(%rax),%rax
+  57dea2:	mov    0x20(%rax),%ecx
+  57dea5:	or     $0x4,%ecx
+  57dea8:	mov    %ecx,0x20(%rax)
+  57deab:	jmp    0x57dec2
+  57dead:	mov    0x30(%rsp),%rax
+  57deb2:	mov    0x138(%rax),%rax
+  57deb9:	mov    0x20(%rax),%ecx
+  57debc:	and    $0xfffffffb,%ecx
+  57debf:	mov    %ecx,0x20(%rax)
+  57dec2:	jmp    0x57dec4
+  57dec4:	mov    0x30(%rsp),%rax
+  57dec9:	mov    0x18(%rax),%rax
+  57decd:	mov    %rax,0x30(%rsp)
+  57ded2:	jmp    0x57de87
+  57ded4:	mov    0x2f(%rsp),%dl
+  57ded8:	mov    0x4d0e21(%rip),%rcx        # 0xa4ed00
+  57dedf:	call   0x7bd600
+  57dee4:	nop
+  57dee5:	add    $0x48,%rsp
+  57dee9:	ret
+
+## the frame that queued the removal: RVA 0x17e8ca..0x17e8e3 (PiRunDeviceAction, case PiActionRemoveDevice,
+## pnpstate.c:2127-2143: PiSetDevNodeState(DeviceNode, DeviceNodeAwaitingQueuedRemoval /* 0x30f */) then
+## PiDevNodeStateMachine(DeviceNode)); the backtrace's frame #04 returns to +0x17e8e3
+000000000057e8ca <.text+0x17d8ca>:
+  57e8ca:	mov    0x58(%rsp),%rcx
+  57e8cf:	mov    $0x30f,%edx
+  57e8d4:	call   0x554e40
+  57e8d9:	mov    0x58(%rsp),%rcx
+  57e8de:	call   0x579f20
+  57e8e3:	jmp    0x57e909
+
+## the functions of the backtrace, by the image's .pdata (RUNTIME_FUNCTION) table (tools/pefuncs.py)
+RVA 0x17deb9: function [0x17de60, 0x17deea) (138 bytes)
+RVA 0x17ddf1: function [0x17dbf0, 0x17de5c) (620 bytes)
+RVA 0x17a568: function [0x17a3f0, 0x17a614) (548 bytes)
+RVA 0x17a074: function [0x179f20, 0x17a15a) (570 bytes)
+RVA 0x17e8e3: function [0x17e560, 0x17e969) (1033 bytes)
+RVA 0x17ac4d: function [0x17aa80, 0x17ac52) (466 bytes)
+RVA 0xa124d: function [0xa1030, 0xa1322) (754 bytes)
+RVA 0x30976d: function [0x3095e0, 0x3097a0) (448 bytes)
+RVA 0x3120: function [0x30e4, 0x3125) (65 bytes)
+
+## the call sites of the functions of the walk (call rel32, by tools/pefuncs.py)
+      called from (call rel32 sites, RVA): 0x17a57b, 0x17dda2, 0x17ddec
+      called from (call rel32 sites, RVA): 0x17a5c1, 0x17e07d
+      called from (call rel32 sites, RVA): 0x17a563, 0x17dfa6

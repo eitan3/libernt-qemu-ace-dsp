@@ -1,0 +1,93 @@
+# image check 2026-11-26T08:04:00Z
+## sha256sum -c SHA256SUMS (in the staging directory)
+LiberNT.iso: OK
+LiberNT.vhd: OK
+LiberNT.img: OK
+dsploop_apitest.exe: OK
+rc=0
+## sizes
+215040 dsploop_apitest.exe
+1610612736 LiberNT.img
+654075904 LiberNT.iso
+807766528 LiberNT.vhd
+## the staging directory's PROVENANCE.txt (head)
+Built from 0d90fbd22c9 (feat/audio-control-polish; 107 commits over master a81cf9e65cf), tree clean (status --porcelain --untracked-files=no: 0 lines; one untracked directory outside the build, a Pyth
+
+master moved between the p4c4a image and this one (sync #23: a02c335f4db -> a81cf9e65cf, +28 commits: the audio install of setupapi/mkdrvdb/bootdata, NTOS CM/EX/MM/IO/PS/INBV/KE, PnP disable semantics
+
+branch feat/audio-control-polish tip 0d90fbd22c93e749fcf12e42a46303fdf7aaffd8 on master a81cf9e65cf2c039d13dce7590d9049a0d6560c6; the assembly 2026-11-26 07:17:45Z to 07:26:08Z (8 min 23 s, 4309 steps
+The stamp inside the image: feat/audio-control-polish.0d90fbd.amd64.clang.1707-261126 (<build>/sdk/include/libernt/buildstamp.h, LIBERNT_BUILD_COMMIT 0d90fbd; the time is minutes then hours, UTC: 07:1
+
+Staged (SHA256SUMS):
+59e0cce88f0a7fdfd1438e01db3ce066eb074ffc2d701b56f42528fbb756c88b  LiberNT.iso   654075904 bytes
+220c401579a45c273848c9a80134a4405d015c77cd8e26f542009c933c653dba  LiberNT.vhd   807766528 bytes (dynamic VHD, 80 GiB virtual)
+bd2f43eceae914e156deab0a04f5deac1cb1eaa21b17e607ef150c1bcb7817ae  LiberNT.img   1610612736 bytes (raw disk image)
+b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7  dsploop_apitest.exe  215552 bytes (not in the image: rostests are off in this build; below)
+The ISO is 1.2 MB larger than p4c4a's: sof-mtl.ri (1.16 MB) and master's delta.
+
+What this image adds over p4c4a (test-audio-intel-sst-p4c4a-a02c335f4db), the five commits of C4b (oldest first; git-log.txt has all 107):
+  4f002b21a79  [DSPPCM]      the position arithmetic apart from the reading of the register (DsppcmPositionFromValue); where the stack reads the position, at which IRQL, and how the clock carries acro
+  16777245110  [APITESTS]    dsploop, the loop through the endpoint in user mode over mmdevapi, and its comparison apart from the audio calls
+  090183718b0  [INTCDSP][FWLOAD][BUILD][HOSTTESTS][KMTEST]  Meteor Lake: 8086:7E28 boots from sof-mtl.ri; the platform table's records (device ID, firmware file, one ACE 1.0 map for both); the boot de
+  695b0324049  [HOSTTESTS]   the position rows and the engine's clock over them; the comparison's host test
+  0d90fbd22c9  [HOSTTESTS]   one cppcheck portability note (a decimal literal cast to a pointer)
+27 files changed, 1814 insertions, 112 deletions.
+
+Hashes in the ISO (bsdtar extraction of LiberNT.iso; system root is Windows/; gates/in-iso.txt, gates/in-iso-equal.txt):
+  b559a66c57ba14402ffdb8983112caf7e6ffe1ccc1bbe4d3398ca2966495940d  Windows/system32/drivers/intcdsp.sys (462848 bytes; 4096 over p4c4a's: the per-ID path and the decision)
+  9f1eb00fa8d754a746e4aa4a33f9845c3e77cb2b8a417e868b0e65a3bac1d1c0  Windows/system32/drivers/hdaudbus.sys (331776 bytes; p4c4a's source, relinked on the new master)
+  3ced786cb0e5712d934393ade85ffc30cce7438bbe9c5494db2cae221f9409e1  Windows/system32/drivers/dsppcm.sys (147456 bytes; the position arithmetic split)
+  c59862227d6fe0ad3a32d88e57b46737564099a23a68cc91a203c79cfc6b7752  Windows/system32/drivers/hdaudio.sys (241664 bytes; the codec driver, relinked)
+  260f44b7ce48e1632564d06644f7bbd5b040c3db89a3e6c05f915df4486017a3  Windows/inf/dsppcm.inf (9346 bytes; p4c4a's)
+  b06383069c655ba90df5b4e35388236cf7f78ee99fc06c4dd70cc2314d7ff3e9  Windows/inf/intcdsp.inf (6922 bytes; its comments now name the two controllers that boot and their files)
+  f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e  Windows/system32/drivers/intel/sof/sof-arl-s.ri (1158164 bytes; p3c3b's)
+  4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250  Windows/system32/drivers/intel/sof/sof-mtl.ri (1158164 bytes; new in this image)
+  80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  Windows/system32/drivers/intel/sof/LICENCE.Intel (52982 bytes; the same file under sof-tplg)
+  0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg (4286 bytes; p3c3b's)
+  e4e0d29ed05b23795880930039622a9bbd41fa1e65b4478ec7f1085700181323  Windows/system32/drivers/intel/sof-tplg/NOTICE (684 bytes)
+  17b1a0666b93a8f97fc3e318e061165c0a27a18d8697531e24fd59638782ce40  Windows/system32/ntoskrnl.exe (10055680 bytes; the stamp's carrier)
+The four .sys and ntoskrnl.exe are byte-identical (sha256) to the build tree's at the assembly; the two firmware files, the licence, the topology and the notice to the tree's; the ISO's two INFs are t
+
+dsploop_apitest.exe (gates/dsploop-build.txt, gates/build-dsploop.py): rostests are off in this build dir, so ninja has no apitest target. The three units compile with the build's own -Werror flags by
+
+Verification on the exact tip (0d90fbd22c9, on master a81cf9e65cf; gates/):
+  host: <build>/host-tests, ASan+UBSan, ctest -R "(dsppath|sofipc|disco|softplg|fwload|audiofmt|dsppcm)" 8/8 and ctest -R dsploop 1/1 (ctest.txt): sofipc.transport 3309 checks, sofipc4 380714, disco 2
+  mutations (not committed; mutations.txt, mut.sh): 23 rows for the new logic, 22 killed, 1 equivalent: the position arithmetic 6 of 6 distinguishable (7 rows, one equivalent), the comparison 9 of 9, 
+  kernel: CCACHE_DISABLE=1 ninja intcdsp.sys hdaudbus.sys dsppcm.sys hdaudio.sys, -Werror, ninja exit 0, 0 warnings (drivers.txt, drivers-build.log), the changed sources touched first so that they com
+  the dsploop apitest builds: gates/dsploop-build.txt.
+  cppcheck 2.22.0 with -D_ERRCODE_DEFINED, the effective run (cppcheck-counts.txt, cppcheck-apitest-counts.txt, one output per file), on the C files this checkpoint changed:
+    cppcheck --project=<compdb of the build> --file-filter="*/<file>" -D_ERRCODE_DEFINED -D_WIN32 -D_WIN64 -D_M_AMD64 -D__x86_64__ -D__clang__ -D__GNUC__=4 '-D__has_cpp_attribute(x)=0' '-D__has_builti
+    (the kernel units ksendpoint.c, fwfile.c, hwops.c, intcdsp.c, fwboot.c; the host units through the host build's compile database: t_dsppcm.c, t_dsploop.c, t_fwload.c, t_sofipc.c; cppcheck-run.sh)
+    the apitest units, which no compile database of this build holds:
+    cppcheck <the apitests' compile check's DEFINES and include paths> <the platform defines as above> -D__cdecl= --enable=warning,performance,portability --platform=win64 --inline-suppr --quiet <file
+    (dsploop.c, compare.c, testlist.c; cppcheck-apitest.sh; -D__cdecl= because cppcheck 2.22 stops at the SDK's own "typedef DWORD __cdecl QUERYHANDLER(...)" in winreg.h, and without it the two units 
+    0 findings of any kind in any changed file. The kernel outputs hold only the SDK's own note (wdm.h's uninitvar in RtlZeroMemory's inline, reaching intcdsp.c:126 as "memset of <Uninit>", the note o
+  the image: gates/in-iso.txt, gates/in-iso-equal.txt, iso-listing.txt (2681 entries; 15 name this checkpoint's files, one more than p4c4a: sof-mtl.ri).
+No VM was run in this round: every guest line of TESTING.md is to be taken in the next simulator round.
+Unverified: that a stream runs through the endpoint (dsploop); the position as the stack reads it on a live stream; the SelfTest = 2 figure on this image; the three leftovers of C4a; everything of Met
+Rollback: the p4c4a staging directory is untouched. A checkpoint that fails is reverted as a whole: git revert of the five commits above in reverse order, no history rewrite (the DSP driver keeps the 
+
+To copy from the build box (the three images are about 3.0 GB in all; <build-box> is its address, as the p4c4a staging gave it):
+  scp <build-box>:libernt-build-logs/test-audio-intel-sst-p4c4b-a81cf9e65cf/SHA256SUMS <build-box>:libernt-build-logs/test-audio-intel-sst-p4c4b-a81cf9e65cf/LiberNT.iso <build-box>:libernt-build-logs/
+  sha256sum -c SHA256SUMS
+  (LiberNT.img only where a raw disk image is wanted: the same scp with LiberNT.img; the evidence under gates/ likewise.)
+## gates/in-iso.txt (the staging record)
+=== in the ISO (bsdtar extraction of LiberNT.iso; sha256, bytes) ===
+b559a66c57ba14402ffdb8983112caf7e6ffe1ccc1bbe4d3398ca2966495940d  Windows/system32/drivers/intcdsp.sys (462848 bytes)
+9f1eb00fa8d754a746e4aa4a33f9845c3e77cb2b8a417e868b0e65a3bac1d1c0  Windows/system32/drivers/hdaudbus.sys (331776 bytes)
+3ced786cb0e5712d934393ade85ffc30cce7438bbe9c5494db2cae221f9409e1  Windows/system32/drivers/dsppcm.sys (147456 bytes)
+c59862227d6fe0ad3a32d88e57b46737564099a23a68cc91a203c79cfc6b7752  Windows/system32/drivers/hdaudio.sys (241664 bytes)
+260f44b7ce48e1632564d06644f7bbd5b040c3db89a3e6c05f915df4486017a3  Windows/inf/dsppcm.inf (9346 bytes)
+b06383069c655ba90df5b4e35388236cf7f78ee99fc06c4dd70cc2314d7ff3e9  Windows/inf/intcdsp.inf (6922 bytes)
+a6d5c33ab40aec261fe69c0f219a61e41b1aec92dbf7d0cb83f8f6b1ec68079f  Windows/inf/hdaudbus.inf (12526 bytes)
+f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e  Windows/system32/drivers/intel/sof/sof-arl-s.ri (1158164 bytes)
+4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250  Windows/system32/drivers/intel/sof/sof-mtl.ri (1158164 bytes)
+80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  Windows/system32/drivers/intel/sof/LICENCE.Intel (52982 bytes)
+0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg (4286 bytes)
+80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  Windows/system32/drivers/intel/sof-tplg/LICENCE.Intel (52982 bytes)
+e4e0d29ed05b23795880930039622a9bbd41fa1e65b4478ec7f1085700181323  Windows/system32/drivers/intel/sof-tplg/NOTICE (684 bytes)
+17b1a0666b93a8f97fc3e318e061165c0a27a18d8697531e24fd59638782ce40  Windows/system32/ntoskrnl.exe (10055680 bytes)
+b559a66c57ba14402ffdb8983112caf7e6ffe1ccc1bbe4d3398ca2966495940d  intcdsp/intcdsp.sys
+9f1eb00fa8d754a746e4aa4a33f9845c3e77cb2b8a417e868b0e65a3bac1d1c0  hdaudbus/hdaudbus.sys
+3ced786cb0e5712d934393ade85ffc30cce7438bbe9c5494db2cae221f9409e1  drivers/dsppcm/dsppcm.sys
+c59862227d6fe0ad3a32d88e57b46737564099a23a68cc91a203c79cfc6b7752  drivers/hdaudio/hdaudio.sys

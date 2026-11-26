@@ -1,0 +1,322 @@
+## r0a
+
+### boot 1 (serial.txt line 35)
+   91: [    7.506708] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  101: [    7.834635] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  130: [   20.942457] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000F7E59C2B30 000000000000000A 'AudioSrv' 000000F7E59C3D7C 32 0x1 000000F7E59C3E90 21c 000000F7E59C3DA8)
+  134: [   44.582805] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D7AD0
+  136: The system has been stopped to keep it from damaging anything further.
+  149: Stop code: 0x0000001E
+  150: [   44.801555]   Parameter 1: 0xFFFFFFFFC0000005
+  151: [   44.801555]   Parameter 2: 0xFFFFF8007B4A3EB9
+  152: [   44.801555]   Parameter 3: 0xFFFF8080004DC520
+  153: [   44.801555]   Parameter 4: 0xFFFF8080004DBEE0
+  157: Backtrace:
+  158: [   44.801555] #00 ntoskrnl.exe+0x17deb9
+  159: [   44.801555] #01 ntoskrnl.exe+0x17ddf1
+  160: [   44.801555] #02 ntoskrnl.exe+0x17a568
+  161: [   44.801555] #03 ntoskrnl.exe+0x17a074
+  162: [   44.801555] #04 ntoskrnl.exe+0x17e8e3
+  163: [   44.801555] #05 ntoskrnl.exe+0x17ac4d
+  164: [   44.801555] #06 ntoskrnl.exe+0xa124d
+  165: [   44.801555] #07 ntoskrnl.exe+0x30976d
+  166: [   44.801555] #08 ntoskrnl.exe+0x3120
+  167: [   44.801555] #09 ntoskrnl.exe+0x3125
+  172: [   44.801555] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  173: [   44.801555] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  178: [   44.801555] Dumping memory to storage:   0% completeKD: Crash dump selected 48717 pages, writing 48717 pages (199622656 bytes) to a 267609088-byte target.
+  183: [   44.801555] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+## r0b
+
+### boot 1 (serial.txt line 35)
+   90: [    8.165659] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  100: [    8.326936] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  129: [   23.758106] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000E269BB2B30 000000000000000A 'AudioSrv' 000000E269BB3D7C 32 0x1 000000E269BB3E90 238 000000E269BB3DA8)
+  133: [   51.772878] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000686850
+  135: The system has been stopped to keep it from damaging anything further.
+  148: Stop code: 0x0000001E
+  149: [   52.022879]   Parameter 1: 0xFFFFFFFFC0000005
+  150: [   52.022879]   Parameter 2: 0xFFFFF8007B4A3EB9
+  151: [   52.022879]   Parameter 3: 0xFFFF8080004BC520
+  152: [   52.022879]   Parameter 4: 0xFFFF8080004BBEE0
+  156: Backtrace:
+  157: [   52.022879] #00 ntoskrnl.exe+0x17deb9
+  158: [   52.022879] #01 ntoskrnl.exe+0x17ddf1
+  159: [   52.022879] #02 ntoskrnl.exe+0x17a568
+  160: [   52.022879] #03 ntoskrnl.exe+0x17a074
+  161: [   52.022879] #04 ntoskrnl.exe+0x17e8e3
+  162: [   52.022879] #05 ntoskrnl.exe+0x17ac4d
+  163: [   52.022879] #06 ntoskrnl.exe+0xa124d
+  164: [   52.022879] #07 ntoskrnl.exe+0x30976d
+  165: [   52.022879] #08 ntoskrnl.exe+0x3120
+  166: [   52.022879] #09 ntoskrnl.exe+0x3125
+  171: [   52.022879] RIP=fffff8007b4a3eb9 RSP=ffff8080004bc750 RBP=ffff8080004bcb50 EFL=00010246
+  172: [   52.022879] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  177: [   52.022879] Dumping memory to storage:   0% completeKD: Crash dump selected 48758 pages, writing 48758 pages (199790592 bytes) to a 267609088-byte target.
+  182: [   52.022879] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 2 (serial.txt line 220)
+  275: [    8.646126] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  285: [    8.677351] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  316: [   25.082372] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000928C4B2C60 000000000000000A 'AudioSrv' 000000928C4B3EAC 32 0x1 000000928C4B3FC0 238 000000928C4B3ED8)
+  320: [   36.472086] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+  322: The system has been stopped to keep it from damaging anything further.
+  335: Stop code: 0x0000001E
+  336: [   36.893961]   Parameter 1: 0xFFFFFFFFC0000005
+  337: [   36.893961]   Parameter 2: 0xFFFFF8007B4A3EB9
+  338: [   36.893961]   Parameter 3: 0xFFFF8080004DC520
+  339: [   36.893961]   Parameter 4: 0xFFFF8080004DBEE0
+  343: Backtrace:
+  344: [   36.893961] #00 ntoskrnl.exe+0x17deb9
+  345: [   36.893961] #01 ntoskrnl.exe+0x17ddf1
+  346: [   36.893961] #02 ntoskrnl.exe+0x17a568
+  347: [   36.893961] #03 ntoskrnl.exe+0x17a074
+  348: [   36.893961] #04 ntoskrnl.exe+0x17e8e3
+  349: [   36.893961] #05 ntoskrnl.exe+0x17ac4d
+  350: [   36.893961] #06 ntoskrnl.exe+0xa124d
+  351: [   36.893961] #07 ntoskrnl.exe+0x30976d
+  352: [   36.893961] #08 ntoskrnl.exe+0x3120
+  353: [   36.893961] #09 ntoskrnl.exe+0x3125
+  358: [   36.893961] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  359: [   36.893961] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  364: [   36.893961] Dumping memory to storage:   0% completeKD: Crash dump selected 50721 pages, writing 50721 pages (207831040 bytes) to a 267609088-byte target.
+  369: [   36.893961] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 3 (serial.txt line 407)
+  462: [    7.535750] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  472: [    7.613775] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  503: [   22.501660] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000FD8B7D2C60 000000000000000A 'AudioSrv' 000000FD8B7D3EAC 32 0x1 000000FD8B7D3FC0 23c 000000FD8B7D3ED8)
+  507: [   30.173213] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+  509: The system has been stopped to keep it from damaging anything further.
+  522: Stop code: 0x0000001E
+  523: [   30.235713]   Parameter 1: 0xFFFFFFFFC0000005
+  524: [   30.235713]   Parameter 2: 0xFFFFF8007B4A3EB9
+  525: [   30.235713]   Parameter 3: 0xFFFF8080004DC520
+  526: [   30.235713]   Parameter 4: 0xFFFF8080004DBEE0
+  530: Backtrace:
+  531: [   30.235713] #00 ntoskrnl.exe+0x17deb9
+  532: [   30.235713] #01 ntoskrnl.exe+0x17ddf1
+  533: [   30.235713] #02 ntoskrnl.exe+0x17a568
+  534: [   30.235713] #03 ntoskrnl.exe+0x17a074
+  535: [   30.235713] #04 ntoskrnl.exe+0x17e8e3
+  536: [   30.235713] #05 ntoskrnl.exe+0x17ac4d
+  537: [   30.235713] #06 ntoskrnl.exe+0xa124d
+  538: [   30.235713] #07 ntoskrnl.exe+0x30976d
+  539: [   30.235713] #08 ntoskrnl.exe+0x3120
+  540: [   30.235713] #09 ntoskrnl.exe+0x3125
+  545: [   30.235713] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  546: [   30.235713] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  551: [   30.235713] Dumping memory to storage:   0% completeKD: Crash dump selected 50670 pages, writing 50670 pages (207622144 bytes) to a 267609088-byte target.
+  556: [   30.235713] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+## r0c
+
+### boot 1 (serial.txt line 38)
+   93: [    8.000257] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  103: [    8.062708] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  136: [   23.873398] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D4E6AF2C60 000000000000000A 'AudioSrv' 000000D4E6AF3EAC 32 0x1 000000D4E6AF3FC0 228 000000D4E6AF3ED8)
+  140: [   31.794917] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+  142: The system has been stopped to keep it from damaging anything further.
+  155: Stop code: 0x0000001E
+  156: [   32.013669]   Parameter 1: 0xFFFFFFFFC0000005
+  157: [   32.013669]   Parameter 2: 0xFFFFF8007B4A3EB9
+  158: [   32.013669]   Parameter 3: 0xFFFF8080004DC520
+  159: [   32.013669]   Parameter 4: 0xFFFF8080004DBEE0
+  163: Backtrace:
+  164: [   32.013669] #00 ntoskrnl.exe+0x17deb9
+  165: [   32.013669] #01 ntoskrnl.exe+0x17ddf1
+  166: [   32.013669] #02 ntoskrnl.exe+0x17a568
+  167: [   32.013669] #03 ntoskrnl.exe+0x17a074
+  168: [   32.013669] #04 ntoskrnl.exe+0x17e8e3
+  169: [   32.013669] #05 ntoskrnl.exe+0x17ac4d
+  170: [   32.013669] #06 ntoskrnl.exe+0xa124d
+  171: [   32.013669] #07 ntoskrnl.exe+0x30976d
+  172: [   32.013669] #08 ntoskrnl.exe+0x3120
+  173: [   32.013669] #09 ntoskrnl.exe+0x3125
+  178: [   32.013669] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  179: [   32.013669] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  184: [   32.013669] Dumping memory to storage:   0% completeKD: Crash dump selected 50634 pages, writing 50634 pages (207474688 bytes) to a 267609088-byte target.
+  189: [   32.013669] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 2 (serial.txt line 227)
+  285: [    8.088166] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  295: [    8.384992] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  325: [   23.321032] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D9DB472C60 000000000000000A 'AudioSrv' 000000D9DB473EAC 32 0x1 000000D9DB473FC0 234 000000D9DB473ED8)
+  329: [   30.461332] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000682850
+  331: The system has been stopped to keep it from damaging anything further.
+  344: Stop code: 0x0000001E
+  345: [   30.601957]   Parameter 1: 0xFFFFFFFFC0000005
+  346: [   30.601957]   Parameter 2: 0xFFFFF8007B4A3EB9
+  347: [   30.601957]   Parameter 3: 0xFFFF8080004BC520
+  348: [   30.601957]   Parameter 4: 0xFFFF8080004BBEE0
+  352: Backtrace:
+  353: [   30.601957] #00 ntoskrnl.exe+0x17deb9
+  354: [   30.601957] #01 ntoskrnl.exe+0x17ddf1
+  355: [   30.601957] #02 ntoskrnl.exe+0x17a568
+  356: [   30.601957] #03 ntoskrnl.exe+0x17a074
+  357: [   30.601957] #04 ntoskrnl.exe+0x17e8e3
+  358: [   30.601957] #05 ntoskrnl.exe+0x17ac4d
+  359: [   30.601957] #06 ntoskrnl.exe+0xa124d
+  360: [   30.601957] #07 ntoskrnl.exe+0x30976d
+  361: [   30.601957] #08 ntoskrnl.exe+0x3120
+  362: [   30.601957] #09 ntoskrnl.exe+0x3125
+  367: [   30.601957] RIP=fffff8007b4a3eb9 RSP=ffff8080004bc750 RBP=ffff8080004bcb50 EFL=00010246
+  368: [   30.601957] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  373: [   30.601957] Dumping memory to storage:   0% completeKD: Crash dump selected 50703 pages, writing 50703 pages (207757312 bytes) to a 267609088-byte target.
+  378: [   30.601957] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 3 (serial.txt line 416)
+  471: [    7.730402] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  481: [    7.792854] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  512: [   22.385476] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(00000033FF1C2C60 000000000000000A 'AudioSrv' 00000033FF1C3EAC 32 0x1 00000033FF1C3FC0 23c 00000033FF1C3ED8)
+  516: [   30.681927] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+  518: The system has been stopped to keep it from damaging anything further.
+  531: Stop code: 0x0000001E
+  532: [   30.853803]   Parameter 1: 0xFFFFFFFFC0000005
+  533: [   30.853803]   Parameter 2: 0xFFFFF8007B4A3EB9
+  534: [   30.853803]   Parameter 3: 0xFFFF8080004DC520
+  535: [   30.853803]   Parameter 4: 0xFFFF8080004DBEE0
+  539: Backtrace:
+  540: [   30.853803] #00 ntoskrnl.exe+0x17deb9
+  541: [   30.853803] #01 ntoskrnl.exe+0x17ddf1
+  542: [   30.853803] #02 ntoskrnl.exe+0x17a568
+  543: [   30.853803] #03 ntoskrnl.exe+0x17a074
+  544: [   30.853803] #04 ntoskrnl.exe+0x17e8e3
+  545: [   30.853803] #05 ntoskrnl.exe+0x17ac4d
+  546: [   30.853803] #06 ntoskrnl.exe+0xa124d
+  547: [   30.853803] #07 ntoskrnl.exe+0x30976d
+  548: [   30.853803] #08 ntoskrnl.exe+0x3120
+  549: [   30.853803] #09 ntoskrnl.exe+0x3125
+  554: [   30.853803] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  555: [   30.853803] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  560: [   30.853803] Dumping memory to storage:   0% completeKD: Crash dump selected 50705 pages, writing 50705 pages (207765504 bytes) to a 267609088-byte target.
+  565: [   30.853803] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 4 (serial.txt line 603)
+
+## r0d
+
+### boot 1 (serial.txt line 35)
+   92: [   27.572741] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+  117: [   31.443754] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000FD33292B30 000000000000000A 'AudioSrv' 000000FD33293D7C 32 0x1 000000FD33293E90 230 000000FD33293DA8)
+  125: [   42.631183] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180006EE5D0
+  127: The system has been stopped to keep it from damaging anything further.
+  140: Stop code: 0x0000001E
+  141: [   42.709308]   Parameter 1: 0xFFFFFFFFC0000005
+  142: [   42.709308]   Parameter 2: 0xFFFFF8007B4A3EB9
+  143: [   42.709308]   Parameter 3: 0xFFFF8080004DC520
+  144: [   42.709308]   Parameter 4: 0xFFFF8080004DBEE0
+  148: Backtrace:
+  149: [   42.709308] #00 ntoskrnl.exe+0x17deb9
+  150: [   42.709308] #01 ntoskrnl.exe+0x17ddf1
+  151: [   42.709308] #02 ntoskrnl.exe+0x17a568
+  152: [   42.709308] #03 ntoskrnl.exe+0x17a074
+  153: [   42.709308] #04 ntoskrnl.exe+0x17e8e3
+  154: [   42.709308] #05 ntoskrnl.exe+0x17ac4d
+  155: [   42.709308] #06 ntoskrnl.exe+0xa124d
+  156: [   42.709308] #07 ntoskrnl.exe+0x30976d
+  157: [   42.709308] #08 ntoskrnl.exe+0x3120
+  158: [   42.709308] #09 ntoskrnl.exe+0x3125
+  163: [   42.709308] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  164: [   42.709308] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  169: [   42.709308] Dumping memory to storage:   0% completeKD: Crash dump selected 48475 pages, writing 48475 pages (198631424 bytes) to a 267609088-byte target.
+  174: [   42.709308] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 2 (serial.txt line 212)
+  267: [    8.094842] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+  298: [   23.030980] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000A153E32C60 000000000000000A 'AudioSrv' 000000A153E33EAC 32 0x1 000000A153E33FC0 230 000000A153E33ED8)
+  302: [   33.312038] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180006F15D0
+  304: The system has been stopped to keep it from damaging anything further.
+  317: Stop code: 0x0000001E
+  318: [   33.405789]   Parameter 1: 0xFFFFFFFFC0000005
+  319: [   33.405789]   Parameter 2: 0xFFFFF8007B4A3EB9
+  320: [   33.405789]   Parameter 3: 0xFFFF8080004DC520
+  321: [   33.405789]   Parameter 4: 0xFFFF8080004DBEE0
+  325: Backtrace:
+  326: [   33.405789] #00 ntoskrnl.exe+0x17deb9
+  327: [   33.405789] #01 ntoskrnl.exe+0x17ddf1
+  328: [   33.405789] #02 ntoskrnl.exe+0x17a568
+  329: [   33.405789] #03 ntoskrnl.exe+0x17a074
+  330: [   33.405789] #04 ntoskrnl.exe+0x17e8e3
+  331: [   33.405789] #05 ntoskrnl.exe+0x17ac4d
+  332: [   33.405789] #06 ntoskrnl.exe+0xa124d
+  333: [   33.405789] #07 ntoskrnl.exe+0x30976d
+  334: [   33.405789] #08 ntoskrnl.exe+0x3120
+  335: [   33.405789] #09 ntoskrnl.exe+0x3125
+  340: [   33.405789] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  341: [   33.405789] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  346: [   33.405789] Dumping memory to storage:   0% completeKD: Crash dump selected 50360 pages, writing 50360 pages (206352384 bytes) to a 267609088-byte target.
+  351: [   33.405789] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 3 (serial.txt line 389)
+  444: [    7.261795] hdaudbus.sys: audio path LegacyHdaOnly on PCI 8086:293e: codec mask 0x0001, DSP absent, NHLT no table, 0 endpoints not on the HDA link
+  476: [   22.603890] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(00000097D4AC2C60 000000000000000A 'AudioSrv' 00000097D4AC3EAC 32 0x1 00000097D4AC3FC0 240 00000097D4AC3ED8)
+  480: [   31.212791] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180006ED5D0
+  482: The system has been stopped to keep it from damaging anything further.
+  495: Stop code: 0x0000001E
+  496: [   31.400291]   Parameter 1: 0xFFFFFFFFC0000005
+  497: [   31.400291]   Parameter 2: 0xFFFFF8007B4A3EB9
+  498: [   31.400291]   Parameter 3: 0xFFFF80800430C520
+  499: [   31.400291]   Parameter 4: 0xFFFF80800430BEE0
+  503: Backtrace:
+  504: [   31.400291] #00 ntoskrnl.exe+0x17deb9
+  505: [   31.400291] #01 ntoskrnl.exe+0x17ddf1
+  506: [   31.400291] #02 ntoskrnl.exe+0x17a568
+  507: [   31.400291] #03 ntoskrnl.exe+0x17a074
+  508: [   31.400291] #04 ntoskrnl.exe+0x17e8e3
+  509: [   31.400291] #05 ntoskrnl.exe+0x17ac4d
+  510: [   31.400291] #06 ntoskrnl.exe+0xa124d
+  511: [   31.400291] #07 ntoskrnl.exe+0x30976d
+  512: [   31.400291] #08 ntoskrnl.exe+0x3120
+  513: [   31.400291] #09 ntoskrnl.exe+0x3125
+  518: [   31.400291] RIP=fffff8007b4a3eb9 RSP=ffff80800430c750 RBP=ffff80800430cb50 EFL=00010246
+  519: [   31.400291] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  524: [   31.400291] Dumping memory to storage:   0% completeKD: Crash dump selected 50257 pages, writing 50257 pages (205930496 bytes) to a 267609088-byte target.
+  529: [   31.400291] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 4 (serial.txt line 567)
+
+## r0e
+
+### boot 1 (serial.txt line 35)
+  115: [   21.445603] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000421D2D2B30 000000000000000A 'AudioSrv' 000000421D2D3D7C 32 0x1 000000421D2D3E90 240 000000421D2D3DA8)
+  126: [   77.038796] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+  144: [   77.741923] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+  199: [   91.257965] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+## r1b
+
+### boot 1 (serial.txt line 35)
+   94: [    7.927622] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  104: [    8.255699] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  133: [   28.255031] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000BA58BB2AF0 000000000000000A 'AudioSrv' 000000BA58BB2C5C 32 0x1 000000BA58BB2CB0 298 000000BA58BB2C88)
+  135: [   36.957977] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005AEAD0
+  137: The system has been stopped to keep it from damaging anything further.
+  150: Stop code: 0x0000001E
+  151: [   37.426729]   Parameter 1: 0xFFFFFFFFC0000005
+  152: [   37.426729]   Parameter 2: 0xFFFFF8007AB0CEB9
+  153: [   37.426729]   Parameter 3: 0xFFFF8080004DC520
+  154: [   37.426729]   Parameter 4: 0xFFFF8080004DBEE0
+  158: Backtrace:
+  159: [   37.426729] #00 ntoskrnl.exe+0x17deb9
+  160: [   37.426729] #01 ntoskrnl.exe+0x17ddf1
+  161: [   37.426729] #02 ntoskrnl.exe+0x17a568
+  162: [   37.426729] #03 ntoskrnl.exe+0x17a074
+  163: [   37.426729] #04 ntoskrnl.exe+0x17e8e3
+  164: [   37.426729] #05 ntoskrnl.exe+0x17ac4d
+  165: [   37.426729] #06 ntoskrnl.exe+0xa124d
+  166: [   37.426729] #07 ntoskrnl.exe+0x30976d
+  167: [   37.426729] #08 ntoskrnl.exe+0x3120
+  168: [   37.426729] #09 ntoskrnl.exe+0x3125
+  173: [   37.426729] RIP=fffff8007ab0ceb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+  174: [   37.426729] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+  179: [   37.426729] Dumping memory to storage:   0% completeKD: Crash dump selected 56044 pages, writing 56044 pages (229634048 bytes) to a 267609088-byte target.
+  184: [   37.426729] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+
+### boot 2 (serial.txt line 222)
+  267: [    3.515641] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001645D0
+  279: [    7.673700] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+  289: [    8.001797] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+  326: [   27.953858] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000EF95B92C60 000000000000000A 'AudioSrv' 000000EF95B93EAC 32 0x1 000000EF95B93FC0 2a4 000000EF95B93ED8)
+

@@ -38,6 +38,8 @@
 #              external client can read the model's registers while the guest
 #              runs (tools/qtest.py; reads only -- every ace_reg_read is free
 #              of side effects); the acceptance runs leave it off
+#   EXTRA_DRIVES  more -drive arguments of a round's own data disk, one per
+#              line (empty: none)
 #   SMP        fixed at 1 (refuses any other value: never evidence)
 set -u
 
@@ -77,6 +79,14 @@ args=("$QEMU" -L "$BIOSDIR"
       -d cpu_reset,guest_errors -D "$EV/qemu-dbg.log")
 if [ -n "${DISK:-}" ]; then
     args+=(-drive "file=$DISK,if=ide,index=0,media=disk,format=qcow2")
+fi
+# EXTRA_DRIVES: more -drive arguments for a round's own data disk (one per line,
+# each line one argument, e.g. a FAT disk that carries a tool into the guest and
+# the text the guest writes back); the command line of the run records them
+if [ -n "${EXTRA_DRIVES:-}" ]; then
+    while IFS= read -r d; do
+        [ -n "$d" ] && args+=(-drive "$d")
+    done <<< "$EXTRA_DRIVES"
 fi
 [ "${QTESTSOCK:-0}" = 1 ] && args+=(-qtest "unix:$SOCK/qtest.sock,server,nowait")
 ACCEL="${ACCEL:-tcg,thread=multi}"

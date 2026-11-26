@@ -1,0 +1,12 @@
+884 bugpause-check.out
+0 bugpause-crash.out
+1071 command.txt
+0 contents.txt
+1265 driver.log
+21 end.txt
+331 lib-run.out
+1038 qemu-args.txt
+2700 qemu-dbg.log
+20528 serial.log
+20089 serial.txt
+21 start.txt

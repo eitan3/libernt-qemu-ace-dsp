@@ -1,0 +1,2 @@
+2026-11-26T09:35:03Z boot1b: r1b-secondboot-ace-dsploop-selftest2 on disk/p4c4b-fresh.qcow2 (the overlay's first boot ran without an audio controller: r0e)
+2026-11-26T09:35:04Z VM r1b-secondboot-ace-dsploop-selftest2 started (lib-run pid 1072799, sockets /tmp/qad-vm.1072801, data disk /tmp/qad-ev/p4c4b/pouch/r1b-secondboot-ace-dsploop-selftest2.img)

@@ -1,0 +1,571 @@
+[=3hBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007D3FF000
+OS loader: selecting the boot entry
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: loading the SYSTEM hive
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007DEAE000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007DEAE000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: entry FFFFF8007BE74760, loader block FFFFF8007DEB0000, arc disks FFFFF8007DEB11B0, registry 2613248 bytes at FFFFF8007CDC3000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20F80, Gdt = FFFFF8007DEAB000, Idt = FFFFF8007BBFBBD0, Tss = FFFFF8007DEAD000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 999995400 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC21100
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.656251] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.515631] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.515631] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.968757] ACPI: RSDP 0x00000000100308B0 000024 (v02 ROS   )
+[    2.968757] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.968757] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.968757] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.968757] ACPI: FACS 0x000000007FECA000 000040
+[    2.968757] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.968757] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.968757] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.968757] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.968757] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    2.984382] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    2.984382] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    3.031257] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    3.031257] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    3.031257] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    3.031257] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    3.031257] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    3.046882] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    3.125008] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    3.140633] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    3.140633] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+[    3.265634] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATAPI 'QEMU DVD-ROM' fw '2.5+' 0 sectors of 0 bytes
+[    3.734384] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F217B00)
+[    4.031260] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[    4.031260] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+0000œ€€è04‰€€\SystemRoot\system32\drivers\BasicDisplay.sysª[    7.759080] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B1EB4F1
+[    7.868382] (\drivers\directx\dxgkrnl\adapter.c:13166) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF81800052E1A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    7.962132] (\drivers\directx\dxgkrnl\adapter.c:15097) DXGKRNL: DxgkAdapterStart: adapter FFFF81800052E1A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    7.962132] (\drivers\directx\dxgkrnl\adapter.c:6428) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    8.072758] (\drivers\directx\dxgkrnl\display.c:6534) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800052E1A0 desktop ready 1280x800 (scanout)
+[    8.072758] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    8.164659] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    8.164659] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+[    8.165659] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    8.165659] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    8.248905] intcdsp.sys: loaded for the Intel audio DSP child
+[    8.264436] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    8.264436] intcdsp.sys: NHLT table: the bus driver reports none
+[    8.264436] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    8.264436] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    8.264436] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[    8.264436] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    8.311311] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    8.311311] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    8.326936] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    8.979737] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    9.104337] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    9.228938] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    9.259894] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    9.259894] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    9.259894] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    9.291144] (\drivers\directx\dxgkrnl\adapter.c:621) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005721A0 device UI suppressed
+[    9.291144] (\drivers\directx\dxgkrnl\adapter.c:14490) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005721A0 stays retired; another adapter owns the desktop
+[    9.603292] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    9.603292] (\drivers\network\nwifi\control.c:816) NWIFI: control device \Device\Nwifi created
+[    9.603292] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    9.603292] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    9.728145] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[   12.103151] (\base\system\smss\pagefile.c:974) SMSS:PFILE: Open volume `\??\D:\' failed with status C000014F
+[   12.103151] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[   12.103151] (\base\system\smss\crashdmp.c:273) SMSS: Failed to open crash dump pagefile `\??\C:\pagefile.sys' (0xc0000034)
+[   12.134402] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   12.134402] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 163293, disk byte 737005568
+[   12.134402] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   12.603152] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000001000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AF7382C
+[   13.649248] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   13.649248] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   15.242902] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   15.242902] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   17.695834] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007A08B4E
+[   17.695834] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007A08D8D
+[   17.695834] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007B1EADFA
+[   17.695834] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007C2AB075
+[   23.758106] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000E269BB2B30 000000000000000A 'AudioSrv' 000000E269BB3D7C 32 0x1 000000E269BB3E90 238 000000E269BB3DA8)
+[   23.758106] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   26.413486] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   27.538442] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   51.772878] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000686850
+[   52.022879] 
+The system has been stopped to keep it from damaging anything further.
+
+[   52.022879] Check to be sure you have adequate disk space. If a driver is
+identified in the Stop message, disable the driver or check
+with the manufacturer for driver updates. Try changing video
+adapters.
+
+Check with your hardware vendor for any BIOS updates. Disable
+BIOS memory options such as caching or shadowing. If you need
+to use Safe Mode to remove or disable components, restart your
+computer, press F8 to select Advanced Startup Options, and then
+select Safe Mode.
+[   52.022879] 
+Stop code: 0x0000001E
+[   52.022879]   Parameter 1: 0xFFFFFFFFC0000005
+[   52.022879]   Parameter 2: 0xFFFFF8007B4A3EB9
+[   52.022879]   Parameter 3: 0xFFFF8080004BC520
+[   52.022879]   Parameter 4: 0xFFFF8080004BBEE0
+[   52.022879] 
+Faulting module: ntoskrnl.exe + 0x17deb9
+[   52.022879] 
+Backtrace:
+[   52.022879] #00 ntoskrnl.exe+0x17deb9
+[   52.022879] #01 ntoskrnl.exe+0x17ddf1
+[   52.022879] #02 ntoskrnl.exe+0x17a568
+[   52.022879] #03 ntoskrnl.exe+0x17a074
+[   52.022879] #04 ntoskrnl.exe+0x17e8e3
+[   52.022879] #05 ntoskrnl.exe+0x17ac4d
+[   52.022879] #06 ntoskrnl.exe+0xa124d
+[   52.022879] #07 ntoskrnl.exe+0x30976d
+[   52.022879] #08 ntoskrnl.exe+0x3120
+[   52.022879] #09 ntoskrnl.exe+0x3125
+[   52.022879] 
+Parameters point into: , ntoskrnl.exe
+[   52.022879] 
+LiberNT 10.0 build 26100, 1 processor(s)
+[   52.022879] RIP=fffff8007b4a3eb9 RSP=ffff8080004bc750 RBP=ffff8080004bcb50 EFL=00010246
+[   52.022879] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+[   52.022879] RDX=0000000000000000 RSI=0000000000000000 RDI=0000000000000000
+[   52.022879] R8 =fffff8007bbd6bf8 R9 =0000000000000001 R10=0000000000000001
+[   52.022879] R11=ffff81800010a060 R12=0000000000000000 R13=0000000000000000
+[   52.022879] R14=0000000000000000 R15=0000000000000000
+[   52.022879] Dumping memory to storage:   0% completeKD: Crash dump selected 48758 pages, writing 48758 pages (199790592 bytes) to a 267609088-byte target.
+[   52.022879] Dumping memory to storage:   5% completeDumping memory to storage:  10% completeDumping memory to storage:  15% completeDumping memory to storage:  20% completeDumping memory to storage:  25% completeDumping memory to storage:  30% completeDumping memory to storage:  35% completeDumping memory to storage:  40% completeDumping memory to storage:  45% completeDumping memory to storage:  50% completeDumping memory to storage:  55% completeDumping memory to storage:  60% completeDumping memory to storage:  65% completeDumping memory to storage:  70% completeDumping memory to storage:  75% completeDumping memory to storage:  80% completeDumping memory to storage:  85% completeDumping memory to storage:  90% completeDumping memory to storage:  95% completeDumping memory to storage: 100% complete
+KD: Memory dump saved successfully.
+[   52.022879] 
+Press Ctrl+Alt+B+K within 3 seconds to enter the debugger.
+[   52.022879] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+[=3hBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x3
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007D3FF000
+OS loader: selecting the boot entry
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x3
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: loading the SYSTEM hive
+(\sdk\lib\cmlib\hivelog.c:150) Applied 7 hive log entries up to sequence 0xd
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007DEAE000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007DEAE000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: entry FFFFF8007BE74760, loader block FFFFF8007DEB0000, arc disks FFFFF8007DEB11B0, registry 2736128 bytes at FFFFF8007CAF9000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20F80, Gdt = FFFFF8007DEAB000, Idt = FFFFF8007BBFBBD0, Tss = FFFFF8007DEAD000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000008200 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC21100
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.484381] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.484381] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.937508] ACPI: RSDP 0x00000000100318B0 000024 (v02 ROS   )
+[    2.937508] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.937508] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: FACS 0x000000007FECA000 000040
+[    2.937508] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.937508] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    2.953133] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    2.953133] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    3.031258] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    3.031258] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    3.031258] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    3.031258] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    3.046883] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    3.078133] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    3.203134] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    3.234384] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    3.234384] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+[    3.359385] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATAPI 'QEMU DVD-ROM' fw '2.5+' 0 sectors of 0 bytes
+[    3.765635] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F218B00)
+[    3.953136] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[    3.953136] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+0000œ€€è04‰€€\SystemRoot\system32\drivers\BasicDisplay.sysª[    6.931190] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B1EB4F1
+[    7.134168] (\drivers\directx\dxgkrnl\adapter.c:13166) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF81800052E1A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    8.134175] (\drivers\directx\dxgkrnl\adapter.c:15097) DXGKRNL: DxgkAdapterStart: adapter FFFF81800052E1A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    8.134175] (\drivers\directx\dxgkrnl\adapter.c:6428) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    8.555675] (\drivers\directx\dxgkrnl\display.c:6534) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800052E1A0 desktop ready 1280x800 (scanout)
+[    8.555675] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    8.646126] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    8.646126] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+[    8.646126] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    8.646126] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    8.661749] intcdsp.sys: loaded for the Intel audio DSP child
+[    8.661749] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    8.661749] intcdsp.sys: NHLT table: the bus driver reports none
+[    8.661749] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    8.661749] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    8.661749] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[    8.661749] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    8.677351] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    8.677351] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    8.677351] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    8.677351] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    8.677351] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    8.692901] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    8.708451] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    8.708451] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    8.708451] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    8.708451] (\drivers\directx\dxgkrnl\adapter.c:621) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005721A0 device UI suppressed
+[    8.708451] (\drivers\directx\dxgkrnl\adapter.c:14490) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005721A0 stays retired; another adapter owns the desktop
+[    9.083154] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    9.083154] (\drivers\network\nwifi\control.c:816) NWIFI: control device \Device\Nwifi created
+[    9.083154] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    9.098704] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    9.223606] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[   11.582988] (\base\system\smss\pagefile.c:974) SMSS:PFILE: Open volume `\??\D:\' failed with status C000014F
+[   11.582988] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[   11.582988] (\base\system\smss\crashdmp.c:304) SMSS: Found a valid crash dump in `\??\C:\pagefile.sys'
+[   11.598613] (\base\system\smss\crashdmp.c:325) SMSS: Saved crash dump `\??\C:\pagefile.sys' as `\??\C:\Windows\MEMORY.DMP'
+[   11.629863] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   11.629863] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 231985, disk byte 1018368000
+[   11.629863] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   12.629866] UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000003E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AF7382C
+[   12.864242] (\sdk\lib\cmlib\hivelog.c:150) Applied 4 hive log entries up to sequence 0x8
+[   13.161117] (\sdk\lib\cmlib\hivelog.c:150) Applied 2 hive log entries up to sequence 0x6
+[   13.176742] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x5
+[   13.192367] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x5
+[   14.317069] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   14.317069] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   15.457594] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x3
+[   16.160721] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   16.160721] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   25.082372] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000928C4B2C60 000000000000000A 'AudioSrv' 000000928C4B3EAC 32 0x1 000000928C4B3FC0 238 000000928C4B3ED8)
+[   25.082372] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   27.472107] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   28.565813] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   36.472086] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+[   36.893961] 
+The system has been stopped to keep it from damaging anything further.
+
+[   36.893961] Check to be sure you have adequate disk space. If a driver is
+identified in the Stop message, disable the driver or check
+with the manufacturer for driver updates. Try changing video
+adapters.
+
+Check with your hardware vendor for any BIOS updates. Disable
+BIOS memory options such as caching or shadowing. If you need
+to use Safe Mode to remove or disable components, restart your
+computer, press F8 to select Advanced Startup Options, and then
+select Safe Mode.
+[   36.893961] 
+Stop code: 0x0000001E
+[   36.893961]   Parameter 1: 0xFFFFFFFFC0000005
+[   36.893961]   Parameter 2: 0xFFFFF8007B4A3EB9
+[   36.893961]   Parameter 3: 0xFFFF8080004DC520
+[   36.893961]   Parameter 4: 0xFFFF8080004DBEE0
+[   36.893961] 
+Faulting module: ntoskrnl.exe + 0x17deb9
+[   36.893961] 
+Backtrace:
+[   36.893961] #00 ntoskrnl.exe+0x17deb9
+[   36.893961] #01 ntoskrnl.exe+0x17ddf1
+[   36.893961] #02 ntoskrnl.exe+0x17a568
+[   36.893961] #03 ntoskrnl.exe+0x17a074
+[   36.893961] #04 ntoskrnl.exe+0x17e8e3
+[   36.893961] #05 ntoskrnl.exe+0x17ac4d
+[   36.893961] #06 ntoskrnl.exe+0xa124d
+[   36.893961] #07 ntoskrnl.exe+0x30976d
+[   36.893961] #08 ntoskrnl.exe+0x3120
+[   36.893961] #09 ntoskrnl.exe+0x3125
+[   36.893961] 
+Parameters point into: , ntoskrnl.exe
+[   36.893961] 
+LiberNT 10.0 build 26100, 1 processor(s)
+[   36.893961] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+[   36.893961] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+[   36.893961] RDX=0000000000000000 RSI=0000000000000000 RDI=0000000000000000
+[   36.893961] R8 =fffff8007bbd6bf8 R9 =0000000000000001 R10=0000000000000001
+[   36.893961] R11=ffff81800010c060 R12=0000000000000000 R13=0000000000000000
+[   36.893961] R14=0000000000000000 R15=0000000000000000
+[   36.893961] Dumping memory to storage:   0% completeKD: Crash dump selected 50721 pages, writing 50721 pages (207831040 bytes) to a 267609088-byte target.
+[   36.893961] Dumping memory to storage:   5% completeDumping memory to storage:  10% completeDumping memory to storage:  15% completeDumping memory to storage:  20% completeDumping memory to storage:  25% completeDumping memory to storage:  30% completeDumping memory to storage:  35% completeDumping memory to storage:  40% completeDumping memory to storage:  45% completeDumping memory to storage:  50% completeDumping memory to storage:  55% completeDumping memory to storage:  60% completeDumping memory to storage:  65% completeDumping memory to storage:  70% completeDumping memory to storage:  75% completeDumping memory to storage:  80% completeDumping memory to storage:  85% completeDumping memory to storage:  90% completeDumping memory to storage:  95% completeDumping memory to storage: 100% complete
+KD: Memory dump saved successfully.
+[   36.893961] 
+Press Ctrl+Alt+B+K within 3 seconds to enter the debugger.
+[   36.893961] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+[=3hBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x5
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007D3FF000
+OS loader: selecting the boot entry
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x5
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: loading the SYSTEM hive
+(\sdk\lib\cmlib\hivelog.c:150) Applied 5 hive log entries up to sequence 0x15
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007DEAE000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007DEAE000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: entry FFFFF8007BE74760, loader block FFFFF8007DEB0000, arc disks FFFFF8007DEB11B0, registry 2859008 bytes at FFFFF8007CACD000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20F80, Gdt = FFFFF8007DEAB000, Idt = FFFFF8007BBFBBD0, Tss = FFFFF8007DEAD000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000008200 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC21100
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.140630] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.140630] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.593757] ACPI: RSDP 0x00000000100318B0 000024 (v02 ROS   )
+[    2.593757] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.593757] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.593757] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.593757] ACPI: FACS 0x000000007FECA000 000040
+[    2.593757] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.593757] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.593757] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.593757] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.593757] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    2.593757] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    2.609382] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    2.640632] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    2.640632] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    2.640632] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    2.640632] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    2.656257] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.656257] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.687507] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    2.687507] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    2.687507] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+[    2.812507] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATAPI 'QEMU DVD-ROM' fw '2.5+' 0 sectors of 0 bytes
+[    3.250009] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F218B00)
+[    3.609385] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[    3.609385] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+0000œ€€è04‰€€\SystemRoot\system32\drivers\BasicDisplay.sysª[    5.962431] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B1EB4F1
+[    6.508820] (\drivers\directx\dxgkrnl\adapter.c:13166) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF81800052E1A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    6.696320] (\drivers\directx\dxgkrnl\adapter.c:15097) DXGKRNL: DxgkAdapterStart: adapter FFFF81800052E1A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    6.696320] (\drivers\directx\dxgkrnl\adapter.c:6428) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    7.386948] (\drivers\directx\dxgkrnl\display.c:6534) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800052E1A0 desktop ready 1280x800 (scanout)
+[    7.386948] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    7.535750] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    7.535750] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007272000, processing capabilities at BAR0 +0x180
+[    7.535750] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    7.535750] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    7.598150] intcdsp.sys: loaded for the Intel audio DSP child
+[    7.598150] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    7.598150] intcdsp.sys: NHLT table: the bus driver reports none
+[    7.598150] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    7.598150] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    7.598150] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[    7.598150] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    7.613775] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    7.613775] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.613775] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.644926] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    7.675977] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    7.707122] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    7.738084] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    7.738084] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    7.738084] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    7.753709] (\drivers\directx\dxgkrnl\adapter.c:621) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005721A0 device UI suppressed
+[    7.753709] (\drivers\directx\dxgkrnl\adapter.c:14490) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005721A0 stays retired; another adapter owns the desktop
+[    7.940408] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    7.940408] (\drivers\network\nwifi\control.c:816) NWIFI: control device \Device\Nwifi created
+[    7.940408] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    7.986785] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    8.736693] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[   10.517948] (\base\system\smss\pagefile.c:974) SMSS:PFILE: Open volume `\??\D:\' failed with status C000014F
+[   10.517948] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[   10.517948] (\base\system\smss\crashdmp.c:304) SMSS: Found a valid crash dump in `\??\C:\pagefile.sys'
+[   10.549198] (\base\system\smss\crashdmp.c:325) SMSS: Saved crash dump `\??\C:\pagefile.sys' as `\??\C:\Windows\MEMORY.DMP'
+[   10.596073] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   10.596073] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 282725, disk byte 1226199040
+[   10.596073] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   11.580451] UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000007E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AF7382C
+[   11.689826] (\sdk\lib\cmlib\hivelog.c:150) Applied 3 hive log entries up to sequence 0xe
+[   11.908576] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x9
+[   11.908576] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x9
+[   12.533281] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   12.533281] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   13.439434] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x5
+[   13.751934] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   13.751934] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   18.736124] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x4
+[   22.501660] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000FD8B7D2C60 000000000000000A 'AudioSrv' 000000FD8B7D3EAC 32 0x1 000000FD8B7D3FC0 23c 000000FD8B7D3ED8)
+[   22.517285] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   23.110888] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   23.954446] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   30.173213] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000683850
+[   30.235713] 
+The system has been stopped to keep it from damaging anything further.
+
+[   30.235713] Check to be sure you have adequate disk space. If a driver is
+identified in the Stop message, disable the driver or check
+with the manufacturer for driver updates. Try changing video
+adapters.
+
+Check with your hardware vendor for any BIOS updates. Disable
+BIOS memory options such as caching or shadowing. If you need
+to use Safe Mode to remove or disable components, restart your
+computer, press F8 to select Advanced Startup Options, and then
+select Safe Mode.
+[   30.235713] 
+Stop code: 0x0000001E
+[   30.235713]   Parameter 1: 0xFFFFFFFFC0000005
+[   30.235713]   Parameter 2: 0xFFFFF8007B4A3EB9
+[   30.235713]   Parameter 3: 0xFFFF8080004DC520
+[   30.235713]   Parameter 4: 0xFFFF8080004DBEE0
+[   30.235713] 
+Faulting module: ntoskrnl.exe + 0x17deb9
+[   30.235713] 
+Backtrace:
+[   30.235713] #00 ntoskrnl.exe+0x17deb9
+[   30.235713] #01 ntoskrnl.exe+0x17ddf1
+[   30.235713] #02 ntoskrnl.exe+0x17a568
+[   30.235713] #03 ntoskrnl.exe+0x17a074
+[   30.235713] #04 ntoskrnl.exe+0x17e8e3
+[   30.235713] #05 ntoskrnl.exe+0x17ac4d
+[   30.235713] #06 ntoskrnl.exe+0xa124d
+[   30.235713] #07 ntoskrnl.exe+0x30976d
+[   30.235713] #08 ntoskrnl.exe+0x3120
+[   30.235713] #09 ntoskrnl.exe+0x3125
+[   30.235713] 
+Parameters point into: , ntoskrnl.exe
+[   30.235713] 
+LiberNT 10.0 build 26100, 1 processor(s)
+[   30.235713] RIP=fffff8007b4a3eb9 RSP=ffff8080004dc750 RBP=ffff8080004dcb50 EFL=00010246
+[   30.235713] RAX=c0c0c0c0c0c0c0c0 RBX=0000000000000000 RCX=0000000000000800
+[   30.235713] RDX=0000000000000000 RSI=0000000000000000 RDI=0000000000000000
+[   30.235713] R8 =fffff8007bbd6bf8 R9 =0000000000000001 R10=0000000000000001
+[   30.235713] R11=ffff81800010c060 R12=0000000000000000 R13=0000000000000000
+[   30.235713] R14=0000000000000000 R15=0000000000000000
+[   30.235713] Dumping memory to storage:   0% completeKD: Crash dump selected 50670 pages, writing 50670 pages (207622144 bytes) to a 267609088-byte target.
+[   30.235713] Dumping memory to storage:   5% completeDumping memory to storage:  10% completeDumping memory to storage:  15% completeDumping memory to storage:  20% completeDumping memory to storage:  25% completeDumping memory to storage:  30% completeDumping memory to storage:  35% completeDumping memory to storage:  40% completeDumping memory to storage:  45% completeDumping memory to storage:  50% completeDumping memory to storage:  55% completeDumping memory to storage:  60% completeDumping memory to storage:  65% completeDumping memory to storage:  70% completeDumping memory to storage:  75% completeDumping memory to storage:  80% completeDumping memory to storage:  85% completeDumping memory to storage:  90% completeDumping memory to storage:  95% completeDumping memory to storage: 100% complete
+KD: Memory dump saved successfully.
+[   30.235713] 
+Press Ctrl+Alt+B+K within 3 seconds to enter the debugger.
+[   30.235713] (\hal\halx86\acpi\halacpi.c:124) HAL: ACPI reset port cf9 value 0f
+[=3hBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x7
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
