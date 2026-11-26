@@ -1,0 +1,14 @@
+# the host during this boot (captured at the end of the boot, 2026-11-26T21:21:44Z; the VM ran 21:17:30Z-21:21:31Z)
+## uptime
+ 23:21:44 up 1 day, 22:23,  3 users,  load average: 3.88, 3.33, 1.97
+## the processes of the host above 1 % CPU (top -bn1, one sample, taken at 21:20:25 local)
+clang (the toolchain of another build): 3 processes at 90, 62 and 50 %CPU; ninja -j 3 -k 0 liberntiso liberntvhd liberntimg elapsed 07:39; qemu-system-x86_64 (this VM, nice 9) 70 %CPU
+## PSI
+cpu: some avg10=11.28 avg60=30.88 avg300=23.43 total=7034717119
+io:  some avg10=0.05 avg60=0.03 avg300=0.69 total=1596600287
+## the build processes now
+    PID %CPU  NI     ELAPSED COMMAND
+1201289 93.3   -       00:00 clang
+1201288 91.6   -       00:00 clang
+1201293 71.4   -       00:00 clang
+1182337  0.5   -       08:58 ninja

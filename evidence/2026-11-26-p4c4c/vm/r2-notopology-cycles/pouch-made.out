@@ -1,0 +1,21 @@
+== r2-notopology-cycles.img: 33586688 bytes
+label: dos
+label-id: 0xf7b5f4d8
+device: /tmp/qad-ev/p4c4c/pouch/r2-notopology-cycles.img
+unit: sectors
+sector-size: 512
+/tmp/qad-ev/p4c4c/pouch/r2-notopology-cycles.img1 : start=          63, size=       65536, type=6
+fsck.fat -n of the partition: clean
+== the files on it (mdir):
+ Volume in drive : is P4C4C      
+ Volume Serial Number is A19C-5286
+Directory for ::/
+
+DSPLOO~1 EXE    211968 2026-11-26  23:52  dsploop_apitest.exe
+dsploop  exe    211968 2026-11-26  23:52 
+pouch    tag        38 2026-11-26  23:52 
+        3 files             423 974 bytes
+                         33 042 432 bytes free
+
+== the exe read back from the image: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b
+== the staging directory's exe:            3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b

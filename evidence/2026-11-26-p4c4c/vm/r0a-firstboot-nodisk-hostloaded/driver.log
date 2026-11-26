@@ -1,0 +1,2 @@
+2026-11-26T21:17:29Z boot0: r0-firstboot-nodisk on disk/p4c4c-nodisk.qcow2, no data disk
+2026-11-26T21:17:30Z VM r0-firstboot-nodisk started (lib-run pid 1198776, sockets /tmp/qad-vm.1198778, data disk none)

@@ -1,0 +1,3 @@
+SHA256 hash of C:\dsploop_apitest.exe:
+3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b
+CertUtil: -hashfile command completed successfully

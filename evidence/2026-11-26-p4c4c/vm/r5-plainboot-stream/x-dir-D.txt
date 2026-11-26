@@ -1,0 +1,14 @@
+Volume in drive E is P4C4C
+Volume Serial Number is 88bc-dc82
+
+Directory of E:
+
+11/26/2026  11:45 PM           211,968 DSPLOO~1.EXE dsploop_apitest.exe
+11/26/2026  11:45 PM           211,968              dsploop.exe
+11/26/2026  11:45 PM                38              pouch.tag
+11/26/2026  09:51 PM                 4              drive.txt
+11/26/2026  09:51 PM                 8 ALIVE-~1.TXT alive-boot.txt
+11/26/2026  09:51 PM                 0 X-DIR-D.TXT  x-dir-D.txt
+       6 files                  423,986 bytes
+       0 directories         33,036,288 bytes free
+

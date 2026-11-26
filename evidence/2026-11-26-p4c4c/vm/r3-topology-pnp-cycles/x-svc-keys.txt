@@ -1,0 +1,3 @@
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioSrv
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\sysaudio
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\usbaudio

@@ -1,0 +1,9 @@
+Volume in drive C is LiberNT
+Volume Serial Number is 2f29-aeff
+
+Directory of C:
+
+11/26/2026  11:45 PM           211,968 dsploop_apitest.exe
+       1 file                   211,968 bytes
+       0 directories     84,777,451,520 bytes free
+

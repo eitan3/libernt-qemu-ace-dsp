@@ -1,0 +1,23 @@
+2026-11-26T21:24:43Z boot0: r0-firstboot-nodisk on disk/p4c4c-nodisk.qcow2, no data disk
+2026-11-26T21:24:44Z VM r0-firstboot-nodisk started (lib-run pid 1206608, sockets /tmp/qad-vm.1206610, data disk none)
+2026-11-26T21:29:07Z boot0b: taking the running VM over (lib-run.sh pid 1206610, sockets /tmp/qad-vm.1206610); boot0.sh was stopped by my own fault (waitre's third argument)
+[21:29:07] [   91.269829] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T21:29:07Z A1 (no data disk): the first boot's lines:
+[    7.487705] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+[    7.488705] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    8.438532] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    8.438532] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    9.094262] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[   42.264175] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF81800067B850
+[   42.357925] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   43.436051] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF81800067BAD0
+[   86.207317] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000AD05838090 00000000001C0166 'Program Manager' 000000AD058359C8 32 0x0 000000AD05835930 318 000000AD058359F4)
+[   90.441702] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   90.832328] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+[   91.269829] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T21:29:07Z the swenum line is 133 135  of the normalised log, the storage-expansion line 174 ; stop lines in the boot's log: 0; storport timeouts: 0; ace_unexpected: 0
+2026-11-26T21:29:40Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T21:30:25Z stop lines in the whole log: 0; fatal lines: 0; driver lines: 14
+2026-11-26T21:30:25Z VM r0-firstboot-nodisk ended: 
+2026-11-26T21:30:25Z boot0b done
+2026-11-26T21:30:39Z VM r0-firstboot-nodisk ended (boot0b: the wait on the pid that was not its child returned at once; this line written after the launcher was seen to exit): qemu exited rc=0 (none) at 2026-11-26T21:30:28Z; wall 345 s

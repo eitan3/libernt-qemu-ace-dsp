@@ -1,0 +1,100 @@
+2026-11-26T22:08:48Z boot3: r3-topology-pnp-cycles on disk/p4c4c-tp.qcow2
+2026-11-26T22:08:50Z VM r3-topology-pnp-cycles started (lib-run pid 1220401, sockets /tmp/qad-vm.1220403, data disk /tmp/qad-ev/p4c4c/pouch/r3-topology-pnp-cycles.img)
+[22:10:29] [   87.978411] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T22:10:29Z A1: the first boot's lines:
+[    7.521441] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.521441] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   40.550976] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.660351] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.785353] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   83.525276] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000F60F5C8200 0000000000070170 'Program Manager' 000000F60F5C5838 32 0x0 000000F60F5C57A0 314 000000F60F5C5864)
+[   87.197160] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   87.978411] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T22:10:29Z stop lines in the boot's log: 0; storport timeouts: 0; ace_unexpected: 0
+2026-11-26T22:11:05Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T22:11:43Z console: Win+R, cmd.exe
+2026-11-26T22:12:01Z data disk: drive D: in the guest (1 marker)
+2026-11-26T22:12:08Z console answering after firstboot (alive-firstboot.txt, 3 s)
+2026-11-26T22:12:23Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-26T22:12:39Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-26T22:12:54Z typed: reg add SelfTest = 2 (REG_DWORD)
+2026-11-26T22:13:12Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device disabled successfully.  
+[22:13:12] [  990.845108] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+2026-11-26T22:13:35Z pnputil /enable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 6 s: LiberNT PnP Utility  Enabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device enabled successfully.  
+[22:13:35] [ 1065.934694] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[22:13:35] [ 1065.934694] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[22:13:35] [ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[22:13:35] [ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[22:13:35] [ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+2026-11-26T22:13:50Z B7 (D0 entry) and run 1 at the cycle (after serial line 183):
+[  990.845108] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1065.664568] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1065.665568] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1065.670568] intcdsp.sys: boot ok after 5446 us (clock 1076108965 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1065.670568] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1065.670568] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1065.672568] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 1065.672568] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 1065.672568] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.762819] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[ 1065.762819] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.762819] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.856569] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[ 1065.856569] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.856569] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.934694] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[ 1065.934694] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-26T22:13:50Z ace_audio lines of the VM: 12
+2026-11-26T22:14:04Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-26T22:14:15Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-26T22:14:28Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-26T22:14:43Z reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio /s: output after about 4 s:  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}     DeviceState    REG_DWORD    0x1  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}\Properties     {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    HD Audio Line in     {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Microphone     {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Microphone (HD Audio Line in)     {233164C8-1B2C-4C7D-BC68-B671687A2567},1    REG_SZ    {E779F4D6-D3A3-83C7-97B0-B
+2026-11-26T22:14:43Z the lists: enum-media.txt 3 INTCDSP lines; enum-endpoint.txt 0 Loopback lines; reg-mmdev.txt 2 'Intel SST Loopback' lines
+2026-11-26T22:15:00Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 3 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T22:15:05Z C10: the serial lines of the disable (after serial line 229):
+[ 1375.818394] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C7FC0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1375.818394] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+2026-11-26T22:15:05Z C10: Safe removal lines after the ask: 0
+2026-11-26T22:15:17Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-26T22:15:17Z C10: the Media list after the refused disable: Status:                     Started Instance ID:                INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Status:                     Started Hardware IDs:               INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50 Compatible IDs:             INTCDSP\PCM Status:                     Started Status:                     Started Status:                     Started 
+2026-11-26T22:15:26Z net start: output after about 3 s: Error: 234 
+2026-11-26T22:15:26Z the running services (net start), the audio lines: 
+2026-11-26T22:18:45Z net stop audiosrv: output after about 180 s: 
+2026-11-26T22:19:52Z net start | findstr /i audio: output after about 60 s: 
+2026-11-26T22:19:52Z C11: the audio services still running (net start | findstr /i audio): ''
+2026-11-26T22:20:09Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T22:21:45Z boot3b: taking the running VM over (lib-run.sh pid 1220403, sockets /tmp/qad-vm.1220403, the data disk on D: in the guest); boot3.sh was stopped by me after the disable with the service stopped was refused
+2026-11-26T22:22:00Z reg query HKLM\SYSTEM\CurrentControlSet\Services | findstr /i "audio endpoint": output after about 4 s: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioSrv HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\sysaudio HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\usbaudio 
+2026-11-26T22:22:00Z the service keys: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioSrv|HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\sysaudio|HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\usbaudio|
+2026-11-26T22:22:09Z sc query AudioSrv: output after about 3 s: SERVICE_NAME: AudioSrv 	TYPE               : 10  WIN32_OWN_PROCESS 	STATE              : 1  STOPPED 				(STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN) 	WIN32_EXIT_CODE    : 0  (0x0) 	SERVICE_EXIT_CODE  : 0  (0x0) 	CHECKPOINT         : 0x0 	WAIT_HINT          : 0x0  
+2026-11-26T22:22:09Z sc query AudioSrv: SERVICE_NAME: AudioSrv|	TYPE               : 10  WIN32_OWN_PROCESS|	STATE              : 1  STOPPED|				(STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN)|	WIN32_EXIT_CODE    : 0  (0x0)|	SERVICE_EXIT_CODE  : 0  (0x0)|	CHECKPOINT         : 0x0|	WAIT_HINT          : 0x0||
+2026-11-26T22:22:18Z sc query sysaudio: output after about 3 s: SERVICE_NAME: sysaudio 	TYPE               : 1  KERNEL_DRIVER 	STATE              : 4  RUNNING 				(STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN) 	WIN32_EXIT_CODE    : 0  (0x0) 	SERVICE_EXIT_CODE  : 0  (0x0) 	CHECKPOINT         : 0x0 	WAIT_HINT          : 0x0  
+2026-11-26T22:22:18Z sc query sysaudio: SERVICE_NAME: sysaudio|	TYPE               : 1  KERNEL_DRIVER|	STATE              : 4  RUNNING|				(STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN)|	WIN32_EXIT_CODE    : 0  (0x0)|	SERVICE_EXIT_CODE  : 0  (0x0)|	CHECKPOINT         : 0x0|	WAIT_HINT          : 0x0||
+2026-11-26T22:22:27Z sc query usbaudio: output after about 3 s: SERVICE_NAME: usbaudio 	TYPE               : 1  KERNEL_DRIVER 	STATE              : 1  STOPPED 				(NOT_STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN) 	WIN32_EXIT_CODE    : 1077  (0x435) 	SERVICE_EXIT_CODE  : 0  (0x0) 	CHECKPOINT         : 0x0 	WAIT_HINT          : 0x0  
+2026-11-26T22:22:27Z sc query usbaudio: SERVICE_NAME: usbaudio|	TYPE               : 1  KERNEL_DRIVER|	STATE              : 1  STOPPED|				(NOT_STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN)|	WIN32_EXIT_CODE    : 1077  (0x435)|	SERVICE_EXIT_CODE  : 0  (0x0)|	CHECKPOINT         : 0x0|	WAIT_HINT          : 0x0||
+2026-11-26T22:22:44Z pnputil /disable-device "INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00": output after about 4 s: LiberNT PnP Utility  Disabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T22:23:07Z pnputil /disable-device "HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001": output after about 4 s: LiberNT PnP Utility  Disabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T22:23:10Z the serial lines of the two asks (after serial line 237):
+[ 3625.931188] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C85F0 INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0 0x00000000)
+[ 3625.931188] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0)
+[ 3711.455208] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C89E0 HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0 0x00000000)
+[ 3711.455208] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0)
+2026-11-26T22:26:19Z net stop sysaudio: output after about 180 s: 
+2026-11-26T22:26:36Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T22:26:39Z after net stop sysaudio, the DSP device asked again: the serial lines (after serial line 243):
+[ 4684.470323] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C8050 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 4684.470323] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+2026-11-26T22:26:57Z pnputil /restart-device "HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001": output after about 4 s: LiberNT PnP Utility  Restarting device:         HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001  System reboot is needed to complete the operation! 
+2026-11-26T22:27:02Z N5-05: the serial lines of the codec's restart (after serial line 246):
+2026-11-26T22:27:37Z stop lines in the whole log: 0; fatal lines: 0; ace_unexpected: 0; model now: adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=32000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+2026-11-26T22:27:40Z VM r3-topology-pnp-cycles ended: qemu exited rc=0 (none) at 2026-11-26T22:27:40Z; wall 1131 s
+2026-11-26T22:27:40Z boot3b done

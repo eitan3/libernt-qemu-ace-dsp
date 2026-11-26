@@ -1,0 +1,35 @@
+--- tools/fault-matrix.sh	2026-11-25 13:46:15.947840629 +0200
++++ <project>/evidence/2026-11-26-p4c4c/vm/tools-used/fault-matrix-p4c4c.sh	2026-11-27 01:41:52.836064654 +0200
+@@ -1,6 +1,9 @@
+ #!/bin/bash
+ # SPDX-License-Identifier: GPL-2.0-or-later
+-# qemu-ace-dsp: fault-matrix.sh -- AC4 in the VM, unattended: one boot per fault
++# qemu-ace-dsp: fault-matrix-p4c4c.sh -- the project's tools/fault-matrix.sh as the p4c4c round
++# runs it: one block changed (the recovery cycle's console is opened by the shell's Win+R hotkey,
++# as every console of this round: the marked block below).  Everything else is the tool's.
++# Original header: fault-matrix.sh -- AC4 in the VM, unattended: one boot per fault
+ # on the stage-2 overlay (BootDsp=1 already set in the guest), the driver's
+ # outcome timed from its "booting:" line, bounded/unbounded by rule, the VM
+ # stopped; a markdown table of the rows in <evidence root>/fault-matrix.md.
+@@ -52,7 +55,7 @@
+ # This work is licensed under the terms of the GNU GPL, version 2 or later.
+ # See the COPYING file in the top-level directory.
+ set -u
+-QAD="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
++QAD=<project>   # the copy lives outside the project's tools/ directory: the project's path, not the script's ../
+ EVROOT="${EVROOT:-/tmp/qad-fault-matrix}"
+ DISK="${DISK:-$QAD/disk/p2b2.qcow2}"
+ WINDOW="${WINDOW:-30}"
+@@ -170,8 +173,10 @@
+     if [ "${RECOVER:-0}" = 1 ]; then
+         if ( cd "$QAD" && tools/waitline.sh "$EV" "Program Manager" 420 >/dev/null 2>&1 ); then
+             sleep 10
+-            ( cd "$QAD" && q tools/guest.sh "$EV" key ctrl-esc ); sleep 2
+-            ( cd "$QAD" && q tools/guest.sh "$EV" type "cmd" ); ( cd "$QAD" && q tools/guest.sh "$EV" key ret ); sleep 6
++            # the console by the shell's Win+R hotkey (the Start menu's way is not used on this image: vmcommon.sh's console())
++            ( cd "$QAD" && q tools/guest.sh "$EV" key meta_l-r ); sleep 4
++            ( cd "$QAD" && q tools/guest.sh "$EV" key home shift-end ); sleep 1
++            ( cd "$QAD" && q tools/guest.sh "$EV" type "cmd.exe" ); ( cd "$QAD" && q tools/guest.sh "$EV" key ret ); sleep 10
+             if [ -n "$scale" ]; then ( cd "$QAD" && q ./set-fault.sh "$EV" none x-delay-scale=1 )
+             else ( cd "$QAD" && q ./set-fault.sh "$EV" none ); fi
+             ( cd "$QAD" && HEARTBEAT="${HEARTBEAT:-0}" TIMEOUT="${TIMEOUT:-60}" tools/cycle.sh "$EV" recover > "$EV/recover.out" 2>&1 )

@@ -1,0 +1,9 @@
+Volume in drive E is P4C4C
+Volume Serial Number is 88bc-dc82
+
+Directory of E:
+
+11/26/2026  11:45 PM           211,968 dsploop.exe
+       1 file                   211,968 bytes
+       0 directories         33,032,192 bytes free
+

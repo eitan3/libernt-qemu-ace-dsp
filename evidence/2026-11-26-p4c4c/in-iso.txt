@@ -1,0 +1,73 @@
+# in-ISO hashes, independent extraction (bsdtar -x -f LiberNT.iso -C /tmp/..., the named members only) 2026-11-26T21:15:20Z
+# expected: gates/in-iso.txt of the staging directory (image-check.txt): its iso= value, or the payload line
+3e12e60bbc2626437b1455f8cd1737610c48ce667207a1c327d23be33a2ff70b      45056  Windows/system32/drivers/swenum.sys  equal (hash and size)
+35548fd307677a052cc0ffb69327f177e2b1406ba8a6fefc9c643ab00acfaf7b     479232  Windows/system32/drivers/intcdsp.sys  equal (hash and size)
+1c2754a06e6cecace63277af463e5d0f6fcc5fac2ea3b36549201fddae1d1b74     331776  Windows/system32/drivers/hdaudbus.sys  equal (hash and size)
+64bcd5e9d5e3d3018f8cf286446b02f715ff8d0f76483e525d5615966ef6e7f9     151552  Windows/system32/drivers/dsppcm.sys  equal (hash and size)
+69e2fc3eb3af357679f04ce727b1ba82d9b75bf9f93cfac7a1b1f64708d710bb     249856  Windows/system32/drivers/hdaudio.sys  equal (hash and size)
+5cc9aa7ec15716326f6e26d74dde825c34f36ab80fc2a5900d30e018944435bb     249856  Windows/system32/drivers/wdmaud.sys  equal (hash and size)
+a8e3b7f6038b4eca0c2e0a1c02c1bf0a24401b507a46246da7208a594277c225     359936  Windows/system32/mmdevapi.dll  equal (hash and size)
+f180480e5e6f133d9b30669c7cd92c43aef685d06df293f8cd23e0128cae636e     907264  Windows/system32/mmsys.cpl  equal (hash and size)
+8df867a76e350ba4cd603af2d790ad98bbb02271c214ec795af2662bd60aaa4c    6112256  Windows/explorer.exe  equal (hash and size)
+b8870fe3c4b75631493d7b55b69a7231bc48c68bd5c9f2197b4dfe74c9ba8398    1620992  Windows/ImmersiveControlPanel/SystemSettings.exe  equal (hash)
+cd75b6677a720aadc1249e2083a6c185eef11320d7160bb8288fc70436e26d5a    2061824  Windows/system32/stobject.dll  equal (hash and size)
+564c94a383ce510c772943a871f1173e59204ca6cb1e62611292340e5e12e422   10055680  Windows/system32/ntoskrnl.exe  equal (hash and size)
+f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e    1158164  Windows/system32/drivers/intel/sof/sof-arl-s.ri  equal (hash)
+4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250    1158164  Windows/system32/drivers/intel/sof/sof-mtl.ri  equal (hash)
+0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601       4286  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg  equal (hash)
+3f7a98af484ad34b2d5da5da0d170d3419fad9551929469e3fea5958189adab1       9540  Windows/inf/dsppcm.inf  (no record in gates/in-iso.txt)
+b06383069c655ba90df5b4e35388236cf7f78ee99fc06c4dd70cc2314d7ff3e9       6922  Windows/inf/intcdsp.inf  (no record in gates/in-iso.txt)
+a6d5c33ab40aec261fe69c0f219a61e41b1aec92dbf7d0cb83f8f6b1ec68079f      12526  Windows/inf/hdaudbus.inf  (no record in gates/in-iso.txt)
+1f05d5a1622b5b4899be806cd0a4e69599e0c8d5aeb332ee3820b594d1650c89    4415488  Windows/system32/hal.dll  (no record in gates/in-iso.txt)
+44ec7eb52e05c819b59e25588a5023451f83513a0db829bc958a62a2ebb26510     788992  Windows/system32/cmd.exe  (no record in gates/in-iso.txt)
+55128208e1bdbfdf366c40dd3ef99306b7e186ceca0c753ef3d950a254a2387a      52224  Windows/system32/certutil.exe  (no record in gates/in-iso.txt)
+4839dc2762e272371ee3b812cac66157da95ee2c3c5e06fec20e0e58e013edd8      62976  Windows/system32/pnputil.exe  (no record in gates/in-iso.txt)
+
+## the identity string of the ISO's ntoskrnl.exe (grep -a)
+      1 20261126-ec8ce8
+## dsppcm.inf's FriendlyNames (the ISO's copy)
+## the format strings of this checkpoint in the copies extracted from the ISO (grep -a)
+  present  intcdsp.sys  the DSP is booted at the next D0 entry with
+  absent   dsppcm.sys   the DSP is booted at the next D0 entry with
+  present  intcdsp.sys  topology: none selected
+  absent   dsppcm.sys   topology: none selected
+  present  intcdsp.sys  topology: modules
+  absent   dsppcm.sys   topology: modules
+  present  intcdsp.sys  audio child
+  absent   dsppcm.sys   audio child
+  present  intcdsp.sys  loopback self-test: %u runs
+  absent   dsppcm.sys   loopback self-test: %u runs
+  present  intcdsp.sys  stream %u: latency: fifo
+  absent   dsppcm.sys   stream %u: latency: fifo
+  absent   intcdsp.sys  pin created
+  present  dsppcm.sys   pin created
+  absent   intcdsp.sys  registered as
+  present  dsppcm.sys   registered as
+  present  intcdsp.sys  mailbox
+  absent   dsppcm.sys   mailbox
+  present  intcdsp.sys  released
+  present  dsppcm.sys   released
+  absent   intcdsp.sys  generation
+  absent   dsppcm.sys   generation
+## the lines around 'latency', 'pin created', 'released' in dsppcm.sys and intcdsp.sys (strings -a, 6 wide)
+--- intcdsp.sys
+intcdsp.sys: stream %u: not freed, 0x%08lx
+intcdsp.sys: idle reference not released: 0x%08lx
+streams: released for the power-down; nothing is sent until the DSP is booted again
+stream %u: the PCM's pipelines could not be deleted after the failed build (0x%08x); released as after a fault
+stream %u: not allocated (0x%08x); its buffer is released, the tag is kept for the close
+stream %u: the undo of the PCM's pipelines could not be finished (0x%08x); released as after a fault
+stream %u: the PCM's pipelines could not be built (0x%08x) and what was built could not be deleted again (0x%08x); released as after a fault
+streams: released after the fault; nothing is sent until the DSP is booted again
+stream %u: its copier could not be told the stream is going (0x%08x); released as after a fault
+stream %u: the PCM's pipelines could not be deleted (0x%08x); released as after a fault
+loopback self-test: stopped at render position %u (LPIB %u, buffer %u), capture position %u (LPIB %u, buffer %u), %u capture periods, released: %u pipelines and %u instances deleted, %u streams freed,
+released by the fault
+intcdsp.sys: stream %u: latency: fifo %lu bytes, dsp estimate %lu bytes (the copier's gateway buffer and the PCM's module buffers)
+--- dsppcm.sys
+dsppcm.sys: stream: the buffer is not released, 0x%08lx
+dsppcm.sys: endpoint '%s' %s: pin created, %lu Hz %lu ch %lu in %lu bits
+## swenum.sys of this image (upstream's fix): its size and the strings of its remove path's neighbours (for the record)
+KsRemoveBusEnumInterface
+IoDeleteDevice
+IoDetachDevice

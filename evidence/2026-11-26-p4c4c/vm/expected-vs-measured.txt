@@ -1,0 +1,198 @@
+# TESTING.md (p4c4c's) expected lines against what the p4c4c round measured
+# A fixed line is looked up as it is written (TESTING.md quotes it without the timestamp); "RE:" rows are extended regexes;
+# "FILE:<name>:" rows count a substring in the named file of the VM directory (the text the guest wrote to its data disk).
+# The VMs: r0-firstboot-nodisk, r0a-firstboot-nodisk-hostloaded, r1-firstboot-stream-selftest2boot, r2-notopology-cycles, r3-topology-pnp-cycles, r4-byeye, r5-plainboot-stream
+# A count is the number of lines of that VM's serial log (or of the named file) that carry it.
+
+## A1: the first boot (upstream's swenum fix in this image)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `swenum: KsCreateBusEnumObject Devices BusDeviceObject` | **2** | 0 | **4** | **2** | **2** | **1** | **1** |
+| `umpnpmgr: Safe removal: ROOT\SYSTEM\0000 (the step at which p4c4b bugchecked)` | **1** | 0 | **1** | **1** | **1** | 0 | 0 |
+| `base\setup\libernt: Storage expansion not offered (the Setup phase)` | **1** | 0 | **1** | **1** | **1** | 0 | 0 |
+| `The system has been stopped (a bugcheck)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Storport: a request ... timed out (the environment of the first launch)` | 0 | **7** | 0 | 0 | 0 | 0 | 0 |
+
+## A3 / B4: the system boot with BootDsp = 1 and the topology
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'` | 0 | 0 | **2** | **25** | **1** | **1** | **1** |
+| `boot ok after <us> ... attempt 1, 0 DSP interrupts, cleanup ok` | 0 | 0 | **2** | **25** | **1** | **1** | **1** |
+| `firmware ready: version 2.15.0.1, ABI 1` | 0 | 0 | **2** | **25** | **1** | **1** | **1** |
+| `E17: downlink mailbox 4096 bytes, uplink mailbox 4096 bytes` | 0 | 0 | **2** | **25** | **1** | **1** | **1** |
+| `topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), ... from the registry override` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `endpoint 'Loopback' render: registered as 'LoopbackTopo'` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `endpoint 'Loopback' render: registered as 'LoopbackWave'` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `endpoint 'Loopback' capture: registered as 'LoopbackInTopo'` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `endpoint 'Loopback' capture: registered as 'LoopbackInWave'` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+
+## B4: the names complete in MMDevices (reg-mmdev.txt, the data disk)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `{026E516E-…},2 = 'Speakers - Intel SST Loopback' (DEVPKEY_DeviceInterface_FriendlyName)` | 0 | 0 | **1** | 0 | 0 | 0 | **1** |
+| `{026E516E-…},2 = 'Microphone - Intel SST Loopback'` | 0 | 0 | **1** | 0 | **1** | 0 | **1** |
+| `{A45C254E-…},14 = 'Speakers (Speakers - Intel SST Loopback)'` | 0 | 0 | **1** | 0 | 0 | 0 | **1** |
+| `{A45C254E-…},14 = 'Microphone (Microphone - Intel SST Loopback)'` | 0 | 0 | **1** | 0 | **1** | 0 | **1** |
+| `the legacy endpoints beside them: HD Audio Line out / Line in` | 0 | 0 | **4** | 0 | **4** | 0 | **4** |
+| `a name cut at 31 characters (p4c4b2's D3: "Intel Smart Sound DS" / "Microphone - Intel Smart Sound ")` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## B5: the stream through the audio stack (dsploop-out.txt: LIBERNT_APITEST_REQUIRED=1, run from the system disk)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `the identity line, render: endpoint is of the DSP's PCM: filter ...intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50...loopbacktopo` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `the identity line, capture: ...loopbackintopo` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `the legacy endpoint told apart: endpoint is not of the DSP's PCM: filter ...hdaudio#func_01...` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `16 valid bits: 48000 frames compared within 1 LSB, max abs error 0, offset <k>, ok (TESTING.md: "max abs error <= 1 LSB (tolerance 1)")` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `24-in-32: 48000 frames compared within 0 LSB, max abs error 0, offset <k>, ok` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `32: 48000 frames compared within 0 LSB, max abs error 0, offset <k>, ok` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `dsploop: 3 of 3 depths compared` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `the summary: dsploop: <n> tests executed (0 marked as todo, 0 failures), 0 skipped.` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `0 preconditions missing under the switch` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `the exit code 0 (dsploop-rc.txt: the whole text is 0)` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `a skipped chunk (0 expected under the switch)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## B5, the data disk's own launches (E24: x-launch-pouch.txt by the long name, x-launch-short.txt by dsploop.exe; no switch)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `x-launch-pouch.txt: 3 of 3 depths compared` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `x-launch-pouch.txt: max abs error 0 (three depths)` | 0 | 0 | 0 | 0 | 0 | 0 | **3** |
+| `x-launch-short.txt: 3 of 3 depths compared` | 0 | 0 | 0 | 0 | 0 | 0 | **1** |
+| `x-launch-short.txt: max abs error 0 (three depths)` | 0 | 0 | 0 | 0 | 0 | 0 | **3** |
+| `VM 1's launch by the long name: 'The system cannot find the path specified.'` | 0 | 0 | **1** | 0 | 0 | 0 | 0 |
+| `VM 1's copy by the long name: 'The system cannot find the path specified.'` | 0 | 0 | **1** | 0 | 0 | 0 | 0 |
+
+## B6: the FIFO constraint (the serial lines of the apitest)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `endpoint 'Loopback' render: pin created, 48000 Hz 2 ch <b> in <w> bits` | 0 | 0 | 0 | 0 | 0 | 0 | **9** |
+| `endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch <b> in <w> bits` | 0 | 0 | 0 | 0 | 0 | 0 | **9** |
+| `stream <t>: latency: fifo <F> bytes, dsp estimate <D> bytes` | 0 | 0 | 0 | 0 | 0 | 0 | **18** |
+
+## B7: SelfTest = 2 (three runs and the summary)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `16-bit: 4096 frames captured after <ms> ms, offset <k> frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok` | 0 | 0 | **1** | 0 | **1** | 0 | 0 |
+| `24- and 32-bit: ... render rms 379742706.482, capture rms 379742706.482, ok` | 0 | 0 | **2** | 0 | **2** | 0 | 0 |
+| `3 runs, 3 matched, 0 failed, <n> requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok` | 0 | 0 | **1** | 0 | **1** | 0 | 0 |
+| `ran (0x00000000), the DSP is left running` | 0 | 0 | **1** | 0 | **1** | 0 | 0 |
+| `a run's failures (not captured / failed)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## A3: SelfTest = 0 at a system boot (no self-test line expected)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms` | **1** | **1** | **2** | **26** | **1** | **1** | **1** |
+| `loopback self-test: (0 expected in a SelfTest = 0 boot)` | 0 | 0 | **11** | 0 | **11** | 0 | 0 |
+
+## C8: no Topology
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint` | 0 | 0 | 0 | **25** | 0 | 0 | 0 |
+| `DSP power down from state ready` | 0 | 0 | **2** | **25** | **1** | **1** | **1** |
+| `lines that must be absent (0 expected in r2): audio child` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `lines that must be absent (0 expected in r2): dsppcm.sys:` | 0 | 0 | **12** | 0 | **6** | **6** | **24** |
+| `the Media list while there is no topology: INTCDSP\PCM lines (0 expected)` | 0 | 0 | **3** | 0 | **3** | 0 | **3** |
+
+## C9 and the regression of the plan: the disable/enable cycles (cycles.log)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `## cycle c8-none` | 0 | 0 | 0 | **1** | 0 | 0 | 0 |
+| `## cycle c9a-alone, c9b-alone (the DSP device alone)` | 0 | 0 | 0 | **2** | 0 | 0 | 0 |
+| `## cycle ac3-1 ... ac3-22 (the regression)` | 0 | 0 | 0 | **22** | 0 | 0 | 0 |
+| `a cycle's boot line: intcdsp.sys: boot ok after` | 0 | 0 | 0 | **25** | 0 | 0 | 0 |
+| `a cycle's bounded timeout (0 expected): boot ... timeout after` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `a cycle's disable not seen (0 expected)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Safe removal: CSAUDIO (a completed disable of the DSP device)` | 0 | 0 | 0 | **25** | **1** | 0 | 0 |
+
+## C10/C11: the PnP cycles with the child present (the serial lines)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `DisableDeviceInstance(CSAUDIO (every disable asked of the DSP device)` | 0 | 0 | 0 | **25** | **4** | 0 | 0 |
+| `Safe removal: CSAUDIO (the completed ones)` | 0 | 0 | 0 | **25** | **1** | 0 | 0 |
+| `dsppcm.sys: endpoint ... registered as (four per enable with the topology)` | 0 | 0 | **8** | 0 | **4** | **4** | **4** |
+| `streams: released for the power-down` | 0 | 0 | **2** | 0 | **1** | **1** | **1** |
+| `RestartDeviceInstance / the codec's restart (N5-05)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## C10/C11: pnputil's and net's own texts (the data disk)
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `C10 (the service running): Failed to disable device: A device attached to the system is not functioning.` | 0 | 0 | 0 | 0 | **1** | 0 | 0 |
+| `C11 (the service stopped): Device disabled successfully (x-c11-1-disable.txt)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `C11: the child gone while disabled: INTCDSP\PCM lines in x-c11-1-media-disabled.txt (0 expected)` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `C11: the service stop's own text (x-svc-stop.txt: 'stopped successfully')` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `N5-05 (the service stopped): x-n5-05.txt` | 0 | 0 | 0 | 0 | **1** | 0 | 0 |
+| `N5-05 (the service running): x-n5-05-running.txt` | 0 | 0 | 0 | 0 | 0 | **1** | 0 |
+
+## What no VM may show, and the clean end
+
+| expected | r0-firstboot-nodisk | r0a-firstboot-nodisk-hostloaded | r1-firstboot-stream-selftest2boot | r2-notopology-cycles | r3-topology-pnp-cycles | r4-byeye | r5-plainboot-stream |
+|---|---|---|---|---|---|---|---|
+| `The system has been stopped` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Stop code:` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `clock stalled` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `interrupt storm` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Entering sleep state S5 (the clean end)` | **1** | **1** | **1** | **1** | **1** | **1** | **1** |
+
+## The gate rule on every apitest log (tools/apitest-gate.sh: --required for dsploop-out.txt, the switch was set; the data disk's launches without)
+
+| VM | log | the rule |
+|---|---|---|
+| r1-firstboot-stream-selftest2boot | dsploop-out.txt | no summary line (the program did not finish) (rc=1) |
+| r1-firstboot-stream-selftest2boot | x-launch-pouch.txt | no summary line (the program did not finish) (rc=1) |
+| r5-plainboot-stream | dsploop-out.txt | dsploop: 1285 tests executed (0 marked as todo, 0 failures), 0 skipped. (allowance 0, required) (rc=0) |
+| r5-plainboot-stream | x-launch-pouch.txt | dsploop: 1259 tests executed (0 marked as todo, 0 failures), 0 skipped. (allowance 0) (rc=0) |
+| r5-plainboot-stream | x-launch-short.txt | dsploop: 1290 tests executed (0 marked as todo, 0 failures), 0 skipped. (allowance 0) (rc=0) |
+
+## The latency lines of the stream (B6) in full
+
+- r5-plainboot-stream: 18 lines; fifo values: 0, 257; dsp estimates: 2496, 2880
+
+## What pnputil and net answered (x-*.txt, the data disk's text; the first 300 characters of each)
+
+| VM | file | text |
+|---|---|---|
+| r1-firstboot-stream-selftest2boot | x-b-copy.txt | The system cannot find the path specified. |
+| r1-firstboot-stream-selftest2boot | x-c-certutil.txt | CertUtil: -hashfile command failed: 2 |
+| r1-firstboot-stream-selftest2boot | x-launch-pouch.txt | The system cannot find the path specified. |
+| r3-topology-pnp-cycles | x-c1-disable.txt | Disabling device: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device disabled successfully. |
+| r3-topology-pnp-cycles | x-c1-enable.txt | Enabling device: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device enabled successfully. |
+| r3-topology-pnp-cycles | x-c10-disable.txt | Disabling device: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning. |
+| r3-topology-pnp-cycles | x-c10-media.txt | Instance ID: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description: High Definition Audio Device Class Name: MEDIA Class GUID: {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name: ReactOS Status: Started Driver Name: hdaudio.inf Hardware IDs: HDAUDIO\FU |
+| r3-topology-pnp-cycles | x-c11-1-disable.txt | Disabling device: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning. |
+| r3-topology-pnp-cycles | x-c11-child-disable.txt | Disabling device: INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Failed to disable device: A device attached to the system is not functioning. |
+| r3-topology-pnp-cycles | x-c11-codec-disable.txt | Disabling device: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Failed to disable device: A device attached to the system is not functioning. |
+| r3-topology-pnp-cycles | x-c11-dsp-retry.txt | Disabling device: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning. |
+| r3-topology-pnp-cycles | x-n5-05.txt | Restarting device: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 System reboot is needed to complete the operation! |
+| r3-topology-pnp-cycles | x-svc-after.txt |  |
+| r3-topology-pnp-cycles | x-svc-keys.txt | HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioSrv HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\sysaudio HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\usbaudio |
+| r3-topology-pnp-cycles | x-svc-list.txt | Error: 234 |
+| r3-topology-pnp-cycles | x-svc-stop-sysaudio.txt |  |
+| r3-topology-pnp-cycles | x-svc-stop.txt |  |
+| r3-topology-pnp-cycles | x-svcq-AudioSrv.txt | SERVICE_NAME: AudioSrv TYPE : 10 WIN32_OWN_PROCESS STATE : 1 STOPPED (STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN) WIN32_EXIT_CODE : 0 (0x0) SERVICE_EXIT_CODE : 0 (0x0) CHECKPOINT : 0x0 WAIT_HINT : 0x0 |
+| r3-topology-pnp-cycles | x-svcq-sysaudio.txt | SERVICE_NAME: sysaudio TYPE : 1 KERNEL_DRIVER STATE : 4 RUNNING (STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN) WIN32_EXIT_CODE : 0 (0x0) SERVICE_EXIT_CODE : 0 (0x0) CHECKPOINT : 0x0 WAIT_HINT : 0x0 |
+| r3-topology-pnp-cycles | x-svcq-usbaudio.txt | SERVICE_NAME: usbaudio TYPE : 1 KERNEL_DRIVER STATE : 1 STOPPED (NOT_STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN) WIN32_EXIT_CODE : 1077 (0x435) SERVICE_EXIT_CODE : 0 (0x0) CHECKPOINT : 0x0 WAIT_HINT : 0x0 |
+| r4-byeye | x-exe-on-c.txt | Volume in drive C is LiberNT Volume Serial Number is 2f29-aeff Directory of C: 11/26/2026 11:45 PM 211,968 dsploop_apitest.exe 1 file 211,968 bytes 0 directories 84,777,451,520 bytes free |
+| r4-byeye | x-n5-05-media.txt | Instance ID: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description: High Definition Audio Device Class Name: MEDIA Class GUID: {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name: ReactOS Status: Started Driver Name: hdaudio.inf Hardware IDs: HDAUDIO\FU |
+| r4-byeye | x-n5-05-running.txt | Restarting device: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 System reboot is needed to complete the operation! |
+| r5-plainboot-stream | x-certutil-short.txt | SHA256 hash of E:\dsploop.exe: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b CertUtil: -hashfile command completed successfully |
+| r5-plainboot-stream | x-certutil.txt | SHA256 hash of C:\dsploop_apitest.exe: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b CertUtil: -hashfile command completed successfully |
+| r5-plainboot-stream | x-copy-lfn.txt | 1 file(s) copied |
+| r5-plainboot-stream | x-copy-short.txt | 1 file(s) copied |
+| r5-plainboot-stream | x-dir-D.txt | Volume in drive E is P4C4C Volume Serial Number is 88bc-dc82 Directory of E: 11/26/2026 11:45 PM 211,968 DSPLOO~1.EXE dsploop_apitest.exe 11/26/2026 11:45 PM 211,968 dsploop.exe 11/26/2026 11:45 PM 38 pouch.tag 11/26/2026 09:51 PM 4 drive.txt 11/26/2026 09:51 PM 8 ALIVE-~1.TXT alive-boot.txt 11/26/2 |
+| r5-plainboot-stream | x-dir-lfn.txt | Volume in drive E is P4C4C Volume Serial Number is 88bc-dc82 Directory of E: 11/26/2026 11:45 PM 211,968 dsploop_apitest.exe 1 file 211,968 bytes 0 directories 33,034,240 bytes free |
+| r5-plainboot-stream | x-dir-short.txt | Volume in drive E is P4C4C Volume Serial Number is 88bc-dc82 Directory of E: 11/26/2026 11:45 PM 211,968 dsploop.exe 1 file 211,968 bytes 0 directories 33,032,192 bytes free |
+| r5-plainboot-stream | x-launch-pouch.txt | dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&re |
+| r5-plainboot-stream | x-launch-short.txt | dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&re |

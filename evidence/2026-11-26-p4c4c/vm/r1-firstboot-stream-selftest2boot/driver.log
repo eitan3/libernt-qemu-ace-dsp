@@ -1,0 +1,79 @@
+2026-11-26T21:32:41Z boot1: r1-firstboot-stream-selftest2boot on disk/p4c4c.qcow2
+2026-11-26T21:32:42Z VM r1-firstboot-stream-selftest2boot started (lib-run pid 1208916, sockets /tmp/qad-vm.1208918, data disk /tmp/qad-ev/p4c4c/pouch/r1-firstboot-stream-selftest2boot.img)
+[21:34:19] [   86.516522] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T21:34:19Z A1 (with the data disk): the first boot's lines:
+[    8.082202] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    8.082202] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   39.879548] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.301425] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.020177] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   82.360257] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000007687828780 0000000000070170 'Program Manager' 0000007687825728 32 0x0 0000007687825600 310 0000007687825754)
+[   85.625894] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   86.516522] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T21:34:19Z stop lines in the boot's log: 0; ace_unexpected: 0
+2026-11-26T21:34:55Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T21:35:33Z console: Win+R, cmd.exe
+2026-11-26T21:35:52Z data disk: drive D: in the guest (1 marker)
+2026-11-26T21:35:59Z console answering after firstboot (alive-firstboot.txt, 3 s)
+2026-11-26T21:36:13Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-26T21:36:29Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-26T21:36:43Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-26T21:36:56Z certutil -hashfile %POUCHDRV%:\dsploop_apitest.exe SHA256: output after about 3 s: SHA256 hash of D:\dsploop_apitest.exe: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b CertUtil: -hashfile command completed successfully 
+2026-11-26T21:36:59Z reboot typed at serial line 183
+[21:37:51] [    5.064769] intcdsp.sys: boot ok after 5451 us (clock 1028730059 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-26T21:38:06Z B4/E17: the system boot's driver lines (after serial line 183):
+[    5.064769] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    5.064769] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    5.064769] intcdsp.sys: boot ok after 5451 us (clock 1028730059 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    5.064769] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    5.064769] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    5.064769] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    5.064769] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    5.064769] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[21:38:20] [   21.565497] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(00000063B5CB51B0 0000000000030172 'Program Manager' 00000063B5CB5E48 32 0x0 00000063B5CB5E90 2ac 00000063B5CB5E74)
+2026-11-26T21:38:57Z console: Win+R, cmd.exe
+2026-11-26T21:39:11Z data disk: drive D: in the guest (1 marker)
+2026-11-26T21:39:18Z console answering after after-reboot (alive-after-reboot.txt, 3 s)
+2026-11-26T21:39:28Z %POUCHDRV%\dsploop_apitest.exe: output after about 3 s: The system cannot find the path specified.  
+2026-11-26T21:39:41Z copy %POUCHDRV%\dsploop_apitest.exe C:\dsploop_apitest.exe: output after about 3 s: The system cannot find the path specified.  
+2026-11-26T21:39:53Z certutil -hashfile C:\dsploop_apitest.exe SHA256: output after about 3 s: CertUtil: -hashfile command failed: 2 
+2026-11-26T21:39:59Z typed: set LIBERNT_APITEST_REQUIRED=1 (serial line 430)
+2026-11-26T21:40:19Z C:\dsploop_apitest.exe: output after about 2 s: Can't recognize 'C:\dsploop_apitest.exe ' as an internal or external command, or batch script. 
+2026-11-26T21:40:30Z echo %ERRORLEVEL%: output after about 3 s: 9009  
+2026-11-26T21:40:30Z B5: the apitest's output as the guest wrote it (dsploop-out.txt, 1 lines):
+Can't recognize 'C:\dsploop_apitest.exe ' as an internal or external command, or batch script.
+2026-11-26T21:40:30Z B5: the gate rule on it (apitest-gate.sh --required):
+RED   /tmp/qad-ev/p4c4c/r1-firstboot-stream-selftest2boot/dsploop-out.txt: no summary line (the program did not finish)
+2026-11-26T21:40:30Z gate rc=1
+2026-11-26T21:40:30Z B6: the apitest's driver lines (after serial line 430):
+2026-11-26T21:40:30Z ace_audio lines of the VM so far: 0; ace_unexpected: 0
+2026-11-26T21:40:42Z pnputil /enum-devices /class Media /ids: output after about 3 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-26T21:40:55Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-26T21:41:09Z reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio /s: output after about 3 s:  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}     DeviceState    REG_DWORD    0x1  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}\Properties     {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    HD Audio Line in     {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Microphone     {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Microphone (HD Audio Line in)     {233164C8-1B2C-4C7D-BC68-B671687A2567},1    REG_SZ    {E779F4D6-D3A3-83C7-97B0-B
+2026-11-26T21:41:09Z enum-media.txt: 3 INTCDSP lines; enum-endpoint.txt: 0 Loopback lines; reg-mmdev.txt: 4 'Intel SST Loopback' lines
+2026-11-26T21:42:08Z typed: reg add SelfTest = 2 (REG_DWORD)
+2026-11-26T21:42:10Z reboot typed at serial line 432 (SelfTest = 2)
+[21:43:03] [    4.875268] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[21:43:03] [    4.875268] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+2026-11-26T21:43:13Z B7: the self-test's lines at the system boot (after serial line 432):
+[    4.594018] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    4.594018] intcdsp.sys: boot ok after 5451 us (clock 2304627549 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    4.594018] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[    4.687768] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[    4.687768] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    4.687768] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[    4.781518] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[    4.781518] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    4.781518] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[    4.875268] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[    4.875268] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    4.875268] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[    4.875268] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+2026-11-26T21:43:13Z ace_audio lines of the VM: 12
+[21:43:25] [   17.345484] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D8F4FA59D0 0000000000060170 'Program Manager' 000000D8F4FA5BA8 32 0x0 000000D8F4FA5BF0 2b4 000000D8F4FA5BD4)
+2026-11-26T21:44:01Z console: Win+R, cmd.exe
+2026-11-26T21:44:16Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-26T21:44:57Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 30 s: 
+2026-11-26T21:44:57Z stop lines in the whole log: 0; fatal lines: 0
+2026-11-26T21:45:00Z VM r1-firstboot-stream-selftest2boot ended: qemu exited rc=0 (none) at 2026-11-26T21:45:00Z; wall 739 s
+2026-11-26T21:45:00Z boot1 done

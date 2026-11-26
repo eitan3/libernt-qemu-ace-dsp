@@ -1,0 +1,725 @@
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_state state running -> off

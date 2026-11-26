@@ -1,0 +1,79 @@
+2026-11-26T21:45:47Z boot5: r5-plainboot-stream on disk/p4c4c.qcow2 (VM 1's overlay)
+2026-11-26T21:45:49Z VM r5-plainboot-stream started (lib-run pid 1213419, sockets /tmp/qad-vm.1213421, data disk /tmp/qad-ev/p4c4c/pouch/r5-plainboot-stream.img)
+[21:46:07] [    7.630105] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[21:46:07] [    7.630105] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[21:46:07] [    7.630105] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+2026-11-26T21:46:17Z the boot's driver lines:
+[    7.598856] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    7.598856] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.598856] intcdsp.sys: boot ok after 5446 us (clock 18219838 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    7.598856] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    7.598856] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    7.614481] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    7.614481] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    7.614481] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[    7.630105] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.630105] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.630105] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[    7.630105] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[    7.630105] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[    7.630105] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[21:46:33] [   34.497535] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000E782DC59C0 0000000000060170 'Program Manager' 000000E782DC5B38 32 0x0 000000E782DC5BE0 2e8 000000E782DC5B64)
+2026-11-26T21:47:10Z console: Win+R, cmd.exe
+2026-11-26T21:47:26Z data disk: drive E: in the guest (1 marker)
+2026-11-26T21:47:32Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-26T21:47:41Z dir %POUCHDRV%:\ /x: output after about 3 s: Volume in drive E is P4C4C Volume Serial Number is 88bc-dc82  Directory of E:  11/26/2026  11:45 PM           211,968 DSPLOO~1.EXE dsploop_apitest.exe 11/26/2026  11:45 PM           211,968              dsploop.exe 11/26/2026  11:45 PM                38              pouch.tag 11/26/2026  09:51 PM                 4              drive.txt 11/26/2026  09:51 PM                 8 ALIVE-~1.TXT alive-boot.txt 11/26/2026  09:51 PM                 0 X-DIR-D.TXT  x-dir-D.txt        6 files                  423,986 bytes        0 directories         33,036,288 bytes free  
+2026-11-26T21:47:51Z dir %POUCHDRV%:\dsploop_apitest.exe: output after about 3 s: Volume in drive E is P4C4C Volume Serial Number is 88bc-dc82  Directory of E:  11/26/2026  11:45 PM           211,968 dsploop_apitest.exe        1 file                   211,968 bytes        0 directories         33,034,240 bytes free  
+2026-11-26T21:48:01Z dir %POUCHDRV%:\dsploop.exe: output after about 3 s: Volume in drive E is P4C4C Volume Serial Number is 88bc-dc82  Directory of E:  11/26/2026  11:45 PM           211,968 dsploop.exe        1 file                   211,968 bytes        0 directories         33,032,192 bytes free  
+2026-11-26T21:48:14Z certutil -hashfile %POUCHDRV%:\dsploop.exe SHA256: output after about 4 s: SHA256 hash of E:\dsploop.exe: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b CertUtil: -hashfile command completed successfully 
+2026-11-26T21:48:26Z copy %POUCHDRV%:\dsploop.exe C:\dsploop_apitest.exe: output after about 3 s: 	1 file(s) copied 
+2026-11-26T21:48:38Z copy %POUCHDRV%:\dsploop_apitest.exe C:\x-lfn.exe: output after about 3 s: 	1 file(s) copied 
+2026-11-26T21:48:49Z certutil -hashfile C:\dsploop_apitest.exe SHA256: output after about 3 s: SHA256 hash of C:\dsploop_apitest.exe: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b CertUtil: -hashfile command completed successfully 
+2026-11-26T21:49:04Z %POUCHDRV%:\dsploop_apitest.exe: output after about 6 s: dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo dsploop.c:411: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms dsploop.c:426: dsploop: 48000 frames compared within 1
+2026-11-26T21:49:17Z %POUCHDRV%:\dsploop.exe: output after about 7 s: dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo dsploop.c:411: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2000 ms dsploop.c:426: dsploop: 48000 frames compared within 1
+2026-11-26T21:49:24Z typed: set LIBERNT_APITEST_REQUIRED=1 (serial line 225)
+2026-11-26T21:49:37Z C:\dsploop_apitest.exe: output after about 7 s: dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo dsploop.c:411: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms dsploop.c:426: dsploop: 48000 frames compared within 1
+2026-11-26T21:49:48Z echo %ERRORLEVEL%: output after about 3 s: 0  
+2026-11-26T21:49:48Z B5: the apitest's output as the guest wrote it (dsploop-out.txt, 12 lines):
+dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+dsploop.c:411: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+dsploop.c:411: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+dsploop.c:411: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2000 ms
+dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED=1, a failure)
+
+dsploop: 1285 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-26T21:49:48Z B5: the gate rule on it (apitest-gate.sh --required):
+GREEN /tmp/qad-ev/p4c4c/r5-plainboot-stream/dsploop-out.txt: dsploop: 1285 tests executed (0 marked as todo, 0 failures), 0 skipped. (allowance 0, required)
+2026-11-26T21:49:48Z gate rc=0
+2026-11-26T21:49:48Z B6: the apitest's driver lines (after serial line 225):
+[  748.387022] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  748.387022] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  748.388022] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  748.390022] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  748.391022] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  748.391022] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  750.440028] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  750.440028] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  750.440028] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  750.440028] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  750.440028] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  750.440028] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  752.507908] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  752.507908] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  752.507908] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  752.507908] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  752.507908] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  752.507908] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-26T21:49:48Z ace_audio lines of the VM so far: 3618; ace_unexpected: 0
+2026-11-26T21:50:02Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-26T21:50:15Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-26T21:50:30Z reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio /s: output after about 3 s:  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}     DeviceState    REG_DWORD    0x1  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}\Properties     {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    HD Audio Line in     {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Microphone     {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Microphone (HD Audio Line in)     {233164C8-1B2C-4C7D-BC68-B671687A2567},1    REG_SZ    {E779F4D6-D3A3-83C7-97B0-B
+2026-11-26T21:50:30Z B4: enum-media.txt: 3 INTCDSP lines; enum-endpoint.txt: 0 Loopback lines; reg-mmdev.txt: 4 'Intel SST Loopback' lines
+2026-11-26T21:50:30Z stop lines in the whole log: 0; fatal lines: 0
+2026-11-26T21:50:33Z VM r5-plainboot-stream ended: qemu exited rc=0 (none) at 2026-11-26T21:50:33Z; wall 285 s
+2026-11-26T21:50:33Z boot5 done

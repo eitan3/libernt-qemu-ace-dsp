@@ -1,0 +1,895 @@
+[=3hBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007CF86000
+OS loader: selecting the boot entry
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: loading the SYSTEM hive
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007DB45000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007DB45000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: entry FFFFF8007BE74760, loader block FFFFF8007DB47000, arc disks FFFFF8007DB481B0, registry 2613248 bytes at FFFFF8007C94A000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20D00, Gdt = FFFFF8007DA2D000, Idt = FFFFF8007BBFB950, Tss = FFFFF8007DB44000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000008200 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC20E80
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.156256] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.156256] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.609382] ACPI: RSDP 0x000000001002F8B0 000024 (v02 ROS   )
+[    2.609382] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.609382] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.609382] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.609382] ACPI: FACS 0x000000007FECA000 000040
+[    2.609382] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.609382] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.609382] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.609382] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.609382] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    2.625007] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    2.625007] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    2.671882] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    2.671882] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    2.671882] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    2.671882] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    2.671882] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.687507] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.734382] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    2.734382] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    2.734382] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+[    2.859383] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATA 'QEMU HARDDISK' fw '2.5+' 65599 sectors of 512 bytes
+[    3.265634] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F217B00)
+[    3.375009] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011FC50 FFFF81803F255B80)
+[    3.609385] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[    3.609385] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+0000œ€€è04‰€€\SystemRoot\system32\drivers\BasicDisplay.sysª[    6.134240] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007AE544F1
+[    6.306042] (\drivers\directx\dxgkrnl\adapter.c:13218) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF81800053E1A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    6.415417] (\drivers\directx\dxgkrnl\adapter.c:15149) DXGKRNL: DxgkAdapterStart: adapter FFFF81800053E1A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    6.415417] (\drivers\directx\dxgkrnl\adapter.c:6458) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    7.307671] (\drivers\directx\dxgkrnl\display.c:6534) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800053E1A0 desktop ready 1280x800 (scanout)
+[    7.307671] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    7.388822] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    7.388822] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007272000, processing capabilities at BAR0 +0x180
+[    7.388822] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    7.388822] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    7.435647] intcdsp.sys: loaded for the Intel audio DSP child
+[    7.435647] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    7.435647] intcdsp.sys: NHLT table: the bus driver reports none
+[    7.435647] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    7.435647] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    7.435647] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[    7.435647] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    7.451273] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    7.451273] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.451273] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.466895] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    7.482423] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    9.654178] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    9.654178] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    9.654178] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    9.654178] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    9.654178] (\drivers\directx\dxgkrnl\adapter.c:650) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005721A0 device UI suppressed
+[    9.654178] (\drivers\directx\dxgkrnl\adapter.c:14542) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005721A0 stays retired; another adapter owns the desktop
+[    9.763304] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    9.763304] (\drivers\network\nwifi\control.c:895) NWIFI: control device \Device\Nwifi created
+[    9.763304] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    9.810080] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    9.919407] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[    9.919407] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\D:
+[   10.606884] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[   10.606884] (\base\system\smss\crashdmp.c:273) SMSS: Failed to open crash dump pagefile `\??\C:\pagefile.sys' (0xc0000034)
+[   10.622509] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   10.622509] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 163610, disk byte 738304000
+[   10.622509] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   10.872510] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000001000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007ABDAA3C
+[   11.091158] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   11.091158] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   12.528662] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   12.528662] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   15.981647] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007948B4E
+[   15.981647] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007948D8D
+[   15.981647] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007AE53DFA
+[   15.981647] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007B23A075
+[   18.981556] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000007DBC0A2B30 000000000000000A 'AudioSrv' 0000007DBC0A3D7C 32 0x1 0000007DBC0A3E90 240 0000007DBC0A3DA8)
+[   18.981556] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   20.825212] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   21.590742] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   40.497045] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.637670] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.684548] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   43.372023] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+[   43.372023] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+[   43.372023] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+[   43.372023] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1189) HDAUDIO: SubdeviceName eLineOutWave
+[   43.387503] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineOutTopo
+[   43.387503] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1250) HDAUDIO: SubdeviceName eLineInWave
+[   43.387503] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineInTopo
+[   56.684413] (\drivers\wdm\audio\filters\kmixer\kmixer.c:106) KMixer.sys loaded
+[   56.684413] (\drivers\wdm\audio\filters\kmixer\kmixer.c:53) KMix_InstallDevice called
+[   56.684413] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000001 DeviceName {b7eafdc0-a680-11d0-96d8-00aa0051e51d}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   58.949997] (\drivers\wdm\audio\sysaudio\main.c:149) SYSAUDIO: AddDevice PDO FFFF8180005D65F0
+[   58.965622] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {a7c7a5b0-5af3-11d1-9ced-00a024bf0407}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   61.293754] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000003 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   61.496879] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   61.950005] (\dll\win32\userenv\profile.c:703) CopySystemProfile()
+[   62.137506] (\dll\win32\userenv\profile.c:2247) Profile S-1-5-18 already loaded
+[   62.543758] (\dll\win32\syssetup\security.c:163) SYSSETUP: SetPrimaryDomain()
+[   83.841149] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000007DBC0A7F10 00000000001C0166 'Program Manager' 0000007DBC0A5578 32 0x0 0000007DBC0A54E0 314 0000007DBC0A55A4)
+[   83.841149] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   87.653660] (\base\setup\libernt\oobe.c:1035) Disk signature check finished with exit code 0
+[   87.841161] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   88.294287] (\base\setup\lib\setuplib.c:1044) SourcePath (1): '\Device\HarddiskVolume2\AMD64'
+[   88.294287] (\base\setup\lib\setuplib.c:1045) SourceRootPath (1): '\Device\HarddiskVolume2'
+[   88.294287] (\base\setup\lib\setuplib.c:1046) SourceRootDir (1): '\AMD64'
+[   88.294287] (\base\setup\lib\setuplib.c:1063) SourcePath (2): '\Device\HarddiskVolume2\AMD64'
+[   88.294287] (\base\setup\lib\setuplib.c:1064) SourceRootPath (2): '\Device\HarddiskVolume2'
+[   88.294287] (\base\setup\lib\setuplib.c:1065) SourceRootDir (2): '\AMD64'
+[   88.294287] (\base\setup\lib\setuplib.c:180) UnattendInf path: '\Device\HarddiskVolume2\AMD64\unattend.inf'
+[   88.309912] (\base\setup\lib\utils\partlist.c:2014) Disk 0 of identifier 'edde42a4-a824d203-A' is fixed
+[   88.309912] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   88.309912] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   88.309912] (\base\setup\lib\utils\partlist.c:2234) Use megabyte (2048 Sectors) alignment!
+[   88.309912] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT32
+[   88.309912] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): NTFS
+[   88.309912] (\base\setup\lib\utils\partlist.c:2014) Disk 1 of identifier '47b00716-f7b5f4d8-A' is fixed
+[   88.309912] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   88.309912] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   88.309912] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT
+[   88.356787] (\base\setup\libernt\libernt.c:1106) Firmware language 'en'
+[   88.356787] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+[   88.356787] (\base\setup\libernt\libernt.c:1501) No LiberNT installation to upgrade
+[   88.372412] (\base\setup\libernt\oobe.c:989) Upgrade of the installed copy finished with 1168
+[   88.731788] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+[  660.061420] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000004098AAC4D0): stub
+[  660.061420] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000004098AAC4D0, 1, 000000409AF4FD68, 000000409AF4FD64): stub
+[  661.503176] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+[  807.021733] (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+[  910.128382] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8810 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  910.128382] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  910.128382] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  952.488148] intcdsp.sys: loaded for the Intel audio DSP child
+[  952.488148] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  952.488148] intcdsp.sys: NHLT table: the bus driver reports none
+[  952.488148] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  952.488148] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  952.488148] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[  952.488148] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  952.488148] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  952.488148] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[  952.488148] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  952.488148] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  952.488148] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 962925164 us at 10000000 Hz
+[  952.488148] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  952.488148] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  952.488148] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  952.488148] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  952.503748] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  952.503748] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  952.503748] intcdsp.sys: boot ok after 5481 us (clock 962930739 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[  952.503748] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[  952.503748] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[  952.503748] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[  952.503748] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1139.853326] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8660 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1139.853326] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1139.858326] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1184.038972] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1184.038972] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1184.038972] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1184.038972] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1184.038972] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1184.038972] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1184.038972] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1184.038972] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1184.038972] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1184.054573] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1184.054573] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1184.054573] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1194479027 us at 10000000 Hz
+[ 1184.054573] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1184.054573] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1184.054573] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1184.054573] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1184.054573] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1184.054573] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1184.054573] intcdsp.sys: boot ok after 5452 us (clock 1194484573 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1184.054573] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1184.054573] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1184.054573] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1184.054573] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1231.721881] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8270 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1231.721881] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1231.721881] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1276.385755] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1276.386755] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1276.386755] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1276.386755] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1276.386755] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1276.386755] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1276.386755] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1276.389755] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1276.392755] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1276.393755] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1276.393755] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1276.393755] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1286818605 us at 10000000 Hz
+[ 1276.393755] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1276.394755] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1276.394755] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1276.395755] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1276.397755] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1276.398755] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1276.399755] intcdsp.sys: boot ok after 5453 us (clock 1286824152 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1276.399755] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1276.399755] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1276.399755] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1276.401755] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1328.335329] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A88A0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1328.335329] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1328.340329] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1372.028450] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1372.028450] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1372.028450] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1372.028450] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1372.028450] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1372.028450] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1372.028450] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1372.031450] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1372.034450] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1372.035450] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1372.035450] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1372.035450] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1382460513 us at 10000000 Hz
+[ 1372.035450] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1372.036450] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1372.036450] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1372.037450] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1372.040450] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1372.040450] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1372.041450] intcdsp.sys: boot ok after 5462 us (clock 1382466069 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1372.041450] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1372.041450] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1372.041450] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1372.043450] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1420.188509] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8300 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1420.188509] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1420.188509] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1466.024887] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1466.025887] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1466.025887] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1466.025887] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1466.025887] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1466.025887] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1466.025887] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1466.028887] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1466.031887] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1466.032887] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1466.032887] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1466.032887] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1476457734 us at 10000000 Hz
+[ 1466.032887] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1466.033887] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1466.033887] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1466.034887] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1466.036887] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1466.037887] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1466.037887] intcdsp.sys: boot ok after 5451 us (clock 1476463279 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1466.038887] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1466.038887] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1466.038887] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1466.040887] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1516.059203] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A81E0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1516.059203] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1516.065180] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1557.706592] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1557.706592] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1557.706592] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1557.706592] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1557.706592] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1557.706592] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1557.706592] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1557.706592] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1557.706592] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1557.706592] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1557.706592] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1557.706592] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1568145255 us at 10000000 Hz
+[ 1557.706592] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1557.706592] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1557.706592] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1557.722193] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1557.722193] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1557.722193] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1557.722193] intcdsp.sys: boot ok after 5452 us (clock 1568150801 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1557.722193] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1557.722193] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1557.722193] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1557.722193] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1603.270121] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A81E0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1603.270121] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1603.270121] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1649.458750] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1649.459750] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1649.459750] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1649.459750] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1649.459750] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1649.459750] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1649.459750] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1649.462750] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1649.465750] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1649.466750] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1649.466750] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1649.466750] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1659891693 us at 10000000 Hz
+[ 1649.466750] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1649.467750] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1649.467750] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1649.468750] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1649.470750] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1649.471750] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1649.471750] intcdsp.sys: boot ok after 5451 us (clock 1659897238 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1649.472750] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1649.472750] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1649.472750] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1649.474750] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1695.699303] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A84B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1695.699303] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1695.699303] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1735.039182] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1735.039182] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1735.039182] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1735.039182] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1735.039182] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1735.039182] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1735.039182] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1735.039182] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1735.039182] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1735.039182] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1735.039182] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1735.039182] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1745475901 us at 10000000 Hz
+[ 1735.039182] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1735.039182] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1735.039182] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1735.039182] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1735.054782] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1735.054782] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1735.054782] intcdsp.sys: boot ok after 5451 us (clock 1745481446 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1735.054782] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1735.054782] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1735.054782] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1735.054782] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1782.126963] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8B70 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1782.126963] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1782.142564] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1821.088717] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1821.088717] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1821.088717] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1821.088717] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1821.088717] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1821.088717] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1821.088717] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1821.088717] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1821.088717] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1821.088717] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1821.088717] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1821.088717] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1831522546 us at 10000000 Hz
+[ 1821.088717] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1821.088717] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1821.088717] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1821.088717] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1821.088717] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1821.088717] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1821.088717] intcdsp.sys: boot ok after 5452 us (clock 1831528092 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1821.088717] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1821.088717] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1821.088717] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1821.104318] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1865.825368] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A89C0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1865.825368] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1865.840993] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1906.435003] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1906.435003] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1906.435003] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1906.435003] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1906.435003] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1906.435003] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1906.435003] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1906.435003] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1906.435003] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1906.435003] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1906.435003] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1906.435003] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1916871327 us at 10000000 Hz
+[ 1906.435003] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1906.435003] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1906.435003] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1906.435003] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1906.450603] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1906.450603] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1906.450603] intcdsp.sys: boot ok after 5451 us (clock 1916876872 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1906.450603] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1906.450603] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1906.450603] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1906.450603] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1951.652152] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A84B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1951.652152] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1951.667777] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1992.767036] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1992.767036] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1992.767036] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1992.767036] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1992.767036] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1992.767036] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1992.767036] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1992.767036] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1992.767036] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1992.767036] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1992.767036] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1992.767036] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2003201883 us at 10000000 Hz
+[ 1992.767036] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1992.767036] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1992.767036] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1992.767036] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1992.767036] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1992.767036] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1992.782637] intcdsp.sys: boot ok after 5472 us (clock 2003207450 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1992.782637] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1992.782637] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1992.782637] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1992.782637] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2040.352195] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C90 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2040.352195] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2040.367820] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2081.277830] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2081.277830] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2081.277830] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2081.277830] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2081.277830] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2081.277830] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2081.277830] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2081.293430] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2081.293430] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2081.293430] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2081.293430] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2081.293430] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2091723961 us at 10000000 Hz
+[ 2081.293430] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2081.293430] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2081.293430] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2081.293430] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2081.293430] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2081.293430] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2081.293430] intcdsp.sys: boot ok after 5451 us (clock 2091729506 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2081.293430] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2081.293430] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2081.293430] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2081.293430] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2126.020854] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A7FA0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2126.020854] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2126.020854] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2166.284985] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2166.284985] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2166.284985] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2166.284985] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2166.284985] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2166.284985] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2166.284985] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2166.284985] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2166.284985] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2166.284985] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2166.284985] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2166.284985] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2176719960 us at 10000000 Hz
+[ 2166.284985] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2166.284985] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2166.284985] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2166.284985] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2166.284985] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2166.284985] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2166.300587] intcdsp.sys: boot ok after 5492 us (clock 2176725547 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2166.300587] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2166.300587] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2166.300587] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2166.300587] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2213.198767] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8B70 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2213.198767] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2213.198767] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2253.611525] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2253.611525] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2253.611525] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2253.611525] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2253.611525] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2253.611525] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2253.611525] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2253.627125] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2253.627125] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2253.627125] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2253.627125] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2253.627125] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2264057361 us at 10000000 Hz
+[ 2253.627125] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2253.627125] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2253.627125] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2253.627125] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2253.627125] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2253.627125] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2253.627125] intcdsp.sys: boot ok after 5502 us (clock 2264062957 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2253.627125] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2253.627125] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2253.627125] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2253.627125] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2303.320564] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A84B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2303.320564] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2303.320564] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2344.170673] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2344.170673] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2344.170673] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2344.170673] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2344.170673] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2344.170673] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2344.170673] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2344.170673] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2344.170673] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2344.170673] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2344.170673] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2344.170673] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2354603222 us at 10000000 Hz
+[ 2344.170673] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2344.170673] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2344.170673] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2344.170673] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2344.170673] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2344.170673] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2344.170673] intcdsp.sys: boot ok after 5451 us (clock 2354608767 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2344.170673] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2344.170673] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2344.170673] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2344.170673] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2388.646846] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8780 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2388.646846] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2388.646846] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2430.744860] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2430.744860] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2430.744860] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2430.744860] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2430.744860] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2430.744860] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2430.744860] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2430.744860] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2430.744860] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2430.744860] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2430.744860] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2430.744860] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2441182203 us at 10000000 Hz
+[ 2430.744860] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2430.744860] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2430.744860] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2430.744860] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2430.760460] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2430.760460] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2430.760460] intcdsp.sys: boot ok after 5451 us (clock 2441187748 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2430.760460] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2430.760460] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2430.760460] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2430.760460] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2477.117888] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C00 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2477.117888] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2477.133513] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2518.082274] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2518.082274] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2518.082274] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2518.082274] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2518.082274] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2518.082274] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2518.082274] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2518.082274] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2518.082274] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2518.082274] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2518.082274] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2518.082274] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2528519401 us at 10000000 Hz
+[ 2518.082274] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2518.082274] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2518.082274] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2518.082274] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2518.097874] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2518.097874] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2518.097874] intcdsp.sys: boot ok after 5451 us (clock 2528524946 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2518.097874] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2518.097874] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2518.097874] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2518.097874] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2565.072929] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A7E80 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2565.072929] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2565.072929] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2607.068067] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2607.068067] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2607.068067] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2607.068067] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2607.068067] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2607.068067] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2607.068067] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2607.068067] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2607.068067] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2607.068067] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2607.068067] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2607.068067] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2617505194 us at 10000000 Hz
+[ 2607.068067] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2607.068067] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2607.068067] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2607.068067] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2607.083667] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2607.083667] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2607.083667] intcdsp.sys: boot ok after 5451 us (clock 2617510739 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2607.083667] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2607.083667] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2607.083667] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2607.083667] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2653.248970] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8540 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2653.248970] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2653.248970] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2693.034602] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2693.034602] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2693.034602] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2693.034602] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2693.034602] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2693.034602] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2693.034602] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2693.034602] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2693.034602] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2693.050202] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2693.050202] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2693.050202] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2703476386 us at 10000000 Hz
+[ 2693.050202] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2693.050202] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2693.050202] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2693.050202] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2693.050202] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2693.050202] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2693.050202] intcdsp.sys: boot ok after 5451 us (clock 2703481931 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2693.050202] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2693.050202] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2693.050202] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2693.050202] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2738.590252] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8930 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2738.590252] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2738.590252] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2780.729892] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2780.729892] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2780.729892] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2780.729892] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2780.729892] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2780.729892] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2780.729892] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2780.729892] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2780.729892] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2780.729892] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2780.729892] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2780.729892] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2791167022 us at 10000000 Hz
+[ 2780.729892] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2780.729892] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2780.729892] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2780.729892] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2780.745492] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2780.745492] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2780.745492] intcdsp.sys: boot ok after 5502 us (clock 2791172618 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2780.745492] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2780.745492] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2780.745492] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2780.745492] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2825.752289] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C90 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2825.752289] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2825.752289] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2867.071801] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2867.071801] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2867.071801] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2867.071801] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2867.071801] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2867.071801] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2867.071801] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2867.087401] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2867.087401] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2867.087401] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2867.087401] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2867.087401] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2877518375 us at 10000000 Hz
+[ 2867.087401] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2867.087401] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2867.087401] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2867.087401] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2867.087401] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2867.087401] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2867.087401] intcdsp.sys: boot ok after 5451 us (clock 2877523920 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2867.087401] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2867.087401] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2867.087401] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2867.087401] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2910.466319] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8AE0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2910.466319] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2910.466319] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2951.899333] intcdsp.sys: loaded for the Intel audio DSP child
+[ 2951.899333] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 2951.899333] intcdsp.sys: NHLT table: the bus driver reports none
+[ 2951.899333] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 2951.899333] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 2951.899333] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 2951.899333] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 2951.914933] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2951.914933] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2951.914933] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2951.914933] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 2951.914933] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 2962344167 us at 10000000 Hz
+[ 2951.914933] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2951.914933] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2951.914933] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 2951.914933] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2951.914933] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2951.914933] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 2951.914933] intcdsp.sys: boot ok after 5451 us (clock 2962349712 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2951.914933] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2951.914933] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2951.914933] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2951.914933] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2994.431975] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C00 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2994.431975] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2994.431975] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3029.603339] intcdsp.sys: loaded for the Intel audio DSP child
+[ 3029.603339] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 3029.603339] intcdsp.sys: NHLT table: the bus driver reports none
+[ 3029.603339] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 3029.603339] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 3029.603339] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 3029.603339] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 3029.603339] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 3029.603339] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 3029.603339] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 3029.603339] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 3029.603339] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 3040039038 us at 10000000 Hz
+[ 3029.603339] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3029.603339] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3029.603339] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 3029.603339] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3029.603339] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3029.603339] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3029.618941] intcdsp.sys: boot ok after 5684 us (clock 3040044817 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 3029.618941] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 3029.618941] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 3029.618941] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 3029.618941] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 3076.587622] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8270 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 3076.587622] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 3076.587622] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3115.244001] intcdsp.sys: loaded for the Intel audio DSP child
+[ 3115.244001] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 3115.244001] intcdsp.sys: NHLT table: the bus driver reports none
+[ 3115.244001] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 3115.244001] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 3115.244001] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 3115.244001] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 3115.259601] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 3115.259601] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 3115.259601] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 3115.259601] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 3115.259601] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 3125689711 us at 10000000 Hz
+[ 3115.259601] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3115.259601] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3115.259601] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 3115.259601] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3115.259601] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3115.259601] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3115.259601] intcdsp.sys: boot ok after 5452 us (clock 3125695257 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 3115.259601] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 3115.259601] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 3115.259601] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 3115.259601] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 3156.409011] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A7E80 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 3156.409011] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 3156.409011] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3191.568503] intcdsp.sys: loaded for the Intel audio DSP child
+[ 3191.568503] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 3191.568503] intcdsp.sys: NHLT table: the bus driver reports none
+[ 3191.568503] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 3191.568503] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 3191.568503] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 3191.568503] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 3191.568503] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 3191.568503] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 3191.568503] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 3191.568503] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 3191.568503] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 3202005698 us at 10000000 Hz
+[ 3191.568503] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3191.568503] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3191.568503] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 3191.568503] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3191.584103] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3191.584103] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 3191.584103] intcdsp.sys: boot ok after 5451 us (clock 3202011243 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 3191.584103] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 3191.584103] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 3191.584103] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 3191.584103] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 3206.457655] (\ntos\po\pobutton.c:165) System button event 0x00000001
+[ 3206.457655] (\ntos\po\pobutton.c:99) Button action 6
+[ 3207.029283] err:(\dll\win32\combase\marshal.c:759) StdMarshal ReleaseMarshalData failed with error 0x8001011d
+[ 3207.060533] (\ntos\po\poshutdown.c:293) Shutdown: running the queued shutdown work
+[ 3207.060533] (\ntos\po\poshutdown.c:300) Shutdown: notifying the drivers registered for shutdown
+[ 3207.060533] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\sysaudio
+[ 3207.060533] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\HDAudBus
+[ 3207.060533] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\MountMgr
+[ 3207.060533] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\WMIxWDM
+[ 3207.060533] (\ntos\po\poshutdown.c:302) Shutdown: holding the user-mode threads
+[ 3207.060533] (\ntos\po\poshutdown.c:304) Shutdown: flushing the registry
+[ 3207.076158] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+[ 3207.076158] (\ntos\po\poshutdown.c:312) Shutdown: flushing the cache
+[ 3207.076158] (\ntos\po\poshutdown.c:314) Shutdown: stopping the memory manager
+[ 3207.154283] (\ntos\po\poshutdown.c:317) Shutdown: flushing the volumes
+[ 3207.154283] (\ntos\po\poshutdown.c:320) Shutdown: notifying the file systems
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\fastfat
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Ntfs
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 3207.154283] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 3207.154283] (\ntos\po\poshutdown.c:322) Shutdown: notifying the last-chance drivers
+[ 3207.154283] (\ntos\po\poshutdown.c:329) Shutdown: powering the devices down for action 6
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2ee25b9a&0&S21658107_O100000_L4000000
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2ee25b9a&0&S21658107_O4100000_L13fbf00000
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2a178ba7&0&Sf7b5f4d8_O7e00_L2000000
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to DISPLAY\Default_Monitor\4&ff262a49&0&UID0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&aeefd634&0&0001
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_29C0&SUBSYS_11001AF4&REV_00\3&a5c7842&0&00
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_1234&DEV_1111&SUBSYS_11001AF4&REV_02\3&a5c7842&0&08
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_7F50&SUBSYS_11001AF4&REV_10\3&a5c7842&0&D8
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_2918&SUBSYS_11001AF4&REV_02\3&a5c7842&0&F8
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_2922&SUBSYS_11001AF4&REV_02\3&a5c7842&0&FA
+[ 3207.154283] (\drivers\storage\port\storport\fdo.c:2805) Storport: adapter FFFF81800011F080 to D3: requests drained, timeouts stopped, stopping the miniport
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\CPU_Hotplug_resources
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\GPE0_resources
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\PCI_Hotplug_resources
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0303\3&a5c7842&0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0F13\3&a5c7842&0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0400\1
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0B00\3&a5c7842&0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\FixedButton\2&ccb86d17&0&FFB0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A08\0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\ACPI0010\2&ccb86d17&0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\AuthenticAMD_-_AMD64_Family_6_Model_6_-_QEMU_TCG_CPU_version_2.5+\_0
+[ 3207.154283] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI_HAL\PNP0C08\0
+[ 3207.154283] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.

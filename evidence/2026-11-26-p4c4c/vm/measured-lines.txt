@@ -1,0 +1,485 @@
+# The measured lines of the p4c4c round, cut from each VM's serial.txt (ANSI escapes, NULs and CRs removed; the timestamps are the guest's).
+# Long lines are cut at 400 characters; the whole line is in the VM's serial.txt.
+# 2026-11-26T23:41:52Z
+
+=== r0a-firstboot-nodisk-hostloaded  (serial.txt 320 lines; start 2026-11-26T21:17:29Z; end 2026-11-26T21:21:31Z; qemu exited rc=0 (none) at 2026-11-26T21:21:31Z; wall 242 s)
+--- counts: settings lines 1; boot ok 0 (with '0 DSP interrupts' on 0); self-test runs captured 0; pins created 0; 'Safe removal' 0; stopped 0; storport timeouts 7; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 6 ace_* lines, 0 ace_unexpected, 0 ace_audio
+--- the lines:
+[   19.531343] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[   39.843940] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[   49.859613] (\sdk\lib\fslib\ntfslib_new\src\volume\volume.cpp:581) The volume holds a hibernated system. Opening disk as readonly.
+[   50.658816] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[   50.658816] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   86.582140] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[  106.894736] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[  118.066640] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[  132.957313] err:(\base\system\winlogon\winlogon.c:507) WL: Failed to initialize Gina
+[  144.472993] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[  179.004359] (\drivers\storage\port\storport\fdo.c:2236) Storport: a request to 0:0:0 timed out after 10 seconds, resetting the logical unit
+[12993.737655] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+=== r0-firstboot-nodisk  (serial.txt 242 lines; start 2026-11-26T21:24:43Z; end 2026-11-26T21:30:28Z; qemu exited rc=0 (none) at 2026-11-26T21:30:28Z; wall 345 s)
+--- counts: settings lines 1; boot ok 0 (with '0 DSP interrupts' on 0); self-test runs captured 0; pins created 0; 'Safe removal' 1; stopped 0; storport timeouts 0; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 6 ace_* lines, 0 ace_unexpected, 0 ace_audio
+--- the lines:
+[    8.438532] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    8.438532] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   42.264175] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF81800067B850
+[   42.357925] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   43.436051] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF81800067BAD0
+[   91.269829] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+[ 2798.588418] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+=== r1-firstboot-stream-selftest2boot  (serial.txt 755 lines; start 2026-11-26T21:32:41Z; end 2026-11-26T21:45:00Z; qemu exited rc=0 (none) at 2026-11-26T21:45:00Z; wall 739 s)
+--- counts: settings lines 3; boot ok 2 (with '0 DSP interrupts' on 2); self-test runs captured 3; pins created 0; 'Safe removal' 1; stopped 0; storport timeouts 0; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 999 ace_* lines, 0 ace_unexpected, 12 ace_audio
+--- the lines:
+[    8.082202] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    8.082202] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   39.879548] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.301425] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.020177] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   86.516522] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+[    2.093755] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001645D0
+[    5.064769] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    5.064769] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    5.064769] intcdsp.sys: boot ok after 5451 us (clock 1028730059 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    5.064769] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    5.064769] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    5.064769] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    5.064769] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    5.064769] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[   15.574354] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[   15.574354] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[   15.574354] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[   15.574354] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[   15.574354] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[   15.574354] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[ 1271.793598] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+[ 1271.793598] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[    2.093755] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001645D0
+[    4.594018] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    4.594018] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    4.594018] intcdsp.sys: boot ok after 5451 us (clock 2304627549 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    4.594018] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    4.594018] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    4.594018] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    4.594018] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    4.594018] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[    4.687768] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[    4.687768] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    4.687768] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[    4.781518] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[    4.781518] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    4.781518] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[    4.875268] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[    4.875268] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[    4.875268] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[    4.875268] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[    4.875268] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[    4.875268] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    4.875268] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    4.875268] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[    4.875268] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[    4.890869] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[    4.890869] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[  457.974346] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+[  457.974346] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[  457.974346] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+=== r2-notopology-cycles  (serial.txt 895 lines; start 2026-11-26T21:52:26Z; end 2026-11-26T22:07:39Z; qemu exited rc=0 (none) at 2026-11-26T22:07:39Z; wall 913 s)
+--- counts: settings lines 26; boot ok 25 (with '0 DSP interrupts' on 25); self-test runs captured 0; pins created 0; 'Safe removal' 26; stopped 0; storport timeouts 0; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 3631 ace_* lines, 0 ace_unexpected, 0 ace_audio
+--- the lines:
+[    7.451273] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.451273] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   40.497045] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.637670] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.684548] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   88.731788] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+[  910.128382] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8810 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  910.128382] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  910.128382] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  952.488148] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[  952.488148] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  952.503748] intcdsp.sys: boot ok after 5481 us (clock 962930739 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[  952.503748] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[  952.503748] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[  952.503748] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[  952.503748] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1139.853326] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8660 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1139.853326] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1139.858326] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1184.038972] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1184.054573] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1184.054573] intcdsp.sys: boot ok after 5452 us (clock 1194484573 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1184.054573] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1184.054573] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1184.054573] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1184.054573] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1231.721881] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8270 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1231.721881] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1231.721881] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1276.392755] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1276.393755] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1276.399755] intcdsp.sys: boot ok after 5453 us (clock 1286824152 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1276.399755] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1276.399755] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1276.399755] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1276.401755] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1328.335329] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A88A0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1328.335329] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1328.340329] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1372.034450] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1372.035450] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1372.041450] intcdsp.sys: boot ok after 5462 us (clock 1382466069 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1372.041450] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1372.041450] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1372.041450] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1372.043450] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1420.188509] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8300 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1420.188509] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1420.188509] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1466.031887] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1466.032887] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1466.037887] intcdsp.sys: boot ok after 5451 us (clock 1476463279 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1466.038887] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1466.038887] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1466.038887] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1466.040887] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1516.059203] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A81E0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1516.059203] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1516.065180] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1557.706592] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1557.706592] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1557.722193] intcdsp.sys: boot ok after 5452 us (clock 1568150801 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1557.722193] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1557.722193] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1557.722193] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1557.722193] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1603.270121] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A81E0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1603.270121] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1603.270121] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1649.465750] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1649.466750] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1649.471750] intcdsp.sys: boot ok after 5451 us (clock 1659897238 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1649.472750] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1649.472750] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1649.472750] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1649.474750] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1695.699303] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A84B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1695.699303] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1695.699303] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1735.039182] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1735.039182] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1735.054782] intcdsp.sys: boot ok after 5451 us (clock 1745481446 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1735.054782] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1735.054782] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1735.054782] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1735.054782] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1782.126963] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8B70 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1782.126963] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1782.142564] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1821.088717] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1821.088717] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1821.088717] intcdsp.sys: boot ok after 5452 us (clock 1831528092 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1821.088717] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1821.088717] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1821.088717] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1821.104318] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1865.825368] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A89C0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1865.825368] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1865.840993] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1906.435003] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1906.435003] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1906.450603] intcdsp.sys: boot ok after 5451 us (clock 1916876872 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1906.450603] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1906.450603] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1906.450603] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1906.450603] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 1951.652152] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A84B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1951.652152] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1951.667777] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1992.767036] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1992.767036] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1992.782637] intcdsp.sys: boot ok after 5472 us (clock 2003207450 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1992.782637] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1992.782637] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1992.782637] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 1992.782637] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2040.352195] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C90 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2040.352195] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2040.367820] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2081.293430] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2081.293430] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2081.293430] intcdsp.sys: boot ok after 5451 us (clock 2091729506 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2081.293430] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2081.293430] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2081.293430] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2081.293430] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2126.020854] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A7FA0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2126.020854] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2126.020854] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2166.284985] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2166.284985] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2166.300587] intcdsp.sys: boot ok after 5492 us (clock 2176725547 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2166.300587] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2166.300587] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2166.300587] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2166.300587] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2213.198767] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8B70 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2213.198767] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2213.198767] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2253.627125] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2253.627125] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2253.627125] intcdsp.sys: boot ok after 5502 us (clock 2264062957 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2253.627125] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2253.627125] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2253.627125] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2253.627125] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2303.320564] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A84B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2303.320564] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2303.320564] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2344.170673] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2344.170673] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2344.170673] intcdsp.sys: boot ok after 5451 us (clock 2354608767 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2344.170673] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2344.170673] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2344.170673] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2344.170673] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2388.646846] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8780 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2388.646846] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2388.646846] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2430.744860] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2430.744860] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2430.760460] intcdsp.sys: boot ok after 5451 us (clock 2441187748 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2430.760460] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2430.760460] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2430.760460] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2430.760460] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2477.117888] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C00 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2477.117888] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2477.133513] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2518.082274] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2518.082274] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2518.097874] intcdsp.sys: boot ok after 5451 us (clock 2528524946 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2518.097874] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2518.097874] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2518.097874] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2518.097874] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2565.072929] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A7E80 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2565.072929] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2565.072929] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2607.068067] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2607.068067] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2607.083667] intcdsp.sys: boot ok after 5451 us (clock 2617510739 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2607.083667] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2607.083667] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2607.083667] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2607.083667] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2653.248970] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8540 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2653.248970] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2653.248970] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2693.034602] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2693.050202] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2693.050202] intcdsp.sys: boot ok after 5451 us (clock 2703481931 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2693.050202] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2693.050202] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2693.050202] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2693.050202] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2738.590252] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8930 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2738.590252] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2738.590252] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2780.729892] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2780.729892] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2780.745492] intcdsp.sys: boot ok after 5502 us (clock 2791172618 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2780.745492] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2780.745492] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2780.745492] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2780.745492] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2825.752289] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C90 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2825.752289] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2825.752289] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2867.087401] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2867.087401] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2867.087401] intcdsp.sys: boot ok after 5451 us (clock 2877523920 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2867.087401] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2867.087401] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2867.087401] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2867.087401] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2910.466319] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8AE0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2910.466319] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2910.466319] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 2951.914933] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 2951.914933] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 2951.914933] intcdsp.sys: boot ok after 5451 us (clock 2962349712 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 2951.914933] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 2951.914933] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 2951.914933] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 2951.914933] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 2994.431975] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8C00 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2994.431975] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2994.431975] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3029.603339] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 3029.603339] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 3029.618941] intcdsp.sys: boot ok after 5684 us (clock 3040044817 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 3029.618941] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 3029.618941] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 3029.618941] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 3029.618941] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 3076.587622] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A8270 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 3076.587622] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 3076.587622] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3115.259601] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 3115.259601] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 3115.259601] intcdsp.sys: boot ok after 5452 us (clock 3125695257 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 3115.259601] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 3115.259601] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 3115.259601] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 3115.259601] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 3156.409011] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000007DBC0A7E80 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 3156.409011] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 3156.409011] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 3191.568503] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 3191.568503] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 3191.584103] intcdsp.sys: boot ok after 5451 us (clock 3202011243 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 3191.584103] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 3191.584103] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 3191.584103] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[ 3191.584103] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 3207.154283] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+=== r3-topology-pnp-cycles  (serial.txt 313 lines; start 2026-11-26T22:08:49Z; end 2026-11-26T22:27:40Z; qemu exited rc=0 (none) at 2026-11-26T22:27:40Z; wall 1131 s)
+--- counts: settings lines 2; boot ok 1 (with '0 DSP interrupts' on 1); self-test runs captured 3; pins created 0; 'Safe removal' 2; stopped 0; storport timeouts 0; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 882 ace_* lines, 0 ace_unexpected, 12 ace_audio
+--- the lines:
+[    7.521441] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.521441] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   40.550976] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.660351] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.785353] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   87.978411] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+[  990.839131] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C7C60 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  990.839131] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  990.845108] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1065.664568] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1065.665568] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1065.670568] intcdsp.sys: boot ok after 5446 us (clock 1076108965 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1065.670568] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1065.670568] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1065.672568] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 1065.672568] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 1065.672568] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.762819] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[ 1065.762819] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.762819] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.856569] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[ 1065.856569] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.856569] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.934694] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[ 1065.934694] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[ 1375.818394] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C7FC0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1375.818394] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 2975.783103] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C8830 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2975.783103] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 3625.931188] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C85F0 INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0 0x00000000)
+[ 3625.931188] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0)
+[ 3711.455208] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C89E0 HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0 0x00000000)
+[ 3711.455208] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0)
+[ 4684.470323] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C8050 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 4684.470323] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 5090.400574] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+[ 5090.400574] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 5090.400574] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+=== r4-byeye  (serial.txt 300 lines; start 2026-11-26T23:05:14Z; end 2026-11-26T23:40:24Z; qemu exited rc=0 (none) at 2026-11-26T23:40:24Z; wall 2110 s)
+--- counts: settings lines 1; boot ok 1 (with '0 DSP interrupts' on 1); self-test runs captured 0; pins created 0; 'Safe removal' 0; stopped 0; storport timeouts 0; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 126 ace_* lines, 0 ace_unexpected, 0 ace_audio
+--- the lines:
+[    3.453135] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001645D0
+[    7.704486] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    7.704486] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.704486] intcdsp.sys: boot ok after 5451 us (clock 18133030 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    7.704486] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    7.704486] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    7.704486] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    7.704486] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    7.704486] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[    7.720110] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.720110] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.720110] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[    7.720110] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[    7.720110] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[    7.720110] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[ 7021.534579] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+[ 7021.534579] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 7021.534579] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+
+=== r5-plainboot-stream  (serial.txt 316 lines; start 2026-11-26T21:45:48Z; end 2026-11-26T21:50:33Z; qemu exited rc=0 (none) at 2026-11-26T21:50:33Z; wall 285 s)
+--- counts: settings lines 1; boot ok 1 (with '0 DSP interrupts' on 1); self-test runs captured 0; pins created 18; 'Safe removal' 0; stopped 0; storport timeouts 0; clock stalled 0; interrupt storm 0; 'Entering sleep state S5' 1
+--- the model's trace (qemu-dbg.log): 6072 ace_* lines, 0 ace_unexpected, 3618 ace_audio
+--- the lines:
+[    3.421883] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001645D0
+[    7.598856] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    7.598856] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.598856] intcdsp.sys: boot ok after 5446 us (clock 18219838 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    7.598856] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    7.598856] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    7.614481] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    7.614481] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    7.614481] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[    7.630105] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.630105] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.630105] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[    7.630105] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[    7.630105] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[    7.630105] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[  635.502906] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  635.502906] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  635.502906] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  635.502906] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  637.565411] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  637.565411] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  637.565411] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  637.565411] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  639.632291] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  639.632291] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  639.632291] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  639.632291] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  678.626796] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  678.626796] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  678.629796] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  678.629796] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  680.670801] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  680.670801] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  680.670801] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  680.670801] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  682.728057] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  682.728057] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  682.728057] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  682.728057] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  748.387022] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  748.388022] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  748.391022] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  748.391022] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  750.440028] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  750.440028] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  750.440028] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  750.440028] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  752.507908] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  752.507908] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  752.507908] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  752.507908] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  964.968741] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+[  964.968741] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[  964.968741] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.

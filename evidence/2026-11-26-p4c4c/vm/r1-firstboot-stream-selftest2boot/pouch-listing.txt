@@ -1,0 +1,21 @@
+ Volume in drive : is P4C4C      
+ Volume Serial Number is 56B8-FC91
+Directory for ::/
+
+DSPLOO~1 EXE    211968 2026-11-26  23:32  dsploop_apitest.exe
+pouch    tag        38 2026-11-26  23:32 
+drive    txt         4 2026-11-26  21:42 
+ALIVE-~1 TXT         8 2026-11-26  21:45  alive-firstboot.txt
+exe-hash txt       158 2026-11-26  21:49 
+ALIVE-~2 TXT         8 2026-11-26  21:42  alive-after-reboot.txt
+X-LAUN~1 TXT        46 2026-11-26  21:43  x-launch-pouch.txt
+x-b-copy txt        46 2026-11-26  21:43 
+X-C-CE~1 TXT        39 2026-11-26  21:44  x-c-certutil.txt
+DSPLOO~1 TXT        96 2026-11-26  21:45  dsploop-out.txt
+DSPLOO~2 TXT         7 2026-11-26  21:49  dsploop-rc.txt
+ENUM-M~1 TXT      3305 2026-11-26  21:50  enum-media.txt
+ENUM-E~1 TXT        61 2026-11-26  21:50  enum-endpoint.txt
+REG-MM~1 TXT      4467 2026-11-26  21:51  reg-mmdev.txt
+       14 files             220 251 bytes
+                         33 224 704 bytes free
+

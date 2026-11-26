@@ -1,0 +1,5 @@
+LiberNT PnP Utility
+
+Enabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+Device enabled successfully.
+

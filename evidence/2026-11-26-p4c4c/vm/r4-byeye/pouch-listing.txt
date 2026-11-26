@@ -1,0 +1,15 @@
+ Volume in drive : is P4C4C      
+ Volume Serial Number is B2A8-7631
+Directory for ::/
+
+DSPLOO~1 EXE    211968 2026-11-27   1:05  dsploop_apitest.exe
+dsploop  exe    211968 2026-11-27   1:05 
+pouch    tag        38 2026-11-27   1:05 
+drive    txt         4 2026-11-26  23:11 
+ALIVE-~1 TXT         8 2026-11-26  23:11  alive-boot.txt
+X-EXE-~1 TXT       247 2026-11-26  23:12  x-exe-on-c.txt
+X-N5-0~1 TXT       182 2026-11-26  23:13  x-n5-05-running.txt
+X-N5-0~2 TXT      3310 2026-11-26  23:14  x-n5-05-media.txt
+        8 files             427 725 bytes
+                         33 030 144 bytes free
+

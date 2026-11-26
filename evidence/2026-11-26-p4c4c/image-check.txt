@@ -1,0 +1,113 @@
+# image check 2026-11-26T21:15:11Z
+## sha256sum -c SHA256SUMS (in the staging directory)
+LiberNT.iso: OK
+LiberNT.vhd: OK
+LiberNT.img: OK
+dsploop_apitest.exe: OK
+rc=0
+## sizes
+211968 dsploop_apitest.exe
+1610612736 LiberNT.img
+655714304 LiberNT.iso
+809864192 LiberNT.vhd
+## the staging directory's PROVENANCE.txt (head; its sentence naming the manager is elided as <manager>)
+Built from ec8ce887b1b971d159b0d3f12955af59ff8a960c (feat/audio-control-polish; 163 commits over master f71e13cc154af9398720a8feccb07fdf47074247),
+tree clean at the build (git status --porcelain --untracked-files=no: 0 lines) and the branch pushed (origin/feat/audio-control-polish == the tip).
+Staged and verified by <manager>. This is image p4c4c: p4c4b2's branch plus the P3 close-out (six fix passes, 56 commits) rebased onto upstream
+master f71e13cc154 (sync #24: +46, #25: +7, #26: +55 upstream commits; among them upstream's own fix of the first-boot swenum bugcheck,
+693821aba75, which replaces the local variant p4c4b2 carried).
+
+The identity the image carries: KERNEL_VERSION_BUILD_STR "20261126-ec8ce88" (gates/source-state.txt); the ISO's ntoskrnl.exe carries the
+string 20261126-ec8ce88 (gates/identity.txt).
+
+How the identity was made to name the commit. "ninja liberntiso liberntvhd liberntimg" alone does not: buildno.h is written at configure
+time and the buildstamp target is not on the image's dependency path. The two steps are the TARGETS "ninja rebuild_cache" (this ninja has
+no -t rebuild_cache tool) and "ninja buildstamp", run before the image targets. A first assembly at 21:05:41Z-21:05:53Z was made without
+them and is discarded, not staged: its binaries were current but its identity named the previous tip (ab93c7e).
+
+Recipe, as run in output-Clang-amd64-debug (Clang cross toolchain of the project, Debug amd64, the llvmpipe software renderer):
+  ninja rebuild_cache            21:07:02Z-21:07:09Z  rc 0  (gates/configure.log)
+  ninja buildstamp               21:07:09Z             rc 0  (gates/buildstamp.log)
+  CCACHE_DISABLE=1 ninja liberntiso liberntvhd liberntimg
+                                 21:07:09Z-21:07:49Z  rc 0, 1459 steps (identity-only rebuilds), 0 warnings outside the known
+                                 Mesa llvmpipe lines (gates/build.log)
+Host: a 4-core x86-64 Linux build machine; nothing in this record names it.
+
+Staged (SHA256SUMS):
+6b5ef3cd56bc6feebd207fc85ba09fe9b9caa0aeb74badcd1e25fc3366a875bd  LiberNT.iso   655714304 bytes
+3933d4410010b9a7a303e2abdf46263314cadf2e3bf4664d2f1fd486f38bf02d  LiberNT.vhd   809864192 bytes (dynamic VHD, 80 GiB virtual)
+dfe7ff2d273c08d8c69646bbb57e63a44f6aaaf8284615332f6e1383fdb4a45d  LiberNT.img   1610612736 bytes (raw disk image)
+3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b  dsploop_apitest.exe   211968 bytes (built from the tip's sources with
+                                 gates/build-dsploop.py's method, tools/build-dsploop.py of the gate tooling; NOT in the image: rostests are
+                                 off in this build. It is the version that finds the DSP's endpoints by identity, counts a refused format
+                                 as a skip, requires 3 depths under LIBERNT_APITEST_REQUIRED=1, and allows 1 LSB at 16 valid bits.)
+
+The ISO's binaries against the build tree's outputs (gates/in-iso.txt; every one EQUAL): intcdsp.sys 35548fd3... (479232 bytes),
+hdaudbus.sys 1c2754a0..., dsppcm.sys 64bcd5e9..., hdaudio.sys 69e2fc3e..., swenum.sys 3e12e60b... (upstream's), wdmaud.sys 5cc9aa7e...,
+mmdevapi.dll a8e3b7f6..., mmsys.cpl f180480e..., explorer.exe 8df867a7..., ImmersiveControlPanel/SystemSettings.exe b8870fe3...,
+stobject.dll cd75b667..., ntoskrnl.exe 564c94a3...
+The ISO's dsppcm.inf carries the FriendlyNames "Speakers - Intel SST Loopback" and "Microphone - Intel SST Loopback" (gates/identity.txt).
+Unchanged payloads: sof-arl-s.ri f37a055c..., sof-mtl.ri 4f3fb3fc..., sof-ipc4-loopback.tplg 0e002de8... (the hashes of p4c4b2).
+
+Verification on the exact tip (ec8ce887b1b; the fix passes' gates, records in the passes' reports):
+  host: scratch configure of submodules/host-tests (gates/gate-commands.md), ASan+UBSan, ctest 12/12 (gates/host-tests-ctest.log): sofipc.transport,
+        sofipc4, disco, softplg, dsppath, dsppcm, hdaudio.capture, dsploop.compare, pcmsample, dspidentity, audiofmt, fwload.
+        (The tree's own host-tests build directory cannot regenerate: an upstream CMake problem in mmcc/nvs/core and rtl, not this branch's.)
+  kernel: the five audio drivers and swenum/wdmaud: ninja, -Werror, 0 warnings; every translation unit the branch changes also compiles
+        warning-free in a free (non-Debug) build (tools/free-build-compile.py).
+  user mode: mmdevapi.dll, mmsys.cpl, stobject.dll, SystemSettings.exe, explorer.exe, advapi32.dll, winmm.dll: 0 warnings.
+  kmtests: the 17 sources compile with the build's kernel flags, 0 warnings (tools/kmtest-compilecheck.sh).
+  cppcheck 2.22 with -D_ERRCODE_DEFINED -D__cdecl= (tools/cppcheck-gate.sh): 0 findings in changed lines.
+  mutations: every fix pass ran rows for its new logic; all killed except the equivalents named in the reports.
+  the image: gates/in-iso.txt, gates/identity.txt, gates/source-state.txt, gates/branch-commits.txt (the 163 commits).
+No VM was run on this image: every guest line is for the regression round (TESTING.md).
+
+Unverified until that round: the first boot on this master (upstream's graphics-stack changes are in it), the dsploop stream through the
+audio stack at all three depths, the endpoint identity the apitest now relies on, the disable/enable cycles, the firmware's mailbox sizes
+on real hardware (the loader now refuses a mailbox above 4096 bytes), everything on silicon.
+
+Rollback: the p4c4b2 staging directory is untouched. The fix round is 56 commits over p4c4b2's tree plus three syncs; nothing in the
+history was rewritten after the pushes recorded in the project journal.
+
+To copy from the build box (about 3.0 GB in all; <build-box> is its address, as the p4c4b staging gave it):
+  scp <build-box>:libernt-build-logs/test-audio-intel-sst-p4c4c-ec8ce887b1b/SHA256SUMS <build-box>:libernt-build-logs/test-audio-intel-sst-p4c4c-ec8ce887b1b/LiberNT.iso <build-box>:libernt-build-logs/
+## gates/in-iso.txt (the staging record)
+# image p4c4c: sha256 of members extracted from LiberNT.iso (bsdtar) against the build tree's own outputs
+# source tip ec8ce887b1b; ISO sha256 6b5ef3cd56bc6feebd207fc85ba09fe9b9caa0aeb74badcd1e25fc3366a875bd (655714304 bytes)
+EQUAL  Windows/system32/drivers/intcdsp.sys (479232 bytes)  iso=35548fd307677a052cc0ffb69327f177e2b1406ba8a6fefc9c643ab00acfaf7b  build=35548fd307677a052cc0ffb69327f177e2b1406ba8a6fefc9c643ab00acfaf7b
+EQUAL  Windows/system32/drivers/hdaudbus.sys (331776 bytes)  iso=1c2754a06e6cecace63277af463e5d0f6fcc5fac2ea3b36549201fddae1d1b74  build=1c2754a06e6cecace63277af463e5d0f6fcc5fac2ea3b36549201fddae1d1b74
+EQUAL  Windows/system32/drivers/dsppcm.sys (151552 bytes)  iso=64bcd5e9d5e3d3018f8cf286446b02f715ff8d0f76483e525d5615966ef6e7f9  build=64bcd5e9d5e3d3018f8cf286446b02f715ff8d0f76483e525d5615966ef6e7f9
+EQUAL  Windows/system32/drivers/hdaudio.sys (249856 bytes)  iso=69e2fc3eb3af357679f04ce727b1ba82d9b75bf9f93cfac7a1b1f64708d710bb  build=69e2fc3eb3af357679f04ce727b1ba82d9b75bf9f93cfac7a1b1f64708d710bb
+EQUAL  Windows/system32/drivers/swenum.sys (45056 bytes)  iso=3e12e60bbc2626437b1455f8cd1737610c48ce667207a1c327d23be33a2ff70b  build=3e12e60bbc2626437b1455f8cd1737610c48ce667207a1c327d23be33a2ff70b
+EQUAL  Windows/system32/drivers/wdmaud.sys (249856 bytes)  iso=5cc9aa7ec15716326f6e26d74dde825c34f36ab80fc2a5900d30e018944435bb  build=5cc9aa7ec15716326f6e26d74dde825c34f36ab80fc2a5900d30e018944435bb
+EQUAL  Windows/system32/mmdevapi.dll (359936 bytes)  iso=a8e3b7f6038b4eca0c2e0a1c02c1bf0a24401b507a46246da7208a594277c225  build=a8e3b7f6038b4eca0c2e0a1c02c1bf0a24401b507a46246da7208a594277c225
+EQUAL  Windows/system32/mmsys.cpl (907264 bytes)  iso=f180480e5e6f133d9b30669c7cd92c43aef685d06df293f8cd23e0128cae636e  build=f180480e5e6f133d9b30669c7cd92c43aef685d06df293f8cd23e0128cae636e
+EQUAL  Windows/explorer.exe (6112256 bytes)  iso=8df867a76e350ba4cd603af2d790ad98bbb02271c214ec795af2662bd60aaa4c  build=8df867a76e350ba4cd603af2d790ad98bbb02271c214ec795af2662bd60aaa4c
+MISSING in ISO: Windows/system32/SystemSettings.exe
+EQUAL  Windows/system32/stobject.dll (2061824 bytes)  iso=cd75b6677a720aadc1249e2083a6c185eef11320d7160bb8288fc70436e26d5a  build=cd75b6677a720aadc1249e2083a6c185eef11320d7160bb8288fc70436e26d5a
+DIFFERENT  Windows/system32/ntoskrnl.exe (10055680 bytes)  iso=564c94a383ce510c772943a871f1173e59204ca6cb1e62611292340e5e12e422  build=(no build output at ntoskrnl/ntoskrnl.exe)
+# unchanged payloads
+f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e  Windows/system32/drivers/intel/sof/sof-arl-s.ri
+4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250  Windows/system32/drivers/intel/sof/sof-mtl.ri
+0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg
+# the two members whose paths the first pass looked up wrong
+EQUAL  Windows/ImmersiveControlPanel/SystemSettings.exe  iso=b8870fe3c4b75631493d7b55b69a7231bc48c68bd5c9f2197b4dfe74c9ba8398
+EQUAL  Windows/system32/ntoskrnl.exe  iso=564c94a383ce510c772943a871f1173e59204ca6cb1e62611292340e5e12e422
+## gates/identity.txt
+# identity strings found in the ISO's ntoskrnl.exe and intcdsp.sys
+ntoskrnl.exe: 20261126-ec8ce88 
+intcdsp.sys:  
+mmdevapi.dll: 
+# dsppcm.inf FriendlyNames in the ISO
+HKR,,FriendlyName,,%Dsppcm.LoopbackRenderName%
+HKR,,FriendlyName,,%Dsppcm.LoopbackRenderName%
+HKR,,FriendlyName,,%Dsppcm.LoopbackCaptureName%
+HKR,,FriendlyName,,%Dsppcm.LoopbackCaptureName%
+Dsppcm.LoopbackRenderName="Speakers - Intel SST Loopback"
+Dsppcm.LoopbackCaptureName="Microphone - Intel SST Loopback"
+## gates/source-state.txt
+tip ec8ce887b1b971d159b0d3f12955af59ff8a960c
+branch feat/audio-control-polish
+master f71e13cc154af9398720a8feccb07fdf47074247
+dirty(tracked) 0
+#define KERNEL_VERSION_BUILD_STR    "20261126-ec8ce88"

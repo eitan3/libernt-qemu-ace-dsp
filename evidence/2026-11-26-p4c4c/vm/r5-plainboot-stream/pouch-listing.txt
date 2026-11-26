@@ -1,0 +1,26 @@
+ Volume in drive : is P4C4C      
+ Volume Serial Number is 88BC-DC82
+Directory for ::/
+
+DSPLOO~1 EXE    211968 2026-11-26  23:45  dsploop_apitest.exe
+dsploop  exe    211968 2026-11-26  23:45 
+pouch    tag        38 2026-11-26  23:45 
+drive    txt         4 2026-11-26  21:51 
+ALIVE-~1 TXT         8 2026-11-26  21:51  alive-boot.txt
+X-DIR-D  TXT       582 2026-11-26  21:51  x-dir-D.txt
+X-DIR-~1 TXT       245 2026-11-26  21:52  x-dir-lfn.txt
+X-DIR-~2 TXT       237 2026-11-26  21:53  x-dir-short.txt
+X-CERT~1 TXT       150 2026-11-26  21:53  x-certutil-short.txt
+X-COPY~1 TXT        19 2026-11-26  21:54  x-copy-short.txt
+X-COPY~2 TXT        19 2026-11-26  21:55  x-copy-lfn.txt
+X-CERT~2 TXT       158 2026-11-26  21:55  x-certutil.txt
+X-LAUN~1 TXT      1315 2026-11-26  21:56  x-launch-pouch.txt
+X-LAUN~2 TXT      1315 2026-11-26  21:57  x-launch-short.txt
+DSPLOO~1 TXT      1332 2026-11-26  21:58  dsploop-out.txt
+DSPLOO~2 TXT         4 2026-11-26  21:59  dsploop-rc.txt
+ENUM-M~1 TXT      3310 2026-11-26  22:00  enum-media.txt
+ENUM-E~1 TXT        61 2026-11-26  22:00  enum-endpoint.txt
+REG-MM~1 TXT      4467 2026-11-26  22:01  reg-mmdev.txt
+       19 files             437 200 bytes
+                         33 003 520 bytes free
+

@@ -1,0 +1,32 @@
+ Volume in drive : is P4C4C      
+ Volume Serial Number is DF0A-90BA
+Directory for ::/
+
+DSPLOO~1 EXE    211968 2026-11-27   0:08  dsploop_apitest.exe
+dsploop  exe    211968 2026-11-27   0:08 
+pouch    tag        38 2026-11-27   0:08 
+drive    txt         4 2026-11-26  22:21 
+ALIVE-~1 TXT         8 2026-11-26  22:21  alive-firstboot.txt
+X-C1-D~1 TXT       149 2026-11-26  22:25  x-c1-disable.txt
+X-C1-E~1 TXT       147 2026-11-26  22:26  x-c1-enable.txt
+ENUM-M~1 TXT      3305 2026-11-26  22:29  enum-media.txt
+ENUM-E~1 TXT        61 2026-11-26  22:29  enum-endpoint.txt
+REG-MM~1 TXT      3386 2026-11-26  22:30  reg-mmdev.txt
+X-C10-~1 TXT       197 2026-11-26  22:31  x-c10-disable.txt
+X-C10-~2 TXT      3305 2026-11-26  22:33  x-c10-media.txt
+X-SVC-~1 TXT        12 2026-11-26  22:33  x-svc-list.txt
+X-SVC-~2 TXT         0 2026-11-26  22:34  x-svc-stop.txt
+X-SVC-~3 TXT         0 2026-11-26  22:52  x-svc-after.txt
+X-C11-~1 TXT       197 2026-11-26  22:58  x-c11-1-disable.txt
+X-SVC-~4 TXT       189 2026-11-26  23:07  x-svc-keys.txt
+X-SVCQ~1 TXT       270 2026-11-26  23:07  x-svcq-AudioSrv.txt
+X-SVCQ~2 TXT       265 2026-11-26  23:08  x-svcq-sysaudio.txt
+X-SVCQ~3 TXT       274 2026-11-26  23:08  x-svcq-usbaudio.txt
+X-C11-~2 TXT       188 2026-11-26  23:09  x-c11-child-disable.txt
+X-C11-~3 TXT       209 2026-11-26  23:10  x-c11-codec-disable.txt
+X-D31C~1 TXT         0 2026-11-26  23:11  x-svc-stop-sysaudio.txt
+X-C11-~4 TXT       197 2026-11-26  23:27  x-c11-dsp-retry.txt
+x-n5-05  txt       182 2026-11-26  23:28 
+       25 files             436 519 bytes
+                         32 997 376 bytes free
+

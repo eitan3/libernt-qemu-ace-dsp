@@ -1,0 +1,15 @@
+ Volume in drive : is P4C4C      
+ Volume Serial Number is A19C-5286
+Directory for ::/
+
+DSPLOO~1 EXE    211968 2026-11-26  23:52  dsploop_apitest.exe
+dsploop  exe    211968 2026-11-26  23:52 
+pouch    tag        38 2026-11-26  23:52 
+drive    txt         4 2026-11-26  22:05 
+ALIVE-~1 TXT         8 2026-11-26  22:05  alive-firstboot.txt
+settings txt       221 2026-11-26  22:07 
+ENUM-M~1 TXT      2825 2026-11-26  22:10  enum-media.txt
+ENUM-E~1 TXT        61 2026-11-26  22:10  enum-endpoint.txt
+        8 files             427 093 bytes
+                         33 030 144 bytes free
+

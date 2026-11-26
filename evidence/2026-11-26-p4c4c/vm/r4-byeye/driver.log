@@ -1,0 +1,74 @@
+2026-11-26T23:05:14Z boot4: r4-byeye on disk/p4c4c.qcow2 (the overlay of VMs 1 and 5), a new data disk
+2026-11-26T23:05:16Z VM r4-byeye started (lib-run pid 1242610, sockets /tmp/qad-vm.1242612, data disk /tmp/qad-ev/p4c4c/pouch/r4-byeye.img)
+[23:05:34] [    7.720110] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[23:05:34] [    7.720110] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[23:05:34] [    7.720110] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+2026-11-26T23:05:44Z A3: the system boot's driver lines:
+[    7.704486] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    7.704486] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.704486] intcdsp.sys: boot ok after 5451 us (clock 18133030 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    7.704486] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[    7.704486] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[    7.704486] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[    7.704486] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    7.704486] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[    7.720110] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.720110] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[    7.720110] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[    7.720110] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[    7.720110] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[    7.720110] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-26T23:05:44Z self-test lines of the boot: 0; registration lines: 4; stop lines: 0
+[23:06:00] [   35.241656] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000895D9D58F0 0000000000030172 'Program Manager' 000000895D9D5AD8 32 0x0 000000895D9D5B80 2dc 000000895D9D5B04)
+2026-11-26T23:06:37Z console: Win+R, cmd.exe
+2026-11-26T23:06:53Z data disk: drive F: in the guest (1 marker)
+2026-11-26T23:06:59Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-26T23:07:09Z dir C:\dsploop_apitest.exe: output after about 3 s: Volume in drive C is LiberNT Volume Serial Number is 2f29-aeff  Directory of C:  11/26/2026  11:45 PM           211,968 dsploop_apitest.exe        1 file                   211,968 bytes        0 directories     84,777,451,520 bytes free  
+2026-11-26T23:07:28Z pnputil /restart-device "HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001": output after about 4 s: LiberNT PnP Utility  Restarting device:         HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001  System reboot is needed to complete the operation! 
+2026-11-26T23:07:33Z N5-05 (the service running): the serial lines of the codec's restart (after serial line 177):
+2026-11-26T23:07:44Z pnputil /enum-devices /class Media /ids: output after about 3 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-26T23:08:16Z boot4: the VM is at the Sound applet; D continues step by step from the host
+2026-11-26T23:09:17Z step d12-2-down-tab: keys down tab
+2026-11-26T23:09:21Z step d12-2-down-tab: screenshot d12-2-down-tab.png
+2026-11-26T23:10:32Z step d12-3-list-up: keys shift-tab shift-tab up
+2026-11-26T23:10:36Z step d12-3-list-up: screenshot d12-3-list-up.png
+2026-11-26T23:11:54Z step d12-4-reopen-home: keys home
+2026-11-26T23:11:59Z step d12-4-reopen-home: screenshot d12-4-reopen-home.png
+2026-11-26T23:12:26Z step d12-5-tab: keys tab
+2026-11-26T23:12:30Z step d12-5-tab: screenshot d12-5-tab.png
+2026-11-26T23:13:36Z step d12-6-properties: keys alt-p
+2026-11-26T23:13:44Z step d12-6-properties: screenshot d12-6-properties.png
+2026-11-26T23:14:35Z step d12-7-advanced: keys ctrl-tab
+2026-11-26T23:14:40Z step d12-7-advanced: screenshot d12-7-advanced.png
+2026-11-26T23:15:16Z step d12-8-format-up2: keys up up
+2026-11-26T23:15:21Z step d12-8-format-up2: screenshot d12-8-format-up2.png
+2026-11-26T23:15:56Z step d12-9-apply: keys alt-a
+2026-11-26T23:16:01Z step d12-9-apply: screenshot d12-9-apply.png
+2026-11-26T23:16:44Z step d12-10-after-ok: keys ret
+2026-11-26T23:16:50Z step d12-10-after-ok: screenshot d12-10-after-ok.png
+2026-11-26T23:16:50Z step d12-11-properties-again: keys alt-p
+2026-11-26T23:16:58Z step d12-11-properties-again: screenshot d12-11-properties-again.png
+2026-11-26T23:18:02Z console: Win+R, cmd.exe
+2026-11-26T23:19:05Z reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render\{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}\Properties: output after about 40 s: 
+2026-11-26T23:19:30Z step x-state-1: keys 
+2026-11-26T23:19:32Z step x-state-1: screenshot x-state-1.png
+2026-11-26T23:20:05Z step x-state-2: keys alt-c alt-c
+2026-11-26T23:20:10Z step x-state-2: screenshot x-state-2.png
+2026-11-26T23:21:32Z step d12d-1-settings-sound: the Run dialog, 'ms-settings:sound', the screenshot d12d-1-settings-sound.png
+2026-11-26T23:22:24Z step d14-1-privacy-microphone: the Run dialog, 'ms-settings:privacy-microphone', the screenshot d14-1-privacy-microphone.png
+2026-11-26T23:23:07Z boot4end: the D4 holder probe (lib-run.sh pid 1242612, the data disk on F:)
+2026-11-26T23:23:23Z console: Win+R, cmd.exe
+2026-11-26T23:23:56Z !! the console did not answer after end (no alive-end.txt in 25 s)
+2026-11-26T23:23:59Z !! the console is silent: the S5 is taken
+2026-11-26T23:25:04Z sc query AudioSrv: output after about 40 s: 
+2026-11-26T23:25:04Z AudioSrv before: 
+2026-11-26T23:28:25Z net stop audiosrv: output after about 180 s: 
+2026-11-26T23:29:15Z sc query AudioSrv: output after about 40 s: 
+2026-11-26T23:29:15Z AudioSrv after net stop audiosrv: 
+2026-11-26T23:30:05Z sc query sysaudio: output after about 40 s: 
+2026-11-26T23:30:05Z sysaudio before: 
+2026-11-26T23:33:50Z net stop sysaudio: output after about 180 s: 
+2026-11-26T23:34:47Z sc query sysaudio: output after about 40 s: 
+2026-11-26T23:34:47Z sysaudio after net stop sysaudio: 
+2026-11-26T23:40:24Z boot4end was stopped by the wrapper\x27s 15-minute cap after its console did not answer (the Run dialog held the earlier line); the power button by hand: qemu exited rc=0 (none) at 2026-11-26T23:40:24Z; wall 2110 s
+2026-11-26T23:41:03Z VM r4-byeye ended: qemu exited rc=0 (none) at 2026-11-26T23:40:24Z; wall 2110 s -- the power button by hand after boot4end.sh was stopped by the wrapper cap: its console had not answered (the Run dialog held the earlier line), so the D4 holder probe of that script did not run

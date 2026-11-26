@@ -1,0 +1,313 @@
+[=3hBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007CF86000
+OS loader: selecting the boot entry
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: loading the SYSTEM hive
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007DB45000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007DB45000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE
+OS loader: entry FFFFF8007BE74760, loader block FFFFF8007DB47000, arc disks FFFFF8007DB481B0, registry 2613248 bytes at FFFFF8007C94A000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20D00, Gdt = FFFFF8007DA2D000, Idt = FFFFF8007BBFB950, Tss = FFFFF8007DB44000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 999999400 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC20E80
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.484376] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.125004] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.125004] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.578130] ACPI: RSDP 0x000000001002F8B0 000024 (v02 ROS   )
+[    2.578130] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.578130] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.578130] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.578130] ACPI: FACS 0x000000007FECA000 000040
+[    2.578130] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.578130] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.578130] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.578130] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.578130] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    2.593755] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    2.593755] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    2.640630] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    2.640630] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    2.640630] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    2.640630] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    2.640630] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.656255] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.734381] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    2.750006] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    2.750006] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+[    2.859381] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATA 'QEMU HARDDISK' fw '2.5+' 65599 sectors of 512 bytes
+[    3.281257] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F217B00)
+[    3.328132] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011FC50 FFFF81803F255B80)
+[    3.593758] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[    3.593758] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+0000œ€€è04‰€€\SystemRoot\system32\drivers\BasicDisplay.sysª[    6.259235] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007AE544F1
+[    6.384162] (\drivers\directx\dxgkrnl\adapter.c:13218) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF81800053E1A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    6.540413] (\drivers\directx\dxgkrnl\adapter.c:15149) DXGKRNL: DxgkAdapterStart: adapter FFFF81800053E1A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    6.540413] (\drivers\directx\dxgkrnl\adapter.c:6458) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    7.409041] (\drivers\directx\dxgkrnl\display.c:6534) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800053E1A0 desktop ready 1280x800 (scanout)
+[    7.409041] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    7.474591] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    7.474591] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007272000, processing capabilities at BAR0 +0x180
+[    7.474591] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    7.474591] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    7.490216] intcdsp.sys: loaded for the Intel audio DSP child
+[    7.490216] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    7.490216] intcdsp.sys: NHLT table: the bus driver reports none
+[    7.490216] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    7.490216] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    7.490216] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[    7.490216] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    7.521441] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    7.521441] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.521441] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    7.537065] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    7.537065] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    7.552617] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    7.568167] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    7.568167] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    7.568167] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    7.583745] (\drivers\directx\dxgkrnl\adapter.c:650) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005721A0 device UI suppressed
+[    7.583745] (\drivers\directx\dxgkrnl\adapter.c:14542) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005721A0 stays retired; another adapter owns the desktop
+[    8.005220] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    8.005220] (\drivers\network\nwifi\control.c:895) NWIFI: control device \Device\Nwifi created
+[    8.005220] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    8.020794] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    8.192572] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[    8.192572] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\D:
+[   10.239402] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[   10.239402] (\base\system\smss\crashdmp.c:273) SMSS: Failed to open crash dump pagefile `\??\C:\pagefile.sys' (0xc0000034)
+[   10.255027] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   10.255027] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 163610, disk byte 738304000
+[   10.255027] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   10.786278] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000001000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007ABDAA3C
+[   11.629681] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   11.629681] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   12.707808] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   12.707808] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   15.848191] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007948B4E
+[   15.848191] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007948D8D
+[   15.848191] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007AE53DFA
+[   15.848191] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007B23A075
+[   20.551226] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000F60F5C2B30 000000000000000A 'AudioSrv' 000000F60F5C3D7C 32 0x1 000000F60F5C3E90 1c4 000000F60F5C3DA8)
+[   20.551226] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   21.285498] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   21.925935] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   40.550976] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5AD0
+[   40.660351] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   41.785353] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D5D50
+[   43.613428] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+[   43.613428] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+[   43.613428] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+[   43.613428] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1189) HDAUDIO: SubdeviceName eLineOutWave
+[   43.628908] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineOutTopo
+[   43.644533] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1250) HDAUDIO: SubdeviceName eLineInWave
+[   43.644533] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineInTopo
+[   57.394561] (\drivers\wdm\audio\filters\kmixer\kmixer.c:106) KMixer.sys loaded
+[   57.394561] (\drivers\wdm\audio\filters\kmixer\kmixer.c:53) KMix_InstallDevice called
+[   57.394561] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000001 DeviceName {b7eafdc0-a680-11d0-96d8-00aa0051e51d}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   59.644518] (\drivers\wdm\audio\sysaudio\main.c:149) SYSAUDIO: AddDevice PDO FFFF8180005D65F0
+[   59.644518] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {a7c7a5b0-5af3-11d1-9ced-00a024bf0407}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   61.988273] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000003 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   62.628900] (\dll\win32\userenv\profile.c:703) CopySystemProfile()
+[   62.738275] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   62.816400] (\dll\win32\userenv\profile.c:2247) Profile S-1-5-18 already loaded
+[   63.332027] (\dll\win32\syssetup\security.c:163) SYSSETUP: SetPrimaryDomain()
+[   83.525276] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000F60F5C8200 0000000000070170 'Program Manager' 000000F60F5C5838 32 0x0 000000F60F5C57A0 314 000000F60F5C5864)
+[   83.525276] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   86.994034] (\base\setup\libernt\oobe.c:1035) Disk signature check finished with exit code 0
+[   87.197160] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   87.525285] (\base\setup\lib\setuplib.c:1044) SourcePath (1): '\Device\HarddiskVolume2\AMD64'
+[   87.525285] (\base\setup\lib\setuplib.c:1045) SourceRootPath (1): '\Device\HarddiskVolume2'
+[   87.525285] (\base\setup\lib\setuplib.c:1046) SourceRootDir (1): '\AMD64'
+[   87.525285] (\base\setup\lib\setuplib.c:1063) SourcePath (2): '\Device\HarddiskVolume2\AMD64'
+[   87.525285] (\base\setup\lib\setuplib.c:1064) SourceRootPath (2): '\Device\HarddiskVolume2'
+[   87.525285] (\base\setup\lib\setuplib.c:1065) SourceRootDir (2): '\AMD64'
+[   87.540910] (\base\setup\lib\setuplib.c:180) UnattendInf path: '\Device\HarddiskVolume2\AMD64\unattend.inf'
+[   87.540910] (\base\setup\lib\utils\partlist.c:2014) Disk 0 of identifier '2582bc10-70805897-A' is fixed
+[   87.540910] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   87.540910] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   87.540910] (\base\setup\lib\utils\partlist.c:2234) Use megabyte (2048 Sectors) alignment!
+[   87.540910] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT32
+[   87.540910] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): NTFS
+[   87.540910] (\base\setup\lib\utils\partlist.c:2014) Disk 1 of identifier '510433a7-ee61c847-A' is fixed
+[   87.540910] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   87.540910] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   87.540910] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT
+[   87.556535] (\base\setup\libernt\libernt.c:1106) Firmware language 'en'
+[   87.556535] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+[   87.572160] (\base\setup\libernt\libernt.c:1501) No LiberNT installation to upgrade
+[   87.572160] (\base\setup\libernt\oobe.c:989) Upgrade of the installed copy finished with 1168
+[   87.978411] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+[  653.977805] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000D62C03BC70): stub
+[  653.977805] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000D62C03BC70, 1, 000000D62E4DFD68, 000000D62E4DFD64): stub
+[  655.932811] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+[  806.860413] (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+[  990.839131] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C7C60 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  990.839131] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  990.845108] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 1065.657568] intcdsp.sys: loaded for the Intel audio DSP child
+[ 1065.658568] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007272000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[ 1065.658568] intcdsp.sys: NHLT table: the bus driver reports none
+[ 1065.658568] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[ 1065.658568] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[ 1065.658568] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[ 1065.658568] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[ 1065.661568] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1065.664568] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[ 1065.665568] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[ 1065.665568] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[ 1065.665568] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007272000, clock 1076103425 us at 10000000 Hz
+[ 1065.665568] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1065.666568] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1065.666568] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[ 1065.667568] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1065.670568] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1065.670568] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[ 1065.670568] intcdsp.sys: boot ok after 5446 us (clock 1076108965 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[ 1065.670568] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[ 1065.670568] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[ 1065.672568] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[ 1065.672568] intcdsp.sys: topology: modules copier â†’ id 5, gain â†’ id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[ 1065.672568] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.762819] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[ 1065.762819] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.762819] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.856569] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[ 1065.856569] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.856569] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[ 1065.934694] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[ 1065.934694] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[ 1065.934694] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[ 1067.721949] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[ 1068.460676] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[ 1068.460676] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[ 1375.818394] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C7FC0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1375.818394] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 1523.491218] (\base\services\umpnpmgr\rpcserver.c:6655) PNP_UnregisterNotification(000000F60F5C2B30 000000F60F5C3E90)
+[ 2123.466341] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[ 2123.466341] (\ntos\po\standby.c:207) The console display is now off
+[ 2613.209516] (\ntos\po\standby.c:207) The console display is now on
+[ 2975.783103] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C8830 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 2975.783103] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 3625.931188] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C85F0 INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0 0x00000000)
+[ 3625.931188] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0)
+[ 3711.455208] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C89E0 HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0 0x00000000)
+[ 3711.455208] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0)
+[ 4369.204382] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[ 4369.204382] (\ntos\po\standby.c:207) The console display is now off
+[ 4644.906186] (\ntos\po\standby.c:207) The console display is now on
+[ 4684.470323] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000F60F5C8050 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 4684.470323] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[ 4800.665810] (\dll\win32\kernel32\client\proc.c:4675) Trying to launch a DLL, failing
+[ 5089.671447] (\ntos\po\pobutton.c:165) System button event 0x00000001
+[ 5089.671447] (\ntos\po\pobutton.c:99) Button action 6
+[ 5090.259948] err:(\dll\win32\combase\marshal.c:759) StdMarshal ReleaseMarshalData failed with error 0x8001011d
+[ 5090.291199] (\ntos\po\poshutdown.c:293) Shutdown: running the queued shutdown work
+[ 5090.291199] (\ntos\po\poshutdown.c:300) Shutdown: notifying the drivers registered for shutdown
+[ 5090.291199] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\intcdsp
+[ 5090.291199] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\sysaudio
+[ 5090.291199] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\HDAudBus
+[ 5090.291199] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\MountMgr
+[ 5090.291199] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\WMIxWDM
+[ 5090.291199] (\ntos\po\poshutdown.c:302) Shutdown: holding the user-mode threads
+[ 5090.291199] (\ntos\po\poshutdown.c:304) Shutdown: flushing the registry
+[ 5090.306824] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+[ 5090.322449] (\ntos\po\poshutdown.c:312) Shutdown: flushing the cache
+[ 5090.322449] (\ntos\po\poshutdown.c:314) Shutdown: stopping the memory manager
+[ 5090.384949] (\ntos\po\poshutdown.c:317) Shutdown: flushing the volumes
+[ 5090.384949] (\ntos\po\poshutdown.c:320) Shutdown: notifying the file systems
+[ 5090.384949] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\fastfat
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Ntfs
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 5090.400574] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 5090.400574] (\ntos\po\poshutdown.c:322) Shutdown: notifying the last-chance drivers
+[ 5090.400574] (\ntos\po\poshutdown.c:329) Shutdown: powering the devices down for action 6
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4d9fad45&0&00
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2ee25b9a&0&S21658107_O100000_L4000000
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2ee25b9a&0&S21658107_O4100000_L13fbf00000
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2a178ba7&0&See61c847_O7e00_L2000000
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to DISPLAY\Default_Monitor\4&ff262a49&0&UID0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&aeefd634&0&0001
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 5090.400574] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+[ 5090.400574] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_29C0&SUBSYS_11001AF4&REV_00\3&a5c7842&0&00
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_1234&DEV_1111&SUBSYS_11001AF4&REV_02\3&a5c7842&0&08
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_7F50&SUBSYS_11001AF4&REV_10\3&a5c7842&0&D8
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_2918&SUBSYS_11001AF4&REV_02\3&a5c7842&0&F8
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_2922&SUBSYS_11001AF4&REV_02\3&a5c7842&0&FA
+[ 5090.400574] (\drivers\storage\port\storport\fdo.c:2805) Storport: adapter FFFF81800011F080 to D3: requests drained, timeouts stopped, stopping the miniport
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\CPU_Hotplug_resources
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\GPE0_resources
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\PCI_Hotplug_resources
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0303\3&a5c7842&0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0F13\3&a5c7842&0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0400\1
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0B00\3&a5c7842&0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\FixedButton\2&ccb86d17&0&FFB0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A08\0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\ACPI0010\2&ccb86d17&0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\AuthenticAMD_-_AMD64_Family_6_Model_6_-_QEMU_TCG_CPU_version_2.5+\_0
+[ 5090.400574] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI_HAL\PNP0C08\0
+[ 5090.400574] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.

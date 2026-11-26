@@ -1,0 +1,5 @@
+LiberNT PnP Utility
+
+Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+Failed to disable device: A device attached to the system is not functioning.
+

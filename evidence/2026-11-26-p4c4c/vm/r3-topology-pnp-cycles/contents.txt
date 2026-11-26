@@ -1,0 +1,7 @@
+serial.txt: 313 lines (ANSI escapes, NULs and CRs removed), 57 driver lines (hdaudbus.sys, intcdsp.sys, dsppcm.sys); serial.log: as the guest wrote it
+qemu-dbg.log: 1035 lines, 882 ace_* of which 696 register accesses (kept in the .gz only); ace-trace.txt: 186 decoded lines; ace-audio-lines.txt: 12 lines
+livecap:  0 lines
+qemu exited: qemu exited rc=0 (none) at 2026-11-26T22:27:40Z; wall 1131 s
+stop/fatal/stall lines in serial.log: 0 stopped, 0 stop code, 0 fatal, 0 clock stalled, 0 interrupt storm, 0 work-queue; ace_unexpected in the trace: 0
+the data disk's text: 32 .txt files in this directory (pouch-listing.txt: the disk's listing)
+bin files: the pages the descriptor lists named at each stop of livecap.py (pmemsave), where a run made them.
