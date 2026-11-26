@@ -1,0 +1,22 @@
+   8  the T1 topology line, exact
+   8  the modules line, exact
+   2  the none-selected line, exact
+  18  self-test runs started (endpoint lines)
+  18  captured lines
+  18    of which `after 85 ms, offset 0 frames, max abs error 0`
+   6    of which render rms = capture rms = 5793.911 (16-bit)
+  12    of which render rms = capture rms = 379742706.482 (24- and 32-bit)
+  18  stopped-at lines, exact
+   6  summary lines, exact
+   6  ran lines, exact
+  11  settings lines (one per device start)
+  10  boot ok lines
+  10    of which `, 0 DSP interrupts`
+  10  `DSP power down from state ready: ok`
+   4  `Entering sleep state S5`
+   0  `clock stalled`
+   0  `interrupt storm`
+   0  `Work queue`
+   0  fatal / bugcheck lines
+boot ok after (us): 5365, 5366, 5368, 5370, 5371
+settings lines seen: ['0', '2']

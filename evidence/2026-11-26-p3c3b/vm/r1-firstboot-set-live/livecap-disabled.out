@@ -1,0 +1,14 @@
+[23:33:20.261] now-disabled: '' reached the serial log
+[23:33:20.261] now-disabled: stopped, 0.1 ms after the line was seen
+!! config space at 0xb00d8000 does not read as the model: vendor/device 0x00000000, BAR0 0x0, BAR4 0x0 -- nothing read through BAR0
+!! now-disabled: no stop with an output and an input stream running together (attempt 1)
+== now-disabled: reading 1; BAR0 0x0 from config 0xb00d8000 (vendor/device 0x00000000, BAR4 0x0); GCAP 0x0000, VMIN/VMAJ 0x00/0x00, global CTL 0x00000000
+   st[0] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[1] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[2] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[3] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[4] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[5] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[6] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[7] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x00 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+[23:33:20.297] now-disabled: continued

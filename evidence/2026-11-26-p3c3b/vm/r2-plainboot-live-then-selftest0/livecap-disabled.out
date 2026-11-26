@@ -1,0 +1,4 @@
+[23:44:13.001] now-disabled: '' reached the serial log
+[23:44:13.015] now-disabled: stopped, 14.3 ms after the line was seen
+!! the monitor does not name the model with its BARs (BAR4 must be 0x81000000) -- nothing read through BAR0:
+

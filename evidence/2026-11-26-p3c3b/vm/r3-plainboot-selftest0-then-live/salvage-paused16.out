@@ -1,0 +1,43 @@
+the monitor's view of the model:
+Bus  0, device  27, function 0:
+    Audio controller: PCI device 8086:7f50
+      PCI subsystem 1af4:1100
+      IRQ 16, pin A
+      BAR0: 32 bit memory at 0x81210000 [0x81213fff]
+      BAR4: 32 bit memory at 0x81000000 [0x811fffff]
+      id "ace"
+BAR0 0x81210000 (32 bit memory); BAR4 0x81000000
+VM status: VM status: paused
+   st[0] input  ctl=0x10001e (RUN 1, STRPE 1, TP 1, IOCE 1, FEIE 0, DEIE 0, STRIPE 0x00, tag 1) sts=0x20 lpib=8192 cbl=16384 lvi=3 fmt=0x0011 bdl=0x3f1d000
+   input stream 0: 4 descriptors at 0x3f1d000
+      bdl[0] words 00404000 00000000 00001000 00000000  addr 0x404000 len 4096  ioc: word 3 bit 0 = 0, upper dword bit 31 = 0 (word 3 = 0x00000000)
+      bdl[1] words 00405000 00000000 00001000 00000001  addr 0x405000 len 4096  ioc: word 3 bit 0 = 1, upper dword bit 31 = 0 (word 3 = 0x00000001)
+      bdl[2] words 00406000 00000000 00001000 00000000  addr 0x406000 len 4096  ioc: word 3 bit 0 = 0, upper dword bit 31 = 0 (word 3 = 0x00000000)
+      bdl[3] words 00407000 00000000 00001000 00000001  addr 0x407000 len 4096  ioc: word 3 bit 0 = 1, upper dword bit 31 = 0 (word 3 = 0x00000001)
+      window 0x403000..0x408fff (6 pages) saved to paused16-st0-window.bin
+      page 0 at 0x404000: head i16: 0 0 1069 1069 2120 2120 3134 3134 4095 4095 4986 4986 5792 5792 6499 6499 | head i32: 0 70059053 138938440 205392958 268374015 326767482 379590304 425924963 | zero: 86/2048 words, 43/1024 dwords | 0xCDCD: 0/2048 words, 0xCDCDCDCD: 0/1024 dwords | i16 min -8192 max 8191
+      page 1 at 0x405000: head i16: 7094 7094 6499 6499 5792 5792 4986 4986 4095 4095 3134 3134 2120 2120 1069 1069 | head i32: 464919478 425924963 379590304 326767482 268374015 205392958 138938440 70059053 | zero: 86/2048 words, 43/1024 dwords | 0xCDCD: 0/2048 words, 0xCDCDCDCD: 0/1024 dwords | i16 min -8192 max 8191
+      page 2 at 0x406000: head i16: -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 | head i32: -842150451 -842150451 -842150451 -842150451 -842150451 -842150451 -842150451 -842150451 | zero: 0/2048 words, 0/1024 dwords | 0xCDCD: 2048/2048 words, 0xCDCDCDCD: 1024/1024 dwords | i16 min -12851 max -12851
+      page 3 at 0x407000: head i16: -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 -12851 | head i32: -842150451 -842150451 -842150451 -842150451 -842150451 -842150451 -842150451 -842150451 | zero: 0/2048 words, 0/1024 dwords | 0xCDCD: 2048/2048 words, 0xCDCDCDCD: 1024/1024 dwords | i16 min -12851 max -12851
+   st[1] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[2] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[3] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[4] output ctl=0x10001e (RUN 1, STRPE 1, TP 1, IOCE 1, FEIE 0, DEIE 0, STRIPE 0x00, tag 1) sts=0x20 lpib=8192 cbl=16384 lvi=3 fmt=0x0011 bdl=0x3f21000
+   output stream 4: 4 descriptors at 0x3f21000
+      bdl[0] words 00400000 00000000 00001000 00000000  addr 0x400000 len 4096  ioc: word 3 bit 0 = 0, upper dword bit 31 = 0 (word 3 = 0x00000000)
+      bdl[1] words 00401000 00000000 00001000 00000001  addr 0x401000 len 4096  ioc: word 3 bit 0 = 1, upper dword bit 31 = 0 (word 3 = 0x00000001)
+      bdl[2] words 00402000 00000000 00001000 00000000  addr 0x402000 len 4096  ioc: word 3 bit 0 = 0, upper dword bit 31 = 0 (word 3 = 0x00000000)
+      bdl[3] words 00403000 00000000 00001000 00000001  addr 0x403000 len 4096  ioc: word 3 bit 0 = 1, upper dword bit 31 = 0 (word 3 = 0x00000001)
+      window 0x3ff000..0x404fff (6 pages) saved to paused16-st4-window.bin
+      page 0 at 0x400000: head i16: 0 0 1069 1069 2120 2120 3134 3134 4095 4095 4986 4986 5792 5792 6499 6499 | head i32: 0 70059053 138938440 205392958 268374015 326767482 379590304 425924963 | zero: 86/2048 words, 43/1024 dwords | 0xCDCD: 0/2048 words, 0xCDCDCDCD: 0/1024 dwords | i16 min -8192 max 8191
+      page 1 at 0x401000: head i16: 7094 7094 6499 6499 5792 5792 4986 4986 4095 4095 3134 3134 2120 2120 1069 1069 | head i32: 464919478 425924963 379590304 326767482 268374015 205392958 138938440 70059053 | zero: 86/2048 words, 43/1024 dwords | 0xCDCD: 0/2048 words, 0xCDCDCDCD: 0/1024 dwords | i16 min -8192 max 8191
+      page 2 at 0x402000: head i16: -7095 -7095 -7569 -7569 -7913 -7913 -8122 -8122 -8192 -8192 -8122 -8122 -7913 -7913 -7569 -7569 | head i32: -464919479 -495984017 -518528745 -532225978 -536813568 -532225978 -518528745 -495984017 | zero: 84/2048 words, 42/1024 dwords | 0xCDCD: 0/2048 words, 0xCDCDCDCD: 0/1024 dwords | i16 min -8192 max 8191
+      page 3 at 0x403000: head i16: 0 0 1069 1069 2120 2120 3134 3134 4095 4095 4986 4986 5792 5792 6499 6499 | head i32: 0 70059053 138938440 205392958 268374015 326767482 379590304 425924963 | zero: 86/2048 words, 43/1024 dwords | 0xCDCD: 0/2048 words, 0xCDCDCDCD: 0/1024 dwords | i16 min -8192 max 8191
+   st[5] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[6] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[7] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   paused16 (st0 against st4): capture against render, page by page at the same list index
+      page 0 (capture 0x404000, render 0x400000): identical, 4096 bytes
+      page 1 (capture 0x405000, render 0x401000): identical, 4096 bytes
+      page 2 (capture 0x406000, render 0x402000): differ at byte 0: capture -12851 0xcdcd, render -7095 0xe449; differing bytes 4096 of 4096
+      page 3 (capture 0x407000, render 0x403000): differ at byte 0: capture -12851 0xcdcd, render 0 0x0000; differing bytes 4096 of 4096

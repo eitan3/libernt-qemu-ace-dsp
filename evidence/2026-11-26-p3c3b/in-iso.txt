@@ -1,0 +1,9 @@
+# in-ISO hashes, independent extraction (bsdtar -xf LiberNT.iso into /tmp, hashed there) 2026-11-25T23:17:20Z
+# expected: PROVENANCE.txt of the staging directory and gates/in-iso.txt (image-check.txt)
+633354e6f142c527b19e3b4451e8890e0ee73b4792ae3743462188457ef46988   315392  Windows/system32/drivers/intcdsp.sys  equal
+13ba7ecdfd80b90f4306461e56965cd679fc277ce2413a5bd8bfe729dbde8b88   262144  Windows/system32/drivers/hdaudbus.sys  equal
+24889058843d340237fc1068d4fd68da6955cdcf1d862d7a81b0d8548fd59384   225280  Windows/system32/drivers/hdaudio.sys  equal
+32f3d6a106723fb3e5ef44e9129ba569804d0c39cf6a40735480c97f4b60ded5     6368  Windows/inf/intcdsp.inf  equal
+a6d5c33ab40aec261fe69c0f219a61e41b1aec92dbf7d0cb83f8f6b1ec68079f    12526  Windows/inf/hdaudbus.inf  equal
+f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e  1158164  Windows/system32/drivers/intel/sof/sof-arl-s.ri  equal
+0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601     4286  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg  equal

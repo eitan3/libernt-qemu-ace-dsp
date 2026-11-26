@@ -1,0 +1,109 @@
+[    9.272099] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    9.338326] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    9.338326] (\drivers\input\i8042prt\pnp.c:844) IRP_MJ_PNP / unknown minor function 0xb
+[    9.353886] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    9.369469] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    9.369469] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    9.369469] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    9.369469] (\drivers\directx\dxgkrnl\adapter.c:618) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005701A0 device UI suppressed
+[    9.369469] (\drivers\directx\dxgkrnl\adapter.c:14487) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005701A0 stays retired; another adapter owns the desktop
+[    9.463045] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    9.463045] (\drivers\network\nwifi\control.c:816) NWIFI: control device \Device\Nwifi created
+[    9.463045] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    9.478604] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    9.587894] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[    9.994145] (\base\system\smss\pagefile.c:974) SMSS:PFILE: Open volume `\??\D:\' failed with status C000014F
+[    9.994145] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[    9.994145] (\base\system\smss\crashdmp.c:273) SMSS: Failed to open crash dump pagefile `\??\C:\pagefile.sys' (0xc0000034)
+[   10.009770] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   10.009770] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 162477, disk byte 733663232
+[   10.009770] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   10.556516] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   10.556516] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   12.087724] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:579) DxStartupDxgkInt: Entry
+[   12.087724] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   14.931219] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   16.337389] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   37.321636] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000682350
+[   38.727889] (\base\services\umpnpmgr\rpcserver.c:6513) PNP_RegisterNotification(00000030EDC27790 000000000000000A 'AudioSrv' 00000030EDC278FC 32 0x1 00000030EDC253F0 114 00000030EDC27928)
+[   38.727889] (\base\services\umpnpmgr\rpcserver.c:6533) DBT_DEVTYP_DEVICEINTERFACE
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1188) HDAUDIO: SubdeviceName eLineOutWave
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1864) HDAUDIO: SubdeviceName eLineOutTopo
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1249) HDAUDIO: SubdeviceName eLineInWave
+[   40.555778] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1864) HDAUDIO: SubdeviceName eLineInTopo
+[   52.258925] (\drivers\wdm\audio\filters\kmixer\kmixer.c:106) KMixer.sys loaded
+[   52.258925] (\drivers\wdm\audio\filters\kmixer\kmixer.c:53) KMix_InstallDevice called
+[   52.258925] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000001 DeviceName {b7eafdc0-a680-11d0-96d8-00aa0051e51d}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   54.508764] (\drivers\wdm\audio\sysaudio\main.c:149) SYSAUDIO: AddDevice PDO FFFF8180006830F0
+[   54.524389] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {a7c7a5b0-5af3-11d1-9ced-00a024bf0407}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   56.477519] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000003 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   56.665019] (\drivers\storage\port\storport\fdo.c:1769) Storport: the miniport is busy, requeueing request FFFF81803F26AB00 (1 so far)
+[   57.336895] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   57.352521] (\dll\win32\userenv\profile.c:698) CopySystemProfile()
+[   57.399395] (\dll\win32\userenv\profile.c:2222) Profile S-1-5-18 already loaded
+[   57.461896] (\dll\win32\syssetup\security.c:163) SYSSETUP: SetPrimaryDomain()
+[   77.004026] (\base\services\umpnpmgr\rpcserver.c:6513) PNP_RegisterNotification(00000030EDC28AA0 0000000000080178 'Program Manager' 00000030EDC255B8 32 0x0 00000030EDC278E0 314 00000030EDC255E4)
+[   77.004026] (\base\services\umpnpmgr\rpcserver.c:6533) DBT_DEVTYP_DEVICEINTERFACE
+[   80.238408] (\base\setup\libernt\oobe.c:1073) Disk signature check finished with exit code 0
+[   80.410284] (\base\setup\libernt\oobe.c:1097) First-boot setup lists 11 components
+[   80.691534] (\base\setup\lib\setuplib.c:1044) SourcePath (1): '\Device\HarddiskVolume2\AMD64'
+[   80.691534] (\base\setup\lib\setuplib.c:1045) SourceRootPath (1): '\Device\HarddiskVolume2'
+[   80.691534] (\base\setup\lib\setuplib.c:1046) SourceRootDir (1): '\AMD64'
+[   80.691534] (\base\setup\lib\setuplib.c:1063) SourcePath (2): '\Device\HarddiskVolume2\AMD64'
+[   80.691534] (\base\setup\lib\setuplib.c:1064) SourceRootPath (2): '\Device\HarddiskVolume2'
+[   80.691534] (\base\setup\lib\setuplib.c:1065) SourceRootDir (2): '\AMD64'
+[   80.691534] (\base\setup\lib\setuplib.c:180) UnattendInf path: '\Device\HarddiskVolume2\AMD64\unattend.inf'
+[   80.691534] (\base\setup\lib\utils\partlist.c:2014) Disk 0 of identifier '5dfc9c68-3806783f-A' is fixed
+[   80.691534] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   80.691534] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   80.691534] (\base\setup\lib\utils\partlist.c:2234) Use megabyte (2048 Sectors) alignment!
+[   80.691534] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT32
+[   80.691534] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): NTFS
+[   80.722785] (\base\setup\libernt\libernt.c:1106) Firmware language 'en'
+[   80.722785] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+[   80.722785] (\base\setup\libernt\libernt.c:1501) No LiberNT installation to upgrade
+[   80.738410] (\base\setup\libernt\oobe.c:1027) Upgrade of the installed copy finished with 1168
+[   81.019660] (\base\setup\libernt\oobe.c:1109) Storage expansion not offered
+[  427.101074] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000072DFC7C4B0): stub
+[  427.101074] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000072DFC7C4B0, 1, 00000072E208FD68, 00000072E208FD64): stub
+[  428.471329] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+[  708.829939] (\base\services\umpnpmgr\rpcserver.c:4089) PNP_DisableDevInst(00000030EDC286B0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  708.829939] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  708.839918] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  766.085700] intcdsp.sys: loaded for the Intel audio DSP child
+[  766.085700] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007201000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[  766.085700] intcdsp.sys: NHLT table: the bus driver reports none
+[  766.085700] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[  766.085700] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[  766.085700] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[  766.086704] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[  766.088700] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  766.088700] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry
+[  766.088700] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  766.088700] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  766.091700] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007201000, clock 776435741 us at 10000000 Hz
+[  766.091700] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  766.092700] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  766.092700] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[  766.093700] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  766.096700] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  766.096700] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+[  766.096700] intcdsp.sys: boot ok after 5366 us (clock 776441188 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[  766.096700] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[  766.096700] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[  766.100700] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[  766.100700] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[  766.100700] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[  766.185576] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911, ok
+[  766.185576] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[  766.185576] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[  766.279326] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[  766.279326] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[  766.279326] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[  766.357451] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[  766.357451] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[  766.357451] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[  766.357451] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running

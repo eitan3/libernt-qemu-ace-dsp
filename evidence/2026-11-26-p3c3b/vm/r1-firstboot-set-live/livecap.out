@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/tmp/qad-ev/p3c3b/tools/livecap.py", line 306, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/tmp/qad-ev/p3c3b/tools/livecap.py", line 242, in main
+    buf += f.read(size - off)
+           ~~~~~~^^^^^^^^^^^^
+ValueError: read of closed file

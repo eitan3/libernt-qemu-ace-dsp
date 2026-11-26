@@ -1,0 +1,602 @@
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x700 -> 0x10040000
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x188 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x00000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x0011a000
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000011
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00004000
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway index 0 (stream tag 1), ibs 192 obs 384, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 0 (stream tag 1), ibs 384 obs 192, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40000007 ext 0x0001000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 0: base configuration, ibs 384 obs 384, pipeline 1, core 0, 10 words
+ace_ipc IPC request primary 0x45000005 ext 0x00000007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 0 bound to module 7 instance 0 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45000007 ext 0x00010005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 0 bound to module 5 instance 1 (queues 0 -> 0)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000011
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00004000
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 1 into host-input copier 5.1's stream 1; 192000 bytes a second
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_audio ace_audio 1 8192 rms 5786.742 peak 8192 first 0 0 1069 1069 2120 2120 3134 3134
+ace_audio ace_audio 1 8192 rms 5786.742 peak 8192 first 0 0 1069 1069 2120 2120 3134 3134
+ace_audio ace_audio 1 8192 rms 5801.756 peak 8192 first -7095 -7095 -7569 -7569 -7913 -7913 -8122 -8122
+ace_audio ace_audio 1 8192 rms 5801.756 peak 8192 first -7095 -7095 -7569 -7569 -7913 -7913 -8122 -8122
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> paused
+ace_gateway gateway stopped (pipeline 1): pipeline 1 is paused
+ace_ipc IPC request primary 0x44010005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 1: copier, host-input gateway without a stream (the placeholder index 0xff), ibs 384 obs 192, parameter 0, 84 bytes
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000011
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_ipc IPC request primary 0x13010002 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> reset
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 0 deleted
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_ipc IPC request primary 0x4b000007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 0 deleted
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was reset)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000000
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000011
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00008000
+ace_ipc IPC request primary 0x11020000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 2 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40020005 ext 0x00020015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 2: copier, host-output gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 2, core 0, 21 words
+ace_ipc IPC request primary 0x40030005 ext 0x00020015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 3: copier, host-input gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 2, core 0, 21 words
+ace_ipc IPC request primary 0x40010007 ext 0x0002000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 1: base configuration, ibs 384 obs 384, pipeline 2, core 0, 10 words
+ace_ipc IPC request primary 0x45020005 ext 0x00010007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 2 bound to module 7 instance 1 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45010007 ext 0x00030005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 1 bound to module 5 instance 3 (queues 0 -> 0)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000011
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00008000
+ace_ipc IPC request primary 0x13020003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: uninitialized -> paused
+ace_ipc IPC request primary 0x13020004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: paused -> running
+ace_gateway gateway armed (pipeline 2): host-output copier 5.2 drains stream 1 into host-input copier 5.3's stream 1; 384000 bytes a second
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_ipc IPC request primary 0x13020003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: running -> paused
+ace_gateway gateway stopped (pipeline 2): pipeline 2 is paused
+ace_ipc IPC request primary 0x44030005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 3: copier, host-input gateway without a stream (the placeholder index 0xff), ibs 384 obs 384, parameter 0, 84 bytes
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000011
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_ipc IPC request primary 0x13020002 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: paused -> reset
+ace_ipc IPC request primary 0x4b020005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 2 deleted
+ace_ipc IPC request primary 0x4b030005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 3 deleted
+ace_ipc IPC request primary 0x4b010007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 1 deleted
+ace_ipc IPC request primary 0x12020000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 2 deleted (was reset)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000000
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000011
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00008000
+ace_ipc IPC request primary 0x11030000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 3 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40040005 ext 0x00030015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 4: copier, host-output gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 3, core 0, 21 words
+ace_ipc IPC request primary 0x40050005 ext 0x00030015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 5: copier, host-input gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 3, core 0, 21 words
+ace_ipc IPC request primary 0x40020007 ext 0x0003000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 2: base configuration, ibs 384 obs 384, pipeline 3, core 0, 10 words
+ace_ipc IPC request primary 0x45040005 ext 0x00020007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 4 bound to module 7 instance 2 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45020007 ext 0x00050005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 2 bound to module 5 instance 5 (queues 0 -> 0)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000011
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00008000
+ace_ipc IPC request primary 0x13030003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: uninitialized -> paused
+ace_ipc IPC request primary 0x13030004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: paused -> running
+ace_gateway gateway armed (pipeline 3): host-output copier 5.4 drains stream 1 into host-input copier 5.5's stream 1; 384000 bytes a second
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_ipc IPC request primary 0x13030003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: running -> paused
+ace_gateway gateway stopped (pipeline 3): pipeline 3 is paused
+ace_ipc IPC request primary 0x44050005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 5: copier, host-input gateway without a stream (the placeholder index 0xff), ibs 384 obs 384, parameter 0, 84 bytes
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000011
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_ipc IPC request primary 0x13030002 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: paused -> reset
+ace_ipc IPC request primary 0x4b040005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 4 deleted
+ace_ipc IPC request primary 0x4b050005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 5 deleted
+ace_ipc IPC request primary 0x4b020007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 2 deleted
+ace_ipc IPC request primary 0x12030000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 3 deleted (was reset)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000000
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+ace_state state running -> off
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x700 -> 0x10040000
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x188 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x00000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x0011a000
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_state state running -> off
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x180 -> 0x10030700
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x188 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x00000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x0011a000
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 1155072 bytes (SPIB 1155072)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000011
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00004000
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway index 0 (stream tag 1), ibs 192 obs 384, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 0 (stream tag 1), ibs 384 obs 192, pipeline 1, core 0, 21 words
+ace_ipc IPC request primary 0x40000007 ext 0x0001000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 0: base configuration, ibs 384 obs 384, pipeline 1, core 0, 10 words
+ace_ipc IPC request primary 0x45000005 ext 0x00000007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 0 bound to module 7 instance 0 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45000007 ext 0x00010005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 0 bound to module 5 instance 1 (queues 0 -> 0)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000011
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00004000
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 1 into host-input copier 5.1's stream 1; 192000 bytes a second
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_audio ace_audio 1 8192 rms 5786.742 peak 8192 first 0 0 1069 1069 2120 2120 3134 3134
+ace_audio ace_audio 1 8192 rms 5786.742 peak 8192 first 0 0 1069 1069 2120 2120 3134 3134
+ace_audio ace_audio 1 8192 rms 5801.756 peak 8192 first -7095 -7095 -7569 -7569 -7913 -7913 -8122 -8122
+ace_audio ace_audio 1 8192 rms 5801.756 peak 8192 first -7095 -7095 -7569 -7569 -7913 -7913 -8122 -8122
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> paused
+ace_gateway gateway stopped (pipeline 1): pipeline 1 is paused
+ace_ipc IPC request primary 0x44010005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 1: copier, host-input gateway without a stream (the placeholder index 0xff), ibs 384 obs 192, parameter 0, 84 bytes
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000011
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_ipc IPC request primary 0x13010002 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> reset
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 0 deleted
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_ipc IPC request primary 0x4b000007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 0 deleted
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was reset)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000000
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000011
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00008000
+ace_ipc IPC request primary 0x11020000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 2 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40020005 ext 0x00020015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 2: copier, host-output gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 2, core 0, 21 words
+ace_ipc IPC request primary 0x40030005 ext 0x00020015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 3: copier, host-input gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 2, core 0, 21 words
+ace_ipc IPC request primary 0x40010007 ext 0x0002000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 1: base configuration, ibs 384 obs 384, pipeline 2, core 0, 10 words
+ace_ipc IPC request primary 0x45020005 ext 0x00010007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 2 bound to module 7 instance 1 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45010007 ext 0x00030005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 1 bound to module 5 instance 3 (queues 0 -> 0)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000011
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00008000
+ace_ipc IPC request primary 0x13020003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: uninitialized -> paused
+ace_ipc IPC request primary 0x13020004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: paused -> running
+ace_gateway gateway armed (pipeline 2): host-output copier 5.2 drains stream 1 into host-input copier 5.3's stream 1; 384000 bytes a second
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_ipc IPC request primary 0x13020003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: running -> paused
+ace_gateway gateway stopped (pipeline 2): pipeline 2 is paused
+ace_ipc IPC request primary 0x44030005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 3: copier, host-input gateway without a stream (the placeholder index 0xff), ibs 384 obs 384, parameter 0, 84 bytes
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000011
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_ipc IPC request primary 0x13020002 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 2: paused -> reset
+ace_ipc IPC request primary 0x4b020005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 2 deleted
+ace_ipc IPC request primary 0x4b030005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 3 deleted
+ace_ipc IPC request primary 0x4b010007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 1 deleted
+ace_ipc IPC request primary 0x12020000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 2 deleted (was reset)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000000
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000011
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000000
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00008000
+ace_ipc IPC request primary 0x11030000 ext 0x00000000
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 3 created: priority 0, 0 pages, core 0, low-power 0
+ace_ipc IPC request primary 0x40040005 ext 0x00030015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 4: copier, host-output gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 3, core 0, 21 words
+ace_ipc IPC request primary 0x40050005 ext 0x00030015
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 5: copier, host-input gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 3, core 0, 21 words
+ace_ipc IPC request primary 0x40020007 ext 0x0003000a
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 2: base configuration, ibs 384 obs 384, pipeline 3, core 0, 10 words
+ace_ipc IPC request primary 0x45040005 ext 0x00020007
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 4 bound to module 7 instance 2 (queues 0 -> 0)
+ace_ipc IPC request primary 0x45020007 ext 0x00050005
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 2 bound to module 5 instance 5 (queues 0 -> 0)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000011
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00008000
+ace_ipc IPC request primary 0x13030003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: uninitialized -> paused
+ace_ipc IPC request primary 0x13030004 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: paused -> running
+ace_gateway gateway armed (pipeline 3): host-output copier 5.4 drains stream 1 into host-input copier 5.5's stream 1; 384000 bytes a second
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 379250530.025 peak 536870912 first 0 0 70075715 70075715 138952416 138952416 205451603 205451603
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_audio ace_audio 1 16384 rms 380234245.866 peak 536870912 first -464943849 -464943849 -496004047 -496004047 -518577479 -518577479 -532277907 -532277907
+ace_ipc IPC request primary 0x13030003 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: running -> paused
+ace_gateway gateway stopped (pipeline 3): pipeline 3 is paused
+ace_ipc IPC request primary 0x44050005 ext 0x30000054
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 5: copier, host-input gateway without a stream (the placeholder index 0xff), ibs 384 obs 384, parameter 0, 84 bytes
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000011
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000010
+intel_hda_cap_write BAR0 cap +0x708 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000011
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000010
+ace_ipc IPC request primary 0x13030002 ext 0x00000000
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 3: paused -> reset
+ace_ipc IPC request primary 0x4b040005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 4 deleted
+ace_ipc IPC request primary 0x4b050005 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 5 deleted
+ace_ipc IPC request primary 0x4b020007 ext 0x00000000
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 2 deleted
+ace_ipc IPC request primary 0x12030000 ext 0x00000000
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 3 deleted (was reset)
+intel_hda_cap_read BAR0 cap +0x704 -> 0x00000010
+intel_hda_cap_write BAR0 cap +0x704 <- 0x00000000
+intel_hda_cap_write BAR0 cap +0x728 <- 0x00000000
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000010
+intel_hda_cap_write BAR0 cap +0x184 <- 0x40000000
+ace_state state running -> off
+intel_hda_cap_read BAR0 cap +0x184 -> 0x40000000
+intel_hda_cap_write BAR0 cap +0x184 <- 0x00000000

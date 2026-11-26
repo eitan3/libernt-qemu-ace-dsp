@@ -1,0 +1,105 @@
+# The rms of the driver's sine (IntcDspSineQ31 at 1619498f85e) and of every ace_audio line of the round.
+
+## rms-check.py: the sine's exact rms over a period's frames and over the whole buffer
+depth            frames      sum of squares   samples   rms (double)   thousandths
+16-bit (>> 18)      0-2047            137160207150    4096   5786.742   5786.742
+16-bit (>> 18)   2048-4095            137872874956    4096   5801.756   5801.756
+16-bit (>> 18)      0-4095            275033082106    8192   5794.254   5794.254
+24/32-bit (>> 2)    0-2047   589131630692787640190    4096   379250530.025   379250530.025
+24/32-bit (>> 2) 2048-4095   592191822763781561612    4096   380234245.866   380234245.866
+24/32-bit (>> 2)    0-4095  1181323453456569201802    8192   379742706.483   379742706.483
+16-bit: mean square 33573374 (integer division); rms in thousandths by integer sqrt: 5794.253
+24/32-bit: mean square 144204523127022607 (integer division); rms in thousandths by integer sqrt: 379742706.482
+
+## driver-rms.py: the driver's own sum (each square divided by the count per sample) through IntcDspRms
+depth            exact rms      the driver's figure   mean square lost per sample
+16-bit (>> 18)       5794.254             5793.911   0.4844
+24/32-bit (>> 2) 379742706.483        379742706.482   0.3828
+
+## r1-firstboot-set-live: ace-audio-check.py
+driver lines: 3 runs started, 3 captured, 0 failures, 1 summaries, 1 'ran' lines; ace_audio lines: 12
+run 1 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5793.911 (its per-sample truncating sum: see driver-rms.py)
+run 2 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 3 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+RESULT: every ace_audio line is the sine's and render = capture in every pair
+
+## r2-plainboot-live-then-selftest0: ace-audio-check.py
+driver lines: 6 runs started, 6 captured, 0 failures, 2 summaries, 2 'ran' lines; ace_audio lines: 24
+run 1 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5793.911 (its per-sample truncating sum: see driver-rms.py)
+run 2 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 3 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 4 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5793.911 (its per-sample truncating sum: see driver-rms.py)
+run 5 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 6 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+RESULT: every ace_audio line is the sine's and render = capture in every pair
+
+## r3-plainboot-selftest0-then-live: ace-audio-check.py
+driver lines: 3 runs started, 3 captured, 0 failures, 1 summaries, 1 'ran' lines; ace_audio lines: 12
+run 1 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5793.911 (its per-sample truncating sum: see driver-rms.py)
+run 2 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 3 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+RESULT: every ace_audio line is the sine's and render = capture in every pair
+
+## r4-plainboot-regression-and-live: ace-audio-check.py
+driver lines: 6 runs started, 6 captured, 0 failures, 2 summaries, 2 'ran' lines; ace_audio lines: 24
+run 1 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5793.911 (its per-sample truncating sum: see driver-rms.py)
+run 2 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 3 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 4 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5793.911, capture rms 5793.911
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5793.911 (its per-sample truncating sum: see driver-rms.py)
+run 5 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+run 6 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (its per-sample truncating sum: see driver-rms.py)
+RESULT: every ace_audio line is the sine's and render = capture in every pair

@@ -1,0 +1,5 @@
+serial.log: 497 lines, 102 driver lines; qemu-dbg.log: 2150 lines, 1862 ace_* of which 1460 register accesses (kept in the .gz only); ace-trace.txt: 602 decoded lines, ace-audio-lines.txt: 24; livecap.out: 578 lines
+serial lines end in CR LF in the logs; driver-lines.txt and selftest-lines.txt are quoted without the tail.
+qemu exited: qemu exited rc=0 (none) at 2026-11-26T00:19:25Z; wall 292 s
+fatal/storm/stall lines in serial.log: 0 fatal, 0 clock stalled, 0 interrupt storm, 0 work-queue; ace_unexpected in the trace: 0
+bin files: the pages the descriptor lists named at each stop of livecap.py (pmemsave; one page more at each end of a window).

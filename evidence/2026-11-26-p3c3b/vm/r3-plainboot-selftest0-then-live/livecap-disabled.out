@@ -1,0 +1,21 @@
+[23:54:24.367] now-disabled: '' reached the serial log
+[23:54:24.382] now-disabled: stopped, 15.9 ms after the line was seen
+== now-disabled: the monitor's view of the model:
+Bus  0, device  27, function 0:
+    Audio controller: PCI device 8086:7f50
+      PCI subsystem 1af4:1100
+      IRQ 16, pin A
+      BAR0: 32 bit memory at 0x81210000 [0x81213fff]
+      BAR4: 32 bit memory at 0x81000000 [0x811fffff]
+      id "ace"
+   BAR0 0x81210000 (32 bit memory, 0x4000 bytes); BAR4 0x81000000, the bus driver's own line names 0x81000000
+   reading 1: GCAP 0x4401, VMIN/VMAJ 0x00/0x01, global CTL 0x00000101
+   st[0] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[1] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[2] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[3] input  ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[4] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=1155072 cbl=1155072 lvi=0 fmt=0x0040 bdl=0x0
+   st[5] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[6] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+   st[7] output ctl=0x000000 (RUN 0, STRPE 0, TP 0, IOCE 0, FEIE 0, DEIE 0, STRIPE 0x00, tag 0) sts=0x20 lpib=0 cbl=0 lvi=0 fmt=0x0000 bdl=0x0
+[23:54:24.418] now-disabled: continued

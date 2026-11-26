@@ -1,0 +1,23 @@
+2026-11-25T23:52:22Z boot3: r3-plainboot-selftest0-then-live on disk/p3c3b.qcow2
+2026-11-25T23:52:23Z VM r3-plainboot-selftest0-then-live started (lib-run pid 980513, sockets /tmp/qad-vm.980515)
+[01:52:40] [    7.867895] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[01:52:40] [    7.867895] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[01:53:02] [   29.608600] (\base\services\umpnpmgr\rpcserver.c:6513) PNP_RegisterNotification(00000081B26459D0 0000000000070178 'Program Manager' 00000081B2645BB8 32 0x0 00000081B2645C60 2fc 00000081B2645BE4)
+2026-11-25T23:53:37Z console: Win+R, cmd.exe
+2026-11-25T23:53:55Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-25T23:54:09Z typed: reg add SelfTest = 2 (REG_DWORD)
+[01:54:21] [  389.138039] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+2026-11-25T23:54:24Z reading the controller while the device is disabled (BAR0 from the monitor's info pci)
+2026-11-25T23:54:24Z livecap (disabled) rc=0:    BAR0 0x81210000 (32 bit memory, 0x4000 bytes); BAR4 0x81000000, the bus driver's own line names 0x81000000
+2026-11-25T23:54:33Z enable typed; stopping on each self-test run's first line
+2026-11-25T23:54:34Z livecap rc=1
+01:54:37 0x81001000 -> 0x0000000001010000 adspcs
+01:54:37 0x81178d04 -> 0x0000000002000101 dsp2cxctl
+01:54:37 0x81073214 -> 0x0000000033000000 hfipcxida
+01:54:37 0x81073300 -> 0x0000000000000000 hfipcxtddy
+01:54:37 0x81163200 -> 0x00000000a0000005 fsr
+2026-11-25T23:54:37Z the cycle's self-test lines:
+[  435.783748] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+2026-11-25T23:54:55Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-26T00:00:10Z VM r3-plainboot-selftest0-then-live ended: qemu exited rc=0 (none) at 2026-11-26T00:00:10Z; wall 468 s
+2026-11-26T00:00:10Z boot3 done

@@ -1,0 +1,28 @@
+[23:54:33.982] 16: '2 ch 16-bit, render stream' reached the serial log
+[23:54:33.995] 16: stopped, 13.2 ms after the line was seen
+== 16: the monitor's view of the model:
+Bus  0, device  27, function 0:
+    Audio controller: PCI device 8086:7f50
+      PCI subsystem 1af4:1100
+      IRQ 16, pin A
+      BAR0: 32 bit memory at 0x81210000 [0x81213fff]
+      BAR4: 32 bit memory at 0x81000000 [0x811fffff]
+      id "ace"
+   BAR0 0x81210000 (32 bit memory, 0x4000 bytes); BAR4 0x81000000, the bus driver's own line names 0x81000000
+   reading 2: GCAP 0x4401, VMIN/VMAJ 0x00/0x01, global CTL 0x00000101
+   st[0] input  ctl=0x10001e (RUN 1, STRPE 1, TP 1, IOCE 1, FEIE 0, DEIE 0, STRIPE 0x00, tag 1) sts=0x20 lpib=8192 cbl=16384 lvi=3 fmt=0x0011 bdl=0x3f1d000
+   input stream 0: 4 descriptors at 0x3f1d000
+      bdl[0] words 00404000 00000000 00001000 00000000  addr 0x404000 len 4096  ioc: word 3 bit 0 = 0, upper dword bit 31 = 0 (word 3 = 0x00000000)
+      bdl[1] words 00405000 00000000 00001000 00000001  addr 0x405000 len 4096  ioc: word 3 bit 0 = 1, upper dword bit 31 = 0 (word 3 = 0x00000001)
+      bdl[2] words 00406000 00000000 00001000 00000000  addr 0x406000 len 4096  ioc: word 3 bit 0 = 0, upper dword bit 31 = 0 (word 3 = 0x00000000)
+      bdl[3] words 00407000 00000000 00001000 00000001  addr 0x407000 len 4096  ioc: word 3 bit 0 = 1, upper dword bit 31 = 0 (word 3 = 0x00000001)
+Traceback (most recent call last):
+  File "/tmp/qad-ev/p3c3b/tools/livecap.py", line 338, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/tmp/qad-ev/p3c3b/tools/livecap.py", line 314, in main
+    res = dump(mon, qt, bar0, out, label)
+  File "/tmp/qad-ev/p3c3b/tools/livecap.py", line 206, in dump
+    with open(f, 'rb') as fh:
+         ~~~~^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/qad-ev/p3c3b/r3-plainboot-selftest0-then-live/16-st0-window.bin'
