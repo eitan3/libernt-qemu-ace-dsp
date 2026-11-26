@@ -1,0 +1,13 @@
+ Volume in drive : is P4C4B2     
+ Volume Serial Number is 427E-27EE
+Directory for ::/
+
+DSPLOO~1 EXE    215040 2026-11-26  15:29  dsploop_apitest.exe
+pouch    tag        39 2026-11-26  15:29 
+drive    txt         4 2026-11-26  13:38 
+X-LAUN~1 TXT        46 2026-11-26  13:38  x-launch-pouch.txt
+ENUM-M~1 TXT      2825 2026-11-26  13:43  enum-media.txt
+ENUM-E~1 TXT        61 2026-11-26  13:44  enum-endpoint.txt
+        6 files             218 015 bytes
+                         33 243 136 bytes free
+

@@ -1,0 +1,5 @@
+LiberNT PnP Utility
+
+Enabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001
+Device enabled successfully.
+

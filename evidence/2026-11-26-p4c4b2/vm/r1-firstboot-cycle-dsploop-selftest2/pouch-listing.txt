@@ -1,0 +1,18 @@
+ Volume in drive : is P4C4B2     
+ Volume Serial Number is 4CA9-43C0
+Directory for ::/
+
+DSPLOO~1 EXE    215040 2026-11-26  14:23  dsploop_apitest.exe
+pouch    tag        39 2026-11-26  14:23 
+drive    txt         4 2026-11-26  12:34 
+exe-hash txt       158 2026-11-26  12:34 
+ENUM-M~1 TXT      3305 2026-11-26  12:38  enum-media.txt
+ENUM-E~1 TXT        61 2026-11-26  12:39  enum-endpoint.txt
+DSPLOO~1 TXT         0 2026-11-26  12:40  dsploop-out.txt
+DSPLOO~2 TXT         4 2026-11-26  13:18  dsploop-rc.txt
+ALIVE-~1 TXT         8 2026-11-26  14:21  alive-postfail.txt
+POSTFA~1 TXT      3305 2026-11-26  14:23  postfail-media.txt
+POSTFA~2 TXT     10060 2026-11-26  14:25  postfail-system.txt
+       11 files             231 984 bytes
+                         33 224 704 bytes free
+

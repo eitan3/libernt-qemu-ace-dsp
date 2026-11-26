@@ -1,0 +1,19 @@
+2026-11-26T12:19:44Z boot0: r0b-firstboot-nodisk on disk/p4c4b2-nodisk.qcow2, no data disk
+2026-11-26T12:19:45Z VM r0b-firstboot-nodisk started (lib-run pid 1101236, sockets /tmp/qad-vm.1101238, data disk none)
+[14:21:28] [   93.000973] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T12:21:28Z run 0 (no data disk): the first boot's lines:
+[    7.528279] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+[    7.528279] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    7.653180] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.653180] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    8.744649] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[   44.681134] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000684850
+[   45.868639] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000684AD0
+[   92.266594] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   92.563470] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+[   93.000973] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T12:21:28Z the swenum line is 134 136  of the normalised log, the storage-expansion line 175 ; stop lines in the boot's log: 0; ace_unexpected: 0
+2026-11-26T12:22:05Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T12:22:28Z stop lines in the whole log: 0; fatal lines: 0
+2026-11-26T12:22:32Z VM r0b-firstboot-nodisk ended: qemu exited rc=0 (none) at 2026-11-26T12:22:32Z; wall 168 s
+2026-11-26T12:22:32Z boot0 done

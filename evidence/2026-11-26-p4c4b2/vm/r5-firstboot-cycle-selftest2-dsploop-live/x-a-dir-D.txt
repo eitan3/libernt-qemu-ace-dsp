@@ -1,0 +1,16 @@
+Volume in drive D is P4C4B2
+Volume Serial Number is b2a3-7df3
+
+Directory of D:
+
+11/26/2026  02:50 PM           215,040 dsploop_apitest.exe
+11/26/2026  02:50 PM                39 pouch.tag
+11/26/2026  01:02 PM                 4 drive.txt
+11/26/2026  01:03 PM               158 exe-hash.txt
+11/26/2026  01:06 PM             3,305 enum-media.txt
+11/26/2026  01:07 PM                61 enum-endpoint.txt
+11/26/2026  01:08 PM                 0 dsploop-out.txt
+11/26/2026  01:41 PM                 0 x-a-dir-D.txt
+       8 files                  218,607 bytes
+       0 directories         33,241,088 bytes free
+

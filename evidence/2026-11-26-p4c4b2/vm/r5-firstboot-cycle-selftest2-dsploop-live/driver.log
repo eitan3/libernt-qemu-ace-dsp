@@ -1,0 +1,84 @@
+2026-11-26T12:50:50Z boot5: r5-firstboot-cycle-selftest2-dsploop-live on disk/p4c4b2-st2.qcow2
+2026-11-26T12:50:51Z VM r5-firstboot-cycle-selftest2-dsploop-live started (lib-run pid 1108763, sockets /tmp/qad-vm.1108765, data disk /tmp/qad-ev/p4c4b2/pouch/r5-firstboot-cycle-selftest2-dsploop-live.img)
+[14:52:37] [   94.809344] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T12:52:37Z run 0 (with the data disk): the first boot's lines:
+[    7.106969] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    7.106969] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[   43.525029] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D7AD0
+[   43.962530] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   44.837531] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180005D7D50
+[   93.684339] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 11 components
+[   94.809344] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T12:52:37Z stop lines in the boot's log: 0; ace_unexpected: 0
+2026-11-26T12:53:14Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T12:53:30Z console: Win+R, cmd.exe
+2026-11-26T12:53:46Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-26T12:54:02Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-26T12:54:16Z typed: reg add SelfTest = 2 (REG_DWORD)
+2026-11-26T12:54:33Z data disk: drive D: in the guest (1 marker)
+2026-11-26T12:54:42Z typed: certutil -hashfile %POUCHDRV%:\dsploop_apitest.exe SHA256 > D:\exe-hash.txt
+[14:54:54] [  755.030768] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[14:55:08] [  802.513765] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[14:55:08] [  802.513765] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+2026-11-26T12:55:18Z the cycle's driver lines (after serial line 182):
+[  755.019792] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(00000046DDF27CD0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  755.019792] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  755.030768] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  802.232537] intcdsp.sys: loaded for the Intel audio DSP child
+[  802.232537] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  802.232537] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[  802.232537] intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  802.232537] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[  802.248139] intcdsp.sys: boot ok after 5451 us (clock 813017102 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[  802.248139] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[  802.248139] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[  802.248139] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[  802.248139] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[  802.248139] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[  802.341889] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[  802.341889] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[  802.341889] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[  802.435640] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[  802.435640] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[  802.435640] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[  802.513765] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[  802.513765] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[  802.513765] intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[  802.513765] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[  802.513765] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[  804.309374] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[  804.309374] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[  804.310374] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[  804.312374] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[  804.313374] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[  804.315374] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-26T12:55:32Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-26T12:55:49Z typed: pnputil /enum-devices /class Media /ids > D:\enum-media.txt
+2026-11-26T12:56:06Z typed: pnputil /enum-devices /class AudioEndpoint /ids > D:\enum-endpoint.txt
+2026-11-26T12:56:15Z the lists on the data disk: enum-media.txt 61 lines, 3 INTCDSP lines; enum-endpoint.txt 3 lines; exe-hash.txt: SHA256 hash of D:\dsploop_apitest.exe:
+b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7
+CertUtil: -hashfile command completed successfully
+2026-11-26T12:56:23Z typed the apitest's command line without Enter (attempt 1, serial line 229)
+-- not seen in 150 s (after line 229): dsppcm\.sys: endpoint .* pin created|intcdsp\.sys: stream [0-9]+: latency|the DSP gives no stream|the pin.s format is refused
+2026-11-26T12:58:53Z the apitest launched: its first driver line came (attempt 1)
+2026-11-26T13:03:52Z boot5b: the launch tried in ways that tell each other apart (lib-run.sh pid 1108765)
+2026-11-26T13:04:03Z dir D:\: Volume in drive D is P4C4B2 Volume Serial Number is b2a3-7df3  Directory of D:  11/26/2026  02:50 PM           215,040 dsploop_apitest.exe 11/26/2026  02:50 PM                39 pouch.tag 11/26/2026  01:02 PM                 4 drive.txt 11/26/2026  01:03 PM               158 exe-hash.txt 11/26/2026  01:06 PM             3,305 enum-media.txt 11/26/2026  01:07 PM                61 enum-endpoint.txt 11/26/2026  01:08 PM                 0 dsploop-out.txt 11/26/2026  01:41 PM                 0 x-a-dir-D.txt        8 files                  218,607 bytes        0 directories         33,241,088 bytes 
+2026-11-26T13:04:31Z copy D:\dsploop_apitest.exe C:\dsploop_apitest.exe: 	1 file(s) copied 
+2026-11-26T13:04:54Z certutil -hashfile C:\dsploop_apitest.exe SHA256: SHA256 hash of C:\dsploop_apitest.exe: b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7 CertUtil: -hashfile command completed successfully 
+2026-11-26T13:04:59Z typed the apitest from the system disk, without Enter (serial line 232)
+2026-11-26T13:08:01Z boot5c: the Enter of the line boot5b.sh typed (lib-run.sh pid 1108765, sockets /tmp/qad-vm.1108765)
+2026-11-26T13:08:01Z livecap.py started: it sends the Enter (serial line 234)
+2026-11-26T13:10:31Z !! no driver line in 150 s after the Enter (the exe from the system disk)
+2026-11-26T13:12:01Z livecap rc=1
+2026-11-26T13:12:15Z echo alive-after-launch-2: alive-after-launch-2  
+2026-11-26T13:12:15Z the console after the launch: alive-after-launch-2  
+2026-11-26T13:12:31Z the apitest ended its output after about 17 s: dsploop: 2 tests executed (0 marked as todo, 0 failures), 1 skipped.
+2026-11-26T13:12:31Z livecap rc=1
+2026-11-26T13:12:48Z echo %ERRORLEVEL%: 0  
+2026-11-26T13:12:49Z run 2: the apitest's output as the guest wrote it (dsploop-out.txt):
+dsploop.c:468: Tests skipped: dsploop: no active render endpoint named 'Loopback'; the DSP's audio child is not present (0x80070490)
+
+dsploop: 2 tests executed (0 marked as todo, 0 failures), 1 skipped.
+2026-11-26T13:12:49Z run 2: driver lines of the apitest (after serial line 237):
+2026-11-26T13:13:35Z VM r5-firstboot-cycle-selftest2-dsploop-live ended: 
+2026-11-26T13:13:35Z boot5c done

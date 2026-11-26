@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/qad-ev/p4c4b2/tools/livecap.py", line 357, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/tmp/qad-ev/p4c4b2/tools/livecap.py", line 269, in main
+    mon = Mon(os.path.join(sockdir, 'monitor.sock'))
+  File "/tmp/qad-ev/p4c4b2/tools/livecap.py", line 68, in __init__
+    self._connect(path)
+    ~~~~~~~~~~~~~^^^^^^
+  File "/tmp/qad-ev/p4c4b2/tools/livecap.py", line 73, in _connect
+    self.s.connect(path)
+    ~~~~~~~~~~~~~~^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory

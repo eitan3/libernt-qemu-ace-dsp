@@ -1,0 +1,3 @@
+# qtest before the first VM run: 2026-11-26T12:15:43Z, rc=0, QTEST_QEMU_BINARY=./qemu-system-x86_64 (build/)
+# qemu-system-x86_64 sha256 a894197dc0b040dd3d5a94d163e70dc631168e1d820b7a9468c2ecb83919e8bc; intel-hda-ace-test sha256 f335e5907c4f9f695e8e4de4f0350d95ef82325e5af63835a6f83ed513b94825
+# ok: 15, not ok: 0

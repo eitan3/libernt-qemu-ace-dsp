@@ -1,0 +1,5 @@
+LiberNT PnP Utility
+
+Disabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00
+Failed to disable device: A device attached to the system is not functioning.
+

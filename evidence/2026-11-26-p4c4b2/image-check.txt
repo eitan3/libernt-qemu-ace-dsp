@@ -1,0 +1,90 @@
+# image check 2026-11-26T12:15:32Z
+## sha256sum -c SHA256SUMS (in the staging directory)
+LiberNT.iso: OK
+LiberNT.vhd: OK
+LiberNT.img: OK
+dsploop_apitest.exe: OK
+rc=0
+## sizes
+215040 dsploop_apitest.exe
+1610612736 LiberNT.img
+654061568 LiberNT.iso
+807766528 LiberNT.vhd
+## the staging directory's PROVENANCE.txt (head)
+Built from 13ab35e39926a49cb5682109703ea13bfbb0a5d6 (feat/audio-control-polish; 108 commits over master a81cf9e65cf), tree clean at the staging (git status --porcelain --untracked-files=no: 0 lines; o
+
+master did not move since p4c4b (a81cf9e65cf2c039d13dce7590d9049a0d6560c6; git fetch origin: already up to date), so nothing was rebased. This image is p4c4b's tree (7940c6d2deba, the content p4c4b wa
+
+The one change over p4c4b: 13ab35e3992 [SWENUM] Detach the bus device object from the stack before deleting it (local unblock: first-boot bugcheck exposed by 82783d979f9): drivers/ksfilter/swenum/swen
+
+branch feat/audio-control-polish tip 13ab35e39926a49cb5682109703ea13bfbb0a5d6 on master a81cf9e65cf2c039d13dce7590d9049a0d6560c6; the assembly of record 2026-11-26 10:57:36Z to 10:58:13Z (37 s, 1363 s
+
+The identity the image carries. CMake writes <build>/sdk/include/libernt/buildno.h at configure time from git (sdk/include/libernt/version.cmake); it reads KERNEL_VERSION_BUILD_STR "20261126-13ab35e",
+
+How the identity was made to name the commit. Neither the configure nor the top-level stamp runs on the way to this image by itself: "ninja liberntiso liberntvhd liberntimg" does not re-run the top-le
+
+Staged (SHA256SUMS):
+b27a002859927b854918f6179fd84871a558a04d999e7c106b224a08ecd97109  LiberNT.iso   654061568 bytes
+05daae7fd016a90ad9498a6a66cee71e11d090f13b79bd141c5a9aa17a88dc72  LiberNT.vhd   807766528 bytes (dynamic VHD, 80 GiB virtual)
+82b817a910442ef181c6d759e931e2ab1266be164acaa19222212e24c22deda3  LiberNT.img   1610612736 bytes (raw disk image)
+b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7  dsploop_apitest.exe   215040 bytes (p4c4b's binary, unchanged; not in the image: rostests are off in this build)
+
+Hashes in the ISO (bsdtar extraction of LiberNT.iso; system root is Windows/; gates/in-iso.txt):
+  36729a970dbc4c6767788b358ddc2d7eb86c9c14242db96bc4ae2beb1777baeb  Windows/system32/drivers/swenum.sys (45056 bytes; the change. p4c4b's: 9676c1c3567fb83c2e1c40ad8334a0e34e63b9de1efaaad5d661d60863cec
+  66e10a507d4edda0040105b30f000f55b46e0e81cab77514194b94d313aab08c  Windows/system32/drivers/intcdsp.sys (462848 bytes; p4c4b's code, its identity bytes new; p4c4b's: b559a66c57ba14402ffdb8983112caf7e
+  f4531d58c13e71ce23cc0268ca3c498e90a9785565423185c08b1b358b49924f  Windows/system32/drivers/hdaudbus.sys (331776 bytes; p4c4b's code, its identity bytes new; p4c4b's: 9f1eb00fa8d754a746e4aa4a33f9845c
+  44094b48614095d57ca22f8d01e8bc7df0f72fd92cab13a5265439a8cfa9bb43  Windows/system32/drivers/dsppcm.sys (147456 bytes; p4c4b's code, its identity bytes new; p4c4b's: 3ced786cb0e5712d934393ade85ffc30cc
+  bcc0d474d7a33dba88eba0cc1ad951508fd86522acbba7a60252d177e11547a4  Windows/system32/drivers/hdaudio.sys (241664 bytes; p4c4b's code, its identity bytes new; p4c4b's: c59862227d6fe0ad3a32d88e57b467375
+  0838035dff18e98e76dc7e4a3bb208c8f2c65876249f3fade0fb6f685b3af4b5  Windows/system32/ntoskrnl.exe (10055680 bytes; below; p4c4b's: 17b1a0666b93a8f97fc3e318e061165c0a27a18d8697531e24fd59638782ce40)
+  260f44b7ce48e1632564d06644f7bbd5b040c3db89a3e6c05f915df4486017a3  Windows/inf/dsppcm.inf (9346 bytes; equal to p4c4b's)
+  b06383069c655ba90df5b4e35388236cf7f78ee99fc06c4dd70cc2314d7ff3e9  Windows/inf/intcdsp.inf (6922 bytes; equal to p4c4b's)
+  a6d5c33ab40aec261fe69c0f219a61e41b1aec92dbf7d0cb83f8f6b1ec68079f  Windows/inf/hdaudbus.inf (12526 bytes; equal to p4c4b's)
+  f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e  Windows/system32/drivers/intel/sof/sof-arl-s.ri (1158164 bytes; equal to p4c4b's)
+  4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250  Windows/system32/drivers/intel/sof/sof-mtl.ri (1158164 bytes; equal to p4c4b's)
+  80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  Windows/system32/drivers/intel/sof/LICENCE.Intel (52982 bytes; equal to p4c4b's)
+  0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg (4286 bytes; equal to p4c4b's)
+  80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  Windows/system32/drivers/intel/sof-tplg/LICENCE.Intel (52982 bytes; equal to p4c4b's)
+  e4e0d29ed05b23795880930039622a9bbd41fa1e65b4478ec7f1085700181323  Windows/system32/drivers/intel/sof-tplg/NOTICE (684 bytes; equal to p4c4b's)
+
+The two ISOs member by member (gates/iso-compare.txt; each extracted in full, the sha256 of every regular file, every differing byte of every differing member classified): 2447 regular files in each, 
+  - Windows/system32/drivers/swenum.sys: the change. 2716 bytes: .text 941, .rdata 575, .pdata 43, .data 14, .symz 1116, and its identity bytes.
+  - Windows/system32/ntoskrnl.exe: 9296 bytes, in 128 clusters, all inside six ranges: the PE header's timestamp and checksum; the debug directory's timestamp and the CodeView GUID; the full commit-ha
+  - 1020 members whose differences are their identity only: the PE TimeDateStamp, the CheckSum, the CodeView GUID and the commit id of the version resource (the text file Windows/servicing/LiberNT.fil
+  - two copies of comctl32.dll (Windows/system32 and the winsxs 5.82 one): every section equal except .buildid; the compressed-symbol section .symz smaller (raw 0x13a00 -> 0xfe00), the code the same.
+  - loader/efisys.bin: 48 bytes of the 8 MB image, not examined further.
+The ISO's drivers against the binaries of the drivers gate (gates/kernel-and-identity.txt): the same code, the identity strings compiled once more for this assembly. swenum.sys 21 bytes (PE header 4, 
+
+dsploop_apitest.exe: p4c4b's binary (hash b1b50f48... above), copied unchanged: nothing of its sources or of the apitests differs between the two trees.
+
+Verification on the exact tip (13ab35e3992, on master a81cf9e65cf; gates/):
+  host: <build>/host-tests, ASan+UBSan, ctest -R "(dsppath|sofipc|disco|softplg|fwload|audiofmt|dsppcm|dsploop)" 9/9 (ctest.txt): sofipc.transport 3309 checks, sofipc4 380714, disco 200, dsppath 19268
+  kernel: CCACHE_DISABLE=1 ninja swenum.sys intcdsp.sys hdaudbus.sys dsppcm.sys hdaudio.sys, -Werror, ninja exit 0, 0 warnings (drivers.txt, drivers-build.log), on the tree that became 13ab35e3992; ni
+  the kmtest sources with the build's kernel flags 17 of 17, 0 warnings (kmtests.txt, kmtest-compilecheck.py, template.txt).
+  cppcheck 2.22.0 with -D_ERRCODE_DEFINED, the earlier rounds' command (cppcheck-run.sh, cppcheck-kernel-swenum.txt, cppcheck-counts.txt):
+    cppcheck --project=<compile database: ninja -t compdb of swenum.c's C compile rule> --file-filter="*/drivers/ksfilter/swenum/swenum.c" -D_ERRCODE_DEFINED -D_WIN32 -D_WIN64 -D_M_AMD64 -D__x86_64__ 
+    0 findings in the file, 0 errors, 0 notes; the output holds only the SDK's own seven portability notes (psdk/basetsd.h six, ddk/ntddk.h one). A positive control proves the analysis reaches the fil
+  the image: gates/in-iso.txt, gates/iso-compare.txt, gates/kernel-and-identity.txt, iso-listing.txt.
+No VM was run: every guest line is for the next simulator round (TESTING.md points to p4c4b's run book and scripts, unchanged).
+
+Unverified: the first boot, where the bugcheck was (gone or not: the rerun of the p4c4b round proves it); what follows the removal of the software bus, a path that runs to its end for the first time (
+Rollback: the p4c4b staging directory is untouched. The change is one commit: git revert 13ab35e39926a49cb5682109703ea13bfbb0a5d6 restores p4c4b's swenum.c (and with it the bugcheck); no history rewri
+
+To copy from the build box (the three images are about 3.0 GB in all; <build-box> is its address, as the p4c4b staging gave it):
+  scp <build-box>:libernt-build-logs/test-audio-intel-sst-p4c4b2-a81cf9e65cf/SHA256SUMS <build-box>:libernt-build-logs/test-audio-intel-sst-p4c4b2-a81cf9e65cf/LiberNT.iso <build-box>:libernt-build-log
+## gates/in-iso.txt (the staging record)
+=== hashes in the ISOs, each extracted in full and hashed (p4c4b2 first; p4c4b beside it) ===
+36729a970dbc4c6767788b358ddc2d7eb86c9c14242db96bc4ae2beb1777baeb  45056  Windows/system32/drivers/swenum.sys  DIFFERENT from p4c4b (9676c1c3567fb83c2e1c40ad8334a0e34e63b9de1efaaad5d661d60863cec6ca)
+66e10a507d4edda0040105b30f000f55b46e0e81cab77514194b94d313aab08c  462848  Windows/system32/drivers/intcdsp.sys  DIFFERENT from p4c4b (b559a66c57ba14402ffdb8983112caf7e6ffe1ccc1bbe4d3398ca2966495940d)
+f4531d58c13e71ce23cc0268ca3c498e90a9785565423185c08b1b358b49924f  331776  Windows/system32/drivers/hdaudbus.sys  DIFFERENT from p4c4b (9f1eb00fa8d754a746e4aa4a33f9845c3e77cb2b8a417e868b0e65a3bac1d1c0)
+44094b48614095d57ca22f8d01e8bc7df0f72fd92cab13a5265439a8cfa9bb43  147456  Windows/system32/drivers/dsppcm.sys  DIFFERENT from p4c4b (3ced786cb0e5712d934393ade85ffc30cce7438bbe9c5494db2cae221f9409e1)
+bcc0d474d7a33dba88eba0cc1ad951508fd86522acbba7a60252d177e11547a4  241664  Windows/system32/drivers/hdaudio.sys  DIFFERENT from p4c4b (c59862227d6fe0ad3a32d88e57b46737564099a23a68cc91a203c79cfc6b7752)
+0838035dff18e98e76dc7e4a3bb208c8f2c65876249f3fade0fb6f685b3af4b5  10055680  Windows/system32/ntoskrnl.exe  DIFFERENT from p4c4b (17b1a0666b93a8f97fc3e318e061165c0a27a18d8697531e24fd59638782ce40)
+260f44b7ce48e1632564d06644f7bbd5b040c3db89a3e6c05f915df4486017a3  9346  Windows/inf/dsppcm.inf  equal to p4c4b
+b06383069c655ba90df5b4e35388236cf7f78ee99fc06c4dd70cc2314d7ff3e9  6922  Windows/inf/intcdsp.inf  equal to p4c4b
+a6d5c33ab40aec261fe69c0f219a61e41b1aec92dbf7d0cb83f8f6b1ec68079f  12526  Windows/inf/hdaudbus.inf  equal to p4c4b
+f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e  1158164  Windows/system32/drivers/intel/sof/sof-arl-s.ri  equal to p4c4b
+4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250  1158164  Windows/system32/drivers/intel/sof/sof-mtl.ri  equal to p4c4b
+80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  52982  Windows/system32/drivers/intel/sof/LICENCE.Intel  equal to p4c4b
+0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601  4286  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg  equal to p4c4b
+80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9  52982  Windows/system32/drivers/intel/sof-tplg/LICENCE.Intel  equal to p4c4b
+e4e0d29ed05b23795880930039622a9bbd41fa1e65b4478ec7f1085700181323  684  Windows/system32/drivers/intel/sof-tplg/NOTICE  equal to p4c4b

@@ -1,0 +1,36 @@
+# The model's trace of the p4c4b2 round: ace-audio-check.py (the p3c3b round's checker, unchanged) on the VMs with ace_audio lines.
+# The trace line is "ace_audio <tag> <bytes> rms <r> peak <p> first <8 samples>"; the checker pairs the render's line with the capture's
+# for each period and holds the samples and the rms against the driver's own sine (IntcDspSineQ31).
+# 2026-11-26T13:39:17Z
+
+## r1-firstboot-cycle-dsploop-selftest2: ace_audio lines 0; self-test lines of the driver 0; pin-created lines 0; latency lines 0
+(no ace_audio line in this VM: no stream ran through the model)
+
+## r5-firstboot-cycle-selftest2-dsploop-live: ace_audio lines 12; self-test lines of the driver 11; pin-created lines 0; latency lines 0
+driver lines: 3 runs started, 3 captured, 0 failures, 1 summaries, 1 'ran' lines; ace_audio lines: 12
+run 1 (16-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253
+   period 1: tag 1, 8192 bytes, rms 5786.742 (the sine over frames 0-2047: 5786.742), peak 8192, first [0, 1069, 2120, 3134] (the sine's: [0, 1069, 2120, 3134]); render and capture lines identical
+   period 2: tag 1, 8192 bytes, rms 5801.756 (the sine over frames 2048-4095: 5801.756), peak 8192, first [-7095, -7569, -7913, -8122] (the sine's: [-7095, -7569, -7913, -8122]); render and capture lines identical
+   the two periods together: rms 5794.254; the driver's whole-buffer figure 5794.253 (one thousandth below the model's whole-buffer rms: the driver's integer square root in thousandths)
+run 2 (24-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (one thousandth below the model's whole-buffer rms: the driver's integer square root in thousandths)
+run 3 (32-bit): after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482
+   period 1: tag 1, 16384 bytes, rms 379250530.025 (the sine over frames 0-2047: 379250530.025), peak 536870912, first [0, 70075715, 138952416, 205451603] (the sine's: [0, 70075715, 138952416, 205451603]); render and capture lines identical
+   period 2: tag 1, 16384 bytes, rms 380234245.866 (the sine over frames 2048-4095: 380234245.866), peak 536870912, first [-464943849, -496004047, -518577479, -532277907] (the sine's: [-464943849, -496004047, -518577479, -532277907]); render and capture lines identical
+   the two periods together: rms 379742706.483; the driver's whole-buffer figure 379742706.482 (one thousandth below the model's whole-buffer rms: the driver's integer square root in thousandths)
+RESULT: every ace_audio line is the sine's and render = capture in every pair
+
+## r2-plainboot-selftest0: ace_audio lines 0; self-test lines of the driver 0; pin-created lines 0; latency lines 0
+(no ace_audio line in this VM: no stream ran through the model)
+
+## r3-plainboot-attribution: ace_audio lines 0; self-test lines of the driver 0; pin-created lines 0; latency lines 0
+(no ace_audio line in this VM: no stream ran through the model)
+
+## r4-freshboot-notopology: ace_audio lines 0; self-test lines of the driver 0; pin-created lines 0; latency lines 0
+(no ace_audio line in this VM: no stream ran through the model)
+
+## The apitest's runs (r5 and r3, the test launched from the system disk): no 'pin created' line, no 'latency: fifo' line, no ace_audio line:
+   the test was skipped before it opened a stream (its line: no active render endpoint named 'Loopback'; DIVERGENCE.md, D1), so the negotiated
+   engine buffer and period, the FIFO constraint and the render-against-capture comparison of the apitest were not reached in this round.

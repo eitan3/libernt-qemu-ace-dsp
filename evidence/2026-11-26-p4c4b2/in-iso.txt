@@ -1,0 +1,80 @@
+# in-ISO hashes, independent extraction (bsdtar -x -f LiberNT.iso -C /tmp/..., the named members only) 2026-11-26T12:15:33Z
+# expected: gates/in-iso.txt of the staging directory (image-check.txt); its verdict against p4c4b is quoted in [ ]
+36729a970dbc4c6767788b358ddc2d7eb86c9c14242db96bc4ae2beb1777baeb      45056  Windows/system32/drivers/swenum.sys  equal (hash and size)  [DIFFERENT from p4c4b]
+66e10a507d4edda0040105b30f000f55b46e0e81cab77514194b94d313aab08c     462848  Windows/system32/drivers/intcdsp.sys  equal (hash and size)  [DIFFERENT from p4c4b]
+f4531d58c13e71ce23cc0268ca3c498e90a9785565423185c08b1b358b49924f     331776  Windows/system32/drivers/hdaudbus.sys  equal (hash and size)  [DIFFERENT from p4c4b]
+44094b48614095d57ca22f8d01e8bc7df0f72fd92cab13a5265439a8cfa9bb43     147456  Windows/system32/drivers/dsppcm.sys  equal (hash and size)  [DIFFERENT from p4c4b]
+bcc0d474d7a33dba88eba0cc1ad951508fd86522acbba7a60252d177e11547a4     241664  Windows/system32/drivers/hdaudio.sys  equal (hash and size)  [DIFFERENT from p4c4b]
+260f44b7ce48e1632564d06644f7bbd5b040c3db89a3e6c05f915df4486017a3       9346  Windows/inf/dsppcm.inf  equal (hash and size)  [equal to p4c4b]
+b06383069c655ba90df5b4e35388236cf7f78ee99fc06c4dd70cc2314d7ff3e9       6922  Windows/inf/intcdsp.inf  equal (hash and size)  [equal to p4c4b]
+a6d5c33ab40aec261fe69c0f219a61e41b1aec92dbf7d0cb83f8f6b1ec68079f      12526  Windows/inf/hdaudbus.inf  equal (hash and size)  [equal to p4c4b]
+f37a055cefef26bbe14906ec6cd5fe5532c2a4419de87612d8b45b45dc647c6e    1158164  Windows/system32/drivers/intel/sof/sof-arl-s.ri  equal (hash and size)  [equal to p4c4b]
+4f3fb3fc57d2a2c90216d2a6195e24be54921c099395c9d2d019a14bbdc09250    1158164  Windows/system32/drivers/intel/sof/sof-mtl.ri  equal (hash and size)  [equal to p4c4b]
+80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9      52982  Windows/system32/drivers/intel/sof/LICENCE.Intel  equal (hash and size)  [equal to p4c4b]
+0e002de8d92e94f9f961a94a72654750f42d21afbdea09a2f6f6ee7196965601       4286  Windows/system32/drivers/intel/sof-tplg/sof-ipc4-loopback.tplg  equal (hash and size)  [equal to p4c4b]
+80169325f69cf8288ff225b590ca4bf2e8e2a15759076616fae0bfe2610427c9      52982  Windows/system32/drivers/intel/sof-tplg/LICENCE.Intel  equal (hash and size)  [equal to p4c4b]
+e4e0d29ed05b23795880930039622a9bbd41fa1e65b4478ec7f1085700181323        684  Windows/system32/drivers/intel/sof-tplg/NOTICE  equal (hash and size)  [equal to p4c4b]
+0838035dff18e98e76dc7e4a3bb208c8f2c65876249f3fade0fb6f685b3af4b5   10055680  Windows/system32/ntoskrnl.exe  equal (hash and size)  [DIFFERENT from p4c4b]
+44c87a09686cbbc78d13e095e87eae8c819e7fd25fc3f38b93aa642d99b1db49    4415488  Windows/system32/hal.dll  (not in gates/in-iso.txt)  [no record]
+f4e8667145dee59354811c50c0a2be56cc02c69592b51c1b6acca2f611a5276f     788992  Windows/system32/cmd.exe  (not in gates/in-iso.txt)  [no record]
+20093d79b549796b1c5f06d17a9c367e48973541ff38d0093ea100289a6497bc      52224  Windows/system32/certutil.exe  (not in gates/in-iso.txt)  [no record]
+ec587976d17917062cdc4af0cecc3b9c53b5e4449ab47a67bdd99514db518e38      62976  Windows/system32/pnputil.exe  (not in gates/in-iso.txt)  [no record]
+
+## the format strings of this checkpoint in the copies extracted from the ISO (grep -a)
+  present  intcdsp.sys the DSP is booted at the next D0 entry with
+  absent   dsppcm.sys the DSP is booted at the next D0 entry with
+  present  intcdsp.sys topology: none selected
+  absent   dsppcm.sys topology: none selected
+  present  intcdsp.sys topology: modules
+  absent   dsppcm.sys topology: modules
+  present  intcdsp.sys audio child
+  absent   dsppcm.sys audio child
+  present  intcdsp.sys loopback self-test: %u runs
+  absent   dsppcm.sys loopback self-test: %u runs
+  present  intcdsp.sys stream %u: latency: fifo
+  absent   dsppcm.sys stream %u: latency: fifo
+  absent   intcdsp.sys pin created
+  present  dsppcm.sys pin created
+  absent   intcdsp.sys registered as
+  present  dsppcm.sys registered as
+  absent   intcdsp.sys 3 formats in 2 data ranges
+  absent   dsppcm.sys 3 formats in 2 data ranges
+  absent   intcdsp.sys GetClockRegister
+  absent   dsppcm.sys GetClockRegister
+  present  intcdsp.sys clock
+  absent   dsppcm.sys clock
+## the lines around 'latency' and 'pin created' in dsppcm.sys and intcdsp.sys (strings -a, 6 wide)
+--- intcdsp.sys
+intcdsp.sys: stream %u: not freed, 0x%08lx
+intcdsp.sys: stream %u: the bus prepared it without a descriptor list
+intcdsp.sys: booting: firmware '%s' %u.%u.%u.%u, %I64u payload bytes in %u descriptors on stream %u, BAR4 %p, clock %I64u us at %I64u Hz
+intcdsp.sys: code-loader stream %u: %I64u bytes in %u descriptors (LVI %u), SPIB %lu, format 0x%04x
+stream %u: not run (0x%08x)
+stream %u: the bus does not run it (0x%08x)
+stream %u: a pipeline could not be paused (0x%08x)
+stream %u: its copier could not be told the stream is going (0x%08x)
+stream %u: the PCM's pipelines could not be deleted (0x%08x)
+stream %u: the bus gives no buffer of %u bytes (0x%08x)
+stream %u: not allocated (0x%08x); its buffer is released, the tag is kept for the close
+stream %u: the PCM reaches pipeline %u, which another PCM holds; the stream is not allocated
+stream %u: the PCM's pipelines could not be built (0x%08x); what was built is deleted again
+loopback self-test: endpoint '%s', %u Hz %u ch %u-bit, render stream %u, capture stream %u, %u frames
+loopback self-test: %u frames not captured: %u of %u periods after %u ms (0x%08x), failed
+loopback self-test: stopped at render position %u (LPIB %u, buffer %u), capture position %u (LPIB %u, buffer %u), %u capture periods, released: %u pipelines and %u instances deleted, %u streams freed,
+intcdsp.sys: endpoint '%s' %s: stream %u opened, %lu Hz %lu ch %lu in %lu bits
+intcdsp.sys: stream %u: latency: fifo %lu bytes, dsp estimate %lu bytes (the copier's gateway buffer and the PCM's module buffers)
+DMA buffer too small
+ROM firmware manifest in DMA buffer
+model buffer too small
+probe injection buffer too small
+probe extraction buffer too small
+--- dsppcm.sys
+dsppcm.sys: stream: no buffer of %lu bytes with %lu notifications, 0x%08lx
+dsppcm.sys: stream: the buffer is not released, 0x%08lx
+dsppcm.sys: endpoint '%s' %s: pin created, %lu Hz %lu ch %lu in %lu bits
+## swenum.sys of this image: the strings of its remove path's neighbours (for the record)
+KsRemoveBusEnumInterface
+IoDeleteDevice
+IoDetachDevice
+## cmd.exe's version string
+0.4.17-amd64-dev

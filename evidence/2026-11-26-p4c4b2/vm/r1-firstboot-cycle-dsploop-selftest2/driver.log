@@ -1,0 +1,127 @@
+2026-11-26T12:23:38Z boot1: r1-firstboot-cycle-dsploop-selftest2 on disk/p4c4b2.qcow2
+2026-11-26T12:23:40Z VM r1-firstboot-cycle-dsploop-selftest2 started (lib-run pid 1102317, sockets /tmp/qad-vm.1102319, data disk /tmp/qad-ev/p4c4b2/pouch/r1-firstboot-cycle-dsploop-selftest2.img)
+[14:25:22] [   92.969813] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T12:25:59Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T12:26:16Z console: Win+R, cmd.exe
+2026-11-26T12:26:31Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-26T12:26:48Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-26T12:27:04Z data disk: drive D: in the guest (1 marker)
+2026-11-26T12:27:13Z typed: certutil -hashfile %POUCHDRV%:\dsploop_apitest.exe SHA256 > D:\exe-hash.txt
+[14:27:25] [  682.445145] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[14:27:43] [  728.014147] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[14:27:43] [  728.016147] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[14:27:43] [  728.017147] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[14:27:43] [  728.019147] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-26T12:28:03Z run 1: driver lines after the disable (serial line 182):
+[  682.429543] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000626FF08540 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  682.429543] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+[  682.445145] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  726.206416] intcdsp.sys: loaded for the Intel audio DSP child
+[  726.210416] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[  726.211416] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  726.219416] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[  726.224416] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[  726.224416] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[  726.224416] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[  728.013147] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[  728.013147] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[  728.014147] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[  728.016147] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[  728.017147] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[  728.019147] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-26T12:28:20Z typed: pnputil /enum-devices /class Media /ids > D:\enum-media.txt
+2026-11-26T12:28:36Z typed: pnputil /enum-devices /class AudioEndpoint /ids > D:\enum-endpoint.txt
+2026-11-26T12:28:44Z the lists on the data disk: enum-media.txt 61 lines, 3 INTCDSP lines; enum-endpoint.txt 3 lines, 0 Loopback lines; exe-hash.txt: SHA256 hash of D:\dsploop_apitest.exe: b1b50f48229e7853dbd56c84ee01245b66ab19f500efcd6622bdf2e869d427d7 CertUtil: -hashfile command completed successfully 
+2026-11-26T12:28:52Z typed the apitest's command line without Enter (serial line 218)
+2026-11-26T12:37:11Z !! the apitest's output shows no 'tests executed' line in 495 s
+2026-11-26T12:37:11Z livecap rc=1
+2026-11-26T12:37:19Z typed: echo %ERRORLEVEL% > D:\dsploop-rc.txt
+2026-11-26T12:37:21Z run 2: the apitest's output as the guest wrote it (dsploop-out.txt):
+2026-11-26T12:37:21Z run 2: exit code line (dsploop-rc.txt): 
+2026-11-26T12:37:21Z run 2: driver lines of the apitest (after serial line 218):
+2026-11-26T12:37:36Z typed: reg add SelfTest = 2 (REG_DWORD)
+-- not seen in 60 s (after line 221): Safe removal
+-- not seen in 180 s (after line 221): loopback self-test: ran \(|self-test: .* failed|not captured
+2026-11-26T12:42:03Z self-test lines of the cycle (after serial line 221):
+2026-11-26T12:42:17Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-26T12:47:03Z postfail: the second console (lib-run.sh pid 1102319, sockets /tmp/qad-vm.1102319)
+alive marker files on the data disk: 0
+2026-11-26T12:48:48Z postfail-media.txt: 61 lines, 5 devices; postfail-system.txt: 217 lines, 17 devices
+2026-11-26T12:48:48Z the Media list after the failed disable (as the guest wrote it):
+LiberNT PnP Utility
+
+Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001
+Device Description:         High Definition Audio Device
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                hdaudio.inf
+Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022
+Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4
+                            HDAUDIO\FUNC_01&VEN_1AF4
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086
+                            HDAUDIO\FUNC_01
+
+Instance ID:                INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00
+Device Description:         Intel Smart Sound Technology DSP Audio
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          Intel
+Status:                     Started
+Driver Name:                dsppcm.inf
+Hardware IDs:               INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50
+Compatible IDs:             INTCDSP\PCM
+
+Instance ID:                SW\{A7C7A5B0-5AF3-11D1-9CED-00A024BF0407}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         ReactOS System audio device
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{a7c7a5b0-5af3-11d1-9ced-00a024bf0407}
+
+Instance ID:                SW\{B7EAFDC0-A680-11D0-96D8-00AA0051E51D}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         ReactOS Wave Audio Mixer
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{b7eafdc0-a680-11d0-96d8-00aa0051e51d}
+
+Instance ID:                SW\{CD171DE3-69E5-11D2-B56D-0000F8754380}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         Driver for ReactOS WINMM-WDM-Audio
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{cd171de3-69e5-11d2-b56d-0000f8754380}
+
+2026-11-26T12:48:48Z the System list's DSP, HDA and software-bus entries (as the guest wrote it):
+Instance ID:                CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&AEEFD634&0&1000000000
+Device Description:         Intel Smart Sound Technology DSP
+Class Name:                 System
+Class GUID:                 {4d36e97d-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          Intel
+--
+Instance ID:                ROOT\SYSTEM\0000
+Device Description:         Plug & Play Software Bus Enumerator
+Class Name:                 System
+Class GUID:                 {4d36e97d-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          (Generic system devices)
+2026-11-26T12:48:48Z the shutdown typed
+[14:48:54] [ 7396.508472] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+2026-11-26T12:48:55Z VM r1-firstboot-cycle-dsploop-selftest2 ended: qemu exited rc=0 (none) at 2026-11-26T12:48:54Z; wall 1515 s
+2026-11-26T12:48:55Z postfail done

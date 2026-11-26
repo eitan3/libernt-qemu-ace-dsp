@@ -1,0 +1,77 @@
+2026-11-26T13:29:11Z boot4: r4-freshboot-notopology on disk/p4c4b2-fresh.qcow2
+2026-11-26T13:29:13Z VM r4-freshboot-notopology started (lib-run pid 1117708, sockets /tmp/qad-vm.1117710, data disk /tmp/qad-ev/p4c4b2/pouch/r4-freshboot-notopology.img)
+[15:31:00] [   97.465890] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-26T13:31:37Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-26T13:31:54Z console: Win+R, cmd.exe
+2026-11-26T13:32:09Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-26T13:32:26Z data disk: drive D: in the guest (1 marker)
+2026-11-26T13:33:03Z the apitest from the data disk, as the guest wrote it (x-launch-pouch.txt): The system cannot find the path specified.  
+[15:33:14] [  724.087026] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[15:33:27] [  764.099848] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+2026-11-26T13:33:42Z run 3 (i): driver lines after the disable (serial line 182):
+[  724.071401] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000599CA587F0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[  724.087026] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[  764.082848] intcdsp.sys: loaded for the Intel audio DSP child
+[  764.086848] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[  764.087848] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[  764.096848] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[  764.099848] intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint
+[  764.101848] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+2026-11-26T13:33:42Z audio child lines after the enable: 0; dsppcm.sys lines of the whole boot: 0
+2026-11-26T13:33:49Z typed: pnputil /enum-devices /class Media /ids > D:\enum-media.txt
+2026-11-26T13:34:06Z typed: pnputil /enum-devices /class AudioEndpoint /ids > D:\enum-endpoint.txt
+2026-11-26T13:34:14Z enum-media.txt: 51 lines, 0 INTCDSP lines; enum-endpoint.txt: 3 lines, 0 Loopback lines
+2026-11-26T13:34:14Z enum-media.txt as the guest wrote it:
+LiberNT PnP Utility
+
+Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001
+Device Description:         High Definition Audio Device
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                hdaudio.inf
+Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022
+Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4
+                            HDAUDIO\FUNC_01&VEN_1AF4
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086
+                            HDAUDIO\FUNC_01
+
+Instance ID:                SW\{A7C7A5B0-5AF3-11D1-9CED-00A024BF0407}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         ReactOS System audio device
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{a7c7a5b0-5af3-11d1-9ced-00a024bf0407}
+
+Instance ID:                SW\{B7EAFDC0-A680-11D0-96D8-00AA0051E51D}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         ReactOS Wave Audio Mixer
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{b7eafdc0-a680-11d0-96d8-00aa0051e51d}
+
+Instance ID:                SW\{CD171DE3-69E5-11D2-B56D-0000F8754380}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         Driver for ReactOS WINMM-WDM-Audio
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{cd171de3-69e5-11d2-b56d-0000f8754380}
+
+2026-11-26T13:34:18Z VM r4-freshboot-notopology ended: qemu exited rc=0 (none) at 2026-11-26T13:34:18Z; wall 306 s
+2026-11-26T13:34:18Z boot4 done

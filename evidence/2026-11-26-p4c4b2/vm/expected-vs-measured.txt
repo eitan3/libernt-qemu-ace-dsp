@@ -1,0 +1,109 @@
+# TESTING.md (p4c4b's) expected lines against what the p4c4b2 round measured
+# A fixed line is looked up as it is written (TESTING.md quotes it without the timestamp); "RE:" rows are extended regexes.
+# The VMs: r0b-firstboot-nodisk, r1-firstboot-cycle-dsploop-selftest2, r2-plainboot-selftest0, r3-plainboot-attribution, r4-freshboot-notopology, r5-firstboot-cycle-selftest2-dsploop-live
+# A count is the number of lines of that VM's serial log that carry it.
+
+## Run 0: the first boot (U1 fixed)
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `swenum: KsCreateBusEnumObject Devices BusDeviceObject` | **2** | **2** | **1** | **1** | **2** | **2** |
+| `umpnpmgr: Safe removal: ROOT\SYSTEM\0000 (the removal that bugchecked on p4c4b)` | **1** | **1** | 0 | 0 | **1** | **1** |
+| `base\setup\libernt: Storage expansion not offered` | **1** | **1** | 0 | 0 | **1** | **1** |
+| `The system has been stopped (a bugcheck)` | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## Run 1: BootDsp = 1 + Topology = sof-ipc4-loopback.tplg
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'` | 0 | **1** | **1** | **1** | **1** | **1** |
+| `topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), ... from the registry override` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `endpoint 'Loopback' render: registered as 'LoopbackTopo'` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `endpoint 'Loopback' render: registered as 'LoopbackWave'` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `endpoint 'Loopback' capture: registered as 'LoopbackInTopo'` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `endpoint 'Loopback' capture: registered as 'LoopbackInWave'` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `boot ok after <us> ... attempt 1, 0 DSP interrupts, cleanup ok` | 0 | **1** | **1** | **1** | **1** | **1** |
+| `firmware ready: version 2.15.0.1, ABI 1` | 0 | **1** | **1** | **1** | **1** | **1** |
+| `none of: not registered / not started / no audio interface / no endpoint / is not well-formed` | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## TESTING.md's run 2: SelfTest = 2 (its three runs and the summary)
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `16-bit: 4096 frames captured after <ms> ms, offset <k> frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok` | 0 | 0 | 0 | 0 | 0 | **1** |
+| `24- and 32-bit: ... render rms 379742706.482, capture rms 379742706.482, ok` | 0 | 0 | 0 | 0 | 0 | **2** |
+| `3 runs, 3 matched, 0 failed, <n> requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok` | 0 | 0 | 0 | 0 | 0 | **1** |
+| `ran (0x00000000), the DSP is left running` | 0 | 0 | 0 | 0 | 0 | **1** |
+| `a run's failures (not captured / failed)` | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## TESTING.md's run 1, the stream: the lines of the apitest (the serial log)
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch <b> in <w> bits` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `endpoint 'Loopback' render: pin created, 48000 Hz 2 ch <b> in <w> bits` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `stream <t>: latency: fifo <F> bytes, dsp estimate <D> bytes` | 0 | 0 | 0 | 0 | 0 | 0 |
+
+## TESTING.md's run 3 (i): no Topology, from a fresh boot
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint` | 0 | 0 | 0 | 0 | **1** | 0 |
+| `lines that must be absent (0 expected in r4): audio child` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `lines that must be absent (0 expected in r4): dsppcm.sys:` | 0 | **6** | **6** | **6** | 0 | **6** |
+
+## TESTING.md's run 3 (iii) and the brief's run 4: SelfTest = 0 at a system boot
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms` | **1** | **2** | **1** | **1** | **2** | **1** |
+| `boot ok after <us> ... attempt 1, 0 DSP interrupts, cleanup ok` | 0 | **1** | **1** | **1** | **1** | **1** |
+| `the topology line (with the Topology value kept)` | 0 | **1** | **1** | **1** | 0 | **1** |
+| `lines that must be absent at a SelfTest = 0 boot (0 in r2, r3, r4; r1 asked for none, r5 ran SelfTest = 2): loopback self-test:` | 0 | 0 | 0 | 0 | 0 | **11** |
+
+## The disable attribution (TESTING.md's run 3 (ii)): the serial lines of a completed disable
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `Safe removal: INTCDSP (the child alone)` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Safe removal: HDAUDIO (the codec)` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Safe removal: CSAUDIO (the DSP device)` | 0 | **1** | 0 | 0 | **1** | **1** |
+| `DisableDeviceInstance(CSAUDIO (every disable asked of the DSP device)` | 0 | **2** | 0 | **1** | **1** | **1** |
+| `DisableDeviceInstance(INTCDSP` | 0 | 0 | 0 | **1** | 0 | 0 |
+| `DisableDeviceInstance(HDAUDIO` | 0 | 0 | 0 | **1** | 0 | 0 |
+
+## What no VM may show
+
+| expected | r0b-firstboot-nodisk | r1-firstboot-cycle-dsploop-selftest2 | r2-plainboot-selftest0 | r3-plainboot-attribution | r4-freshboot-notopology | r5-firstboot-cycle-selftest2-dsploop-live |
+|---|---|---|---|---|---|---|
+| `The system has been stopped` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Stop code:` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `clock stalled` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `interrupt storm` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Entering sleep state S5 (the clean end)` | **1** | **1** | **1** | **1** | **1** | **1** |
+
+## What the test program wrote (the data disk's text, copied into each VM directory)
+
+| VM | dsploop-out.txt | dsploop-rc.txt |
+|---|---|---|
+| r1-firstboot-cycle-dsploop-selftest2 | (empty: 0 bytes) |3 (ERROR_PATH_NOT_FOUND: the errorlevel of the command line that did not launch the test) |
+| r3-plainboot-attribution | dsploop.c:468: Tests skipped: dsploop: no active render endpoint named 'Loopback'; the DSP's audio child is not present (0x80070490) /  / dsploop: 2 tests executed (0 marked as todo, 0 failures), 1 skipped. |0 |
+| r5-firstboot-cycle-selftest2-dsploop-live | dsploop.c:468: Tests skipped: dsploop: no active render endpoint named 'Loopback'; the DSP's audio child is not present (0x80070490) /  / dsploop: 2 tests executed (0 marked as todo, 0 failures), 1 skipped. |0 |
+
+## What pnputil answered (attrib-*.txt, the data disk's text)
+
+| VM | file | text |
+|---|---|---|
+| r3-plainboot-attribution | attrib-child-disable.txt | Disabling device: INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Failed to disable device: A device attached to the system is not functioning. |
+| r3-plainboot-attribution | attrib-child-enable.txt | Enabling device: INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Device enabled successfully. |
+| r3-plainboot-attribution | attrib-codec-disable.txt | Disabling device: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Failed to disable device: A device attached to the system is not functioning. |
+| r3-plainboot-attribution | attrib-codec-enable.txt | Enabling device: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device enabled successfully. |
+| r3-plainboot-attribution | attrib-dsp-disable.txt | Disabling device: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning. |
+
+## The launch of the apitest from the data disk (x-launch-pouch.txt: the guest's own text)
+
+- r4-freshboot-notopology: `The system cannot find the path specified.`

@@ -1,0 +1,9 @@
+ Volume in drive : is P4C4B2     
+ Volume Serial Number is 0F32-51EE
+Directory for ::/
+
+DSPLOO~1 EXE    215040 2026-11-26  15:15  dsploop_apitest.exe
+pouch    tag        39 2026-11-26  15:15 
+        2 files             215 079 bytes
+                         33 253 376 bytes free
+

@@ -1,0 +1,22 @@
+ Volume in drive : is P4C4B2     
+ Volume Serial Number is 175D-F82D
+Directory for ::/
+
+DSPLOO~1 EXE    215040 2026-11-26  15:17  dsploop_apitest.exe
+pouch    tag        39 2026-11-26  15:17 
+drive    txt         4 2026-11-26  13:22 
+X-LAUN~1 TXT        46 2026-11-26  13:22  x-launch-D.txt
+X-DIR-C  TXT       247 2026-11-26  13:24  x-dir-C.txt
+DSPLOO~1 TXT       206 2026-11-26  13:25  dsploop-out.txt
+DSPLOO~2 TXT         4 2026-11-26  13:37  dsploop-rc.txt
+REG-MM~1 TXT      2144 2026-11-26  13:38  reg-mmdev-render.txt
+REG-MM~2 TXT      2154 2026-11-26  13:40  reg-mmdev-capture.txt
+ATTRIB~1 TXT       188 2026-11-26  13:43  attrib-child-disable.txt
+ATTRIB~2 TXT       138 2026-11-26  13:44  attrib-child-enable.txt
+ATTRIB~3 TXT       209 2026-11-26  13:46  attrib-codec-disable.txt
+ATTRIB~4 TXT       159 2026-11-26  13:47  attrib-codec-enable.txt
+ATAD1F~1 TXT       197 2026-11-26  13:49  attrib-dsp-disable.txt
+ALIVE-~1 TXT         8 2026-11-26  13:50  alive-dsp-disabled.txt
+       15 files             220 783 bytes
+                         33 222 656 bytes free
+

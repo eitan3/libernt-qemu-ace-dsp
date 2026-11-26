@@ -1,0 +1,79 @@
+2026-11-26T13:17:41Z boot3: r3-plainboot-attribution on disk/p4c4b2-st2.qcow2
+2026-11-26T13:17:43Z VM r3-plainboot-attribution started (lib-run pid 1115046, sockets /tmp/qad-vm.1115048, data disk /tmp/qad-ev/p4c4b2/pouch/r3-plainboot-attribution.img)
+[15:18:02] [    8.112009] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2288 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+2026-11-26T13:18:07Z the boot's driver lines:
+[    8.096384] intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'
+[    8.096384] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    8.096384] intcdsp.sys: boot ok after 5896 us (clock 18758257 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[    8.112009] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[    8.112009] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[    8.127631] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[    8.127631] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[    8.127631] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[    8.143209] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[15:18:34] [   39.433585] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000E3E83E59C0 0000000000090176 'Program Manager' 000000E3E83E5C08 32 0x0 000000E3E83E5CB0 280 000000E3E83E5C34)
+2026-11-26T13:19:08Z console: Win+R, cmd.exe
+2026-11-26T13:19:25Z data disk: drive E: in the guest (1 marker)
+2026-11-26T13:20:01Z D:\dsploop_apitest.exe: The system cannot find the path specified.  
+2026-11-26T13:20:15Z dir C:\dsploop_apitest.exe: Volume in drive C is LiberNT Volume Serial Number is 0490-487f  Directory of C:  11/26/2026  02:50 PM           215,040 dsploop_apitest.exe        1 file                   215,040 bytes        0 directories     84,778,184,704 bytes free  
+2026-11-26T13:20:20Z typed the apitest from the system disk with Enter (serial line 177)
+2026-11-26T13:22:51Z no driver line of the apitest in 150 s (its output below says why)
+2026-11-26T13:22:53Z the apitest ended its output after about 2 s: dsploop: 2 tests executed (0 marked as todo, 0 failures), 1 skipped.
+2026-11-26T13:23:06Z echo %ERRORLEVEL%: 0  
+2026-11-26T13:23:06Z the apitest's output as the guest wrote it (dsploop-out.txt):
+dsploop.c:468: Tests skipped: dsploop: no active render endpoint named 'Loopback'; the DSP's audio child is not present (0x80070490)
+
+dsploop: 2 tests executed (0 marked as todo, 0 failures), 1 skipped.
+2026-11-26T13:23:06Z driver lines of the apitest (after serial line 177):
+2026-11-26T13:23:40Z reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render /s:  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render\{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}     DeviceState    REG_DWORD    0x1  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render\{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}\Properties     {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    Speakers - Intel Smart Sound DS     {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Speakers     {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Speakers (Speakers - Intel Smart Sound DS)     {233164C8-1B2C-4C7D-BC68-B671687A2567},1  
+2026-11-26T13:24:14Z reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture /s:  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}     DeviceState    REG_DWORD    0x1  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}\Properties     {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    HD Audio Line in     {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Microphone     {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Microphone (HD Audio Line in)     {233164C8-1B2C-4C7D-BC68-B671687A2567},1    REG_SZ    {E779F4D6-D3
+2026-11-26T13:24:14Z MMDevices\\Audio\\Render: 27 lines, 4 keys, DeviceState values:  DeviceState REG_DWORD 0x1; DeviceState REG_DWORD 0x1;
+2026-11-26T13:24:14Z MMDevices\\Audio\\Capture: 27 lines, 4 keys, DeviceState values:  DeviceState REG_DWORD 0x1; DeviceState REG_DWORD 0x1;
+2026-11-26T13:24:14Z == the attribution, TESTING.md run 3 (ii)
+2026-11-26T13:24:31Z disable child-disable: no such line in 60 s; about 17 s after Enter: the command returned: LiberNT PnP Utility  Disabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Failed to disable device: A device attached to the system is not functioning.  
+[ 1509.310566] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000E3E83E5BD0 INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0 0x00000000)
+[ 1509.310566] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0)
+2026-11-26T13:24:53Z enable child-enable: no such line in 120 s; about 18 s after Enter: the command returned: LiberNT PnP Utility  Enabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Device enabled successfully.  
+2026-11-26T13:25:27Z disable codec-disable: no such line in 60 s; about 19 s after Enter: the command returned: LiberNT PnP Utility  Disabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Failed to disable device: A device attached to the system is not functioning.  
+[ 1704.180729] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000E3E83E5BD0 HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0 0x00000000)
+[ 1704.180729] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0)
+2026-11-26T13:25:51Z enable codec-enable: no such line in 120 s; about 19 s after Enter: the command returned: LiberNT PnP Utility  Enabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device enabled successfully.  
+2026-11-26T13:26:18Z disable dsp-disable: no such line in 60 s; about 17 s after Enter: the command returned: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+[ 1880.892957] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000E3E83E5BD0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1880.892957] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+2026-11-26T13:26:35Z console answering after dsp-disabled (alive-dsp-disabled.txt, 3 s)
+2026-11-26T13:26:35Z console after the DSP device's disable: answering
+2026-11-26T13:26:36Z == the last 25 serial lines of the attribution:
+[   21.194063] (\dll\win32\userenv\profile.c:2222) Profile S-1-5-20 already loaded
+[   28.398956] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000E3E83E2C60 000000000000000A 'AudioSrv' 000000E3E83E3EAC 32 0x1 000000E3E83E3FC0 2a8 000000E3E83E3ED8)
+[   28.398956] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   35.692199] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   35.707824] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   35.707824] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   39.433585] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000E3E83E59C0 0000000000090176 'Program Manager' 000000E3E83E5C08 32 0x0 000000E3E83E5CB0 280 000000E3E83E5C34)
+[   39.433585] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[  189.529063] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000AD460BB6D0): stub
+[  189.529063] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000AD460BB6D0, 1, 000000AD4856FD68, 000000AD4856FD64): stub
+[  190.554442] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+[  266.954203] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007BB8B4E
+[  266.954203] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007BB8D8D
+[  266.954203] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007B95CDFA
+[  266.954203] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007BD8E075
+[  763.603282] (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+[ 1076.676380] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[ 1076.676380] (\ntos\po\standby.c:207) The console display is now off
+[ 1167.768414] (\ntos\po\standby.c:207) The console display is now on
+[ 1509.310566] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000E3E83E5BD0 INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0 0x00000000)
+[ 1509.310566] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0)
+[ 1704.180729] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000E3E83E5BD0 HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0 0x00000000)
+[ 1704.180729] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0)
+[ 1880.892957] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(000000E3E83E5BD0 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+[ 1880.892957] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+2026-11-26T13:26:36Z == the commands' own texts (the data disk):
+2026-11-26T13:26:36Z attrib-child-disable.txt: LiberNT PnP Utility  Disabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T13:26:36Z attrib-child-enable.txt: LiberNT PnP Utility  Enabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Device enabled successfully.  
+2026-11-26T13:26:36Z attrib-codec-disable.txt: LiberNT PnP Utility  Disabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T13:26:36Z attrib-codec-enable.txt: LiberNT PnP Utility  Enabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device enabled successfully.  
+2026-11-26T13:26:36Z attrib-dsp-disable.txt: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-26T13:26:39Z VM r3-plainboot-attribution ended: qemu exited rc=0 (none) at 2026-11-26T13:26:39Z; wall 537 s
+2026-11-26T13:26:39Z boot3 done
