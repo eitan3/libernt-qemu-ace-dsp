@@ -1,0 +1,4 @@
+boot1  p4c4d: anywhere 10, at line start (after the timestamp) 10 | p4c4e: anywhere 10, at line start 10
+boot2  p4c4d: anywhere 23, at line start (after the timestamp) 23 | p4c4e: anywhere 23, at line start 23
+boot3  p4c4d: anywhere 35, at line start (after the timestamp) 35 | p4c4e: anywhere 35, at line start 35
+boot4  p4c4d: anywhere 36, at line start (after the timestamp) 36 | p4c4e: anywhere 36, at line start 36

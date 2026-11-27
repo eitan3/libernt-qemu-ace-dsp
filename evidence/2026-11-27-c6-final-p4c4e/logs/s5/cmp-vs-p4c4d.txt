@@ -1,0 +1,26 @@
+== boot1: old 171 lines, new 260 lines; untagged old 33, new 33
+  rows that differ: 5; net tagged 89
+    -1  \drivers\storage\port\storport\fdo.c (old 3, new 2)
+    -1  \subsystems\win\win32k\user\ntuser\focus.c (old 1, new 0)
+    +1  \base\setup\libernt\oobe.c (old 6, new 7)
+    +1  \base\setup\lib\utils\partlist.c (old 10, new 11)
+   +89  \dll\win32\iphlpapi\ipstats_reactos.c (old 0, new 89)
+  intcdsp files:
+== boot2: old 138 lines, new 133 lines; untagged old 42, new 42
+  rows that differ: 3; net tagged -5
+    -3  \ntos\po\standby.c (old 3, new 0)
+    -1  \base\setup\libernt\updagent.c (old 1, new 0)
+    -1  \subsystems\win\win32k\gdi\ntgdi\cliprgn.c (old 1, new 0)
+  intcdsp files:
+== boot3: old 160 lines, new 156 lines; untagged old 60, new 60
+  rows that differ: 4; net tagged -4
+    -3  \ntos\po\standby.c (old 3, new 0)
+    -1  \base\setup\libernt\updagent.c (old 1, new 0)
+    -1  \sdk\lib\drivers\sound\mmixer\controls.c (old 3, new 2)
+    +1  \drivers\storage\port\storport\fdo.c (old 2, new 3)
+  intcdsp files:
+== boot4: old 174 lines, new 166 lines; untagged old 71, new 67
+  rows that differ: 2; net tagged -4
+    -3  \ntos\po\standby.c (old 3, new 0)
+    -1  \drivers\storage\port\storport\fdo.c (old 3, new 2)
+  intcdsp files:

@@ -1,0 +1,260 @@
+(\hal\halx86\apic\apic.c:486) APIC: Hyper-V synthetic EOI/ICR MSRs not used
+(\hal\halx86\apic\apic.c:489) APIC: extended (x2APIC) mode not used
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007BC20D00, Gdt = FFFFF8007DEB8000, Idt = FFFFF8007BBFB950, Tss = FFFFF8007DEBA000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000001000 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007BC20E80
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.421875] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    1.984379] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    1.984379] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[    2.500005] ACPI: RSDP 0x00000000100318B0 000024 (v02 ROS   )
+[    2.500005] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    2.500005] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.500005] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.515630] ACPI: FACS 0x000000007FECA000 000040
+[    2.515630] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.515630] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.515630] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.515630] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    2.515630] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    2.531255] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    2.531255] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    2.578130] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    2.578130] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    2.578130] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    2.578130] (\hal\halx86\acpi\sleep.c:805) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    2.593755] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.609380] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    2.640630] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[    2.656255] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[    2.656255] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 8388608 sectors of 512 bytes
+[    2.781256] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATA 'QEMU HARDDISK' fw '2.5+' 524288 sectors of 512 bytes
+[    3.187507] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F207B00)
+[    3.250007] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011FC50 FFFF81803F245B80)
+[    3.625007] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[    3.718758] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+[    3.993730] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B1EB4F1
+[    4.243657] (\drivers\directx\dxgkrnl\adapter.c:13227) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF8180001C61A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[    4.649912] (\drivers\directx\dxgkrnl\adapter.c:15158) DXGKRNL: DxgkAdapterStart: adapter FFFF8180001C61A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[    4.666703] (\drivers\directx\dxgkrnl\adapter.c:6467) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[    5.761931] (\drivers\directx\dxgkrnl\display.c:6535) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF8180001C61A0 desktop ready 1280x800 (scanout)
+[    5.761931] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[    5.805132] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[    5.805132] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+[    5.805132] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[    5.805132] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[    5.836380] intcdsp.sys: loaded for the Intel audio DSP child
+[    5.836380] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+[    5.836380] intcdsp.sys: NHLT table: the bus driver reports none
+[    5.836380] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[    5.836380] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[    5.836380] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[    5.836380] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[    5.883232] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[    5.883232] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched
+[    5.883232] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms
+[    5.914481] (\drivers\input\i8042prt\pnp.c:850) IRP_MJ_PNP / unknown minor function 0xb
+[    5.930057] (\drivers\input\i8042prt\pnp.c:850) IRP_MJ_PNP / unknown minor function 0xb
+[    5.945631] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[    5.961208] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[    5.961208] (\drivers\processor\processr\tables.c:705) Processor 0: no performance control (HWP 0, EST 0)
+[    5.961208] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[    5.961208] (\drivers\directx\dxgkrnl\adapter.c:650) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180002011A0 device UI suppressed
+[    5.961208] (\drivers\directx\dxgkrnl\adapter.c:14551) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180002011A0 stays retired; another adapter owns the desktop
+[    6.054759] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[    6.054759] (\drivers\network\nwifi\control.c:895) NWIFI: control device \Device\Nwifi created
+[    6.054759] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[    6.132735] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[    7.367089] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[    7.367089] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\D:
+[    8.648317] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[    8.648317] (\base\system\smss\crashdmp.c:273) SMSS: Failed to open crash dump pagefile `\??\C:\pagefile.sys' (0xc0000034)
+[    8.648317] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[    8.648317] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 47072, LCN 216143, disk byte 953479168
+[    8.648317] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 192806400 bytes available, 0 required for full)
+[    9.101443] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000001000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AF71A3C
+[   10.022822] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   10.022822] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   11.085323] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   11.085323] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   14.178829] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007948B4E
+[   14.178829] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007948D8D
+[   14.178829] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007B1EADFA
+[   14.178829] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007C2B6075
+[   19.256865] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000BCDC2C2B30 000000000000000A 'AudioSrv' 000000BCDC2C3D7C 32 0x1 000000BCDC2C3E90 22c 000000BCDC2C3DA8)
+[   19.256865] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   20.069268] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   20.069268] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   20.069268] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   20.069268] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   20.069268] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   20.131668] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   20.943976] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   21.100226] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   21.100226] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   22.178354] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   22.178354] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   23.225231] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   23.225231] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   24.240858] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   24.240858] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   25.303360] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   25.303360] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   26.350238] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   26.350238] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   27.365865] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   27.365865] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   28.381492] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   28.381492] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   29.443994] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   29.443994] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   30.459622] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   30.459622] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   31.506499] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   31.506499] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   32.584626] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   32.584626] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   33.631504] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   33.631504] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   34.678381] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   34.678381] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   35.694008] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   35.694008] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   36.740885] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   36.740885] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   37.787763] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   37.787763] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   38.834640] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   38.834640] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   39.881517] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   39.881517] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   40.881520] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000262AD0
+[   40.944020] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   40.944020] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   41.209645] (\base\services\umpnpmgr\event.c:360) Safe removal: ROOT\SYSTEM\0000
+[   42.053397] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   42.053397] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   42.209647] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF818000262D50
+[   43.131499] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   43.131499] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1189) HDAUDIO: SubdeviceName eLineOutWave
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineOutTopo
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1250) HDAUDIO: SubdeviceName eLineInWave
+[   44.006499] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineInTopo
+[   44.147052] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   44.147052] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   45.209554] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   45.209554] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   46.287682] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   46.287682] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   47.334559] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   47.334559] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   48.381436] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   48.381436] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   49.412688] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   49.412688] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   50.490816] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   50.490816] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   51.537693] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   51.537693] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   52.600195] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   52.600195] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   53.631448] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   53.631448] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   54.693950] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   54.693950] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   55.787703] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   55.787703] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   56.803330] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   56.803330] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   57.850207] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   57.850207] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   58.397082] (\drivers\wdm\audio\filters\kmixer\kmixer.c:106) KMixer.sys loaded
+[   58.397082] (\drivers\wdm\audio\filters\kmixer\kmixer.c:53) KMix_InstallDevice called
+[   58.397082] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000001 DeviceName {b7eafdc0-a680-11d0-96d8-00aa0051e51d}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   58.943935] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   58.943935] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   60.006437] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   60.006437] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   60.881439] (\drivers\wdm\audio\sysaudio\main.c:149) SYSAUDIO: AddDevice PDO FFFF8180002635F0
+[   60.881439] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {a7c7a5b0-5af3-11d1-9ced-00a024bf0407}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   61.022064] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   61.022064] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   62.037691] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   62.037691] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   62.897068] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000003 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   63.100194] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   63.100194] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   63.193944] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   63.584570] (\dll\win32\userenv\profile.c:703) CopySystemProfile()
+[   63.647070] (\dll\win32\userenv\profile.c:2247) Profile S-1-5-18 already loaded
+[   64.053322] (\dll\win32\syssetup\security.c:163) SYSSETUP: SetPrimaryDomain()
+[   64.147072] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   64.147072] err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+[   82.829317] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000BCDC2C8540 0000000000070170 'Program Manager' 000000BCDC2C55F8 32 0x0 000000BCDC2C5560 33c 000000BCDC2C5624)
+[   82.829317] (\base\services\umpnpmgr\rpcserver.c:6537) DBT_DEVTYP_DEVICEINTERFACE
+[   86.469950] (\base\setup\libernt\oobe.c:1035) Disk signature check finished with exit code 0
+[   86.579326] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 9 components
+[   87.157452] (\base\setup\lib\setuplib.c:1044) SourcePath (1): '\Device\HarddiskVolume2\AMD64'
+[   87.157452] (\base\setup\lib\setuplib.c:1045) SourceRootPath (1): '\Device\HarddiskVolume2'
+[   87.157452] (\base\setup\lib\setuplib.c:1046) SourceRootDir (1): '\AMD64'
+[   87.173077] (\base\setup\lib\setuplib.c:1063) SourcePath (2): '\Device\HarddiskVolume2\AMD64'
+[   87.173077] (\base\setup\lib\setuplib.c:1064) SourceRootPath (2): '\Device\HarddiskVolume2'
+[   87.173077] (\base\setup\lib\setuplib.c:1065) SourceRootDir (2): '\AMD64'
+[   87.173077] (\base\setup\lib\setuplib.c:180) UnattendInf path: '\Device\HarddiskVolume2\AMD64\unattend.inf'
+[   87.173077] (\base\setup\lib\utils\partlist.c:2014) Disk 0 of identifier '12b01bec-b253f5c7-A' is fixed
+[   87.173077] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   87.173077] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   87.173077] (\base\setup\lib\utils\partlist.c:2234) Use megabyte (2048 Sectors) alignment!
+[   87.173077] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT32
+[   87.173077] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): NTFS
+[   87.173077] (\base\setup\lib\utils\partlist.c:799) First Sector : 3145728
+[   87.173077] (\base\setup\lib\utils\partlist.c:800) Last Sector  : 8385866
+[   87.173077] (\base\setup\lib\utils\partlist.c:801) Total Sectors: 5240139
+[   87.173077] (\base\setup\lib\utils\partlist.c:2014) Disk 1 of identifier 'd983b77e-ba1b2858-A' is fixed
+[   87.173077] (\base\setup\lib\utils\partlist.c:2181) Buffer size: 136
+[   87.173077] (\base\setup\lib\utils\partlist.c:2215) PartitionCount: 4
+[   87.173077] (\base\setup\lib\utils\partlist.c:2234) Use megabyte (2048 Sectors) alignment!
+[   87.173077] (\base\setup\lib\utils\fsrec.c:313) InferFileSystem(): FileSystem (guessed): FAT32
+[   87.219952] (\base\setup\libernt\libernt.c:1106) Firmware language 'en'
+[   87.219952] (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+[   87.219952] (\base\setup\libernt\libernt.c:1501) No LiberNT installation to upgrade
+[   87.235577] (\base\setup\libernt\oobe.c:989) Upgrade of the installed copy finished with 1168
+[   87.641828] (\base\setup\libernt\oobe.c:1071) Storage expansion offered
+[  602.332088] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[  602.332088] (\ntos\po\standby.c:207) The console display is now off
+[  797.613893] (\ntos\po\standby.c:207) The console display is now on
+[  797.738893] (\base\setup\libernt\oobe.c:908) Storage expansion finished with exit code 0
+[  805.707661] (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+[ 2270.711056] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[ 2270.711056] (\ntos\po\standby.c:207) The console display is now off
+[ 2479.226640] (\ntos\po\standby.c:207) The console display is now on
+[ 3260.557117] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[ 3260.557117] (\ntos\po\standby.c:207) The console display is now off
+[ 3374.978744] (\ntos\po\standby.c:207) The console display is now on
+[ 4363.492796] (\base\setup\libernt\oobe.c:667) Account tester created with result 0
+[ 4363.504796] (\base\setup\libernt\oobe.c:676) Setup account disabled with result 0
+[ 4963.403492] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[ 4963.403492] (\ntos\po\standby.c:207) The console display is now off
+[ 5096.356660] (\ntos\po\standby.c:207) The console display is now on
+[ 5112.593959] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000F97047BF70): stub
+[ 5112.593959] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000F97047BF70, 1, 000000F972E6FD68, 000000F972E6FD64): stub
+[ 5117.963976] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub

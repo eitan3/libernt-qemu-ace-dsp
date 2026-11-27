@@ -1,0 +1,4 @@
+boot9        lines  143  intcdsp.sys:  24  stop lines 0  bytes 270336
+    last: [ 1471.319675] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+boot9-prev   lines  130  intcdsp.sys:  24  stop lines 0  bytes 270336
+    last: [    5.632148] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled

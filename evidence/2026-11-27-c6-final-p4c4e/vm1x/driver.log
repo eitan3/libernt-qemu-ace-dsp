@@ -1,0 +1,11 @@
+04:20:28 waited 100
+04:20:30 shot x1-01-lock-screen-100s.png 22245 bytes
+04:20:57 signin: Enter on the lock screen, shot x1-02-signin-tile.png (the tile); typing the password (<typed>)
+04:21:40 winr: meta_l-r, typed cmd.exe
+04:21:57 typed: copy /y C:\logs\*.* D:\
+04:22:06 typed: dir C:\logs
+04:22:15 typed: dir D:\
+04:22:23 shot x1-03-after-export-copy.png 917809 bytes
+04:23:00 typed: exit
+04:23:33 tm-restart: Task Manager > Shut Down > turnoff selected (shot x1-04-tm-turnoff-selected.png); Enter
+04:23:36 qemu pid 1305698: EXITED, 3 s after the wait began

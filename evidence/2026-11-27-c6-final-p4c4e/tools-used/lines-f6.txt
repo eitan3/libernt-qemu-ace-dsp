@@ -1,0 +1,4 @@
+cd \kit
+savelog 9
+copy /y C:\logs\*.* D:\
+dir C:\logs

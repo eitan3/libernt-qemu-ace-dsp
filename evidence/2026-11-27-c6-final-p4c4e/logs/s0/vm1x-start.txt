@@ -1,0 +1,1 @@
+started qemu pid 1305698 at 2026-11-27T04:18:45Z; sockets /tmp/qad-cvm.1305689; evidence /tmp/c6f/ev/vm1x; serial=none

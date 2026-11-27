@@ -1,0 +1,14 @@
+boot1        lines  260  intcdsp.sys:  10  stop lines 0  bytes 270336
+    last: [ 5117.963976] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+boot2        lines  133  intcdsp.sys:  23  stop lines 0  bytes 270336
+    last: [ 1564.349211] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+boot2-prev   lines  138  intcdsp.sys:  10  stop lines 0  bytes 16035
+    last: [ 2309.687689] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+boot3        lines  156  intcdsp.sys:  35  stop lines 0  bytes 270336
+    last: [  649.786013] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+boot3-prev   lines  147  intcdsp.sys:  23  stop lines 0  bytes 17971
+    last: [ 2240.275310] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+boot4        lines  166  intcdsp.sys:  36  stop lines 0  bytes 270336
+    last: [ 1131.714532] (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+boot4-prev   lines  172  intcdsp.sys:  35  stop lines 0  bytes 21454
+    last: [ 1899.387162] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log

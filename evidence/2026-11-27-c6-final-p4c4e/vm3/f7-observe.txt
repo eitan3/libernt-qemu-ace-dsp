@@ -1,0 +1,8 @@
+04:43:02 shot f7-after-shutdown-01.png 19894 bytes (t+22s); CPU resets 3; serial lines 249; serial tail:   Entry 1: LiberNT (default)
+04:43:23 shot f7-after-shutdown-02.png 52162 bytes (t+43s); CPU resets 3; serial lines 403; serial tail: [    6.477825] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP05
+04:43:45 shot f7-after-shutdown-03.png 20136 bytes (t+65s); CPU resets 3; serial lines 410; serial tail: [   10.633962] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000200 at /h
+04:44:06 shot f7-after-shutdown-04.png 22486 bytes (t+86s); CPU resets 3; serial lines 410; serial tail: [   10.633962] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000200 at /h
+04:44:28 shot f7-after-shutdown-05.png 23103 bytes (t+108s); CPU resets 3; serial lines 410; serial tail: [   10.633962] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000200 at /h
+04:45:27 shot f7-after-shutdown-06.png 23330 bytes (t+167s); CPU resets 3; serial lines 410; serial tail: [   10.633962] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000200 at /h
+04:45:48 shot f7-after-shutdown-07.png 23268 bytes (t+188s); CPU resets 3; serial lines 410; serial tail: [   10.633962] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000200 at /h
+04:46:10 shot f7-after-shutdown-08.png 23839 bytes (t+210s); CPU resets 3; serial lines 410; serial tail: [   10.633962] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000200 at /h

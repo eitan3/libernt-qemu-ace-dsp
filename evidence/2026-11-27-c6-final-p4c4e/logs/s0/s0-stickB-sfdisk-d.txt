@@ -1,0 +1,7 @@
+label: dos
+label-id: 0xba1b2858
+device: <project>/disk/c6-stickB-p4c4e.img
+unit: sectors
+sector-size: 512
+
+<project>/disk/c6-stickB-p4c4e.img1 : start=        2048, size=      522240, type=c

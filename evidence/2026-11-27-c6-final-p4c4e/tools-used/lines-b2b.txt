@@ -1,0 +1,2 @@
+cd \kit
+savelog 2

@@ -1,0 +1,144 @@
+03:35:44 waited 50
+03:35:46 shot b1-01-t50s.png 10404 bytes
+03:35:58 waited 12
+03:36:00 shot b1-02-t62s.png 10404 bytes
+03:37:10 waited 30
+03:37:11 shot b1-03-t97s.png 767051 bytes
+03:37:59 key ret
+03:38:07 waited 8
+03:38:09 shot b1-04-after-expand.png 767391 bytes
+03:38:09 key ret
+03:38:17 waited 8
+03:38:19 shot b1-05-account-page.png 769109 bytes
+03:39:13 type tester
+03:39:15 waited 2
+03:39:17 shot b1-06-username-typed.png 768999 bytes
+03:40:05 key tab
+03:40:07 waited 2
+03:40:08 type <typed> (the account's password, not logged)
+03:40:10 waited 2
+03:40:10 key tab
+03:40:12 waited 2
+03:40:14 type <typed> (the account's password, not logged)
+03:40:16 waited 2
+03:40:16 key tab
+03:40:18 waited 2
+03:40:19 type rehearsal
+03:40:21 waited 2
+03:40:22 shot b1-07-account-filled.png 769127 bytes
+03:41:08 key ret
+03:41:18 waited 10
+03:41:19 shot b1-08-components-page.png 773030 bytes
+03:43:03 cleared 11 boxes (spc,down x11)
+03:43:05 shot b1-09-components-cleared.png 772042 bytes
+03:44:23 key spc
+03:44:26 waited 3
+03:44:28 shot b1-10-steam-cleared.png 771901 bytes
+03:45:19 key tab
+03:45:20 waited 1
+03:45:20 key tab
+03:45:22 waited 2
+03:45:24 shot b1-11-next-focus.png 772167 bytes
+03:46:15 key ret
+03:46:27 waited 12
+03:46:29 shot b1-12-after-finish-12s.png 965460 bytes
+03:46:39 waited 10
+03:46:40 shot b1-13-after-finish-22s.png 965418 bytes
+03:47:44 winr: meta_l-r, typed cmd.exe
+03:47:59 shot b1-14-console.png 853849 bytes
+03:48:50 typed: mkdir C:\kit
+03:48:59 typed: copy D:\kit\*.* C:\kit\
+03:49:05 shot b1-15-after-copy.png 894248 bytes
+03:49:53 typed: cd \kit
+03:50:01 typed: savelog 1
+03:50:09 typed: dir C:\
+03:50:16 shot b1-16-after-savelog1-dir.png 908097 bytes
+03:51:49 tm-restart: Task Manager > Shut Down > restart selected (shot b1-17-tm-restart-selected.png); Enter
+03:52:15 waited 26
+03:52:17 shot b1r-early-01.png 19894 bytes (t+2s)
+03:52:22 shot b1r-early-02.png 14432 bytes (t+7s)
+03:52:27 shot b1r-early-03.png 14432 bytes (t+12s)
+03:52:32 shot b1r-early-04.png 51716 bytes (t+17s)
+03:52:36 shot b1r-early-05.png 51716 bytes (t+21s)
+03:52:41 shot b1r-early-06.png 52007 bytes (t+26s)
+03:52:46 shot b1r-early-07.png 23842 bytes (t+31s)
+03:53:11 waited 22
+03:53:12 shot b2-01-after-restart-120s.png 22508 bytes
+03:54:39 signin: Enter on the lock screen, shot b2-02-signin-tile.png (the tile); typing the password (<typed>)
+03:55:17 shot b2-03-desktop-after-signin.png 964395 bytes
+03:56:23 winr: meta_l-r, typed cmd.exe
+03:56:38 typed: cd \kit
+03:56:45 typed: stage1
+03:56:53 shot b2-04-after-stage1.png 856364 bytes
+03:58:03 tm-restart: Task Manager > Shut Down > restart selected (shot b2-05-tm-restart-selected.png); Enter
+03:58:27 waited 22
+03:58:28 shot b2r-early-01.png 19894 bytes (t+1s)
+03:58:35 shot b2r-early-02.png 14432 bytes (t+8s)
+03:58:40 shot b2r-early-03.png 14432 bytes (t+13s)
+03:58:44 shot b2r-early-04.png 51705 bytes (t+17s)
+03:58:49 shot b2r-early-05.png 51705 bytes (t+22s)
+03:58:54 shot b2r-early-06.png 51705 bytes (t+27s)
+03:58:58 shot b2r-early-07.png 24986 bytes (t+31s)
+03:59:03 shot b2r-early-08.png 24986 bytes (t+36s)
+03:59:07 shot b2r-early-09.png 24601 bytes (t+40s)
+03:59:12 shot b2r-early-10.png 22497 bytes (t+45s)
+03:59:16 shot b2r-early-11.png 22497 bytes (t+49s)
+03:59:37 waited 18
+03:59:39 shot b2r-signin-120s.png 22481 bytes
+04:01:14 signin: Enter on the lock screen, shot b2-06-signin-tile.png (the tile); typing the password (<typed>)
+04:01:57 winr: meta_l-r, typed cmd.exe
+04:02:12 typed: cd \kit
+04:02:20 typed: savelog 2
+04:02:27 shot b2-07-after-savelog2.png 857370 bytes
+04:03:10 typed: stage2
+04:03:16 shot b2-08-after-stage2.png 869630 bytes
+04:04:29 tm-restart: Task Manager > Shut Down > restart selected (shot b2-09-tm-restart-selected.png); Enter
+04:04:50 waited 20
+04:04:51 shot b3r-early-01.png 20042 bytes (t+1s)
+04:04:56 shot b3r-early-02.png 19894 bytes (t+6s)
+04:05:01 shot b3r-early-03.png 14432 bytes (t+11s)
+04:05:05 shot b3r-early-04.png 14432 bytes (t+15s)
+04:05:10 shot b3r-early-05.png 51058 bytes (t+20s)
+04:05:15 shot b3r-early-06.png 51719 bytes (t+25s)
+04:05:19 shot b3r-early-07.png 51719 bytes (t+29s)
+04:05:24 shot b3r-early-08.png 23865 bytes (t+34s)
+04:06:07 waited 40
+04:06:09 shot b3r-signin-130s.png 22750 bytes
+04:06:15 signin: Enter on the lock screen, shot b3-01-signin-tile.png (the tile); typing the password (<typed>)
+04:06:57 winr: meta_l-r, typed cmd.exe
+04:07:13 typed: cd \kit
+04:07:21 typed: savelog 3
+04:07:28 shot b3-02-after-savelog3.png 857306 bytes
+04:07:52 typed: mmsys.cpl
+04:08:03 shot b3-03-sound-playback.png 778449 bytes
+04:08:45 key ctrl-tab
+04:08:48 waited 3
+04:08:50 shot b3-04-sound-recording.png 776871 bytes
+04:09:23 key esc
+04:09:26 waited 3
+04:09:27 shot b3-05-after-esc.png 859383 bytes
+04:09:29 typed: stage3
+04:09:35 shot b3-06-after-stage3.png 867004 bytes
+04:10:54 tm-restart: Task Manager > Shut Down > restart selected (shot b3-07-tm-restart-selected.png); Enter
+04:11:14 waited 20
+04:11:16 shot b4r-early-01.png 20042 bytes (t+2s)
+04:11:21 shot b4r-early-02.png 19894 bytes (t+7s)
+04:11:25 shot b4r-early-03.png 19894 bytes (t+11s)
+04:11:30 shot b4r-early-04.png 14432 bytes (t+16s)
+04:11:35 shot b4r-early-05.png 51589 bytes (t+21s)
+04:11:39 shot b4r-early-06.png 51734 bytes (t+25s)
+04:12:27 waited 45
+04:12:29 shot b4r-signin-125s.png 22857 bytes
+04:12:35 signin: Enter on the lock screen, shot b4-01-signin-tile.png (the tile); typing the password (<typed>)
+04:13:18 winr: meta_l-r, typed cmd.exe
+04:13:33 typed: cd \kit
+04:13:45 typed: run-dsploop
+04:13:57 shot b4-02-dsploop-started.png 970846 bytes
+04:15:10 waited 60
+04:15:12 shot b4-03-at-60s.png 970912 bytes
+04:16:07 typed: savelog 4
+04:16:15 shot b4-04-after-savelog4.png 950586 bytes
+04:17:02 typed: exit
+04:17:07 shot b4-05-after-exit.png 964581 bytes
+04:17:38 tm-restart: Task Manager > Shut Down > turnoff selected (shot b4-06-tm-turnoff-selected.png); Enter
+04:17:42 qemu pid 1304122: EXITED, 4 s after the wait began

@@ -1,0 +1,48 @@
+04:31:32 waited 100
+04:31:34 shot f6-00-before-reset-100s.png 20377 bytes
+04:32:07 SYSTEM_RESET #1 (the power button on the running system) at t+0
+04:32:08 shot f6a-01.png 21108 bytes (t+1s)
+04:32:14 shot f6a-02.png 20075 bytes (t+7s)
+04:32:19 shot f6a-03.png 20075 bytes (t+12s)
+04:32:24 shot f6a-04.png 20042 bytes (t+17s)
+04:32:29 shot f6a-05.png 19894 bytes (t+22s)
+04:32:34 shot f6a-06.png 19894 bytes (t+27s)
+04:32:38 shot f6a-07.png 14432 bytes (t+31s)
+04:32:43 shot f6a-08.png 51066 bytes (t+36s)
+04:32:43 the kernel text screen first shows at t+36s
+04:32:48 shot f6a-09.png 51762 bytes (t+41s)
+04:32:52 shot f6a-10.png 51762 bytes (t+45s)
+04:32:52 SYSTEM_RESET #2 (the early one) at t+45s; the text screen first showed at t+36s
+04:32:54 shot f6b-01.png 51762 bytes (t+1s)
+04:33:01 shot f6b-02.png 20075 bytes (t+8s)
+04:33:07 shot f6b-03.png 20042 bytes (t+14s)
+04:33:14 shot f6b-04.png 19894 bytes (t+21s)
+04:33:21 shot f6b-05.png 19894 bytes (t+28s)
+04:33:27 shot f6b-06.png 22967 bytes (t+34s)
+04:33:34 shot f6b-07.png 51718 bytes (t+41s)
+04:33:41 shot f6b-08.png 51718 bytes (t+48s)
+04:33:47 shot f6b-09.png 22075 bytes (t+54s)
+04:33:54 shot f6b-10.png 21968 bytes (t+61s)
+04:34:00 shot f6b-11.png 23344 bytes (t+67s)
+04:34:07 shot f6b-12.png 24156 bytes (t+74s)
+04:34:13 shot f6b-13.png 22948 bytes (t+80s)
+04:34:20 shot f6b-14.png 24501 bytes (t+87s)
+04:34:26 shot f6b-15.png 24159 bytes (t+93s)
+04:34:33 shot f6b-16.png 22455 bytes (t+100s)
+04:34:39 shot f6b-17.png 20377 bytes (t+106s)
+04:34:46 shot f6b-18.png 21624 bytes (t+113s)
+04:34:53 shot f6b-19.png 20136 bytes (t+120s)
+04:34:59 shot f6b-20.png 21638 bytes (t+126s)
+04:35:06 shot f6b-21.png 22568 bytes (t+133s)
+04:35:12 shot f6b-22.png 21108 bytes (t+139s)
+04:35:19 shot f6b-23.png 22869 bytes (t+146s)
+04:35:52 signin: Enter on the lock screen, shot f6-01-signin-tile.png (the tile); typing the password (<typed>)
+04:36:34 winr: meta_l-r, typed cmd.exe
+04:36:49 typed: cd \kit
+04:36:58 typed: savelog 9
+04:37:08 typed: copy /y C:\logs\*.* D:\
+04:37:18 typed: dir C:\logs
+04:37:27 shot f6-02-after-savelog9.png 921004 bytes
+04:38:12 typed: exit
+04:38:45 tm-restart: Task Manager > Shut Down > turnoff selected (shot f6-03-tm-turnoff-selected.png); Enter
+04:38:49 qemu pid 1306636: EXITED, 4 s after the wait began
