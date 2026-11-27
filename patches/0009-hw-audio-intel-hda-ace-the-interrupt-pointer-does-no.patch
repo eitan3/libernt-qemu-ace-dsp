@@ -1,7 +1,7 @@
 From a8142792cfe344755884d6b01b6d17bea2962811 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 01:24:08 +0200
-Subject: [PATCH 09/20] hw/audio: intel-hda-ace: the interrupt pointer does not
+Subject: [PATCH 09/22] hw/audio: intel-hda-ace: the interrupt pointer does not
  answer while unpowered
 
 HFINTIPPTR is a DSP-domain register: while ADSPCS.SPA is clear it reads all ones (a model value), so a host that reads it before power-up -- as R1 of the LiberNT driver review does -- derives its interrupt-enable offset from all ones instead of the 0x120 it gets once the subsystem is up.

@@ -1,7 +1,7 @@
 From bfc7b18a636a8b4786d8aaeb6a33c3909ed46a6f Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 10:24:05 +0200
-Subject: [PATCH 18/20] tests/qtest: intel-hda-ace: a payload read never wraps
+Subject: [PATCH 18/22] tests/qtest: intel-hda-ace: a payload read never wraps
  past the end of the stream
 
 wrapped-offset: the offset field of the ADSP.man entry of the test image is

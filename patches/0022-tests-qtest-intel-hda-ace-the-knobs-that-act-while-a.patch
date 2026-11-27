@@ -1,0 +1,99 @@
+From e6fb5f25ac39d58e3c9fb7cfab9435d3e66f77a4 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 19:34:20 +0200
+Subject: [PATCH 22/22] tests/qtest: intel-hda-ace: the knobs that act while a
+ stream runs
+
+One case, stream-faults, on the render stream (output 5, tag 2) run with
+the loopback's descriptor list: never-reply-running=19 answers the
+set-state while nothing runs, drops it from the stream's start (nothing
+pending after a thousand reply times) while a delete is answered, and
+answers it again once the stream stops; crash-during-stream=1 answers a
+create before the stream runs and one set-state after it, then posts the
+EXCEPTION_CAUGHT notification in place of the next request's reply, the
+request's DONE never set, and again for the request after the
+acknowledgement.
+---
+ tests/qtest/intel-hda-ace-test.c | 59 ++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index 9a16925b6..c7928f097 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1446,6 +1446,64 @@ static void test_audio_loopback(void)
+     boot_end();
+ }
+ 
++/* 16: the knobs that act only while a stream of the boot runs.  A stream is
++ * a host stream of the firmware's from its run bit, the loader's excepted.
++ * never-reply-running=<type> answers that type's requests before the stream
++ * runs (the boot's and the build's alike), drops them from the stream's
++ * start and answers them again once it stops; crash-during-stream=<n>
++ * answers n replies after the stream started, then posts the EXCEPTION_CAUGHT
++ * notification in place of the next reply, which never comes. */
++static void test_stream_faults(void)
++{
++    /* never-reply-running=19: the set-state is answered while nothing runs */
++    boot_start(",fault=never-reply-running=19");
++    boot_running();
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    /* a host stream runs: the set-state is dropped from now on, nothing
++     * pending after a thousand reply times; another type is answered */
++    loop_bdl(BDL_RENDER, RENDER_ADDR);
++    loop_setup(OUT5, LOOP_TAG_RENDER, BDL_RENDER);
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_STATE(1, PPL_RUNNING));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    /* the stream stopped: the set-state is answered again */
++    loop_run(OUT5, false);
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
++    boot_end();
++
++    /* crash-during-stream=1: a request before the stream runs is answered,
++     * one reply comes after the stream started, then the exception stands in
++     * place of the next reply; acknowledged, it stands for the next request
++     * too, no reply ever */
++    boot_start(",fault=crash-during-stream=1");
++    boot_running();
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    loop_bdl(BDL_RENDER, RENDER_ADDR);
++    loop_setup(OUT5, LOOP_TAG_RENDER, BDL_RENDER);
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_STATE(1, PPL_RUNNING));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_EXCEPTION);
++    w4(ACE_XTDR, ACE_BUSY);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_REQ(IPC4_DELETE_PIPELINE, 1));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_EXCEPTION);
++    w4(ACE_XTDR, ACE_BUSY);
++    loop_run(OUT5, false);
++    boot_end();
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -1462,6 +1520,7 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/pipeline-table", test_pipeline_table);
+         qtest_add_func("/intel-hda-ace/pipeline-illegal", test_pipeline_illegal);
+         qtest_add_func("/intel-hda-ace/pipeline-faults", test_pipeline_faults);
++        qtest_add_func("/intel-hda-ace/stream-faults", test_stream_faults);
+         qtest_add_func("/intel-hda-ace/short-stream", test_short_stream);
+         qtest_add_func("/intel-hda-ace/wrapped-offset", test_wrapped_offset);
+         qtest_add_func("/intel-hda-ace/audio-loopback", test_audio_loopback);
+-- 
+2.56.1
+

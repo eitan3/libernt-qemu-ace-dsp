@@ -1,7 +1,7 @@
 From fc39137160d9f0b571fa83487961dc928ec0a30b Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 08:06:33 +0200
-Subject: [PATCH 14/20] tests/qtest: intel-hda-ace: the faults that name one
+Subject: [PATCH 14/22] tests/qtest: intel-hda-ace: the faults that name one
  message type
 
 pipeline-faults: ipc-status=5:19 answers set-pipeline-state with 5 while

@@ -1,0 +1,167 @@
+From df1e34046740040c726771ccf90c3db1e70dab3c Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 19:34:20 +0200
+Subject: [PATCH 21/22] hw/audio: intel-hda-ace: two knobs that act while a
+ stream of the boot runs
+
+Two values of the run-time fault property (the P5 E1 design's section 6),
+for the driver's in-place recovery's VM rows (E1b).  A stream of the boot
+is a host stream of the firmware's from its run bit (a stream from the
+fourth on with a tag, the loader's excepted); the model keeps which run
+and counts its replies from the first that starts while none runs.
+
+never-reply-running=<type>: the requests of that message type are dropped
+only while a stream runs -- before, the boot's and the build's requests
+are answered as without the fault, and once the stream stops they are
+again; other types are answered throughout.
+
+crash-during-stream=<n>: after n replies since the stream started, the
+next request gets the EXCEPTION_CAUGHT notification in place of its reply
+and no reply comes for it (the host's transport faults its link on the
+type); acknowledged, the notification stands for the next request too.
+n = 1 is the pause of the free in the driver's order.
+
+Both are reset with the device and saved with its state.
+---
+ hw/audio/intel-hda-ace.c | 54 +++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 50 insertions(+), 4 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index af96bf1ce..904c54703 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -102,6 +102,8 @@ typedef enum AceFault {
+     ACE_FAULT_TRUNCATED_REPLY,
+     ACE_FAULT_VERSION_SHIFT,
+     ACE_FAULT_WINDOW_READ_FAIL,
++    ACE_FAULT_NEVER_REPLY_RUNNING,
++    ACE_FAULT_CRASH_DURING_STREAM,
+ } AceFault;
+ 
+ /* whether a fault takes a value: none, a required one, or an optional one
+@@ -134,6 +136,10 @@ static const struct {
+     { "truncated-reply",    ACE_FAULT_TRUNCATED_REPLY,    ACE_ARG_NONE },
+     { "version-shift",      ACE_FAULT_VERSION_SHIFT,      ACE_ARG_NONE },
+     { "window-read-fail",   ACE_FAULT_WINDOW_READ_FAIL,   ACE_ARG_NONE },
++    /* the two that act only while a stream of the boot runs (bit 28:24 of a
++     * request's primary names its type) */
++    { "never-reply-running", ACE_FAULT_NEVER_REPLY_RUNNING, ACE_ARG_REQUIRED },
++    { "crash-during-stream", ACE_FAULT_CRASH_DURING_STREAM, ACE_ARG_REQUIRED },
+ };
+ 
+ /* PCI identities of the ACE 1.0 controllers the host drivers know (the
+@@ -255,6 +261,11 @@ struct IntelHDAAceState {
+     uint32_t fault_arg;
+     bool fault_typed;            /* the fault names one message type */
+     uint32_t fault_type;         /* ... this one (bits 28:24 of the primary) */
++    /* the host streams of the firmware that run (a bit per stream from the
++     * fourth on, the loader's excepted), and the replies made since the first
++     * of them started while none ran: the two knobs above count from there */
++    uint32_t streams_running;
++    uint32_t stream_replies;
+ };
+ 
+ static void ace_fw_ready(IntelHDAAceState *s);
+@@ -1351,6 +1362,9 @@ static void ace_reply_timer_cb(void *opaque)
+     if (!fw_config) {
+         ace_gateways_update(s);
+     }
++    if (s->streams_running) {
++        s->stream_replies++;
++    }
+ }
+ 
+ /* a host -> DSP request: the primary was written with BUSY set */
+@@ -1381,7 +1395,9 @@ static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
+     }
+     trace_ace_ipc("request", primary, ext);
+     if (s->fault_id == ACE_FAULT_DROP_REQUESTS ||
+-        (s->fault_id == ACE_FAULT_NEVER_REPLY && ace_fault_applies(s, type))) {
++        (s->fault_id == ACE_FAULT_NEVER_REPLY && ace_fault_applies(s, type)) ||
++        (s->fault_id == ACE_FAULT_NEVER_REPLY_RUNNING && s->streams_running &&
++         ace_fault_applies(s, type))) {
+         /* the message is dropped: named by its type, so that a fault which
+          * names one type shows which requests it took */
+         g_autofree char *dir = g_strdup_printf(
+@@ -1391,6 +1407,16 @@ static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
+         trace_ace_ipc(dir, primary, ext);
+         return;
+     }
++    if (s->fault_id == ACE_FAULT_CRASH_DURING_STREAM && s->streams_running &&
++        s->stream_replies >= s->fault_arg) {
++        /* the firmware's exception, caught after the value's replies while a
++         * stream runs: the notification stands in place of the reply, and no
++         * reply comes (the host's transport faults its link on the type) */
++        trace_ace_ipc("exception caught in place of the reply", primary, ext);
++        ace_set_notif(s, (ACE_IPC4_GLB_NOTIFICATION << ACE_IPC4_MSG_TYPE_SHIFT) |
++                      (ACE_IPC4_EXCEPTION_CAUGHT << ACE_IPC4_NOTIFY_TYPE_SHIFT), 0);
++        return;
++    }
+     s->reply_primary = primary;
+     s->reply_ext = ext;
+     ace_arm(s->reply_timer, ace_delay(s, ACE_US_IPC_REPLY));
+@@ -1466,6 +1492,21 @@ static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
+     uint32_t tag = (st->ctl >> 20) & 0x0f;
+ 
+     ace_gateways_update(s);
++    if (idx >= 4 && tag != 0 && tag != s->purge_tag) {
++        /* a host stream of the firmware's, not the loader's: the knobs that act
++         * while a stream runs see a stream from its run bit, and count the
++         * replies from the first that starts while none runs */
++        uint32_t bit = 1u << (idx - 4);
++
++        if (running) {
++            if (!s->streams_running) {
++                s->stream_replies = 0;
++            }
++            s->streams_running |= bit;
++        } else {
++            s->streams_running &= ~bit;
++        }
++    }
+     if (running) {
+         ace_stream_report(d, idx);   /* a stream that starts reports its position */
+     }
+@@ -2230,7 +2271,7 @@ static void ace_apply_fault(IntelHDAAceState *s, const char *value, Error **errp
+         error_setg(errp, "intel-hda-ace: fault '%s' needs a value (%s)", base,
+                    fault == ACE_FAULT_IPC_STATUS ?
+                    "=<status>, or =<status>:<type> for one message type" :
+-                   "=<number>");
++                   fault == ACE_FAULT_NEVER_REPLY_RUNNING ? "=<type>" : "=<number>");
+         return;
+     }
+     if (arg) {
+@@ -2244,9 +2285,10 @@ static void ace_apply_fault(IntelHDAAceState *s, const char *value, Error **errp
+                            : g_strdup(arg + 1);
+             fault_arg = (uint32_t)strtoul(status, NULL, 0);
+             type = colon ? colon + 1 : NULL;
+-        } else if (fault == ACE_FAULT_NEVER_REPLY) {
++        } else if (fault == ACE_FAULT_NEVER_REPLY || fault == ACE_FAULT_NEVER_REPLY_RUNNING) {
+             /* never-reply: every request; never-reply=<type>: the requests
+-             * of that message type alone */
++             * of that message type alone; never-reply-running=<type>: those
++             * requests, while a stream of the boot runs */
+             type = arg + 1;
+         } else {
+             fault_arg = (uint32_t)strtoul(arg + 1, NULL, 0);
+@@ -2338,6 +2380,8 @@ static void intel_hda_ace_reset(DeviceState *dev)
+     s->purge_pending = false;
+     s->reply_pending = false;
+     s->notif_pending = false;
++    s->streams_running = 0;
++    s->stream_replies = 0;
+     ace_ppl_clear(s);
+     s->state = ACE_OFF;
+     s->hda.ext_sts = 0;
+@@ -2465,6 +2509,8 @@ static const VMStateDescription vmstate_intel_hda_ace = {
+         VMSTATE_UINT32(purge_tag, IntelHDAAceState),
+         VMSTATE_BOOL(reply_pending, IntelHDAAceState),
+         VMSTATE_BOOL(notif_pending, IntelHDAAceState),
++        VMSTATE_UINT32(streams_running, IntelHDAAceState),
++        VMSTATE_UINT32(stream_replies, IntelHDAAceState),
+         VMSTATE_UINT16_ARRAY(fw_version, IntelHDAAceState, 4),
+         VMSTATE_BOOL(have_version, IntelHDAAceState),
+         VMSTATE_END_OF_LIST()
+-- 
+2.56.1
+
