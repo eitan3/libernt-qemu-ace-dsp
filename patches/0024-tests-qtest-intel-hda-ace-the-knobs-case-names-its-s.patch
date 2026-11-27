@@ -1,0 +1,71 @@
+From 813793ba53f0658b64a0c2de91cbd3cf5113f1e8 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 21:55:36 +0200
+Subject: [PATCH 24/25] tests/qtest: intel-hda-ace: the knobs' case names its
+ streams
+
+never-reply-running=19 drops the set-state behind an input stream that a
+host-input copier names (the capture side, before the fourth), and
+crash-during-stream=1 crashes behind a stream that carries the loader's tag,
+1, named by a host-output copier: the two assignments the driver's streams
+get in the VM. The module instance is deleted before its pipeline.
+---
+ tests/qtest/intel-hda-ace-test.c | 24 +++++++++++++++++-------
+ 1 file changed, 17 insertions(+), 7 deletions(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index c7928f097..dca74b94e 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1460,18 +1460,24 @@ static void test_stream_faults(void)
+     boot_running();
+     g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
+     g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
+-    /* a host stream runs: the set-state is dropped from now on, nothing
+-     * pending after a thousand reply times; another type is answered */
+-    loop_bdl(BDL_RENDER, RENDER_ADDR);
+-    loop_setup(OUT5, LOOP_TAG_RENDER, BDL_RENDER);
++    /* a host-input copier names input stream 0 (its node index 1 is the tag
++     * less one): a host stream of the firmware's runs from its run bit, an
++     * input stream no less than an output one, and the set-state is dropped
++     * from now on, nothing pending after a thousand reply times; another
++     * type is answered */
++    loop_config((1u << 8) | 1, 21);
++    g_assert_cmpuint(ipc(MOD_EXT(1, 21), MOD_REQ(IPC4_MOD_INIT, 5, 1)), ==, MOD_REPLY(IPC4_MOD_INIT, 0));
++    loop_bdl(BDL_CAPTURE, CAPTURE_ADDR);
++    loop_setup(IN0, 2, BDL_CAPTURE);
+     w4(ACE_XIDDY, 0);
+     w4(ACE_XIDR, PPL_STATE(1, PPL_RUNNING));
+     qtest_clock_step(t.qs, US(1000));
+     g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
+     g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(ipc(0, MOD_REQ(IPC4_MOD_DELETE, 5, 1)), ==, MOD_REPLY(IPC4_MOD_DELETE, 0));
+     g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
+     /* the stream stopped: the set-state is answered again */
+-    loop_run(OUT5, false);
++    loop_run(IN0, false);
+     g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
+     g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
+     g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_DELETE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_DELETE_PIPELINE, 0));
+@@ -1480,12 +1486,16 @@ static void test_stream_faults(void)
+     /* crash-during-stream=1: a request before the stream runs is answered,
+      * one reply comes after the stream started, then the exception stands in
+      * place of the next reply; acknowledged, it stands for the next request
+-     * too, no reply ever */
++     * too, no reply ever. The stream carries the loader's tag, 1, which the
++     * bus hands back at the boot's end: a host-output copier names it, so
++     * it is the firmware's stream all the same */
+     boot_start(",fault=crash-during-stream=1");
+     boot_running();
+     g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    loop_config(0u << 8, 21);
++    g_assert_cmpuint(ipc(MOD_EXT(1, 21), MOD_REQ(IPC4_MOD_INIT, 5, 0)), ==, MOD_REPLY(IPC4_MOD_INIT, 0));
+     loop_bdl(BDL_RENDER, RENDER_ADDR);
+-    loop_setup(OUT5, LOOP_TAG_RENDER, BDL_RENDER);
++    loop_setup(OUT5, 1, BDL_RENDER);
+     g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
+     w4(ACE_XIDDY, 0);
+     w4(ACE_XIDR, PPL_STATE(1, PPL_RUNNING));
+-- 
+2.56.1
+

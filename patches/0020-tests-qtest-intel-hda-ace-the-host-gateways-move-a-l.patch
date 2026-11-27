@@ -1,7 +1,7 @@
 From 46998f8106f49fe7612da405a99785ce20af01a9 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 19:30:58 +0200
-Subject: [PATCH 20/22] tests/qtest: intel-hda-ace: the host gateways move a
+Subject: [PATCH 20/25] tests/qtest: intel-hda-ace: the host gateways move a
  loopback's PCM
 
 One case, audio-loopback, on the driver's loopback topology -- host

@@ -1,0 +1,75 @@
+From 580212c9484d9b6428bacf674660837edc4929ab Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 21:55:36 +0200
+Subject: [PATCH 23/25] hw/audio: intel-hda-ace: a host stream of the
+ firmware's is the one a copier names
+
+The two knobs that act while a stream of the boot runs (0021) took a host
+stream of the firmware's for any output stream from the fourth on whose tag
+was not the loader's. Against the driver neither of its streams is that: the
+capture stream is an input (the model's inputs are the streams before the
+fourth), and the render stream carries the loader's tag, 1, which the bus
+hands back at the boot's end. So never-reply-running and crash-during-stream
+never fired in the VM (the P5 E1b round, N10-02: the knob set at a stream's
+open, no exception in the trace, the run through).
+
+A stream is now the firmware's iff an initialised host copier names it: its
+gateway node index plus one is the tag, on its side (a host-output copier's
+an output stream, a host-input copier's an input one). The loader's stream
+is never named, whatever tag the bus gives it.
+---
+ hw/audio/intel-hda-ace.c | 28 ++++++++++++++++++++++++++--
+ 1 file changed, 26 insertions(+), 2 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 904c54703..ddebfbec9 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -1485,6 +1485,30 @@ static void ace_rom_consume(IntelHDAAceState *s, unsigned int idx)
+     intel_hda_update_irq(d);
+ }
+ 
++/* whether a stream that runs is a host stream of the firmware's: the
++ * gateway of an initialised host copier, which names it by its node index
++ * (the tag less one) on its side, a host-output copier's an output stream
++ * and a host-input copier's an input one. The loader's stream is never
++ * named, whatever tag the bus gives it: the tag it hands back at the
++ * boot's end is the PCM's render stream's when the bus reuses it, and the
++ * PCM's capture stream is an input, before the fourth */
++static bool ace_stream_of_firmware(const IntelHDAAceState *s, unsigned int idx, uint32_t tag)
++{
++    uint32_t type = idx >= 4 ? ACE_CFG_NODE_HOST_OUTPUT : ACE_CFG_NODE_HOST_INPUT;
++    unsigned int i;
++
++    if (tag == 0) {
++        return false;
++    }
++    for (i = 0; i < ACE_MODEL_MAX_MODULES; i++) {
++        if (s->mod[i].used && s->mod[i].gateway && s->mod[i].gw_type == type &&
++            s->mod[i].gw_index != ACE_CFG_NODE_INDEX_PLACEHOLDER && s->mod[i].gw_index + 1 == tag) {
++            return true;
++        }
++    }
++    return false;
++}
++
+ static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
+ {
+     IntelHDAAceState *s = INTEL_HDA_ACE(d);
+@@ -1492,11 +1516,11 @@ static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
+     uint32_t tag = (st->ctl >> 20) & 0x0f;
+ 
+     ace_gateways_update(s);
+-    if (idx >= 4 && tag != 0 && tag != s->purge_tag) {
++    if (ace_stream_of_firmware(s, idx, tag)) {
+         /* a host stream of the firmware's, not the loader's: the knobs that act
+          * while a stream runs see a stream from its run bit, and count the
+          * replies from the first that starts while none runs */
+-        uint32_t bit = 1u << (idx - 4);
++        uint32_t bit = 1u << idx;
+ 
+         if (running) {
+             if (!s->streams_running) {
+-- 
+2.56.1
+

@@ -1,0 +1,51 @@
+From e1550824e87560e392ded36c7952322eb2fb5f03 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 21:57:03 +0200
+Subject: [PATCH 25/25] hw/audio: intel-hda-ace: a stream that stops clears its
+ bit whatever names it
+
+The bit of a running host stream was cleared only while a copier still
+named the stream; a host that deletes the copier ahead of the stop (the
+qtest's order) left the bit set and the knobs acting after the stream was
+gone. The start alone asks which stream it is; the stop clears the bit.
+---
+ hw/audio/intel-hda-ace.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index ddebfbec9..f6f1b0a63 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -1516,20 +1516,19 @@ static void ace_stream_run(IntelHDAState *d, unsigned int idx, bool running)
+     uint32_t tag = (st->ctl >> 20) & 0x0f;
+ 
+     ace_gateways_update(s);
+-    if (ace_stream_of_firmware(s, idx, tag)) {
+-        /* a host stream of the firmware's, not the loader's: the knobs that act
+-         * while a stream runs see a stream from its run bit, and count the
+-         * replies from the first that starts while none runs */
+-        uint32_t bit = 1u << idx;
+-
+-        if (running) {
++    if (running) {
++        if (ace_stream_of_firmware(s, idx, tag)) {
++            /* a host stream of the firmware's starts: the knobs that act while a stream runs see
++             * it from its run bit, and count the replies from the first that starts while none
++             * runs; the loader's stream is never named, so it never counts */
+             if (!s->streams_running) {
+                 s->stream_replies = 0;
+             }
+-            s->streams_running |= bit;
+-        } else {
+-            s->streams_running &= ~bit;
++            s->streams_running |= 1u << idx;
+         }
++    } else {
++        /* a stream stops: its bit goes whatever names it now, its copier may be gone ahead of it */
++        s->streams_running &= ~(1u << idx);
+     }
+     if (running) {
+         ace_stream_report(d, idx);   /* a stream that starts reports its position */
+-- 
+2.56.1
+
