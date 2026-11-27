@@ -1,0 +1,5 @@
+2026-11-27T15:24:40Z s5: done; the VM is left running for S7 and S8 (lib-run pid 1434179, sockets /tmp/qad-vm.1434179)
+2026-11-27T15:31:17Z S8: shutdown -s -t 0 through the Run box (the console lost its focus to the flyouts of S7)
+2026-11-27T15:31:31Z S8: QEMU exited 6 s after the command; the shutdown's own lines:
+2026-11-27T15:31:31Z S8: ending the VM by the ACPI power button
+2026-11-27T15:31:31Z S8b: one more boot from the same disk

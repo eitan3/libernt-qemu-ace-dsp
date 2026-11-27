@@ -1,0 +1,23 @@
+# the exports of the first-session flow (p4c4g, read from stick B after the clean Turn Off of the export boot) against the p4c4e final pass (evidence/2026-11-27-c6-final-p4c4e/logs/s5)
+# format: boot  lines / intcdsp.sys: lines / stop lines / bytes (raw) -- last line;   p4c4e: the same figures
+boot1        lines  259  intcdsp.sys:  10  stop lines 0  bytes 270336
+    last: [ 2445.894026] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+    p4c4e: lines  260  intcdsp.sys:  10  stop lines 0  bytes 27570
+boot2        lines  133  intcdsp.sys:  23  stop lines 0  bytes 270336
+    last: [ 2923.746869] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+    p4c4e: lines  133  intcdsp.sys:  23  stop lines 0  bytes 16511
+boot2-prev   lines  133  intcdsp.sys:  10  stop lines 0  bytes 15561
+    last: [ 2701.098670] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+    p4c4e: lines  138  intcdsp.sys:  10  stop lines 0  bytes 16025
+boot3        lines  155  intcdsp.sys:  35  stop lines 0  bytes 270336
+    last: [ 1947.146875] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+    p4c4e: lines  156  intcdsp.sys:  35  stop lines 0  bytes 19800
+boot3-prev   lines  145  intcdsp.sys:  23  stop lines 0  bytes 17718
+    last: [ 3269.470409] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+    p4c4e: lines  147  intcdsp.sys:  23  stop lines 0  bytes 17961
+boot4        lines  169  intcdsp.sys:  36  stop lines 0  bytes 270336
+    last: [ 2592.578349] (\ntos\po\standby.c:207) The console display is now on
+    p4c4e: lines  166  intcdsp.sys:  36  stop lines 0  bytes 20230
+boot4-prev   lines  171  intcdsp.sys:  35  stop lines 0  bytes 21314
+    last: [ 2557.576368] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+    p4c4e: lines  172  intcdsp.sys:  35  stop lines 0  bytes 21444

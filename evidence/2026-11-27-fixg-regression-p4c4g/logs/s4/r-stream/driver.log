@@ -1,0 +1,72 @@
+2026-11-27T14:54:16Z r-stream: r-stream on disk/p4c4g-nt.qcow2
+2026-11-27T14:54:18Z VM r-stream started (lib-run pid 1421336, sockets /tmp/qad-vm.1421338, data disk /tmp/c6g/pouch/r-stream.img)
+[14:55:12] [   42.124351] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000002FFEFD59C0 0000000000070170 'Program Manager' 0000002FFEFD5B38 32 0x0 0000002FFEFD5BE0 30c 0000002FFEFD5B64)
+2026-11-27T14:55:37Z console: Win+R, cmd.exe
+2026-11-27T14:55:53Z data disk: drive F: in the guest (1 marker)
+2026-11-27T14:55:59Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-27T14:56:15Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-27T14:56:29Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-27T14:56:42Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 3 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T14:57:15Z cycle tp-1 (the topology at the D0 entry): rc=0
+2026-11-27T14:57:15Z after the cycle: boot ok lines: 1; the topology line: 1; registered-as lines: 0; audio child lines: 1
+2026-11-27T14:57:28Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-27T14:57:28Z the endpoints the guest lists: 0 Loopback lines
+2026-11-27T14:57:38Z s4a-never-reply: dsploop started (fault never-reply at open 1, bounded at 300 s)
+2026-11-27T14:57:39Z s4a-never-reply: open #1 at guest 572.602906 s; fault 'never-reply' injected at 14:57:39 (host), the model answered: {"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "propert
+2026-11-27T14:57:46Z s4a-never-reply: fault cleared (14:57:46)
+2026-11-27T14:57:55Z console answering after s4a-never-reply (alive-s4a-never-reply.txt, 3 s)
+2026-11-27T14:57:55Z s4a-never-reply: ended after about 5 s; the console answers
+2026-11-27T14:57:55Z s4a-never-reply: the run's own lines (compared / preconditions / tests executed / errors):
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:311: Test failed: dsploop (24 valid in 32): render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 1 of 3 depths compared
+    dsploop: 1 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED '1 ': not a 0 or a 1, required, a failure)
+    dsploop: 433 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T14:57:55Z s4a-never-reply: the driver's lines from the open on (ipc / stream / held / freed / tag / power), after serial line 217:
+    [  572.602906] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  572.602906] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  572.602906] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  572.605906] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  572.605906] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  572.605906] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  575.112043] intcdsp.sys: ipc: set pipeline state (19) 0x93010003|0x00000000 reply timeout after 500009 us; the link is faulted
+    [  575.112043] intcdsp.sys: stream 1: a pipeline could not be paused (0xc00000b5)
+    [  575.112043] intcdsp.sys: streams: released after the fault; nothing is sent until the DSP is booted again
+    [  575.112043] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [  575.112043] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+    [  575.112043] dsppcm.sys: stream: state 0 not set, 0xc00000a3
+    [  575.112043] dsppcm.sys: stream: state 2 not set, 0xc00000a3
+    [  575.112043] dsppcm.sys: stream: state 1 not set, 0xc00000a3
+    [  575.112043] dsppcm.sys: stream: state 0 not set, 0xc00000a3
+    [  575.112043] dsppcm.sys: stream: state 0 not set, 0xc00000a3
+    [  575.112043] dsppcm.sys: stream: state 1 not set, 0xc00000a3
+    [  575.112043] dsppcm.sys: stream: state 0 not set, 0xc00000a3
+    [  575.143293] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T14:57:55Z s4a-never-reply: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 1; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T14:58:07Z s4a-recovered: dsploop started (fault none at open 0, bounded at 300 s)
+2026-11-27T14:58:22Z console answering after s4a-recovered (alive-s4a-recovered.txt, 3 s)
+2026-11-27T14:58:22Z s4a-recovered: ended after about 4 s; the console answers
+2026-11-27T14:58:22Z s4a-recovered: the run's own lines (compared / preconditions / tests executed / errors):
+    dsploop.c:311: Test failed: dsploop: render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared
+    dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED '1 ': not a 0 or a 1, required, a failure)
+    dsploop: 5 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T14:58:22Z s4a-recovered: the driver's lines from the open on (ipc / stream / held / freed / tag / power), after serial line 240:
+    [  658.091149] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T14:58:22Z s4a-recovered: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T14:58:22Z s4a-recovered: !! the run after the fault did not pass (compared lines: 0; failures line: dsploop: 5 tests executed (0 marked as todo, 2 failures), 0 skipped.)
+2026-11-27T15:00:46Z cycle rec-s4a-recovered: rc=0; boot ok: 0
+2026-11-27T15:00:58Z s4a-recovered-after-cycle: dsploop started (fault none at open 0, bounded at 300 s)
+2026-11-27T15:01:14Z console answering after s4a-recovered-after-cycle (alive-s4a-recovered-after-cycle.txt, 3 s)
+2026-11-27T15:01:14Z s4a-recovered-after-cycle: ended after about 4 s; the console answers
+2026-11-27T15:01:14Z s4a-recovered-after-cycle: the run's own lines (compared / preconditions / tests executed / errors):
+    dsploop.c:311: Test failed: dsploop: render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared
+    dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED '1 ': not a 0 or a 1, required, a failure)
+    dsploop: 5 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T15:01:14Z s4a-recovered-after-cycle: the driver's lines from the open on (ipc / stream / held / freed / tag / power), after serial line 244:
+    [ 1488.228957] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T15:01:14Z s4a-recovered-after-cycle: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:01:14Z s4a-recovered-after-cycle: !! still not passing after the device cycle
+2026-11-27T15:01:25Z s4b-crash-notification: dsploop started (fault crash-notification at open 1, bounded at 300 s)
+s4b: stopped by me at 15:05:18: the DSP was dead since S4a (no in-session recovery); the fault was not injected

@@ -1,0 +1,23 @@
+13:53:41 shot x1w-01.png 21702 bytes (t+1s)
+13:53:55 shot x1w-02.png 23207 bytes (t+15s)
+13:54:07 shot x1w-03.png 23917 bytes (t+27s)
+13:54:18 shot x1w-04.png 19549 bytes (t+38s)
+13:54:38 shot x1w-05.png 22359 bytes (t+58s)
+13:54:50 shot x1w-06.png 21722 bytes (t+70s)
+13:55:01 shot x1w-07.png 19352 bytes (t+81s)
+13:55:13 shot x1w-08.png 20359 bytes (t+93s)
+13:55:24 shot x1w-09.png 21763 bytes (t+104s)
+13:55:36 shot x1w-10.png 20424 bytes (t+116s)
+13:55:47 shot x1w-11.png 21729 bytes (t+127s)
+13:55:59 shot x1w-12.png 21408 bytes (t+139s)
+13:56:18 shot x1w-13.png 23679 bytes (t+158s)
+13:56:18 x1w-13 = the lock screen (still frame of 23679 bytes, read by size)
+13:56:25 signin: Enter on the lock screen, shot x1-02-signin-tile.png (the tile); typing the password (<typed>)
+13:57:02 winr: meta_l-r, typed cmd.exe
+13:57:24 typed: copy /y C:\logs\*.* D:\
+13:57:33 typed: dir C:\logs
+13:57:42 typed: dir D:\
+13:57:49 shot x1-03-after-export-copy.png 915841 bytes
+13:57:51 typed: exit
+13:58:47 tm-restart: Task Manager > Shut Down > turnoff selected (shot x1-04-tm-turnoff-selected.png); Enter
+13:58:50 qemu pid 1390657: EXITED, 3 s after the wait began

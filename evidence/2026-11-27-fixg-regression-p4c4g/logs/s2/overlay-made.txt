@@ -1,0 +1,7 @@
+Formatting '<project>/disk/p4c4g-nt.qcow2', fmt=qcow2 cluster_size=65536 extended_l2=off compression_type=zlib size=85899345920 backing_file=<home>/libernt-build-logs/test-audio-intel-sst-p4c4g-6bdaaa5e920/LiberNT.vhd backing_fmt=vpc lazy_refcounts=off refcount_bits=16
+image: <project>/disk/p4c4g-nt.qcow2
+file format: qcow2
+virtual size: 80 GiB (85899345920 bytes)
+disk size: 196 KiB
+cluster_size: 65536
+backing file: <home>/libernt-build-logs/test-audio-intel-sst-p4c4g-6bdaaa5e920/LiberNT.vhd

@@ -1,0 +1,258 @@
+== boot1: old 260 lines, new 259 lines
+  tagged lines: old 0, new 0; rows that differ: 2
+      -9  \ntos\po\standby.c (old 12, new 3)
+      +8  \dll\win32\iphlpapi\ipstats_reactos.c (old 89, new 97)
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000BCDC2C2B30 000000000000000A 'AudioSrv' 000000BCDC2C3D7C 32 0x1 000000BCDC2C3E90 22c 000000BCDC2C3DA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000BCDC2C8540 0000000000070170 'Program Manager' 000000BCDC2C55F8 32 0x0 000000BCDC2C5560 33c 000000BCDC2C5624)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000009F631B2B30 000000000000000A 'AudioSrv' 0000009F631B3D7C 32 0x1 0000009F631B3E90 240 0000009F631B3DA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000009F631B8420 00000000001C0166 'Program Manager' 0000009F631B55F8 32 0x0 0000009F631B5560 338 0000009F631B5624)
+  < (\base\setup\libernt\libernt.c:1106) Firmware language 'en'
+  < (\base\setup\libernt\libernt.c:1313) Setup language 00000409, keyboard 00000409
+  < (\base\setup\libernt\libernt.c:1501) No LiberNT installation to upgrade
+  > (\base\setup\libernt\libernt.c:1105) Firmware language 'en'
+  > (\base\setup\libernt\libernt.c:1312) Setup language 00000409, keyboard 00000409
+  > (\base\setup\libernt\libernt.c:1500) No LiberNT installation to upgrade
+  < (\base\setup\lib\utils\partlist.c:2014) Disk 0 of identifier '12b01bec-b253f5c7-A' is fixed
+  < (\base\setup\lib\utils\partlist.c:2014) Disk 1 of identifier 'd983b77e-ba1b2858-A' is fixed
+  > (\base\setup\lib\utils\partlist.c:2014) Disk 0 of identifier '46aedb2f-7e553684-A' is fixed
+  > (\base\setup\lib\utils\partlist.c:2014) Disk 1 of identifier '818fd5b2-120f0a24-A' is fixed
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  > err:(\dll\win32\iphlpapi\ipstats_reactos.c:514) openTcpFile returned 0xc0000034
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000F97047BF70, 1, 000000F972E6FD68, 000000F972E6FD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000F97047BF70): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000D325B7E1A0, 1, 000000D32852FD68, 000000D32852FD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000D325B7E1A0): stub
+  < (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000001000 Hz
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 1000002000 Hz
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 47072, LCN 216143, disk byte 953479168
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 47072, LCN 218671, disk byte 963833856
+  < (\ntos\po\standby.c:207) The console display is now off
+  < (\ntos\po\standby.c:207) The console display is now off
+  < (\ntos\po\standby.c:207) The console display is now off
+  < (\ntos\po\standby.c:207) The console display is now on
+  < (\ntos\po\standby.c:207) The console display is now on
+  < (\ntos\po\standby.c:207) The console display is now on
+  < (\ntos\po\standby.c:346) The display idled out after 600 seconds
+  < (\ntos\po\standby.c:346) The display idled out after 600 seconds
+  < (\ntos\po\standby.c:346) The display idled out after 600 seconds
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007948B4E
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007948D8D
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007B1EADFA
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007C2B6075
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000001000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AF71A3C
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B1EB4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007948B4E
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007948D8D
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007B1EADFA
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000600 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007C2B6075
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000001000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AF71A7C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B1EB4F1
+== boot2: old 133 lines, new 133 lines
+  tagged lines: old 0, new 0; rows that differ: 0
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000CEA8C12C70 000000000000000A 'AudioSrv' 000000CEA8C13E7C 32 0x1 000000CEA8C13F90 25c 000000CEA8C13EA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000CEA8C159A0 000000000006017E 'Program Manager' 000000CEA8C15B78 32 0x0 000000CEA8C15C20 324 000000CEA8C15BA4)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000004A8B072C70 000000000000000A 'AudioSrv' 0000004A8B073E7C 32 0x1 0000004A8B073F90 264 0000004A8B073EA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000004A8B0759A0 000000000006017E 'Program Manager' 0000004A8B075BE8 32 0x0 0000004A8B075C30 108 0000004A8B075C14)
+  < (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F241800)
+  > (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F207B00)
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000002558B7BC30, 1, 000000255B57FD68, 000000255B57FD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000002558B7BC30): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000002EC1D2E280, 1, 0000002EC46EFD68, 0000002EC46EFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000002EC1D2E280): stub
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007252000, clock 8528938810 us at 10000000 Hz
+  < intcdsp.sys: boot ok after 5450 us (clock 8528944355 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, att
+  > intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007253000, clock 6717853310 us at 10000000 Hz
+  > intcdsp.sys: boot ok after 5451 us (clock 6717858855 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, att
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268877, disk byte 1169477632
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 269131, disk byte 1170518016
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270383, disk byte 1175646208
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270637, disk byte 1176686592
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000D000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A3C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A7C
+== boot2-prev: old 138 lines, new 133 lines
+  tagged lines: old 0, new 0; rows that differ: 3
+      -3  \ntos\po\standby.c (old 3, new 0)
+      -1  \base\setup\libernt\updagent.c (old 1, new 0)
+      -1  \dll\win32\combase\marshal.c (old 1, new 0)
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D6C5132C70 000000000000000A 'AudioSrv' 000000D6C5133E7C 32 0x1 000000D6C5133F90 280 000000D6C5133EA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D6C51359B0 0000000000030180 'Program Manager' 000000D6C5135CE8 32 0x0 000000D6C5135C50 130 000000D6C5135D14)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000006927802C70 000000000000000A 'AudioSrv' 0000006927803E7C 32 0x1 0000006927803F90 27c 0000006927803EA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(00000069278059A0 000000000006017E 'Program Manager' 0000006927805BE8 32 0x0 0000006927805C30 118 0000006927805C14)
+  < (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+  < err:(\dll\win32\combase\marshal.c:759) StdMarshal ReleaseMarshalData failed with error 0x8001011d
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000997B4EBFB0, 1, 000000997DFFFD68, 000000997DFFFD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000997B4EC110, 1, 000000997DEEFD68, 000000997DEEFD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000997B4EBFB0): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000997B4EC110): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000094B6EFDA00, 1, 00000094B98BFD68, 00000094B98BFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000094B6EFDE60, 1, 00000094B99CFD68, 00000094B99CFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000094B6EFDA00): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000094B6EFDE60): stub
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 47072, LCN 216143, disk byte 953479168
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 269131, disk byte 1170518016
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 47072, LCN 218671, disk byte 963833856
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270637, disk byte 1176686592
+  < (\ntos\po\standby.c:207) The console display is now off
+  < (\ntos\po\standby.c:207) The console display is now on
+  < (\ntos\po\standby.c:346) The display idled out after 600 seconds
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000D000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A3C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A7C
+== boot3: old 156 lines, new 155 lines
+  tagged lines: old 0, new 0; rows that differ: 1
+      -1  \drivers\storage\port\storport\fdo.c (old 3, new 2)
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000C343322C70 000000000000000A 'AudioSrv' 000000C343323E7C 32 0x1 000000C343323F90 264 000000C343323EA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000C343325C50 000000000006017E 'Program Manager' 000000C343325E28 32 0x0 000000C343325ED0 114 000000C343325E54)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000A778812C70 000000000000000A 'AudioSrv' 000000A778813E7C 32 0x1 000000A778813F90 280 000000A778813EA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000A778815C70 000000000006017E 'Program Manager' 000000A778815E48 32 0x0 000000A778815EF0 2d0 000000A778815E74)
+  < (\drivers\storage\port\storport\fdo.c:1769) Storport: the miniport is busy, requeueing request FFFF81803F207400 (1 so far)
+  < (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F207B00)
+  > (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F241800)
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000A80308BCF0, 1, 000000A805A8FD68, 000000A805A8FD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000A80308BCF0): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000021A47EDBA0, 1, 00000021A71AFD68, 00000021A71AFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000021A47EDBA0): stub
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007252000, clock 10773823402 us at 10000000 Hz
+  < intcdsp.sys: boot ok after 5451 us (clock 10773828947 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, at
+  > intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007253000, clock 9991860218 us at 10000000 Hz
+  > intcdsp.sys: boot ok after 5451 us (clock 9991865763 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, att
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268873, disk byte 1169461248
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268877, disk byte 1169477632
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270379, disk byte 1175629824
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270383, disk byte 1175646208
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000D000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A3C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A7C
+== boot3-prev: old 147 lines, new 145 lines
+  tagged lines: old 0, new 0; rows that differ: 2
+      -1  \base\setup\libernt\updagent.c (old 1, new 0)
+      -1  \dll\win32\combase\marshal.c (old 1, new 0)
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000CEA8C12C70 000000000000000A 'AudioSrv' 000000CEA8C13E7C 32 0x1 000000CEA8C13F90 25c 000000CEA8C13EA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000CEA8C159A0 000000000006017E 'Program Manager' 000000CEA8C15B78 32 0x0 000000CEA8C15C20 324 000000CEA8C15BA4)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000004A8B072C70 000000000000000A 'AudioSrv' 0000004A8B073E7C 32 0x1 0000004A8B073F90 264 0000004A8B073EA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000004A8B0759A0 000000000006017E 'Program Manager' 0000004A8B075BE8 32 0x0 0000004A8B075C30 108 0000004A8B075C14)
+  < (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+  < (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F241800)
+  > (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F207B00)
+  < err:(\dll\win32\combase\marshal.c:759) StdMarshal ReleaseMarshalData failed with error 0x8001011d
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000002558B7BC30, 1, 000000255B57FD68, 000000255B57FD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000002558B7BE30, 1, 000000255B68FD68, 000000255B68FD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000002558B7BC30): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000002558B7BE30): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000002EC1D2DFA0, 1, 0000002EC47FFD68, 0000002EC47FFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000002EC1D2E280, 1, 0000002EC46EFD68, 0000002EC46EFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000002EC1D2DFA0): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000002EC1D2E280): stub
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007252000, clock 8528938810 us at 10000000 Hz
+  < intcdsp.sys: boot ok after 5450 us (clock 8528944355 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, att
+  > intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007253000, clock 6717853310 us at 10000000 Hz
+  > intcdsp.sys: boot ok after 5451 us (clock 6717858855 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, att
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268877, disk byte 1169477632
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 269131, disk byte 1170518016
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270383, disk byte 1175646208
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270637, disk byte 1176686592
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000D000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A3C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A7C
+== boot4: old 166 lines, new 169 lines
+  tagged lines: old 0, new 0; rows that differ: 1
+      +3  \ntos\po\standby.c (old 0, new 3)
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D0781C2C70 000000000000000A 'AudioSrv' 000000D0781C3E7C 32 0x1 000000D0781C3F90 25c 000000D0781C3EA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000D0781C59A0 0000000000030180 'Program Manager' 000000D0781C5BE8 32 0x0 000000D0781C5C30 15c 000000D0781C5C14)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000002D7DB62C70 000000000000000A 'AudioSrv' 0000002D7DB63E7C 32 0x1 0000002D7DB63F90 25c 0000002D7DB63EA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000002D7DB659A0 000000000006017E 'Program Manager' 0000002D7DB65BE8 32 0x0 0000002D7DB65C30 10c 0000002D7DB65C14)
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000033EA4DBF10, 1, 00000033ECEDFD68, 00000033ECEDFD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000033EA4DBF10): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000B7E682DD00, 1, 000000B7E91EFD68, 000000B7E91EFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000B7E682DD00): stub
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007252000, clock 12678911107 us at 10000000 Hz
+  < intcdsp.sys: boot ok after 5451 us (clock 12678916652 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, at
+  > intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007253000, clock 12554040224 us at 10000000 Hz
+  > intcdsp.sys: boot ok after 5451 us (clock 12554045769 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, at
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268873, disk byte 1169461248
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268873, disk byte 1169461248
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270379, disk byte 1175629824
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270379, disk byte 1175629824
+  > (\ntos\po\standby.c:207) The console display is now off
+  > (\ntos\po\standby.c:207) The console display is now on
+  > (\ntos\po\standby.c:346) The display idled out after 600 seconds
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000D000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A3C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A7C
+== boot4-prev: old 172 lines, new 171 lines
+  tagged lines: old 0, new 0; rows that differ: 1
+      -1  \drivers\storage\port\storport\fdo.c (old 3, new 2)
+  whole lines in one log only (timestamps dropped, sorted; old <, new >):
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000C343322C70 000000000000000A 'AudioSrv' 000000C343323E7C 32 0x1 000000C343323F90 264 000000C343323EA8)
+  < (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000C343325C50 000000000006017E 'Program Manager' 000000C343325E28 32 0x0 000000C343325ED0 114 000000C343325E54)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000A778812C70 000000000000000A 'AudioSrv' 000000A778813E7C 32 0x1 000000A778813F90 280 000000A778813EA8)
+  > (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000A778815C70 000000000006017E 'Program Manager' 000000A778815E48 32 0x0 000000A778815EF0 2d0 000000A778815E74)
+  < (\drivers\storage\port\storport\fdo.c:1769) Storport: the miniport is busy, requeueing request FFFF81803F207400 (1 so far)
+  < (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F207B00)
+  > (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF81803F241800)
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000A80308BCF0, 1, 000000A805A8FD68, 000000A805A8FD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(000000A80308C590, 1, 000000A805ABFD68, 000000A805ABFD64): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000A80308BCF0): stub
+  < fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(000000A80308C590): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000021A47EDBA0, 1, 00000021A71AFD68, 00000021A71AFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(00000021A47EE300, 1, 00000021A71DFD68, 00000021A71DFD64): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000021A47EDBA0): stub
+  > fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(00000021A47EE300): stub
+  < hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capabilities at BAR0 +0x180
+  > hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007253000, processing capabilities at BAR0 +0x180
+  < intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007252000, clock 10773823402 us at 10000000 Hz
+  < intcdsp.sys: boot ok after 5451 us (clock 10773828947 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, at
+  > intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007253000, clock 9991860218 us at 10000000 Hz
+  > intcdsp.sys: boot ok after 5451 us (clock 9991865763 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, att
+  < intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  > intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPS
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268873, disk byte 1169461248
+  < (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 268877, disk byte 1169477632
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270379, disk byte 1175629824
+  > (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 270383, disk byte 1175646208
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  < UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000D000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A3C
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B08F4F1
+  > UBSAN: pointer index expression with base 0000000000000000 overflowed to 000000000000E000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007AE15A7C

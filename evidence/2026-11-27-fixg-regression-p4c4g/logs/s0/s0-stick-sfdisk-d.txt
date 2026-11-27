@@ -1,0 +1,13 @@
+# stick A made 2026-11-27T13:08:17Z
+source LiberNT.img sha256: d6432564b40ba4ee2058923ee99bd205a58fd3258d59bb25bbfcd7b7e86012ed
+the first 1610612736 bytes of the stick read back: d6432564b40ba4ee2058923ee99bd205a58fd3258d59bb25bbfcd7b7e86012ed
+EQUAL
+stick file: 4294967296 bytes
+label: dos
+label-id: 0x21658107
+device: <project>/disk/c6-stick-p4c4g.img
+unit: sectors
+sector-size: 512
+
+<project>/disk/c6-stick-p4c4g.img1 : start=        2048, size=      131072, type=ef, bootable
+<project>/disk/c6-stick-p4c4g.img2 : start=      133120, size=     3012608, type=7

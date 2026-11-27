@@ -1,0 +1,164 @@
+2026-11-27T15:13:23Z s6: r-s6 on disk/p4c4g-nt.qcow2 (BootDsp = 1 and the topology)
+2026-11-27T15:13:24Z VM r-s6 started (lib-run pid 1434177, sockets /tmp/qad-vm.1434179, data disk /tmp/c6g/pouch/r-s6.img)
+[15:14:15] [   39.216318] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000009E6FDB59B0 0000000000030172 'Program Manager' 0000009E6FDB5BF8 32 0x0 0000009E6FDB5C40 2e4 0000009E6FDB5C24)
+2026-11-27T15:14:40Z console: Win+R, cmd.exe
+2026-11-27T15:14:56Z data disk: drive H: in the guest (1 marker)
+2026-11-27T15:15:02Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-27T15:15:02Z the boot: AUTOCHK lines 2; boot ok lines 1; the topology line 1; registered-as lines 4; audio child 1; stop lines 0
+2026-11-27T15:15:36Z pnputil /disable-device "INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00": output after about 4 s: LiberNT PnP Utility  Disabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-27T15:15:52Z pnputil /enable-device "INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00": output after about 4 s: LiberNT PnP Utility  Enabling device:          INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 Device enabled successfully.  
+2026-11-27T15:16:08Z pnputil /restart-device "INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00": output after about 3 s: LiberNT PnP Utility  Restarting device:         INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00  System reboot is needed to complete the operation! 
+2026-11-27T15:16:28Z pnputil /disable-device "HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001": output after about 4 s: LiberNT PnP Utility  Disabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-27T15:16:46Z pnputil /enable-device "HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001": output after about 4 s: LiberNT PnP Utility  Enabling device:          HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device enabled successfully.  
+2026-11-27T15:17:05Z pnputil /restart-device "HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001": output after about 4 s: LiberNT PnP Utility  Restarting device:         HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001  System reboot is needed to complete the operation! 
+2026-11-27T15:17:17Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-27T15:17:39Z pnputil /enum-devices /class System /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                ACPI\ACPI0010\2&CCB86D17&0 Device Description:         Generic ACPI bus Class Name:                 System Class GUID:                 {4d36e97d-e325-11ce-bfc1-08002be10318} Manufacturer Name:          (Generic system devices) Status:                     Started Driver Name:                machine.inf Hardware IDs:               ACPI\VEN_ACPI&DEV_0010                             ACPI\ACPI0010                             *ACPI0010 Compatible IDs:             ACPI\PNP0A05                             *PNP0A05  Instance ID:                ACPI\FIXEDBUTTON\2&CCB86D17&0&FFB0 Device Description:         ACPI fixed feature button Class Name:          
+2026-11-27T15:17:42Z S6: the driver's lines during the six commands (after serial line 177):
+    [  479.131414] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000009E6FDB5D00 INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0 0x00000000)
+    [  479.131414] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00 0000000000000000 0000000000000000 0)
+    [  622.014247] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000009E6FDB5D00 HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0 0x00000000)
+    [  622.014247] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 0000000000000000 0000000000000000 0)
+2026-11-27T15:17:42Z S6: the child's lines in enum-media.txt: 3; the codec's status: 
+2026-11-27T15:17:59Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-27T15:18:16Z pnputil /enable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Enabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device enabled successfully.  
+2026-11-27T15:18:19Z S6: the driver's lines of the devnode cycle (after serial line 182):
+    [  986.595904] (\base\services\umpnpmgr\rpcserver.c:4093) PNP_DisableDevInst(0000009E6FDB5D00 CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0 0x00000000)
+    [  986.595904] (\base\services\umpnpmgr\rpcserver.c:504) DisableDeviceInstance(CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 0000000000000000 0000000000000000 0)
+2026-11-27T15:18:26Z console answering after s6-dsp (alive-s6-dsp.txt, 4 s)
+2026-11-27T15:18:39Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-27T15:18:39Z S6: the child after the cycle: 3 INTCDSP lines; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:18:49Z s6-recovered: dsploop started (fault none at open 0, bounded at 300 s)
+2026-11-27T15:19:07Z console answering after s6-recovered (alive-s6-recovered.txt, 3 s)
+2026-11-27T15:19:07Z s6-recovered: ended after about 7 s; the console answers
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1299 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T15:19:07Z s6-recovered: the driver's lines from the start on, after serial line 184:
+    [ 1154.672193] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1154.672193] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1154.672193] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1154.675193] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1154.675193] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1154.675193] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1156.714199] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1156.714199] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1156.714199] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1156.714199] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1156.714199] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1156.714199] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1158.761080] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1158.761080] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1158.761080] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1158.761080] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1158.761080] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1158.761080] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T15:19:07Z s6-recovered: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:19:07Z s6-recovered: PASS (3 of 3 depths compared, 0 failures): recovered: open ok
+2026-11-27T15:19:17Z s5-status-18: dsploop started (fault ipc-status=5:18 at open 9, bounded at 300 s)
+2026-11-27T15:22:49Z s5 (by hand): taking the VM over (lib-run pid 1434179, sockets /tmp/qad-vm.1434179); s6.sh was stopped by me: the apitest opens the render stream 3 times per run, not 9
+2026-11-27T15:23:03Z data disk: drive H: in the guest (1 marker)
+2026-11-27T15:23:10Z console answering after s5-start (alive-s5-start.txt, 3 s)
+2026-11-27T15:23:20Z s5-status-18: dsploop started (fault ipc-status=5:18 at open 3, bounded at 300 s)
+2026-11-27T15:23:23Z s5-status-18: open #3 at guest 2671.111175 s; fault 'ipc-status=5:18' injected at 15:23:23 (host): {"execute": "qom-set", "arguments": {"path": "/machine/perip
+2026-11-27T15:23:29Z s5-status-18: fault cleared (15:23:29)
+2026-11-27T15:23:39Z console answering after s5-status-18 (alive-s5-status-18.txt, 4 s)
+2026-11-27T15:23:39Z s5-status-18: ended after about 4 s; the console answers
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1296 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T15:23:39Z s5-status-18: the driver's lines from the start on, after serial line 235:
+    [ 2671.111175] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.111175] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.112196] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2671.114175] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.115179] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.115179] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2673.163181] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2673.163181] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2675.225687] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2675.225687] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2677.256943] intcdsp.sys: ipc: delete pipeline (18) 0x92090000|0x00000000 firmware status after 63 us; the link is faulted
+    [ 2677.256943] intcdsp.sys: stream 1: the PCM's pipelines could not be deleted (0xc0000186); released as after a fault
+    [ 2677.256943] intcdsp.sys: streams: released after the fault; nothing is sent until the DSP is booted again
+    [ 2677.272568] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 2677.272568] dsppcm.sys: stream: the buffer is not released, 0xc0000186
+2026-11-27T15:23:39Z s5-status-18: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 1; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:23:51Z s5-recovered: dsploop started (fault none at open 0, bounded at 300 s)
+2026-11-27T15:24:06Z console answering after s5-recovered (alive-s5-recovered.txt, 3 s)
+2026-11-27T15:24:06Z s5-recovered: ended after about 4 s; the console answers
+    dsploop.c:311: Test failed: dsploop: render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared
+    dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 5 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T15:24:06Z s5-recovered: the driver's lines from the start on, after serial line 264:
+    [ 2764.394531] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T15:24:06Z s5-recovered: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:24:23Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-27T15:24:40Z pnputil /enable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Enabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device enabled successfully.  
+2026-11-27T15:24:40Z s5: the PnP lines of the two commands (after serial line 235): 1; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:24:40Z s5: done; the VM is left running for S7 and S8 (lib-run pid 1434179, sockets /tmp/qad-vm.1434179)
+2026-11-27T15:25:06Z S7: Win+A (the quick-settings flyout)
+2026-11-27T15:25:18Z S7: volumeup (the volume flyout)
+2026-11-27T15:25:59Z !! the console did not answer after s7 (no alive-s7.txt in 25 s)
+2026-11-27T15:25:59Z S7: !! the console does not answer after the two flyouts
+2026-11-27T15:25:59Z S7: driver lines in the while (after serial line 267): 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+15:28:14 S7: Win+A, the mouse to (900,570) from the top-left corner, right click: shot s7-5-pane-menu.png 910640 bytes
+15:28:19 S7: Esc, Esc: shot s7-6-after-esc.png 951972 bytes
+15:28:31 S7: the mouse to (1058,777), left click on the tray speaker icon: shot s7-7-volume-flyout.png 952089 bytes
+15:28:34 S7: Esc: shot s7-8-after-esc.png 952089 bytes
+15:29:37 S7: volumeup, shot after 1 s: s7-9-volume-1s.png 951318 bytes
+15:29:52 S7: Win+A, tab, tab, shift-f10: shot s7-10-pane-menu-kbd.png 910674 bytes
+15:29:57 S7: Esc, Esc: shot s7-11-after-esc.png 951976 bytes; stop lines: 0; fatal: 0
+2026-11-27T15:31:17Z S8: shutdown -s -t 0 through the Run box (the console lost its focus to the flyouts of S7)
+2026-11-27T15:31:31Z S8: QEMU exited 6 s after the command; the shutdown's own lines:
+    [ 6472.391172] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"shutdown -s -t 0" 4): stub
+    [ 6474.996431] (\ntos\po\poshutdown.c:293) Shutdown: running the queued shutdown work
+    [ 6474.996431] (\ntos\po\poshutdown.c:300) Shutdown: notifying the drivers registered for shutdown
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\sysaudio
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\intcdsp
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\HDAudBus
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\MountMgr
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\WMIxWDM
+    [ 6474.996431] (\ntos\po\poshutdown.c:302) Shutdown: holding the user-mode threads
+    [ 6474.996431] (\ntos\po\poshutdown.c:304) Shutdown: flushing the registry
+    [ 6475.012056] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+    [ 6475.012056] (\ntos\po\poshutdown.c:312) Shutdown: flushing the cache
+    [ 6475.012056] (\ntos\po\poshutdown.c:314) Shutdown: stopping the memory manager
+    [ 6475.074556] (\ntos\po\poshutdown.c:317) Shutdown: flushing the volumes
+    [ 6475.074556] (\ntos\po\poshutdown.c:320) Shutdown: notifying the file systems
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\fastfat
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Ntfs
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+    [ 6475.074556] (\ntos\po\poshutdown.c:322) Shutdown: notifying the last-chance drivers
+    [ 6475.074556] (\ntos\po\poshutdown.c:329) Shutdown: powering the devices down for action 4
+    [ 6475.074556] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+    [ 6475.074556] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+2026-11-27T15:31:31Z S8: ending the VM by the ACPI power button
+2026-11-27T15:31:31Z VM ended: qemu exited rc=0 (none) at 2026-11-27T15:31:31Z; wall 1088 s
+2026-11-27T15:31:31Z S8b: one more boot from the same disk

@@ -1,0 +1,101 @@
+--- info
+
+--- status
+
+2026-11-27T15:31:17Z S8: shutdown -s -t 0 through the Run box (the console lost its focus to the flyouts of S7)
+--- sendkey esc
+
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 16 characters
+--- sendkey ret
+
+2026-11-27T15:31:31Z S8: QEMU exited 6 s after the command; the shutdown's own lines:
+    [ 6472.391172] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"shutdown -s -t 0" 4): stub
+    [ 6474.996431] (\ntos\po\poshutdown.c:293) Shutdown: running the queued shutdown work
+    [ 6474.996431] (\ntos\po\poshutdown.c:300) Shutdown: notifying the drivers registered for shutdown
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\sysaudio
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\intcdsp
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\HDAudBus
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\MountMgr
+    [ 6474.996431] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\WMIxWDM
+    [ 6474.996431] (\ntos\po\poshutdown.c:302) Shutdown: holding the user-mode threads
+    [ 6474.996431] (\ntos\po\poshutdown.c:304) Shutdown: flushing the registry
+    [ 6475.012056] (\ntos\po\poshutdown.c:308) Shutdown: closing the boot log
+    [ 6475.012056] (\ntos\po\poshutdown.c:312) Shutdown: flushing the cache
+    [ 6475.012056] (\ntos\po\poshutdown.c:314) Shutdown: stopping the memory manager
+    [ 6475.074556] (\ntos\po\poshutdown.c:317) Shutdown: flushing the volumes
+    [ 6475.074556] (\ntos\po\poshutdown.c:320) Shutdown: notifying the file systems
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\fastfat
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Ntfs
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+    [ 6475.074556] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+    [ 6475.074556] (\ntos\po\poshutdown.c:322) Shutdown: notifying the last-chance drivers
+    [ 6475.074556] (\ntos\po\poshutdown.c:329) Shutdown: powering the devices down for action 4
+    [ 6475.074556] intcdsp.sys: streams: released for the power-down; nothing is sent until the DSP is booted again
+    [ 6475.074556] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.
+2026-11-27T15:31:31Z S8: ending the VM by the ACPI power button
+Traceback (most recent call last):
+  File "<project>/tools/mon.py", line 107, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "<project>/tools/mon.py", line 89, in main
+    s = connect(sys.argv[1])
+  File "<project>/tools/mon.py", line 19, in connect
+    s.connect(path)
+    ~~~~~~~~~^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory
+2026-11-27T15:31:31Z VM ended: qemu exited rc=0 (none) at 2026-11-27T15:31:31Z; wall 1088 s
+2026-11-27T15:31:31Z S8b: one more boot from the same disk
+2026-11-27T15:31:32Z VM r-final started (lib-run pid 1444832, sockets /tmp/qad-vm.1444834, data disk /tmp/c6g/pouch/r-s6.img)
+[15:32:19] [   35.889889] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000820D9F59D0 0000000000020172 'Program Manager' 000000820D9F5BB8 32 0x0 000000820D9F5C60 2e0 000000820D9F5BE4)
+2026-11-27T15:32:19Z S8b: the desktop's line seen; AUTOCHK lines: 2; stop lines: 0; fatal: 0; intcdsp.sys: boot ok: 1; topology: 1; audio child: 1
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-27T15:32:44Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T15:33:21Z data disk: drive H: in the guest (1 marker)
+typed 40 characters
+--- sendkey ret
+
+2026-11-27T15:33:27Z console answering after final (alive-final.txt, 3 s)
+typed 77 characters
+--- sendkey ret
+
+2026-11-27T15:33:40Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-27T15:33:40Z S8b: the child in enum-media: 3 INTCDSP lines; stop lines: 0; fatal: 0; ace_unexpected: 0
+typed 66 characters
+--- sendkey ret
+
+2026-11-27T15:33:56Z S8b: dsploop after the reboot: dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED unset: not required, a skip) dsploop: 1284 tests executed (0 marked as todo, 0 failures), 0 skipped. ; the stream lines of it: 6 opens, ipc lines 0, held/freed/tag lines 0
+2026-11-27T15:33:59Z VM r-final ended: qemu exited rc=0 (none) at 2026-11-27T15:33:59Z; wall 148 s
+2026-11-27T15:33:59Z r-final done

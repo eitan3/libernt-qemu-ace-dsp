@@ -1,0 +1,13 @@
+      1189  command.txt
+      2005  driver.log
+        21  end.txt
+      6406  lib-run.out
+         0  pouch-sha256.txt
+      1148  qemu-args.txt
+      6086  qemu-dbg.log.gz
+         0  qemu.log
+    877927  s8b-desktop-after-boot.png
+     30142  serial.log
+     29637  serial.txt
+        20  sock-dir.txt
+        21  start.txt

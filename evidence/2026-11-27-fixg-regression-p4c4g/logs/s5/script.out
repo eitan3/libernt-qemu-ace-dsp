@@ -1,0 +1,71 @@
+2026-11-27T15:22:49Z s5 (by hand): taking the VM over (lib-run pid 1434179, sockets /tmp/qad-vm.1434179); s6.sh was stopped by me: the apitest opens the render stream 3 times per run, not 9
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T15:23:03Z data disk: drive H: in the guest (1 marker)
+typed 43 characters
+--- sendkey ret
+
+2026-11-27T15:23:10Z console answering after s5-start (alive-s5-start.txt, 3 s)
+typed 100 characters
+--- sendkey ret
+
+2026-11-27T15:23:20Z s5-status-18: dsploop started (fault ipc-status=5:18 at open 3, bounded at 300 s)
+2026-11-27T15:23:23Z s5-status-18: open #3 at guest 2671.111175 s; fault 'ipc-status=5:18' injected at 15:23:23 (host): {"execute": "qom-set", "arguments": {"path": "/machine/perip
+2026-11-27T15:23:29Z s5-status-18: fault cleared (15:23:29)
+2026-11-27T15:23:39Z s5-status-18: ended after about 4 s; the console answers
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1296 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T15:23:39Z s5-status-18: the driver's lines from the start on, after serial line 235:
+    [ 2671.111175] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.111175] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.112196] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2671.114175] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.115179] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2671.115179] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2673.163181] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2673.163181] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2673.163181] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2675.225687] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2675.225687] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2675.225687] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2677.256943] intcdsp.sys: ipc: delete pipeline (18) 0x92090000|0x00000000 firmware status after 63 us; the link is faulted
+    [ 2677.256943] intcdsp.sys: stream 1: the PCM's pipelines could not be deleted (0xc0000186); released as after a fault
+    [ 2677.256943] intcdsp.sys: streams: released after the fault; nothing is sent until the DSP is booted again
+    [ 2677.272568] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 2677.272568] dsppcm.sys: stream: the buffer is not released, 0xc0000186
+2026-11-27T15:23:39Z s5-status-18: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 1; stop lines: 0; fatal: 0; ace_unexpected: 0
+typed 100 characters
+--- sendkey ret
+
+2026-11-27T15:23:51Z s5-recovered: dsploop started (fault none at open 0, bounded at 300 s)
+2026-11-27T15:24:06Z s5-recovered: ended after about 4 s; the console answers
+    dsploop.c:311: Test failed: dsploop: render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared
+    dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 5 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T15:24:06Z s5-recovered: the driver's lines from the start on, after serial line 264:
+    [ 2764.394531] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T15:24:06Z s5-recovered: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+typed 128 characters
+--- sendkey ret
+
+2026-11-27T15:24:23Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+typed 126 characters
+--- sendkey ret
+
+2026-11-27T15:24:40Z pnputil /enable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Enabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Device enabled successfully.  
+2026-11-27T15:24:40Z s5: the PnP lines of the two commands (after serial line 235): 1; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:24:40Z s5: done; the VM is left running for S7 and S8 (lib-run pid 1434179, sockets /tmp/qad-vm.1434179)

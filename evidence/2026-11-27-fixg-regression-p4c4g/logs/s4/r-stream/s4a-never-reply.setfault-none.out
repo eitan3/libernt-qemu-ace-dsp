@@ -1,0 +1,1 @@
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "none"}} -> {"return": {}}

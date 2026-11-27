@@ -1,0 +1,13 @@
+2026-11-27T15:24:40Z s5: done; the VM is left running for S7 and S8 (lib-run pid 1434179, sockets /tmp/qad-vm.1434179)
+2026-11-27T15:25:06Z S7: Win+A (the quick-settings flyout)
+2026-11-27T15:25:18Z S7: volumeup (the volume flyout)
+2026-11-27T15:25:59Z S7: !! the console does not answer after the two flyouts
+2026-11-27T15:25:59Z S7: driver lines in the while (after serial line 267): 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+15:28:14 S7: Win+A, the mouse to (900,570) from the top-left corner, right click: shot s7-5-pane-menu.png 910640 bytes
+15:28:19 S7: Esc, Esc: shot s7-6-after-esc.png 951972 bytes
+15:28:31 S7: the mouse to (1058,777), left click on the tray speaker icon: shot s7-7-volume-flyout.png 952089 bytes
+15:28:34 S7: Esc: shot s7-8-after-esc.png 952089 bytes
+15:29:37 S7: volumeup, shot after 1 s: s7-9-volume-1s.png 951318 bytes
+15:29:52 S7: Win+A, tab, tab, shift-f10: shot s7-10-pane-menu-kbd.png 910674 bytes
+15:29:57 S7: Esc, Esc: shot s7-11-after-esc.png 951976 bytes; stop lines: 0; fatal: 0
+2026-11-27T15:31:17Z S8: shutdown -s -t 0 through the Run box (the console lost its focus to the flyouts of S7)

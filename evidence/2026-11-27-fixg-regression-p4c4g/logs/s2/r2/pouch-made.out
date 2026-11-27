@@ -1,0 +1,21 @@
+== r2-notopology-cycles.img: 33586688 bytes
+label: dos
+label-id: 0x97b4c799
+device: /tmp/c6g/pouch/r2-notopology-cycles.img
+unit: sectors
+sector-size: 512
+/tmp/c6g/pouch/r2-notopology-cycles.img1 : start=          63, size=       65536, type=6
+fsck.fat -n of the partition: clean
+== the files on it (mdir):
+ Volume in drive : is P4C4G      
+ Volume Serial Number is CBD9-B91B
+Directory for ::/
+
+DSPLOO~1 EXE    214016 2026-11-27  15:59  dsploop_apitest.exe
+dsploop  exe    214016 2026-11-27  15:59 
+pouch    tag        38 2026-11-27  15:59 
+        3 files             428 070 bytes
+                         33 038 336 bytes free
+
+== the exe read back from the image: bd849a7ca4acc5a7de2eb8130a217ac5e1616596916bd3555c0b2f2378c99242
+== the image directory's exe:            bd849a7ca4acc5a7de2eb8130a217ac5e1616596916bd3555c0b2f2378c99242

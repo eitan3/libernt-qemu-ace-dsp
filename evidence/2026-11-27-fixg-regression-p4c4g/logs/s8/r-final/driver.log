@@ -1,0 +1,11 @@
+2026-11-27T15:31:32Z VM r-final started (lib-run pid 1444832, sockets /tmp/qad-vm.1444834, data disk /tmp/c6g/pouch/r-s6.img)
+[15:32:19] [   35.889889] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000820D9F59D0 0000000000020172 'Program Manager' 000000820D9F5BB8 32 0x0 000000820D9F5C60 2e0 000000820D9F5BE4)
+2026-11-27T15:32:19Z S8b: the desktop's line seen; AUTOCHK lines: 2; stop lines: 0; fatal: 0; intcdsp.sys: boot ok: 1; topology: 1; audio child: 1
+2026-11-27T15:32:44Z console: Win+R, cmd.exe
+2026-11-27T15:33:21Z data disk: drive H: in the guest (1 marker)
+2026-11-27T15:33:27Z console answering after final (alive-final.txt, 3 s)
+2026-11-27T15:33:40Z pnputil /enum-devices /class Media /ids: output after about 4 s: LiberNT PnP Utility  Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001 Device Description:         High Definition Audio Device Class Name:                 MEDIA Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318} Manufacturer Name:          ReactOS Status:                     Started Driver Name:                hdaudio.inf Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001                             HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022 Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001                             HDAUDIO\FUNC
+2026-11-27T15:33:40Z S8b: the child in enum-media: 3 INTCDSP lines; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:33:56Z S8b: dsploop after the reboot: dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED unset: not required, a skip) dsploop: 1284 tests executed (0 marked as todo, 0 failures), 0 skipped. ; the stream lines of it: 6 opens, ipc lines 0, held/freed/tag lines 0
+2026-11-27T15:33:59Z VM r-final ended: qemu exited rc=0 (none) at 2026-11-27T15:33:59Z; wall 148 s
+2026-11-27T15:33:59Z r-final done

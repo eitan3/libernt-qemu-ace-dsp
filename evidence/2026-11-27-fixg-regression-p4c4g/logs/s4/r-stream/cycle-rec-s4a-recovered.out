@@ -1,0 +1,6 @@
+## cycle rec-s4a-recovered 2026-11-27T14:58:22Z (serial line 241)
+-- not seen in 30 s (after line 241): Safe removal
+model (disabled): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+-- not seen in 90 s (after line 244): intcdsp.sys: boot .*after|clock stalled|Work queue|Fatal|bugcheck
+model (D0): adspcs=00000000 dsp2cxctl=02000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+driver lines after this enable:

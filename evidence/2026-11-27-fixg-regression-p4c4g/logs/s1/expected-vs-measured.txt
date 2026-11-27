@@ -1,0 +1,45 @@
+# EXPECTED-LINES.md's quoted lines (digits folded: model values do not count) in the p4c4g export and in the p4c4e final pass
+# boot assignment: boot1 lines are looked up in boot1, boot2 in boot2 (its prev too), boot3 in boot3, boot4 in boot4 + dsploop.txt; a line is searched in all of them and the boot with a hit is printed
+p4c4g  p4c4e  line (digits folded; the first 150 characters)
+7      7      hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007252000, processing capab  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+7      7      hdaudbus.sys: DMI ok: SMBIOS <ver> DMI <rev>, vendor "<vendor>" product "<product>" version "<version>" board "<board>" "<board version>", quirk none  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+7      7      intcdsp.sys: loaded for the Intel audio DSP child  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+7      7      intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007252000 (0x200000 bytes), PP capability FFFF808000448180: heade  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+0      0      intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163204 … (+0x163200)  <-
+7      7      intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+7      7      intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+0      0      intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000  <-
+7      7      intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+2      2      intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched  <- boot1:1 boot2-prev:1
+7      7      intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+5      5      intcdsp.sys: BootDsp = 1: the DSP is booted at the next D0 entry with 'sof-arl-s.ri'  <- boot2:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+5      5      intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007252000, clock 8528938810 us at 10  <- boot2:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+0      0      intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x0  <-
+0      0      intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), …  <-
+0      0      intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, …  <-
+0      0      intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, …  <-
+0      0      intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, …  <-
+5      5      intcdsp.sys: boot ok after 5450 us (clock 8528944355 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x0000000  <- boot2:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+5      5      intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 byte  <- boot2:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+5      5      intcdsp.sys: ipc: link ready, polled, 500 ms per message  <- boot2:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+2      2      intcdsp.sys: topology: none selected (no override, no quirk, no _DSD name); the DSP is powered down, no audio endpoint  <- boot2:1 boot3-prev:1
+2      2      intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)  <- boot2:1 boot3-prev:1
+7      7      intcdsp.sys: SelfTest = 2, UseInterrupts = 0, IpcTimeoutMs = 500 ms  <- boot1:1 boot2:1 boot2-prev:1 boot3:1 boot3-prev:1 boot4:1 boot4-prev:1
+0      0      intcdsp.sys: boot ok after 5451 us (clock 10773828947 us): …  <-
+3      3      intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manife  <- boot3:1 boot4:1 boot4-prev:1
+3      3      intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32  <- boot3:1 boot4:1 boot4-prev:1
+6      6      intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames  <- boot3:3 boot4-prev:3
+6      6      intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok  <- boot3:3 boot4-prev:3
+0      0      intcdsp.sys: loopback self-test: … 24-bit … / … 32-bit … (the same two lines each, rms 379742706.482)  <-
+2      2      intcdsp.sys: loopback self-test: 3 runs, 3 matched, 0 failed, 45 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok  <- boot3:1 boot4-prev:1
+2      2      intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running  <- boot3:1 boot4-prev:1
+3      3      intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints  <- boot3:1 boot4:1 boot4-prev:1
+0      0      dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'  … capture: registered as 'LoopbackInWave'  <-
+3      3      intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits  <- boot4:3
+6      6      intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)  <- boot4:6
+0      0      intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (…)  <-
+1      1      dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok  <- dsploop.txt
+1      1      dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok  <- dsploop.txt
+1      1      dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok  <- dsploop.txt
+0      1      dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED=1, a failure)  <- dsploop.txt
+1      1      dsploop: 1263 tests executed (0 marked as todo, 0 failures), 0 skipped.  <- dsploop.txt

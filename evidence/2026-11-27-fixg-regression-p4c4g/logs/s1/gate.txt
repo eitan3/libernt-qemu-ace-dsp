@@ -1,0 +1,2 @@
+GREEN dsploop.txt: dsploop: 1284 tests executed (0 marked as todo, 0 failures), 0 skipped. (allowance 0, required)
+rc=0

@@ -1,0 +1,70 @@
+2026-11-27T15:07:09Z s4b: r-s4b on disk/p4c4g-nt.qcow2 (BootDsp = 1 and the topology, set in the guest by the first VM)
+2026-11-27T15:07:10Z VM r-s4b started (lib-run pid 1432978, sockets /tmp/qad-vm.1432980, data disk /tmp/c6g/pouch/r-s4b.img)
+[15:08:03] [   40.455716] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000BF9FE159D0 0000000000030172 'Program Manager' 000000BF9FE15BB8 32 0x0 000000BF9FE15C00 2f0 000000BF9FE15BE4)
+2026-11-27T15:08:28Z console: Win+R, cmd.exe
+2026-11-27T15:08:50Z data disk: drive G: in the guest (1 marker)
+2026-11-27T15:08:56Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-27T15:08:56Z the boot: AUTOCHK lines 2; boot ok lines 1; the topology line 1; registered-as lines 4; audio child 1; stop lines 0
+2026-11-27T15:09:09Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-27T15:09:09Z the endpoints the guest lists: 0 Loopback lines
+2026-11-27T15:09:20Z s4b-crash-notification: dsploop started (fault crash-notification at open 1, bounded at 300 s)
+2026-11-27T15:09:21Z s4b-crash-notification: open #1 at guest 332.360276 s; fault 'crash-notification' injected at 15:09:21 (host): {"execute": "qom-set", "arguments": {"path": "/machine/perip
+2026-11-27T15:09:30Z s4b-crash-notification: fault cleared (15:09:30)
+2026-11-27T15:09:57Z console answering after s4b-crash-notification (alive-s4b-crash-notification.txt, 3 s)
+2026-11-27T15:09:57Z s4b-crash-notification: ended after about 7 s; the console answers
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1288 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T15:09:57Z s4b-crash-notification: the driver's lines from the start on, after serial line 187:
+    [  332.360276] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  332.360276] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  332.360276] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  332.375901] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  332.375901] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  332.375901] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  334.414287] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  334.414287] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  334.414287] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  334.414287] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  334.414287] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  334.414287] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  336.470298] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  336.470298] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  336.470298] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  336.470298] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  336.470298] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  336.470298] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T15:09:57Z s4b-crash-notification: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:10:09Z s4b-recovered: dsploop started (fault none at open 0, bounded at 300 s)
+2026-11-27T15:10:28Z console answering after s4b-recovered (alive-s4b-recovered.txt, 2 s)
+2026-11-27T15:10:28Z s4b-recovered: ended after about 7 s; the console answers
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 513, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1285 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T15:10:28Z s4b-recovered: the driver's lines from the start on, after serial line 211:
+    [  654.982497] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  654.982497] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  654.982497] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  654.982497] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  654.982497] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  654.982497] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  657.051259] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  657.051259] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  657.051259] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  657.054259] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  657.054259] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  657.054259] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  659.101520] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  659.101520] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  659.101520] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  659.101520] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  659.101520] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  659.101520] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T15:10:28Z s4b-recovered: held-buffer lines: 0; freed-under lines: 0; tag lines: 0; ipc lines: 0; stop lines: 0; fatal: 0; ace_unexpected: 0
+2026-11-27T15:10:28Z s4b-recovered: PASS (3 of 3 depths compared, 0 failures): recovered: open ok
+2026-11-27T15:10:32Z VM r-s4b ended: qemu exited rc=0 (none) at 2026-11-27T15:10:32Z; wall 203 s
+2026-11-27T15:10:32Z s4b done

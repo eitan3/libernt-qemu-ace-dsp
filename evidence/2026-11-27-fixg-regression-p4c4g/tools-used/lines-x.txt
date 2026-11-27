@@ -1,0 +1,4 @@
+copy /y C:\logs\*.* D:
+dir C:\logs
+dir D:
+exit

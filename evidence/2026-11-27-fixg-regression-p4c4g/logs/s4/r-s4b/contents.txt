@@ -1,0 +1,17 @@
+      1184  command.txt
+      7870  driver.log
+        21  end.txt
+      7899  lib-run.out
+       794  pouch-made.out
+         0  pouch-mcopy.out
+       687  pouch-sha256.txt
+      1143  qemu-args.txt
+     10334  qemu-dbg.log.gz
+         0  qemu.log
+    917196  s4b-after.png
+       129  s4b-crash-notification.setfault-none.out
+       143  s4b-crash-notification.setfault.out
+     33908  serial.log
+     33367  serial.txt
+        20  sock-dir.txt
+        21  start.txt
