@@ -89,7 +89,7 @@ typed 96 characters
     [  966.217652] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
     [  966.217652] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
 2026-11-27T21:34:28Z baseline: PASS
--rw-r--r-- 1 megan megan 927070 Nov 27 23:34 /tmp/e1c/ev/e1c-round/05-after-baseline.png
+-rw-r--r-- 1 <user> <user> 927070 Nov 27 23:34 /tmp/e1c/ev/e1c-round/05-after-baseline.png
 2026-11-27T21:34:30Z b: dsploop with fault never-reply-running=19 at open 1 (from serial line 336)
 typed 89 characters
 --- sendkey ret
@@ -407,7 +407,7 @@ typed 100 characters
     [ 1839.540337] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
     [ 1839.540337] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
 | crash-async=500 | 1 | fault during stream 1: firmware crash with no request outstanding, read at a stream's period | 2 | release: 2 streams let go, 2 buffers held for their pins, 2 tags back | 2 | dsploop: 329 tests executed (0 marked as todo, 2 failures), 0 skipped. | PASS |
--rw-r--r-- 1 megan megan 951360 Nov 27 23:38 /tmp/e1c/ev/e1c-round/06-after-knobs.png
+-rw-r--r-- 1 <user> <user> 951360 Nov 27 23:38 /tmp/e1c/ev/e1c-round/06-after-knobs.png
 2026-11-27T21:38:14Z ## (d) a D0 cycle in session: the guest's sleep states, one bounded sleep attempt, one bounded disable attempt
 typed 45 characters
 --- sendkey ret
