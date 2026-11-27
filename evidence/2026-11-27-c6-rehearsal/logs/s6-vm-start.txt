@@ -1,0 +1,1 @@
+started qemu pid 1285389 at 2026-11-27T02:19:06Z; sockets /tmp/qad-cvm.1285381; evidence /tmp/c6/ev/vm2

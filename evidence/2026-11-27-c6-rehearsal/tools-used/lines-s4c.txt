@@ -1,0 +1,8 @@
+echo rc=%ERRORLEVEL% > %POUCHDRV%:\dsploop-rc.txt
+copy /y C:\logs\dsploop.txt %POUCHDRV%:\
+savelog 4
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" > %POUCHDRV%:\settings-4.txt
+pnputil /enum-devices /class Media /ids > %POUCHDRV%:\enum-media-4.txt
+dir C:\ > %POUCHDRV%:\dir-c-4.txt
+dir C:\logs > %POUCHDRV%:\dir-logs-4.txt
+copy /y C:\logs\*.* %POUCHDRV%:\

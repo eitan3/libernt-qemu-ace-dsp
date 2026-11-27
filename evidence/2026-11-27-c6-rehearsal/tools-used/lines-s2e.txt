@@ -1,0 +1,2 @@
+copy /y C:\logs\*.* %POUCHDRV%:\
+dir %POUCHDRV%:\*.log > %POUCHDRV%:\dir-d.txt

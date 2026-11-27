@@ -1,0 +1,17 @@
+Volume in drive C is LiberNT
+Volume Serial Number is a80c-7f7f
+
+Directory of C:
+
+11/27/2026  12:53 AM    <DIR>          amd64
+11/27/2026  03:39 AM    <DIR>          kit
+11/27/2026  01:42 AM           270,336 lastboot.log
+11/27/2026  03:41 AM    <DIR>          logs
+11/27/2026  01:04 AM            21,092 prevboot.log
+11/27/2026  12:53 AM    <DIR>          Program Files
+11/27/2026  12:53 AM    <DIR>          Program Files (x86)
+11/27/2026  12:53 AM    <DIR>          Users
+11/27/2026  12:53 AM    <DIR>          Windows
+       2 files                  291,428 bytes
+       7 directories        626,221,056 bytes free
+

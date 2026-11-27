@@ -1,0 +1,85 @@
+02:19:07 shot s6-a-01.png 1558 bytes (t+1s)
+02:19:11 shot s6-a-02.png 11287 bytes (t+5s)
+02:19:15 shot s6-a-03.png 19894 bytes (t+9s)
+02:19:18 shot s6-a-04.png 14432 bytes (t+12s)
+02:19:22 shot s6-a-05.png 51790 bytes (t+16s)
+02:19:25 shot s6-a-06.png 51951 bytes (t+19s)
+02:19:29 shot s6-a-07.png 51951 bytes (t+23s)
+02:19:33 shot s6-a-08.png 52267 bytes (t+27s)
+02:19:36 shot s6-a-09.png 10767 bytes (t+30s)
+02:19:40 shot s6-a-10.png 10156 bytes (t+34s)
+02:19:44 shot s6-a-11.png 982517 bytes (t+38s)
+02:19:47 shot s6-a-12.png 981368 bytes (t+41s)
+02:19:51 shot s6-a-13.png 965517 bytes (t+45s)
+02:19:54 shot s6-a-14.png 965517 bytes (t+48s)
+02:19:58 shot s6-a-15.png 965602 bytes (t+52s)
+02:20:01 shot s6-a-16.png 965602 bytes (t+55s)
+02:20:05 shot s6-a-17.png 965468 bytes (t+59s)
+02:20:08 shot s6-a-18.png 965468 bytes (t+62s)
+02:20:10 SYSTEM_RESET (hard reset, the power button) at t+64s
+02:20:13 shot s6-b-01.png 965384 bytes (t+67s)
+02:20:18 shot s6-b-02.png 20075 bytes (t+72s)
+02:20:23 shot s6-b-03.png 20075 bytes (t+77s)
+02:20:27 shot s6-b-04.png 20042 bytes (t+81s)
+02:20:32 shot s6-b-05.png 19894 bytes (t+86s)
+02:20:37 shot s6-b-06.png 19894 bytes (t+91s)
+02:20:41 shot s6-b-07.png 14432 bytes (t+95s)
+02:20:46 shot s6-b-08.png 14432 bytes (t+100s)
+02:20:50 shot s6-b-09.png 51737 bytes (t+104s)
+02:20:55 shot s6-b-10.png 51737 bytes (t+109s)
+02:21:00 shot s6-b-11.png 51737 bytes (t+114s)
+02:21:04 shot s6-b-12.png 10750 bytes (t+118s)
+02:21:09 shot s6-b-13.png 982571 bytes (t+123s)
+02:21:14 shot s6-b-14.png 982547 bytes (t+128s)
+02:21:18 shot s6-b-15.png 966228 bytes (t+132s)
+02:21:23 shot s6-b-16.png 965552 bytes (t+137s)
+02:24:35 shot s6-c-01-desktop.png 965570 bytes
+02:24:35 key meta_l-r
+02:24:39 key home
+02:24:39 key shift-end
+02:24:40 type cmd.exe
+02:24:40 key ret
+02:25:01 typed: for %d in (C D E F G H I J) do @if exist %d:\pouch.tag set POUCHDRV=%d
+02:25:09 typed: cd \kit
+02:25:17 typed: savelog 6
+02:25:28 typed: dir C:\logs > %POUCHDRV%:\dir-logs-6.txt
+02:25:39 typed: dir C:\ > %POUCHDRV%:\dir-c-6.txt
+02:25:49 typed: copy /y C:\logs\*.* %POUCHDRV%:\
+02:26:42 SYSTEM_RESET #2 (from the console) at t+0
+02:26:43 shot s6d-a-01.png 3057 bytes (t+1s)
+02:26:48 shot s6d-a-02.png 20075 bytes (t+6s)
+02:26:53 shot s6d-a-03.png 20075 bytes (t+11s)
+02:26:59 shot s6d-a-04.png 20042 bytes (t+17s)
+02:27:03 shot s6d-a-05.png 19894 bytes (t+21s)
+02:27:10 shot s6d-a-06.png 19894 bytes (t+28s)
+02:27:14 shot s6d-a-07.png 14432 bytes (t+32s)
+02:27:19 shot s6d-a-08.png 51746 bytes (t+37s)
+02:27:24 shot s6d-a-09.png 51746 bytes (t+42s)
+02:27:27 SYSTEM_RESET #3 (the early one, t+45s)
+02:27:29 shot s6d-b-01.png 51746 bytes (t+47s)
+02:27:35 shot s6d-b-02.png 20075 bytes (t+53s)
+02:27:43 shot s6d-b-03.png 20042 bytes (t+61s)
+02:27:50 shot s6d-b-04.png 19894 bytes (t+68s)
+02:27:57 shot s6d-b-05.png 14432 bytes (t+75s)
+02:28:04 shot s6d-b-06.png 51584 bytes (t+82s)
+02:28:10 shot s6d-b-07.png 51724 bytes (t+88s)
+02:28:17 shot s6d-b-08.png 10766 bytes (t+95s)
+02:28:24 shot s6d-b-09.png 981584 bytes (t+102s)
+02:28:31 shot s6d-b-10.png 981368 bytes (t+109s)
+02:28:37 shot s6d-b-11.png 965536 bytes (t+115s)
+02:28:44 shot s6d-b-12.png 965590 bytes (t+122s)
+02:28:50 shot s6d-b-13.png 965659 bytes (t+128s)
+02:28:57 shot s6d-b-14.png 965561 bytes (t+135s)
+02:29:03 shot s6d-b-15.png 965543 bytes (t+141s)
+02:29:10 shot s6d-b-16.png 965513 bytes (t+148s)
+02:29:54 key meta_l-r
+02:29:58 key home
+02:29:58 key shift-end
+02:29:59 type cmd.exe
+02:29:59 key ret
+02:30:12 type set POUCHDRV=D
+02:30:12 key ret
+02:30:16 typed: cd \kit
+02:30:26 typed: savelog 7
+02:30:39 typed: dir C:\logs > %POUCHDRV%:\dir-logs-7.txt
+02:30:52 typed: copy /y C:\logs\*.* %POUCHDRV%:\

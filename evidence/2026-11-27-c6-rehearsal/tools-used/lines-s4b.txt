@@ -1,0 +1,3 @@
+for %d in (C D E F G H I J) do @if exist %d:\pouch.tag set POUCHDRV=%d
+cd \kit
+run-dsploop

@@ -1,0 +1,20 @@
+== c6.img: 33586688 bytes; the files on it (mdir):
+ Volume in drive : is C6KIT      
+ Volume Serial Number is 7205-902C
+Directory for ::/
+
+restart  cmd        74 2026-11-27   3:04 
+RUN-DS~1 CMD       250 2026-11-27   3:04  run-dsploop.cmd
+savelog  cmd       384 2026-11-27   3:04 
+shutdown cmd        77 2026-11-27   3:04 
+stage1   cmd       204 2026-11-27   3:04 
+stage2   cmd       313 2026-11-27   3:04 
+stage3   cmd       193 2026-11-27   3:04 
+DSPLOO~1 EXE    211968 2026-11-27   3:04  dsploop_apitest.exe
+KIT-SH~1           634 2026-11-27   3:04  KIT-SHA256SUMS
+pouch    tag        47 2026-11-27   3:04 
+       10 files             214 144 bytes
+                         33 239 040 bytes free
+
+== dsploop_apitest.exe read back: 3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b
+== kit folder:                   3b6c1a607e50a0cbfaa148459985f4cb41e76cb4d9960c7b9f93c6ce05239b6b

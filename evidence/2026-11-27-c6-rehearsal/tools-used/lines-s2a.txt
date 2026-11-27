@@ -1,0 +1,4 @@
+cd \kit
+stage1
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" > %POUCHDRV%:\settings-before-boot2.txt
+dir C:\ > %POUCHDRV%:\dir-c-1b.txt

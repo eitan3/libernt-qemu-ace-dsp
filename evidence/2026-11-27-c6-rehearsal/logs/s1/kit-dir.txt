@@ -1,0 +1,21 @@
+Volume in drive C is LiberNT
+Volume Serial Number is a80c-7f7f
+
+Directory of C:\kit
+
+11/27/2026  03:39 AM    <DIR>          .
+11/27/2026  03:39 AM    <DIR>          ..
+11/27/2026  03:38 AM                 3 drive.txt
+11/27/2026  03:04 AM           211,968 dsploop_apitest.exe
+11/27/2026  03:04 AM               634 KIT-SHA256SUMS
+11/27/2026  03:04 AM                47 pouch.tag
+11/27/2026  03:04 AM                74 restart.cmd
+11/27/2026  03:04 AM               250 run-dsploop.cmd
+11/27/2026  03:04 AM               384 savelog.cmd
+11/27/2026  03:04 AM                77 shutdown.cmd
+11/27/2026  03:04 AM               204 stage1.cmd
+11/27/2026  03:04 AM               313 stage2.cmd
+11/27/2026  03:04 AM               193 stage3.cmd
+      11 files                  214,147 bytes
+       2 directories        626,814,976 bytes free
+

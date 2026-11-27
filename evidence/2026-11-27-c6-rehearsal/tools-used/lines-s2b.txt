@@ -1,0 +1,5 @@
+cd \kit
+shutdown -a
+shutdown -a > %POUCHDRV%:\shutdown-a.txt 2>&1
+savelog 9
+copy C:\logs\*.* %POUCHDRV%:\

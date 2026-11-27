@@ -1,0 +1,8 @@
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings
+    BootDsp    REG_DWORD    0x1
+    SelfTest    REG_DWORD    0x2
+    UseInterrupts    REG_DWORD    0x0
+    IpcTimeoutMs    REG_DWORD    0x1f4
+    Topology    REG_SZ    sof-ipc4-loopback.tplg
+

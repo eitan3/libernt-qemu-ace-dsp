@@ -1,0 +1,2 @@
+pnputil /enum-devices /class System /ids > %POUCHDRV%:\enum-system-1.txt
+dir C:\kit > %POUCHDRV%:\kit-dir.txt

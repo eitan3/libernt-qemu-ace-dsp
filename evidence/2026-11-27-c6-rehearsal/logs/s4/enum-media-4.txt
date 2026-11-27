@@ -1,0 +1,61 @@
+LiberNT PnP Utility
+
+Instance ID:                HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&AEEFD634&0&0001
+Device Description:         High Definition Audio Device
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                hdaudio.inf
+Hardware IDs:               HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022
+Compatible IDs:             HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&REV_1001
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50&VEN_1AF4
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&VEN_1AF4
+                            HDAUDIO\FUNC_01&VEN_1AF4
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086&CTLR_DEV_7F50
+                            HDAUDIO\FUNC_01&CTLR_VEN_8086
+                            HDAUDIO\FUNC_01
+
+Instance ID:                INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4D9FAD45&0&00
+Device Description:         Intel Smart Sound Technology DSP Audio
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          Intel
+Status:                     Started
+Driver Name:                dsppcm.inf
+Hardware IDs:               INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50
+Compatible IDs:             INTCDSP\PCM
+
+Instance ID:                SW\{A7C7A5B0-5AF3-11D1-9CED-00A024BF0407}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         ReactOS System audio device
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{a7c7a5b0-5af3-11d1-9ced-00a024bf0407}
+
+Instance ID:                SW\{B7EAFDC0-A680-11D0-96D8-00AA0051E51D}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         ReactOS Wave Audio Mixer
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Disconnected
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{b7eafdc0-a680-11d0-96d8-00aa0051e51d}
+
+Instance ID:                SW\{CD171DE3-69E5-11D2-B56D-0000F8754380}\{9B365890-165F-11D0-A195-0020AFD156E4}
+Device Description:         Driver for ReactOS WINMM-WDM-Audio
+Class Name:                 MEDIA
+Class GUID:                 {4d36e96c-e325-11ce-bfc1-08002be10318}
+Manufacturer Name:          ReactOS
+Status:                     Started
+Driver Name:                wdmaudio.inf
+Hardware IDs:               SW\{cd171de3-69e5-11d2-b56d-0000f8754380}
+

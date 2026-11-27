@@ -1,0 +1,6 @@
+for %d in (C D E F G H I J) do @if exist %d:\pouch.tag set POUCHDRV=%d
+cd \kit
+savelog 6
+dir C:\logs > %POUCHDRV%:\dir-logs-6.txt
+dir C:\ > %POUCHDRV%:\dir-c-6.txt
+copy /y C:\logs\*.* %POUCHDRV%:\

@@ -1,0 +1,13 @@
+for %d in (C D E F G H I J) do @if exist %d:\pouch.tag set POUCHDRV=%d
+mkdir C:\kit
+copy %POUCHDRV%:\*.* C:\kit\
+cd \kit
+net user tester > %POUCHDRV%:\s8-net-user-tester.txt 2>&1
+net user > %POUCHDRV%:\s8-net-user.txt 2>&1
+echo %USERNAME% > %POUCHDRV%:\s8-username.txt
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" /v BootDsp /t REG_DWORD /d 1 /f > %POUCHDRV%:\s8-regadd.txt 2>&1
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" > %POUCHDRV%:\s8-settings-8.txt
+savelog 8
+dir C:\ > %POUCHDRV%:\s8-dir-c.txt
+dir C:\kit > %POUCHDRV%:\s8-kit-dir.txt
+copy /y C:\logs\*.* %POUCHDRV%:\

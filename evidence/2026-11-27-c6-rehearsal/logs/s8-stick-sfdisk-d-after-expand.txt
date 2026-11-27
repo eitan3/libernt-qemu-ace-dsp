@@ -1,0 +1,8 @@
+label: dos
+label-id: 0xe915f19c
+device: <project>/disk/c6-stick-s8.img
+unit: sectors
+sector-size: 512
+
+<project>/disk/c6-stick-s8.img1 : start=        2048, size=      131072, type=ef, bootable
+<project>/disk/c6-stick-s8.img2 : start=      133120, size=     8253407, type=7

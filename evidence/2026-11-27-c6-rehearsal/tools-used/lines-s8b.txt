@@ -1,0 +1,3 @@
+echo %USERNAME% > %POUCHDRV%:\s8-username2.txt
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" > %POUCHDRV%:\s8-settings-8b.txt
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" /v SelfTest /t REG_DWORD /d 0 /f > %POUCHDRV%:\s8-regadd-tester.txt 2>&1

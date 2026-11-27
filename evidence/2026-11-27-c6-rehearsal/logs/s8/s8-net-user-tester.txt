@@ -1,0 +1,26 @@
+User name                           tester
+Full Name                           
+Comment                             
+User's comment                      
+Country code                        000 (System Default)
+Account active                      Yes
+Account expires                     Never
+
+Password last set                   11/27/2026 3:41 AM
+Password expires                    Never
+Password changeable                 11/27/2026 3:41 AM
+Password required                   Yes
+User may change password            Yes
+
+Workstations allowed                All
+Logon script                        
+User profile                        
+Home directory                      
+Last logon                          Never
+
+Logon hours allowed                 All
+
+Local Group Memberships             *Administrators
+                                    *Users
+Global Group memberships            
+The command completed successfully.

@@ -1,0 +1,7 @@
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings
+    BootDsp    REG_DWORD    0x0
+    SelfTest    REG_DWORD    0x0
+    UseInterrupts    REG_DWORD    0x0
+    IpcTimeoutMs    REG_DWORD    0x1f4
+

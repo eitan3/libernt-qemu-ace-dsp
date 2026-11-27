@@ -1,0 +1,8 @@
+label: dos
+label-id: 0x21658107
+device: <home>/libernt-build-logs/test-audio-intel-sst-p4c4d-ec8ce887b1b/LiberNT.img
+unit: sectors
+sector-size: 512
+
+<home>/libernt-build-logs/test-audio-intel-sst-p4c4d-ec8ce887b1b/LiberNT.img1 : start=        2048, size=      131072, type=ef, bootable
+<home>/libernt-build-logs/test-audio-intel-sst-p4c4d-ec8ce887b1b/LiberNT.img2 : start=      133120, size=     3012608, type=7

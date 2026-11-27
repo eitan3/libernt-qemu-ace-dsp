@@ -1,0 +1,11 @@
+Volume in drive C is LiberNT
+Volume Serial Number is a80c-7f7f
+
+Directory of C:\logs
+
+11/27/2026  03:41 AM    <DIR>          .
+11/27/2026  03:41 AM    <DIR>          ..
+11/27/2026  03:30 AM           270,336 boot1.log
+       1 file                   270,336 bytes
+       2 directories        626,544,640 bytes free
+

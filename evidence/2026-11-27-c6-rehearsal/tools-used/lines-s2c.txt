@@ -1,0 +1,9 @@
+for %d in (C D E F G H I J) do @if exist %d:\pouch.tag set POUCHDRV=%d
+cd \kit
+savelog 2
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings" > %POUCHDRV%:\settings-2.txt
+pnputil /enum-devices /class Media /ids > %POUCHDRV%:\enum-media-2.txt
+pnputil /enum-devices /class System /ids > %POUCHDRV%:\enum-system-2.txt
+dir C:\ > %POUCHDRV%:\dir-c-2.txt
+dir C:\logs > %POUCHDRV%:\dir-logs-2.txt
+copy C:\logs\*.* %POUCHDRV%:\

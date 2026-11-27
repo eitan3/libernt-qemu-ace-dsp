@@ -1,0 +1,8 @@
+label: dos
+label-id: 0x21658107
+device: <project>/disk/c6-stick-p4c4d.img
+unit: sectors
+sector-size: 512
+
+<project>/disk/c6-stick-p4c4d.img1 : start=        2048, size=      131072, type=ef, bootable
+<project>/disk/c6-stick-p4c4d.img2 : start=      133120, size=     3012608, type=7
