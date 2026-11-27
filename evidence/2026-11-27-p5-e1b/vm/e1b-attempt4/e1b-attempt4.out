@@ -1,0 +1,286 @@
+2026-11-27T19:04:22Z e1b-round: e1b-round on disk/p5e1b-b.qcow2
+2026-11-27T19:04:24Z VM e1b-round started (lib-run pid 1498232, sockets /tmp/qad-vm.1498234, data disk /tmp/e1b/pouch/e1b-round.img)
+[19:05:58] [   83.803895] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(0000006D189D8150 0000000000070170 'Program Manager' 0000006D189D5748 32 0x0 0000006D189D56B0 33c 0000006D189D5774)
+2026-11-27T19:05:58Z the first boot: [    8.098111] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched;
+2026-11-27T19:05:58Z stop lines in the boot's log: 0; ace_unexpected: 0
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+--- sendkey ret
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+2026-11-27T19:06:35Z wizard: tab tab ret, ret, tab tab tab ret sent
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-27T19:07:11Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T19:07:32Z data disk: drive D: in the guest (1 marker)
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T19:07:38Z console answering after boot (alive-boot.txt, 3 s)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T19:07:51Z typed: reg add BootDsp = 1 (REG_DWORD)
+typed 116 characters
+--- sendkey ret
+
+2026-11-27T19:08:07Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+typed 98 characters
+--- sendkey ret
+
+2026-11-27T19:08:21Z typed: reg add SelfTest = 0 (REG_DWORD)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T19:08:53Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T19:09:19Z cycle tp-1 (the topology at the D0 entry): rc=0
+2026-11-27T19:09:19Z after the cycle: boot ok 1; the topology line 1; registered as 0; audio child 1
+typed 84 characters
+--- sendkey ret
+
+2026-11-27T19:09:38Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-27T19:09:38Z the endpoints the guest lists: 0 Loopback lines
+typed 96 characters
+--- sendkey ret
+
+2026-11-27T19:10:04Z baseline: ended after about 19 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1295 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T19:10:04Z baseline: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:10:04Z baseline: the driver's lines from the start on, after serial line 301:
+    [ 1395.448374] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1395.448374] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1395.448374] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1395.448374] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1395.448374] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1395.448374] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1397.495258] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1397.495258] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1397.495258] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1397.495258] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1397.495258] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1397.495258] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1399.542143] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1399.542143] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1399.542143] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1399.542143] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1399.542143] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1399.542143] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T19:10:04Z baseline: PASS
+2026-11-27T19:10:05Z ## row halt-rom=43
+2026-11-27T19:10:05Z fm-halt-rom_43-1-in: dsploop with fault never-reply at open 1 (from serial line 325)
+typed 107 characters
+--- sendkey ret
+
+2026-11-27T19:10:17Z fm-halt-rom_43-1-in: open #1 at guest 1479.854606 s; fault 'never-reply' set at 19:10:17 (host)
+2026-11-27T19:10:26Z fm-halt-rom_43-1-in: fault cleared (19:10:26)
+2026-11-27T19:10:36Z fm-halt-rom_43-1-in: ended after about 9 s; the console answers; dsploop.c:507: Test failed: dsploop: 1 of 3 depths compared dsploop: 1 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 435 tests executed (0 ma
+2026-11-27T19:10:36Z fm-halt-rom_43-1-in: opens 1, recovered lines 0, failed-boot lines 1, fault-during lines 2, pin-told lines 2, release lines 2, pin-free lines 2, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:10:36Z fm-halt-rom_43-1-in: the run's own lines (errors and the summary):
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:311: Test failed: dsploop (24 valid in 32): render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 1 of 3 depths compared
+    dsploop: 1 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 435 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T19:10:36Z fm-halt-rom_43-1-in: the driver's lines from the start on, after serial line 325:
+    [ 1479.854606] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1479.854606] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1479.854606] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1479.857606] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1479.857606] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1479.857606] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1482.372743] intcdsp.sys: ipc: set pipeline state (19) 0x93040003|0x00000000 reply timeout after 500083 us; the link is faulted
+    [ 1482.372743] intcdsp.sys: stream 1: a pipeline could not be paused (0xc00000b5)
+    [ 1482.372743] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1482.372743] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1482.372743] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1482.372743] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1482.372743] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+    [ 1482.372743] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+    [ 1482.372743] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1482.372743] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+    [ 1482.372743] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1482.372743] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1482.372743] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1482.372743] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1482.372743] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+    [ 1482.372743] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1482.388368] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1482.388368] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1482.388368] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+    [ 1482.903995] intcdsp.sys: boot IPC reply timeout after 507314 us (clock 1493747015 us): state failed, failed in configuring (IPC reply timeout), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x1b080000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0
+    [ 1482.903995] intcdsp.sys: release: 0 streams let go, 0 buffers held for their pins, 0 tags back
+    [ 1482.903995] intcdsp.sys: streams: released for the power-down; nothing is sent until the next stream open or D0 entry
+    [ 1482.903995] intcdsp.sys: DSP power down from state failed: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1482.903995] intcdsp.sys: boot at stream open failed: the DSP is not ready after the boot (0xc00000a3); no stream is taken
+    [ 1482.903995] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T19:10:36Z row halt-rom=43: fault 'halt-rom=43' set
+typed 110 characters
+--- sendkey ret
+
+2026-11-27T19:11:01Z fm-halt-rom_43-2-fault: ended after about 17 s; the console answers; dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 5 tests executed (0 mark
+2026-11-27T19:11:01Z fm-halt-rom_43-2-fault: opens 0, recovered lines 0, failed-boot lines 1, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:11:01Z fm-halt-rom_43-2-fault: the driver's lines from the start on, after serial line 368:
+    [ 1575.233402] intcdsp.sys: ROM init attempt failed: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+    [ 1575.235402] intcdsp.sys: ROM init attempt failed: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+    [ 1575.239402] intcdsp.sys: boot ROM error after 8337 us (clock 1586068737 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, IPC status 0, last DSP message 0x00000000|0x00000000, attempt 3, 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000
+    [ 1575.239402] intcdsp.sys: DSP power down from state failed: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1575.239402] intcdsp.sys: boot at stream open failed: the DSP is not ready after the boot (0xc00000a3); no stream is taken
+    [ 1575.239402] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+typed 114 characters
+--- sendkey ret
+
+2026-11-27T19:11:37Z fm-halt-rom_43-3-recovered: ended after about 21 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1291 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T19:11:37Z fm-halt-rom_43-3-recovered: opens 3, recovered lines 1, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:11:37Z fm-halt-rom_43-3-recovered: the driver's lines from the start on, after serial line 379:
+    [ 1660.234144] intcdsp.sys: boot ok after 5454 us (clock 1671063451 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 1660.234144] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model of the device's first boot
+    [ 1660.234144] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1660.234144] intcdsp.sys: recovered: open ok after 6 ms
+    [ 1660.234144] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1660.234144] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1660.234144] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1660.236144] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1660.236144] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1660.236144] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1662.298654] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1662.298654] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1662.298654] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1662.298654] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1662.298654] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1662.298654] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1664.345538] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1664.345538] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1664.345538] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1664.345538] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1664.345538] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1664.345538] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+| halt-rom=43 | boot ROM error after 8337 us (clock 1586068737 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, IPC status 0, last | 1 | recovered: open ok after 6 ms | PASS |
+2026-11-27T19:11:37Z row halt-rom=43: PASS (boot ROM error after 8337 us (clock 1586068737 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002b base firmware not found, IPC status 0, last; failed-boot lines 1; recovered: open ok after 6 ms)
+2026-11-27T19:11:44Z ## row halt-rom=44
+2026-11-27T19:11:44Z fm-halt-rom_44-1-in: dsploop with fault never-reply at open 1 (from serial line 417)
+typed 107 characters
+--- sendkey ret
+
+2026-11-27T19:11:55Z fm-halt-rom_44-1-in: open #1 at guest 1885.751277 s; fault 'never-reply' set at 19:11:55 (host)
+2026-11-27T19:12:04Z fm-halt-rom_44-1-in: fault cleared (19:12:04)
+2026-11-27T19:12:15Z fm-halt-rom_44-1-in: ended after about 9 s; the console answers; dsploop.c:507: Test failed: dsploop: 1 of 3 depths compared dsploop: 1 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 440 tests executed (0 ma
+2026-11-27T19:12:15Z fm-halt-rom_44-1-in: opens 1, recovered lines 0, failed-boot lines 1, fault-during lines 2, pin-told lines 2, release lines 2, pin-free lines 2, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:12:15Z fm-halt-rom_44-1-in: the run's own lines (errors and the summary):
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:311: Test failed: dsploop (24 valid in 32): render: Initialize 0x8889000f
+    dsploop.c:507: Test failed: dsploop: 1 of 3 depths compared
+    dsploop: 1 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 440 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T19:12:15Z fm-halt-rom_44-1-in: the driver's lines from the start on, after serial line 417:
+    [ 1885.751277] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1885.751277] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1885.751277] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1885.754277] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1885.754277] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1885.754277] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1888.268164] intcdsp.sys: ipc: set pipeline state (19) 0x93040003|0x00000000 reply timeout after 500493 us; the link is faulted
+    [ 1888.268164] intcdsp.sys: stream 1: a pipeline could not be paused (0xc00000b5)
+    [ 1888.268164] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1888.268164] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1888.268164] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1888.268164] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1888.268164] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+    [ 1888.268164] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+    [ 1888.268164] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1888.268164] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+    [ 1888.268164] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1888.268164] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1888.268164] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1888.268164] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1888.268164] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+    [ 1888.283789] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1888.283789] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1888.283789] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1888.283789] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+    [ 1888.799417] intcdsp.sys: boot IPC reply timeout after 507365 us (clock 1899642786 us): state failed, failed in configuring (IPC reply timeout), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x1b080000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0
+    [ 1888.799417] intcdsp.sys: release: 0 streams let go, 0 buffers held for their pins, 0 tags back
+    [ 1888.799417] intcdsp.sys: streams: released for the power-down; nothing is sent until the next stream open or D0 entry
+    [ 1888.799417] intcdsp.sys: DSP power down from state failed: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1888.799417] intcdsp.sys: boot at stream open failed: the DSP is not ready after the boot (0xc00000a3); no stream is taken
+    [ 1888.799417] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T19:12:15Z row halt-rom=44: fault 'halt-rom=44' set
+typed 110 characters
+--- sendkey ret
+
+2026-11-27T19:12:40Z fm-halt-rom_44-2-fault: ended after about 17 s; the console answers; dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 5 tests executed (0 mark
+2026-11-27T19:12:40Z fm-halt-rom_44-2-fault: opens 0, recovered lines 0, failed-boot lines 1, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:12:40Z fm-halt-rom_44-2-fault: the driver's lines from the start on, after serial line 460:
+    [ 1977.300307] intcdsp.sys: ROM init attempt failed: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+    [ 1977.302307] intcdsp.sys: ROM init attempt failed: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000
+    [ 1977.306307] intcdsp.sys: boot ROM error after 8337 us (clock 1988136000 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002c CSE validation failed, IPC status 0, last DSP message 0x00000000|0x00000000, attempt 3, 0 DSP interrupts, cleanup ok, ADSPCS 0x00000000
+    [ 1977.306307] intcdsp.sys: DSP power down from state failed: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1977.306307] intcdsp.sys: boot at stream open failed: the DSP is not ready after the boot (0xc00000a3); no stream is taken
+    [ 1977.306307] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+typed 114 characters
+--- sendkey ret
+
+2026-11-27T19:13:10Z fm-halt-rom_44-3-recovered: ended after about 21 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1304 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T19:13:10Z fm-halt-rom_44-3-recovered: opens 3, recovered lines 1, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T19:13:10Z fm-halt-rom_44-3-recovered: the driver's lines from the start on, after serial line 471:
+    [ 2057.986900] intcdsp.sys: boot ok after 5452 us (clock 2068824890 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 2057.986900] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model of the device's first boot
+    [ 2057.986900] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 2057.986900] intcdsp.sys: recovered: open ok after 6 ms
+    [ 2057.986900] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2057.986900] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2057.986900] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2057.986900] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2057.986900] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2057.986900] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2060.049410] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2060.049410] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2060.049410] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2060.065035] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2060.065035] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2060.065035] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2062.127544] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2062.127544] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2062.127544] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2062.127544] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2062.127544] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2062.127544] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+| halt-rom=44 | boot ROM error after 8337 us (clock 1988136000 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002c CSE validation failed, IPC status 0, last D | 1 | recovered: open ok after 6 ms | PASS |
+2026-11-27T19:13:10Z row halt-rom=44: PASS (boot ROM error after 8337 us (clock 1988136000 us): state failed, failed in ROM init (ROM error), ROM status 0x80000009 ROM purge boot, ROM error 0x0000002c CSE validation failed, IPC status 0, last D; failed-boot lines 1; recovered: open ok after 6 ms)
+2026-11-27T19:13:40Z !! the console does not answer after row halt-rom=44: the round stops here
+2026-11-27T19:13:43Z (b), (c): not run in this VM (KNOBS=0: the knobs did not fire in attempt 2; the model's fix comes after this round)
+2026-11-27T19:13:43Z ## (d) a D0 cycle in session: the guest's sleep states, then one bounded sleep attempt
+typed 45 characters
+--- sendkey ret
+
+2026-11-27T19:13:51Z powercfg /a: output after about 3 s: Can't recognize 'powercfg /a ' as an internal or external command, or batch script. 
+2026-11-27T19:13:51Z d-sleep: rundll32 powrprof.dll,SetSuspendState 0,1,0 typed (bounded at 90 s)
+typed 43 characters
+--- sendkey ret
+
+2026-11-27T19:15:26Z -- not seen in 90 s (after line 509): Entering sleep state|Sleep: Sending|sleep state S[1-4]
+2026-11-27T19:15:26Z d-sleep: no sleep line in 90 s: the guest did not sleep (the README's: no S3 in the VM)
+/tmp/e1b/tools/e1b-round.sh: line 240: syntax error near unexpected token `)'
+/tmp/e1b/tools/e1b-round.sh: line 240: `e VM)"'

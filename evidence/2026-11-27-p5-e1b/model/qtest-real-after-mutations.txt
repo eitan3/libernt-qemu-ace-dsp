@@ -1,0 +1,2991 @@
+TAP version 14
+# random seed: R02Sdd9ebba70c328a2ca7053f97a4699b46
+1..16
+# Start of x86_64 tests
+# Start of intel-hda-ace tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_read BAR4 +0x1108 -> 0xffffffff HFINTIPPTR (model value)
+ok 1 /x86_64/intel-hda-ace/enumerate
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ok 2 /x86_64/intel-hda-ace/caps
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device ich9-intel-hda,bus=pcie.0,addr=1b.0,id=hda0 -device hda-duplex,audiodev=snd0  -accel qtest
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda,bus=pcie.0,addr=1b.0,id=hda0 -device hda-duplex,audiodev=snd0  -accel qtest
+ok 3 /x86_64/intel-hda-ace/stock-controllers
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x42000000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xc2000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe2000002 ext 0x00000000
+ace_ipc_msg IPC reply type 2 (config-set) status 2: not handled
+ace_reg_read BAR4 +0x73214 -> 0xe2000002 HFIPCXIDA
+ok 4 /x86_64/intel-hda-ace/boot-handshake
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_write BAR4 +0x178d04 <- 0x00000000 DSP2CXCTL
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x178d04 -> 0x00000000 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x178d04 <- 0x00000000 DSP2CXCTL
+ace_state state rom-ready -> off
+ace_reg_read BAR4 +0x178d04 -> 0x00000000 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73228 <- 0x00000000 HFIPCXCTL
+ace_reg_write BAR4 +0x178d04 <- 0x00000000 DSP2CXCTL
+ace_state state running -> off
+ace_reg_read BAR4 +0x178d04 -> 0x00000000 DSP2CXCTL
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_unexpected BAR4 +0x180000 unexpected (write=0) 0x00000000
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73228 <- 0x00000000 HFIPCXCTL
+ace_reg_write BAR4 +0x178d04 <- 0x00000000 DSP2CXCTL
+ace_state state running -> off
+ace_reg_read BAR4 +0x178d04 -> 0x00000000 DSP2CXCTL
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_unexpected BAR4 +0x180000 unexpected (write=0) 0x00000000
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,x-powered-down-value=0xffffffff -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_read BAR4 +0x163200 -> 0xffffffff FSR
+ace_reg_read BAR4 +0x163204 -> 0xffffffff ROM error
+ace_unexpected BAR4 +0x180000 unexpected (write=0) 0x00000000
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1108 -> 0xffffffff HFINTIPPTR (model value)
+ok 5 /x86_64/intel-hda-ace/power-down
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1108 -> 0xffffffff HFINTIPPTR (model value)
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_reg_read BAR4 +0x1108 -> 0x00000120 HFINTIPPTR (model value)
+ace_reg_write BAR4 +0x178d04 <- 0x00000000 DSP2CXCTL
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_state state purging -> off
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1108 -> 0xffffffff HFINTIPPTR (model value)
+ok 6 /x86_64/intel-hda-ace/intipptr
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,msi=off -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_reg_read BAR4 +0x1108 -> 0x00000120 HFINTIPPTR (model value)
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_write BAR4 +0x120 <- 0x00000001 INTEN (register the pointer names, model value)
+ace_reg_write BAR4 +0x1140 <- 0x00000001 HfHIPCIE
+ace_reg_write BAR4 +0x73228 <- 0x00000003 HFIPCXCTL
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_irq DSP interrupt 1 (msi 0)
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_irq DSP interrupt 0 (msi 0)
+ace_reg_write BAR4 +0x73228 <- 0x00000002 HFIPCXCTL
+ace_irq DSP interrupt 1 (msi 0)
+ace_reg_write BAR4 +0x73228 <- 0x00000003 HFIPCXCTL
+ace_irq DSP interrupt 0 (msi 0)
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_irq DSP interrupt 1 (msi 0)
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_irq DSP interrupt 0 (msi 0)
+ace_reg_write BAR4 +0x73228 <- 0x00000001 HFIPCXCTL
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ok 7 /x86_64/intel-hda-ace/irq-intx
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,msi=on -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_reg_read BAR4 +0x1108 -> 0x00000120 HFINTIPPTR (model value)
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_write BAR4 +0x120 <- 0x00000001 INTEN (register the pointer names, model value)
+ace_reg_write BAR4 +0x1140 <- 0x00000001 HfHIPCIE
+ace_reg_write BAR4 +0x73228 <- 0x00000003 HFIPCXCTL
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_irq DSP interrupt 1 (msi 1)
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_irq DSP interrupt 0 (msi 1)
+ace_reg_write BAR4 +0x73228 <- 0x00000002 HFIPCXCTL
+ace_irq DSP interrupt 1 (msi 1)
+ace_reg_write BAR4 +0x73228 <- 0x00000003 HFIPCXCTL
+ace_irq DSP interrupt 0 (msi 1)
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_irq DSP interrupt 1 (msi 1)
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_irq DSP interrupt 0 (msi 1)
+ace_reg_write BAR4 +0x73228 <- 0x00000001 HFIPCXCTL
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ok 8 /x86_64/intel-hda-ace/irq-msi
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=none -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule none: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-power -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-power: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_reg_read BAR4 +0x1000 -> 0x00010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_reg_read BAR4 +0x163200 -> 0x00000000 FSR
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-ack -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-ack: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-ready -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-ready: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=halt-rom=43 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule halt-rom=43: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_payload_check ROM rule base firmware not found: 0
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 1
+ace_state state purging -> halted
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x80000009 FSR
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_reg_read BAR4 +0x163200 -> 0x80000009 FSR
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=halt-rom=51 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule halt-rom=51: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_payload_check ROM rule base firmware incompatible: 0
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 1
+ace_state state purging -> halted
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x80000009 FSR
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_reg_read BAR4 +0x163200 -> 0x80000009 FSR
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-enter -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-enter: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-fwready -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-fwready: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=halt-fw=51 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule halt-fw=51: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_payload_check ROM rule base firmware incompatible: 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x8000002a FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=crash-notification -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule crash-notification: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b0a0000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b0a0000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b0a0000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-reply -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-reply: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=drop-requests -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule drop-requests: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=abi=2 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule abi=2: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=ipc-status=5 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule ipc-status=5: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000005 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 5: FW_CONFIG; status 5 injected by the fault
+ace_reg_read BAR4 +0x73214 -> 0xe1000005 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=bad-tuples -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule bad-tuples: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=truncated-reply -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule truncated-reply: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=version-shift -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule version-shift: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=window-read-fail -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule window-read-fail: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 32768 bytes (SPIB 32768)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule loaded segment inside the stream: 0
+ace_payload_check ROM rule IMR too small: 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000028 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002a ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory magic: 0
+ace_payload_check ROM rule base firmware not found: 0
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000009 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002b ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,x-delay-scale=10 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ok 9 /x86_64/intel-hda-ace/faults
+# slow test /x86_64/intel-hda-ace/faults executed in 3.19 secs
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x61000000 HFIPCXIDA
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x31000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010002 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010002 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> reset
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was reset)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 1: no such pipeline
+ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000009 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 9: pipeline 1: no such pipeline
+ace_reg_read BAR4 +0x73214 -> 0xb2000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13020003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93020003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 2: no such pipeline
+ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb100000a ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 10: pipeline 1 exists (state uninitialized)
+ace_reg_read BAR4 +0x73214 -> 0xb100000a HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11020000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91020000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 2 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11000000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000001 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 1: instance 0: not a pipeline id (1 to 16)
+ace_reg_read BAR4 +0x73214 -> 0xb1000001 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11110000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91110000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000001 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 1: instance 17: not a pipeline id (1 to 16)
+ace_reg_read BAR4 +0x73214 -> 0xb1000001 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11100000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91100000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 16 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13100003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93100003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 16: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12100000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92100000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 16 deleted (was paused)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00100001 HFIPCXIDDY
+ace_ipc IPC request primary 0x11032955 ext 0x00100001
+ace_reg_write BAR4 +0x73210 <- 0x91032955 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 3 created: priority 5, 341 pages, core 1, low-power 1
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000001 HFIPCXIDDY
+ace_ipc IPC request primary 0x13030004 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x93030004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000007 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 7: pipeline 3: the multi-pipeline form is not modelled
+ace_reg_read BAR4 +0x73214 -> 0xb3000007 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x51040000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xd1040000 HFIPCXIDR
+ace_ipc IPC reply primary 0xf1000002 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (unknown) status 2: not handled
+ace_reg_read BAR4 +0x73214 -> 0xf1000002 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73228 <- 0x00000000 HFIPCXCTL
+ace_reg_write BAR4 +0x178d04 <- 0x00000000 DSP2CXCTL
+ace_state state running -> off
+ace_reg_write BAR4 +0x1000 <- 0x00000000 ADSPCS
+ace_reg_read BAR4 +0x1000 -> 0x00000000 ADSPCS
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13030003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93030003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 3: no such pipeline
+ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ok 10 /x86_64/intel-hda-ace/pipeline-table
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000005 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1 is uninitialized: running refused, not paused first
+ace_reg_read BAR4 +0x73214 -> 0xb3000005 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010002 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010002 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> reset
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000005 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1 is reset: running refused, not paused first
+ace_reg_read BAR4 +0x73214 -> 0xb3000005 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: reset -> end-of-stream
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010001 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010001 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: end-of-stream -> uninitialized
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000005 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1 is uninitialized: running refused, not paused first
+ace_reg_read BAR4 +0x73214 -> 0xb3000005 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000001 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 1: pipeline 1: state 0 is not a pipeline state
+ace_reg_read BAR4 +0x73214 -> 0xb3000001 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010006 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010006 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000001 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 1: pipeline 1: state 6 is not a pipeline state
+ace_reg_read BAR4 +0x73214 -> 0xb3000001 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was uninitialized)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13070004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93070004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000009 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 9: pipeline 7: no such pipeline
+ace_reg_read BAR4 +0x73214 -> 0xb3000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ok 11 /x86_64/intel-hda-ace/pipeline-illegal
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=ipc-status=5:19 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule ipc-status=5:19: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000005 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 5: pipeline 1: uninitialized -> paused; status 5 injected by the fault
+ace_reg_read BAR4 +0x73214 -> 0xb3000005 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was paused)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=ipc-status=7 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule ipc-status=7: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000007 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 7: FW_CONFIG; status 7 injected by the fault
+ace_reg_read BAR4 +0x73214 -> 0xe1000007 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000007 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 7: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0; status 7 injected by the fault
+ace_reg_read BAR4 +0x73214 -> 0xb1000007 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000007 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 7: pipeline 1 deleted (was uninitialized); status 7 injected by the fault
+ace_reg_read BAR4 +0x73214 -> 0xb2000007 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=ipc-status=7:1 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule ipc-status=7:1: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000007 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 7: FW_CONFIG; status 7 injected by the fault
+ace_reg_read BAR4 +0x73214 -> 0xe1000007 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was uninitialized)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-reply=19 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-reply=19: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC request dropped (set-pipeline-state) primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x31000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was uninitialized)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_ipc IPC request dropped (set-pipeline-state) primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x32000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-reply=1 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-reply=1: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-reply -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-reply: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_ipc IPC request dropped (config-get) primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_ipc IPC request dropped (create-pipeline) primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ok 12 /x86_64/intel-hda-ace/pipeline-faults
+# slow test /x86_64/intel-hda-ace/pipeline-faults executed in 0.96 secs
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=never-reply-running=19 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule never-reply-running=19: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010015 HFIPCXIDDY
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_reg_write BAR4 +0x73210 <- 0xc0010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 1 (stream tag 2), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC request dropped (set-pipeline-state) primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x60000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was paused)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was paused)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace,fault=crash-during-stream=1 -device hda-duplex,audiodev=snd0  -accel qtest
+ace_payload_check ROM rule crash-during-stream=1: 1
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010015 HFIPCXIDDY
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_reg_write BAR4 +0x73210 <- 0xc0000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway index 0 (stream tag 1), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_payload_check ROM rule stream ran with the ROM not ready: 0
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_ipc IPC exception caught in place of the reply primary 0x13010004 ext 0x00000000
+ace_ipc IPC notification primary 0x9b0a0000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x33000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73200 -> 0x9b0a0000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_read BAR4 +0x73200 -> 0x1b0a0000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_ipc IPC exception caught in place of the reply primary 0x12010000 ext 0x00000000
+ace_ipc IPC notification primary 0x9b0a0000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_reg_read BAR4 +0x73214 -> 0x33000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73200 -> 0x9b0a0000 HFIPCXTDR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ok 13 /x86_64/intel-hda-ace/stream-faults
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 4 bytes (SPIB 4)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory entries: 0
+ace_payload_check ROM rule base firmware not found: 0
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000009 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002b ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 32 bytes (SPIB 32)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule ADSP.man entry offset: 0
+ace_payload_check ROM rule base firmware not found: 0
+ace_fsr FSR state 0x25 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000025 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002b ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 80 bytes (SPIB 80)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest vendor word: 0
+ace_payload_check ROM rule CSE validation failed: 0
+ace_fsr FSR state 0x26 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000026 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002c ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 92 bytes (SPIB 92)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest magic word: 0
+ace_payload_check ROM rule CSE validation failed: 0
+ace_fsr FSR state 0x26 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000026 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002c ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 8324 bytes (SPIB 8324)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segment flags: 0
+ace_payload_check ROM rule base firmware not found: 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000028 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002b ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 8328 bytes (SPIB 8328)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segment file offset: 0
+ace_payload_check ROM rule base firmware not found: 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000028 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002b ROM error
+ok 14 /x86_64/intel-hda-ace/short-stream
+# slow test /x86_64/intel-hda-ace/short-stream executed in 0.90 secs
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest header type: 0
+ace_payload_check ROM rule CSE validation failed: 0
+ace_fsr FSR state 0x26 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000026 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002c ROM error
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule loaded segment inside the stream: 0
+ace_payload_check ROM rule IMR too small: 0
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 1
+ace_state state loading -> halted
+ace_reg_read BAR4 +0x163200 -> 0x80000028 FSR
+ace_reg_read BAR4 +0x163204 -> 0x0000002a ROM error
+ok 15 /x86_64/intel-hda-ace/wrapped-offset
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-1526726.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1526726.qmp,id=char0 -object monitor-qmp,id=qmp0,chardev=char0 -display none -audio none -run-with exit-with-parent=on -machine q35 -nodefaults -audiodev none,id=snd0 -trace ace_* -device intel-hda-ace,bus=pcie.0,addr=1b.0,id=ace -device hda-duplex,audiodev=snd0  -accel qtest
+ace_reg_write BAR4 +0x1000 <- 0x00010000 ADSPCS
+ace_state state subsystem-reset -> subsystem-powered (model value: CPA 100 us)
+ace_reg_read BAR4 +0x1000 -> 0x01010000 ADSPCS
+ace_ipc IPC purge-request primary 0x01004000 ext 0x00000001
+ace_reg_write BAR4 +0x73210 <- 0x81004000 HFIPCXIDR
+ace_reg_write BAR4 +0x178d04 <- 0x00000001 DSP2CXCTL
+ace_state state core-reset -> core-powered (model value: CPA 200 us)
+ace_fsr FSR state 0x8 wait 0x0 module 0 halted 0
+ace_state state off -> purging
+ace_reg_read BAR4 +0x178d04 -> 0x00000101 DSP2CXCTL
+ace_reg_read BAR4 +0x163200 -> 0x00000008 FSR
+ace_fsr FSR state 0x9 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_ipc IPC reply primary 0x80000000 ext 0x00000000
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000009 FSR
+ace_fsr FSR state 0x1 wait 0x0 module 0 halted 0
+ace_state state purging -> rom-ready
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_read BAR4 +0x73214 -> 0x00000000 HFIPCXIDA
+ace_reg_read BAR4 +0x163200 -> 0x00000001 FSR
+ace_payload_check ROM rule stream contract: 1
+ace_rom_consume ROM consumes stream 1: 36864 bytes (SPIB 36864)
+ace_state state rom-ready -> loading
+ace_fsr FSR state 0x25 wait 0x5 module 0 halted 0
+ace_payload_check ROM rule partition directory: 1
+ace_payload_check ROM rule manifest: 1
+ace_payload_check ROM rule firmware header: 1
+ace_payload_check ROM rule module segments: 1
+ace_reg_read BAR4 +0x163200 -> 0x05000025 FSR
+ace_fsr FSR state 0x27 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000027 FSR
+ace_fsr FSR state 0x28 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000028 FSR
+ace_fsr FSR state 0x29 wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x00000029 FSR
+ace_fsr FSR state 0x2a wait 0x0 module 0 halted 0
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_reg_read BAR4 +0x163200 -> 0x0000002a FSR
+ace_fsr FSR state 0x5 wait 0x0 module 0 halted 0
+ace_state state loading -> running
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x73200 -> 0x00000000 HFIPCXTDR
+ace_payload_check ROM rule firmware registers written (rom_info model value): 1
+ace_ipc IPC notification primary 0x9b080000 ext 0x00000000
+ace_reg_read BAR4 +0x73200 -> 0x9b080000 HFIPCXTDR
+ace_reg_read BAR4 +0x73300 -> 0x00000000 HFIPCXTDDY
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_reg_read BAR4 +0x163200 -> 0x00000005 FSR
+ace_fsr FSR state 0x5 wait 0x0 module 2 halted 1
+ace_reg_read BAR4 +0x163200 -> 0xa0000005 FSR
+ace_reg_write BAR4 +0x73200 <- 0x80000000 HFIPCXTDR
+ace_reg_write BAR4 +0x73204 <- 0x00000000 HFIPCXTDA
+ace_reg_read BAR4 +0x73200 -> 0x1b080000 HFIPCXTDR
+ace_reg_write BAR4 +0x73380 <- 0x00700000 HFIPCXIDDY
+ace_ipc IPC request primary 0x41000000 ext 0x00700000
+ace_reg_write BAR4 +0x73210 <- 0xc1000000 HFIPCXIDR
+ace_ipc IPC reply primary 0xe1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 1 (config-get) status 0: FW_CONFIG
+ace_reg_read BAR4 +0x73214 -> 0xe1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010015 HFIPCXIDDY
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_reg_write BAR4 +0x73210 <- 0xc0000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway index 1 (stream tag 2), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010015 HFIPCXIDDY
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_reg_write BAR4 +0x73210 <- 0xc0010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 2 (stream tag 3), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x0001000a HFIPCXIDDY
+ace_ipc IPC request primary 0x40000007 ext 0x0001000a
+ace_reg_write BAR4 +0x73210 <- 0xc0000007 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 0: base configuration, ibs 384 obs 384, pipeline 1, core 0, 10 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000007 HFIPCXIDDY
+ace_ipc IPC request primary 0x45000005 ext 0x00000007
+ace_reg_write BAR4 +0x73210 <- 0xc5000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 0 bound to module 7 instance 0 (queues 0 -> 0)
+ace_reg_read BAR4 +0x73214 -> 0xe5000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010005 HFIPCXIDDY
+ace_ipc IPC request primary 0x45000007 ext 0x00010005
+ace_reg_write BAR4 +0x73210 <- 0xc5000007 HFIPCXIDR
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 0 bound to module 5 instance 1 (queues 0 -> 0)
+ace_reg_read BAR4 +0x73214 -> 0xe5000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 2 into host-input copier 5.1's stream 3; 384000 bytes a second
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: running -> paused
+ace_gateway gateway stopped (pipeline 1): pipeline 1 is paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 2 into host-input copier 5.1's stream 3; 384000 bytes a second
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_gateway gateway stopped (pipeline 1): stream 2, the host-output gateway's, is not running
+ace_reg_write BAR4 +0x73380 <- 0x0001000a HFIPCXIDDY
+ace_ipc IPC request primary 0x40000005 ext 0x0001000a
+ace_reg_write BAR4 +0x73210 <- 0xc0000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe000000a ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 10: module 5 instance 0 exists
+ace_reg_read BAR4 +0x73214 -> 0xe000000a HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00090009 HFIPCXIDDY
+ace_ipc IPC request primary 0x45000005 ext 0x00090009
+ace_reg_write BAR4 +0x73210 <- 0xc5000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe5000009 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 9: destination module 9 instance 9: no such instance
+ace_reg_read BAR4 +0x73214 -> 0xe5000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000007 HFIPCXIDDY
+ace_ipc IPC request primary 0x45090009 ext 0x00000007
+ace_reg_write BAR4 +0x73210 <- 0xc5090009 HFIPCXIDR
+ace_ipc IPC reply primary 0xe5000009 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 9: source module 9 instance 9: no such instance
+ace_reg_read BAR4 +0x73214 -> 0xe5000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x30000054 HFIPCXIDDY
+ace_ipc IPC request primary 0x44090009 ext 0x30000054
+ace_reg_write BAR4 +0x73210 <- 0xc4090009 HFIPCXIDR
+ace_ipc IPC reply primary 0xe4000009 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 9: module 9 instance 9: no such instance
+ace_reg_read BAR4 +0x73214 -> 0xe4000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x20000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x44000005 ext 0x20000000
+ace_reg_write BAR4 +0x73210 <- 0xc4000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe4000007 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 7: module 5 instance 0: a configuration in several blocks is not modelled
+ace_reg_read BAR4 +0x73214 -> 0xe4000007 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b090009 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb090009 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000009 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 9: module 9 instance 9: no such instance
+ace_reg_read BAR4 +0x73214 -> 0xeb000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 0 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b000007 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb000007 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 0 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was running)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000009 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 9: module 5 instance 0: no such instance
+ace_reg_read BAR4 +0x73214 -> 0xeb000009 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x11010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x91010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb1000000 ext 0x00000000
+ace_ipc_msg IPC reply type 17 (create-pipeline) status 0: pipeline 1 created: priority 0, 0 pages, core 0, low-power 0
+ace_reg_read BAR4 +0x73214 -> 0xb1000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010015 HFIPCXIDDY
+ace_ipc IPC request primary 0x40000005 ext 0x00010015
+ace_reg_write BAR4 +0x73210 <- 0xc0000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 0: copier, host-output gateway without a stream (the placeholder index 0xff), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010015 HFIPCXIDDY
+ace_ipc IPC request primary 0x40010005 ext 0x00010015
+ace_reg_write BAR4 +0x73210 <- 0xc0010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 5 instance 1: copier, host-input gateway index 2 (stream tag 3), ibs 384 obs 384, pipeline 1, core 0, 21 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x0001000a HFIPCXIDDY
+ace_ipc IPC request primary 0x40000007 ext 0x0001000a
+ace_reg_write BAR4 +0x73210 <- 0xc0000007 HFIPCXIDR
+ace_ipc IPC reply primary 0xe0000000 ext 0x00000000
+ace_ipc_msg IPC reply type 0 (init-instance) status 0: module 7 instance 0: base configuration, ibs 384 obs 384, pipeline 1, core 0, 10 words
+ace_reg_read BAR4 +0x73214 -> 0xe0000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000007 HFIPCXIDDY
+ace_ipc IPC request primary 0x45000005 ext 0x00000007
+ace_reg_write BAR4 +0x73210 <- 0xc5000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 5 instance 0 bound to module 7 instance 0 (queues 0 -> 0)
+ace_reg_read BAR4 +0x73214 -> 0xe5000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00010005 HFIPCXIDDY
+ace_ipc IPC request primary 0x45000007 ext 0x00010005
+ace_reg_write BAR4 +0x73210 <- 0xc5000007 HFIPCXIDR
+ace_ipc IPC reply primary 0xe5000000 ext 0x00000000
+ace_ipc_msg IPC reply type 5 (bind) status 0: module 7 instance 0 bound to module 5 instance 1 (queues 0 -> 0)
+ace_reg_read BAR4 +0x73214 -> 0xe5000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010003 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010003 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: uninitialized -> paused
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x13010004 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x93010004 HFIPCXIDR
+ace_ipc IPC reply primary 0xb3000000 ext 0x00000000
+ace_ipc_msg IPC reply type 19 (set-pipeline-state) status 0: pipeline 1: paused -> running
+ace_reg_read BAR4 +0x73214 -> 0xb3000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x30000054 HFIPCXIDDY
+ace_ipc IPC request primary 0x44000005 ext 0x30000054
+ace_reg_write BAR4 +0x73210 <- 0xc4000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xe4000000 ext 0x00000000
+ace_ipc_msg IPC reply type 4 (large-config-set) status 0: module 5 instance 0: copier, host-output gateway index 1 (stream tag 2), ibs 384 obs 384, parameter 0, 84 bytes
+ace_gateway gateway armed (pipeline 1): host-output copier 5.0 drains stream 2 into host-input copier 5.1's stream 3; 384000 bytes a second
+ace_reg_read BAR4 +0x73214 -> 0xe4000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_audio ace_audio 2 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_audio ace_audio 3 2048 rms 1000000.000 peak 1000000 first 1000000 -1000000 -1000000 1000000 1000000 -1000000 -1000000 1000000
+ace_gateway gateway stopped (pipeline 1): stream 2, the host-output gateway's, is not running
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b000005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb000005 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 0 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b010005 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb010005 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 5 instance 1 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x4b000007 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0xcb000007 HFIPCXIDR
+ace_ipc IPC reply primary 0xeb000000 ext 0x00000000
+ace_ipc_msg IPC reply type 11 (delete-instance) status 0: module 7 instance 0 deleted
+ace_reg_read BAR4 +0x73214 -> 0xeb000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73380 <- 0x00000000 HFIPCXIDDY
+ace_ipc IPC request primary 0x12010000 ext 0x00000000
+ace_reg_write BAR4 +0x73210 <- 0x92010000 HFIPCXIDR
+ace_ipc IPC reply primary 0xb2000000 ext 0x00000000
+ace_ipc_msg IPC reply type 18 (delete-pipeline) status 0: pipeline 1 deleted (was running)
+ace_reg_read BAR4 +0x73214 -> 0xb2000000 HFIPCXIDA
+ace_reg_write BAR4 +0x73214 <- 0x80000000 HFIPCXIDA
+ok 16 /x86_64/intel-hda-ace/audio-loopback
+# End of intel-hda-ace tests
+# End of x86_64 tests

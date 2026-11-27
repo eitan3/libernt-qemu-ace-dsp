@@ -1,0 +1,2 @@
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "crash-notification"}} -> {"return": {}}
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "x-delay-scale", "value": 1}} -> {"return": {}}

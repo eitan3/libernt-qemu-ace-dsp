@@ -1,0 +1,17 @@
+      1197  command.txt
+     22608  driver.log
+        32  lib-run.out
+       764  pouch-made.out
+         0  pouch-mcopy.out
+      1699  pouch-sha256.txt
+      1156  qemu-args.txt
+     29673  qemu-dbg.log.gz
+         0  qemu.log
+     43837  serial.log
+     43222  serial.txt
+       278  setfault-crash-during-stream=1-x-delay-scale=1.out
+       268  setfault-halt-rom=43-x-delay-scale=1.out
+       268  setfault-halt-rom=44-x-delay-scale=1.out
+       261  setfault-none-x-delay-scale=1.out
+        20  sock-dir.txt
+        21  start.txt

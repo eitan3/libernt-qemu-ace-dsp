@@ -1,0 +1,2 @@
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "fault", "value": "halt-fw=51"}} -> {"return": {}}
+{"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "property": "x-delay-scale", "value": 1}} -> {"return": {}}

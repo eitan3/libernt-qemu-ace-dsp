@@ -1,0 +1,97 @@
+2026-11-27T18:24:45Z e1b-round: e1b-round on disk/p5e1b.qcow2
+2026-11-27T18:24:46Z VM e1b-round started (lib-run pid 1473486, sockets /tmp/qad-vm.1473488, data disk /tmp/e1b/pouch/e1b-round.img)
+[18:26:23] [   86.208592] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000DECC537D60 0000000000070170 'Program Manager' 000000DECC535728 32 0x0 000000DECC535600 338 000000DECC535754)
+2026-11-27T18:26:23Z the first boot: [    8.327516] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched;
+2026-11-27T18:26:23Z stop lines in the boot's log: 0; ace_unexpected: 0
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+--- sendkey ret
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+2026-11-27T18:26:59Z wizard: tab tab ret, ret, tab tab tab ret sent
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-27T18:27:36Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T18:27:52Z data disk: drive D: in the guest (1 marker)
+typed 44 characters
+--- sendkey ret
+
+2026-11-27T18:27:58Z console answering after firstboot (alive-firstboot.txt, 3 s)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T18:28:12Z typed: reg add BootDsp = 1 (REG_DWORD)
+typed 116 characters
+--- sendkey ret
+
+2026-11-27T18:28:28Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+typed 98 characters
+--- sendkey ret
+
+2026-11-27T18:28:42Z typed: reg add SelfTest = 0 (REG_DWORD)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T18:28:55Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 3 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T18:29:20Z cycle tp-1 (the topology at the D0 entry): rc=0
+2026-11-27T18:29:20Z after the cycle: boot ok 1; the topology line 1; registered as 0; audio child 1
+typed 84 characters
+--- sendkey ret
+
+2026-11-27T18:29:33Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-27T18:29:33Z the endpoints the guest lists: 0 Loopback lines
+typed 96 characters
+--- sendkey ret
+
+2026-11-27T18:29:58Z baseline: ended after about 19 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1303 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T18:29:58Z baseline: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T18:29:58Z baseline: the driver's lines from the start on, after serial line 305:
+    [  963.149422] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  963.149422] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  963.149422] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  963.149422] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  963.149422] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  963.149422] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  965.211932] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  965.211932] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  965.211932] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  965.211932] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  965.211932] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  965.211932] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  967.279818] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  967.279818] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  967.279818] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  967.279818] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  967.279818] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  967.279818] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T18:29:58Z baseline: PASS
+2026-11-27T18:30:00Z ## row halt-rom=43
+2026-11-27T18:30:00Z fm-halt-rom=43-1-in: dsploop with fault crash-during-stream=1 at open 3 (from serial line 329)
+typed 107 characters
+--- sendkey ret
+
+2026-11-27T18:32:40Z fm-halt-rom=43-1-in: !! open #3 not seen in 150 s; the fault was not set
