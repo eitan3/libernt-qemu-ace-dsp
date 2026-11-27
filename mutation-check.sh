@@ -98,6 +98,8 @@ MUTATIONS=(
 "gw-interrupts|$C|s/->ctl .= (1u << 26);/;/|the streams' completion bits never set: no period interrupt on either stream"
 "fault-never-reply-running-all|$C|s/(s->fault_id == ACE_FAULT_NEVER_REPLY_RUNNING && s->streams_running &&/(s->fault_id == ACE_FAULT_NEVER_REPLY_RUNNING \&\&/|never-reply-running=<type> drops the type's requests before a stream runs too (the stream condition gone)"
 "fault-crash-one-late|$C|s/s->stream_replies >= s->fault_arg)/s->stream_replies > s->fault_arg)/|crash-during-stream=<n> crashes one reply late"
+"fault-crash-async-silent|$C|s/    s->crash_posted = true;/    return;/|crash-async=<ms>: the exception is never posted (the timer returns before it)"
+"fault-crash-async-answers|$C|s/type)) .. s->crash_posted) {/type))) {/|crash-async=<ms>: the firmware answers requests after its exception"
 )
 
 # the cases of a clean run (the un-mutated test file), for the abort note

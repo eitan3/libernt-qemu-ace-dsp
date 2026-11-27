@@ -1,7 +1,7 @@
 From 5a90cf7b7b4e4532228b20da91344e7b21787ca5 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 19:30:58 +0200
-Subject: [PATCH 19/25] hw/audio: intel-hda-ace: the host gateways (the module
+Subject: [PATCH 19/29] hw/audio: intel-hda-ace: the host gateways (the module
  table, audio forwarding, the extended DMA-position registers)
 
 The firmware's module table: init instance (0), large-config set (4),

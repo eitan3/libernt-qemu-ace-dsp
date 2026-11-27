@@ -1,0 +1,51 @@
+From 61174d3c3be769123a68aaf4ac4b8211cdd7afde Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 23:12:18 +0200
+Subject: [PATCH 29/29] qtest: the crash-async row reads the pending bit
+
+The target register keeps the header of an acknowledged notification (the
+FW_READY of the boot, its busy bit clear): the row's "nothing pending"
+reads the busy bit, and the exception is still read whole. With the model's
+reset arming the knob, the row is green: nothing pending 1 ms short of the
+50 ms, the EXCEPTION_CAUGHT notification alone past them, acknowledged, and
+a request after it leaving no reply and no notification.
+---
+ tests/qtest/intel-hda-ace-test.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index 527c35233..b6327a3b6 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1516,7 +1516,8 @@ static void test_stream_faults(void)
+ 
+ /* 17: the asynchronous exception.  crash-async=<ms> posts the EXCEPTION_CAUGHT
+  * notification with no request outstanding, <ms> of the guest's clock after
+- * the knob is set (here at the device's creation), once the firmware runs:
++ * the knob is set (here at the device's creation, the timer armed again at
++ * the machine's reset), once the firmware runs:
+  * nothing of the host's meets it and no reply stands with it; acknowledged,
+  * it is gone, and from there the firmware answers nothing, a request
+  * leaving no reply and no notification. */
+@@ -1524,15 +1525,15 @@ static void test_crash_async(void)
+ {
+     boot_start(",fault=crash-async=50");
+     boot_running();                     /* about 5 ms of the guest's clock */
+-    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
+     qtest_clock_step(t.qs, US(44000));  /* 1 ms short of the 50: nothing yet */
+-    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
+     qtest_clock_step(t.qs, US(2000));   /* past the 50 */
+     g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_EXCEPTION);
+     g_assert_cmpuint(r4(ACE_XTDDY), ==, 0);
+     g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
+     ack_notification();
+-    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
+     /* the firmware answers nothing after its exception */
+     w4(ACE_XIDDY, 0);
+     w4(ACE_XIDR, PPL_REQ(IPC4_CREATE_PIPELINE, 1));
+-- 
+2.56.1
+

@@ -1,7 +1,7 @@
 From 5ea6efafa138d74ddc6c98ba0b203eaf4fbf420e Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 13:01:43 +0200
-Subject: [PATCH 06/25] docs/system: document the intel-hda-ace ACE 1.0 audio
+Subject: [PATCH 06/29] docs/system: document the intel-hda-ace ACE 1.0 audio
  DSP model
 
 The device, its properties (personality, x-bar4-size, x-powered-down-value,

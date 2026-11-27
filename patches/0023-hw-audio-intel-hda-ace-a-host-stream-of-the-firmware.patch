@@ -1,7 +1,7 @@
 From 580212c9484d9b6428bacf674660837edc4929ab Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 21:55:36 +0200
-Subject: [PATCH 23/25] hw/audio: intel-hda-ace: a host stream of the
+Subject: [PATCH 23/29] hw/audio: intel-hda-ace: a host stream of the
  firmware's is the one a copier names
 
 The two knobs that act while a stream of the boot runs (0021) took a host

@@ -1,0 +1,163 @@
+From 4dd6da55146360138d05f39d612a94f21991ad0d Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 23:07:13 +0200
+Subject: [PATCH 26/29] intel-hda-ace: the asynchronous exception
+ (crash-async=<ms>)
+
+A value of the run-time "fault" property: N ms after the set the firmware
+posts its EXCEPTION_CAUGHT notification with no request outstanding, at the
+first tick at which the uplink is free (no reply of the model's waiting to
+be read, no notification unread), so that it stands alone as on a machine;
+from there the firmware answers nothing (a request is dropped, with the
+trace of the dropped requests). The delay is the guest's own clock and is
+not scaled by x-delay-scale: it is the operator's number, not a model
+timing. Set at the device's creation, realize arms the timer; a firmware
+that is not running when the time comes does not raise it. A power-down or
+a reset deletes the timer and the posted state, as it does the reply's.
+
+The P5 E1 design's E1c (p5-e1-design.md section 7): the host's transport
+meets an exception only in a request's wait, so one posted with no request
+outstanding waits for the next request; the driver's poll point at a
+stream's period is what this knob is for.
+---
+ hw/audio/intel-hda-ace.c | 55 +++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 52 insertions(+), 3 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index f6f1b0a63..b410a9288 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -104,6 +104,7 @@ typedef enum AceFault {
+     ACE_FAULT_WINDOW_READ_FAIL,
+     ACE_FAULT_NEVER_REPLY_RUNNING,
+     ACE_FAULT_CRASH_DURING_STREAM,
++    ACE_FAULT_CRASH_ASYNC,
+ } AceFault;
+ 
+ /* whether a fault takes a value: none, a required one, or an optional one
+@@ -137,9 +138,11 @@ static const struct {
+     { "version-shift",      ACE_FAULT_VERSION_SHIFT,      ACE_ARG_NONE },
+     { "window-read-fail",   ACE_FAULT_WINDOW_READ_FAIL,   ACE_ARG_NONE },
+     /* the two that act only while a stream of the boot runs (bit 28:24 of a
+-     * request's primary names its type) */
++     * request's primary names its type), and the asynchronous exception, <ms>
++     * of the guest's clock after the knob is set */
+     { "never-reply-running", ACE_FAULT_NEVER_REPLY_RUNNING, ACE_ARG_REQUIRED },
+     { "crash-during-stream", ACE_FAULT_CRASH_DURING_STREAM, ACE_ARG_REQUIRED },
++    { "crash-async",         ACE_FAULT_CRASH_ASYNC,        ACE_ARG_REQUIRED },
+ };
+ 
+ /* PCI identities of the ACE 1.0 controllers the host drivers know (the
+@@ -239,6 +242,7 @@ struct IntelHDAAceState {
+     QEMUTimer *power_timer;
+     QEMUTimer *rom_timer;
+     QEMUTimer *reply_timer;
++    QEMUTimer *crash_timer;      /* crash-async */
+     uint32_t power_event;        /* what power_timer does when it fires */
+     uint32_t rom_step;           /* where rom_timer is in the current walk */
+     uint32_t reply_primary, reply_ext;
+@@ -259,6 +263,8 @@ struct IntelHDAAceState {
+     char *fault;                 /* "name" or "name=value" */
+     AceFault fault_id;
+     uint32_t fault_arg;
++    /* crash-async: the exception was posted; the firmware answers nothing after */
++    bool crash_posted;
+     bool fault_typed;            /* the fault names one message type */
+     uint32_t fault_type;         /* ... this one (bits 28:24 of the primary) */
+     /* the host streams of the firmware that run (a bit per stream from the
+@@ -433,9 +439,11 @@ static void ace_power_off(IntelHDAAceState *s)
+ {
+     timer_del(s->rom_timer);
+     timer_del(s->reply_timer);
++    timer_del(s->crash_timer);
+     s->reply_pending = false;
+     s->notif_pending = false;
+     s->purge_pending = false;
++    s->crash_posted = false;
+     s->rom_step = 0;
+     /* the DSP-side IPC registers belong to the core's power domain: they
+      * reset with it, the host-side ones (the request, the enables) do not */
+@@ -1367,6 +1375,31 @@ static void ace_reply_timer_cb(void *opaque)
+     }
+ }
+ 
++/* The asynchronous exception (crash-async=<ms>): N ms after the knob was
++ * set the firmware posts its EXCEPTION_CAUGHT notification with no request
++ * outstanding, at the first tick at which the uplink is free (no reply of
++ * the model's waiting to be read, no notification unread), so that it
++ * stands alone as on a machine; from there the firmware answers nothing.
++ * The delay is the guest's own time, not scaled by x-delay-scale: it is the
++ * operator's number, not a model timing. A firmware that is not running
++ * when the time comes does not raise it */
++static void ace_crash_timer_cb(void *opaque)
++{
++    IntelHDAAceState *s = opaque;
++
++    if (s->state != ACE_RUNNING || s->fault_id != ACE_FAULT_CRASH_ASYNC) {
++        return;
++    }
++    if (s->notif_pending || s->reply_pending) {
++        ace_arm(s->crash_timer, 1000000);
++        return;
++    }
++    s->crash_posted = true;
++    trace_ace_ipc("exception caught with no request outstanding", 0, 0);
++    ace_set_notif(s, (ACE_IPC4_GLB_NOTIFICATION << ACE_IPC4_MSG_TYPE_SHIFT) |
++                  (ACE_IPC4_EXCEPTION_CAUGHT << ACE_IPC4_NOTIFY_TYPE_SHIFT), 0);
++}
++
+ /* a host -> DSP request: the primary was written with BUSY set */
+ static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
+ {
+@@ -1397,9 +1430,10 @@ static void ace_request(IntelHDAAceState *s, uint32_t primary, uint32_t ext)
+     if (s->fault_id == ACE_FAULT_DROP_REQUESTS ||
+         (s->fault_id == ACE_FAULT_NEVER_REPLY && ace_fault_applies(s, type)) ||
+         (s->fault_id == ACE_FAULT_NEVER_REPLY_RUNNING && s->streams_running &&
+-         ace_fault_applies(s, type))) {
++         ace_fault_applies(s, type)) || s->crash_posted) {
+         /* the message is dropped: named by its type, so that a fault which
+-         * names one type shows which requests it took */
++         * names one type shows which requests it took (after the asynchronous
++         * exception the firmware answers nothing: the same trace) */
+         g_autofree char *dir = g_strdup_printf(
+             "request dropped (%s)",
+             ace_msg_name(primary & ACE_IPC4_MSG_TARGET_MASK, type));
+@@ -2329,6 +2363,15 @@ static void ace_apply_fault(IntelHDAAceState *s, const char *value, Error **errp
+     g_free(s->fault);
+     s->fault = g_strdup(value);
+     trace_ace_payload_check(value, true);
++    /* crash-async=<ms>: the exception N ms of the guest's clock from now, if
++     * the firmware is running then; set at the device's creation the timer is
++     * not there yet and realize arms it */
++    if (s->crash_timer) {
++        timer_del(s->crash_timer);
++        if (fault == ACE_FAULT_CRASH_ASYNC) {
++            ace_arm(s->crash_timer, (uint64_t)fault_arg * 1000000);
++        }
++    }
+ }
+ 
+ static void ace_get_fault(Object *obj, Visitor *v, const char *name,
+@@ -2390,6 +2433,8 @@ static void intel_hda_ace_reset(DeviceState *dev)
+     timer_del(s->power_timer);
+     timer_del(s->rom_timer);
+     timer_del(s->reply_timer);
++    timer_del(s->crash_timer);
++    s->crash_posted = false;
+     s->hfdsscs = 0;
+     s->dsp2cxctl = 0;
+     s->inten = 0;
+@@ -2483,6 +2528,10 @@ static void intel_hda_ace_realize(PCIDevice *pci, Error **errp)
+     s->power_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_power_timer_cb, s);
+     s->rom_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_rom_timer_cb, s);
+     s->reply_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_reply_timer_cb, s);
++    s->crash_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, ace_crash_timer_cb, s);
++    if (s->fault_id == ACE_FAULT_CRASH_ASYNC) {
++        ace_arm(s->crash_timer, (uint64_t)s->fault_arg * 1000000);
++    }
+     s->audio_buf = g_malloc(ACE_AUDIO_CHUNK);
+     for (i = 0; i < ACE_MODEL_MAX_PIPELINES; i++) {
+         s->gw[i].s = s;
+-- 
+2.56.1
+

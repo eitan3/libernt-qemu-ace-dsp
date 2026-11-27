@@ -1,0 +1,65 @@
+From f2c375d34fcc67fef8ed9be966134deaf0e18a9b Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 23:07:13 +0200
+Subject: [PATCH 27/29] qtest: the asynchronous exception, one case
+ (crash-async)
+
+crash-async=50 set at the device's creation: after the boot (about 5 ms of
+the guest's clock) nothing is pending 1 ms short of the 50; past it the
+EXCEPTION_CAUGHT notification stands alone (no reply with it), is
+acknowledged, and a request after it leaves no reply and no notification.
+The suite 16 -> 17.
+---
+ tests/qtest/intel-hda-ace-test.c | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index dca74b94e..527c35233 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1514,6 +1514,34 @@ static void test_stream_faults(void)
+     boot_end();
+ }
+ 
++/* 17: the asynchronous exception.  crash-async=<ms> posts the EXCEPTION_CAUGHT
++ * notification with no request outstanding, <ms> of the guest's clock after
++ * the knob is set (here at the device's creation), once the firmware runs:
++ * nothing of the host's meets it and no reply stands with it; acknowledged,
++ * it is gone, and from there the firmware answers nothing, a request
++ * leaving no reply and no notification. */
++static void test_crash_async(void)
++{
++    boot_start(",fault=crash-async=50");
++    boot_running();                     /* about 5 ms of the guest's clock */
++    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    qtest_clock_step(t.qs, US(44000));  /* 1 ms short of the 50: nothing yet */
++    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    qtest_clock_step(t.qs, US(2000));   /* past the 50 */
++    g_assert_cmpuint(r4(ACE_XTDR), ==, NOTIFY_EXCEPTION);
++    g_assert_cmpuint(r4(ACE_XTDDY), ==, 0);
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    ack_notification();
++    g_assert_cmpuint(r4(ACE_XTDR), ==, 0);
++    /* the firmware answers nothing after its exception */
++    w4(ACE_XIDDY, 0);
++    w4(ACE_XIDR, PPL_REQ(IPC4_CREATE_PIPELINE, 1));
++    qtest_clock_step(t.qs, US(1000));
++    g_assert_cmpuint(r4(ACE_XIDA) & ACE_BUSY, ==, 0);
++    g_assert_cmpuint(r4(ACE_XTDR) & ACE_BUSY, ==, 0);
++    boot_end();
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -1531,6 +1559,7 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/pipeline-illegal", test_pipeline_illegal);
+         qtest_add_func("/intel-hda-ace/pipeline-faults", test_pipeline_faults);
+         qtest_add_func("/intel-hda-ace/stream-faults", test_stream_faults);
++        qtest_add_func("/intel-hda-ace/crash-async", test_crash_async);
+         qtest_add_func("/intel-hda-ace/short-stream", test_short_stream);
+         qtest_add_func("/intel-hda-ace/wrapped-offset", test_wrapped_offset);
+         qtest_add_func("/intel-hda-ace/audio-loopback", test_audio_loopback);
+-- 
+2.56.1
+

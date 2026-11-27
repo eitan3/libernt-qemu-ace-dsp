@@ -9,9 +9,13 @@
 # never-power, never-ack, never-ready, never-enter, never-fwready,
 # never-reply[=<type>], drop-requests, halt-rom=<code>, halt-fw=<code>,
 # crash-notification, abi=<n>, ipc-status=<n>[:<type>], bad-tuples,
-# truncated-reply, version-shift, window-read-fail; and the two that act only
+# truncated-reply, version-shift, window-read-fail; the two that act only
 # while a stream of the boot runs, the P5 E1 design's §6:
-# never-reply-running=<type>, crash-during-stream=<n>);
+# never-reply-running=<type>, crash-during-stream=<n>; and the asynchronous
+# exception of its §7, crash-async=<ms>, posted <ms> of the guest's clock
+# after the set with no request outstanding, e.g.
+#        set-fault.sh evidence/... crash-async=500
+#        (while the firmware runs; the firmware answers nothing after it);
 # any further name=value pairs are set on the same device (/machine/peripheral/ace).
 # Uses QMP over the socket lib-run.sh opens (its /tmp dir is recorded in the
 # evidence directory's sock-dir.txt); the device is the one with id "ace".

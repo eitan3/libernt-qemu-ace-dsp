@@ -1,7 +1,7 @@
 From e1550824e87560e392ded36c7952322eb2fb5f03 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 21:57:03 +0200
-Subject: [PATCH 25/25] hw/audio: intel-hda-ace: a stream that stops clears its
+Subject: [PATCH 25/29] hw/audio: intel-hda-ace: a stream that stops clears its
  bit whatever names it
 
 The bit of a running host stream was cleared only while a copier still

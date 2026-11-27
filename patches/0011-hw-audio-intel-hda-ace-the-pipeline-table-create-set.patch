@@ -1,7 +1,7 @@
 From 4e2eb4d8c23e2f90b2d8e465c8b49a831b227bbf Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 08:01:55 +0200
-Subject: [PATCH 11/25] hw/audio: intel-hda-ace: the pipeline table (create,
+Subject: [PATCH 11/29] hw/audio: intel-hda-ace: the pipeline table (create,
  set-state, delete)
 
 Once the firmware runs, the three pipeline messages of IPC4 -- create

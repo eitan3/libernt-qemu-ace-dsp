@@ -1,7 +1,7 @@
 From 39fcb704496f6843594e8bc0e8d941f4ac1e994a Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 10:22:46 +0200
-Subject: [PATCH 17/25] hw/audio: intel-hda-ace: a payload read never wraps
+Subject: [PATCH 17/29] hw/audio: intel-hda-ace: a payload read never wraps
  past the end of the stream
 
 The bounds of a read of the streamed image were checked with an addition,

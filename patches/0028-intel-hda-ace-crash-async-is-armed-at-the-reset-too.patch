@@ -1,0 +1,36 @@
+From 4e10629960c603ca60122ebc78d8cef3caace05b Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Fri, 27 Nov 2026 23:12:18 +0200
+Subject: [PATCH 28/29] intel-hda-ace: crash-async is armed at the reset too
+
+The machine's reset follows the device's realize and deletes the knob's
+timer with the others, so a crash-async set at the device's creation never
+fired (the first qtest run of the knob: its timer never called, the debug
+line of the reset at the clock's zero). The reset arms it again from its
+own time, as the realize does: N ms count from the machine's start for a
+knob set at the creation, and from the set for one set while the VM runs.
+The first qtest row's "nothing pending after the boot" read the target
+register whole, which keeps the acknowledged FW_READY's header: the row
+reads the busy bit now (the next commit).
+---
+ hw/audio/intel-hda-ace.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index b410a9288..db33dd97b 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -2435,6 +2435,10 @@ static void intel_hda_ace_reset(DeviceState *dev)
+     timer_del(s->reply_timer);
+     timer_del(s->crash_timer);
+     s->crash_posted = false;
++    /* the machine's reset follows the realize: a knob set at the creation is armed from here */
++    if (s->crash_timer && s->fault_id == ACE_FAULT_CRASH_ASYNC) {
++        ace_arm(s->crash_timer, (uint64_t)s->fault_arg * 1000000);
++    }
+     s->hfdsscs = 0;
+     s->dsp2cxctl = 0;
+     s->inten = 0;
+-- 
+2.56.1
+
