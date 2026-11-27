@@ -10,9 +10,9 @@
 02:36:16 shot s8-05-account-page.png 769211 bytes
 02:37:08 type tester
 02:37:09 key tab
-02:37:11 type Test1234!
+02:37:11 type <typed>
 02:37:12 key tab
-02:37:14 type Test1234!
+02:37:14 type <typed>
 02:37:15 key tab
 02:37:18 type the usual one
 02:37:21 shot s8-06-account-filled.png 769188 bytes
@@ -56,7 +56,7 @@
 02:50:07 shot s8-16-after-restart-120s.png 22767 bytes
 02:51:04 key ret
 02:51:12 shot s8-17-signin-dialog.png 17565 bytes
-02:51:57 type Test1234!
+02:51:57 type <typed>
 02:51:57 key ret
 02:52:39 shot s8-18-desktop-tester.png 964657 bytes
 02:52:39 key meta_l-r
