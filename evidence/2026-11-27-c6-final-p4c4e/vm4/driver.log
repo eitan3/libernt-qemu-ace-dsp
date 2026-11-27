@@ -1,0 +1,20 @@
+04:58:24 waited 100
+04:58:26 shot f7b-01-lock-screen-100s.png 25607 bytes
+04:58:47 signin: Enter on the lock screen, shot f7b-02-signin-tile.png (the tile); typing the password (<typed>)
+04:59:29 winr: meta_l-r, typed cmd.exe
+before: CPU resets 2, no serial port in this VM
+04:59:45 typed: shutdown -r -t 0
+04:59:51 shot f7b-03-after-shutdown-5s.png 3057 bytes
+05:00:14 shot f7-after-shutdown-01.png 19894 bytes (t+23s); CPU resets 3; serial lines ; serial tail: 
+05:00:35 shot f7-after-shutdown-02.png 52035 bytes (t+44s); CPU resets 3; serial lines ; serial tail: 
+05:00:57 shot f7-after-shutdown-03.png 24399 bytes (t+66s); CPU resets 3; serial lines ; serial tail: 
+05:01:18 shot f7-after-shutdown-04.png 25267 bytes (t+87s); CPU resets 3; serial lines ; serial tail: 
+05:01:40 shot f7-after-shutdown-05.png 23253 bytes (t+109s); CPU resets 3; serial lines ; serial tail: 
+05:02:01 shot f7-after-shutdown-06.png 22722 bytes (t+130s); CPU resets 3; serial lines ; serial tail: 
+05:02:23 shot f7-after-shutdown-07.png 21911 bytes (t+152s); CPU resets 3; serial lines ; serial tail: 
+05:02:59 signin: Enter on the lock screen, shot f7b-04-signin-tile.png (the tile); typing the password (<typed>)
+05:03:41 winr: meta_l-r, typed cmd.exe
+before: CPU resets 3; qemu alive
+05:03:57 typed: shutdown -s -t 0
+05:04:02 shot f7b-05-after-shutdown-s-5s.png  bytes
+05:04:02 qemu pid : EXITED, 0 s after the wait began

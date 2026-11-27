@@ -1,0 +1,21 @@
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:00:14 shot f7-after-shutdown-01.png 19894 bytes (t+23s); CPU resets 3; serial: none
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:00:35 shot f7-after-shutdown-02.png 52035 bytes (t+44s); CPU resets 3; serial: none
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:00:57 shot f7-after-shutdown-03.png 24399 bytes (t+66s); CPU resets 3; serial: none
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:01:18 shot f7-after-shutdown-04.png 25267 bytes (t+87s); CPU resets 3; serial: none
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:01:40 shot f7-after-shutdown-05.png 23253 bytes (t+109s); CPU resets 3; serial: none
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:02:01 shot f7-after-shutdown-06.png 22722 bytes (t+130s); CPU resets 3; serial: none
+grep: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+/tmp/c6f/tools/f7-observe.sh: line 14: /tmp/c6f/ev/vm4/serial.log: No such file or directory
+05:02:23 shot f7-after-shutdown-07.png 21911 bytes (t+152s); CPU resets 3; serial: none

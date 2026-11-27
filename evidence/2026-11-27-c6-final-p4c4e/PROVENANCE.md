@@ -41,6 +41,9 @@ network; the LiberNT tree was neither read nor written (everything below comes f
   `savelog 9`, the export, Turn Off.
 - `vm3/` — `shutdown -r -t 0` with a serial port; `serial.log` is the port's log (the kernel's
   shutdown sequence, then the boot manager again); closed through the monitor's `quit`.
+- `vm4/` — the same two commands **without** a serial port (the control for vm3): `shutdown -r -t 0`
+  restarted the machine (a new reset within 23 s), `shutdown -s -t 0` powered it off (QEMU exited
+  within 5 s).
 - `logs/s0/` — the sticks' partition tables and the four VMs' start lines.
 - `logs/s5/` — the exports of the session, as the host read them from stick B after the clean
   Turn Off: `boot1 … boot4.txt`, `boot2 … boot4-prev.txt`, `dsploop.txt`, the gate's output
@@ -73,9 +76,9 @@ and the screenshots show dots.
 
 ## What was not done
 No build; no network; the LiberNT tree was not touched. F8 (the recovery path of the run book,
-S7) was not rehearsed. `shutdown.exe` was not tried on p4c4e **without** a serial port (the
-stall is the p4c4d rehearsal's evidence, S2 and S4; on p4c4e it was only shown to work **with** a
-port). The cause of the 89 `ipstats_reactos.c` lines of Boot 1 was not looked up in the tree.
+S7) was not rehearsed. The p4c4d stall of `shutdown.exe` was not chased in the tree (on p4c4e
+the command worked three times, with and without a serial port, see vm3 and vm4). The cause of
+the 89 `ipstats_reactos.c` lines of Boot 1 was not looked up either.
 The vision model's reading of the screenshots is cited as "the screen shows"; every decision
 rests on the text the guest wrote to stick B.
 
