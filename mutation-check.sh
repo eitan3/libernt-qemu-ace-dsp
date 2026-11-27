@@ -96,6 +96,8 @@ MUTATIONS=(
 "gw-position|$C|s/lpib += n;/lpib += 0;/|the positions never advance: LPIB, the position buffer and the extended register stay at 0 while the bytes move"
 "gw-position-mirror|$C|s/ace_gateway_position(d, src, dst);/;/|the position buffer's entries never written after a period (LPIB and the extended register still move)"
 "gw-interrupts|$C|s/->ctl .= (1u << 26);/;/|the streams' completion bits never set: no period interrupt on either stream"
+"fault-never-reply-running-all|$C|s/(s->fault_id == ACE_FAULT_NEVER_REPLY_RUNNING && s->streams_running &&/(s->fault_id == ACE_FAULT_NEVER_REPLY_RUNNING \&\&/|never-reply-running=<type> drops the type's requests before a stream runs too (the stream condition gone)"
+"fault-crash-one-late|$C|s/s->stream_replies >= s->fault_arg)/s->stream_replies > s->fault_arg)/|crash-during-stream=<n> crashes one reply late"
 )
 
 # the cases of a clean run (the un-mutated test file), for the abort note
