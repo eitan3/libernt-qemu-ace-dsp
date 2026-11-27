@@ -1,0 +1,456 @@
+2026-11-27T21:29:04Z e1c-round: e1c-round on disk/p5e1c.qcow2
+2026-11-27T21:29:06Z VM e1c-round started (lib-run pid 1576411, sockets /tmp/qad-vm.1576413, data disk /tmp/e1c/pouch/e1c-round.img)
+[21:30:48] [   90.909206] (\base\services\umpnpmgr\rpcserver.c:6517) PNP_RegisterNotification(000000FBEAE789C0 00000000001C016E 'Program Manager' 000000FBEAE75748 32 0x0 000000FBEAE756B0 338 000000FBEAE75774)
+2026-11-27T21:30:48Z the first boot: [    9.505969] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched;
+2026-11-27T21:30:48Z stop lines in the boot's log: 0; ace_unexpected: 0
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+--- sendkey ret
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+2026-11-27T21:31:25Z wizard: tab tab ret, ret, tab tab tab ret sent
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-27T21:32:04Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T21:32:20Z data disk: drive D: in the guest (1 marker)
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T21:32:26Z console answering after boot (alive-boot.txt, 3 s)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T21:32:40Z typed: reg add BootDsp = 1 (REG_DWORD)
+typed 116 characters
+--- sendkey ret
+
+2026-11-27T21:32:56Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+typed 98 characters
+--- sendkey ret
+
+2026-11-27T21:33:10Z typed: reg add SelfTest = 0 (REG_DWORD)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T21:33:24Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T21:33:50Z cycle tp-1 (the topology at the D0 entry): rc=0
+2026-11-27T21:33:50Z after the cycle: boot ok 1; the topology line 1; registered as 0
+typed 84 characters
+--- sendkey ret
+
+2026-11-27T21:34:03Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-27T21:34:03Z the endpoints the guest lists: 0 Loopback lines
+typed 96 characters
+--- sendkey ret
+
+2026-11-27T21:34:28Z baseline: ended after about 19 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1297 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:34:28Z baseline: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:34:28Z baseline: the driver's lines from the start on, after serial line 312:
+    [  962.092643] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  962.092643] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  962.092643] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  962.108268] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  962.108268] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  962.108268] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  964.155147] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  964.155147] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  964.155147] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  964.155147] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  964.155147] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  964.155147] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  966.217652] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  966.217652] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  966.217652] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [  966.217652] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [  966.217652] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [  966.217652] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T21:34:28Z baseline: PASS
+-rw-r--r-- 1 megan megan 927070 Nov 27 23:34 /tmp/e1c/ev/e1c-round/05-after-baseline.png
+2026-11-27T21:34:30Z b: dsploop with fault never-reply-running=19 at open 1 (from serial line 336)
+typed 89 characters
+--- sendkey ret
+
+2026-11-27T21:34:39Z b: open #1 at guest 1040.023390 s; fault 'never-reply-running=19' set at 21:34:39 (host)
+2026-11-27T21:34:51Z b: fault cleared (21:34:51)
+2026-11-27T21:34:58Z b: ended after about 12 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:34:58Z b: opens 3, recovered lines 2, failed-boot lines 0, fault-during lines 6, pin-told lines 6, release lines 3, pin-free lines 6, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:34:58Z b: the run's own lines (errors and the summary):
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T21:34:58Z b: the driver's lines from the start on, after serial line 336:
+    [ 1040.023390] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1040.024413] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1040.024413] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1040.027390] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1040.027390] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1040.027390] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1042.532145] intcdsp.sys: ipc: set pipeline state (19) 0x93040003|0x00000000 reply timeout after 500237 us; the link is faulted
+    [ 1042.532145] intcdsp.sys: stream 1: a pipeline could not be paused (0xc00000b5)
+    [ 1042.532145] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1042.532145] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1042.532145] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1042.532145] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1042.532145] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+    [ 1042.532145] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+    [ 1042.532145] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1042.532145] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+    [ 1042.532145] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1042.532145] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1042.532145] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1042.532145] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1042.532145] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+    [ 1042.547771] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1042.547771] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1042.547771] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1042.547771] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+    [ 1042.563396] intcdsp.sys: boot ok after 5447 us (clock 1053845574 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 1042.563396] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model of the device's first boot
+    [ 1042.563396] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1042.563396] intcdsp.sys: recovered: open ok after 6 ms
+    [ 1042.563396] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1042.563396] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1042.563396] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1042.579021] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1042.579021] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1042.579021] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1045.094651] intcdsp.sys: ipc: set pipeline state (19) 0x93010003|0x00000000 reply timeout after 500283 us; the link is faulted
+    [ 1045.094651] intcdsp.sys: stream 1: a pipeline could not be paused (0xc00000b5)
+    [ 1045.094651] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1045.094651] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1045.094651] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1045.094651] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1045.094651] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+    [ 1045.094651] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+    [ 1045.094651] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1045.094651] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+    [ 1045.094651] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1045.094651] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1045.094651] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1045.094651] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1045.094651] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+    [ 1045.110276] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1045.110276] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1045.110276] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1045.110276] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+    [ 1045.125901] intcdsp.sys: boot ok after 5447 us (clock 1056409570 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 1045.125901] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model of the device's first boot
+    [ 1045.125901] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1045.125901] intcdsp.sys: recovered: open ok after 6 ms
+    [ 1045.125901] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1045.125901] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1045.125901] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1045.141526] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1045.141526] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1045.141526] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1047.657157] intcdsp.sys: ipc: set pipeline state (19) 0x93010003|0x00000000 reply timeout after 500003 us; the link is faulted
+    [ 1047.657157] intcdsp.sys: stream 1: a pipeline could not be paused (0xc00000b5)
+    [ 1047.657157] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1047.657157] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1047.657157] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [ 1047.657157] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1047.657157] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+    [ 1047.657157] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+    [ 1047.657157] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1047.657157] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+    [ 1047.657157] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1047.657157] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1047.657157] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1047.657157] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1047.657157] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+    [ 1047.672782] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1047.672782] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1047.672782] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1047.672782] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+2026-11-27T21:34:58Z b: the poll point's lines in this run: 0; the model's asynchronous exceptions so far (its -d log): 0
+typed 96 characters
+--- sendkey ret
+
+2026-11-27T21:35:23Z b-second: ended after about 18 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:35:23Z b-second: opens 3, recovered lines 1, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:35:23Z b-second: the driver's lines from the start on, after serial line 451:
+    [ 1126.592410] intcdsp.sys: boot ok after 5447 us (clock 1137862313 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 1126.592410] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model of the device's first boot
+    [ 1126.592410] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1126.592410] intcdsp.sys: recovered: open ok after 6 ms
+    [ 1126.592410] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1126.592410] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1126.592410] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1126.595410] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1126.595410] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1126.595410] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1128.643415] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1128.643415] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1128.643415] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1128.643415] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1128.643415] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1128.643415] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1130.705920] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1130.705920] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1130.705920] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1130.705920] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1130.705920] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1130.705920] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+| never-reply-running=19 | 1 | fault during stream 1: reply timeout after 500 ms | 6 | release: 2 streams let go, 2 buffers held for their pins, 2 tags back | 6 | dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. | PASS |
+2026-11-27T21:35:23Z c1: dsploop with fault crash-during-stream=1 at open 1 (from serial line 489)
+typed 90 characters
+--- sendkey ret
+
+2026-11-27T21:35:33Z c1: open #1 at guest 1201.363895 s; fault 'crash-during-stream=1' set at 21:35:33 (host)
+2026-11-27T21:35:41Z c1: fault cleared (21:35:41)
+2026-11-27T21:35:49Z c1: ended after about 8 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1297 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:35:49Z c1: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:35:49Z c1: the run's own lines (errors and the summary):
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 513, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1297 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T21:35:49Z c1: the driver's lines from the start on, after serial line 489:
+    [ 1201.363895] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1201.363895] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1201.363895] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1201.366895] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1201.366895] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1201.366895] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1203.425525] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1203.425525] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1203.425525] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1203.425525] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1203.425525] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1203.425525] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1205.472405] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1205.472405] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1205.472405] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1205.472405] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1205.472405] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1205.472405] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T21:35:49Z c1: the poll point's lines in this run: 0; the model's asynchronous exceptions so far (its -d log): 0
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T21:36:13Z c1-second: ended after about 18 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1295 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:36:13Z c1-second: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:36:13Z c1-second: the driver's lines from the start on, after serial line 513:
+    [ 1289.508170] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1289.508170] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1289.508170] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1289.508170] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1289.508170] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1289.508170] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1291.555050] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1291.555050] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1291.555050] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1291.555050] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1291.555050] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1291.555050] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1293.601929] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1293.601929] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1293.601929] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1293.601929] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1293.601929] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1293.601929] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+| crash-during-stream=1 | 1 | **none** | 0 | **none** | 0 | dsploop: 1297 tests executed (0 marked as todo, 0 failures), 0 skipped. | PASS |
+2026-11-27T21:36:13Z c2: dsploop with fault crash-during-stream=2 at open 1 (from serial line 537)
+typed 90 characters
+--- sendkey ret
+
+2026-11-27T21:36:23Z c2: open #1 at guest 1367.925412 s; fault 'crash-during-stream=2' set at 21:36:23 (host)
+2026-11-27T21:36:31Z c2: fault cleared (21:36:31)
+2026-11-27T21:36:39Z c2: ended after about 8 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:36:39Z c2: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:36:39Z c2: the run's own lines (errors and the summary):
+    dsploop.c:426: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:426: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-27T21:36:39Z c2: the driver's lines from the start on, after serial line 537:
+    [ 1367.925412] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1367.925412] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1367.925412] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1367.925412] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1367.925412] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1367.925412] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1369.972291] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1369.972291] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1369.972291] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1369.972291] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1369.972291] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1369.972291] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1372.019171] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1372.019171] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1372.019171] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1372.019171] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1372.019171] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1372.019171] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T21:36:39Z c2: the poll point's lines in this run: 0; the model's asynchronous exceptions so far (its -d log): 0
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T21:37:05Z c2-second: ended after about 19 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1296 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:37:05Z c2-second: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:37:05Z c2-second: the driver's lines from the start on, after serial line 561:
+    [ 1448.570417] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1448.570417] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1448.570417] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1448.575417] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1448.575417] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1448.575417] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1450.625672] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1450.625672] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1450.625672] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1450.625672] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1450.625672] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1450.625672] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1452.703801] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1452.703801] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1452.703801] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1452.703801] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1452.703801] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1452.703801] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+| crash-during-stream=2 | 1 | **none** | 0 | **none** | 0 | dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. | PASS |
+2026-11-27T21:37:05Z async: dsploop with fault crash-async=500 at open 1 (from serial line 585)
+typed 93 characters
+--- sendkey ret
+
+2026-11-27T21:37:15Z async: open #1 at guest 1522.822404 s; fault 'crash-async=500' set at 21:37:15 (host)
+2026-11-27T21:37:37Z async: fault cleared (21:37:37)
+2026-11-27T21:37:46Z async: ended after about 22 s; the console answers; dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 329 tests executed (0 ma
+2026-11-27T21:37:46Z async: opens 1, recovered lines 0, failed-boot lines 0, fault-during lines 2, pin-told lines 2, release lines 1, pin-free lines 2, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:37:46Z async: the run's own lines (errors and the summary):
+    dsploop.c:426: dsploop: 29247 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:431: Test failed: dsploop: 29247 of 48000 frames compared within 1 LSB, max abs error 0, first sample beyond it 4294967295
+    dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared
+    dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 329 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-27T21:37:46Z async: the driver's lines from the start on, after serial line 585:
+    [ 1522.822404] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1522.822404] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1522.822404] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1522.825404] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1522.825404] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1522.825404] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1523.460155] intcdsp.sys: ipc: firmware crash with no request outstanding, read at a stream's period; the link is faulted
+    [ 1523.460155] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+    [ 1523.460155] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1523.460155] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+    [ 1523.460155] intcdsp.sys: stream 1: the pin is told: device removed
+    [ 1523.460155] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+    [ 1523.460155] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+    [ 1523.460155] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+    [ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1537.897686] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+    [ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+    [ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+    [ 1537.897686] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+2026-11-27T21:37:46Z async: the poll point's lines in this run: 3; the model's asynchronous exceptions so far (its -d log): 1
+typed 100 characters
+--- sendkey ret
+
+2026-11-27T21:38:12Z async-second: ended after about 19 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1297 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:38:12Z async-second: opens 3, recovered lines 1, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:38:12Z async-second: the driver's lines from the start on, after serial line 615:
+    [ 1835.423828] intcdsp.sys: boot ok after 5447 us (clock 1846694403 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 1835.424828] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model of the device's first boot
+    [ 1835.424828] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1835.424828] intcdsp.sys: recovered: open ok after 6 ms
+    [ 1835.424828] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1835.424828] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1835.424828] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1835.427828] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1835.427828] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1835.427828] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1837.477833] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1837.477833] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1837.477833] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1837.477833] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1837.477833] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1837.477833] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1839.540337] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1839.540337] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1839.540337] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1839.540337] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1839.540337] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1839.540337] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+| crash-async=500 | 1 | fault during stream 1: firmware crash with no request outstanding, read at a stream's period | 2 | release: 2 streams let go, 2 buffers held for their pins, 2 tags back | 2 | dsploop: 329 tests executed (0 marked as todo, 2 failures), 0 skipped. | PASS |
+-rw-r--r-- 1 megan megan 951360 Nov 27 23:38 /tmp/e1c/ev/e1c-round/06-after-knobs.png
+2026-11-27T21:38:14Z ## (d) a D0 cycle in session: the guest's sleep states, one bounded sleep attempt, one bounded disable attempt
+typed 45 characters
+--- sendkey ret
+
+2026-11-27T21:38:23Z powercfg /a: output after about 4 s: Can't recognize 'powercfg /a ' as an internal or external command, or batch script. 
+2026-11-27T21:38:23Z d-powercfg: Can't recognize 'powercfg /a ' as an internal or external command, or batch script. 
+2026-11-27T21:38:23Z d-sleep: rundll32 powrprof.dll,SetSuspendState 0,1,0 typed (bounded at 90 s)
+typed 43 characters
+--- sendkey ret
+
+2026-11-27T21:39:57Z -- not seen in 90 s (after line 653): Entering sleep state|Sleep: Sending|sleep state S[1-4]
+2026-11-27T21:39:57Z d-sleep: no sleep line in 90 s: the guest did not sleep (E1b's README: no S3 in the VM)
+2026-11-27T21:40:05Z d-sleep: the console answers
+typed 123 characters
+--- sendkey ret
+
+2026-11-27T21:40:27Z pnputil /disable-device "CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000": output after about 4 s: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  
+2026-11-27T21:40:27Z d-disable: the guest's answer: LiberNT PnP Utility  Disabling device:          CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 Failed to disable device: A device attached to the system is not functioning.  ; D0 lines after it: 0
+2026-11-27T21:40:35Z d-disable: the console answers
+typed 103 characters
+--- sendkey ret
+
+2026-11-27T21:41:01Z d-after-disable: ended after about 19 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1304 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-27T21:41:01Z d-after-disable: opens 3, recovered lines 0, failed-boot lines 0, fault-during lines 0, pin-told lines 0, release lines 0, pin-free lines 0, freed-under lines 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T21:41:01Z d-after-disable: the driver's lines from the start on, after serial line 655:
+    [ 2595.547492] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2595.547492] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2595.547492] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2595.550492] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2595.550492] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2595.550492] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2597.612122] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2597.612122] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2597.612122] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2597.612122] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2597.612122] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2597.612122] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2599.674626] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2599.674626] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2599.674626] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 2599.674626] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 2599.674626] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 2599.674626] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-27T21:41:01Z the round's lines: 142 in e1-lines.txt; stop lines: 0
+2026-11-27T21:41:05Z VM e1c-round ended: qemu exited rc=0 (none) at 2026-11-27T21:41:05Z; wall 720 s
+2026-11-27T21:41:05Z e1c-round done

@@ -1,0 +1,142 @@
+# the lines of this round (from the serial log, ANSI and NULs removed)
+## fault during stream
+[ 1042.532145] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[ 1042.532145] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[ 1045.094651] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[ 1045.094651] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[ 1047.657157] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[ 1047.657157] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[ 1523.460155] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+[ 1523.460155] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+## the poll point (read at a stream's period)
+[ 1523.460155] intcdsp.sys: ipc: firmware crash with no request outstanding, read at a stream's period; the link is faulted
+[ 1523.460155] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+[ 1523.460155] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+## the pin told
+[ 1042.532145] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1042.532145] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1045.094651] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1045.094651] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1047.657157] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1047.657157] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1523.460155] intcdsp.sys: stream 1: the pin is told: device removed
+[ 1523.460155] intcdsp.sys: stream 1: the pin is told: device removed
+## release
+[ 1042.532145] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+[ 1045.094651] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+[ 1047.657157] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+[ 1523.460155] intcdsp.sys: release: 2 streams let go, 2 buffers held for their pins, 2 tags back
+## the pin's free
+[ 1042.532145] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+[ 1042.547771] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+[ 1045.094651] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+[ 1045.110276] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+[ 1047.657157] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+[ 1047.672782] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+[ 1537.897686] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 1 held left
+[ 1537.897686] intcdsp.sys: stream 1: its pin's free returned the buffer (7680 bytes); 0 held left
+## recovered
+[ 1042.563396] intcdsp.sys: recovered: open ok after 6 ms
+[ 1045.125901] intcdsp.sys: recovered: open ok after 6 ms
+[ 1126.592410] intcdsp.sys: recovered: open ok after 6 ms
+[ 1835.424828] intcdsp.sys: recovered: open ok after 6 ms
+## boot at stream open failed
+## dsppcm.sys lines
+[  904.723444] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[  904.723444] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[  904.725444] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[  904.726444] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[  904.728444] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[  904.729444] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[  962.092643] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  962.108268] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  964.155147] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  964.155147] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  966.217652] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  966.217652] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1040.024413] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1040.027390] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1042.532145] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+[ 1042.532145] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1042.532145] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1042.532145] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1042.532145] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1042.547771] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1042.547771] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1042.547771] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1042.563396] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1042.579021] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1045.094651] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+[ 1045.094651] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1045.094651] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1045.094651] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1045.094651] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1045.110276] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1045.110276] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1045.110276] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1045.125901] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1045.141526] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1047.657157] dsppcm.sys: stream: state 2 not set, 0xc00000b5
+[ 1047.657157] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1047.657157] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1047.657157] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1047.657157] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1047.672782] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1047.672782] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1047.672782] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1126.592410] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1126.595410] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1128.643415] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1128.643415] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1130.705920] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1130.705920] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1201.363895] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1201.366895] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1203.425525] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1203.425525] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1205.472405] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1205.472405] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1289.508170] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1289.508170] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1291.555050] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1291.555050] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1293.601929] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1293.601929] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1367.925412] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1367.925412] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1369.972291] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1369.972291] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1372.019171] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1372.019171] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1448.570417] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1448.575417] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1450.625672] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1450.625672] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1452.703801] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1452.703801] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1522.822404] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1522.825404] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 2 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 1 not set, 0xc00002b6
+[ 1537.897686] dsppcm.sys: stream: state 0 not set, 0xc00002b6
+[ 1835.424828] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1835.427828] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1837.477833] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1837.477833] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1839.540337] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 1839.540337] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 2595.547492] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 2595.550492] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 2597.612122] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 2597.612122] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 2599.674626] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 2599.674626] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+## counts
+stop lines: 0; fatal lines: 0; ace_unexpected: 0; freed-under lines: 0; kdb prompts: 0

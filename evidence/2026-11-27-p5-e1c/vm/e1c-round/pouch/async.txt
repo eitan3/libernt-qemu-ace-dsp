@@ -1,0 +1,11 @@
+dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+dsploop.c:73: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+dsploop.c:73: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+dsploop.c:411: dsploop: 38176 frames of the tone rendered, 30240 frames captured in 15062 ms
+dsploop.c:426: dsploop: 29247 frames compared within 1 LSB, max abs error 0, offset 993, ok
+dsploop.c:431: Test failed: dsploop: 29247 of 48000 frames compared within 1 LSB, max abs error 0, first sample beyond it 4294967295
+dsploop.c:492: dsploop: stopped after the run above, the plan's stop rule
+dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared
+dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+
+dsploop: 329 tests executed (0 marked as todo, 2 failures), 0 skipped.
