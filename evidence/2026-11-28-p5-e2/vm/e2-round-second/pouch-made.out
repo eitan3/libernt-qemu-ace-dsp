@@ -1,0 +1,20 @@
+== e2-round.img: 33586688 bytes
+label: dos
+label-id: 0xbcb3e7b7
+device: /tmp/e2/pouch/e2-round.img
+unit: sectors
+sector-size: 512
+/tmp/e2/pouch/e2-round.img1 : start=          63, size=       65536, type=6
+fsck.fat -n of the partition: clean
+== the files on it (mdir):
+ Volume in drive : is P5E2       
+ Volume Serial Number is 52E1-7F0A
+Directory for ::/
+
+DSPLOO~1 EXE    214016 2026-11-28   1:41  dsploop_apitest.exe
+pouch    tag        37 2026-11-28   1:41 
+        2 files             214 053 bytes
+                         33 253 376 bytes free
+
+== the exe read back from the image: b77f53f48877e3ef4dfcb312838509e2e60bd06668e81717e6006460ee863188
+== the image directory's exe:            b77f53f48877e3ef4dfcb312838509e2e60bd06668e81717e6006460ee863188

@@ -1,0 +1,53 @@
+2026-11-27T23:32:16Z e2-round: e2-round on disk/p5e2.qcow2 (RUNS 16, CYCLES 22, IDLESEC 3)
+2026-11-27T23:32:18Z VM e2-round started (lib-run pid 1631717, sockets /tmp/qad-vm.1631719, data disk /tmp/e2/pouch/e2-round.img)
+[23:34:01] [   92.500261] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-27T23:34:01Z the first boot: [   15.179271] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched;[   91.265881] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 9 components;[   92.500261] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered;
+2026-11-27T23:34:01Z stop lines in the boot's log: 0; ace_unexpected: 0
+2026-11-27T23:34:37Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-27T23:35:22Z console: Win+R, cmd.exe
+2026-11-27T23:35:39Z data disk: drive D: in the guest (1 marker)
+2026-11-27T23:35:45Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-27T23:35:58Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-27T23:36:14Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-27T23:36:28Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-27T23:36:42Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T23:36:42Z ## (a) BootDsp = 1, BootAtStart unset: a disable/enable cycle boots nothing, the endpoints are listed, the first open boots
+2026-11-27T23:36:42Z ## cycle a-1 by hand 2026-11-27T23:36:42Z (serial line 268)
+[23:36:54] [ 1000.434146] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+2026-11-27T23:36:56Z model (disabled): adspcs=00000000 dsp2cxctl=00000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+[23:37:15] [ 1161.481771] intcdsp.sys: D0 entry: the DSP is not booted (BootAtStart = 0); the first stream open boots it
+2026-11-27T23:37:18Z model (D0): adspcs=00000000 dsp2cxctl=00000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+2026-11-27T23:37:18Z the driver's lines after the enable (from serial line 271):
+    [ 1161.472771] intcdsp.sys: loaded for the Intel audio DSP child
+    [ 1161.472771] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+    [ 1161.472771] intcdsp.sys: NHLT table: the bus driver reports none
+    [ 1161.472771] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+    [ 1161.472771] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+    [ 1161.472771] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+    [ 1161.472771] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+    [ 1161.475771] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+    [ 1161.479771] intcdsp.sys: BootDsp = 1: the DSP boots at the first stream open with 'sof-arl-s.ri' (BootAtStart = 1: at every D0 entry)
+    [ 1161.479771] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [ 1161.481771] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+    [ 1161.481771] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1161.481771] intcdsp.sys: D0 entry: the DSP is not booted (BootAtStart = 0); the first stream open boots it
+    [ 1161.482771] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+    [ 1163.248631] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [ 1163.248631] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [ 1163.250631] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [ 1163.251631] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [ 1163.253631] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [ 1163.254631] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-27T23:37:31Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-27T23:37:31Z (a) the endpoints the guest lists: 0 Loopback lines: 
+2026-11-27T23:37:31Z (a) after the cycle (from serial line 271): booting 0, boot ok 0, boot at open ok 0, failed-boot 0, D0 not booted 1, idle 0, recovered 0, render opens 0, timeouts 0, fault-during 0, pin-told 0, release 0, topology 1, audio child 1, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T23:37:54Z console answering after baseline (alive-baseline.txt, 4 s)
+2026-11-27T23:37:54Z baseline: ended after about 16 s; the console answers; dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 5 tests executed (0 mark
+2026-11-27T23:37:54Z baseline: booting 0, boot ok 0, boot at open ok 0, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 0, timeouts 0, fault-during 0, pin-told 0, release 0, topology 0, audio child 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T23:37:54Z baseline: the driver's lines from the start on, after serial line 293 (the boot noise left out):
+    [ 1223.164128] dsppcm.sys: endpoint 'Loopback' render: the DSP gives no stream, 0xc00000a3
+2026-11-27T23:37:54Z (a) the baseline run (from serial line 293): booting 0, boot ok 0, boot at open ok 0, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 0, timeouts 0, fault-during 0, pin-told 0, release 0, topology 0, audio child 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-27T23:37:56Z ## (b), (d) DspIdleSec = 3: 16 runs, each three cycles, an idle power-down after a run and a boot at the next run's first open
+2026-11-27T23:38:30Z typed: reg add DspIdleSec = 3 (REG_DWORD)
+2026-11-27T23:38:43Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 3 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x3     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T23:38:43Z ## cycle b-1 by hand 2026-11-27T23:38:43Z (serial line 294)

@@ -1,0 +1,168 @@
+2026-11-27T23:54:51Z e2-round: e2-round on disk/p5e2.qcow2 (RUNS 16, CYCLES 22, IDLESEC 3)
+2026-11-27T23:54:52Z VM e2-round started (lib-run pid 1656237, sockets /tmp/qad-vm.1656239, data disk /tmp/e2/pouch/e2-round.img)
+[23:56:43] [   99.033958] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-27T23:56:43Z the first boot: [    7.871463] intcdsp.sys: BootDsp = 0: probe only, the DSP is not touched;[   98.080831] (\base\setup\libernt\oobe.c:1059) First-boot setup lists 9 components;[   99.033958] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered;
+2026-11-27T23:56:43Z stop lines in the boot's log: 0; ace_unexpected: 0
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+--- sendkey ret
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+2026-11-27T23:57:31Z wizard: tab tab ret, ret, tab tab tab ret sent
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-27T23:58:07Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T23:58:24Z data disk: drive D: in the guest (1 marker)
+typed 39 characters
+--- sendkey ret
+
+2026-11-27T23:58:30Z console answering after boot (alive-boot.txt, 3 s)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T23:58:44Z typed: reg add BootDsp = 1 (REG_DWORD)
+typed 116 characters
+--- sendkey ret
+
+2026-11-27T23:58:59Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+typed 98 characters
+--- sendkey ret
+
+2026-11-27T23:59:13Z typed: reg add SelfTest = 0 (REG_DWORD)
+typed 97 characters
+--- sendkey ret
+
+2026-11-27T23:59:27Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-27T23:59:27Z ## (a) BootDsp = 1, BootAtStart unset: a disable/enable cycle boots nothing, the endpoints are listed, the first open boots
+2026-11-27T23:59:27Z ## cycle a-1 by hand 2026-11-27T23:59:27Z (serial line 283)
+typed 90 characters
+--- sendkey ret
+
+[23:59:38] [ 1274.988631] (\base\services\umpnpmgr\event.c:360) Safe removal: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+2026-11-27T23:59:41Z model (disabled): adspcs=00000000 dsp2cxctl=00000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+typed 89 characters
+--- sendkey ret
+
+[23:59:53] [ 1338.917597] intcdsp.sys: D0 entry: the DSP is not booted (BootAtStart = 0); the first stream open boots it
+2026-11-27T23:59:56Z model (D0): adspcs=00000000 dsp2cxctl=00000000 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=00000000 hfipcxida=00000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=00000000 
+2026-11-27T23:59:56Z the driver's lines after the enable (from serial line 286):
+    [ 1338.917597] intcdsp.sys: loaded for the Intel audio DSP child
+    [ 1338.917597] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007253000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000
+    [ 1338.917597] intcdsp.sys: NHLT table: the bus driver reports none
+    [ 1338.917597] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+    [ 1338.917597] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+    [ 1338.917597] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+    [ 1338.917597] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+    [ 1338.917597] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+    [ 1338.917597] intcdsp.sys: BootDsp = 1: the DSP boots at the first stream open with 'sof-arl-s.ri' (BootAtStart = 1: at every D0 entry)
+    [ 1338.917597] intcdsp.sys: SelfTest = 0, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [ 1338.917597] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+    [ 1338.917597] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1338.917597] intcdsp.sys: streams: not started (the IPC link is not ready)
+    [ 1338.917597] intcdsp.sys: D0 entry: the DSP is not booted (BootAtStart = 0); the first stream open boots it
+    [ 1338.917597] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+    [ 1340.756928] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [ 1340.756928] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [ 1340.757928] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [ 1340.759928] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [ 1340.760928] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [ 1340.762928] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+typed 84 characters
+--- sendkey ret
+
+2026-11-28T00:00:14Z pnputil /enum-devices /class AudioEndpoint /ids: output after about 4 s: LiberNT PnP Utility  No devices were found on the system. 
+2026-11-28T00:00:14Z (a) the endpoints the guest lists: 0 Loopback lines: 
+2026-11-28T00:00:14Z (a) after the cycle (from serial line 286): booting 0, boot ok 0, boot at open ok 0, failed-boot 0, D0 not booted 1, idle 0, recovered 0, render opens 0, timeouts 0, fault-during 0, pin-told 0, release 0, topology 1, audio child 1, stop lines 0, fatal 0, ace_unexpected 0
+typed 96 characters
+--- sendkey ret
+
+2026-11-28T00:00:44Z baseline: ended after about 23 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1304 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T00:00:44Z baseline: booting 1, boot ok 1, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 3, timeouts 0, fault-during 0, pin-told 0, release 0, topology 1, audio child 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-28T00:00:44Z baseline: the driver's lines from the start on, after serial line 309 (the boot noise left out):
+    [ 1548.287575] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007253000, clock 1559043089 us at 10000000 Hz
+    [ 1548.303200] intcdsp.sys: boot ok after 5487 us (clock 1559048670 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [ 1548.303200] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': resident, the model the device kept; nothing is read again
+    [ 1548.303200] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [ 1548.303200] intcdsp.sys: boot at stream open: ok after 6 ms
+    [ 1548.303200] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1548.303200] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1548.303200] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1548.303200] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1548.303200] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1548.303200] intcdsp.sys: stream 1: latency: fifo 0 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1550.350081] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1550.350081] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1550.350081] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1550.350081] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1550.350081] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1550.350081] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1552.396962] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1552.396962] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1552.396962] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 1552.396962] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1552.396962] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1552.396962] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+2026-11-28T00:00:44Z (a) the baseline run (from serial line 309): booting 1, boot ok 1, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 3, timeouts 0, fault-during 0, pin-told 0, release 0, topology 1, audio child 0, stop lines 0, fatal 0, ace_unexpected 0
+-rw-r--r-- 1 <user> <user> 927384 Nov 28 02:00 /tmp/e2/ev/e2-round/05-after-baseline.png
+| (a) | BootDsp = 1, BootAtStart unset | after the cycle: booting 0, boot ok 0, boot at open ok 0, failed-boot 0, D0 not booted 1, idle 0, recovered 0, render opens 0, timeouts 0, fault-during 0, pin-told 0, release 0, topology 1, audio child 1, stop lines 0, fatal 0, ace_unexpected 0 | baseline: PASS; the run from its start: booting 1, boot ok 1, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 3, timeouts 0, fault-during 0, pin-told 0, release 0, topology 1, audio child 0, stop lines 0, fatal 0, ace_unexpected 0 | the first open: boot at stream open: ok after 6 ms |
+2026-11-28T00:00:45Z ## (b), (d) DspIdleSec = 3: 16 runs, each three cycles, an idle power-down after a run and a boot at the next run's first open
+typed 100 characters
+--- sendkey ret
+
+2026-11-28T00:01:00Z typed: reg add DspIdleSec = 3 (REG_DWORD)
+typed 98 characters
+--- sendkey ret
+
+2026-11-28T00:01:14Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x3     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-28T00:01:14Z ## reboot 2026-11-28T00:01:14Z (serial line 347): shutdown -r -t 0 typed
+typed 16 characters
+--- sendkey ret
+
+2026-11-28T00:11:31Z -- not seen in 600 s (after line 347): Program Manager
+2026-11-28T00:11:31Z !! no desktop in 600 s after the reboot
+Traceback (most recent call last):
+  File "<project>/tools/mon.py", line 107, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "<project>/tools/mon.py", line 89, in main
+    s = connect(sys.argv[1])
+  File "<project>/tools/mon.py", line 19, in connect
+    s.connect(path)
+    ~~~~~~~~~^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory
+ls: cannot access '/tmp/e2/ev/e2-round/98-no-desktop-after-reboot.png': No such file or directory
+Traceback (most recent call last):
+  File "<project>/tools/mon.py", line 107, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "<project>/tools/mon.py", line 89, in main
+    s = connect(sys.argv[1])
+  File "<project>/tools/mon.py", line 19, in connect
+    s.connect(path)
+    ~~~~~~~~~^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory
+2026-11-28T00:11:31Z VM e2-round ended: qemu exited rc=0 (none) at 2026-11-28T00:01:18Z; wall 387 s

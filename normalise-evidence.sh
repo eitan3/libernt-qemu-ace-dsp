@@ -19,3 +19,21 @@ done
 # "no file left" is grep's "no match" exit: not an error (pipefail would stop the script here)
 left=$({ grep -rla --exclude='*.png' --exclude='*.fd' --exclude='*.gz' -e "$Q" -e "$H" evidence/ 2>/dev/null || true; } | wc -l)
 echo "normalised $(echo "$found" | grep -c . || true) files; remaining: $left"
+
+# The account's login name (N11-12): replaced in listing lines only -- the owner or the group
+# column of an ls -l line (a mode word, a link count, then the name) -- never in prose (the
+# READMEs' "for Megan" stays). Two passes: the owner's column, then the group's; a line that
+# carries the name in both columns reads <user> <user> after. Idempotent.
+U="$(id -un)"
+LIST="^[-lbcpsD][rwxsStT-]{9}[.+@]?[[:space:]]+[0-9]+[[:space:]]+([^[:space:]]+[[:space:]]+)?$U([[:space:]]|$)"
+if [ -n "$U" ]; then
+    listed=$(grep -rlaE "$LIST" evidence/ 2>/dev/null || true)
+    n=0
+    for f in $listed; do
+        c=$(grep -caE "$LIST" "$f" || true)
+        sed -i -E "s/^([-lbcpsD][rwxsStT-]{9}[.+@]?[[:space:]]+[0-9]+[[:space:]]+)(([^[:space:]]+[[:space:]]+)?)$U([[:space:]]|$)/\1\2<user>\4/g" "$f"
+        sed -i -E "s/^([-lbcpsD][rwxsStT-]{9}[.+@]?[[:space:]]+[0-9]+[[:space:]]+)(([^[:space:]]+[[:space:]]+)?)$U([[:space:]]|$)/\1\2<user>\4/g" "$f"
+        n=$((n + c))
+    done
+    echo "listing lines with the login name: $n in $(echo "$listed" | grep -c . || true) files replaced by <user>; files holding the name in any line: $(grep -rlaF "$U" evidence/ 2>/dev/null | wc -l)"
+fi

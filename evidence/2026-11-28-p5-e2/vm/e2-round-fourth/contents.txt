@@ -1,0 +1,17 @@
+    767451  01-desktop-before-wizard.png
+    965733  02-after-wizard.png
+    927463  05-after-baseline.png
+      1177  command.txt
+         0  cycles-run.out
+     10520  driver.log
+        30  lib-run.out
+       759  pouch-made.out
+         0  pouch-mcopy.out
+       640  pouch-sha256.txt
+      1136  qemu-args.txt
+      6774  qemu-dbg.log.gz
+      1422  qemu.log
+     62029  serial.log
+     60984  serial.txt
+        20  sock-dir.txt
+        21  start.txt
