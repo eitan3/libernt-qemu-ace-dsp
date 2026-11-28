@@ -71,7 +71,8 @@ if [ $rc -eq 0 ] && new | grep -aq "intcdsp.sys: boot ok after"; then
     # a boot at a D0 entry is not the entry's end when the settings line asks for the loopback self-test: its closing line is
     st=$(new | grep -aoE "intcdsp.sys: SelfTest = [0-9]+" | tail -1 | grep -oE "[0-9]+$")
     if [ "${st:-0}" -ge 2 ]; then
-        "$QAD/tools/waitline.sh" "$EV" "intcdsp.sys: loopback self-test: (ran|failed) \(|loopback self-test: not run" "$TIMEOUT" "$n1" | cut -c1-300 | tee -a "$LOG"
+        # ... or, on an overlay without a topology, the fail-safe's power-down: the boot's end line comes, no PCM runs a self-test
+        "$QAD/tools/waitline.sh" "$EV" "intcdsp.sys: loopback self-test: (ran|failed) \(|loopback self-test: not run|intcdsp.sys: topology: none selected" "$TIMEOUT" "$n1" | cut -c1-300 | tee -a "$LOG"
         rc2=$?
         new | grep -aE "loopback self-test: [0-9]+ runs," | cut -c1-240 | tee -a "$LOG"
         [ $rc2 -ne 0 ] && rc=$rc2
