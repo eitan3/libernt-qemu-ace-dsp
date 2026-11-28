@@ -1,0 +1,2 @@
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1128: FAIL: value == Headphones: 1 != 3
+mmdevapi: 317 checks, 1 failures

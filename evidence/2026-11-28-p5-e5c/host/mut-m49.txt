@@ -1,0 +1,3 @@
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1137: FAIL: endpoint_form_factor(CODEC L"ELINEOUT10TOPO", eRender, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1163: FAIL: endpoint_form_factor( L"\\\\?\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7E28#00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackWave", eRender, &value)
+mmdevapi: 317 checks, 2 failures

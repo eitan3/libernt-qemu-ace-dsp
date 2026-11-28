@@ -1,0 +1,7 @@
+[0/2] Re-checking globbed directories...
+[0/495] Performing build step for 'host-tools'
+[1/1] Stamping the build with its branch, commit and time
+[2/6] Performing install step for 'host-tools'
+[3/6] Completed 'host-tools'
+[4/6] Building CXX object drivers/wdm/audio/hdaudbus/CMakeFiles/hdaudbus.dir/fdo.cpp.obj
+[5/6] Linking CXX shared module drivers/wdm/audio/hdaudbus/hdaudbus.sys

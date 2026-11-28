@@ -1,0 +1,6 @@
+OK   endpointmute.c
+link rc=0
+pefixup rc=0
+Name: msvcrt.dll
+Name: kernel32.dll
+Name: ole32.dll

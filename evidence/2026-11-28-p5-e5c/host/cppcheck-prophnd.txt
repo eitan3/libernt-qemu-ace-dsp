@@ -1,0 +1,3 @@
+drivers/wdm/audio/drivers/hdaudio/prophnd.cpp                      findings in the file: 0, cppcheck errors anywhere: 1
+<home>/Projects/LiberNT/output-Clang-amd64-debug/amd64-cxx-runtime/include/c++/v1/__configuration/platform.h:50:4: error: #error       "Your compiler doesn't seem to define __BYTE_ORDER__, which is required by libc+
+TOTAL findings: 1

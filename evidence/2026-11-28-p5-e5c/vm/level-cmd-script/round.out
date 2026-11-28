@@ -1,0 +1,87 @@
+2026-11-28T13:38:34Z e5c: level on <project>/disk/e5c-firstboot.qcow2, image test-burnboot-leg1-909633bdde3, the exe b1b44b5ff30f01a4
+2026-11-28T13:38:35Z VM level started (lib-run pid 2051587, sockets /tmp/qad-vm.2051589, data disk /tmp/e5c/pouch/level.img)
+[13:40:30] [  104.277985] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T13:40:30Z first boot: the desktop (or the setup) reached after 599 serial lines
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+--- sendkey ret
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+2026-11-28T13:41:16Z wizard: tab tab ret, ret, tab tab tab ret sent
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T13:41:30Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T13:41:47Z data disk: drive D: in the guest (1 marker)
+typed 40 characters
+--- sendkey ret
+
+2026-11-28T13:41:54Z console answering after first (alive-first.txt, 3 s)
+[13:41:54] [   30.092139] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T13:42:04Z ## the boot (the baked settings): booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 0, timeouts 0, fault-during 0, selftest runs 1, gain lines 5, fatal 0, ace_unexpected 0
+    [   25.623379] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [   26.607756] intcdsp.sys: boot ok after 592081 us (clock 36862220 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, 
+    [   30.092139] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   68.825577] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   68.934952] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   69.028703] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   69.122453] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+typed 2 characters
+--- sendkey ret
+
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T13:44:53Z ## typed 'setdef': setdef.txt after about 150 s
+    GUID=~0,38 
+    reg: Unable to find the specified registry key
+    reg: The operation completed successfully
+    
+    HKEY_CURRENT_USER\Software\Wine\Drivers\wdmaud.drv
+        DefaultOutput    REG_SZ    {0.0.0.00000000}.~0,38
+    
+2026-11-28T13:44:53Z !! DefaultOutput was not set (no id in setdef.txt)
+--- sendkey meta_l-d
+
+--- sendkey volumedown
+
+--- sendkey volumedown
+
+--- sendkey volumedown
+
+--- sendkey volumedown
+
+2026-11-28T13:45:40Z ## the tray's keys (volumedown x4), the driver's lines from serial line 606: 
+--- sendkey meta_l-d
+
+--- sendkey volumedown
+
+--- sendkey volumedown
+
+--- sendkey volumedown
+
+--- sendkey volumedown
+

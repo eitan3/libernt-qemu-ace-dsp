@@ -1,0 +1,14 @@
+dll/win32/mmdevapi/libernt_wdmaud.c                                findings in the file: 24, cppcheck errors anywhere: 0
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:199:31: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:222:26: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:239:26: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:244:20: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:278:26: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:298:26: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:301:25: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:1329:52: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:1441:51: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:1471:29: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:1474:28: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+<home>/Projects/LiberNT/dll/win32/mmdevapi/libernt_wdmaud.c:1503:32: portability: Casting non-zero decimal integer literal to pointer. [intToPointerCast]
+TOTAL findings: 24

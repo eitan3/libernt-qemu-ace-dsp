@@ -1,0 +1,5 @@
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1181: FAIL: !endpoint_form_factor(CODEC L"eSpeaker", eRender, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1182: FAIL: !endpoint_form_factor(CODEC L"eSpeakerMixer", eRender, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1184: FAIL: !endpoint_form_factor(CODEC L"eHeadphoneTopo2", eRender, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1186: FAIL: value == untouched: 3 != 3735928559
+mmdevapi: 317 checks, 4 failures

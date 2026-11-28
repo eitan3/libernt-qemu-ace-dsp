@@ -1,0 +1,10 @@
+m47: run rc=1, mmdevapi: 317 checks, 1 failures, red checks: 1, first red: value == Headphones: 1 != 3
+m48: run rc=1, mmdevapi: 317 checks, 4 failures, red checks: 4, first red: !endpoint_form_factor(CODEC L"eSpeaker", eRender, &value)
+m49: run rc=1, mmdevapi: 317 checks, 2 failures, red checks: 2, first red: endpoint_form_factor(CODEC L"ELINEOUT10TOPO", eRender, &value)
+m50: run rc=1, mmdevapi: 317 checks, 6 failures, red checks: 6, first red: endpoint_form_factor(DSP L"LoopbackTopo", eRender, &value)
+m51: run rc=1, mmdevapi: 317 checks, 1 failures, red checks: 1, first red: value == 0x3f: 255 != 63
+m52: run rc=1, mmdevapi: 317 checks, 2 failures, red checks: 2, first red: endpoint_form_factor(CODEC L"eLineOut2Topo", eRender, &value)
+m53: run rc=1, mmdevapi: 317 checks, 4 failures, red checks: 4, first red: value == UnknownFormFactor: 0 != 10
+restored: identical to the original
+rebuild rc=0
+mmdevapi: 317 checks, 0 failures

@@ -1,0 +1,7 @@
+[0/2] Re-checking globbed directories...
+[0/650] Performing build step for 'host-tools'
+[1/1] Stamping the build with its branch, commit and time
+[2/6] Performing install step for 'host-tools'
+[3/6] Completed 'host-tools'
+[4/6] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/libernt_wdmaud.c.obj
+[5/6] Linking C shared module dll/win32/mmdevapi/mmdevapi.dll

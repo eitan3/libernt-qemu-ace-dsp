@@ -1,0 +1,67 @@
+2026-11-28T13:49:35Z e5c: level3 on <project>/disk/e5c-firstboot3.qcow2, image test-burnboot-leg1-909633bdde3, the exe b1b44b5ff30f01a4
+2026-11-28T13:49:36Z VM level3 started (lib-run pid 2054318, sockets /tmp/qad-vm.2054320, data disk /tmp/e5c/pouch/level3.img)
+[13:51:38] [  110.829377] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T13:51:38Z first boot: the desktop (or the setup) reached after 599 serial lines
+2026-11-28T13:52:18Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-28T13:52:32Z console: Win+R, cmd.exe
+2026-11-28T13:52:48Z data disk: drive D: in the guest (1 marker)
+2026-11-28T13:52:59Z console answering after first (alive-first.txt, 3 s)
+[13:52:59] [   30.573945] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T13:53:09Z ## the boot (the baked settings): booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 0, timeouts 0, fault-during 0, selftest runs 1, gain lines 5, fatal 0, ace_unexpected 0
+    [   26.105178] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [   27.089557] intcdsp.sys: boot ok after 592686 us (clock 38044146 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, 
+    [   30.573945] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   69.213642] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   69.307392] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   69.416768] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   69.510518] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T13:53:20Z ## typed 'setdef': setdef.txt after about 4 s
+    {BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+    {a45c254e-df1c-4efd-8020-67d146a850e0},14: REG_SZ Speakers (Intel SST Loopback)
+    {b3f8fa53-0004-438e-9003-51a46e139bfc},2: not set (2)
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},0: REG_DWORD 1
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},3: not set (2)
+    {BDAAA8D1-59C6-8B7A-A0C2-D2E0786FC14A}
+    {a45c254e-df1c-4efd-8020-67d146a850e0},14: REG_SZ Speakers (HD Audio Line out)
+    {b3f8fa53-0004-438e-9003-51a46e139bfc},2: not set (2)
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},0: REG_DWORD 1
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},3: not set (2)
+    render endpoints: 2, the one named Loopback: 1
+    DefaultOutput set to {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}: error 0
+    DefaultOutput: REG_SZ {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+2026-11-28T13:53:49Z ## the tray's keys (volumedown x4), the driver's lines from serial line 603: [  788.107485] intcdsp.sys: gain: -2.00 dB, mute 0, kept until the DSP runs the PCM again|[  836.673045] intcdsp.sys: gain: -4.00 dB, mute 0, kept until the DSP runs the PCM again|[  870.255549] intcdsp.sys: gain: -6.00 dB, mute 0, kept until the DSP runs the PCM again|[  911.510707] intcdsp.sys: gain: -8.00 dB, mute 0, kept until the DSP runs the PCM again|
+2026-11-28T13:54:05Z console: Win+R, cmd.exe
+2026-11-28T13:54:19Z ## typed 'dl level': dl-level.txt after about 7 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: -8.00 dB (level -524288, the driver's level), mute 0: the expectation scaled by the gain 0x32f52cff, the tolerance 2 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2031 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 2 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 1 LSB, max abs error 0, offset 513, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 1 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1295 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T13:54:19Z ## dsploop at the level: the driver's lines (serial 613 to 651): [ 1059.342451] intcdsp.sys: gain: -8.00 dB, mute 0|
+2026-11-28T13:54:37Z ## the mute key twice (serial 651 to 652): 
+2026-11-28T13:54:50Z console: Win+R, cmd.exe
+2026-11-28T13:55:06Z ## typed 'dl after': dl-after.txt after about 8 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: -8.00 dB (level -524288, the driver's level), mute 0: the expectation scaled by the gain 0x32f52cff, the tolerance 2 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 2 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 1 LSB, max abs error 0, offset 513, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 1 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1293 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T13:55:06Z ## dsploop after mute and unmute: the driver's lines (serial 652 to 689): 
+2026-11-28T13:55:49Z VM level3 ended: qemu exited rc=0 (none) at 2026-11-28T13:55:49Z; wall 374 s
+2026-11-28T13:55:49Z done: booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 0, timeouts 0, fault-during 0, selftest runs 1, gain lines 10, fatal 0, ace_unexpected 0

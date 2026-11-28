@@ -1,0 +1,95 @@
+2026-11-28T13:59:36Z e5c mute row: mute on <project>/disk/e5c-firstboot3.qcow2, image test-burnboot-leg1-909633bdde3, the exes b1b44b5ff30f01a4 aa1c2c522846cd0b
+2026-11-28T13:59:37Z VM mute started (lib-run pid 2056576, sockets /tmp/qad-vm.2056578, data disk /tmp/e5c/pouch/mute.img)
+[14:00:05] [   32.619405] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T14:01:05Z ## the boot: booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 0, timeouts 0, fault-during 0, selftest runs 1, gain lines 6, fatal 0, ace_unexpected 0
+2026-11-28T14:01:05Z ## the driver's gain lines of the boot: [   29.728766] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again|[   29.916267] intcdsp.sys: gain: 0.00 dB, mute 0|[   31.072522] intcdsp.sys: gain: -6.00 dB, mute 0, kept until the DSP runs the PCM again|[   31.369399] intcdsp.sys: gain: -6.00 dB, mute 0|[   32.525654] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again|[   33.900636] intcdsp.sys: gain: -8.00 dB, mute 0, kept until the DSP runs the PCM again|
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T14:01:22Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T14:01:36Z data disk: drive D: in the guest (1 marker)
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T14:01:42Z console answering after boot (alive-boot.txt, 3 s)
+typed 2 characters
+--- sendkey ret
+
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T14:01:54Z ## typed 'mute 1': mute-1.txt after about 4 s
+    DefaultOutput: {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+    the call: IAudioEndpointVolume::SetMute(1)
+    before: mute 0 (0x00000000)
+    SetMute: 0x00000000
+    after: mute 1 (0x00000000)
+2026-11-28T14:01:54Z ## mute: the driver's lines (serial 565 to 568): [  390.634206] intcdsp.sys: gain: -8.00 dB, mute 1, kept until the DSP runs the PCM again|
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T14:02:08Z console: Win+R, cmd.exe
+typed 2 characters
+--- sendkey ret
+
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T14:02:19Z ## typed 'mute 0': mute-0.txt after about 4 s
+    DefaultOutput: {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+    the call: IAudioEndpointVolume::SetMute(0)
+    before: mute 1 (0x00000000)
+    SetMute: 0x00000000
+    after: mute 0 (0x00000000)
+2026-11-28T14:02:19Z ## unmute: the driver's lines (serial 571 to 574): [  474.414305] intcdsp.sys: gain: -8.00 dB, mute 0, kept until the DSP runs the PCM again|
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T14:02:35Z console: Win+R, cmd.exe
+typed 2 characters
+--- sendkey ret
+
+typed 10 characters
+--- sendkey ret
+
+2026-11-28T14:02:49Z ## typed 'dl unmuted': dl-unmuted.txt after about 7 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: -8.00 dB (level -524288, the driver's level), mute 0: the expectation scaled by the gain 0x32f52cff, the tolerance 2 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2000 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 2 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 1 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 1 LSB, max abs error 0, offset 513, the expectation scaled by the gain, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1280 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T14:02:49Z ## dsploop after mute and unmute: the driver's lines (serial 577 to 612): [  569.179577] intcdsp.sys: gain: -8.00 dB, mute 0|
+2026-11-28T14:03:34Z VM mute ended: qemu exited rc=0 (none) at 2026-11-28T14:03:34Z; wall 238 s
+2026-11-28T14:03:34Z done: booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 0, timeouts 0, fault-during 0, selftest runs 1, gain lines 9, fatal 0, ace_unexpected 0

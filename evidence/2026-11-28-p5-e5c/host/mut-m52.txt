@@ -1,0 +1,3 @@
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1135: FAIL: endpoint_form_factor(CODEC L"eLineOut2Topo", eRender, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1137: FAIL: endpoint_form_factor(CODEC L"ELINEOUT10TOPO", eRender, &value)
+mmdevapi: 317 checks, 2 failures

@@ -1,0 +1,2 @@
+[1/2] Building C object mmdevapi/CMakeFiles/mmdevapi.dir/t_mmdevapi.c.o
+[2/2] Linking C executable mmdevapi/mmdevapi

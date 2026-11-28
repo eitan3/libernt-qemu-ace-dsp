@@ -1,0 +1,2 @@
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1201: FAIL: value == 0x3f: 255 != 63
+mmdevapi: 317 checks, 1 failures

@@ -1,0 +1,5 @@
+DefaultOutput: {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+the call: IAudioEndpointVolume::SetMute(1)
+before: mute 0 (0x00000000)
+SetMute: 0x00000000
+after: mute 1 (0x00000000)

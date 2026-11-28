@@ -1,0 +1,7 @@
+GUID=~0,38 
+reg: Unable to find the specified registry key
+reg: The operation completed successfully
+
+HKEY_CURRENT_USER\Software\Wine\Drivers\wdmaud.drv
+    DefaultOutput    REG_SZ    {0.0.0.00000000}.~0,38
+
