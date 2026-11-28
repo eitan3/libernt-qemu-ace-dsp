@@ -1,7 +1,7 @@
 From 813793ba53f0658b64a0c2de91cbd3cf5113f1e8 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 21:55:36 +0200
-Subject: [PATCH 24/29] tests/qtest: intel-hda-ace: the knobs' case names its
+Subject: [PATCH 24/35] tests/qtest: intel-hda-ace: the knobs' case names its
  streams
 
 never-reply-running=19 drops the set-state behind an input stream that a

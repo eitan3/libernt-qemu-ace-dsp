@@ -100,6 +100,8 @@ MUTATIONS=(
 "fault-crash-one-late|$C|s/s->stream_replies >= s->fault_arg)/s->stream_replies > s->fault_arg)/|crash-during-stream=<n> crashes one reply late"
 "fault-crash-async-silent|$C|s/    s->crash_posted = true;/    return;/|crash-async=<ms>: the exception is never posted (the timer returns before it)"
 "fault-crash-async-answers|$C|s/type)) .. s->crash_posted) {/type))) {/|crash-async=<ms>: the firmware answers requests after its exception"
+"gain-never-scales|$C|s#if (volume == ACE_CFG_GAIN_UNITY) {#if (1) {   /* MUTATED */#|the gain module forwards every sample untouched: a volume change is answered and does nothing"
+"gain-never-known|$C|s#if (!m->copier .. words >= ACE_CFG_GAIN_CONFIG_WORDS) {#if (!m->copier .. words >= ACE_CFG_COPIER_CONFIG_WORDS) {   /* MUTATED */#|no module is the gain: its initialization's entry is not read and a volume change replaces its configuration"
 )
 
 # the cases of a clean run (the un-mutated test file), for the abort note

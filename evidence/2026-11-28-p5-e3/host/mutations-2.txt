@@ -1,0 +1,11 @@
+== base ==
+sofipc: 7730 checks, 0 failures
+m29: 3 red (the gain product is not rounded); first: 5642: FAIL: IntcDspGainApply(1, 32, 32, 0x40000000) == 1: 0 != 1 [sofipc: 7730 checks, 3 failures]
+   restored: identical
+m31: 4 red (the volume change goes under parameter id 1); first: 5704: FAIL: StreamTraceCount(S, INTCDSP_TRACE_IPC, 0x44000007, 0x30000018) == 1: 0 != 1 [sofipc: 7730 checks, 4 failures]
+   restored: identical
+m32: 4 red (the trace names no block); first: 5704: FAIL: StreamTraceCount(S, INTCDSP_TRACE_IPC, 0x44000007, 0x30000018) == 1: 0 != 1 [sofipc: 7730 checks, 4 failures]
+   restored: identical
+== after ==
+identical
+sofipc: 7730 checks, 4 failures

@@ -1,0 +1,2 @@
+==1813418==AddressSanitizer: WARNING: unexpected format specifier in printf interceptor: %I (reported once per process)
+sofipc: 7729 checks, 0 failures

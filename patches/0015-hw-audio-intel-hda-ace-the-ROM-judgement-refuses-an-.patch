@@ -1,7 +1,7 @@
 From e3d91b07076cf1607b1d9635ecf97f7dd3ecb792 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 10:20:10 +0200
-Subject: [PATCH 15/29] hw/audio: intel-hda-ace: the ROM judgement refuses an
+Subject: [PATCH 15/35] hw/audio: intel-hda-ace: the ROM judgement refuses an
  image a stream cut short
 
 ace_rom_judge() read six words of the streamed image without looking at the

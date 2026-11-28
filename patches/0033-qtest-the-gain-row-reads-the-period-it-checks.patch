@@ -1,0 +1,73 @@
+From 36524e65cf5cb45c237dbdf564e5f2c7a5e04570 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Sat, 28 Nov 2026 05:08:23 +0200
+Subject: [PATCH 33/35] qtest: the gain row reads the period it checks
+
+The buffer holds two periods: the second period after the volume change is
+written at the buffer middle, and the ones after it alternate, so the row
+reads each period where it was written.
+---
+ tests/qtest/intel-hda-ace-test.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index 5cad3c332..725f163cf 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1488,13 +1488,13 @@ static void gain_set(uint32_t channel, uint32_t volume)
+ /* one period of the capture against the render under a volume: every
+  * sample the render's scaled, rounded, within one unit; the RMS within one
+  * unit of the magnitude scaled */
+-static void check_capture_gain(uint32_t volume, const char *when)
++static void check_capture_gain(uint32_t off, uint32_t volume, const char *when)
+ {
+     uint8_t *got = g_malloc(LOOP_PERIOD);
+     double sumsq = 0;
+     uint32_t k, count = 0;
+ 
+-    qtest_memread(t.qs, CAPTURE_ADDR, got, LOOP_PERIOD);
++    qtest_memread(t.qs, CAPTURE_ADDR + off, got, LOOP_PERIOD);
+     for (k = 0; k + 4 <= LOOP_PERIOD; k += 4) {
+         int32_t render = ldl_le_p(loop_render + k);
+         int32_t capture = ldl_le_p(got + k);
+@@ -1503,7 +1503,7 @@ static void check_capture_gain(uint32_t volume, const char *when)
+ 
+         if (labs((long)(capture - expected)) > 1) {
+             g_test_message("%s: capture +0x%x is %" PRId32 ", the render's %" PRId32
+-                           " under 0x%08x is %" PRId64, when, k, capture, render, volume,
++                           " under 0x%08x is %" PRId64, when, off + k, capture, render, volume,
+                            expected);
+         }
+         g_assert_cmpint(labs((long)(capture - expected)), <=, 1);
+@@ -1562,7 +1562,7 @@ static void test_audio_gain(void)
+     gain_set(ACE_CFG_GAIN_ALL_CHANNELS, 0x4026e73d);
+     qtest_clock_step(t.qs, US(5400));
+     check_position(IN0, 0, "-6 dB: after the second period");
+-    check_capture_gain(0x4026e73d, "-6 dB");
++    check_capture_gain(LOOP_PERIOD, 0x4026e73d, "-6 dB");
+     loop_ack();
+     /* one channel only: the left scaled, the right not */
+     gain_set(0, 0x40000000);
+@@ -1586,16 +1586,16 @@ static void test_audio_gain(void)
+     /* the exact half: one half of the magnitude within one unit */
+     gain_set(ACE_CFG_GAIN_ALL_CHANNELS, 0x40000000);
+     qtest_clock_step(t.qs, US(5800));
+-    check_capture_gain(0x40000000, "one half");
++    check_capture_gain(LOOP_PERIOD, 0x40000000, "one half");
+     loop_ack();
+     /* silence, then unity again: the pattern itself */
+     gain_set(ACE_CFG_GAIN_ALL_CHANNELS, 0);
+     qtest_clock_step(t.qs, US(5800));
+-    check_capture_gain(0, "muted");
++    check_capture_gain(0, 0, "muted");
+     loop_ack();
+     gain_set(ACE_CFG_GAIN_ALL_CHANNELS, ACE_CFG_GAIN_UNITY);
+     qtest_clock_step(t.qs, US(5800));
+-    check_capture(0, LOOP_PERIOD, "unity again");
++    check_capture(LOOP_PERIOD, LOOP_PERIOD, "unity again");
+     loop_ack();
+     /* a channel id that is no channel: refused, the volume unchanged */
+     {
+-- 
+2.56.1
+

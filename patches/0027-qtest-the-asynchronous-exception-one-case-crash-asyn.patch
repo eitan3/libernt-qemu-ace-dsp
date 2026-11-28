@@ -1,7 +1,7 @@
 From f2c375d34fcc67fef8ed9be966134deaf0e18a9b Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 23:07:13 +0200
-Subject: [PATCH 27/29] qtest: the asynchronous exception, one case
+Subject: [PATCH 27/35] qtest: the asynchronous exception, one case
  (crash-async)
 
 crash-async=50 set at the device's creation: after the boot (about 5 ms of

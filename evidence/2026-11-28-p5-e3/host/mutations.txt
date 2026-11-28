@@ -1,0 +1,25 @@
+== base ==
+sofipc: 7726 checks, 0 failures
+m23: 106 red (the level one step off: -6 dB takes the -7 dB word); first: 5601: FAIL: IntcDspGainOfLevel(-65536, FALSE) == 0x721482c0: 65ac8c2f != 721482c0 [sofipc: 7726 checks, 106 failures]
+   restored: identical
+m24: 3 red (mute leaves the level's word); first: 5606: FAIL: IntcDspGainOfLevel(0, TRUE) == 0: 7fffffff != 0 [sofipc: 7726 checks, 3 failures]
+   restored: identical
+m25: 3 red (a stream's gain is initialized at unity, not at the kept level); first: 5773: FAIL: Module->Config[11] == 0x4026e73d: 7fffffff != 4026e73d [sofipc: 7726 checks, 3 failures]
+   restored: identical
+m26: 16 red (a level kept while no instance existed is not sent after the build); first: 5699: FAIL: StreamTraceCount(S, INTCDSP_TRACE_IPC, 0x44000007, 0x30000018) == 1: 0 != 1 [sofipc: 7726 checks, 16 failures]
+   restored: identical
+m27: 17 red (a change is sent to a gain widget that has no instance); first: 5677: FAIL: IntcDspStreamsGainSet(&S->Streams, Pcm, Minus6, FALSE) == STATUS_SUCCESS: ffffffffc0000186 != 0 []
+   restored: identical
+m28: 5 red (the self-test compares the capture with the unscaled render); first: 5832: FAIL: Status == STATUS_SUCCESS: ffffffffc0000186 != 0 [sofipc: 7702 checks, 5 failures]
+   restored: identical
+m29: 0 red -- SURVIVED (the gain's product is not rounded)
+   restored: identical
+m30: 4 red (a release does not keep the level for the next build); first: 5743: FAIL: S->Streams.Gain[Pcm].Kept [sofipc: 7726 checks, 4 failures]
+   restored: identical
+m31: 0 red -- SURVIVED (the volume change goes under parameter id 1)
+   restored: identical
+m32: 4 red (the change is sent without its block flags); first: 5699: FAIL: StreamTraceCount(S, INTCDSP_TRACE_IPC, 0x44000007, 0x30000018) == 1: 0 != 1 [sofipc: 7726 checks, 4 failures]
+   restored: identical
+== after ==
+stream.c identical to the original
+sofipc: 7726 checks, 0 failures

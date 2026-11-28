@@ -1,7 +1,7 @@
 From 651a91676fbfdf6f0e654ea54adc36543759f94f Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Tue, 24 Nov 2026 09:35:27 +0200
-Subject: [PATCH 02/29] hw/audio: add the extended-capability chain (PP, SPB)
+Subject: [PATCH 02/35] hw/audio: add the extended-capability chain (PP, SPB)
  behind a property
 
 The ACE-era Intel HD Audio controllers carry two extended capabilities in

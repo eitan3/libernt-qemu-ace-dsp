@@ -1,7 +1,7 @@
 From 4e10629960c603ca60122ebc78d8cef3caace05b Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 23:12:18 +0200
-Subject: [PATCH 28/29] intel-hda-ace: crash-async is armed at the reset too
+Subject: [PATCH 28/35] intel-hda-ace: crash-async is armed at the reset too
 
 The machine's reset follows the device's realize and deletes the knob's
 timer with the others, so a crash-async set at the device's creation never

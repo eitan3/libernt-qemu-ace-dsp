@@ -1,0 +1,285 @@
+From ecd8af11c4fe496a5a1c65c1fa8cfb76e9c9c790 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Sat, 28 Nov 2026 05:05:24 +0200
+Subject: [PATCH 30/35] intel-hda-ace: the gain module scales what it forwards
+
+The loopback pipeline middle widget, the firmware volume component under
+its gain UUID, was a wire: initialized, bound, and forwarding the period
+untouched. A module whose initialization is the base configuration and one
+volume entry (ipc4_peak_volume_module_cfg, the layout the SOF source at the
+pinned revision declares: read for the layout, own declarations, no text
+copied) is the gain now: the entry target volume of every channel is kept
+in Q1.31, unity until the entry says otherwise, and a large-configuration
+set of parameter 0 with one entry changes it at once, every channel or
+one. The gain on the path between the two host copiers multiplies each
+sample of a period by its channel volume before the capture stream takes
+it, as the component does: a 16-bit sample widened to 32 bits, the product
+rounded and shifted, saturated, and back in the container with the bits
+below the stream valid bits clear. Unity is a copy, the component
+passthrough, so the gateways rows are byte-exact as before. The curve and
+a ramp are not modelled (MODEL-NOTES).
+---
+ hw/audio/intel-hda-ace-regs.h |  14 ++++
+ hw/audio/intel-hda-ace.c      | 154 +++++++++++++++++++++++++++++++++-
+ 2 files changed, 167 insertions(+), 1 deletion(-)
+
+diff --git a/hw/audio/intel-hda-ace-regs.h b/hw/audio/intel-hda-ace-regs.h
+index 87f5017b4..18f4655c5 100644
+--- a/hw/audio/intel-hda-ace-regs.h
++++ b/hw/audio/intel-hda-ace-regs.h
+@@ -432,6 +432,20 @@
+ #define ACE_CFG_AUDIO_FORMAT_WORDS       6
+ #define ACE_CFG_BASE_CONFIG_WORDS        10  /* cpc, ibs, obs, pages, the input format */
+ #define ACE_CFG_COPIER_CONFIG_WORDS      21  /* a host copier: 84 bytes */
++/* ipc4_peak_volume_module_cfg (SOF src/audio/volume/peak_volume.h at the
++ * pinned revision, BSD-3): the base configuration, then volume entries of
++ * six words -- the channel (0xffffffff: every channel), the target volume
++ * in Q1.31 (unity 0x7fffffff), the curve type, a reserved word, the curve
++ * duration -- of which an initialization carries at least one; a volume
++ * change is a large-configuration set of parameter 0 carrying exactly one.
++ * A module whose initialization is the base configuration and one entry,
++ * and no copier's tail, is the gain of this model. */
++#define ACE_CFG_GAIN_CONFIG_WORDS        (ACE_CFG_BASE_CONFIG_WORDS + 6)
++#define ACE_CFG_GAIN_ENTRY_WORD          ACE_CFG_BASE_CONFIG_WORDS
++#define ACE_CFG_GAIN_ALL_CHANNELS        0xffffffffu
++#define ACE_CFG_GAIN_UNITY               0x7fffffffu
++#define ACE_IPC4_PARAM_VOLUME            0
++#define ACE_MODEL_GAIN_CHANNELS          8
+ #define ACE_CFG_OUT_FORMAT_WORD          10
+ #define ACE_CFG_FEATURE_MASK_WORD        16
+ #define ACE_CFG_NODE_ID_WORD             17
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index db33dd97b..1c1539773 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -200,6 +200,11 @@ typedef struct AceModule {
+     uint32_t rate;              /* the input format's sampling frequency */
+     uint32_t sample;            /* bytes of one sample of the input format */
+     uint32_t frame_in, frame_out;   /* bytes of one frame, in and out */
++    /* the gain module (the firmware's volume component): the target volume
++     * of each channel in Q1.31, every channel unity until its
++     * initialization or a volume change says otherwise */
++    bool gain;
++    uint32_t volume[ACE_MODEL_GAIN_CHANNELS];
+ } AceModule;
+ 
+ /* one pipeline's host gateway at work: its host-output gateway's stream
+@@ -210,8 +215,11 @@ typedef struct AceGateway {
+     IntelHDAAceState *s;
+     unsigned int ppl;           /* the pipeline instance id */
+     int render, capture;        /* controller stream indices; capture -1: dropped */
++    int source;                 /* the host-output copier's index in the module table */
+     uint32_t bps;               /* the stream's rate in bytes a second */
+     uint32_t sample;            /* bytes of one sample, for the evidence line */
++    uint32_t channels;          /* channels of one frame */
++    uint32_t valid;             /* valid bits of the render stream's samples */
+ } AceGateway;
+ 
+ struct IntelHDAAceState {
+@@ -1102,6 +1110,21 @@ static void ace_config_parse(IntelHDAAceState *s, uint32_t words, AceModule *m)
+     m->gw_type = 0;
+     m->gw_index = ACE_CFG_NODE_INDEX_PLACEHOLDER;
+     m->frame_out = 0;
++    /* the gain: the base configuration and one volume entry for every
++     * channel; a per-channel entry or several are not modelled (unity) */
++    m->gain = false;
++    for (i = 0; i < ACE_MODEL_GAIN_CHANNELS; i++) {
++        m->volume[i] = ACE_CFG_GAIN_UNITY;
++    }
++    if (!m->copier && words >= ACE_CFG_GAIN_CONFIG_WORDS) {
++        m->gain = true;
++        if (w[ACE_CFG_GAIN_ENTRY_WORD] == ACE_CFG_GAIN_ALL_CHANNELS &&
++            w[ACE_CFG_GAIN_ENTRY_WORD + 1] <= ACE_CFG_GAIN_UNITY) {
++            for (i = 0; i < ACE_MODEL_GAIN_CHANNELS; i++) {
++                m->volume[i] = w[ACE_CFG_GAIN_ENTRY_WORD + 1];
++            }
++        }
++    }
+     if (!m->copier) {
+         return;
+     }
+@@ -1217,6 +1240,32 @@ static uint32_t ace_module_status(IntelHDAAceState *s, uint32_t type,
+             return ACE_IPC4_ERROR_INVALID_PARAM;
+         }
+         m = &s->mod[mi];
++        if (m->gain && ((ext & ACE_IPC4_LC_PARAM_MASK) >> ACE_IPC4_LC_PARAM_SHIFT) == ACE_IPC4_PARAM_VOLUME &&
++            bytes >= 24) {
++            /* the volume entry of a change: every channel, or one; the target
++             * volume in Q1.31 is applied at once (the curve is not modelled) */
++            const uint8_t *dl = s->ram[1];
++            uint32_t channel = ldl_le_p(dl), target = ldl_le_p(dl + 4);
++
++            if (channel == ACE_CFG_GAIN_ALL_CHANNELS) {
++                for (i = 0; i < ACE_MODEL_GAIN_CHANNELS; i++) {
++                    m->volume[i] = MIN(target, ACE_CFG_GAIN_UNITY);
++                }
++            } else if (channel < ACE_MODEL_GAIN_CHANNELS) {
++                m->volume[channel] = MIN(target, ACE_CFG_GAIN_UNITY);
++            } else {
++                *detail = g_strdup_printf("module %u instance %u: channel %u is not a channel",
++                                          id, instance, channel);
++                return ACE_IPC4_ERROR_INVALID_PARAM;
++            }
++            kind = g_strdup_printf("the gain, volume 0x%08x%s", MIN(target, ACE_CFG_GAIN_UNITY),
++                                   channel == ACE_CFG_GAIN_ALL_CHANNELS ? " on every channel" : " on one channel");
++            *detail = g_strdup_printf("module %u instance %u: %s, parameter %u, %u bytes",
++                                      id, instance, kind,
++                                      (ext & ACE_IPC4_LC_PARAM_MASK) >> ACE_IPC4_LC_PARAM_SHIFT,
++                                      bytes);
++            break;
++        }
+         ace_config_parse(s, bytes / 4, m);
+         kind = ace_mod_kind(m);
+         *detail = g_strdup_printf("module %u instance %u: %s, parameter %u, %u bytes",
+@@ -1770,6 +1819,89 @@ static void ace_gateway_irq(IntelHDAState *d, IntelHDAStream *src,
+     intel_hda_update_irq(d);
+ }
+ 
++/* the gain modules between the host-output copier `from` and the
++ * host-input copier behind it, in the order the samples meet them: their
++ * indices in the module table, at most ACE_MODEL_MAX_BINDING_DEPTH; the
++ * count. The walk is ace_mod_sink's. */
++static int ace_mod_gains(IntelHDAAceState *s, int from, int *gains)
++{
++    unsigned int i, depth;
++    int cur = from, next, count = 0;
++
++    for (depth = 0; depth < ACE_MODEL_MAX_BINDING_DEPTH; depth++) {
++        next = -1;
++        for (i = 0; i < ACE_MODEL_MAX_MODULES; i++) {
++            if (s->mod[i].used && s->mod[i].src == cur) {
++                next = i;
++                break;
++            }
++        }
++        if (next < 0) {
++            break;
++        }
++        if (s->mod[next].gain) {
++            gains[count++] = next;
++        }
++        if (s->mod[next].copier && s->mod[next].gateway &&
++            s->mod[next].gw_type == ACE_CFG_NODE_HOST_INPUT) {
++            break;
++        }
++        cur = next;
++    }
++    return count;
++}
++
++/* The gain modules' work on one period's samples, in place before the
++ * capture stream takes them: the firmware's volume component multiplies
++ * each sample by its channel's target volume in Q1.31 -- a 16-bit sample
++ * widened to 32 bits, the product rounded and shifted, saturated, and back
++ * in the container with the bits below the stream's valid bits clear, as
++ * the host copiers take and give the samples (SOF src/audio/volume/
++ * volume.c at the pinned revision, studied; a model value where the real
++ * conversions differ). Unity on every channel is a copy, the component's
++ * passthrough. */
++static void ace_gain_apply(IntelHDAAceState *s, const int *gains, int count,
++                           const AceGateway *g, uint8_t *buf, uint32_t bytes)
++{
++    uint32_t sample = g->sample, shift = 32 - (sample == 2 ? 16 : 32);
++    uint32_t k, c, low = sample == 4 && g->valid < 32 ? (1u << (32 - g->valid)) - 1 : 0;
++    int i;
++
++    if (count == 0 || sample == 0 || g->channels == 0 || (sample == 4 && g->valid == 0)) {
++        return;
++    }
++    for (k = 0; k + sample <= bytes; k += sample) {
++        uint32_t channel = (k / sample) % g->channels;
++        int64_t wide = sample == 2 ? (int16_t)lduw_le_p(buf + k) : (int32_t)ldl_le_p(buf + k);
++        int64_t product;
++
++        wide <<= shift;
++        for (i = 0; i < count; i++) {
++            uint32_t volume = s->mod[gains[i]].volume[channel];
++
++            if (volume == ACE_CFG_GAIN_UNITY) {
++                continue;
++            }
++            product = (wide * (int64_t)volume + (1ll << 30)) >> 31;
++            if (product > INT32_MAX) {
++                product = INT32_MAX;
++            } else if (product < INT32_MIN) {
++                product = INT32_MIN;
++            }
++            wide = product;
++        }
++        product = wide >> shift;
++        if (low) {
++            product &= ~(int64_t)low;
++        }
++        if (sample == 2) {
++            stw_le_p(buf + k, (uint16_t)(int16_t)product);
++        } else {
++            stl_le_p(buf + k, (uint32_t)product);
++        }
++    }
++}
++
+ /* one period: `bytes` read from the render stream's descriptors and, when
+  * the capture stream runs, written into its own, the two walked as
+  * intel_hda_xfer() walks a stream; then the positions, the interrupts and
+@@ -1790,6 +1922,8 @@ static void ace_gateway_copy(IntelHDAAceState *s, AceGateway *g, uint32_t bytes)
+     double sumsq = 0;
+     int64_t peak = 0;
+     const MemTxAttrs attrs = { .memory = true };
++    int gains[ACE_MODEL_MAX_BINDING_DEPTH];
++    int gain_count = ace_mod_gains(s, g->source, gains);
+     g_autofree char *rms = NULL;
+     char first_text[9 + 8 * 12];
+     size_t len = 5;
+@@ -1823,6 +1957,10 @@ static void ace_gateway_copy(IntelHDAAceState *s, AceGateway *g, uint32_t bytes)
+             failed = true;
+             break;
+         }
++        /* the gain modules between the copiers scale the period before the capture stream takes it */
++        if (dst) {
++            ace_gain_apply(s, gains, gain_count, g, s->audio_buf, n);
++        }
+         if (dst &&
+             pci_dma_rw(&d->pci, dst->bpl[dst->be].addr + dst->bp, s->audio_buf, n,
+                        DMA_DIRECTION_FROM_DEVICE, attrs) != MEMTX_OK) {
+@@ -1931,7 +2069,7 @@ static void ace_gateways_update(IntelHDAAceState *s)
+         AceModule *m = NULL, *k = NULL;
+         g_autofree char *why = NULL;
+         int src = -1, sink = -1, render = -1, capture = -1;
+-        uint32_t bps = 0, sample = 0;
++        uint32_t bps = 0, sample = 0, channels = 0, valid = 0;
+ 
+         if (!ppl->used) {
+             why = g_strdup("the pipeline is gone");
+@@ -1971,6 +2109,17 @@ static void ace_gateways_update(IntelHDAAceState *s)
+                     capture = ace_gateway_stream(s, k->gw_index, false);
+                     bps = m->rate * m->frame_in;
+                     sample = m->sample;
++                    channels = m->sample ? m->frame_in / m->sample : 0;
++                    /* the stream's format register: its bits a sample (0: 8,
++                     * 1: 16, 2: 20, 3: 24, 4: 32), the valid bits the host
++                     * copier takes and the capture copier writes */
++                    switch ((s->hda.st[render].fmt >> 4) & 7) {
++                    case 1: valid = 16; break;
++                    case 2: valid = 20; break;
++                    case 3: valid = 24; break;
++                    case 4: valid = 32; break;
++                    default: valid = 0; break;
++                    }
+                 }
+             }
+         }
+@@ -1996,8 +2145,11 @@ static void ace_gateways_update(IntelHDAAceState *s)
+             g->ppl = p + 1;
+             g->render = render;
+             g->capture = capture;
++            g->source = src;
+             g->bps = bps;
+             g->sample = sample;
++            g->channels = channels;
++            g->valid = valid;
+         } else if (g->active) {
+             g->active = false;
+             timer_del(g->timer);
+-- 
+2.56.1
+

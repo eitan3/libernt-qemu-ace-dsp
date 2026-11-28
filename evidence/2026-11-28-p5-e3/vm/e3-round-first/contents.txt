@@ -1,0 +1,12 @@
+      1177  command.txt
+       209  driver.log
+        30  lib-run.out
+       759  pouch-made.out
+         0  pouch-sha256.txt
+      1136  qemu-args.txt
+       563  qemu-dbg.log.gz
+         0  qemu.log
+     28507  serial.log
+     27994  serial.txt
+        20  sock-dir.txt
+        21  start.txt

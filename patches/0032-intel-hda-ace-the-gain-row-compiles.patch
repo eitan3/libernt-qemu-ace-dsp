@@ -1,0 +1,53 @@
+From 4bbfaea7a95f11cd6c13d95c1f889227a3ac9e97 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Sat, 28 Nov 2026 05:06:34 +0200
+Subject: [PATCH 32/35] intel-hda-ace: the gain row compiles
+
+The qtest declares the volume entry words and the invalid-parameter status
+beside its other copies of the model definitions, and takes the square
+root and the absolute value from the C library; the model drops a variable
+it did not use.
+---
+ hw/audio/intel-hda-ace.c         | 2 +-
+ tests/qtest/intel-hda-ace-test.c | 5 +++++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index 1c1539773..dd2cd9b7b 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -1864,7 +1864,7 @@ static void ace_gain_apply(IntelHDAAceState *s, const int *gains, int count,
+                            const AceGateway *g, uint8_t *buf, uint32_t bytes)
+ {
+     uint32_t sample = g->sample, shift = 32 - (sample == 2 ? 16 : 32);
+-    uint32_t k, c, low = sample == 4 && g->valid < 32 ? (1u << (32 - g->valid)) - 1 : 0;
++    uint32_t k, low = sample == 4 && g->valid < 32 ? (1u << (32 - g->valid)) - 1 : 0;
+     int i;
+ 
+     if (count == 0 || sample == 0 || g->channels == 0 || (sample == 4 && g->valid == 0)) {
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index 14c4acc13..5cad3c332 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -30,6 +30,7 @@
+ #include "hw/pci/pci_regs.h"
+ #include "libqos/pci.h"
+ #include "libqos/pci-pc.h"
++#include <math.h>
+ 
+ #define ACE_DEVFN          QPCI_DEVFN(0x1b, 0)   /* 00:1b.0, the PCH address */
+ 
+@@ -76,6 +77,10 @@
+ #define ACE_XTDDY          0x73300
+ #define ACE_XIDDY          0x73380
+ #define ACE_FSR            0x163200
++/* the gain module of the model: the volume entry's channel and unity words (ipc4_peak_volume_config), and the invalid-parameter status */
++#define ACE_CFG_GAIN_ALL_CHANNELS  0xffffffffu
++#define ACE_CFG_GAIN_UNITY         0x7fffffffu
++#define ACE_IPC4_ERROR_INVALID_PARAM 1
+ #define ACE_ROMERR         0x163204
+ #define ACE_WIN0           0x180000
+ #define ACE_FW_ROM_INFO    0x18
+-- 
+2.56.1
+

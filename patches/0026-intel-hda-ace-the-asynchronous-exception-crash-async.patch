@@ -1,7 +1,7 @@
 From 4dd6da55146360138d05f39d612a94f21991ad0d Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 23:07:13 +0200
-Subject: [PATCH 26/29] intel-hda-ace: the asynchronous exception
+Subject: [PATCH 26/35] intel-hda-ace: the asynchronous exception
  (crash-async=<ms>)
 
 A value of the run-time "fault" property: N ms after the set the firmware

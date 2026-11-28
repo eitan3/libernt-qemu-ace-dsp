@@ -1,7 +1,7 @@
 From c7d45671482a34ca1c2c5228a64b9589c89eff30 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Wed, 25 Nov 2026 01:24:09 +0200
-Subject: [PATCH 10/29] tests/qtest: intel-hda-ace: the interrupt pointer only
+Subject: [PATCH 10/35] tests/qtest: intel-hda-ace: the interrupt pointer only
  answers while powered
 
 Case intipptr: all ones while unpowered, 0x120 after power-up, all ones again after power-down; the enumerate and power-down cases assert the unpowered value, the interrupt case the powered one.

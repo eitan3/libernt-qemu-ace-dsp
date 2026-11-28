@@ -1,7 +1,7 @@
 From df1e34046740040c726771ccf90c3db1e70dab3c Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 19:34:20 +0200
-Subject: [PATCH 21/29] hw/audio: intel-hda-ace: two knobs that act while a
+Subject: [PATCH 21/35] hw/audio: intel-hda-ace: two knobs that act while a
  stream of the boot runs
 
 Two values of the run-time fault property (the P5 E1 design's section 6),

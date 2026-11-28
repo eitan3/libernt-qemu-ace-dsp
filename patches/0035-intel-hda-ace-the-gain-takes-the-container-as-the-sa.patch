@@ -1,0 +1,58 @@
+From 5215562ca0bb4ba26889fe9e3ff2357da5a441a9 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Sat, 28 Nov 2026 05:34:58 +0200
+Subject: [PATCH 35/35] intel-hda-ace: the gain takes the container as the
+ sample whole
+
+The first VM round of the driver work (SelfTest = 3 on the image of the
+first E3 commits) failed the self-test 24-bit run at unity: the model
+cleared the 8 bits under the 24 valid ones of a 32-bit container after
+the gain, and the driver fills that container with the same 32-bit sine at
+24 and at 32 valid bits. The valid bits of the stream say what the link
+carries; the gain now returns the product as it is, as the driver expects,
+and the valid bits are not read for the sample.
+---
+ hw/audio/intel-hda-ace.c | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/hw/audio/intel-hda-ace.c b/hw/audio/intel-hda-ace.c
+index dd2cd9b7b..3802230ce 100644
+--- a/hw/audio/intel-hda-ace.c
++++ b/hw/audio/intel-hda-ace.c
+@@ -1855,16 +1855,17 @@ static int ace_mod_gains(IntelHDAAceState *s, int from, int *gains)
+  * capture stream takes them: the firmware's volume component multiplies
+  * each sample by its channel's target volume in Q1.31 -- a 16-bit sample
+  * widened to 32 bits, the product rounded and shifted, saturated, and back
+- * in the container with the bits below the stream's valid bits clear, as
+- * the host copiers take and give the samples (SOF src/audio/volume/
+- * volume.c at the pinned revision, studied; a model value where the real
+- * conversions differ). Unity on every channel is a copy, the component's
+- * passthrough. */
++ * in the container, the container being the sample whole whatever the
++ * stream's valid bits (the driver fills a 32-bit container the same at 24
++ * and 32 valid bits, and the gateways forward the bytes as they are; a
++ * model value where the real copiers convert) (SOF src/audio/volume/
++ * volume.c at the pinned revision, studied). Unity on every channel is a
++ * copy, the component's passthrough. */
+ static void ace_gain_apply(IntelHDAAceState *s, const int *gains, int count,
+                            const AceGateway *g, uint8_t *buf, uint32_t bytes)
+ {
+     uint32_t sample = g->sample, shift = 32 - (sample == 2 ? 16 : 32);
+-    uint32_t k, low = sample == 4 && g->valid < 32 ? (1u << (32 - g->valid)) - 1 : 0;
++    uint32_t k;
+     int i;
+ 
+     if (count == 0 || sample == 0 || g->channels == 0 || (sample == 4 && g->valid == 0)) {
+@@ -1891,9 +1892,6 @@ static void ace_gain_apply(IntelHDAAceState *s, const int *gains, int count,
+             wide = product;
+         }
+         product = wide >> shift;
+-        if (low) {
+-            product &= ~(int64_t)low;
+-        }
+         if (sample == 2) {
+             stw_le_p(buf + k, (uint16_t)(int16_t)product);
+         } else {
+-- 
+2.56.1
+

@@ -1,7 +1,7 @@
 From e6fb5f25ac39d58e3c9fb7cfab9435d3e66f77a4 Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 19:34:20 +0200
-Subject: [PATCH 22/29] tests/qtest: intel-hda-ace: the knobs that act while a
+Subject: [PATCH 22/35] tests/qtest: intel-hda-ace: the knobs that act while a
  stream runs
 
 One case, stream-faults, on the render stream (output 5, tag 2) run with

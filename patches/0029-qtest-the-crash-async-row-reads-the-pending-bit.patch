@@ -1,7 +1,7 @@
 From 61174d3c3be769123a68aaf4ac4b8211cdd7afde Mon Sep 17 00:00:00 2001
 From: Tasker <tasker@localhost>
 Date: Fri, 27 Nov 2026 23:12:18 +0200
-Subject: [PATCH 29/29] qtest: the crash-async row reads the pending bit
+Subject: [PATCH 29/35] qtest: the crash-async row reads the pending bit
 
 The target register keeps the header of an acknowledged notification (the
 FW_READY of the boot, its busy bit clear): the row's "nothing pending"

@@ -1,0 +1,204 @@
+From 02846c899166247e014848092403f49588c3bb20 Mon Sep 17 00:00:00 2001
+From: Tasker <tasker@localhost>
+Date: Sat, 28 Nov 2026 05:05:24 +0200
+Subject: [PATCH 31/35] qtest: the gain module scales a period
+
+Case audio-gain: the driver build with the gain at its entry unity
+forwards the pattern byte for byte; a volume change while the pipeline
+runs (the driver -6 dB word 0x4026e73d, 0.5012) makes every captured
+sample the render under that volume within one unit and the RMS the
+pattern magnitude scaled within one unit; one channel only scales that
+channel; the exact half gives one half of the magnitude within one unit;
+zero is silence; unity again is the pattern; a channel id that is no
+channel is refused with the invalid-parameter status and changes nothing.
+---
+ tests/qtest/intel-hda-ace-test.c | 166 +++++++++++++++++++++++++++++++
+ 1 file changed, 166 insertions(+)
+
+diff --git a/tests/qtest/intel-hda-ace-test.c b/tests/qtest/intel-hda-ace-test.c
+index b6327a3b6..14c4acc13 100644
+--- a/tests/qtest/intel-hda-ace-test.c
++++ b/tests/qtest/intel-hda-ace-test.c
+@@ -1446,6 +1446,171 @@ static void test_audio_loopback(void)
+     boot_end();
+ }
+ 
++/* 15b: the gain module's work.  The gain initialized as the driver
++ * initializes it now (the base configuration and one volume entry, every
++ * channel at unity) forwards the samples unchanged; a large-configuration
++ * set of parameter 0 with one entry changes the target volume at once and
++ * the samples the capture takes are the render's under that volume in
++ * Q1.31 -- the driver's -6 dB word (0x4026e73d: 0.5012, one half within a
++ * quarter of a per cent) and the exact half (0x40000000) -- every sample
++ * within one unit and the RMS within one unit of the pattern's magnitude
++ * scaled; a target of 0 is silence; unity again is the pattern again. */
++static void gain_init(uint32_t volume)
++{
++    uint32_t w[6] = { ACE_CFG_GAIN_ALL_CHANNELS, volume, 0, 0, 0, 0 };
++    uint32_t i;
++
++    loop_config(0, 10);
++    for (i = 0; i < 6; i++) {
++        w4(ACE_WIN1 + 4 * (10 + i), w[i]);
++    }
++    g_assert_cmpuint(ipc(MOD_EXT(1, 16), MOD_REQ(IPC4_MOD_INIT, 7, 0)), ==, MOD_REPLY(IPC4_MOD_INIT, 0));
++}
++
++/* the volume change the driver sends: one entry, every channel (channel
++ * 0xffffffff) or one channel */
++static void gain_set(uint32_t channel, uint32_t volume)
++{
++    uint32_t w[6] = { channel, volume, 0, 0, 0, 0 };
++    uint32_t i;
++
++    for (i = 0; i < 6; i++) {
++        w4(ACE_WIN1 + 4 * i, w[i]);
++    }
++    g_assert_cmpuint(ipc(LC_EXT(0, 24), MOD_REQ(IPC4_MOD_LC_SET, 7, 0)), ==, MOD_REPLY(IPC4_MOD_LC_SET, 0));
++}
++
++/* one period of the capture against the render under a volume: every
++ * sample the render's scaled, rounded, within one unit; the RMS within one
++ * unit of the magnitude scaled */
++static void check_capture_gain(uint32_t volume, const char *when)
++{
++    uint8_t *got = g_malloc(LOOP_PERIOD);
++    double sumsq = 0;
++    uint32_t k, count = 0;
++
++    qtest_memread(t.qs, CAPTURE_ADDR, got, LOOP_PERIOD);
++    for (k = 0; k + 4 <= LOOP_PERIOD; k += 4) {
++        int32_t render = ldl_le_p(loop_render + k);
++        int32_t capture = ldl_le_p(got + k);
++        int64_t expected = volume == ACE_CFG_GAIN_UNITY ? render :
++            (((int64_t)render * volume + (1ll << 30)) >> 31);
++
++        if (labs((long)(capture - expected)) > 1) {
++            g_test_message("%s: capture +0x%x is %" PRId32 ", the render's %" PRId32
++                           " under 0x%08x is %" PRId64, when, k, capture, render, volume,
++                           expected);
++        }
++        g_assert_cmpint(labs((long)(capture - expected)), <=, 1);
++        sumsq += (double)capture * capture;
++        count++;
++    }
++    g_free(got);
++    {
++        double rms = sqrt(sumsq / count);
++        double want = (double)LOOP_AMPLITUDE * volume / 2147483648.0;
++
++        g_test_message("%s: capture rms %.3f under 0x%08x (the pattern's %.3f scaled)",
++                       when, rms, volume, want);
++        g_assert_cmpfloat(fabs(rms - want), <=, 1.0);
++    }
++}
++
++static void test_audio_gain(void)
++{
++    static const uint8_t zero[64];
++
++    boot_start("");
++    qtest_irq_intercept_in(t.qs, "ioapic");
++    boot_running();
++
++    loop_pattern();
++    qtest_memwrite(t.qs, RENDER_ADDR, loop_render, sizeof(loop_render));
++    qtest_memset(t.qs, CAPTURE_ADDR, loop_capture_fill, LOOP_BYTES);
++    qtest_memwrite(t.qs, POSBUF_ADDR, zero, sizeof(zero));
++    loop_bdl(BDL_RENDER, RENDER_ADDR);
++    loop_bdl(BDL_CAPTURE, CAPTURE_ADDR);
++    w0(HDA_DPUBASE, 0);
++    w0(HDA_DPLBASE, POSBUF_ADDR | 1);
++    w0(HDA_INTCTL, HDA_INTCTL_GIE | (1u << OUT5) | (1u << IN0));
++
++    /* the driver's build with the gain at its entry's unity: a period is the
++     * pattern itself */
++    g_assert_cmpuint(ipc(0, PPL_REQ(IPC4_CREATE_PIPELINE, 1)), ==, PPL_REPLY(IPC4_CREATE_PIPELINE, 0));
++    loop_config((0u << 8) | (LOOP_TAG_RENDER - 1), 21);
++    g_assert_cmpuint(ipc(MOD_EXT(1, 21), MOD_REQ(IPC4_MOD_INIT, 5, 0)), ==, MOD_REPLY(IPC4_MOD_INIT, 0));
++    loop_config((1u << 8) | (LOOP_TAG_CAPTURE - 1), 21);
++    g_assert_cmpuint(ipc(MOD_EXT(1, 21), MOD_REQ(IPC4_MOD_INIT, 5, 1)), ==, MOD_REPLY(IPC4_MOD_INIT, 0));
++    gain_init(ACE_CFG_GAIN_UNITY);
++    g_assert_cmpuint(ipc(BIND_EXT(7, 0), MOD_REQ(IPC4_MOD_BIND, 5, 0)), ==, MOD_REPLY(IPC4_MOD_BIND, 0));
++    g_assert_cmpuint(ipc(BIND_EXT(5, 1), MOD_REQ(IPC4_MOD_BIND, 7, 0)), ==, MOD_REPLY(IPC4_MOD_BIND, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_PAUSED)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    g_assert_cmpuint(ipc(0, PPL_STATE(1, PPL_RUNNING)), ==, PPL_REPLY(IPC4_SET_PIPELINE_STATE, 0));
++    loop_setup(IN0, LOOP_TAG_CAPTURE, BDL_CAPTURE);
++    loop_setup(OUT5, LOOP_TAG_RENDER, BDL_RENDER);
++    qtest_clock_step(t.qs, US(5400));
++    check_position(OUT5, LOOP_PERIOD, "unity: after the first period");
++    check_capture(0, LOOP_PERIOD, "unity: after the first period");
++    loop_ack();
++
++    /* the driver's -6 dB, while the pipeline runs: the pattern scaled */
++    gain_set(ACE_CFG_GAIN_ALL_CHANNELS, 0x4026e73d);
++    qtest_clock_step(t.qs, US(5400));
++    check_position(IN0, 0, "-6 dB: after the second period");
++    check_capture_gain(0x4026e73d, "-6 dB");
++    loop_ack();
++    /* one channel only: the left scaled, the right not */
++    gain_set(0, 0x40000000);
++    qtest_clock_step(t.qs, US(5800));
++    check_position(IN0, LOOP_PERIOD, "the left channel at one half: after the third period");
++    {
++        uint8_t *got = g_malloc(LOOP_PERIOD);
++        uint32_t k;
++
++        qtest_memread(t.qs, CAPTURE_ADDR, got, LOOP_PERIOD);
++        for (k = 0; k + 4 <= LOOP_PERIOD; k += 4) {
++            int32_t render = ldl_le_p(loop_render + k);
++            int32_t capture = ldl_le_p(got + k);
++            int64_t expected = (k & 4) ? render : ((int64_t)render * 0x40000000ll + (1ll << 30)) >> 31;
++
++            g_assert_cmpint(labs((long)(capture - expected)), <=, 1);
++        }
++        g_free(got);
++    }
++    loop_ack();
++    /* the exact half: one half of the magnitude within one unit */
++    gain_set(ACE_CFG_GAIN_ALL_CHANNELS, 0x40000000);
++    qtest_clock_step(t.qs, US(5800));
++    check_capture_gain(0x40000000, "one half");
++    loop_ack();
++    /* silence, then unity again: the pattern itself */
++    gain_set(ACE_CFG_GAIN_ALL_CHANNELS, 0);
++    qtest_clock_step(t.qs, US(5800));
++    check_capture_gain(0, "muted");
++    loop_ack();
++    gain_set(ACE_CFG_GAIN_ALL_CHANNELS, ACE_CFG_GAIN_UNITY);
++    qtest_clock_step(t.qs, US(5800));
++    check_capture(0, LOOP_PERIOD, "unity again");
++    loop_ack();
++    /* a channel id that is no channel: refused, the volume unchanged */
++    {
++        uint32_t w[6] = { 99, 0, 0, 0, 0, 0 };
++        uint32_t i;
++
++        for (i = 0; i < 6; i++) {
++            w4(ACE_WIN1 + 4 * i, w[i]);
++        }
++        g_assert_cmpuint(ipc(LC_EXT(0, 24), MOD_REQ(IPC4_MOD_LC_SET, 7, 0)), ==, MOD_REPLY(IPC4_MOD_LC_SET, ACE_IPC4_ERROR_INVALID_PARAM));
++    }
++    qtest_clock_step(t.qs, US(5800));
++    check_capture(0, LOOP_PERIOD, "unity after a refused change");
++    loop_ack();
++    loop_run(OUT5, false);
++    loop_run(IN0, false);
++    loop_teardown();
++    boot_end();
++}
++
+ /* 16: the knobs that act only while a stream of the boot runs.  A stream is
+  * a host stream of the firmware's from its run bit, the loader's excepted.
+  * never-reply-running=<type> answers that type's requests before the stream
+@@ -1564,6 +1729,7 @@ int main(int argc, char **argv)
+         qtest_add_func("/intel-hda-ace/short-stream", test_short_stream);
+         qtest_add_func("/intel-hda-ace/wrapped-offset", test_wrapped_offset);
+         qtest_add_func("/intel-hda-ace/audio-loopback", test_audio_loopback);
++        qtest_add_func("/intel-hda-ace/audio-gain", test_audio_gain);
+     }
+     return g_test_run();
+ }
+-- 
+2.56.1
+
