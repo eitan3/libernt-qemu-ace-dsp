@@ -1,0 +1,20 @@
+mmdevapi.devenum under mutation m54 -- the NT form dropped from endpoint_is_dsp_pcm's strip (endpoint_props.h:104, the clause `|| endpoint_text_starts(path, L"\\??\\")` removed), the scratch build /tmp/ht-e1a, 2026-11-28T17:26:41Z.  Verbatim output of `bash /tmp/e5fix-mutation-run.sh` (ninja -C /tmp/ht-e1a mmdevapi; ctest --test-dir /tmp/ht-e1a -R mmdevapi.devenum --output-on-failure; the binary itself):
+
+ninja mmdevapi rc=0; steps: 2; warning lines: 0; error lines: 0
+
+0% tests passed, 1 test failed out of 1
+
+Total Test time (real) =   0.02 sec
+
+The following tests FAILED:
+	 17 - mmdevapi.devenum (Failed)
+Errors while running CTest
+mmdevapi: 326 checks, 5 failures
+binary rc=1
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1172: FAIL: endpoint_form_factor( L"\\??\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackTopo", eRender, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1175: FAIL: value == UnknownFormFactor: 3735928559 != 10
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1177: FAIL: endpoint_form_factor( L"\\??\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackInTopo", eCapture, &value)
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1180: FAIL: value == UnknownFormFactor: 3735928559 != 10
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:1181: FAIL: endpoint_is_dsp_pcm(L"\\??\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#00")
+
+The five failures are the five NT-form checks and no other (the Win32-form checks, the two paths the NT form must refuse and the codec's NT path pass under the mutation, as they should).  The clause restored (17:26:53Z): ninja rc 0, 2 steps, 0 warnings; ctest 1/1 passed; mmdevapi: 326 checks, 0 failures; binary rc 0.

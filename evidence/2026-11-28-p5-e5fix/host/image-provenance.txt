@@ -1,0 +1,9 @@
+P5 final image - provenance
+  built        2026-11-28 on the build machine (output-Clang-amd64-debug)
+  source       <home>/Projects/LiberNT at 486b024c9b1 (detached; local branch diag/test-p5final)
+               = feat/audio-control-polish d8fbfe348da (pushed; master bb96c5e4abf + 247 commits)
+                 + the baked-INF commit (patch-id identical to fb3c99d6d5f: BootDsp 1, SelfTest 3, Topology sof-ipc4-loopback.tplg)
+               no diagnostic trace commits
+  build        rebuild_cache rc 0, buildstamp rc 0, liberntiso + liberntvhd + liberntimg; FAILED lines 0, warning/error lines 2
+  not done     the simulator's DSP is a model and its codec has no jack: the owner's machines are the acceptance tests
+  logs         build.log, build-reconfigure.log, build-buildstamp.log, source-state.txt in this folder

@@ -1,0 +1,2 @@
+submodules/host-tests/mmdevapi/t_mmdevapi.c                        findings in the file: 0, cppcheck errors anywhere: 0
+TOTAL findings: 0

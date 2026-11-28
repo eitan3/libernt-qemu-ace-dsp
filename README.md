@@ -731,6 +731,14 @@ filled from measurements on the real device; "—" means not yet measured.
 
 ## Evidence index
 
+### 2026-11-28-p5-e5fix (P5 E5-fixes: the DSP endpoint's form factor 10 in the registry of the image `test-audio-p5final-486b024c9b1` (N16-21, the NT form of the interface path); the stream test after the tray's mute key (N16-23); the crash mid-stream with `crash-async` at the first open and the recovery (N16-25); the Wi-Fi service confirmed running at boot -- the hive's line was never wrong, WIFI-1 read the `\n` of `drivers\nwifi.sys` as a line break; the host gates 326/0, mutation m54)
+
+| Run | What it shows |
+|---|---|
+| `README.md`, `host/` | the round's record; the image's provenance and hashes (`image-provenance.txt`, `image-SHA256SUMS`); the phase-1 gates: `mmdevapi-host-build.txt`, `mmdevapi-host-test-mutation-m54.txt` (5 failures, restored 326/0), `mmdevapi-dll-build.txt`, `build-dsploop.txt`, `cppcheck-*.txt` |
+| `vm/rows/` | one fresh first-boot overlay, the four rows in one boot (rc 0, wall 401 s): `setdef.txt` (the DSP endpoint's `{1da5d803-…},0 = 10`, the codec's line out 2), `cap.txt` (the capture endpoints: `LoopbackInTopo` 10, `eLineInTopo` 2), `svc-nwifi.txt` (`sc query Nwifi`: RUNNING), the NWIFI lines of the boot in `serial.log`/`driver.log`, `dl-base.txt`, the mute key's lines and `dl-muted.txt` (`3 of 3`, `1289 tests … 0 failures`), `dl-crash.txt` (the run's error) and `dl-a-crash-async.txt` (`recovered: open ok after 6 ms`, `3 of 3`, `1283 tests … 0 failures`), the screenshots |
+| `tools-used/` | `e5fix-rows.sh` (the rows), `vmcommon.sh`, `make-pouch.sh`, `mkqcow2.py`, `cap.cmd`, `svc.cmd`, the phase-1 gate scripts, the hive scan (`t2-*.sh`), `scrub-dmi.sh`, `verify.sh` |
+
 ### 2026-11-28-p5-e5 (P5 E5: the regression on the final image `test-audio-p5final-9f023b460cc` -- the DSP boots by itself and its self-test at every boot; the 22-cycle matrix on the no-topology overlay and the fault rows; the image as burned refuses the first disable (D4); E3 by keys, by the mute key and by the pointer; E5c's properties in the registry (the DSP endpoint's form factor 1, not 10); LEG-1's no-jack rows; the P5-H checklist)
 
 | Run | What it shows |

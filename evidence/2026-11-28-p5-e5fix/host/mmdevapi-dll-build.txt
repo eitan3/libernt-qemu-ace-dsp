@@ -1,0 +1,101 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (deprecated) at CMakeLists.txt:14 (cmake_policy):
+  The OLD behavior for policy CMP0116 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+Not cross-compiling, no special host-tools cmake command
+-- Build type: Debug
+-- Display driver model: WDDM 3.2 compatibility ceiling (UMD ABI 0x6003)
+-- Selected localization: all
+-- Building separate debug symbols
+-- dxilconv: the dxc feed is not checked out; building without it. Run scripts/feeds update dxc to build it.
+CMake Warning (author) at /usr/share/cmake/Modules/ExternalProject.cmake:2688 (message):
+  Policy CMP0225 is not set: ExternalProject sets CMAKE_INSTALL_PREFIX to
+  <INSTALL_DIR> in the default configure command.  Run "cmake --help-policy
+  CMP0225" for policy details.  Use the cmake_policy command to set the
+  policy and suppress this warning.
+
+  ExternalProject_Add(mesa_gallium_build) uses the default configure command
+  without a CMAKE_INSTALL_PREFIX.  The OLD behavior leaves the external
+  project's install prefix at the CMake default; the NEW behavior sets it to
+  <INSTALL_DIR>.
+Call Stack (most recent call first):
+  /usr/share/cmake/Modules/ExternalProject.cmake:2833 (_ep_extract_configure_command)
+  /usr/share/cmake/Modules/ExternalProject.cmake:3316 (_ep_add_configure_command)
+  dll/opengl/mesa_gallium/CMakeLists.txt:186 (ExternalProject_Add)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+-- Mesa Gallium (amd64): ReactOS SDK build from <home>/Projects/LiberNT/submodules/mesa
+-- FFmpeg: no published payload for amd64 release n8.1.3-1; building the decoders without FFmpeg. Set FFMPEG_PAYLOAD or FFMPEG_FROM_SOURCE.
+-- WoW64 win32u parity: 0 service export gaps, 283 missing Wine wrappers
+-- LLVMpipe/Lavapipe payload 26.2.2-2 for amd64 from <home>/Projects/LiberNT/output-Clang-amd64-debug/submodules/mesa-llvmpipe-payload/libernt-mesa-llvmpipe-26.2.2-2-amd64.zip
+CMake Warning (author) at /usr/share/cmake/Modules/ExternalProject.cmake:2688 (message):
+  Policy CMP0225 is not set: ExternalProject sets CMAKE_INSTALL_PREFIX to
+  <INSTALL_DIR> in the default configure command.  Run "cmake --help-policy
+  CMP0225" for policy details.  Use the cmake_policy command to set the
+  policy and suppress this warning.
+
+  ExternalProject_Add(lxgpu-build) uses the default configure command without
+  a CMAKE_INSTALL_PREFIX.  The OLD behavior leaves the external project's
+  install prefix at the CMake default; the NEW behavior sets it to
+  <INSTALL_DIR>.
+Call Stack (most recent call first):
+  /usr/share/cmake/Modules/ExternalProject.cmake:2833 (_ep_extract_configure_command)
+  /usr/share/cmake/Modules/ExternalProject.cmake:3316 (_ep_add_configure_command)
+  submodules/lxgpu.cmake:95 (ExternalProject_Add)
+  submodules/CMakeLists.txt:16 (include)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+-- WoW64: double-building 484 i386 targets into SysWOW64
+-- Configuring done (2.2s)
+-- Generating done (3.6s)
+-- Build files have been written to: <home>/Projects/LiberNT/output-Clang-amd64-debug
+[0/4] Re-checking globbed directories...
+[0/652] Performing build step for 'host-tools'
+[1/4] Stamping the build with its branch, commit and time
+[2/4] Building CXX object sdk/tools/ntfsimg/CMakeFiles/ntfslib_host.dir/__/__/lib/fslib/ntfslib_new/src/lfs/lfs.cpp.o
+[3/4] Linking CXX static library sdk/tools/ntfsimg/libntfslib_host.a
+[4/4] Linking CXX executable ntfsimg
+[2/183] Performing install step for 'host-tools'
+[3/183] Completed 'host-tools'
+[4/183] Generating ntdef.h
+[5/183] Generating ntifs.h
+Could not find variable '$LXUID'
+Could not find variable '$LXGID'
+Could not find variable '$LXMOD'
+Could not find variable '$LXDEV'
+[6/183] Generating wdm.h
+[7/183] Generating ntddk.h
+[8/183] Generating devioctl.h
+[9/183] Generating winnt.h
+[10/183] Generating ../psdk/ntdef.h
+[11/183] Generating ../ddk/ntifs.h
+[12/183] Generating ../ddk/wdm.h
+[13/183] Generating ../psdk/devioctl.h
+[14/183] Generating libkernel32_thunks.def
+[15/183] Generating libkernel32_implib.def
+[16/183] Generating ../psdk/winnt.h
+[17/43] Generating ../ddk/ntddk.h
+[18/35] Generating CMakeFiles/libkernel32.dir/libkernel32_thunks.a
+[19/35] Generating CMakeFiles/libkernel32.dir/libkernel32.a
+[20/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/audiosessionmanager.c.obj
+[21/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/client.c.obj
+[22/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/audiovolume.c.obj
+[23/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/devenum.c.obj
+[24/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/main.c.obj
+[25/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/reactos_session.c.obj
+[26/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/session.c.obj
+[27/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/spatialaudio.c.obj
+[28/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/reactos_capture_engine.c.obj
+[29/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/reactos_render_engine.c.obj
+[30/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/reactos_devicetopology.c.obj
+[31/35] Building C object dll/win32/mmdevapi/CMakeFiles/mmdevapi.dir/libernt_wdmaud.c.obj
+[32/35] Linking C shared module dll/win32/mmdevapi/mmdevapi.dll

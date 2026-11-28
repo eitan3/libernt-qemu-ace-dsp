@@ -1,0 +1,7 @@
+source-state
+  commit 486b024c9b1a9b48a36e7861ab688deffe01eca1
+  branch 'detached'
+  describe lxgpu-sources-1-554-g486b024c9b1
+  over master bb96c5e4abf: 248 commits
+  stashes: 2
+  build option BOOTLOADER_DEBUG_PORT: BOOTLOADER_DEBUG_PORT:STRING=FILE,SCREEN

@@ -1,0 +1,131 @@
+2026-11-28T18:02:26Z e5fix rows: rows on <project>/disk/e5fix-firstboot.qcow2, image test-audio-p5final-486b024c9b1, the exe d3b4abfcf94b596b, pouch /tmp/e5fix/pouch/rows.img
+2026-11-28T18:02:27Z VM rows started (lib-run pid 2151669, sockets /tmp/qad-vm.2151671, data disk /tmp/e5fix/pouch/rows.img)
+[18:02:45] [    8.778861] (\drivers\directx\dxgkrnl\display.c:7189) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF8180005481A0 desktop ready 1280x800 (scanout)
+2026-11-28T18:02:45Z first boot: the desktop (or the setup) reached after 121 serial lines
+2026-11-28T18:03:25Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-28T18:03:39Z console: Win+R, cmd.exe
+2026-11-28T18:04:34Z !! the data disk got no drive letter the console could find (no drive.txt in 40 s)
+2026-11-28T18:05:03Z console: Win+R, cmd.exe
+2026-11-28T18:05:19Z data disk: drive D: in the guest (1 marker)
+2026-11-28T18:05:25Z console answering after first (alive-first.txt, 3 s)
+[18:05:25] [    9.417793] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T18:05:35Z ## the boot (the DSP boots by itself): booting 1, boot ok 1, selftest ok 1, boot at open ok 0, recovered 0, render opens 0, gain lines 5, mute lines 0, fault-during 0, firmware crash 0, timeouts 0, stop lines 0, fatal 0, ace_unexpected 0
+    [    8.854787] intcdsp.sys: BootDsp = 1: the DSP boots at the first stream open with 'sof-arl-s.ri' (BootAtStart = 1: at every D0 entry)
+    [    8.855787] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [    8.860787] intcdsp.sys: boot ok after 5525 us (clock 19699331 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP inter
+    [    8.860787] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1
+    [    8.862787] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+    [    9.138790] intcdsp.sys: loopback self-test: the gain step, three depths at -6.00 dB (gain 0x4026e73d)
+    [    9.417793] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [    9.417793] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+    [    9.418793] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+    [   53.392192] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   53.392192] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   53.392192] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   53.392192] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T18:05:35Z ## row 4, the Wi-Fi service at boot: the lines naming NWIFI / wlansvc / wifi.sys:
+    [    9.893175] (\drivers\network\nwifi\nwifi.c:172) NWIFI: DriverEntry
+    [    9.893175] (\drivers\network\nwifi\control.c:941) NWIFI: control device \Device\Nwifi created
+    [    9.893175] (\drivers\network\nwifi\nwifi.c:199) NWIFI: DriverEntry succeeded
+2026-11-28T18:05:35Z ## row 4: lines naming \wifi.sys (the backslash form nwifi.sys cannot match): 0; lines with (not found|cannot find|failed to load) near wifi: 0; all 'not found' lines of the boot: 0
+2026-11-28T18:06:18Z console: Win+R, cmd.exe
+2026-11-28T18:06:36Z ## typed 'setdef': setdef.txt after about 4 s
+    {BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+    {a45c254e-df1c-4efd-8020-67d146a850e0},14: REG_SZ Speakers (Intel SST Loopback)
+    {b3f8fa53-0004-438e-9003-51a46e139bfc},2: REG_SZ \??\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\LoopbackTopo
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},0: REG_DWORD 10
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},3: REG_DWORD 3
+    {BDAAA8D1-59C6-8B7A-A0C2-D2E0786FC14A}
+    {a45c254e-df1c-4efd-8020-67d146a850e0},14: REG_SZ Speakers (HD Audio Line out)
+    {b3f8fa53-0004-438e-9003-51a46e139bfc},2: REG_SZ \??\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\eLineOutTopo
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},0: REG_DWORD 2
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},3: REG_DWORD 3
+    render endpoints: 2, the one named Loopback: 1
+    DefaultOutput set to {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}: error 0
+    DefaultOutput: REG_SZ {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+2026-11-28T18:06:41Z ## typed 'cap': cap.txt after about 4 s
+    
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}
+        DeviceState    REG_DWORD    0x1
+    
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}\Properties
+        {B3F8FA53-0004-438E-9003-51A46E139BFC},2    REG_SZ    \??\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\eLineInTopo
+        {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    HD Audio Line in
+        {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Microphone
+        {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Microphone (HD Audio Line in)
+        {233164C8-1B2C-4C7D-BC68-B671687A2567},1    REG_SZ    {E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}
+        {1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},0    REG_DWORD    0x2
+        {A45C254E-DF1C-4EFD-8020-67D146A850E0},11    REG_SZ    wdmaud.drv
+        {E4870E26-3CC5-4CD2-BA46-CA0A9A70ED04},3    REG_BINARY    FEFF020080BB000000EE02000400100016001000030000000100000000001000800000AA00389B71
+        {F19F064D-082C-4E27-BC73-6882A1BB8E4C},0    REG_BINARY    FEFF020080BB000000EE02000400100016001000030000000100000000001000800000AA00389B71
+    
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E77CD7FF-39A3-83CB-BBF3-5EC2E8266020}
+        DeviceState    REG_DWORD    0x1
+    
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture\{E77CD7FF-39A3-83CB-BBF3-5EC2E8266020}\Properties
+        {B3F8FA53-0004-438E-9003-51A46E139BFC},2    REG_SZ    \??\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\LoopbackInTopo
+        {026E516E-B814-414B-83CD-856D6FEF4822},2    REG_SZ    Intel SST Loopback
+        {A45C254E-DF1C-4EFD-8020-67D146A850E0},2    REG_SZ    Microphone
+        {A45C254E-DF1C-4EFD-8020-67D146A850E0},14    REG_SZ    Microphone (Intel SST Loopback)
+        {233164C8-1B2C-4C7D-BC68-B671687A2567},1    REG_SZ    {E77CD7FF-39A3-83CB-BBF3-5EC2E8266020}
+        {1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},0    REG_DWORD    0xa
+        {A45C254E-DF1C-4EFD-8020-67D146A850E0},11    REG_SZ    wdmaud.drv
+        {E4870E26-3CC5-4CD2-BA46-CA0A9A70ED04},3    REG_BINARY    FEFF020080BB000000DC05000800200016002000030000000100000000001000800000AA00389B71
+        {F19F064D-082C-4E27-BC73-6882A1BB8E4C},0    REG_BINARY    FEFF020080BB000000DC05000800200016002000030000000100000000001000800000AA00389B71
+    
+2026-11-28T18:06:48Z ## typed 'svc': svc-nwifi.txt after about 4 s
+    SERVICE_NAME: Nwifi
+    	TYPE               : 1  KERNEL_DRIVER
+    	STATE              : 4  RUNNING
+    				(STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN)
+    	WIN32_EXIT_CODE    : 0  (0x0)
+    	SERVICE_EXIT_CODE  : 0  (0x0)
+    	CHECKPOINT         : 0x0
+    	WAIT_HINT          : 0x0
+    
+2026-11-28T18:06:59Z base: ended after about 11 s; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1297 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T18:06:59Z base: booting 0, boot ok 0, selftest ok 0, boot at open ok 0, recovered 0, render opens 3, gain lines 1, mute lines 0, fault-during 0, firmware crash 0, timeouts 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-28T18:06:59Z base: the driver's lines after serial line 346:
+    [  871.236157] intcdsp.sys: gain: 0.00 dB, mute 0
+2026-11-28T18:07:15Z ## row 2, the mute key twice (audiomute; serial 373 to 376): mute 1 lines 1, mute 0 lines 1: [  920.351924] intcdsp.sys: gain: 0.00 dB, mute 1, kept until the DSP runs the PCM again|[  957.928676] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again|
+2026-11-28T18:07:35Z console: Win+R, cmd.exe
+2026-11-28T18:07:45Z console answering after after-mute (alive-after-mute.txt, 3 s)
+2026-11-28T18:07:57Z ## typed 'dl muted': dl-muted.txt after about 7 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: 0.00 dB (level 0, the driver's level), mute 0: the expectation scaled by the gain 0x7fffffff, the tolerance 1 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2031 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 513, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1289 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T18:07:57Z ## row 2: dsploop after the mute/unmute: PASS; the driver's lines (serial 379 to 406): [ 1195.193574] intcdsp.sys: gain: 0.00 dB, mute 0|
+2026-11-28T18:08:17Z ## row 3: crash-async=500 at a run's first open, then a run after it
+2026-11-28T18:08:19Z crash: open #1 at guest 1469.776033 s; crash-async=500 set at 18:08:19 (host)
+2026-11-28T18:08:28Z crash: ended after about 9 s; fault cleared (18:08:28)
+2026-11-28T18:08:28Z crash: the run's own lines (errors and the summary):
+    dsploop.c:626: dsploop: 33087 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:632: Test failed: dsploop: 33087 of 48000 frames compared within 1 LSB, max abs error 0, first sample beyond it 4294967295
+    dsploop.c:809: Test failed: dsploop: 0 of 3 depths compared
+    dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    dsploop: 353 tests executed (0 marked as todo, 2 failures), 0 skipped.
+2026-11-28T18:08:28Z crash: the driver's fault lines after serial line 406:
+    [ 1470.505791] intcdsp.sys: ipc: firmware crash with no request outstanding, read at a stream's period; the link is faulted
+    [ 1470.505791] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+    [ 1470.505791] intcdsp.sys: fault during stream 1: firmware crash with no request outstanding, read at a stream's period
+    [ 1470.505791] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+2026-11-28T18:08:28Z crash: booting 0, boot ok 0, selftest ok 0, boot at open ok 0, recovered 0, render opens 1, gain lines 0, mute lines 0, fault-during 2, firmware crash 3, timeouts 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-28T18:08:42Z console: Win+R, cmd.exe
+2026-11-28T18:08:50Z console answering after after-crash (alive-after-crash.txt, 3 s)
+2026-11-28T18:09:02Z a-crash-async: ended after about 12 s; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1283 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T18:09:02Z a-crash-async: booting 1, boot ok 1, selftest ok 0, boot at open ok 0, recovered 1, render opens 3, gain lines 0, mute lines 0, fault-during 0, firmware crash 0, timeouts 0, stop lines 0, fatal 0, ace_unexpected 0
+2026-11-28T18:09:02Z a-crash-async: the driver's lines after serial line 441:
+    [ 1586.320048] intcdsp.sys: recovered: open ok after 6 ms
+2026-11-28T18:09:02Z ## row 3: PASS after the crash: [ 1586.320048] intcdsp.sys: recovered: open ok after 6 ms
+2026-11-28T18:09:07Z VM rows ended: qemu exited rc=0 (none) at 2026-11-28T18:09:07Z; wall 401 s
+2026-11-28T18:09:07Z done: booting 2, boot ok 2, selftest ok 1, boot at open ok 0, recovered 1, render opens 10, gain lines 9, mute lines 1, fault-during 2, firmware crash 3, timeouts 0, stop lines 0, fatal 0, ace_unexpected 0

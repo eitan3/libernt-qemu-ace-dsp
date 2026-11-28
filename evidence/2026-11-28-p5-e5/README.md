@@ -33,6 +33,7 @@ under `ICOUNT=1`, one at a time, none during a compile. Nothing here was driven 
   Volume tab (`-96.00 dB`). The stream test after the mute/unmute was **not obtained** in this VM (N16-23).
 - **E5c's properties in the VM's registry** (`vm/flow/setdef.txt`): the adapter paths and the physical speakers as
   predicted; **the DSP endpoint's form factor is 1 (Speakers), not 10** (N16-21); the codec's line out 2 as predicted.
+  **Closed by the E5-fixes round (`evidence/2026-11-28-p5-e5fix`): 10 on the next image, the capture endpoint too.**
 - **LEG-1's no-jack rows**: `HDAUDIO: pin 3 … presence-detect 0: pin sense raw 00000000 present 0, not followed` (pin 5
   alike), the four subdevice names (`eLineOutWave`, `eLineOutTopo`, `eLineInWave`, `eLineInTopo`), the endpoints in the
   Sound page (Playback: `Speakers – Intel SST Loopback – Ready`, `Speakers – HD Audio line out – Default Device`;
@@ -41,7 +42,7 @@ under `ICOUNT=1`, one at a time, none during a compile. Nothing here was driven 
 - **The host gates on the final tip**: `mmdevapi: 317 checks, 0 failures` (the host test binary current: `ninja mmdevapi`
   rc 0, 0 steps); `dsploop_apitest.exe` built at `b7274b3e004` (link rc 0, pefixup rc 0, `614b1c97…`).
 - - **The fault rows**: 20 of the 20 rows run (none, halt-rom=43, halt-rom=44, halt-fw=51, crash-notification, abi=2, window-read-fail, never-power, never-ack, never-ready, never-enter, never-fwready, never-reply, drop-requests, ipc-status=5, bad-tuples, truncated-reply, version-shift, none scale=1550, none scale=0.001): 20 bounded, 0 late, 0 unbounded; 20 `recovered: boot ok, self-test ok`; `fm-check.sh`: 0 row(s) with a failed check.
-- **E1/E2 on the final image**: E2 (b)(c)(d) 10 of 10 runs with `DspIdleSec = 3`, a boot at each first open and an idle power-down after each; E1 `never-reply=19` with a stream open → `recovered: open ok after 6 ms`, the run after PASS; `crash-async=500` set before a run not produced (N16-25).
+- **E1/E2 on the final image**: E2 (b)(c)(d) 10 of 10 runs with `DspIdleSec = 3`, a boot at each first open and an idle power-down after each; E1 `never-reply=19` with a stream open → `recovered: open ok after 6 ms`, the run after PASS; `crash-async=500` set before a run not produced (N16-25; produced at the first open, as E1c did, in the E5-fixes round).
 - The LiberNT branch was rebased in place by Megan at 18:23 onto upstream `bb96c5e4abf` (245/245 commits identical; the tip `284c85a825e`): no commit of this round is on it (none was needed).
 
 ## The blocks
@@ -72,11 +73,14 @@ guest by `reg add` / `reg delete` and made live by a **reboot** (a clean shutdow
 ## What was not done
 
 - The stream test after the mute/unmute on the final image (N16-23: the Run dialog trap); E5c has it at −8 dB on the
-  owner's image.
+  owner's image. Done on the next image in the E5-fixes round: exact at all three depths after the tray's mute key.
+- The Wi-Fi service's image path (`wifi-plan.md`'s WIFI‑1): the hive already names `nwifi.sys` (the `\n` of
+  `drivers\nwifi.sys` read as a line break); the service is shown running at boot in the E5-fixes round.
 - The default rule's VM row (no active device → `0x80070490`): not reachable in the VM -- every audio device's disable
   is refused on this image (D4/C11), so "no active render device" cannot be made; the rule stays host-tested (N16-05).
 - D14 (the privacy page) and D12 d by the Properties sheet: D12 d was seen in the Settings' Sound page of the pointer
   row (`p11.png`), D14 not run (E4b has it on p5e4b).
 - The 50 cycles of E2 (d) as 50: E2 (d)'s 50 cycles were 30 here (10 runs × 3 opens); E2's own round has 51 on p5e2.
-- A fix for N16-21 (the form factor): the cause is not read.
+- A fix for N16-21 (the form factor): the cause is not read. Read and fixed in `674015229b0` (the NT form of the
+  interface path), shown 10 in the E5-fixes round.
 - Nothing was driven on real hardware; the P5-H checklist (`p5-h-checklist.md` in the plan directory) is the owner's.
