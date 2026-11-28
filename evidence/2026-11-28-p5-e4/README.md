@@ -80,10 +80,11 @@ are in the commit.
 
 ## What was not done
 
-- The list after N12-03 in the round's brief, in its order: the legacy microphone consent (board 27f810b4, D7), FD-01 /
-  FD-02, the subdevice names (board 0b931523), the UI rows D12 d, D13, D14 (board 8b424002): **not reached** (the
-  budget: step 0 took 38 minutes for the applet's keyboard path, the image was built twice). None of their files was
-  read or changed. Deferred by Megan before the round: N8-05, N13-06 (record only).
+- The list after N12-03 in the round's brief, in its order: the legacy microphone consent (board 27f810b4, D7: read,
+  N14-10 — every legacy capture opener goes through mmdevapi's `IAudioClient::Initialize`, where the consent already
+  runs; no line written, the proof row left for Megan's call), FD-01 / FD-02, the subdevice names (board 0b931523),
+  the UI rows D12 d, D13, D14 (board 8b424002): **not reached** (the budget: step 0 took 38 minutes for the applet's
+  keyboard path, the image was built twice). No file of theirs was changed. Deferred by Megan before the round: N8-05, N13-06 (record only).
 - The model mutation rows of the simulator were not rerun (no model change).
 - N12-02 has no VM row: the loopback topology passes the limits check and the model has no knob to refuse it; the
   host case and its two mutation rows are the evidence.
