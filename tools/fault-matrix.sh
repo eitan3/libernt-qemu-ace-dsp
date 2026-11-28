@@ -57,8 +57,9 @@ EVROOT="${EVROOT:-/tmp/qad-fault-matrix}"
 DISK="${DISK:-$QAD/disk/p2b2.qcow2}"
 WINDOW="${WINDOW:-30}"
 TERM='intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|bad IPC reply|.*crash|interrupt storm|clock stalled)|ipc bad reply|truncated|DSP power down)'
-TERM_ST='intcdsp.*(ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, (ok|failed at .+)|loopback self-test: [0-9]+ runs, [0-9]+ matched, [0-9]+ failed, .*, (ok|failed))'
-TERM_ST_OK='intcdsp.*(ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, ok|loopback self-test: [0-9]+ runs, [0-9]+ matched, 0 failed, .*, ok)'
+# a SelfTest = 2/3 row's end: the self-test's summary, or (no topology: no PCM runs one) the fail-safe's line
+TERM_ST='intcdsp.*(ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, (ok|failed at .+)|loopback self-test: [0-9]+ runs, [0-9]+ matched, [0-9]+ failed, .*, (ok|failed)|topology: none selected)'
+TERM_ST_OK='intcdsp.*(ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, ok|loopback self-test: [0-9]+ runs, [0-9]+ matched, 0 failed, .*, ok|topology: none selected)'
 mkdir -p "$EVROOT"
 SUMMARY="$EVROOT/fault-matrix.md"
 
