@@ -13,8 +13,8 @@
 #      WAIT (VM wall-clock cap, default 900 + 90 s per cycle)
 # Result: <EVID>/cycles.log (cycle.sh's log), <EVID>/cycles-run.out and the
 # summary line "<EVID>/summary.txt": N cycles, K boot ok, the others by outcome.
-# A fresh first-boot overlay goes through the Setup wizard first (its three
-# pages, by chords).  On an image whose guest has SelfTest = 2 or 3 every enable
+# A fresh first-boot overlay prints the Setup wizard's line and no "Program Manager": the wait takes either, and
+# the wizard's three pages are gone through by chords.  On an image whose guest has SelfTest = 2 or 3 every enable
 # runs the loopback self-test after its boot (tools/cycle.sh waits for its
 # closing line); the summary counts those cycles as "self-test ok" when the
 # closing line says `ran (0x00000000)`, and an enable that boots nothing
@@ -41,11 +41,15 @@ cleanup() { ( cd "$QAD" && q tools/guest.sh "$EVID" stop ); wait $lr 2>/dev/null
 trap cleanup EXIT
 
 echo "== $(date -u +%FT%TZ) waiting for the shell" | tee -a "$EVID/cycles-run.out"
-if ! ( cd "$QAD" && tools/waitline.sh "$EVID" "Program Manager" 900 >> "$EVID/cycles-run.out" 2>&1 ); then
-    echo "!! the shell did not come up in 900 s" | tee -a "$EVID/cycles-run.out"; exit 1
+# a later boot prints the shell's line; a first boot prints the Setup wizard's line and no "Program Manager" at all
+if ! ( cd "$QAD" && tools/waitline.sh "$EVID" "Program Manager|Storage expansion not offered|The system has been stopped" 900 >> "$EVID/cycles-run.out" 2>&1 ); then
+    echo "!! neither the shell nor the first-boot setup came up in 900 s" | tee -a "$EVID/cycles-run.out"; exit 1
+fi
+if grep -aq "The system has been stopped" "$EVID/serial.log"; then
+    echo "!! the boot STOPPED" | tee -a "$EVID/cycles-run.out"; ( cd "$QAD" && q tools/guest.sh "$EVID" shot stopped ); exit 1
 fi
 # a first boot of the overlay: the Setup wizard's three pages (the storage page's Next, the account page's Skip, the component page's Cancel), closed by chords
-if ( cd "$QAD" && tools/waitline.sh "$EVID" "Storage expansion not offered" 240 >> "$EVID/cycles-run.out" 2>&1 ); then
+if grep -aq "Storage expansion not offered" "$EVID/serial.log"; then
     sleep 25
     ( cd "$QAD" && q tools/guest.sh "$EVID" key tab tab ret ); sleep 5
     ( cd "$QAD" && q tools/guest.sh "$EVID" key ret ); sleep 5
