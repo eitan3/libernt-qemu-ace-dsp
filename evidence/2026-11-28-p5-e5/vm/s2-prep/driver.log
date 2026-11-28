@@ -1,0 +1,35 @@
+2026-11-28T14:42:51Z e5 prep-cycles: prepcyc on <project>/disk/e5-firstboot.qcow2, image test-audio-p5final-9f023b460cc
+2026-11-28T14:42:53Z VM prepcyc started (lib-run pid 2075940, sockets /tmp/qad-vm.2075942, data disk /tmp/e5/pouch/prepcyc.img)
+2026-11-28T14:48:53Z e5 prep-cycles: prepcyc on <project>/disk/e5-firstboot.qcow2, image test-audio-p5final-9f023b460cc
+2026-11-28T14:48:53Z VM prepcyc started (lib-run pid 2077449, sockets /tmp/qad-vm.2075942, data disk /tmp/e5/pouch/prepcyc.img)
+[14:48:53] [    7.729636] (\drivers\directx\dxgkrnl\display.c:7181) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800053D1A0 desktop ready 1280x800 (scanout)
+2026-11-28T14:49:58Z ## the boot: boot ok 1, selftest ok 1, registered-as 4, stop lines 0, fatal 0
+2026-11-28T14:50:12Z console: Win+R, cmd.exe
+2026-11-28T14:50:28Z data disk: drive E: in the guest (1 marker)
+2026-11-28T14:50:34Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-28T14:51:04Z reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings": output after about 3 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x3     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-28T14:51:18Z typed: reg add SelfTest = 0 (REG_DWORD)
+2026-11-28T14:51:30Z typed: reg delete Topology
+2026-11-28T14:51:55Z reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings": output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4  
+2026-11-28T14:51:59Z VM prepcyc ended: qemu exited rc=0 (none) at 2026-11-28T14:51:59Z; wall 186 s
+2026-11-28T14:51:59Z done: qemu exited rc=0 (none) at 2026-11-28T14:51:59Z; wall 186 s
+2026-11-28T14:55:33Z e5 prep-cycles: prepcyc on <project>/disk/e5-firstboot.qcow2, image test-audio-p5final-9f023b460cc
+2026-11-28T14:55:34Z VM prepcyc started (lib-run pid 2079095, sockets /tmp/qad-vm.2079097, data disk /tmp/e5/pouch/prepcyc.img)
+[14:55:52] [    8.353444] (\drivers\directx\dxgkrnl\display.c:7181) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF81800053D1A0 desktop ready 1280x800 (scanout)
+2026-11-28T14:56:57Z ## the boot: boot ok 0, selftest ok 0, registered-as 0, stop lines 0, fatal 0
+2026-11-28T14:57:11Z console: Win+R, cmd.exe
+2026-11-28T14:57:25Z data disk: drive E: in the guest (1 marker)
+2026-11-28T14:58:05Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+2026-11-28T14:58:49Z console: Win+R, cmd.exe
+2026-11-28T14:59:03Z data disk: drive E: in the guest (1 marker)
+2026-11-28T14:59:33Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+2026-11-28T15:00:01Z console: Win+R, cmd.exe
+2026-11-28T15:00:35Z data disk: drive E: in the guest (1 marker)
+2026-11-28T15:01:31Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+2026-11-28T15:02:03Z reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings": output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x0     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4  
+2026-11-28T15:02:17Z typed: reg add SelfTest = 3 (REG_DWORD)
+2026-11-28T15:02:31Z typed: reg add BootAtStart = 1 (REG_DWORD)
+2026-11-28T15:02:46Z typed: reg delete Topology
+2026-11-28T15:03:00Z reg query "HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings": output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x1     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x3     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4  
+2026-11-28T15:03:06Z VM prepcyc ended: qemu exited rc=0 (none) at 2026-11-28T15:03:06Z; wall 453 s
+2026-11-28T15:03:06Z done: qemu exited rc=0 (none) at 2026-11-28T15:03:06Z; wall 453 s

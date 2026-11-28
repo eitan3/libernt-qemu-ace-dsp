@@ -1,0 +1,233 @@
+2026-11-28T16:08:05Z e2-round: e2 on disk/e5-flow.qcow2, a later boot (RUNS 10, CYCLES 0, IDLESEC 3), image test-audio-p5final-9f023b460cc
+2026-11-28T16:08:06Z VM e2 started (lib-run pid 2097195, sockets /tmp/qad-vm.2097197, data disk /tmp/e5/pouch/e2.img)
+[16:08:26] [    8.523243] intcdsp.sys: boot ok after 6055 us (clock 19167020 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T16:08:26Z the boot: booting 1, boot ok 1, selftest ok 1, boot at open ok 0, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 0, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T16:09:25Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T16:09:39Z data disk: drive D: in the guest (1 marker)
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T16:09:46Z console answering after boot (alive-boot.txt, 4 s)
+typed 2 characters
+--- sendkey ret
+
+typed 104 characters
+--- sendkey ret
+
+2026-11-28T16:10:04Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x0     SelfTest    REG_DWORD    0x3     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-28T16:10:04Z ## DspIdleSec = 3 by the registry, then a reboot (N12-09)
+typed 100 characters
+--- sendkey ret
+
+2026-11-28T16:10:18Z typed: reg add DspIdleSec = 3 (REG_DWORD)
+2026-11-28T16:10:18Z ## reboot 2026-11-28T16:10:18Z (serial line 210): shutdown -r -t 0 typed
+typed 16 characters
+--- sendkey ret
+
+[16:11:11] [    5.516895] intcdsp.sys: boot ok after 5530 us (clock 296987511 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T16:12:12Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T16:12:27Z data disk: drive D: in the guest (1 marker)
+typed 41 characters
+--- sendkey ret
+
+2026-11-28T16:12:33Z console answering after reboot (alive-reboot.txt, 3 s)
+typed 2 characters
+--- sendkey ret
+
+2026-11-28T16:12:35Z after the reboot (from serial line 210): booting 1, boot ok 1, selftest ok 1, boot at open ok 0, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 0, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [    5.516895] intcdsp.sys: BootDsp = 1: the DSP boots at the first stream open with 'sof-arl-s.ri' (BootAtStart = 1: at every D0 entry)
+    [    5.516895] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+    [    5.516895] intcdsp.sys: boot ok after 5530 us (clock 296987511 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+    [    5.516895] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry overrid
+    [    6.079397] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [    6.079397] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+typed 102 characters
+--- sendkey ret
+
+2026-11-28T16:12:50Z reg query HKLM\SYSTEM\CurrentControlSet\Services\intcdsp\Settings: output after about 4 s:  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intcdsp\Settings     BootDsp    REG_DWORD    0x1     BootAtStart    REG_DWORD    0x0     DspIdleSec    REG_DWORD    0x3     SelfTest    REG_DWORD    0x3     UseInterrupts    REG_DWORD    0x0     IpcTimeoutMs    REG_DWORD    0x1f4     Topology    REG_SZ    sof-ipc4-loopback.tplg  
+2026-11-28T16:12:50Z (b) from serial line 211 (the setting read at the reboot's D0 entry): booting 1, boot ok 1, selftest ok 1, boot at open ok 0, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 0, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:13:07Z r01: ended after about 11 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1294 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:13:07Z r01: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  387.717948] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  387.717948] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  396.908981] intcdsp.sys: idle power down after 3 s
+[16:13:07] [  396.908981] intcdsp.sys: idle power down after 3 s
+| r01 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:13:23Z r02: ended after about 10 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1285 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:13:23Z r02: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  436.146629] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  436.146629] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  445.360163] intcdsp.sys: idle power down after 3 s
+[16:13:24] [  445.360163] intcdsp.sys: idle power down after 3 s
+| r02 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:13:40Z r03: ended after about 10 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1287 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:13:40Z r03: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  486.198818] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  486.198818] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  495.393226] intcdsp.sys: idle power down after 3 s
+[16:13:40] [  495.393226] intcdsp.sys: idle power down after 3 s
+| r03 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:13:55Z r04: ended after about 10 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1299 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:13:55Z r04: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  538.333135] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  538.333135] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  547.527539] intcdsp.sys: idle power down after 3 s
+[16:13:55] [  547.527539] intcdsp.sys: idle power down after 3 s
+| r04 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:14:11Z r05: ended after about 10 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1309 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:14:11Z r05: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  588.678478] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  588.678478] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  597.844596] intcdsp.sys: idle power down after 3 s
+[16:14:11] [  597.844596] intcdsp.sys: idle power down after 3 s
+| r05 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:14:28Z r06: ended after about 11 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1303 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:14:28Z r06: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  637.361118] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  637.361118] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  646.548895] intcdsp.sys: idle power down after 3 s
+[16:14:28] [  646.548895] intcdsp.sys: idle power down after 3 s
+| r06 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:14:45Z r07: ended after about 11 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1299 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:14:45Z r07: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  701.740101] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  701.740101] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  710.926879] intcdsp.sys: idle power down after 3 s
+[16:14:45] [  710.926879] intcdsp.sys: idle power down after 3 s
+| r07 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:15:00Z r08: ended after about 10 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1301 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:15:01Z r08: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  754.600792] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  754.600792] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  763.782195] intcdsp.sys: idle power down after 3 s
+[16:15:01] [  763.782195] intcdsp.sys: idle power down after 3 s
+| r08 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:15:21Z r09: ended after about 14 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1298 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:15:21Z r09: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  805.875102] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  805.875102] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  815.061880] intcdsp.sys: idle power down after 3 s
+[16:15:21] [  815.061880] intcdsp.sys: idle power down after 3 s
+| r09 | PASS | 1 | 1 | 0 | 3 | 0 |
+typed 6 characters
+--- sendkey ret
+
+2026-11-28T16:15:36Z r10: ended after about 10 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:15:37Z r10: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [  925.652906] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  925.652906] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  934.829684] intcdsp.sys: idle power down after 3 s
+[16:15:37] [  934.829684] intcdsp.sys: idle power down after 3 s
+| r10 | PASS | 1 | 1 | 0 | 3 | 0 |
+-rw-r--r-- 1 <user> <user> 879300 Nov 28 18:15 /tmp/e5/ev/e2/06-after-idle.png
+2026-11-28T16:15:38Z (b), (d), (c) from serial line 211: booting 11, boot ok 11, selftest ok 1, boot at open ok 10, failed-boot 0, D0 not booted 0, idle 11, recovered 0, render opens 30, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0; runs passed: 10 of 10; idle lines seen by the waits: 10
+
+| (b) | DspIdleSec = 3 | booting 11, boot ok 11, selftest ok 1, boot at open ok 10, failed-boot 0, D0 not booted 0, idle 11, recovered 0, render opens 30, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0 | 10 of 10 runs passed | idle power-downs 11; boots at open 10; recovered 0; render opens 30 |
+2026-11-28T16:15:38Z ## E1: never-reply=19 at a run's first open, then a run after it
+2026-11-28T16:15:38Z f-never-reply: fault 'never-reply=19' set (16:15:38): {"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "propert
+typed 16 characters
+--- sendkey ret
+
+2026-11-28T16:15:56Z f-never-reply: ended after about 10 s; the console answers; dsploop.c:809: Test failed: dsploop: 0 of 3 depths compared dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 9 tests executed (0 mark
+2026-11-28T16:15:56Z f-never-reply: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 0, recovered 0, render opens 1, timeouts 3, fault-during 2, stop lines 0, fatal 0, ace_unexpected 0
+    [  981.922986] intcdsp.sys: boot at stream open: ok after 6 ms
+    [  981.922986] intcdsp.sys: gain: -23.00 dB, mute 0
+    [  982.422988] intcdsp.sys: ipc: set pipeline state (19) 0x93010003|0x00000000 reply timeout after 500204 us; the link is faulted
+    [  982.422988] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [  982.422988] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [  982.422988] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+2026-11-28T16:15:56Z f-never-reply: fault cleared
+    [  982.422988] intcdsp.sys: ipc: set pipeline state (19) 0x93010003|0x00000000 reply timeout after 500204 us; the link is faulted
+    [  982.422988] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [  982.422988] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+    [  982.422988] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+typed 16 characters
+--- sendkey ret
+
+2026-11-28T16:16:15Z a-never-reply: ended after about 11 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1302 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:16:15Z a-never-reply: booting 1, boot ok 1, selftest ok 0, boot at open ok 0, failed-boot 0, D0 not booted 0, idle 1, recovered 1, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [ 1047.018731] intcdsp.sys: recovered: open ok after 6 ms
+    [ 1047.018731] intcdsp.sys: gain: -23.00 dB, mute 0
+    [ 1056.195508] intcdsp.sys: idle power down after 3 s
+2026-11-28T16:16:15Z a-never-reply: PASS after the fault: [ 1047.018731] intcdsp.sys: recovered: open ok after 6 ms
+| E1 never-reply=19 | 2 | 1 | PASS |
+2026-11-28T16:16:15Z ## E1: crash-async=500 at a run's first open (the asynchronous exception, read at a stream's period), then a run after it
+2026-11-28T16:16:15Z f-crash-async: fault 'crash-async=500' set (16:16:15): {"execute": "qom-set", "arguments": {"path": "/machine/peripheral/ace", "propert
+typed 16 characters
+--- sendkey ret
+
+2026-11-28T16:16:34Z f-crash-async: ended after about 12 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1300 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:16:34Z f-crash-async: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [ 1104.210067] intcdsp.sys: boot at stream open: ok after 6 ms
+    [ 1104.210067] intcdsp.sys: gain: -23.00 dB, mute 0
+    [ 1113.394844] intcdsp.sys: idle power down after 3 s
+2026-11-28T16:16:34Z f-crash-async: fault cleared
+typed 16 characters
+--- sendkey ret
+
+2026-11-28T16:16:58Z a-crash-async: ended after about 11 s; the console answers; dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 1299 tests executed (0 marked as todo, 0 failures), 0 skipped. 
+2026-11-28T16:16:58Z a-crash-async: booting 1, boot ok 1, selftest ok 0, boot at open ok 1, failed-boot 0, D0 not booted 0, idle 1, recovered 0, render opens 3, timeouts 0, fault-during 0, stop lines 0, fatal 0, ace_unexpected 0
+    [ 1182.134476] intcdsp.sys: boot at stream open: ok after 6 ms
+    [ 1182.134476] intcdsp.sys: gain: -23.00 dB, mute 0
+    [ 1191.312879] intcdsp.sys: idle power down after 3 s
+2026-11-28T16:16:58Z a-crash-async: PASS after the crash: 
+| E1 crash-async=500 | 0 | 0 | PASS |
+2026-11-28T16:17:02Z VM e2 ended: qemu exited rc=0 (none) at 2026-11-28T16:17:02Z; wall 537 s
+2026-11-28T16:17:02Z e2-round done: booting 16, boot ok 16, selftest ok 2, boot at open ok 13, failed-boot 0, D0 not booted 0, idle 14, recovered 1, render opens 40, timeouts 3, fault-during 2, stop lines 0, fatal 0, ace_unexpected 0

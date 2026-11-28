@@ -1,0 +1,59 @@
+# the lines of this round (from the serial log, ANSI and NULs removed)
+## the settings as the driver read them
+[    8.507618] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+[    5.516895] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+## the D0 entries
+[    8.523243] intcdsp.sys: boot ok after 6055 us (clock 19167020 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, la
+[    5.516895] intcdsp.sys: boot ok after 5530 us (clock 296987511 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  387.717948] intcdsp.sys: boot ok after 5530 us (clock 679184909 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  436.146629] intcdsp.sys: boot ok after 5531 us (clock 727614848 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  486.198818] intcdsp.sys: boot ok after 5530 us (clock 777662546 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  538.333135] intcdsp.sys: boot ok after 5531 us (clock 829805628 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  588.662818] intcdsp.sys: boot ok after 5531 us (clock 880138470 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  637.361118] intcdsp.sys: boot ok after 5530 us (clock 928829634 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  701.740101] intcdsp.sys: boot ok after 5531 us (clock 993210008 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, l
+[  754.600792] intcdsp.sys: boot ok after 5530 us (clock 1046073221 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+[  805.875102] intcdsp.sys: boot ok after 5531 us (clock 1097348148 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+[  925.652906] intcdsp.sys: boot ok after 5546 us (clock 1217115605 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+[  981.922986] intcdsp.sys: boot ok after 5531 us (clock 1273383414 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+[ 1047.018731] intcdsp.sys: boot ok after 5531 us (clock 1338479255 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+[ 1104.210067] intcdsp.sys: boot ok after 5531 us (clock 1395676287 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+[ 1182.134476] intcdsp.sys: boot ok after 5531 us (clock 1473605790 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+## boot at stream open: ok
+[  387.717948] intcdsp.sys: boot at stream open: ok after 6 ms
+[  436.146629] intcdsp.sys: boot at stream open: ok after 6 ms
+[  486.198818] intcdsp.sys: boot at stream open: ok after 6 ms
+[  538.333135] intcdsp.sys: boot at stream open: ok after 6 ms
+[  588.678478] intcdsp.sys: boot at stream open: ok after 6 ms
+[  637.361118] intcdsp.sys: boot at stream open: ok after 6 ms
+[  701.740101] intcdsp.sys: boot at stream open: ok after 6 ms
+[  754.600792] intcdsp.sys: boot at stream open: ok after 6 ms
+[  805.875102] intcdsp.sys: boot at stream open: ok after 6 ms
+[  925.652906] intcdsp.sys: boot at stream open: ok after 6 ms
+[  981.922986] intcdsp.sys: boot at stream open: ok after 6 ms
+[ 1104.210067] intcdsp.sys: boot at stream open: ok after 6 ms
+[ 1182.134476] intcdsp.sys: boot at stream open: ok after 6 ms
+## idle power down
+[    9.094158] intcdsp.sys: idle power down after 3 s
+[  396.908981] intcdsp.sys: idle power down after 3 s
+[  445.360163] intcdsp.sys: idle power down after 3 s
+[  495.393226] intcdsp.sys: idle power down after 3 s
+[  547.527539] intcdsp.sys: idle power down after 3 s
+[  597.844596] intcdsp.sys: idle power down after 3 s
+[  646.548895] intcdsp.sys: idle power down after 3 s
+[  710.926879] intcdsp.sys: idle power down after 3 s
+[  763.782195] intcdsp.sys: idle power down after 3 s
+[  815.061880] intcdsp.sys: idle power down after 3 s
+[  934.829684] intcdsp.sys: idle power down after 3 s
+[ 1056.195508] intcdsp.sys: idle power down after 3 s
+[ 1113.394844] intcdsp.sys: idle power down after 3 s
+[ 1191.312879] intcdsp.sys: idle power down after 3 s
+## recovered
+[ 1047.018731] intcdsp.sys: recovered: open ok after 6 ms
+## faults with a stream open
+[  982.422988] intcdsp.sys: ipc: set pipeline state (19) 0x93010003|0x00000000 reply timeout after 500204 us; the link is faulted
+[  982.422988] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[  982.422988] intcdsp.sys: fault during stream 1: reply timeout after 500 ms
+[  982.422988] intcdsp.sys: streams: released after the fault; nothing is sent until the next stream open or D0 entry
+## counts
+stop lines: 0; fatal lines: 0; ace_unexpected: 0; kdb prompts: 0

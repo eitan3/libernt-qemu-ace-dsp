@@ -1,0 +1,11 @@
+## cycle c1 2026-11-28T14:33:32Z (serial line 334)
+-- not seen in 30 s (after line 334): Safe removal
+!! c1: disable not seen
+model (disabled): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=32000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+-- not seen in 90 s (after line 336): intcdsp.sys: boot .*after|D0 entry: the DSP is not booted|clock stalled|Work queue|Fatal|bugcheck
+model (D0): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=32000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 
+driver lines after this enable:
+## cycle c2 2026-11-28T14:35:58Z (serial line 337)
+-- not seen in 30 s (after line 337): Safe removal
+!! c2: disable not seen
+model (disabled): adspcs=01010000 dsp2cxctl=02000101 inten=00000000 irqsts=00000000 hfhipcie=00000000 hfipcxtdr=1b080000 hfipcxida=32000000 hfipcxctl=00000000 hfipcxtddy=00000000 fsr=a0000005 

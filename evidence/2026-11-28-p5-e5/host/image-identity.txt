@@ -1,0 +1,17 @@
+image: test-audio-p5final-9f023b460cc
+identity (build.log): 
+source-state.txt:
+source-state
+  commit 9f023b460cc5fb6f3f3ed35c85171e0563960558
+  branch 'detached'
+  describe lxgpu-sources-1-521-g9f023b460cc
+  over master 23a7b6407b7: 246 commits
+  stashes: 2
+  build option BOOTLOADER_DEBUG_PORT: BOOTLOADER_DEBUG_PORT:STRING=FILE,SCREEN
+SHA256SUMS:
+169005d6624b6d489d12c5fdffc75ed02471224b5f09da31c00fc84ef5a8e662  LiberNT.iso
+6d357d63c32b9ff3a83cb90686e77384f66627533e428b4371262b122ca5d6bf  LiberNT.vhd
+3aee194cef6c5fea3a4889ab42bc889f4d4472d9f5db41e01ba86730079f778d  LiberNT.img
+the console banner in the VM: LiberNT [Version 0.4.17-amd64-dev 20261128-nt10.0-045-3158-g9f023b4]
+the commit over b7274b3e004: 9f023b460cc diag(test): the DSP boots by default with the loopback topology and its self-test
+its diff:  1 file changed, 3 insertions(+), 2 deletions(-)

@@ -1,0 +1,24 @@
+UpdateCTestConfiguration  from :/tmp/ht-e1a/DartConfiguration.tcl
+Parse Config file:/tmp/ht-e1a/DartConfiguration.tcl
+Test project /tmp/ht-e1a
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 17
+    Start 17: mmdevapi.devenum
+
+17: Test command: /tmp/ht-e1a/mmdevapi/mmdevapi
+17: Working Directory: /tmp/ht-e1a/mmdevapi
+17: Test timeout computed to be: 120
+17: mmdevapi: 317 checks, 0 failures
+1/1 Test #17: mmdevapi.devenum .................   Passed    0.01 sec
+
+The following tests passed:
+	mmdevapi.devenum
+
+100% tests passed out of 1
+
+Total Test time (real) =   0.02 sec

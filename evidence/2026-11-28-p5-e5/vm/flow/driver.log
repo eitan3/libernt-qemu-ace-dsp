@@ -1,0 +1,78 @@
+2026-11-28T15:21:16Z e5 flow: flow on <project>/disk/e5-flow.qcow2, image test-audio-p5final-9f023b460cc, the exe 614b1c9764631604
+2026-11-28T15:21:17Z VM flow started (lib-run pid 2085775, sockets /tmp/qad-vm.2085777, data disk /tmp/e5/pouch/flow.img)
+[15:23:11] [  103.156163] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T15:23:11Z first boot: the desktop (or the setup) reached after 336 serial lines
+2026-11-28T15:23:51Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-28T15:24:05Z console: Win+R, cmd.exe
+2026-11-28T15:24:21Z data disk: drive D: in the guest (1 marker)
+2026-11-28T15:24:27Z console answering after first (alive-first.txt, 3 s)
+[15:24:27] [    8.809206] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T15:24:38Z ## the boot (the DSP boots by itself): booting 1, boot ok 1, selftest ok 1, gain lines 5, mute lines 0, fatal 0, ace_unexpected 0, mmdevapi ERR/WARN 0:
+    [    8.246703] intcdsp.sys: BootDsp = 1: the DSP boots at the first stream open with 'sof-arl-s.ri' (BootAtStart = 1: at every D0 entry)
+    [    8.246703] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [    8.262328] intcdsp.sys: boot ok after 5525 us (clock 18932570 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP inter
+    [    8.262328] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1
+    [    8.262328] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+    [    8.543580] intcdsp.sys: loopback self-test: the gain step, three depths at -6.00 dB (gain 0x4026e73d)
+    [    8.809206] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [    8.809206] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+    [    8.809206] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+    [   50.649552] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1311) HDAUDIO: pin 3 cfg port 0 dev 0 loc 0 assoc 1 seq 0 presence-detect 0: pin sense raw 00000000 present 0, not followed
+    [   50.649552] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1193) HDAUDIO: SubdeviceName eLineOutWave
+    [   50.665177] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:2052) HDAUDIO: SubdeviceName eLineOutTopo
+    [   50.665177] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1311) HDAUDIO: pin 5 cfg port 0 dev 8 loc 0 assoc 2 seq 0 presence-detect 0: pin sense raw 00000000 present 0, not followed
+    [   50.665177] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1254) HDAUDIO: SubdeviceName eLineInWave
+    [   50.680883] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:2052) HDAUDIO: SubdeviceName eLineInTopo
+    [   55.180773] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   55.180773] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   55.180773] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   55.180773] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+    [   88.557211] (\drivers\wdm\audio\drivers\hdaudio\prophnd.cpp:205) HDAUDIO: jack description of a topology of 1 pin(s): IsConnected 1 by pin 3 (no presence detect, pin sense raw 00000000)
+    [   88.557211] (\drivers\wdm\audio\drivers\hdaudio\prophnd.cpp:205) HDAUDIO: jack description of a topology of 1 pin(s): IsConnected 1 by pin 5 (no presence detect, pin sense raw 00000000)
+2026-11-28T15:25:21Z console: Win+R, cmd.exe
+2026-11-28T15:26:24Z ## typed 'hc .exe': hc-t0.txt after about 60 s
+2026-11-28T15:26:31Z ## typed 'setdef': setdef.txt after about 4 s
+    {BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+    {a45c254e-df1c-4efd-8020-67d146a850e0},14: REG_SZ Speakers (Intel SST Loopback)
+    {b3f8fa53-0004-438e-9003-51a46e139bfc},2: REG_SZ \??\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\LoopbackTopo
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},0: REG_DWORD 1
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},3: REG_DWORD 3
+    {BDAAA8D1-59C6-8B7A-A0C2-D2E0786FC14A}
+    {a45c254e-df1c-4efd-8020-67d146a850e0},14: REG_SZ Speakers (HD Audio Line out)
+    {b3f8fa53-0004-438e-9003-51a46e139bfc},2: REG_SZ \??\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\eLineOutTopo
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},0: REG_DWORD 2
+    {1da5d803-d492-4edd-8c23-e0c0ffee7f0e},3: REG_DWORD 3
+    render endpoints: 2, the one named Loopback: 1
+    DefaultOutput set to {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}: error 0
+    DefaultOutput: REG_SZ {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+2026-11-28T15:27:01Z ## the tray's keys (volumedown x4): the driver's lines from serial 343: [ 1117.487524] intcdsp.sys: gain: -2.00 dB, mute 0, kept until the DSP runs the PCM again|[ 1154.393452] intcdsp.sys: gain: -4.00 dB, mute 0, kept until the DSP runs the PCM again|[ 1188.690619] intcdsp.sys: gain: -6.00 dB, mute 0, kept until the DSP runs the PCM again|[ 1222.032155] intcdsp.sys: gain: -8.00 dB, mute 0, kept until the DSP runs the PCM again|
+2026-11-28T15:27:16Z console: Win+R, cmd.exe
+2026-11-28T15:27:31Z ## typed 'dl level': dl-level.txt after about 8 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: -8.00 dB (level -524288, the driver's level), mute 0: the expectation scaled by the gain 0x32f52cff, the tolerance 2 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 2 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2000 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 1 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2031 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 1 LSB, max abs error 0, offset 993, the expectation scaled by the gain, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1299 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T15:27:31Z ## dsploop at the level: the driver's lines (serial 348 to 378): [ 1377.045093] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)|[ 1377.045093] intcdsp.sys: gain: -8.00 dB, mute 0|[ 1377.045093] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)|[ 1379.098479] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)|[ 1379.098479] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)|[ 1381.154491] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)|[ 1381.170116] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)|
+2026-11-28T15:27:49Z ## the mute key twice (audiomute; serial 378 to 381): [ 1444.232073] intcdsp.sys: gain: -8.00 dB, mute 1, kept until the DSP runs the PCM again|[ 1495.268695] intcdsp.sys: gain: -8.00 dB, mute 0, kept until the DSP runs the PCM again|
+2026-11-28T15:39:56Z ## go: go-ptr-1
+2026-11-28T15:39:56Z ## the pointer path, the tray's flyout (serial 381 to 390): [ 7682.813029] intcdsp.sys: gain: -9.00 dB, mute 0, kept until the DSP runs the PCM again|[ 7689.297435] intcdsp.sys: gain: -35.00 dB, mute 0, kept until the DSP runs the PCM again|[ 7695.422465] intcdsp.sys: gain: -60.00 dB, mute 0, kept until the DSP runs the PCM again|
+2026-11-28T15:51:16Z ## go: go-ptr-2
+2026-11-28T15:51:17Z ## the pointer path, the Volume tab (serial 390 to 452): [11988.687653] intcdsp.sys: gain: -96.00 dB, mute 0, kept until the DSP runs the PCM again|[12292.462737] intcdsp.sys: gain: -94.00 dB, mute 0, kept until the DSP runs the PCM again|[12301.397407] intcdsp.sys: gain: -92.00 dB, mute 0, kept until the DSP runs the PCM again|[12309.347071] intcdsp.sys: gain: -90.00 dB, mute 0, kept until the DSP runs the PCM again|[12316.953359] intcdsp.sys: gain: -88.00 dB, mute 0, kept until the DSP runs the PCM again|[12326.381531] intcdsp.sys: gain: -86.00 dB, mute 0, kept until the DSP runs the PCM again|[12335.174449] intcdsp.sys: gain: -84.00 dB, mute 0, kept until the DSP runs the PCM again|[12344.427120] intcdsp.sys: gain: -83.00 dB, mute 0, kept until the DSP runs the PCM again|[12352.770787] intcdsp.sys: gain: -81.00 dB, mute 0, kept until the DSP runs the PCM again|[12360.245199] intcdsp.sys: gain: -79.00 dB, mute 0, kept until the DSP runs the PCM again|[12369.649745] intcdsp.sys: gain: -77.00 dB, mute 0, kept until the DSP runs the PCM again|[12378.565290] intcdsp.sys: gain: -75.00 dB, mute 0, kept until the DSP runs the PCM again|[12386.982456] intcdsp.sys: gain: -73.00 dB, mute 0, kept until the DSP runs the PCM again|[12394.102117] intcdsp.sys: gain: -71.00 dB, mute 0, kept until the DSP runs the PCM again|[12401.390029] intcdsp.sys: gain: -69.00 dB, mute 0, kept until the DSP runs the PCM again|[12409.518194] intcdsp.sys: gain: -67.00 dB, mute 0, kept until the DSP runs the PCM again|[12418.448363] intcdsp.sys: gain: -65.00 dB, mute 0, kept until the DSP runs the PCM again|[12426.037401] intcdsp.sys: gain: -63.00 dB, mute 0, kept until the DSP runs the PCM again|[12451.699901] intcdsp.sys: gain: -61.00 dB, mute 0, kept until the DSP runs the PCM again|[12459.290314] intcdsp.sys: gain: -60.00 dB, mute 0, kept until the DSP runs the PCM again|[12467.715481] intcdsp.sys: gain: -58.00 dB, mute 0, kept until the DSP runs the PCM again|[12475.729271] intcdsp.sys: gain: -56.00 dB, mute 0, kept until the DSP runs the PCM again|[12484.289063] intcdsp.sys: gain: -54.00 dB, mute 0, kept until the DSP runs the PCM again|[12607.010779] intcdsp.sys: gain: -52.00 dB, mute 0, kept until the DSP runs the PCM again|[12616.589201] intcdsp.sys: gain: -50.00 dB, mute 0, kept until the DSP runs the PCM again|[12737.057906] intcdsp.sys: gain: -48.00 dB, mute 0, kept until the DSP runs the PCM again|[12745.512948] intcdsp.sys: gain: -46.00 dB, mute 0, kept until the DSP runs the PCM again|[12751.464353] intcdsp.sys: gain: -44.00 dB, mute 0, kept until the DSP runs the PCM again|[12758.805765] intcdsp.sys: gain: -42.00 dB, mute 0, kept until the DSP runs the PCM again|[12767.887935] intcdsp.sys: gain: -40.00 dB, mute 0, kept until the DSP runs the PCM again|[12777.127730] intcdsp.sys: gain: -38.00 dB, mute 0, kept until the DSP runs the PCM again|[12785.706148] intcdsp.sys: gain: -36.00 dB, mute 0, kept until the DSP runs the PCM again|[12793.414561] intcdsp.sys: gain: -35.00 dB, mute 0, kept until the DSP runs the PCM again|[12802.536607] intcdsp.sys: gain: -33.00 dB, mute 0, kept until the DSP runs the PCM again|[12808.825138] intcdsp.sys: gain: -31.00 dB, mute 0, kept until the DSP runs the PCM again|[12814.077040] intcdsp.sys: gain: -29.00 dB, mute 0, kept until the DSP runs the PCM again|[12819.483942] intcdsp.sys: gain: -27.00 dB, mute 0, kept until the DSP runs the PCM again|[12824.727469] intcdsp.sys: gain: -25.00 dB, mute 0, kept until the DSP runs the PCM again|[12830.462123] intcdsp.sys: gain: -23.00 dB, mute 0, kept until the DSP runs the PCM again|
+2026-11-28T15:51:32Z console: Win+R, cmd.exe
+2026-11-28T16:01:17Z ## typed 'dl after': dl-after.txt after about 540 s
+2026-11-28T16:01:17Z ## dsploop after: the driver's lines (serial 452 to 459): 
+2026-11-28T16:01:31Z console: Win+R, cmd.exe
+2026-11-28T16:02:51Z ## typed 'hc .exe': hc-t10.txt after about 60 s
+2026-11-28T16:02:51Z ## the Sound page after 10 minutes: the jack-description lines 2, the watcher's TRACE lines 0, mmdevapi ERR/WARN lines 0:
+2026-11-28T16:03:11Z console: Win+R, cmd.exe
+2026-11-28T16:07:13Z VM flow ended by the guest's shutdown: qemu exited rc=0 (none) at 2026-11-28T16:07:13Z; wall 2757 s
+2026-11-28T16:07:13Z done: booting 1, boot ok 1, selftest ok 1, gain lines 54, mute lines 1, fatal 0, ace_unexpected 0, mmdevapi ERR/WARN 0:
