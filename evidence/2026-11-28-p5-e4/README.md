@@ -44,7 +44,7 @@ Not driven: the mute flag across an idle power-down (unmuted before (d1)); the s
 | row | the VM | what the log shows | result |
 |---|---|---|---|
 | (a) SelfTest = 3 | `e4-round` (the first boot, the wizard, the settings, a reboot) and `e4-round2` (a later boot) | `6 runs, 6 matched, 0 failed`; three rows `gain 0x4026e73d ... ok` | **PASS** (both; the script's own count: gain rows ok 3) |
-| (b) the baseline | both | one dsploop run after the idle power-down: `boot at stream open: ok after 6 ms`, `gain: 0.00 dB, mute 0`, `3 of 3 depths compared` (1301 / 1285 tests, 0 failures) | **PASS** |
+| (b) the baseline | both | one dsploop run after the idle power-down: `boot at stream open: ok after 6 ms`, `gain: 0.00 dB, mute 0`, `3 of 3 depths compared` (1290 tests in `e4-round`, 1301 in `e4-round2`, 0 failures) | **PASS** |
 | (c) the hold (N12-03) | both | `DSPLOOP_HOLD=20`: `dsploop hold: the render client initialized, its pin open and not started`, `boot at stream open: ok after 6 ms` at guest 877 s, `released after 20000 ms (the timeout)`; no `idle power down` between them; `idle power down after 3 s` at guest 900 s | **PASS**: 23 s after the boot at open (20 + 3), one power-down in the run |
 | (d) the stream test after | `e4-round`: **not a stream test** — the console still had `DSPLOOP_HOLD` set, so it ran a second hold (a fault of the script, recorded as it ran); `e4-round2` with the variable cleared | `boot at stream open: ok after 6 ms`, `gain: 0.00 dB, mute 0`, `3 of 3 depths compared`, `1285 tests executed (0 marked as todo, 0 failures), 0 skipped` | `e4-round2`: **PASS** |
 
