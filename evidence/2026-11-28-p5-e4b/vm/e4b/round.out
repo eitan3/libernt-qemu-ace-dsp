@@ -1,0 +1,112 @@
+2026-11-28T06:08:05Z e4b: e4b on disk/p5e4b.qcow2, image test-audio-intel-sst-p5e4b-82d9cf754e9 (IDLESEC 3): the first boot, the wizard, the settings, a reboot; then the holder
+2026-11-28T06:08:06Z VM e4b started (lib-run pid 1865064, sockets /tmp/qad-vm.1865066, data disk /tmp/e4b/pouch/e4b.img)
+[06:09:51] [   94.178970] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T06:09:51Z first boot: the desktop (or the setup) reached after 279 serial lines
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+--- sendkey ret
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey tab
+
+--- sendkey ret
+
+2026-11-28T06:10:31Z wizard: tab tab ret, ret, tab tab tab ret sent
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T06:10:45Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T06:11:11Z data disk: drive D: in the guest (1 marker)
+typed 40 characters
+--- sendkey ret
+
+2026-11-28T06:11:17Z console answering after first (alive-first.txt, 3 s)
+typed 116 characters
+--- sendkey ret
+
+2026-11-28T06:11:42Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+typed 98 characters
+--- sendkey ret
+
+2026-11-28T06:12:05Z typed: reg add SelfTest = 3 (REG_DWORD)
+typed 97 characters
+--- sendkey ret
+
+2026-11-28T06:13:03Z typed: reg add BootDsp = 1 (REG_DWORD)
+typed 100 characters
+--- sendkey ret
+
+2026-11-28T06:13:17Z typed: reg add DspIdleSec = 3 (REG_DWORD)
+2026-11-28T06:13:17Z ## reboot 2026-11-28T06:13:17Z (serial line 286): shutdown -r -t 0 typed
+typed 16 characters
+--- sendkey ret
+
+[06:14:11] [    8.516279] intcdsp.sys: boot ok after 5451 us (clock 1768357595 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+--- sendkey meta_l-r
+
+--- sendkey home
+
+--- sendkey shift-end
+
+typed 7 characters
+--- sendkey ret
+
+2026-11-28T06:15:08Z console: Win+R, cmd.exe
+typed 70 characters
+--- sendkey ret
+
+typed 39 characters
+--- sendkey ret
+
+2026-11-28T06:15:23Z data disk: drive D: in the guest (1 marker)
+typed 41 characters
+--- sendkey ret
+
+2026-11-28T06:15:29Z console answering after reboot (alive-reboot.txt, 3 s)
+2026-11-28T06:15:29Z after the reboot (from serial line 286): booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 1, timeouts 0, fault-during 0, selftest runs 1, gain lines 5, fatal 0, ace_unexpected 0
+[06:15:29] [    9.094406] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T06:15:49Z ## the boot after the reboot (from serial line 286): booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 1, timeouts 0, fault-during 0, selftest runs 1, gain lines 5, fatal 0, ace_unexpected 0
+    [    8.516279] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+    [    8.516279] intcdsp.sys: boot ok after 5451 us (clock 1768357595 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [    8.531904] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [    8.531904] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again
+    [    8.531904] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.531904] intcdsp.sys: gain: 0.00 dB, mute 0
+    [    8.625654] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.719405] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.813155] intcdsp.sys: gain: -6.00 dB, mute 0, kept until the DSP runs the PCM again
+    [    8.813155] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.813155] intcdsp.sys: gain: -6.00 dB, mute 0
+    [    8.906905] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+    [    9.000655] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+    [    9.094406] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again
+    [    9.094406] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   12.109418] intcdsp.sys: idle power down after 3 s
+    [   21.333770] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [   21.333770] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [   21.333770] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   21.333770] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   21.333770] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   21.333770] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T06:15:51Z ## ready: the console answers after the reboot (go1 written); the rows by hand; waiting for /tmp/e4b/ev/e4b/stop
+2026-11-28T06:47:50Z VM e4b ended: qemu exited rc=0 (none) at 2026-11-28T06:47:50Z; wall 2385 s
+2026-11-28T06:47:50Z done: booting 3, boot ok 3, boot at open ok 2, failed-boot 0, idle 3, timeouts 0, fault-during 0, selftest runs 1, gain lines 16, fatal 0, ace_unexpected 0

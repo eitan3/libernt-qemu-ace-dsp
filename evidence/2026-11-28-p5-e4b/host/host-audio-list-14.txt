@@ -1,0 +1,33 @@
+Test project /tmp/ht-e1a
+      Start  1: audiofmt.rules
+ 1/14 Test  #1: audiofmt.rules ...................   Passed    0.00 sec
+      Start  2: pcmsample.dither
+ 2/14 Test  #2: pcmsample.dither .................   Passed    0.02 sec
+      Start  3: dsppath.rules
+ 3/14 Test  #3: dsppath.rules ....................   Passed    0.05 sec
+      Start  4: sofipc4.abi
+ 4/14 Test  #4: sofipc4.abi ......................   Passed    0.02 sec
+      Start  5: disco.abi
+ 5/14 Test  #5: disco.abi ........................   Passed    0.03 sec
+      Start  6: softplg.abi
+ 6/14 Test  #6: softplg.abi ......................   Passed    0.39 sec
+      Start  7: fwload.boot
+ 7/14 Test  #7: fwload.boot ......................   Passed    0.70 sec
+      Start  8: sofipc.transport
+ 8/14 Test  #8: sofipc.transport .................   Passed    0.39 sec
+      Start  9: dsppcm.endpoint
+ 9/14 Test  #9: dsppcm.endpoint ..................   Passed    0.01 sec
+      Start 10: hdaudio.capture
+10/14 Test #10: hdaudio.capture ..................   Passed    0.01 sec
+      Start 11: dsploop.compare
+11/14 Test #11: dsploop.compare ..................   Passed    0.07 sec
+      Start 12: dspidentity.identity
+12/14 Test #12: dspidentity.identity .............   Passed    0.01 sec
+      Start 13: mmdevapi.devenum
+13/14 Test #13: mmdevapi.devenum .................   Passed    0.01 sec
+      Start 14: apitest.required
+14/14 Test #14: apitest.required .................   Passed    0.01 sec
+
+100% tests passed out of 14
+
+Total Test time (real) =   1.75 sec

@@ -1,0 +1,3 @@
+<home>/Projects/LiberNT/submodules/host-tests/ipc/t_sofipc.c:5907: FAIL: IntcDspStreamsTeardownPoll(&S->Streams) == 0: 1 != 0
+<home>/Projects/LiberNT/submodules/host-tests/ipc/t_sofipc.c:5908: FAIL: S->H.LockAttempts == Requests: 12 != f
+sofipc: 7802 checks, 2 failures

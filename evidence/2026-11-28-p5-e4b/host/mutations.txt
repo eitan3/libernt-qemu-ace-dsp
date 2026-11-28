@@ -1,0 +1,16 @@
+== base 08:00:21 ==
+sofipc: 7802 checks, 0 failures
+dsploop: 1321 checks, 0 failures
+m36: 5 red (the refused-model query answers FALSE whatever the flag (N14-04)); first: 6008: FAIL: IntcDspStreamsModelRefused(&S->Streams) == TRUE: 0 != 1 [sofipc: 7802 checks, 5 failures]
+   restored: identical
+m37: 2 red (the teardown poll takes the lock with a wait again (N14-05)); first: 5907: FAIL: IntcDspStreamsTeardownPoll(&S->Streams) == 0: 1 != 0 [sofipc: 7802 checks, 2 failures]
+   restored: identical
+m38: 198 red (the gain word is unity whatever the level (N14-02)); first: 550: FAIL: DsploopGainWord(-6 * 65536, 0) == Minus6: 2147483647 != 1076291389 [dsploop: 1321 checks, 198 failures]
+   restored: identical
+m39: 283 red (the expectation is not scaled by the gain (N14-02)); first: 572: FAIL: DsploopToneSampleAtGain(F, Depths[D][0], Depths[D][1], 0) == 0: 2139 != 0 [dsploop: 1321 checks, 283 failures]
+   restored: identical
+== after ==
+drivers/wdm/audio/intcdsp/stream.c: identical to its copy before its last row
+modules/rostests/apitests/dsploop/compare.c: identical to its copy before its last row
+sofipc: 7802 checks, 0 failures
+dsploop: 1321 checks, 0 failures

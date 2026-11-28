@@ -1,0 +1,199 @@
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:550: FAIL: DsploopGainWord(-6 * 65536, 0) == Minus6: 2147483647 != 1076291389
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:551: FAIL: DsploopGainWord(-1 * 65536, 0) == 0x721482C0: 2147483647 != 1913946816
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:552: FAIL: DsploopGainWord(-96 * 65536, 0) == 0x84F3: 2147483647 != 34035
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:553: FAIL: DsploopGainWord(-200 * 65536, 0) == 0x84F3: 2147483647 != 34035
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:556: FAIL: DsploopGainWord(-5 * 65536, 0) == 0x47FACCF0: 2147483647 != 1207618800
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:557: FAIL: DsploopGainWord(-5 * 65536 - 32768, 0) == (int32_t)(((int64_t)0x47FACCF0 + Minus6 + 1) / 2): 2147483647 != 1141955095
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:558: FAIL: DsploopGainWord(-6 * 65536 + 1, 0) == (int32_t)(((int64_t)0x47FACCF0 + (int64_t)Minus6 * 65535 + 32768) / 65536): 2147483647 != 1076293393
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:564: FAIL: DsploopGainWord(-(int32_t)(F * 65536), 0) > DsploopGainWord(-(int32_t)((F + 1) * 65536), 0)
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:565: FAIL: fabs((double)DsploopGainWord(-(int32_t)(F * 65536), 0) / 2147483648.0 - Linear) <= 1.0 / 2147483648.0
+dsploop: 1321 checks, 198 failures

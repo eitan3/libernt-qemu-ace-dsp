@@ -1,0 +1,172 @@
+Test project /tmp/ht-e1a
+      Start  1: nlasvc.probe
+Could not find executable /tmp/ht-e1a/nlasvc/nlasvc_probe
+Looked in the following places:
+/tmp/ht-e1a/nlasvc/nlasvc_probe
+/tmp/ht-e1a/nlasvc/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Release/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Release/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Debug/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Debug/nlasvc_probe
+/tmp/ht-e1a/nlasvc/MinSizeRel/nlasvc_probe
+/tmp/ht-e1a/nlasvc/MinSizeRel/nlasvc_probe
+/tmp/ht-e1a/nlasvc/RelWithDebInfo/nlasvc_probe
+/tmp/ht-e1a/nlasvc/RelWithDebInfo/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Deployment/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Deployment/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Development/nlasvc_probe
+/tmp/ht-e1a/nlasvc/Development/nlasvc_probe
+tmp/ht-e1a/nlasvc/nlasvc_probe
+tmp/ht-e1a/nlasvc/nlasvc_probe
+tmp/ht-e1a/nlasvc/Release/nlasvc_probe
+tmp/ht-e1a/nlasvc/Release/nlasvc_probe
+tmp/ht-e1a/nlasvc/Debug/nlasvc_probe
+tmp/ht-e1a/nlasvc/Debug/nlasvc_probe
+tmp/ht-e1a/nlasvc/MinSizeRel/nlasvc_probe
+tmp/ht-e1a/nlasvc/MinSizeRel/nlasvc_probe
+tmp/ht-e1a/nlasvc/RelWithDebInfo/nlasvc_probe
+tmp/ht-e1a/nlasvc/RelWithDebInfo/nlasvc_probe
+tmp/ht-e1a/nlasvc/Deployment/nlasvc_probe
+tmp/ht-e1a/nlasvc/Deployment/nlasvc_probe
+tmp/ht-e1a/nlasvc/Development/nlasvc_probe
+tmp/ht-e1a/nlasvc/Development/nlasvc_probe
+Unable to find executable: /tmp/ht-e1a/nlasvc/nlasvc_probe
+ 1/18 Test  #1: nlasvc.probe .....................***Not Run   0.00 sec
+      Start  2: lntweb.script
+Could not find executable /tmp/ht-e1a/lntweb/lntweb_script
+Looked in the following places:
+/tmp/ht-e1a/lntweb/lntweb_script
+/tmp/ht-e1a/lntweb/lntweb_script
+/tmp/ht-e1a/lntweb/Release/lntweb_script
+/tmp/ht-e1a/lntweb/Release/lntweb_script
+/tmp/ht-e1a/lntweb/Debug/lntweb_script
+/tmp/ht-e1a/lntweb/Debug/lntweb_script
+/tmp/ht-e1a/lntweb/MinSizeRel/lntweb_script
+/tmp/ht-e1a/lntweb/MinSizeRel/lntweb_script
+/tmp/ht-e1a/lntweb/RelWithDebInfo/lntweb_script
+/tmp/ht-e1a/lntweb/RelWithDebInfo/lntweb_script
+/tmp/ht-e1a/lntweb/Deployment/lntweb_script
+/tmp/ht-e1a/lntweb/Deployment/lntweb_script
+/tmp/ht-e1a/lntweb/Development/lntweb_script
+/tmp/ht-e1a/lntweb/Development/lntweb_script
+tmp/ht-e1a/lntweb/lntweb_script
+tmp/ht-e1a/lntweb/lntweb_script
+tmp/ht-e1a/lntweb/Release/lntweb_script
+tmp/ht-e1a/lntweb/Release/lntweb_script
+tmp/ht-e1a/lntweb/Debug/lntweb_script
+tmp/ht-e1a/lntweb/Debug/lntweb_script
+tmp/ht-e1a/lntweb/MinSizeRel/lntweb_script
+tmp/ht-e1a/lntweb/MinSizeRel/lntweb_script
+tmp/ht-e1a/lntweb/RelWithDebInfo/lntweb_script
+tmp/ht-e1a/lntweb/RelWithDebInfo/lntweb_script
+tmp/ht-e1a/lntweb/Deployment/lntweb_script
+tmp/ht-e1a/lntweb/Deployment/lntweb_script
+tmp/ht-e1a/lntweb/Development/lntweb_script
+tmp/ht-e1a/lntweb/Development/lntweb_script
+Unable to find executable: /tmp/ht-e1a/lntweb/lntweb_script
+ 2/18 Test  #2: lntweb.script ....................***Not Run   0.00 sec
+      Start  3: iexplore.browser
+Could not find executable /tmp/ht-e1a/iexplore/iexplore_browser
+Looked in the following places:
+/tmp/ht-e1a/iexplore/iexplore_browser
+/tmp/ht-e1a/iexplore/iexplore_browser
+/tmp/ht-e1a/iexplore/Release/iexplore_browser
+/tmp/ht-e1a/iexplore/Release/iexplore_browser
+/tmp/ht-e1a/iexplore/Debug/iexplore_browser
+/tmp/ht-e1a/iexplore/Debug/iexplore_browser
+/tmp/ht-e1a/iexplore/MinSizeRel/iexplore_browser
+/tmp/ht-e1a/iexplore/MinSizeRel/iexplore_browser
+/tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_browser
+/tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_browser
+/tmp/ht-e1a/iexplore/Deployment/iexplore_browser
+/tmp/ht-e1a/iexplore/Deployment/iexplore_browser
+/tmp/ht-e1a/iexplore/Development/iexplore_browser
+/tmp/ht-e1a/iexplore/Development/iexplore_browser
+tmp/ht-e1a/iexplore/iexplore_browser
+tmp/ht-e1a/iexplore/iexplore_browser
+tmp/ht-e1a/iexplore/Release/iexplore_browser
+tmp/ht-e1a/iexplore/Release/iexplore_browser
+tmp/ht-e1a/iexplore/Debug/iexplore_browser
+tmp/ht-e1a/iexplore/Debug/iexplore_browser
+tmp/ht-e1a/iexplore/MinSizeRel/iexplore_browser
+tmp/ht-e1a/iexplore/MinSizeRel/iexplore_browser
+tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_browser
+tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_browser
+tmp/ht-e1a/iexplore/Deployment/iexplore_browser
+tmp/ht-e1a/iexplore/Deployment/iexplore_browser
+tmp/ht-e1a/iexplore/Development/iexplore_browser
+tmp/ht-e1a/iexplore/Development/iexplore_browser
+Unable to find executable: /tmp/ht-e1a/iexplore/iexplore_browser
+ 3/18 Test  #3: iexplore.browser .................***Not Run   0.00 sec
+      Start  4: iexplore.html
+Could not find executable /tmp/ht-e1a/iexplore/iexplore_html
+Looked in the following places:
+/tmp/ht-e1a/iexplore/iexplore_html
+/tmp/ht-e1a/iexplore/iexplore_html
+/tmp/ht-e1a/iexplore/Release/iexplore_html
+/tmp/ht-e1a/iexplore/Release/iexplore_html
+/tmp/ht-e1a/iexplore/Debug/iexplore_html
+/tmp/ht-e1a/iexplore/Debug/iexplore_html
+/tmp/ht-e1a/iexplore/MinSizeRel/iexplore_html
+/tmp/ht-e1a/iexplore/MinSizeRel/iexplore_html
+/tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_html
+/tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_html
+/tmp/ht-e1a/iexplore/Deployment/iexplore_html
+/tmp/ht-e1a/iexplore/Deployment/iexplore_html
+/tmp/ht-e1a/iexplore/Development/iexplore_html
+/tmp/ht-e1a/iexplore/Development/iexplore_html
+tmp/ht-e1a/iexplore/iexplore_html
+tmp/ht-e1a/iexplore/iexplore_html
+tmp/ht-e1a/iexplore/Release/iexplore_html
+tmp/ht-e1a/iexplore/Release/iexplore_html
+tmp/ht-e1a/iexplore/Debug/iexplore_html
+tmp/ht-e1a/iexplore/Debug/iexplore_html
+tmp/ht-e1a/iexplore/MinSizeRel/iexplore_html
+tmp/ht-e1a/iexplore/MinSizeRel/iexplore_html
+tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_html
+tmp/ht-e1a/iexplore/RelWithDebInfo/iexplore_html
+tmp/ht-e1a/iexplore/Deployment/iexplore_html
+tmp/ht-e1a/iexplore/Deployment/iexplore_html
+tmp/ht-e1a/iexplore/Development/iexplore_html
+tmp/ht-e1a/iexplore/Development/iexplore_html
+Unable to find executable: /tmp/ht-e1a/iexplore/iexplore_html
+ 4/18 Test  #4: iexplore.html ....................***Not Run   0.00 sec
+      Start  5: audiofmt.rules
+ 5/18 Test  #5: audiofmt.rules ...................   Passed    0.00 sec
+      Start  6: pcmsample.dither
+ 6/18 Test  #6: pcmsample.dither .................   Passed    0.02 sec
+      Start  7: dsppath.rules
+ 7/18 Test  #7: dsppath.rules ....................   Passed    0.06 sec
+      Start  8: sofipc4.abi
+ 8/18 Test  #8: sofipc4.abi ......................   Passed    0.02 sec
+      Start  9: disco.abi
+ 9/18 Test  #9: disco.abi ........................   Passed    0.03 sec
+      Start 10: softplg.abi
+10/18 Test #10: softplg.abi ......................   Passed    0.38 sec
+      Start 11: fwload.boot
+11/18 Test #11: fwload.boot ......................   Passed    0.78 sec
+      Start 12: sofipc.transport
+12/18 Test #12: sofipc.transport .................   Passed    0.41 sec
+      Start 13: dsppcm.endpoint
+13/18 Test #13: dsppcm.endpoint ..................   Passed    0.01 sec
+      Start 14: hdaudio.capture
+14/18 Test #14: hdaudio.capture ..................   Passed    0.01 sec
+      Start 15: dsploop.compare
+15/18 Test #15: dsploop.compare ..................   Passed    0.08 sec
+      Start 16: dspidentity.identity
+16/18 Test #16: dspidentity.identity .............   Passed    0.01 sec
+      Start 17: mmdevapi.devenum
+17/18 Test #17: mmdevapi.devenum .................   Passed    0.01 sec
+      Start 18: apitest.required
+18/18 Test #18: apitest.required .................   Passed    0.01 sec
+
+78% tests passed, 4 tests failed out of 18
+
+Total Test time (real) =   1.83 sec
+
+The following tests FAILED:
+	  1 - nlasvc.probe (Not Run)
+	  2 - lntweb.script (Not Run)
+	  3 - iexplore.browser (Not Run)
+	  4 - iexplore.html (Not Run)
+Errors while running CTest

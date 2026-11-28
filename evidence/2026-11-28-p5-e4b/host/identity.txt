@@ -1,0 +1,18 @@
+ntoskrnl.exe identity string (unique):
+20261128-nt10.0-045-2927-g82d9cf7.libernt
+the version strings (UTF-16) of the drivers:
+  drivers/intcdsp.sys: 10.0.26100.1
+  drivers/dsppcm.sys: 10.0.26100.1
+  drivers/hdaudbus.sys: (no string)
+  drivers/hdaudio.sys: 10.0.26100.1
+  mmdevapi.dll: (no string)
+  mmsys.cpl: 10.0.26100.1
+
+--- in-ISO vs the build tree
+Windows/system32/drivers/intcdsp.sys: identical to the build tree (507904 bytes, sha256 9d53aeeeaa12d373...)
+Windows/system32/drivers/dsppcm.sys: identical to the build tree (151552 bytes, sha256 ba531beb022594e3...)
+Windows/system32/drivers/hdaudbus.sys: identical to the build tree (335872 bytes, sha256 b506e0ab03bf385c...)
+Windows/system32/drivers/hdaudio.sys: identical to the build tree (253952 bytes, sha256 0e13fb2ae7dc5c43...)
+Windows/system32/mmdevapi.dll: identical to the build tree (363520 bytes, sha256 a1f1bb996b4a6d5f...)
+Windows/system32/mmsys.cpl: identical to the build tree (907776 bytes, sha256 deb16b8091ed6bd0...)
+method: bsdtar -x of the ISO; the identity string 8-bit in ntoskrnl.exe; 6 of 6 identical; the count in the string is the branch's absolute commit count
