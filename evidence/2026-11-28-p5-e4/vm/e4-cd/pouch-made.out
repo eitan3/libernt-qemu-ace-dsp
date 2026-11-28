@@ -1,0 +1,20 @@
+== e4-cd.img: 33586688 bytes
+label: dos
+label-id: 0x591adf36
+device: /tmp/e4/pouch/e4-cd.img
+unit: sectors
+sector-size: 512
+/tmp/e4/pouch/e4-cd.img1 : start=          63, size=       65536, type=6
+fsck.fat -n of the partition: clean
+== the files on it (mdir):
+ Volume in drive : is P5E4       
+ Volume Serial Number is 6001-D15E
+Directory for ::/
+
+DSPLOO~1 EXE    214016 2026-11-28   6:18  dsploop_apitest.exe
+pouch    tag        37 2026-11-28   6:18 
+        2 files             214 053 bytes
+                         33 253 376 bytes free
+
+== the exe read back from the image: d87b0f4449f255f53c7dfdb086118c7bd1e29232e7f849f5c7186ca49af3fc63
+== the image directory's exe:            d87b0f4449f255f53c7dfdb086118c7bd1e29232e7f849f5c7186ca49af3fc63

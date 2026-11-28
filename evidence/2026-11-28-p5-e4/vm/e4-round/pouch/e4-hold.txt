@@ -1,0 +1,9 @@
+dsploop.c:74: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+dsploop.c:74: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+dsploop.c:74: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+dsploop.c:485: dsploop hold: the render client initialized, its pin open and not started; holding up to 20 s, a key ends it
+dsploop.c:497: dsploop hold: released after 20094 ms (the timeout); the pin closes
+dsploop.c:569: Test failed: dsploop: 0 of 3 depths compared
+dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+
+dsploop: 4 tests executed (0 marked as todo, 1 failure), 0 skipped.

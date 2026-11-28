@@ -1,0 +1,10 @@
+== base ==
+sofipc: 7788 checks, 0 failures
+m33: 5 red (an open boots again for a model the firmware refused (N12-02 not remembered at the open)); first: 6007: FAIL: S->Boots == 1: 4 != 1 [sofipc: 7788 checks, 5 failures]
+   restored: identical
+m34: 9 red (the release of a D0 exit does not forget the refused model); first: 6012: FAIL: S->Streams.ModelRefused == FALSE: 1 != 0 [sofipc: 7782 checks, 9 failures]
+   restored: identical
+== after ==
+identical
+sofipc: 7782 checks, 9 failures
+exit 0

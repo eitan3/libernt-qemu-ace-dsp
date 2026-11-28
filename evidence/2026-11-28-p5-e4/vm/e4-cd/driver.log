@@ -1,0 +1,71 @@
+2026-11-28T04:18:08Z e4-cd: e4-cd on disk/p5e3.qcow2, image test-audio-intel-sst-p5e3-ae97c6a7a3e
+2026-11-28T04:18:09Z VM e4-cd started (lib-run pid 1829671, sockets /tmp/qad-vm.1829673, data disk /tmp/e4/pouch/e4-cd.img)
+[04:18:28] [    8.293791] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T04:18:28Z the boot: self-test summary lines 1, matched rows 1, gain rows ok 3, idle power-downs so far 0
+    [    7.704776] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+    [    7.710776] intcdsp.sys: boot ok after 5504 us (clock 18157953 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [    7.712776] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again
+    [    7.712776] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+    [    7.712776] intcdsp.sys: gain: 0.00 dB, mute 0
+    [    7.809777] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+    [    7.809777] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+    [    7.810777] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+    [    7.906777] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+    [    7.906777] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+    [    7.906777] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.002777] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+    [    8.002777] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+    [    8.002777] intcdsp.sys: gain: -6.00 dB, mute 0, kept until the DSP runs the PCM again
+    [    8.002777] intcdsp.sys: loopback self-test: the gain step, three depths at -6.00 dB (gain 0x4026e73d)
+    [    8.002777] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.003786] intcdsp.sys: gain: -6.00 dB, mute 0
+    [    8.106778] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, gain 0x4026e73d, render rms 5794.253, capture rms 2903.940, ok
+    [    8.107823] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+    [    8.107823] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.200778] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, gain 0x4026e73d, render rms 379742706.482, capture rms 190322196.559, ok
+    [    8.200778] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+    [    8.200778] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+    [    8.292778] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, gain 0x4026e73d, render rms 379742706.482, capture rms 190322196.559, ok
+    [    8.292778] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+    [    8.292778] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again
+    [    8.293791] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [    8.293791] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+2026-11-28T04:19:36Z screenshot 01-boot; waiting for /tmp/e4/ev/e4-cd/go1
+2026-11-28T04:20:28Z console: Win+R, cmd.exe
+2026-11-28T04:20:44Z data disk: drive E: in the guest (1 marker)
+2026-11-28T04:20:50Z console answering after first (alive-first.txt, 3 s)
+2026-11-28T04:20:50Z the console and the data disk are ready; waiting for /tmp/e4/ev/e4-cd/stop
+2026-11-28T04:39:19Z ## row (d): waiting for /tmp/e4/ev/e4-cd/go2
+2026-11-28T04:39:35Z unmute by the tray's key (audiomute):
+    [12320.328487] intcdsp.sys: gain: -8.00 dB, mute 0, kept until the DSP runs the PCM again
+2026-11-28T04:39:48Z console: Win+R, cmd.exe
+2026-11-28T04:40:02Z data disk: drive E: in the guest (1 marker)
+2026-11-28T04:40:08Z console answering after d1 (alive-d1.txt, 3 s)
+2026-11-28T04:40:08Z ## (d1) dsploop after the applet's level (-8 dB since the last key), the DSP down by idle since the boot
+2026-11-28T04:40:25Z d1-level: ended after about 17 s
+2026-11-28T04:40:25Z d1-level: dsploop.c:420: dsploop: no frame within 48000 matches the tone's first cycle; from the first frame, first differing sample 1 (channel 0): expected 2139, captured 0 dsploop.c:422: Test failed: dsploop: the tone was not captured (96000 frames) dsploop.c:507: Test failed: dsploop: 0 of 3 depths compared dsploop: 0 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure) dsploop: 433 tests executed (0 marked as todo, 2 failures), 0 skipped. 
+    [12482.955464] intcdsp.sys: boot ok after 5452 us (clock 12493405912 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+    [12482.955464] intcdsp.sys: boot at stream open: ok after 6 ms
+    [12482.955464] intcdsp.sys: gain: -8.00 dB, mute 0
+    [12488.000732] intcdsp.sys: idle power down after 3 s
+2026-11-28T04:40:25Z (d1) idle power-downs during the run: 1
+2026-11-28T04:40:25Z ## waiting for /tmp/e4/ev/e4-cd/go3 (the level back at unity by the tray's keys, then the idle power-down)
+2026-11-28T04:41:22Z console: Win+R, cmd.exe
+2026-11-28T04:42:13Z !! the console did not answer after d2 (no alive-d2.txt in 25 s)
+2026-11-28T04:42:13Z !! the console does not answer before d2
+2026-11-28T04:42:13Z ## (d2) dsploop at unity after the idle power-down
+2026-11-28T04:45:39Z d2-unity: !! NOT ended within 150 s
+2026-11-28T04:45:39Z d2-unity: 
+2026-11-28T04:45:39Z (d2) idle power-downs during the run: 0
+2026-11-28T04:45:41Z row (d) done; the start script ends the VM at /tmp/e4/ev/e4-cd/stop
+[14728.043193] intcdsp.sys: boot at stream open: ok after 6 ms
+[14728.043193] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[14728.043193] intcdsp.sys: gain: 0.00 dB, mute 0
+[14728.043193] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[14730.098200] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[14730.101200] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[14732.157333] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[14732.160333] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[14737.188601] intcdsp.sys: idle power down after 3 s
+2026-11-28T04:47:10Z VM e4-cd ended: qemu exited rc=0 (none) at 2026-11-28T04:47:10Z; wall 1742 s
+2026-11-28T04:47:10Z done

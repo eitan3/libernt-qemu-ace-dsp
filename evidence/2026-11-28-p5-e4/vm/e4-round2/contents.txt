@@ -1,0 +1,16 @@
+    965716  01-boot.png
+    944429  90-end.png
+      1181  command.txt
+     12818  driver.log
+        21  end.txt
+      9484  lib-run.out
+       762  pouch-made.out
+         0  pouch-mcopy.out
+       730  pouch-sha256.txt
+      1140  qemu-args.txt
+     15442  qemu-dbg.log.gz
+         0  qemu.log
+     45632  serial.log
+     45015  serial.txt
+        20  sock-dir.txt
+        21  start.txt

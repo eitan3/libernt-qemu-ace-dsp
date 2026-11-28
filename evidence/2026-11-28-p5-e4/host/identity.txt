@@ -1,0 +1,17 @@
+ntoskrnl.exe identity string (unique):
+20261128-nt10.0-045-2923-ga6ab68c.libernt
+the version resources (UTF-16) of the drivers:
+  Windows/system32/drivers/intcdsp.sys: 10.0.26100.1 (0.4.17-amd64-dev 20261128-nt10.0-045-2923-ga6ab68c)
+
+  Windows/system32/drivers/dsppcm.sys: 10.0.26100.1 (0.4.17-amd64-dev 20261128-nt10.0-045-2923-ga6ab68c)
+
+  Windows/system32/drivers/hdaudbus.sys: 
+  Windows/system32/drivers/hdaudio.sys: 10.0.26100.1 (0.4.17-amd64-dev 20261128-nt10.0-045-2923-ga6ab68c)
+
+--- in-ISO vs the build tree
+Windows/system32/drivers/intcdsp.sys: identical to the build tree (507904 bytes)
+Windows/system32/drivers/dsppcm.sys: identical to the build tree (151552 bytes)
+Windows/system32/drivers/hdaudbus.sys: identical to the build tree (335872 bytes)
+Windows/system32/drivers/hdaudio.sys: identical to the build tree (253952 bytes)
+Windows/system32/mmdevapi.dll: identical to the build tree (363520 bytes)
+method: bsdtar -x of the ISO; the count in the identity string is the branch's absolute commit count

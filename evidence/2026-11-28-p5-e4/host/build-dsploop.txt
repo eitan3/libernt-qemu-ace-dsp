@@ -1,0 +1,8 @@
+OK   modules/rostests/apitests/dsploop/dsploop.c
+OK   modules/rostests/apitests/dsploop/compare.c
+OK   modules/rostests/apitests/dsploop/testlist.c
+link rc=0
+pefixup rc=0
+Name: msvcrt.dll
+Name: kernel32.dll
+Name: ole32.dll

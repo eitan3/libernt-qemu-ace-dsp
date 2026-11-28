@@ -1,0 +1,32 @@
+branch feat/audio-control-polish HEAD a6ab68c812d4c05f0d60e3ced4f61915db96c323
+dirty 0
+== start 2026-11-28 07:02:19 +0200
+== rebuild_cache
+[0/2] Re-checking globbed directories...
+[0/2] Running CMake to regenerate build system...
+  of CMake.
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+  <INSTALL_DIR> in the default configure command.  Run "cmake --help-policy
+  policy and suppress this warning.
+  project's install prefix at the CMake default; the NEW behavior sets it to
+  <INSTALL_DIR>.
+Call Stack (most recent call first):
+rebuild_cache rc=0
+== buildstamp
+[0/2] Re-checking globbed directories...
+[1/2] Stamping the build with its branch, commit and time
+== images
+[993/1461] Building RC object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/dsppcm.rc.res
+[1006/1461] Building RC object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/intcdsp.rc.res
+[1020/1461] Building C object ntos/CMakeFiles/ntoskrnl.dir/kd/kdinfo.c.obj
+[1021/1461] Building C object ntos/CMakeFiles/ntoskrnl.dir/ex/exinit.c.obj
+[1026/1461] Building C object ntos/CMakeFiles/ntoskrnl.dir/mm/nt/ntci.c.obj
+[1430/1461] Linking C shared module drivers/wdm/audio/intcdsp/intcdsp.sys
+[1431/1461] Linking C shared module drivers/wdm/audio/legacy/wdmaud/wdmaud.sys
+[1432/1461] Linking C shared module drivers/wdm/audio/sysaudio/sysaudio.sys
+images rc=0
+== end 07:03:07
+exit 0

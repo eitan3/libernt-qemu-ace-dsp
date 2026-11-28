@@ -1,0 +1,19 @@
+template bytes: 3353
+OK   modules/rostests/kmtests/hdaudbus/HdAudBusInterface.c
+OK   modules/rostests/kmtests/hdaudbus/NhltParser.c
+OK   modules/rostests/kmtests/hdaudbus/Policy.c
+OK   modules/rostests/kmtests/hdaudbus/SofIpc4.c
+OK   modules/rostests/kmtests/hdaudbus/Disco.c
+OK   modules/rostests/kmtests/hdaudbus/Softplg.c
+OK   modules/rostests/kmtests/fwload/Fwload.c
+OK   modules/rostests/kmtests/intcdsp/SofIpc.c
+OK   submodules/host-tests/fwload/fake_dsp.c
+OK   submodules/host-tests/fwload/fake_bus.c
+OK   drivers/wdm/audio/intcdsp/adspbus.c
+OK   drivers/wdm/audio/intcdsp/ipclock.c
+OK   drivers/wdm/audio/intcdsp/topology.c
+OK   drivers/wdm/audio/intcdsp/stream.c
+OK   drivers/wdm/audio/intcdsp/intcdsp.c
+OK   drivers/wdm/audio/hdaudbus/hdac_bdl.c
+OK   drivers/wdm/audio/intcdsp/audioif.c
+17/17 compiled with 0 warnings

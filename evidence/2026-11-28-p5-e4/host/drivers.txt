@@ -1,0 +1,21 @@
+[0/2] Re-checking globbed directories...
+[0/495] Performing build step for 'host-tools'
+[1/1] Stamping the build with its branch, commit and time
+[2/20] Performing install step for 'host-tools'
+[3/20] Completed 'host-tools'
+[4/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/minwave.cpp.obj
+[5/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/prophnd.cpp.obj
+[6/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/mintopo.cpp.obj
+[7/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/adapter.cpp.obj
+[8/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/stream.cpp.obj
+[9/20] Building C object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/ksendpoint.c.obj
+[10/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/dsppcm.cpp.obj
+[11/20] Building CXX object drivers/wdm/audio/drivers/dsppcm/CMakeFiles/dsppcm.dir/guid.cpp.obj
+[12/20] Building C object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/hwops.c.obj
+[13/20] Building C object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/fwfile.c.obj
+[14/20] Building C object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/intcdsp.c.obj
+[15/20] Building C object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/topology.c.obj
+[16/20] Linking CXX shared module drivers/wdm/audio/drivers/dsppcm/dsppcm.sys
+[17/20] Building C object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/stream.c.obj
+[18/20] Building C object drivers/wdm/audio/intcdsp/CMakeFiles/intcdsp.dir/audioif.c.obj
+[19/20] Linking C shared module drivers/wdm/audio/intcdsp/intcdsp.sys

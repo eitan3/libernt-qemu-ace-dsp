@@ -1,0 +1,28 @@
+== build 06:57:52
+ninja: Entering directory `/tmp/ht-e1a'
+ninja: error: unknown target 'dsppath/dsppcm', did you mean 'dsppath/dsppath'?
+ninja rc=1 warnings: 0
+== ctest 06:57:52
+      Start 10: softplg.abi
+ 6/14 Test #10: softplg.abi ......................   Passed    0.39 sec
+      Start 11: fwload.boot
+ 7/14 Test #11: fwload.boot ......................   Passed    0.77 sec
+      Start 12: sofipc.transport
+ 8/14 Test #12: sofipc.transport .................   Passed    0.40 sec
+      Start 13: dsppcm.endpoint
+ 9/14 Test #13: dsppcm.endpoint ..................   Passed    0.01 sec
+      Start 14: hdaudio.capture
+10/14 Test #14: hdaudio.capture ..................   Passed    0.01 sec
+      Start 15: dsploop.compare
+11/14 Test #15: dsploop.compare ..................   Passed    0.05 sec
+      Start 16: dspidentity.identity
+12/14 Test #16: dspidentity.identity .............   Passed    0.01 sec
+      Start 17: mmdevapi.devenum
+13/14 Test #17: mmdevapi.devenum .................   Passed    0.01 sec
+      Start 18: apitest.required
+14/14 Test #18: apitest.required .................   Passed    0.01 sec
+
+100% tests passed out of 14
+
+Total Test time (real) =   1.84 sec
+ctest rc=0
