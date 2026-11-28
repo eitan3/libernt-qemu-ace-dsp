@@ -10,7 +10,19 @@
 #      driver boots -- a host whose timer delivery stalls under a spinning TCG
 #      guest otherwise lets the main loop sleep through the model's timers
 #      (README, "A note on the host")
-#      TIMEOUT=<s>  cap on the wait for the driver's "boot ... after" line (60)
+#      TIMEOUT=<s>  cap on each wait of an enable: the boot's end line, then the
+#                   self-test's closing line (60)
+#
+# What an enable prints (the D0 rule, E2): the driver's settings line
+# (`SelfTest = N, ..., BootAtStart = B, DspIdleSec = I s`), then either a boot
+# (`booting:`, `boot ok after ...`) -- and with SelfTest = 2 or 3 the loopback
+# self-test follows, its closing line `loopback self-test: ran (0x00000000),
+# the DSP is left running` ends the entry -- or, with BootAtStart = 0 and no
+# self-test, `D0 entry: the DSP is not booted (BootAtStart = 0); the first
+# stream open boots it` and no boot at all.  The cycle waits for the first of
+# the boot's end line and that line, then for the self-test's closing line
+# when the settings line asks for one.  Exit: 0 the entry ended as its
+# settings say; 1 a wait timed out; 3 the entry booted nothing (BootAtStart = 0).
 #
 # The commands are typed into the guest's console window through the monitor
 # (tools/guest.sh, one key per ~100 ms); the instance id defaults to the one
@@ -19,6 +31,7 @@
 # This work is licensed under the terms of the GNU GPL, version 2 or later.
 # See the COPYING file in the top-level directory.
 set -u
+set -o pipefail
 QAD="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 EV="${1:?usage: cycle.sh <evidence-dir> <label> [instance id]}"
 LABEL="${2:?label missing}"
@@ -50,12 +63,25 @@ fi
 n1=$(lines)
 tools_c type "pnputil /enable-device \"$ID\""
 tools_c key ret
-"$QAD/tools/waitline.sh" "$EV" "intcdsp.sys: boot .*after|clock stalled|Work queue|Fatal|bugcheck" "$TIMEOUT" "$n1" | cut -c1-700 | tee -a "$LOG"
+new() { norm | tail -n +"$((n1 + 1))"; }
+# the entry's first word: the boot's end line, or the D0 rule's "not booted" line
+"$QAD/tools/waitline.sh" "$EV" "intcdsp.sys: boot .*after|D0 entry: the DSP is not booted|clock stalled|Work queue|Fatal|bugcheck" "$TIMEOUT" "$n1" | cut -c1-700 | tee -a "$LOG"
 rc=$?
+if [ $rc -eq 0 ] && new | grep -aq "intcdsp.sys: boot ok after"; then
+    # a boot at a D0 entry is not the entry's end when the settings line asks for the loopback self-test: its closing line is
+    st=$(new | grep -aoE "intcdsp.sys: SelfTest = [0-9]+" | tail -1 | grep -oE "[0-9]+$")
+    if [ "${st:-0}" -ge 2 ]; then
+        "$QAD/tools/waitline.sh" "$EV" "intcdsp.sys: loopback self-test: (ran|failed) \(|loopback self-test: not run" "$TIMEOUT" "$n1" | cut -c1-300 | tee -a "$LOG"
+        rc2=$?
+        new | grep -aE "loopback self-test: [0-9]+ runs," | cut -c1-240 | tee -a "$LOG"
+        [ $rc2 -ne 0 ] && rc=$rc2
+    fi
+fi
+if [ $rc -eq 0 ] && new | grep -aq "D0 entry: the DSP is not booted"; then rc=3; fi
 sleep 3
 pkill -f "heartbeat.py $SOCK" 2>/dev/null
 [ -n "$hb" ] && tail -1 "$hb" | tee -a "$LOG"
 log "model (D0): $(st)"
 log "driver lines after this enable:"
-norm | tail -n +"$((n1 + 1))" | grep -aE "intcdsp\.sys|Work queue|clock stalled|Fatal|bugcheck|PNP_" | grep -av "boot .*after" | cut -c1-400 | tee -a "$LOG"
+norm | tail -n +"$((n1 + 1))" | grep -aE "intcdsp\.sys|Work queue|clock stalled|Fatal|bugcheck|PNP_" | grep -av "boot .*after" | cut -c1-400 | head -40 | tee -a "$LOG"
 exit $rc

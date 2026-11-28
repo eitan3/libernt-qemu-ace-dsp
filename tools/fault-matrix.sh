@@ -57,8 +57,8 @@ EVROOT="${EVROOT:-/tmp/qad-fault-matrix}"
 DISK="${DISK:-$QAD/disk/p2b2.qcow2}"
 WINDOW="${WINDOW:-30}"
 TERM='intcdsp.*(boot (ok|.*timeout|ROM error|stopped|ABI|version|ipc|bad IPC reply|.*crash|interrupt storm|clock stalled)|ipc bad reply|truncated|DSP power down)'
-TERM_ST='intcdsp.*ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, (ok|failed at .+)'
-TERM_ST_OK='intcdsp.*ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, ok'
+TERM_ST='intcdsp.*(ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, (ok|failed at .+)|loopback self-test: [0-9]+ runs, [0-9]+ matched, [0-9]+ failed, .*, (ok|failed))'
+TERM_ST_OK='intcdsp.*(ipc self-test: [0-9]+ requests, [0-9]+ replies, [0-9]+ notifications, [0-9]+ timeouts, [0-9]+ DSP interrupts, ok|loopback self-test: [0-9]+ runs, [0-9]+ matched, 0 failed, .*, ok)'
 mkdir -p "$EVROOT"
 SUMMARY="$EVROOT/fault-matrix.md"
 
@@ -67,8 +67,8 @@ gtime() { echo "$1" | grep -oE "^\[ *[0-9.]+\]" | tr -d "[] "; }
 wall() { date +%s; }
 # the serial log from the driver's "booting:" line on
 after_booting() { norm "$1" | awk -v t="$(norm "$1" | grep -a 'intcdsp.sys: booting:' | head -1)" 'f{print} $0==t{f=1}'; }
-# a self-test row: the driver's settings line before its "booting:" line says so
-st_row() { norm "$1" | awk '/intcdsp.sys: booting:/{exit} /intcdsp.sys: SelfTest = 1,/{f=1} END{print f ? "yes" : "no"}'; }
+# a self-test row: the driver's settings line before its "booting:" line says so (SelfTest = 1, the IPC self-test; 2 or 3, the loopback one)
+st_row() { norm "$1" | awk '/intcdsp.sys: booting:/{exit} /intcdsp.sys: SelfTest = [123],/{f=1} END{print f ? "yes" : "no"}'; }
 q() { "$@" >/dev/null 2>&1; }
 
 collect() {
@@ -130,7 +130,7 @@ run_one() {
         term=$(after_booting "$EV/serial.log" | grep -aiE "$TERM" | grep -aiv "DSP power down" | head -1)
         [ -z "$term" ] && term=$(after_booting "$EV/serial.log" | grep -aiE "intcdsp.*DSP power down" | head -1)
         if [ "$strow" = yes ] && [ -n "$term" ] && echo "$term" | grep -aq "boot ok"; then
-            # SelfTest = 1: boot ok is not the end of the row -- the self-test's
+            # SelfTest set: boot ok is not the end of the row -- the self-test's
             # summary is, or the row is unbounded
             term=$(after_booting "$EV/serial.log" | grep -aiE "$TERM_ST" | head -1)
         fi
@@ -154,7 +154,7 @@ run_one() {
         txt=$(echo "$term" | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //' | cut -c1-200 | sed 's/|/\\|/g')
         if awk -v d="$gdt" -v w="$WINDOW" 'BEGIN{exit !(d <= w)}'; then verdict="bounded"; else verdict="**late**"; fi
     fi
-    if [ "$strow" = yes ] && echo "$term" | grep -aq "ipc self-test:"; then
+    if [ "$strow" = yes ] && echo "$term" | grep -aqE "(ipc|loopback) self-test:"; then
         # the boot's own line and the failing exchange after the summary; the
         # summary has no elapsed of its own, the failing exchange's is the row's
         bootline=$(after_booting "$EV/serial.log" | grep -a "intcdsp.sys: boot ok" | head -1 | sed 's/^\[ *[0-9.]*\] intcdsp.sys: //;s/[[:space:]]*$//' | cut -c1-270 | sed 's/|/\\|/g')
@@ -170,8 +170,10 @@ run_one() {
     if [ "${RECOVER:-0}" = 1 ]; then
         if ( cd "$QAD" && tools/waitline.sh "$EV" "Program Manager" 420 >/dev/null 2>&1 ); then
             sleep 10
-            ( cd "$QAD" && q tools/guest.sh "$EV" key ctrl-esc ); sleep 2
-            ( cd "$QAD" && q tools/guest.sh "$EV" type "cmd" ); ( cd "$QAD" && q tools/guest.sh "$EV" key ret ); sleep 6
+            # the console by the shell's Win+R hotkey (cmd.exe in the Run dialog), as every console of these rounds
+            ( cd "$QAD" && q tools/guest.sh "$EV" key meta_l-r ); sleep 4
+            ( cd "$QAD" && q tools/guest.sh "$EV" key home shift-end ); sleep 1
+            ( cd "$QAD" && q tools/guest.sh "$EV" type "cmd.exe" ); ( cd "$QAD" && q tools/guest.sh "$EV" key ret ); sleep 10
             if [ -n "$scale" ]; then ( cd "$QAD" && q ./set-fault.sh "$EV" none x-delay-scale=1 )
             else ( cd "$QAD" && q ./set-fault.sh "$EV" none ); fi
             ( cd "$QAD" && HEARTBEAT="${HEARTBEAT:-0}" TIMEOUT="${TIMEOUT:-60}" tools/cycle.sh "$EV" recover > "$EV/recover.out" 2>&1 )
