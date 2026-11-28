@@ -1,0 +1,58 @@
+[ 3174.310472] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.347472] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.363097] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.363097] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.394347] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.409972] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.409972] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.503722] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.550597] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.581848] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.613098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.613098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.628723] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.659973] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.659973] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.756098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.801098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.839098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.863098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.864098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.875098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.906349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.906349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.984474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.031349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.062599] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.093849] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.093849] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.109474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.140724] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.140724] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.234474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3750.021409] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3750.088910] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3750.088910] intcdsp.sys: gain: 0.00 dB, mute 0
+[ 3750.088910] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3752.104539] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[ 3752.120164] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[ 3752.135789] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3752.135789] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3754.167044] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[ 3754.182669] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[ 3754.198294] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3754.198294] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3756.229548] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[ 3756.245173] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128

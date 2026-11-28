@@ -1,0 +1,9 @@
+2026-11-28T10:49:58Z boothold: walk on /tmp/e5b/disk/p5e5-proof.qcow2
+2026-11-28T10:49:59Z VM walk started (lib-run pid 1967101, sockets /tmp/qad-vm.1967103, data disk /tmp/e5b/pouch/walk.img)
+[10:50:27] [   28.746319] intcdsp.sys: boot ok after 591658 us (clock 39598062 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T10:51:30Z console: Win+R, cmd.exe
+2026-11-28T10:51:46Z data disk: drive E: in the guest (1 marker)
+2026-11-28T10:51:52Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-28T10:51:52Z ## ready: the console answers; waiting for /tmp/e5b/ev/walk/stop
+2026-11-28T11:04:30Z VM walk ended: qemu exited rc=0 (none) at 2026-11-28T11:04:30Z; wall 872 s
+2026-11-28T11:04:30Z done: fatal 0, ace_unexpected 0

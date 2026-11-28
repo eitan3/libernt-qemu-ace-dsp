@@ -1,0 +1,9 @@
+2026-11-28T11:11:16Z boothold: dbg on /tmp/e5b/disk/p5e5-proof.qcow2
+2026-11-28T11:11:17Z VM dbg started (lib-run pid 1971444, sockets /tmp/qad-vm.1971446, data disk /tmp/e5b/pouch/dbg.img)
+[11:11:43] [   28.129370] intcdsp.sys: boot ok after 591959 us (clock 38643460 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T11:12:46Z console: Win+R, cmd.exe
+2026-11-28T11:13:02Z data disk: drive G: in the guest (1 marker)
+2026-11-28T11:13:08Z console answering after boot (alive-boot.txt, 3 s)
+2026-11-28T11:13:08Z ## ready: the console answers; waiting for /tmp/e5b/ev/dbg/stop
+2026-11-28T11:18:16Z VM dbg ended: qemu exited rc=0 (none) at 2026-11-28T11:18:16Z; wall 420 s
+2026-11-28T11:18:16Z done: fatal 0, ace_unexpected 0

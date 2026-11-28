@@ -1,0 +1,79 @@
+2026-11-28T11:21:11Z proof2: proof2 on /tmp/e5b/disk/p5e5b.qcow2, image test-audio-intel-sst-p5e5b-5ed065692de, the exe b7817561899e13eb
+2026-11-28T11:21:12Z VM proof2 started (lib-run pid 1982609, sockets /tmp/qad-vm.1982611, data disk /tmp/e5b/pouch/proof2.img)
+[11:23:01] [   98.375615] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T11:23:01Z first boot: the desktop (or the setup) reached after 274 serial lines
+2026-11-28T11:23:41Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-28T11:23:55Z console: Win+R, cmd.exe
+2026-11-28T11:24:16Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:24:22Z console answering after first (alive-first.txt, 3 s)
+2026-11-28T11:24:38Z typed: reg add Topology = sof-ipc4-loopback.tplg (REG_SZ)
+2026-11-28T11:24:52Z typed: reg add SelfTest = 3 (REG_DWORD)
+2026-11-28T11:25:06Z typed: reg add BootDsp = 1 (REG_DWORD)
+2026-11-28T11:25:20Z typed: reg add DspIdleSec = 3 (REG_DWORD)
+2026-11-28T11:25:20Z ## reboot 2026-11-28T11:25:20Z (serial line 277): shutdown -r -t 0 typed
+[11:26:18] [    5.032519] intcdsp.sys: boot ok after 5529 us (clock 752408420 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T11:27:16Z console: Win+R, cmd.exe
+2026-11-28T11:27:32Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:28:14Z console answering after reboot (alive-reboot.txt, 3 s)
+2026-11-28T11:28:14Z after the reboot (from serial line 277): booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 1, timeouts 0, fault-during 0, selftest runs 1, gain lines 5, fatal 0, ace_unexpected 0
+[11:28:14] [    5.579396] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T11:28:34Z ## the boot after the reboot (from serial line 277): booting 1, boot ok 1, boot at open ok 0, failed-boot 0, idle 1, timeouts 0, fault-during 0, selftest runs 1, gain lines 5, fatal 0, ace_unexpected 0
+    [    5.016918] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+    [    5.032519] intcdsp.sys: boot ok after 5529 us (clock 752408420 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, a
+    [    5.579396] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   18.385111] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   18.385111] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   18.385111] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   18.385111] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T11:28:54Z ## the tray's keys (volumedown x4): 
+2026-11-28T11:29:22Z ## the tray's keys (volumedown x4): 
+2026-11-28T11:29:35Z console: Win+R, cmd.exe
+2026-11-28T11:29:56Z ## dsploop (dsploop-level.txt): the output after about 9 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: 0.00 dB (level 0, the driver's level), mute 0: the expectation scaled by the gain 0x7fffffff, the tolerance 1 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2000 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1290 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T11:30:00Z ## the driver's lines of the run (serial 557 to 607):
+    [ 1026.918692] intcdsp.sys: boot at stream open: ok after 6 ms
+    [ 1026.918692] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1026.918692] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1026.918692] intcdsp.sys: gain: 0.00 dB, mute 0
+    [ 1028.975074] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1028.975074] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1031.029457] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1031.029457] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+2026-11-28T11:30:20Z ## the tray's keys (volumeup x4): [ 1026.918692] intcdsp.sys: gain: 0.00 dB, mute 0|
+2026-11-28T11:30:33Z console: Win+R, cmd.exe
+2026-11-28T11:30:53Z ## dsploop (dsploop-unity.txt): the output after about 8 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:775: dsploop: the volume node: 0.00 dB (level 0, the driver's level), mute 0: the expectation scaled by the gain 0x7fffffff, the tolerance 1 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2000 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 993, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1287 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T11:30:57Z ## the driver's lines of the run (serial 608 to 657):
+    [ 1257.337703] intcdsp.sys: boot at stream open: ok after 6 ms
+    [ 1257.337703] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1257.337703] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1259.391086] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1259.391086] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1261.444718] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1261.444718] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+2026-11-28T11:31:03Z VM proof2 ended: qemu exited rc=0 (none) at 2026-11-28T11:31:03Z; wall 592 s
+2026-11-28T11:31:03Z done: booting 3, boot ok 3, boot at open ok 2, failed-boot 0, idle 3, timeouts 0, fault-during 0, selftest runs 1, gain lines 6, fatal 0, ace_unexpected 0

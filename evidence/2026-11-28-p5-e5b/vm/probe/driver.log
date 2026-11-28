@@ -1,0 +1,29 @@
+2026-11-28T10:11:40Z probe: probe on /tmp/e5b/disk/p5e5-probe.qcow2, image test-burnboot-diag-02e16ed400c
+2026-11-28T10:11:41Z VM probe started (lib-run pid 1958916, sockets /tmp/qad-vm.1958918, data disk /tmp/e5b/pouch/probe.img)
+[10:13:49] [  116.630155] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T10:13:49Z first boot: the desktop (or the setup) reached after 578 serial lines
+2026-11-28T10:14:29Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-28T10:14:43Z console: Win+R, cmd.exe
+2026-11-28T10:14:59Z data disk: drive D: in the guest (1 marker)
+2026-11-28T10:15:14Z console answering after first (alive-first.txt, 4 s)
+[10:15:14] [   30.237038] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   25.768239] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [   26.752625] intcdsp.sys: boot ok after 591710 us (clock 37434417 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP int
+    [   27.237005] intcdsp.sys: topology: modules copier → id 5, gain → id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+    [   27.440132] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+    [   27.924513] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+    [   28.299517] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+    [   28.877648] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+    [   29.362028] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+    [   29.752658] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+    [   30.237038] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   68.517691] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [   68.611442] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+    [   68.705193] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   68.814569] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   68.908320] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   69.002071] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T10:15:29Z set "WINEDEBUG=warn+mmdevapi"&& %POUCHDRV%\mmdevapi_apitest.exe devicetopology: output after about 4 s: The system cannot find the path specified.  
+2026-11-28T10:15:34Z ## the serial lines of the probe (from 581 to 581): 0
+2026-11-28T10:15:47Z set LIBERNT_APITEST_REQUIRED=1&& %POUCHDRV%\dsploop_apitest.exe: output after about 3 s: The system cannot find the path specified.  
+2026-11-28T10:15:52Z ## the serial lines of dsploop at unity (from 581 to 581)

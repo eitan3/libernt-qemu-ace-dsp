@@ -1,0 +1,32 @@
+2026-11-28T11:32:38Z console: Win+R, cmd.exe
+2026-11-28T11:32:41Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:33:03Z proof3: proof3 on /tmp/e5b/disk/p5e5b.qcow2, image test-audio-intel-sst-p5e5b-5ed065692de, the exe b7817561899e13eb, DefaultOutput {0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}
+2026-11-28T11:33:04Z VM proof3 started (lib-run pid 1985944, sockets /tmp/qad-vm.1985946, data disk /tmp/e5b/pouch/proof2.img)
+2026-11-28T11:33:07Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+[11:33:24] [    8.599167] intcdsp.sys: boot ok after 5525 us (clock 19197635 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T11:33:40Z console: Win+R, cmd.exe
+2026-11-28T11:33:55Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:34:25Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+2026-11-28T11:34:28Z console: Win+R, cmd.exe
+2026-11-28T11:34:42Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:34:49Z console answering after boot (alive-boot.txt, 4 s)
+    [    8.599167] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+    [    8.599167] intcdsp.sys: boot ok after 5525 us (clock 19197635 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, la
+    [    9.161670] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T11:34:59Z console: Win+R, cmd.exe
+2026-11-28T11:35:49Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:35:55Z console: Win+R, cmd.exe
+2026-11-28T11:36:43Z ## DefaultOutput read back: 
+2026-11-28T11:36:59Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+2026-11-28T11:37:08Z ## the tray's keys (volumedown x4): 
+2026-11-28T11:37:32Z console: Win+R, cmd.exe
+2026-11-28T11:37:37Z ## the tray's keys (volumedown x4): 
+2026-11-28T11:37:46Z data disk: drive D: in the guest (1 marker)
+2026-11-28T11:37:52Z console: Win+R, cmd.exe
+2026-11-28T11:38:16Z !! the console did not answer after boot (no alive-boot.txt in 25 s)
+    [    8.599167] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 3 s
+    [    8.599167] intcdsp.sys: boot ok after 5525 us (clock 19197635 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, la
+    [    9.161670] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+2026-11-28T11:39:07Z console: Win+R, cmd.exe
+2026-11-28T11:39:21Z ## DefaultOutput read back: 
+2026-11-28T11:39:39Z ## the tray's keys (volumedown x4): 

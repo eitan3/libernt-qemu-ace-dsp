@@ -1,0 +1,24 @@
+branch feat/audio-control-polish HEAD 5ed065692de3339ce3b5b74f15fa359744add450
+dirty 5
+== start 2026-11-28 13:19:18 +0200
+== rebuild_cache
+[0/2] Re-checking globbed directories...
+[0/2] Running CMake to regenerate build system...
+rebuild_cache rc=0
+== buildstamp
+[1/2] Stamping the build with its branch, commit and time
+buildstamp rc=0
+== images
+ninja: no work to do.
+ninja: no work to do.
+[10/11] Linking C shared module dll/win32/mmdevapi/mmdevapi.dll
+[1452/1488] Linking CXX shared module drivers/wdm/audio/drivers/hdaudio/hdaudio.sys
+[1453/1488] Linking CXX shared module drivers/wdm/audio/drivers/dsppcm/dsppcm.sys
+[1454/1488] Linking CXX shared module drivers/wdm/audio/drm/drmk/drmk.sys
+[1455/1488] Linking C shared module drivers/wdm/audio/legacy/wdmaud/wdmaud.sys
+[1456/1488] Linking C shared module drivers/wdm/audio/intcdsp/intcdsp.sys
+[1457/1488] Linking CXX shared module drivers/wdm/audio/backpln/portcls/portcls.sys
+[1458/1488] Linking C shared module drivers/wdm/audio/sysaudio/sysaudio.sys
+steps 1430, warnings 0; images rc=0
+== end 13:20:12
+exit 0

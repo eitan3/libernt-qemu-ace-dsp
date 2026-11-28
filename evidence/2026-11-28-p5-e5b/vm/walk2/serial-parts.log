@@ -1,0 +1,35 @@
+[  338.460293] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[  338.549793] (\sdk\lib\rtl\heap.c:2343) HEAP 00000041E3960000: Trying to free an invalid address 00000041E396D110!
+[  338.549793] (\sdk\lib\rtl\heap.c:2364)     process 0000000000000078 'F:\walkprobe.exe'
+[  338.549793] (\sdk\lib\rtl\heap.c:2394)     frame 0: 00007FFE05AEEA54 ('ntdll.dll' + 0x5ea54)
+[  338.549793] (\sdk\lib\rtl\heap.c:2394)     frame 1: 00007FFE05AEE597 ('ntdll.dll' + 0x5e597)
+[  338.549793] (\sdk\lib\rtl\heap.c:2394)     frame 2: 00007FF810E58588 ('combase.dll' + 0x18588)
+[  338.549793] (\sdk\lib\rtl\heap.c:2394)     frame 3: 00007FF810E57C26 ('combase.dll' + 0x17c26)
+[  338.549793] (\sdk\lib\rtl\heap.c:2394)     frame 4: 00007FF810E57BFA ('combase.dll' + 0x17bfa)
+[  338.549793] (\sdk\lib\rtl\heap.c:2394)     frame 5: 00007FFC554A1504 ('walkprobe.exe' + 0x1504)
+[  675.436878] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[  675.500129] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  675.500129] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  675.500129] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  675.500129] intcdsp.sys: gain: 0.00 dB, mute 0
+[  675.515754] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  675.515754] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  675.515754] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  677.532386] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[  677.549386] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[  677.572386] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  677.572386] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  677.572386] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  677.575386] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  677.575386] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  677.575386] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  679.592143] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[  679.610143] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[  679.633143] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  679.633143] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  679.633143] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  679.636143] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[  679.636143] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[  679.636143] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[  681.661775] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[  681.677400] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128

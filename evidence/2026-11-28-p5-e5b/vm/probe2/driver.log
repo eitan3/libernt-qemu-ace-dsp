@@ -1,0 +1,87 @@
+2026-11-28T10:21:18Z probe2: probe2 on /tmp/e5b/disk/p5e5-probe.qcow2, image test-burnboot-diag-02e16ed400c
+2026-11-28T10:21:19Z VM probe2 started (lib-run pid 1961099, sockets /tmp/qad-vm.1961101, data disk /tmp/e5b/pouch/probe2.img)
+[10:21:47] [   28.623335] intcdsp.sys: boot ok after 591969 us (clock 39100434 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T10:24:30Z probe2: probe2 on /tmp/e5b/disk/p5e5-probe.qcow2, image test-burnboot-diag-02e16ed400c
+2026-11-28T10:24:30Z VM probe2 started (lib-run pid 1961441, sockets /tmp/qad-vm.1961101, data disk /tmp/e5b/pouch/probe2.img)
+[10:24:30] [   28.623335] intcdsp.sys: boot ok after 591969 us (clock 39100434 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+2026-11-28T10:25:28Z console: Win+R, cmd.exe
+2026-11-28T10:26:49Z !! the data disk got no drive letter the console could find (no drive.txt in 40 s)
+2026-11-28T10:27:22Z console: Win+R, cmd.exe
+2026-11-28T10:27:39Z data disk: drive F: in the guest (1 marker)
+2026-11-28T10:27:45Z console answering after boot (alive-boot.txt, 3 s)
+    [   27.997309] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [   28.981686] intcdsp.sys: boot ok after 592154 us (clock 40233846 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, 
+    [   32.466069] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   33.747297] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   33.841047] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   33.934797] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   34.044173] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T10:28:00Z %POUCHDRV%\mmdevapi_apitest.exe devicetopology: output after about 3 s: The system cannot find the path specified.  
+2026-11-28T10:28:08Z ## the serial lines of the probe (from 556 to 556): 0
+2026-11-28T10:28:23Z %POUCHDRV%\dsploop_apitest.exe: output after about 3 s: The system cannot find the path specified.  
+2026-11-28T10:28:31Z ## the serial lines of dsploop at unity (from 556 to 556)
+2026-11-28T10:37:08Z %POUCHDRV%\dsploop_apitest.exe: output after about 420 s: 
+2026-11-28T10:37:16Z ## the serial lines of dsploop at -8 dB (from 557 to 618)
+    [ 2652.786185] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000000D7B2557C0): stub
+    [ 2652.786185] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000000D7B2557C0, 1, 0000000D8000FD68, 0000000D8000FD64): stub
+    [ 2654.145064] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+    [ 3174.310472] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.347472] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.363097] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.363097] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.394347] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.409972] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.409972] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.503722] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.550597] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.581848] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.613098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.613098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.628723] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.659973] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.659973] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.756098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.801098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.839098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.863098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.864098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.875098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.906349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.906349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3174.984474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.031349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.062599] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.093849] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.093849] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.109474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.140724] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.140724] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3175.234474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3750.021409] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+    [ 3750.088910] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 3750.088910] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 3750.088910] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 3750.088910] intcdsp.sys: gain: 0.00 dB, mute 0
+    [ 3750.088910] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 3750.088910] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 3750.088910] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 3752.104539] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+    [ 3752.120164] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+    [ 3752.135789] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 3752.135789] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 3752.135789] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 3752.135789] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 3752.135789] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 3752.135789] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 3754.167044] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+    [ 3754.182669] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+    [ 3754.198294] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 3754.198294] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 3754.198294] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 3754.198294] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 3754.198294] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 3754.198294] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+    [ 3756.229548] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+    [ 3756.245173] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+2026-11-28T10:38:11Z VM probe2 ended: qemu exited rc=0 (none) at 2026-11-28T10:38:11Z; wall 821 s
+2026-11-28T10:38:11Z done: fatal 0, ace_unexpected 0

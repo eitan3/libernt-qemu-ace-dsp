@@ -1,0 +1,22 @@
+== base 13:19:25 ==
+mmdevapi: 226 checks, 0 failures
+dsploop: 1327 checks, 0 failures
+m40: 2 red (the walk follows the parts outgoing from a render endpoint connector (E5a direction, N15-20)); first: 657: FAIL: DsploopWalkIncoming(DsploopFlowIn) == 1: 0 != 1 [dsploop: 1327 checks, 2 failures]
+   restored: identical (yes)
+m41: 1 red (the walk always follows the incoming parts); first: 658: FAIL: DsploopWalkIncoming(DsploopFlowOut) == 0: 1 != 0 [dsploop: 1327 checks, 1 failures]
+   restored: identical (yes)
+m42: 1 red (the walk always follows the outgoing parts); first: 657: FAIL: DsploopWalkIncoming(DsploopFlowIn) == 1: 0 != 1 [dsploop: 1327 checks, 1 failures]
+   restored: identical (yes)
+m43: 2 red (the two flows exchanged (In 1, Out 0)); first: 655: FAIL: DsploopFlowIn == 0: 1 != 0 [dsploop: 1327 checks, 2 failures]
+   restored: identical (yes)
+m44: 1 red (a node property request without KSPROPERTY_TYPE_TOPOLOGY (the E5a request: answered STATUS_NOT_FOUND)); first: 697: FAIL: seen.Property.Flags == GET | KSPROPERTY_TYPE_TOPOLOGY: 1 != 268435457 [mmdevapi: 226 checks, 1 failures]
+   restored: identical (yes)
+m45: 1 red (a node event request without KSEVENT_TYPE_TOPOLOGY); first: 799: FAIL: seen.Event.Flags == 0x1 | KSEVENT_TYPE_TOPOLOGY: 1 != 268435457 [mmdevapi: 226 checks, 1 failures]
+   restored: identical (yes)
+m46: 1 red (a node method request without KSMETHOD_TYPE_TOPOLOGY); first: 765: FAIL: seen.Method.Flags == 0x3 | KSMETHOD_TYPE_TOPOLOGY: 3 != 268435459 [mmdevapi: 226 checks, 1 failures]
+   restored: identical (yes)
+== after ==
+modules/rostests/apitests/dsploop/walk.h: identical to its copy before the first row (yes)
+dll/win32/mmdevapi/devicetopology_control.h: identical to its copy before its first row (yes)
+mmdevapi: 226 checks, 0 failures
+dsploop: 1327 checks, 0 failures

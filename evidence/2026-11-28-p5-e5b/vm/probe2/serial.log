@@ -1,0 +1,695 @@
+[2J[001;001H[=3h[2J[001;001H[2J[001;001H[8;042;160t[2J[001;001H[2J[001;001H[8;056;240t[2J[001;001HBdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+
+LiberNT Boot Manager, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x7
+BCD store \EFI\LiberNT\Boot\BCD: 1 entries, 0 tools, timeout 3 s
+  Entry 1: LiberNT (default)
+
+LiberNT OS Loader, firmware EDK II revision 0x00010000, UEFI 2.70
+Serial port 1 of 1: PNP0A03(0) PCI(31.0) COM1, 115200 baud <- this port
+UDP log broadcast to port 6666 on 0 network adapters
+OS loader: describing the platform
+OS loader: reading the memory map
+OS loader: allocating the loader stack
+OS loader: switching to the loader stack at 000000007CF84000
+OS loader: selecting the boot entry
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x7
+OS loader: reading the boot entry
+OS loader: system root \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE,SCREEN
+OS loader: loading the SYSTEM hive
+(\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x21
+OS loader: loading ntoskrnl.exe and hal.dll
+OS loader: loading the NLS files
+OS loader: loading the boot drivers
+OS loader: preparing the kernel address space
+OS loader: machine-dependent state built, amd64 ready
+OS loader: kernel memory layout built, its pml4 at 000000007DB45000, firmware cr3 still 000000007F801000
+OS loader: leaving the firmware boot services
+OS loader: firmware boot services exited
+OS loader: processor context set, cr3 000000007DB45000 cr4 0000000000000668
+OS loader: firmware runtime moved to its virtual addresses
+OS loader: handing over, boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1)
+OS loader: nt path \Windows\, options  SOS DEBUG DEBUGPORT=COM1 BAUDRATE=115200 KDWATCHDOG=0  DEBUGPORT=FILE,SCREEN
+OS loader: entry FFFFF8007B5417A0, loader block FFFFF8007DB47000, arc disks FFFFF8007DB481B0, registry 3182592 bytes at FFFFF8007C832000
+[    0.000000] KDLOGWD: disabled, timeout 0 seconds
+[    0.000000] (\ntos\ke\amd64\kiinit.c:722) Pcr = FFFFF8007B2ED640, Gdt = FFFFF8007DA2D000, Idt = FFFFF8007B2C8290, Tss = FFFFF8007DB44000
+[    0.000000] (\ntos\ke\amd64\cpu.c:497) Supported CPU features: KF_SMEP KF_RDTSC KF_CR4 KF_CMOV KF_GLOBAL_PAGE KF_LARGE_PAGE KF_MTRR KF_CMPXCHG8B KF_MMX KF_PAT KF_FXSR KF_FAST_SYSCALL KF_XMMI KF_3DNOW KF_XSAVEOPT KF_XMMI64 KF_BRANCH KF_SSE3 KF_CMPXCHG16B KF_AUTHENTICAMD KF_XSTATE KF_SLAT KF_VIRT_FIRMWARE_ENABLED KF_RDWRFSGSBASE KF_NX_BIT KF_NX_ENABLED KF_RDRAND KF_SMAP KF_RDTSCP KF_HUGEPAGE KF_SSSE3 KF_SSE4_1 KF_SSE4_2 KF_AVX KF_AVX2 X86_FEATURE_PAE
+[    0.000000] (\hal\halx86\acpi\halacpi.c:56) ACPI Timer at: 608h (EXT: 0)
+[    0.000000] (\hal\arch\common\acpi\tables.c:936) ACPI v1.5-2.0_C detected. Tables: [XSDT] [APIC] [FACP]
+[    0.000000] (\hal\halx86\apic\apic.c:780) APIC: I/O APIC at FFFFFFFFFFFE1000, GSI 0-23
+[    0.000000] (\hal\halx86\apic\rtctimer.c:90) Local APIC timer clock: 999999400 Hz
+[    0.000000] (\hal\halx86\apic\rtctimer.c:230) Clock initialized (local APIC timer)
+[    0.000000] (\hal\halx86\apic\halinit.c:102) Using HAL: APIC SMP DBG, local APIC through the memory window
+[    0.000000] (\hal\halx86\acpi\madt.c:346) Physical processor count: 1
+[    0.000000] (\hal\halx86\acpi\madt.c:355)  Processor 0: ProcessorId 0, LapicId 0, ProcessorStarted 0, BSPCheck 1, ProcessorPrcb FFFFF8007B2ED7C0
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:595) Display: 'UEFI GOP Framebuffer'
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:53) IsNewConfigData:TRUE
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:227) **  FbBVid: New Config data found
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:84) GetVideoData
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:136)     CmResourceTypeMemory
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:155)     CmResourceTypeDeviceSpecific
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:241) **  FbBVid: Got video RAM address: 0x80000000 - Size: 4096000
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:266) **  FbBVid: Framebuffer at: 0x80000000
+[    0.578126] (\sdk\include\libernt\drivers\bootvid\framebuf.c:730) 
+[    2.234379] (\ntos\ke\amd64\mproc.c:211) KeStartAllProcessors: started 0 processor(s)
+[    2.234379] (\ntos\ke\cpuctrl.c:833) All 1 processors have efficiency class 0
+[0m[s[999;999H[6n[u[    2.750005] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of DbgCap
+[    2.750005] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of DbgCap answered 0
+[    2.750005] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Wdf01000
+[    2.750005] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Wdf01000 answered 0
+[    2.750005] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of swenum
+[    2.750005] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of swenum answered 0
+[    2.765630] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of acpi
+[    2.765630] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of acpi answered 0
+[    2.765630] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of isapnp
+[    2.765630] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of isapnp answered 0
+[    2.765630] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of partmgr
+[    2.765630] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of partmgr answered 0
+[    2.765630] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of pci
+[    2.765630] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of pci answered 0
+[    2.765630] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of reshub
+[    2.781256] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of reshub answered 0
+[    2.781256] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbccgp
+[    2.781256] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbccgp answered 0
+[    2.781256] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbehci
+[    2.781256] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbehci answered 0
+[    2.781256] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbhub
+[    2.781256] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbhub answered 0
+[    2.781256] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbohci
+[    2.781256] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbohci answered 0
+[    2.890631] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbuhci
+[    2.984381] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbuhci answered 0
+[    3.078131] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbxhci
+[    3.171881] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbxhci answered 0
+[    3.265632] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of MountMgr
+[    3.375007] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of MountMgr answered 0
+[    3.468757] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of pciide
+[    3.562507] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of pciide answered 0
+[    3.656257] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of sdbus
+[    3.765633] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of sdbus answered 0
+[    3.859383] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of sdhc
+[    3.953133] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of sdhc answered 0
+[    4.046883] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of sdport
+[    4.140633] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of sdport answered 0
+[    4.250009] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of vmbus
+[    4.343759] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of vmbus answered 0
+[    4.437509] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of atapi
+[    4.531259] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of atapi answered 0
+[    4.640635] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of LSI_SAS
+[    4.734385] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of LSI_SAS answered 0
+[    4.828135] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of storahci
+[    4.921885] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of storahci answered 0
+[    5.015635] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of stornvme
+[    5.125011] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of stornvme answered 0
+[    5.218761] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of storport
+[    5.312511] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of storport answered 0
+[    5.406261] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of storvsc
+[    5.515636] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of storvsc answered 0
+[    5.609387] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of vioblk
+[    5.703137] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of vioblk answered 0
+[    5.796887] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of usbstor
+[    5.890637] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of usbstor answered 0
+[    6.000012] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Disk
+[    6.093763] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Disk answered 0
+[    6.187513] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of sffdisk
+[    6.281263] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of sffdisk answered 0
+[    6.390638] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of cdrom
+[    6.484389] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of cdrom answered 0
+[    6.578139] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of fltmgr
+[    6.671889] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of fltmgr answered 0
+[    6.781264] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Ntfs
+[    6.875014] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Ntfs answered 0
+[    6.968765] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of ksecdd
+[    7.062515] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of ksecdd answered 0
+[    7.171890] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Ndis
+[    7.265640] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Ndis answered 0
+[    7.359390] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Mup
+[    7.453141] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Mup answered 0
+[    7.562516] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of RamDisk
+[    7.656266] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of RamDisk answered 0
+[    7.750016] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\acpi -> ACPI_HAL\PNP0C08\0
+[    7.843766] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\acpi answered 0
+[    7.953142] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI_HAL\PNP0C08\0
+[    8.046892] ACPI: RSDP 0x00000000142338B0 000024 (v02 ROS   )
+[    8.140642] ACPI: XSDT 0x000000007FE6A0E8 000054 (v01 BOCHS  BXPC     00000001      01000013)
+[    8.234392] ACPI: FACP 0x000000007FE66000 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    8.343768] ACPI: DSDT 0x000000007FE67000 0020FD (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    8.437518] ACPI: FACS 0x000000007FECA000 000040
+[    8.531268] ACPI: APIC 0x000000007FE65000 000078 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    8.640643] ACPI: HPET 0x000000007FE64000 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    8.734393] ACPI: MCFG 0x000000007FE63000 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    8.828144] ACPI: WAET 0x000000007FE62000 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    8.937519] ACPI: BGRT 0x000000007FE61000 000038 (v01 INTEL  EDK2     00000002      01000013)
+[    9.046894] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    9.140644] ACPI: Enabled 2 GPEs in block 00 to 3F
+[    9.281270] (\ntos\po\sleep.c:372) Power state handler 2 registered
+[    9.375020] (\hal\halx86\acpi\sleep.c:813) ACPI sleep state S3 available (SLP_TYP 1/1)
+[    9.484395] (\ntos\po\sleep.c:372) Power state handler 3 registered
+[    9.578145] (\hal\halx86\acpi\sleep.c:813) ACPI sleep state S4 available (SLP_TYP 2/2)
+[    9.671895] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI_HAL\PNP0C08\0 started, status 0
+[    9.765646] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[    9.875021] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\FixedButton\2&ccb86d17&0&FFB0
+[    9.968771] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\FixedButton\2&ccb86d17&0&FFB0 started, status 0
+[   10.062521] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\pci -> ACPI\PNP0A08\0
+[   10.171897] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\pci answered 0
+[   10.265647] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0A08\0
+[   10.359397] (\drivers\bus\acpi\buspdo.c:299) ACPI: Using hex _UID for PCI root ACPI\PNP0A08 bus=0
+[   10.468772] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0A08\0 started, status 0
+[   10.562522] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting PCI\VEN_8086&DEV_29C0&SUBSYS_11001AF4&REV_00\3&a5c7842&0&00
+[   10.671898] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: PCI\VEN_8086&DEV_29C0&SUBSYS_11001AF4&REV_00\3&a5c7842&0&00 started, status 0
+[   10.765648] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\isapnp -> PCI\VEN_8086&DEV_2918&SUBSYS_11001AF4&REV_02\3&a5c7842&0&F8
+[   10.875023] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\isapnp answered 0
+[   10.968773] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting PCI\VEN_8086&DEV_2918&SUBSYS_11001AF4&REV_02\3&a5c7842&0&F8
+[   11.062523] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: PCI\VEN_8086&DEV_2918&SUBSYS_11001AF4&REV_02\3&a5c7842&0&F8 started, status 0
+[   11.171899] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\storahci -> PCI\VEN_8086&DEV_2922&SUBSYS_11001AF4&REV_02\3&a5c7842&0&FA
+[   11.265649] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\storahci answered 0
+[   11.359399] (\drivers\storage\port\storport\fdo.c:2569) IRP_MJ_PNP / Unknown IOCTL 0xb
+[   11.453149] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting PCI\VEN_8086&DEV_2922&SUBSYS_11001AF4&REV_02\3&a5c7842&0&FA
+[   11.562525] (\drivers\storage\port\storport\fdo.c:83) Storport: 1 message interrupts connected
+[   11.656275] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 0: ATA 'QEMU HARDDISK' fw '2.5+' 167772160 sectors of 512 bytes
+[   11.875025] (\drivers\storage\port\storahci\storahci.c:479) AHCI port 2: ATA 'QEMU HARDDISK' fw '2.5+' 65599 sectors of 512 bytes
+[   11.968775] (\ntos\ex\exworker.c:439) Work queue 1 has made no progress for 3 passes
+[   12.437526] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: PCI\VEN_8086&DEV_2922&SUBSYS_11001AF4&REV_02\3&a5c7842&0&FA started, status 0
+[   12.546902] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\Disk -> SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000
+[   12.640652] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\Disk answered 0
+[   12.734402] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\partmgr -> SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000
+[   12.828152] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\partmgr answered 0
+[   12.921903] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000
+[   13.031278] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000 started, status 0
+[   13.140653] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011EB90 FFFF8180FE807B00)
+[   13.234403] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting STORAGE\Partition\5&2ee25b9a&0&Sebce863c_O100000_L4000000
+[   13.328153] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: STORAGE\Partition\5&2ee25b9a&0&Sebce863c_O100000_L4000000 started, status 0
+[   13.437529] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting STORAGE\Partition\5&2ee25b9a&0&Sebce863c_O4100000_L13fbf00000
+[   13.531279] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: STORAGE\Partition\5&2ee25b9a&0&Sebce863c_O4100000_L13fbf00000 started, status 0
+[   13.640654] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\Disk -> SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000
+[   13.734404] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\Disk answered 0
+[   13.828154] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\partmgr -> SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000
+[   13.921905] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\partmgr answered 0
+[   14.015655] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000
+[   14.125030] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000 started, status 0
+[   14.218780] (\drivers\storage\port\storport\storport.c:1238) PortDispatchSystemControl(FFFF81800011FC50 FFFF8180FE840B80)
+[   14.328156] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting STORAGE\Partition\5&2a178ba7&0&Sf540056f_O7e00_L2000000
+[   14.421906] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: STORAGE\Partition\5&2a178ba7&0&Sf540056f_O7e00_L2000000 started, status 0
+[   14.531281] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0A06\CPU_Hotplug_resources
+[   14.625031] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0A06\CPU_Hotplug_resources started, status 0
+[   14.734406] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0A06\GPE0_resources
+[   14.828157] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0A06\GPE0_resources started, status 0
+[   14.921907] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0A06\PCI_Hotplug_resources
+[   15.031282] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0A06\PCI_Hotplug_resources started, status 0
+[   15.140657] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0B00\3&a5c7842&0
+[   15.234408] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0B00\3&a5c7842&0 started, status 0
+[   15.328158] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\ACPI0010\2&ccb86d17&0
+[   15.437533] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\ACPI0010\2&ccb86d17&0 started, status 0
+[   15.531283] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\swenum -> ROOT\SYSTEM\0000
+[   15.625033] (\drivers\ksfilter\ks\swenum.c:1518) KsCreateBusEnumObject Devices BusDeviceObject FFFF8180001615D0
+[   15.734409] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\swenum answered 0
+[   15.828159] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ROOT\SYSTEM\0000
+[   15.921909] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ROOT\SYSTEM\0000 started, status 0
+[   16.031284] (\ntos\io\iomgr\ioarcname.c:657) I/O: the loader named boot device multi(0)disk(0)rdisk(0)partition(2), hal device multi(0)disk(0)rdisk(0)partition(1), remote boot 0
+[   16.125034] (\ntos\io\iomgr\ioarcname.c:673) I/O: attempt 0, the disks answered to the boot device
+[   18.453164] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   18.546915] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 158618, disk byte 717856768
+[   18.640665] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   18.765665] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver BasicDisplay
+0000 œ  €€è  04      ‰ €€                                                 \ S y s t e m R o o t \ s y s t e m 3 2 \ d r i v e r s \ B a s i c D i s p l a y . s y s   ª[   18.900012] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000009000 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3648:24, caller FFFFF8007B96E4F1
+[   19.009387] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of BasicDisplay
+[   19.103114] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver dxgkrnl
+[   19.259363] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of dxgkrnl
+[   19.353064] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of dxgkrnl answered 0
+[   19.462440] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver dxgkrnl loaded, status 0
+[   19.556190] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of BasicDisplay answered 0
+[   19.649940] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver BasicDisplay loaded, status 0
+[   19.743690] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\BasicDisplay -> PCI\VEN_1234&DEV_1111&SUBSYS_11001AF4&REV_02\3&a5c7842&0&08
+[   19.853065] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\BasicDisplay answered 0
+[   19.946816] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting PCI\VEN_1234&DEV_1111&SUBSYS_11001AF4&REV_02\3&a5c7842&0&08
+[   20.040566] (\drivers\bus\pci\pdo.c:5593) DIAG-PCI:     assigned memory 0x80000000, length field 0x1000000, type 3, flags 0x84
+[   20.149941] (\drivers\bus\pci\pdo.c:5602) DIAG-PCI:     assigned resource of type 129
+[   20.243691] (\drivers\bus\pci\pdo.c:5593) DIAG-PCI:     assigned memory 0x81215000, length field 0x1000, type 3, flags 0x80
+[   20.337442] (\drivers\bus\pci\pdo.c:5602) DIAG-PCI:     assigned resource of type 129
+[   20.431192] (\drivers\bus\pci\pdo.c:5573) DIAG-PCI: 00:01.0 before its BARs are rewritten: class 030000, command 0007, BARs 80000008 00000000 81215000 00000000 00000000 00000000
+[   20.540567] (\drivers\bus\pci\pdo.c:5708) DIAG-PCI: a display device: about to rewrite its BARs
+[   20.634317] (\drivers\bus\pci\pdo.c:5573) DIAG-PCI: 00:01.0 after its BARs were rewritten: class 030000, command 0007, BARs 80000008 00000000 81215000 00000000 00000000 00000000
+[   20.728067] (\drivers\bus\pci\pdo.c:5716) DIAG-PCI: a display device: the BAR rewrite answered 0x00000000
+[   20.837443] (\drivers\bus\pci\pdo.c:5573) DIAG-PCI: 00:01.0 its start is finished: class 030000, command 0007, BARs 80000008 00000000 81215000 00000000 00000000 00000000
+[   20.931193] (\drivers\bus\pci\pdo.c:6019) DIAG-PCI: a display device: its start is finished
+[   21.040568] (\drivers\directx\dxgkrnl\adapter.c:193) DXGKRNL: DISPLAY_BRIDGE: the boot screen left its window at 0x80000000 for a 4096000-byte copy
+[   21.134318] (\drivers\directx\dxgkrnl\adapter.c:14988) DXGKRNL: DIAG about to call the display miniport's StartDevice (fallback 0)
+[   21.228068] (\drivers\directx\dxgkrnl\adapter.c:13352) DXGKRNL: DxgkCbAcquirePostDisplayOwnership #1: claimant=FFFF8180005411A0 owner=0000000000000000 -> status=0x00000000 1280x800 pitch=5120 fmt=22 pa=0x80000000 fbstate=1
+[   21.321819] (\sdk\lib\drivers\softgpu\softgpu.c:1269) SOFTGPU: DIAG StartDevice: 1280x800, firmware framebuffer 0x80000000, pitch 5120, size 0x3e8000, modes 0
+[   21.431194] (\sdk\lib\drivers\softgpu\softgpu.c:1270) SOFTGPU: DIAG asking ACPI about the panel
+[   21.524944] (\sdk\lib\drivers\softgpu\softgpu.c:1272) SOFTGPU: DIAG ACPI answered; starting the scanout
+[   21.618694] (\sdk\lib\drivers\softgpu\softgpu.c:1277) SOFTGPU: DIAG the scanout start answered 0x00000000
+[   21.728070] (\sdk\lib\drivers\softgpu\softgpu.c:1281) SOFTGPU: DIAG allocating the frame buffer, 0x49152000 bytes preferred
+[   21.899945] (\sdk\lib\drivers\softgpu\softgpu.c:1312) SOFTGPU: DIAG the frame buffer is allocated, 0x49152000 bytes; starting the platform scanout
+[   21.993695] (\sdk\lib\drivers\softgpu\softgpu.c:1318) SOFTGPU: DIAG the platform scanout start answered 0x00000000
+[   22.103070] (\sdk\lib\drivers\softgpu\softgpu.c:1513) SOFTGPU: DIAG StartDevice success
+[   22.196821] (\drivers\directx\dxgkrnl\adapter.c:15004) DXGKRNL: DIAG the display miniport's StartDevice returned 0x00000000 after 963892 us
+[   22.290571] (\drivers\directx\dxgkrnl\adapter.c:15300) DXGKRNL: DxgkAdapterStart: adapter FFFF8180005411A0 LUID=00000000-000003f3 service=\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\BASICDISPLAY sources=1 (full)
+[   22.384321] (\drivers\directx\dxgkrnl\adapter.c:6592) DXGKRNL: PoFx: no runtime power components 0xC00000BB
+[   22.592322] (\drivers\directx\dxgkrnl\display.c:7181) DXGKRNL: DISPLAY_BRIDGE: adapter FFFF8180005411A0 desktop ready 1280x800 (scanout)
+[   22.690322] (\ntos\po\sleep.c:169) Sleep states 0x7 disabled, reason 0
+[   22.787322] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: PCI\VEN_1234&DEV_1111&SUBSYS_11001AF4&REV_02\3&a5c7842&0&08 started, status 0
+[   22.888322] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver monitor
+[   23.044322] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of monitor
+[   23.138048] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of monitor answered 0
+[   23.231799] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver monitor loaded, status 0
+[   23.325549] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\monitor -> DISPLAY\Default_Monitor\4&ff262a49&0&UID0
+[   23.419299] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\monitor answered 0
+[   23.528674] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting DISPLAY\Default_Monitor\4&ff262a49&0&UID0
+[   23.622424] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: DISPLAY\Default_Monitor\4&ff262a49&0&UID0 started, status 0
+[   23.731800] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver HDAudBus
+[   23.825550] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of HDAudBus
+[   23.919275] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of HDAudBus answered 0
+[   24.028650] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver HDAudBus loaded, status 0
+[   24.122401] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\HDAudBus -> PCI\VEN_8086&DEV_7F50&SUBSYS_11001AF4&REV_10\3&a5c7842&0&D8
+[   24.216151] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\HDAudBus answered 0
+[   24.309901] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting PCI\VEN_8086&DEV_7F50&SUBSYS_11001AF4&REV_10\3&a5c7842&0&D8
+[   24.419276] hdaudbus.sys: HDA codec 0: vendor 1af4 device 0022 revision 1001 subsystem 1af40022, function group 01 at node 1
+[   24.513026] hdaudbus.sys: ADSP child created on PCI 8086:7f50 (subclass 03): BAR4 register 0x81000000, 0x200000 bytes mapped at FFFF808007294000, processing capabilities at BAR0 +0x180
+[   24.622402] hdaudbus.sys: DMI ok: SMBIOS 2.8 DMI 40, vendor "QEMU" product "Standard PC (Q35 + ICH9, 2009)" version "pc-q35-11.1" board "" "", quirk none
+[   24.716152] hdaudbus.sys: audio path DspOptional on PCI 8086:7f50: codec mask 0x0001, DSP present, NHLT no table, 0 endpoints not on the HDA link
+[   24.809902] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: PCI\VEN_8086&DEV_7F50&SUBSYS_11001AF4&REV_10\3&a5c7842&0&D8 started, status 0
+[   24.919277] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver HdAudAddService
+[   25.013028] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of HdAudAddService
+[   25.122328] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of HdAudAddService answered 0
+[   25.216078] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver HdAudAddService loaded, status 0
+[   25.309828] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\HdAudAddService -> HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&aeefd634&0&0001
+[   25.403579] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\HdAudAddService answered 0
+[   25.512954] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&aeefd634&0&0001
+[   25.606704] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:162) HDAUDIO: codec 0 vendor 1af4 device 0022 revision 1001
+[   25.700454] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x03 configuration default 0x00004010 (port 0 location 0x00 device 0 connection 0 color 4 misc 0 association 1 sequence 0)
+[   25.794204] (\drivers\wdm\audio\drivers\hdaudio\functiongroupnode.cpp:177) HDAUDIO: codec 0 pin 0x05 configuration default 0x00805020 (port 0 location 0x00 device 8 connection 0 color 5 misc 0 association 2 sequence 0)
+[   25.903580] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1189) HDAUDIO: SubdeviceName eLineOutWave
+[   25.997330] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineOutTopo
+[   26.106705] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1250) HDAUDIO: SubdeviceName eLineInWave
+[   26.200455] (\drivers\wdm\audio\drivers\hdaudio\common.cpp:1865) HDAUDIO: SubdeviceName eLineInTopo
+[   26.294206] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&aeefd634&0&0001 started, status 0
+[   26.403581] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver intcdsp
+[   26.512955] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of intcdsp
+[   26.606681] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of intcdsp answered 0
+[   26.716057] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver intcdsp loaded, status 0
+[   26.809807] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\intcdsp -> CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[   26.903557] intcdsp.sys: loaded for the Intel audio DSP child
+[   26.997307] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\intcdsp answered 0
+[   27.106682] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[   27.200433] intcdsp.sys: controller 8086:7f50: BAR0 FFFF808000448000 (0x4000 bytes), BAR4 FFFF808007294000 (0x200000 bytes), PP capability FFFF808000448180: header 0x10030700 (id 3, version 1, next 0x0700), PPCTL 0x00000000 (GPROCEN 0), PPSTS 0x00000000, PGCTL 0x00000000, CGCTL 0x00000000
+[   27.294183] intcdsp.sys: NHLT table: the bus driver reports none
+[   27.387933] intcdsp.sys: reading BAR4 at +0x1000 +0x1108 +0x1140 +0x73228 +0x163200 +0x163204
+[   27.497308] intcdsp.sys: BAR4 +0x1000 ADSPCS 0x00000000 (SPA 0, CPA 0), +0x1108 HFINTIPPTR 0xffffffff, +0x1140 HfHIPCIE 0x00000000, +0x73228 HFIPCXCTL 0x00000000
+[   27.591058] intcdsp.sys: HFINTIPPTR 0xffffffff names no 32-bit register inside BAR4: the host IPC interrupt enable cannot be reached
+[   27.684809] intcdsp.sys: BAR4 +0x163200 FSR 0x00000000: halted 0, module 0, wait state 0x0, state 0x00 init; +0x163204 ROM error 0x00000000 
+[   27.809809] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, read, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[   27.903559] intcdsp.sys: BootDsp = 1: the DSP boots at the first stream open with 'sof-arl-s.ri' (BootAtStart = 1: at every D0 entry)
+[   27.997309] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+[   28.106685] intcdsp.sys: firmware \SystemRoot\System32\drivers\intel\sof\sof-arl-s.ri: 1158164 bytes, resident, image 'ADSPFW' version 2.15.0.1, 32 modules, payload 0xc14 + 0x11a000, 282 preload pages
+[   28.200435] intcdsp.sys: booting: firmware 'ADSPFW' 2.15.0.1, 1155072 payload bytes in 1 descriptors on stream 1, BAR4 FFFF808007294000, clock 39446010 us at 10000000 Hz
+[   28.294185] intcdsp.sys: interrupts before power-up: ADSPCS 0x00000000 (SPA 0, CPA 0), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000, PPCTL 0x00000010 (GPROCEN 0, PIE 0)
+[   28.387935] intcdsp.sys: power gating: PGCTL 0x00000000 CGCTL 0x00000000 -> PGCTL 0x00000004 CGCTL 0x00000000
+[   28.497310] intcdsp.sys: subsystem powered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0xffffffff, INTEN 0xffffffff, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000, PPCTL 0x40000010 (GPROCEN 1, PIE 0)
+[   28.591061] intcdsp.sys: code-loader stream 1: 1155072 bytes in 1 descriptors (LVI 0), SPIB 1155072, format 0x0040
+[   28.684811] intcdsp.sys: ROM ready for the firmware: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000, PPCTL 0x40000010 (GPROCEN 1, PIE 0)
+[   28.794186] intcdsp.sys: firmware entered: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000, PPCTL 0x40000000 (GPROCEN 1, PIE 0)
+[   28.887936] intcdsp.sys: FW_READY received: ADSPCS 0x01010000 (SPA 1, CPA 1), HFINTIPPTR 0x00000120, INTEN 0x00000000, HfHIPCIE 0x00000000, HFIPCXCTL 0x00000000, PPCTL 0x40000000 (GPROCEN 1, PIE 0)
+[   28.981686] intcdsp.sys: boot ok after 592154 us (clock 40233846 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x61000000|0x00000000, attempt 1, 0 DSP interrupts, cleanup ok, ADSPCS 0x01010000
+[   29.091062] intcdsp.sys: after the boot (gating allowed again): ADSPCS 0x01010000
+[   29.184812] intcdsp.sys: firmware ready: version 2.15.0.1, ABI 1, ROM implementation 0.3 version 1.2 platform 288, ROM info 0x0000005a, downlink mailbox 4096 bytes, uplink mailbox 4096 bytes, trace log 131072 bytes, 16 pipelines, 4 libraries, context save 1, 7 tuples
+[   29.278562] intcdsp.sys: ipc: link ready, polled, 500 ms per message
+[   29.372312] intcdsp.sys: topology 'sof-ipc4-loopback.tplg': ABI 3.29.1, 4286 bytes (model 2384 bytes), 2 controls, 4 widgets, 2 edges, 1 pcm, 1 pipeline, 0 manifest items, from the registry override
+[   29.481688] intcdsp.sys: topology: modules copier â†’ id 5, gain â†’ id 7; endpoint 'Loopback' render+capture 48000 Hz 2 ch 16/24/32
+[   29.575438] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again
+[   29.669188] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[   29.762938] intcdsp.sys: gain: 0.00 dB, mute 0
+[   29.950439] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 5794.253, capture rms 5794.253, ok
+[   30.059814] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[   30.153564] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[   30.341064] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[   30.434815] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[   30.544190] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[   30.731690] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, render rms 379742706.482, capture rms 379742706.482, ok
+[   30.825440] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[   30.919191] intcdsp.sys: gain: -6.00 dB, mute 0, kept until the DSP runs the PCM again
+[   31.012941] intcdsp.sys: loopback self-test: the gain step, three depths at -6.00 dB (gain 0x4026e73d)
+[   31.122316] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 16-bit, render stream 1, capture stream 1, 4096 frames
+[   31.216066] intcdsp.sys: gain: -6.00 dB, mute 0
+[   31.403567] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, gain 0x4026e73d, render rms 5794.253, capture rms 2903.940, ok
+[   31.497317] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[   31.606692] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 24-bit, render stream 1, capture stream 1, 4096 frames
+[   31.794193] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, gain 0x4026e73d, render rms 379742706.482, capture rms 190322196.559, ok
+[   31.887943] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[   31.981693] intcdsp.sys: loopback self-test: endpoint 'Loopback', 48000 Hz 2 ch 32-bit, render stream 1, capture stream 1, 4096 frames
+[   32.184818] intcdsp.sys: loopback self-test: 4096 frames captured after 85 ms, offset 0 frames, max abs error 0, gain 0x4026e73d, render rms 379742706.482, capture rms 190322196.559, ok
+[   32.278569] intcdsp.sys: loopback self-test: stopped at render position 0 (LPIB 0, buffer 0), capture position 0 (LPIB 0, buffer 0), 2 capture periods, released: 1 pipelines and 3 instances deleted, 2 streams freed, ok
+[   32.372319] intcdsp.sys: gain: 0.00 dB, mute 0, kept until the DSP runs the PCM again
+[   32.466069] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+[   32.559819] intcdsp.sys: loopback self-test: ran (0x00000000), the DSP is left running
+[   32.669194] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000 started, status 0
+[   32.762945] intcdsp.sys: audio child 'INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\00' for pcm 'Loopback': 2 endpoints
+[   32.856695] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver dsppcm
+[   32.966070] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of dsppcm
+[   33.059795] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of dsppcm answered 0
+[   33.153546] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver dsppcm loaded, status 0
+[   33.247296] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\dsppcm -> INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4d9fad45&0&00
+[   33.356671] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\dsppcm answered 0
+[   33.450421] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4d9fad45&0&00
+[   33.544171] dsppcm.sys: endpoint 'Loopback' render: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[   33.637922] dsppcm.sys: endpoint 'Loopback' capture: 3 formats in 2 data ranges, -6291456..0 in 1/65536 dB by 65536
+[   33.747297] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+[   33.841047] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+[   33.934797] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+[   34.044173] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+[   34.137923] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4d9fad45&0&00 started, status 0
+[   34.231673] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver i8042prt
+[   34.341048] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of i8042prt
+[   34.434774] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of i8042prt answered 0
+[   34.528524] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver i8042prt loaded, status 0
+[   34.637899] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver kbdclass
+[   34.731649] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of kbdclass
+[   34.825375] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of kbdclass answered 0
+[   34.919125] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver kbdclass loaded, status 0
+[   35.028500] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\i8042prt -> ACPI\PNP0303\3&a5c7842&0
+[   35.122250] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\i8042prt answered 0
+[   35.216000] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\kbdclass -> ACPI\PNP0303\3&a5c7842&0
+[   35.309751] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\kbdclass answered 0
+[   35.419126] (\drivers\input\i8042prt\pnp.c:850) IRP_MJ_PNP / unknown minor function 0xb
+[   35.512876] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0303\3&a5c7842&0
+[   35.606626] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0303\3&a5c7842&0 started, status 0
+[   35.716001] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver mouclass
+[   35.809752] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of mouclass
+[   35.903477] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of mouclass answered 0
+[   35.997227] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver mouclass loaded, status 0
+[   36.106602] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\i8042prt -> ACPI\PNP0F13\3&a5c7842&0
+[   36.200353] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\i8042prt answered 0
+[   36.294103] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\mouclass -> ACPI\PNP0F13\3&a5c7842&0
+[   36.387853] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\mouclass answered 0
+[   36.497228] (\drivers\input\i8042prt\pnp.c:850) IRP_MJ_PNP / unknown minor function 0xb
+[   36.590978] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0F13\3&a5c7842&0
+[   36.684729] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0F13\3&a5c7842&0 started, status 0
+[   36.778479] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver parport
+[   36.887854] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of parport
+[   36.981579] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of parport answered 0
+[   37.075330] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver parport loaded, status 0
+[   37.169080] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\parport -> ACPI\PNP0400\1
+[   37.278455] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\parport answered 0
+[   37.372205] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\PNP0400\1
+[   37.465955] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\PNP0400\1 started, status 0
+[   37.559706] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver serial
+[   37.684705] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of serial
+[   37.778431] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of serial answered 0
+[   37.872181] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver serial loaded, status 0
+[   37.965932] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\serial -> ACPI\PNP0501\1
+[   38.059682] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\serial answered 0
+[   38.169057] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   38.262807] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Processor
+[   38.356534] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Processor
+[   38.465884] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Processor answered 0
+[   38.559634] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Processor loaded, status 0
+[   38.653385] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\Processor -> ACPI\AuthenticAMD_-_AMD64_Family_6_Model_6_-_QEMU_TCG_CPU_version_2.5+\_0
+[   38.747135] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\Processor answered 0
+[   38.856510] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ACPI\AuthenticAMD_-_AMD64_Family_6_Model_6_-_QEMU_TCG_CPU_version_2.5+\_0
+[   38.950260] (\drivers\processor\processr\tables.c:282) Processor 0: _PDC declared 0x31a, status 0xc0000034
+[   39.044010] (\drivers\processor\processr\tables.c:744) Processor 0: no performance control (HWP 0, EST 0)
+[   39.137761] (\drivers\processor\processr\processr.c:368) Processor 0: no idle or performance states to manage
+[   39.247136] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ACPI\AuthenticAMD_-_AMD64_Family_6_Model_6_-_QEMU_TCG_CPU_version_2.5+\_0 started, status 0
+[   39.340886] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\BasicDisplay -> ROOT\BASICDISPLAY\0000
+[   39.434636] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\BasicDisplay answered 0
+[   39.544011] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting ROOT\BASICDISPLAY\0000
+[   39.637762] (\drivers\directx\dxgkrnl\adapter.c:765) DXGKRNL: BASICDISPLAY_UI: adapter FFFF8180005811A0 device UI suppressed
+[   39.731512] (\drivers\directx\dxgkrnl\adapter.c:14677) DXGKRNL: DISPLAY_BRIDGE: BasicDisplay adapter FFFF8180005811A0 stays retired; another adapter owns the desktop
+[   39.840887] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: ROOT\BASICDISPLAY\0000 started, status 0
+[   39.934637] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver sysaudio
+[   40.028388] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of sysaudio
+[   40.122113] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of sysaudio answered 0
+[   40.231488] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver sysaudio loaded, status 0
+[   40.325238] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\sysaudio -> SW\{a7c7a5b0-5af3-11d1-9ced-00a024bf0407}\{9b365890-165f-11d0-a195-0020afd156e4}
+[   40.418989] (\drivers\wdm\audio\sysaudio\main.c:149) SYSAUDIO: AddDevice PDO FFFF818000161870
+[   40.512739] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver kmixer
+[   40.653363] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of kmixer
+[   40.762714] (\drivers\wdm\audio\filters\kmixer\kmixer.c:106) KMixer.sys loaded
+[   40.856465] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of kmixer answered 0
+[   40.950215] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver kmixer loaded, status 0
+[   41.043965] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\sysaudio answered 0
+[   41.153340] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting SW\{a7c7a5b0-5af3-11d1-9ced-00a024bf0407}\{9b365890-165f-11d0-a195-0020afd156e4}
+[   41.247090] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000001 DeviceName {a7c7a5b0-5af3-11d1-9ced-00a024bf0407}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   41.340841] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: SW\{a7c7a5b0-5af3-11d1-9ced-00a024bf0407}\{9b365890-165f-11d0-a195-0020afd156e4} started, status 0
+[   41.465841] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Fs_Rec
+[   41.559591] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Fs_Rec
+[   41.653317] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Fs_Rec answered 0
+[   41.747067] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Fs_Rec loaded, status 0
+[   41.856442] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Beep
+[   41.950192] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Beep
+[   42.043918] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Beep answered 0
+[   42.137668] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Beep loaded, status 0
+[   42.247043] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver ConDrv
+[   42.356417] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of ConDrv
+[   42.450143] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of ConDrv answered 0
+[   42.543894] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver ConDrv loaded, status 0
+[   42.637644] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Null
+[   42.747018] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Null
+[   42.840744] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Null answered 0
+[   42.934495] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Null loaded, status 0
+[   43.028245] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Blue
+[   43.137620] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Blue
+[   43.231345] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Blue answered 0
+[   43.325095] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Blue loaded, status 0
+[   43.418846] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Msfs
+[   43.528221] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Msfs
+[   43.621946] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Msfs answered 0
+[   43.715696] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Msfs loaded, status 0
+[   43.809447] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Npfs
+[   43.934446] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Npfs
+[   44.028172] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Npfs answered 0
+[   44.121922] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Npfs loaded, status 0
+[   44.215672] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Netio
+[   44.340671] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Netio
+[   44.434398] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Netio answered 0
+[   44.528148] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Netio loaded, status 0
+[   44.621898] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Tcpip
+[   44.746897] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Tcpip
+[   44.856224] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Tcpip answered 0
+[   44.949974] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Tcpip loaded, status 0
+[   45.043725] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Nwifi
+[   45.153099] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Nwifi
+[   45.246825] (\drivers\network\nwifi\nwifi.c:164) NWIFI: DriverEntry
+[   45.340575] (\drivers\network\nwifi\control.c:895) NWIFI: control device \Device\Nwifi created
+[   45.449951] (\drivers\network\nwifi\nwifi.c:191) NWIFI: DriverEntry succeeded
+[   45.543701] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Nwifi answered 0
+[   45.637451] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Nwifi loaded, status 0
+[   45.731201] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Afd
+[   45.856152] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Afd
+[   45.949902] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Afd answered 0
+[   46.043652] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Afd loaded, status 0
+[   46.137402] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver Afunix
+[   46.246753] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of Afunix
+[   46.340503] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of Afunix answered 0
+[   46.434253] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver Afunix loaded, status 0
+[   46.528003] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver MMCSS
+[   46.637354] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of MMCSS
+[   46.731104] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of MMCSS answered 0
+[   46.824854] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver MMCSS loaded, status 0
+[   46.918604] (\ntos\po\pobutton.c:314) System button 0x1 watched on \??\ACPI#FixedButton#2&ccb86d17&0&FFB0#{4afa3d53-74a7-11d0-be5e-00a0c9062857}
+[   47.106105] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\C:
+[   47.309230] (\base\system\autochk\autochk.c:453) AUTOCHK: Checking \??\F:
+[   47.402980] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver fastfat
+[   47.512354] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of fastfat
+[   47.606081] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of fastfat answered 0
+[   47.699831] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver fastfat loaded, status 0
+[   48.606083] (\base\system\smss\crashdmp.c:267) SMSS: Inspecting `\??\C:\pagefile.sys' for a crash dump
+[   48.699833] (\base\system\smss\crashdmp.c:300) SMSS: No valid crash dump in `\??\C:\pagefile.sys' (00000000/00000000, type 0, size 0)
+[   48.809208] (\ntos\kd64\kddump.c:751) KD: Crash dump storage: partition 68157440, cluster 4096, sector 512, extents 1
+[   48.902959] (\ntos\kd64\kddump.c:752) KD: Crash dump first extent: VCN 0 to 65335, LCN 158618, disk byte 717856768
+[   49.012334] (\ntos\kd64\kddump.c:602) KD: Crash dump target initialized (file-backed fallback, summary dump, 267609088 bytes available, 0 required for full)
+[   49.199834] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000080000 at <home>/Projects/LiberNT/drivers/filesystems/ntfs_new/read.c:184:67, caller FFFFF8007B6F4A7C
+[   49.324835] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x1a
+[   49.606085] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0xd
+[   49.715460] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x11
+[   50.059109] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   50.152859] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   50.402860] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x7
+[   50.652860] (\subsystems\win\win32k\gdi\ntgdi\d3dkmt.c:576) DxStartupDxgkInt: Entry
+[   50.746610] (\subsystems\win\win32k\reactx\ntddraw\ddraw.c:52) DxDdStartupDxGraphics: WDDM build, legacy dxg.sys path disabled
+[   51.480913] (\dll\win32\userenv\profile.c:2247) Profile S-1-5-18 already loaded
+[   52.027789] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver serial
+[   52.121539] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of serial
+[   52.215264] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of serial answered 0
+[   52.309014] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver serial loaded, status 0
+[   52.402765] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\serial -> ACPI\PNP0501\1
+[   52.512140] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\serial answered 0
+[   52.605890] (\ntos\io\pnpmgr\pnpresource.c:589) PnP: no free setting for a type 2 requirement of ACPI\PNP0501\1
+[   52.730867] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x10
+[   53.371493] (\sdk\lib\cmlib\hivelog.c:150) Applied 1 hive log entries up to sequence 0x8
+[   53.949595] (\subsystems\win\win32k\gdi\ntgdi\cliprgn.c:73) SVR: Setting NULL Region
+[   54.743222] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver lltdio
+[   54.950596] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of lltdio
+[   55.231823] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of lltdio answered 0
+[   55.388074] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver lltdio loaded, status 0
+[   55.528699] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver rspndr
+[   55.794323] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of rspndr
+[   55.934925] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of rspndr answered 0
+[   56.075550] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver rspndr loaded, status 0
+[   56.216176] (\dll\win32\userenv\profile.c:2247) Profile S-1-5-20 already loaded
+[   60.088935] (\base\services\umpnpmgr\rpcserver.c:6522) PNP_RegisterNotification(000000E8AB122B60 000000000000000A 'AudioSrv' 000000E8AB122CCC 32 0x1 000000E8AB123DA0 2c8 000000E8AB122CF8)
+[   60.276435] (\base\services\umpnpmgr\rpcserver.c:6542) DBT_DEVTYP_DEVICEINTERFACE
+[   65.307696] (\ntos\io\iomgr\drvobj.c:875) DIAG-PNP: loading driver wdmaud
+[   65.885821] (\ntos\io\iomgr\drvinit.c:558) DIAG-PNP: DriverEntry of wdmaud
+[   66.026423] (\ntos\io\iomgr\drvinit.c:564) DIAG-PNP: DriverEntry of wdmaud answered 0
+[   66.151423] (\ntos\io\iomgr\drvobj.c:879) DIAG-PNP: driver wdmaud loaded, status 0
+[   66.292048] (\ntos\io\pnpmgr\pnpstate.c:1032) DIAG-PNP: AddDevice \Driver\wdmaud -> SW\{cd171de3-69e5-11d2-b56d-0000f8754380}\{9b365890-165f-11d0-a195-0020afd156e4}
+[   66.385798] (\ntos\io\pnpmgr\pnpstate.c:1038) DIAG-PNP: AddDevice \Driver\wdmaud answered 0
+[   66.495174] (\ntos\io\pnpmgr\pnpquery.c:236) DIAG-PNP: starting SW\{cd171de3-69e5-11d2-b56d-0000f8754380}\{9b365890-165f-11d0-a195-0020afd156e4}
+[   66.588924] (\drivers\ksfilter\ks\swenum.c:821) KspStartBusDevice Name \Device\KSENUM00000002 DeviceName {cd171de3-69e5-11d2-b56d-0000f8754380}&{9b365890-165f-11d0-a195-0020afd156e4} Instance {9b365890-165f-11d0-a195-0020afd156e4} Started
+[   66.682674] (\ntos\io\pnpmgr\pnpquery.c:242) DIAG-PNP: SW\{cd171de3-69e5-11d2-b56d-0000f8754380}\{9b365890-165f-11d0-a195-0020afd156e4} started, status 0
+[   66.792049] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[   66.901425] (\sdk\lib\drivers\sound\mmixer\controls.c:570) MMixerCountMixerControls PinId 1 is not connected by any node
+[  669.718737] (\ntos\po\standby.c:346) The display idled out after 600 seconds
+[  669.718737] (\ntos\po\standby.c:207) The console display is now off
+[  789.078496] (\base\setup\libernt\updagent.c:507) Download of https://libernt.com/api/update/?arch=amd64&build=0 finished with 0x80072ee7
+[ 1043.047174] (\ntos\po\standby.c:207) The console display is now on
+[ 1049.134192] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000000D7CB8E170): stub
+[ 1049.134192] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000000D7CB8E170, 1, 0000000D7F66FD68, 0000000D7F66FD64): stub
+[ 1050.325321] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+[ 1132.140452] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1765:63, caller FFFF808007D28B4E
+[ 1132.140452] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/filesystems/fastfat/deviosup.c:1785:61, caller FFFF808007D28D8D
+[ 1132.140452] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/storage/class/classpnp/class.c:3487:25, caller FFFFF8007B96DDFA
+[ 1132.140452] UBSAN: pointer index expression with base 0000000000000000 overflowed to 0000000000000800 at <home>/Projects/LiberNT/drivers/storage/port/storport/pdo.c:1169:21, caller FFFFF8007BD22075
+[ 1377.991066] (\subsystems\win\win32k\user\ntuser\focus.c:1507) err: SetFocus from explorer.exe: 0000000000030172 belongs to another thread's input queue
+[ 2652.786185] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:37) CACLHistory::Reset(0000000D7B2557C0): stub
+[ 2652.786185] fixme:(\dll\win32\shell32\autocomplete\aclhistory.cpp:24) CACLHistory::Next(0000000D7B2557C0, 1, 0000000D8000FD68, 0000000D8000FD64): stub
+[ 2654.145064] fixme:(\dll\win32\kernelbase\wine\path.c:4974) (L"cmd.exe" 4): stub
+[ 3174.310472] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.347472] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.363097] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.363097] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.394347] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.409972] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.409972] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.503722] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.550597] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.581848] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.613098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.613098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.628723] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.659973] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.659973] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.756098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.801098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.839098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.863098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.864098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.875098] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.906349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.906349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3174.984474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.031349] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.062599] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.093849] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.093849] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.109474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.140724] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.140724] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3175.234474] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3750.021409] (\drivers\ksfilter\ks\connectivity.c:345) ZwOpenKey() failed with status 0xc0000034
+[ 3750.088910] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3750.088910] intcdsp.sys: gain: 0.00 dB, mute 0
+[ 3750.088910] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3750.088910] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3752.104539] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[ 3752.120164] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[ 3752.135789] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3752.135789] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3752.135789] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3754.167044] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[ 3754.182669] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[ 3754.198294] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2496 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3754.198294] intcdsp.sys: endpoint 'Loopback' capture: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] dsppcm.sys: endpoint 'Loopback' capture: pin created, 48000 Hz 2 ch 32 in 32 bits
+[ 3754.198294] intcdsp.sys: stream 1: latency: fifo 257 bytes, dsp estimate 2880 bytes (the copier's gateway buffer and the PCM's module buffers)
+[ 3756.229548] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000130
+[ 3756.245173] (\drivers\wdm\audio\legacy\wdmaud\control.c:471) Closing device FFFFFFFF80000128
+[ 4180.347782] (\ntos\po\pobutton.c:165) System button event 0x00000001
+[ 4180.347782] (\ntos\po\pobutton.c:99) Button action 6
+[ 4205.725838] (\subsystems\win\win32k\user\winsrv\usersrv\shutdown.c:300) SendClientShutdown -- Error == error
+[ 4205.725838] (\subsystems\win\win32k\user\winsrv\usersrv\shutdown.c:804) Context->UIThread != NULL
+[ 4205.725838] (\subsystems\win\win32k\user\winsrv\usersrv\shutdown.c:807) Sending WM_CLOSE because Dlg is != NULL
+[ 4205.725838] (\subsystems\win\win32k\user\winsrv\usersrv\shutdown.c:192) WM_CLOSE
+[ 4205.725838] (\subsystems\win\win32k\user\winsrv\usersrv\shutdown.c:198) WM_DESTROY
+[ 4209.736348] err:(\dll\win32\combase\marshal.c:759) StdMarshal ReleaseMarshalData failed with error 0x8001011d
+[ 4209.767598] (\ntos\po\poshutdown.c:403) DIAG-PO: the system is asked to shut down, action 6
+[ 4209.767598] (\ntos\po\poshutdown.c:331) Shutdown: running the queued shutdown work
+[ 4209.767598] (\ntos\po\poshutdown.c:338) Shutdown: notifying the drivers registered for shutdown
+[ 4209.767598] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\sysaudio
+[ 4209.767598] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\intcdsp
+[ 4209.767598] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\HDAudBus
+[ 4209.767598] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\MountMgr
+[ 4209.767598] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \Driver\WMIxWDM
+[ 4209.767598] (\ntos\po\poshutdown.c:340) Shutdown: holding the user-mode threads
+[ 4209.767598] (\ntos\po\poshutdown.c:342) Shutdown: flushing the registry
+[ 4209.783223] (\ntos\po\poshutdown.c:346) Shutdown: closing the boot log
+[ 4209.783223] (\ntos\po\poshutdown.c:350) Shutdown: flushing the cache
+[ 4209.783223] (\ntos\po\poshutdown.c:352) Shutdown: stopping the memory manager
+[ 4209.845723] (\ntos\po\poshutdown.c:355) Shutdown: flushing the volumes
+[ 4209.845723] (\ntos\po\poshutdown.c:358) Shutdown: notifying the file systems
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\fastfat
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.845723] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Ntfs
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\Fs_Rec
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 4209.861348] (\ntos\io\iomgr\ioshutdown.c:72) Shutdown: sending the shutdown request to \FileSystem\RAW
+[ 4209.861348] (\ntos\po\poshutdown.c:360) Shutdown: notifying the last-chance drivers
+[ 4209.861348] (\ntos\po\poshutdown.c:368) DIAG-PO: the shutdown is about to power the machine down (action 6); waiting 20 s so the screen can be photographed
+[ 4229.830141] (\ntos\po\poshutdown.c:377) Shutdown: powering the devices down for action 6
+[ 4229.830141] (\ntos\po\sleep.c:794) DIAG-PO: the shutdown (S5) goes to the system power device FFFF81800010EC00, action 6
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to INTCDSP\PCM&CTLR_VEN_8086&CTLR_DEV_7F50\5&4d9fad45&0&00
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2ee25b9a&0&Sebce863c_O100000_L4000000
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2ee25b9a&0&Sebce863c_O4100000_L13fbf00000
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to STORAGE\Partition\5&2a178ba7&0&Sf540056f_O7e00_L2000000
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to DISPLAY\Default_Monitor\4&ff262a49&0&UID0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to HDAUDIO\FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001\4&aeefd634&0&0001
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to CSAUDIO\ADSP&CTLR_VEN_8086&CTLR_DEV_7F50\4&aeefd634&0&1000000000
+[ 4229.830141] intcdsp.sys: release: 0 streams let go, 0 buffers held for their pins, 0 tags back
+[ 4229.830141] intcdsp.sys: streams: released for the power-down; nothing is sent until the next stream open or D0 entry
+[ 4229.830141] intcdsp.sys: DSP power down from state ready: ok, cleanup ok, ADSPCS 0x00000000 (SPA 0, CPA 0)
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&000000
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to SCSI\Disk&Ven_QEMU&Prod_HARDDISK\4&75f63945&0&020000
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_29C0&SUBSYS_11001AF4&REV_00\3&a5c7842&0&00
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_1234&DEV_1111&SUBSYS_11001AF4&REV_02\3&a5c7842&0&08
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_7F50&SUBSYS_11001AF4&REV_10\3&a5c7842&0&D8
+[ 4229.830141] (\drivers\bus\pci\pdo.c:7110) DIAG-PWR: PCI 00:1b.0 is asked for D3 (was D0), shutdown type 0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_2918&SUBSYS_11001AF4&REV_02\3&a5c7842&0&F8
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to PCI\VEN_8086&DEV_2922&SUBSYS_11001AF4&REV_02\3&a5c7842&0&FA
+[ 4229.830141] (\drivers\storage\port\storport\fdo.c:2805) Storport: adapter FFFF81800011F080 to D3: requests drained, timeouts stopped, stopping the miniport
+[ 4229.830141] (\drivers\bus\pci\pdo.c:7110) DIAG-PWR: PCI 00:1f.2 is asked for D3 (was D0), shutdown type 0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\CPU_Hotplug_resources
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\GPE0_resources
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A06\PCI_Hotplug_resources
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0303\3&a5c7842&0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0F13\3&a5c7842&0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0400\1
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0B00\3&a5c7842&0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\FixedButton\2&ccb86d17&0&FFB0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\PNP0A08\0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\ACPI0010\2&ccb86d17&0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI\AuthenticAMD_-_AMD64_Family_6_Model_6_-_QEMU_TCG_CPU_version_2.5+\_0
+[ 4229.830141] (\ntos\po\sleep.c:557) Sending the S5 set request to ACPI_HAL\PNP0C08\0
+[ 4229.830141] (\drivers\bus\acpi\osl.c:1495) Entering sleep state S5.

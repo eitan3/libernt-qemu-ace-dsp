@@ -1,0 +1,14 @@
+dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+dsploop.c:760: dsploop: the volume node's level is not reachable through the topology's control interface (0x80070490): the endpoint's scalar instead
+dsploop.c:775: dsploop: the volume node: 0.00 dB (level 0, the scalar last set, the node unreachable), mute 0: the expectation scaled by the gain 0x7fffffff, the tolerance 1 LSB
+dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+dsploop.c:626: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+dsploop.c:626: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+
+dsploop: 1291 tests executed (0 marked as todo, 0 failures), 0 skipped.

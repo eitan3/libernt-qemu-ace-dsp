@@ -1,0 +1,3 @@
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:657: FAIL: DsploopWalkIncoming(DsploopFlowIn) == 1: 0 != 1
+<home>/Projects/LiberNT/submodules/host-tests/dsploop/t_dsploop.c:658: FAIL: DsploopWalkIncoming(DsploopFlowOut) == 0: 1 != 0
+dsploop: 1327 checks, 2 failures

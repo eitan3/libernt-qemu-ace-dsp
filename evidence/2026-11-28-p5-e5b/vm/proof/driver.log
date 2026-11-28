@@ -1,0 +1,68 @@
+2026-11-28T10:41:15Z proof: proof on /tmp/e5b/disk/p5e5-proof.qcow2, image test-burnboot-diag-02e16ed400c, the exe d050804597b5528f
+2026-11-28T10:41:17Z VM proof started (lib-run pid 1965363, sockets /tmp/qad-vm.1965365, data disk /tmp/e5b/pouch/proof.img)
+[10:43:14] [  108.586320] (\base\setup\libernt\oobe.c:1071) Storage expansion not offered
+2026-11-28T10:44:13Z proof (rest): proof on /tmp/e5b/disk/p5e5-proof.qcow2, image test-burnboot-diag-02e16ed400c, the exe d050804597b5528f
+2026-11-28T10:44:13Z first boot: the desktop (or the setup) reached after 580 serial lines
+2026-11-28T10:44:54Z wizard: tab tab ret, ret, tab tab tab ret sent
+2026-11-28T10:45:07Z console: Win+R, cmd.exe
+2026-11-28T10:45:24Z data disk: drive D: in the guest (1 marker)
+2026-11-28T10:45:30Z console answering after first (alive-first.txt, 3 s)
+[10:45:30] [   30.320914] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   25.852152] intcdsp.sys: SelfTest = 3, UseInterrupts = 0, IpcTimeoutMs = 500 ms, BootAtStart = 0, DspIdleSec = 0 s
+    [   26.836530] intcdsp.sys: boot ok after 592465 us (clock 37326774 us): state ready, failed in off (ok), ROM status 0x00000005 firmware entered, ROM error 0x00000000 unknown ROM error, IPC status 0, last DSP message 0x6
+    [   30.320914] intcdsp.sys: loopback self-test: 6 runs, 6 matched, 0 failed, 92 requests, 0 notifications, 0 timeouts, 0 DSP interrupts, ok
+    [   68.788750] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackTopo'
+    [   68.882500] dsppcm.sys: endpoint 'Loopback' render: registered as 'LoopbackWave'
+    [   68.991875] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInTopo'
+    [   69.085625] dsppcm.sys: endpoint 'Loopback' capture: registered as 'LoopbackInWave'
+2026-11-28T10:45:44Z ## the tray's keys: 
+2026-11-28T10:45:57Z console: Win+R, cmd.exe
+2026-11-28T10:46:17Z ## dsploop (dsploop-level.txt): the output after about 8 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:760: dsploop: the volume node's level is not reachable through the topology's control interface (0x80070490): the endpoint's scalar instead
+    dsploop.c:775: dsploop: the volume node: 0.00 dB (level 0, the scalar last set, the node unreachable), mute 0: the expectation scaled by the gain 0x7fffffff, the tolerance 1 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 993, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1291 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T10:46:21Z ## the driver's lines of the run (serial 586 to 615):
+    [ 1308.808650] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1308.808650] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1308.808650] intcdsp.sys: gain: 0.00 dB, mute 0
+    [ 1310.862283] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1310.862283] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1312.933540] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1312.933540] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+2026-11-28T10:46:37Z ## the tray's keys: [ 1308.808650] intcdsp.sys: gain: 0.00 dB, mute 0|
+2026-11-28T10:46:50Z console: Win+R, cmd.exe
+2026-11-28T10:47:10Z ## dsploop (dsploop-unity.txt): the output after about 8 s
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbacktopo
+    dsploop.c:85: dsploop: endpoint is not of the DSP's PCM: filter {2}.\\?\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\elineintopo
+    dsploop.c:85: dsploop: endpoint is of the DSP's PCM: filter {2}.\\?\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\loopbackintopo
+    dsploop.c:760: dsploop: the volume node's level is not reachable through the topology's control interface (0x80070490): the endpoint's scalar instead
+    dsploop.c:775: dsploop: the volume node: 0.00 dB (level 0, the scalar last set, the node unreachable), mute 0: the expectation scaled by the gain 0x7fffffff, the tolerance 1 LSB
+    dsploop.c:611: dsploop: 48000 frames of the tone rendered, 96000 frames captured in 2031 ms
+    dsploop.c:626: dsploop: 48000 frames compared within 1 LSB, max abs error 0, offset 513, ok
+    dsploop.c:611: dsploop (24 valid in 32): 48000 frames of the tone rendered, 96000 frames captured in 2015 ms
+    dsploop.c:626: dsploop (24 valid in 32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop.c:611: dsploop (32): 48000 frames of the tone rendered, 96000 frames captured in 2016 ms
+    dsploop.c:626: dsploop (32): 48000 frames compared within 0 LSB, max abs error 0, offset 513, ok
+    dsploop: 3 of 3 depths compared, 0 preconditions missing (LIBERNT_APITEST_REQUIRED 1: required, a failure)
+    
+    dsploop: 1285 tests executed (0 marked as todo, 0 failures), 0 skipped.
+2026-11-28T10:47:14Z ## the driver's lines of the run (serial 616 to 644):
+    [ 1536.008911] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1536.008911] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1538.063669] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1538.063669] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+    [ 1540.136926] intcdsp.sys: endpoint 'Loopback' render: stream 1 opened, 48000 Hz 2 ch 32 in 32 bits
+    [ 1540.136926] dsppcm.sys: endpoint 'Loopback' render: pin created, 48000 Hz 2 ch 32 in 32 bits
+2026-11-28T10:47:58Z VM proof ended: 
+2026-11-28T10:47:58Z done: fatal 0, ace_unexpected 0

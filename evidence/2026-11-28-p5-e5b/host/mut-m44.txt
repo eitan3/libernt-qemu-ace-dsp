@@ -1,0 +1,2 @@
+<home>/Projects/LiberNT/submodules/host-tests/mmdevapi/t_mmdevapi.c:697: FAIL: seen.Property.Flags == GET | KSPROPERTY_TYPE_TOPOLOGY: 1 != 268435457
+mmdevapi: 226 checks, 1 failures

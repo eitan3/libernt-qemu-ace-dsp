@@ -1,0 +1,30 @@
+devicetopology.c:741: endpoint L"{0.0.1.00000000}.{E779F4D6-D3A3-83C7-97B0-BFCE8DC56F11}" flow 1
+devicetopology.c:808: endpoint connector type 2
+devicetopology.c:672: filter L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineintopo"
+devicetopology.c:577: L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineintopo" pin 0 physical connection to L"\\??\\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\eLineInWave" pin 1
+devicetopology.c:672: filter L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineinwave"
+devicetopology.c:577: L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineinwave" pin 1 physical connection to L"\\??\\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\eLineInTopo" pin 0
+devicetopology.c:607: L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineintopo" pin 1 type 2 connected 1
+devicetopology.c:741: endpoint L"{0.0.1.00000000}.{E77CD7FF-39A3-83CB-BBF3-5EC2E8266020}" flow 1
+devicetopology.c:808: endpoint connector type 2
+devicetopology.c:672: filter L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackintopo"
+devicetopology.c:577: L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackintopo" pin 0 physical connection to L"\\??\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackInWave" pin 1
+devicetopology.c:672: filter L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackinwave"
+devicetopology.c:577: L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackinwave" pin 1 physical connection to L"\\??\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackInTopo" pin 0
+devicetopology.c:607: L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackintopo" pin 1 type 2 connected 1
+devicetopology.c:741: endpoint L"{0.0.0.00000000}.{BDA7C5A8-F3C6-8B76-ABDB-D685E723178B}" flow 0
+devicetopology.c:808: endpoint connector type 2
+devicetopology.c:672: filter L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbacktopo"
+devicetopology.c:577: L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbacktopo" pin 0 physical connection to L"\\??\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackWave" pin 1
+devicetopology.c:672: filter L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackwave"
+devicetopology.c:577: L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbackwave" pin 1 physical connection to L"\\??\\INTCDSP#PCM&CTLR_VEN_8086&CTLR_DEV_7F50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\LoopbackTopo" pin 0
+devicetopology.c:607: L"{2}.\\\\?\\intcdsp#pcm&ctlr_ven_8086&ctlr_dev_7f50#5&4d9fad45&0&00#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\loopbacktopo" pin 1 type 2 connected 1
+devicetopology.c:741: endpoint L"{0.0.0.00000000}.{BDAAA8D1-59C6-8B7A-A0C2-D2E0786FC14A}" flow 0
+devicetopology.c:808: endpoint connector type 2
+devicetopology.c:672: filter L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineouttopo"
+devicetopology.c:577: L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineouttopo" pin 0 physical connection to L"\\??\\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\eLineOutWave" pin 1
+devicetopology.c:672: filter L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineoutwave"
+devicetopology.c:577: L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineoutwave" pin 1 physical connection to L"\\??\\HDAUDIO#FUNC_01&VEN_1AF4&DEV_0022&SUBSYS_1AF40022&REV_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\eLineOutTopo" pin 0
+devicetopology.c:607: L"{2}.\\\\?\\hdaudio#func_01&ven_1af4&dev_0022&subsys_1af40022&rev_1001#4&aeefd634&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\elineouttopo" pin 1 type 2 connected 1
+
+devicetopology: 1849 tests executed (0 marked as todo, 0 failures), 0 skipped.

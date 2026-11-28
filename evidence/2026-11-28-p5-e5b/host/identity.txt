@@ -1,0 +1,8 @@
+ntoskrnl.exe identity string (unique):
+--- in-ISO vs the build tree
+Windows/system32/drivers/intcdsp.sys: identical to the build tree (520192 bytes)
+Windows/system32/drivers/dsppcm.sys: identical to the build tree (151552 bytes)
+Windows/system32/drivers/hdaudbus.sys: identical to the build tree (339968 bytes)
+Windows/system32/drivers/hdaudio.sys: identical to the build tree (253952 bytes)
+Windows/system32/mmdevapi.dll: identical to the build tree (370688 bytes)
+method: bsdtar -x of the ISO; 5 of 5 identical
