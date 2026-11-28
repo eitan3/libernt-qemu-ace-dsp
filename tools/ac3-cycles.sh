@@ -41,9 +41,10 @@ cleanup() { ( cd "$QAD" && q tools/guest.sh "$EVID" stop ); wait $lr 2>/dev/null
 trap cleanup EXIT
 
 echo "== $(date -u +%FT%TZ) waiting for the shell" | tee -a "$EVID/cycles-run.out"
-# a later boot prints the shell's line; a first boot prints the Setup wizard's line and no "Program Manager" at all
-if ! ( cd "$QAD" && tools/waitline.sh "$EVID" "Program Manager|Storage expansion not offered|The system has been stopped" 900 >> "$EVID/cycles-run.out" 2>&1 ); then
-    echo "!! neither the shell nor the first-boot setup came up in 900 s" | tee -a "$EVID/cycles-run.out"; exit 1
+# a later boot prints the shell's line; a first boot prints the Setup wizard's line and no "Program Manager" at
+# all; the P5 image prints neither at any boot -- its last boot line before the shell is the display's "desktop ready"
+if ! ( cd "$QAD" && tools/waitline.sh "$EVID" "Program Manager|Storage expansion not offered|desktop ready|The system has been stopped" 900 >> "$EVID/cycles-run.out" 2>&1 ); then
+    echo "!! neither the shell, the display nor the first-boot setup came up in 900 s" | tee -a "$EVID/cycles-run.out"; exit 1
 fi
 if grep -aq "The system has been stopped" "$EVID/serial.log"; then
     echo "!! the boot STOPPED" | tee -a "$EVID/cycles-run.out"; ( cd "$QAD" && q tools/guest.sh "$EVID" shot stopped ); exit 1
@@ -55,6 +56,8 @@ if grep -aq "Storage expansion not offered" "$EVID/serial.log"; then
     ( cd "$QAD" && q tools/guest.sh "$EVID" key ret ); sleep 5
     ( cd "$QAD" && q tools/guest.sh "$EVID" key tab tab tab ret ); sleep 5
     echo "wizard: tab tab ret, ret, tab tab tab ret sent" | tee -a "$EVID/cycles-run.out"
+elif ! grep -aq "Program Manager" "$EVID/serial.log"; then
+    sleep 45
 fi
 sleep 10
 # the console by the shell's Win+R hotkey (cmd.exe in the Run dialog), as every console of these rounds

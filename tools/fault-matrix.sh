@@ -168,7 +168,9 @@ run_one() {
     ( cd "$QAD" && q tools/guest.sh "$EV" shot desktop )
     local rec="-"
     if [ "${RECOVER:-0}" = 1 ]; then
-        if ( cd "$QAD" && tools/waitline.sh "$EV" "Program Manager|Storage expansion not offered" 420 >/dev/null 2>&1 ); then
+        # the shell's line, the first-boot setup's, or the display's "desktop ready" (the P5 image prints no shell line)
+        if ( cd "$QAD" && tools/waitline.sh "$EV" "Program Manager|Storage expansion not offered|desktop ready" 420 >/dev/null 2>&1 ); then
+            grep -aq "Program Manager" "$EV/serial.log" || sleep 45
             sleep 10
             # the console by the shell's Win+R hotkey (cmd.exe in the Run dialog), as every console of these rounds
             ( cd "$QAD" && q tools/guest.sh "$EV" key meta_l-r ); sleep 4
